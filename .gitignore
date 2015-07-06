@@ -1,0 +1,14 @@
+build/
+.gradle/
+node_modules/
+gradle
+frontend/node_modules
+rms.iml
+rms_backend.iml
+frontend/build
+backend/build
+backend/backend.iml
+.idea
+out
+backend/.gradle
+frontend/$npm_package_config_buildDir

@@ -1,0 +1,23 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: $footer-height;
+  margin-top: $header-height;
+}
+
+body footer {
+  padding: 10px 0;
+
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: $footer-height;
+
+  background-color: $navbar-inverse-bg;
+  border-top: 1px solid $navbar-inverse-border;
+}
+
+
