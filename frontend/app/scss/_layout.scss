@@ -1,14 +1,15 @@
+
 html {
   position: relative;
-  min-height: 100%;
 }
 
 body {
-  margin-bottom: $footer-height;
-  margin-top: $header-height;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: url('../img/bg.jpg') no-repeat center center fixed;
+  background-size: cover;
 }
 
-body footer {
+body {
   padding: 10px 0;
 
   position: absolute;
@@ -20,4 +21,43 @@ body footer {
   border-top: 1px solid $navbar-inverse-border;
 }
 
+.box {
+  margin-bottom: 20px;
+  padding: 30px 15px;
+  background: #fff;
+  background: rgba(255, 255, 255, 0.9);
+}
 
+.center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.intro-text {
+  text-transform: uppercase;
+  font-size: 1.25em;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+.tagline-divider {
+  margin: 15px auto 3px;
+  max-width: 250px;
+  border-color: #999999;
+}
+
+hr {
+  max-width: 400px;
+  border-color: #999999;
+}
+
+blockquote {
+  border-left-color: #999999;
+}
+
+p {
+  font-size: 1.1em;
+  line-height: 1.4;
+  color: #3e3e3e;
+}

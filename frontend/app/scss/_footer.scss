@@ -1,5 +1,9 @@
-.footer {
-  height: $footer-height;
-  background-color: $bgDefault;
-  color: gray;
+footer {
+  background: #fff;
+  background: rgba(255,255,255,0.9);
+}
+
+footer p {
+  margin: 0;
+  padding: 20px 0;
 }

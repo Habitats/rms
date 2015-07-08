@@ -1,19 +1,12 @@
 import 'babel-core/polyfill';
-
 import './index.html';
 import './scss/base.scss';
+import HelloActionCreators from './HelloActionCreators.js';
+import Hello from './components/Hello.jsx';
+import HelloStore from './HelloStore.js';
 
 import React from 'react';
 import Marty from 'marty';
-
-Marty.HttpStateSource.removeHook('parseJSON');
-let ApplicationContainer = Marty.ApplicationContainer;
-
-import SessionStore from './stores/SessionStore.js';
-import Queries from './queries/Queries.js';
-import AppActions from './actions/AppActions.js';
-import Api from './api/Api.js';
-import router from './router';
 
 if (module.hot) {
   module.hot.accept();
@@ -22,22 +15,21 @@ if (module.hot) {
 class Application extends Marty.Application {
   constructor(options) {
     super(options);
-    this.register(SessionStore);
-    this.register(Queries);
-    this.register(Api);
-    this.register(AppActions);
-    this.router = router;
+    this.register({
+      helloStore: HelloStore,
+      helloActionCreators: HelloActionCreators
+    });
   }
 }
 
 var app = new Application();
+var {ApplicationContainer} = require('marty');
+React.render((
+  <ApplicationContainer app={app}>
+    <Hello />
+  </ApplicationContainer>
+), document.body);
 
-app.router.run(function (Handler) {
 
-  React.render((
-      <ApplicationContainer app={app}>
-        <Handler/>
-      </ApplicationContainer>)
-    , document.body);
-});
+
 
