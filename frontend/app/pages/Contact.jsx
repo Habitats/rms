@@ -1,6 +1,6 @@
 import React from 'react';
-import ContactText from './../components/ContactText.jsx';
-import BigHeadline from './../components/BigHeadline.jsx';
+import ContactText from './../components/text/ContactText.jsx';
+import BigHeadline from './../components/text/BigHeadline.jsx';
 
 export default class Contact extends React.Component {
 

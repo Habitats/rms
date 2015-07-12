@@ -1,5 +1,4 @@
 import React from 'react';
-import BigHeadline from './BigHeadline.jsx';
 
 export default class About extends React.Component {
 

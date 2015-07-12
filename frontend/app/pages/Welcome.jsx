@@ -1,7 +1,7 @@
 import React from 'react';
-import WelcomeText from './../components/WelcomeText.jsx';
-import Carousel from './../components/Carousel.jsx';
-import BigHeadline from './../components/BigHeadline.jsx';
+import WelcomeText from './../components/text/WelcomeText.jsx';
+import Carousel from './../components/photo/Carousel.jsx';
+import BigHeadline from './../components/text/BigHeadline.jsx';
 
 export default class Welcome extends React.Component {
 

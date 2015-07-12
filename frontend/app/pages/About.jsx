@@ -1,6 +1,6 @@
 ﻿import React from 'react';
-import AboutText from './../components/AboutText.jsx';
-import BigHeadline from './../components/BigHeadline.jsx';
+import AboutText from './../components/text/AboutText.jsx';
+import BigHeadline from './../components/text/BigHeadline.jsx';
 
 export default class About extends React.Component {
 

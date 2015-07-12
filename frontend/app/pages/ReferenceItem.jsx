@@ -1,8 +1,8 @@
 import React from 'react';
 import Projects from './../components/Projects.jsx';
-import BigHeadline from './../components/BigHeadline.jsx';
-import PhotoBig from './../components/PhotoBig.jsx';
-import PhotoLine from './../components/PhotoLine.jsx';
+import BigHeadline from './../components/text/BigHeadline.jsx';
+import PhotoBig from './../components/photo/PhotoBig.jsx';
+import PhotoLine from './../components/photo/PhotoLine.jsx';
 
 export default class ReferenceItem extends React.Component {
 

@@ -27,7 +27,7 @@ export default class ContactText extends React.Component {
 
           </div>
           <div className="col-md-6">
-            <h3>Åpningstider:</h3>
+            <h3>Kontortid:</h3>
 
             <p>Mandag-fredag: 0900-1600</p>
 
