@@ -1,7 +1,7 @@
 import React from 'react';
 import Marty from 'marty';
 
-class Main extends React.Component {
+class LoremIpsum extends React.Component {
   render() {
     console.log('FLUX > rendering > main');
     return (
@@ -84,6 +84,6 @@ class Main extends React.Component {
   }
 }
 
-export default Marty.createContainer(Main, {
+export default Marty.createContainer(LoremIpsum, {
   listenTo: 'helloStore'
 });

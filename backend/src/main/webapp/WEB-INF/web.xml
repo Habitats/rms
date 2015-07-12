@@ -5,7 +5,7 @@
   <filter>
     <filter-name>scalatra</filter-name>
     <filter-class>
-      com.example.HelloWorld
+      no.rms.RmsServlet
     </filter-class>
   </filter>
 
