@@ -22,7 +22,7 @@ export default class WelcomeText extends React.Component {
           <p>Romerike Markiseservice AS er offisiell forhandler av Luxaflex-produkter fra Hunter Douglas. HD er verdens ledende
             leverandør, produsent og produktutvikler av solskjermingsprodukter.</p>
 
-          <P>Luxaflex står for spesialtilpassede solskjermingsprodukter til private hjem og offentlige bygninger.</P>
+          <p>Luxaflex står for spesialtilpassede solskjermingsprodukter til private hjem og offentlige bygninger.</p>
 
           <p>Vårt salgsområde er Akerhus nord, men vi tar gjerne oppdrag også utenfor dette området. Vi ønsker å tilby produkter av høy
             kvalitet med raske leveringstider til konkurransedyktige priser.</p>

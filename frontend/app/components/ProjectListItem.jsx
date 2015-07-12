@@ -11,7 +11,7 @@ export default class ProjectListItem extends React.Component {
         </a>
 
         <h3>
-          <Link params={{id: this.props.id, index: '1'}} to="projectItem">{this.props.title}</Link>
+          <Link params={{id: this.props.id, index: '1'}} to="referenceItem">{this.props.title}</Link>
         </h3>
 
         <p>{this.props.description}</p>

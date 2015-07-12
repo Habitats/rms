@@ -15,19 +15,8 @@ export default class Projects extends React.Component {
       );
     }
     return (
-      <div>
-        <div className="row">
-          <div className="col-lg-12">
-            <h1 className="page-header">Page Heading
-              <small>Secondary Text</small>
-            </h1>
-          </div>
-        </div>
-
-        <div className="row">
-          {projects}
-        </div>
-
+      <div className="row">
+        {projects}
       </div>
     );
   }

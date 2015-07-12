@@ -6,8 +6,6 @@ export default class ContactText extends React.Component {
     return (
       <div>
 
-        <h1>Kontaktinfo</h1>
-
         <div className="row">
           <div className="col-md-6">
             <h3>Adresse:</h3>

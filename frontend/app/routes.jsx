@@ -11,8 +11,8 @@ import Welcome from './pages/Welcome.jsx';
 import Contact from './pages/Contact.jsx';
 import About from './pages/About.jsx';
 import References from './pages/References.jsx';
+import ReferenceItem from './pages/ReferenceItem.jsx';
 import ProjectListItem from './components/ProjectListItem.jsx';
-import ProjectItem from './components/ProjectItem.jsx';
 
 // declare our routes and their hierarchy
 let routes = (
@@ -23,7 +23,7 @@ let routes = (
     <Route handler={References} name="references" path="referanser/">
       <Route handler={ProjectListItem} name="project" path="prosjekt/:id"/>
     </Route>
-    <Route handler={ProjectItem} title="Beste prosjetet" description="fint prosjekt" name="projectItem" path="prosjekt/:id/:index"/>
+    <Route handler={ReferenceItem} title="Beste prosjetet" description="fint prosjekt" name="referenceItem" path="prosjekt/:id/:index"/>
     <NotFoundRoute handler={NotFound}/>
   </Route>
 );
