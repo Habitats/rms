@@ -1,14 +1,20 @@
+# common
 build/
 .gradle/
-node_modules/
 gradle
-frontend/node_modules
-rms.iml
-rms_backend.iml
-frontend/build
-backend/build
-backend/backend.iml
+*.iml
 .idea
 out
+Thumbs.db
+*.log
+
+# backend
+backend/build
 backend/.gradle
+
+# frontend
 frontend/$npm_package_config_buildDir
+frontend/node_modules
+frontend/build
+
+
