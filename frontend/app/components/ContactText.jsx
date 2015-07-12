@@ -13,7 +13,7 @@ export default class ContactText extends React.Component {
             <h3>Adresse:</h3>
 
             <p>Romerike Markiseservice AS<br />
-              Døhlengården<br />
+              DÃ¸hlengÃ¥rden<br />
               2032 MAURA
             </p>
 
@@ -25,19 +25,18 @@ export default class ContactText extends React.Component {
               E-post kontor: <a href="mailto:post@romerike-markiseservice.no">post@romerike-markiseservice.no</a><br />
               E-post Morten: <a href="mailto:morten@romerike-markiseservice.no">morten@romerike-markiseservice.no</a><br />
               E-post Roar: <a href="mailto:roar@romerike-markiseservice.no">roar@romerike-markiseservice.no</a>
-
             </p>
 
           </div>
           <div className="col-md-6">
-            <h3>Åpningstider:</h3>
+            <h3>Ã…pningstider:</h3>
 
             <p>Mandag-fredag: 0900-1600</p>
 
             <h3>Tlf. betjening:</h3>
 
             <p>Mandag-fredag: 0800-2000<br />
-              Lørdag: 1000-1400</p>
+              LÃ¸rdag: 1000-1400</p>
           </div>
         </div>
       </div>

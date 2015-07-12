@@ -10,18 +10,16 @@ export default class About extends React.Component {
 
         <div>
           <p>
-            Romerike Markiseservice ble etablert i 1986 i Maura. Da med to ansatte pluss en montør.
-            Vokst fort ut av lokalene og etablerte seg i Dølengården der de er pr dags dato. Det er i
-            dag 6 ansatte med et meget høyt kompetanse nivå, både når det gjelder markiser og
-            solskjerming. Leverer både til privat og næringskunder er en totallevrandør med en meget
-            høy servicegrad. Satser mye på servicearbeid det vil si at vi reparerer de gamle persiennene.
-            Romerike Markiseservice representerer Hunter Douglas som er verdens største innen
-            solskjerming. Vi er meget stolte av og ha blitt valgt, og vi kjøper alt derfra.
-            Familiebedrift som går så det suser her er intet oppdrag for lite intet for stort.</p>
-
-          <p>Her er noen bilder av butikken slik den ser ut i dag, med showroom og verksted.</p>
-
-          <p>Trykk på bildene for å se dem i høyere oppløsning.</p>
+            Romerike Markiseservice ble etablert i 1986 i Maura. Da med to ansatte pluss en montÃ¸r.
+            Vokst fort ut av lokalene og etablerte seg i DÃ¸lengÃ¥rden der de er pr dags dato. Det er i
+            dag 6 ansatte med et meget hÃ¸yt kompetanse nivÃ¥, bÃ¥de nÃ¥r det gjelder markiser og
+            solskjerming. Leverer bÃ¥de til privat og nÃ¦ringskunder er en totallevrandÃ¸r med en meget
+            hÃ¸y servicegrad.  Satser mye pÃ¥ servicearbeid det vil si at vi reparerer de gamle persiennene.
+            Romerike Markiseservice representerer Hunter Douglas som er verdens stÃ¸rste innen
+            solskjerming. Vi er meget stolte av og ha blitt valgt, og vi kjÃ¸per alt derfra.
+            Familiebedrift som gÃ¥r sÃ¥ det suser her er intet oppdrag for lite intet for stort.</p>
+          <p>Her er noen bilder av butikken slik den ser ut i dag, med  showroom og verksted.</p>
+          <p>Trykk pÃ¥ bildene for Ã¥ se dem i hÃ¸yere opplÃ¸sning.</p>
 
 
         </div>

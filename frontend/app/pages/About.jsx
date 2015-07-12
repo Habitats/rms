@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import AboutText from './../components/AboutText.jsx';
 
 export default class About extends React.Component {

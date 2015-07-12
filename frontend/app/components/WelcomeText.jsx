@@ -10,26 +10,25 @@ export default class WelcomeText extends React.Component {
         <div>
           <p>Hei, velkommen til det nye nettstedet for Romerike Markiseservice AS.</p>
 
-          <p>På disse sidene finner du nødvendig informasjon om oss, og om våre produkter.<br />
-            Du kan guide deg til sidene ved hjelp av menyen over.
-          </p>
+          <p>PÃ¥ disse sidene finner du nÃ¸dvendig informasjon om oss, og om vÃ¥re produkter.<br />
+            Du kan guide deg til sidene ved hjelp av menyen over.</p>
 
-          <p>Skulle du ha noen spørsmål, finner du kontaktinformasjon <a href="under/skjema.php">her</a>.<br />
-            Send oss gjerne en mail, eller bruk <a href="under/skjema.php">kontaktskjemaet</a> og vi vil være behjelpelig med dine
-            spørsmål.</p>
+          <p>Skulle du ha noen spÃ¸rsmÃ¥l, finner du kontaktinformasjon <a href="under/skjema.php">her</a>.<br/>
+            Send oss gjerne en mail, eller bruk <a href="under/skjema.php">kontaktskjemaet</a> og vi vil vÃ¦re behjelpelig med dine
+            spÃ¸rsmÃ¥l.</p>
 
           <h2>Firmabeskrivelse</h2>
 
           <p>Romerike Markiseservice AS er offisiell forhandler av Luxaflex-produkter fra Hunter Douglas. HD er verdens ledende
-            leverandør, produsent og produktutvikler av solskjermingsprodukter.</p>
+            leverandÃ¸r, produsent og produktutvikler av solskjermingsprodukter.</p>
 
-          <p>Luxaflex står for spesialtilpassede solskjermingsprodukter til private hjem og offentlige bygninger.</p>
+          <P>Luxaflex stÃ¥r for spesialtilpassede solskjermingsprodukter til private hjem og offentlige bygninger.</P>
 
-          <p>Vårt salgsområde er Akerhus nord, men vi tar gjerne oppdrag også utenfor dette området. Vi ønsker å tilby produkter av høy
+          <p>VÃ¥rt salgsomrÃ¥de er Akerhus nord, men vi tar gjerne oppdrag ogsÃ¥ utenfor dette omrÃ¥det. Vi Ã¸nsker Ã¥ tilby produkter av hÃ¸y
             kvalitet med raske leveringstider til konkurransedyktige priser.</p>
 
-          <p>Er du interessert i å se nærmere på noen av våre referanser så kan du trykke <a href="under/r_prosjekt.php">her</a> for mer
-            informasjon. Her vil du også finne et flott bildegalleri.</p>
+          <p>Er du interessert i Ã¥ se nÃ¦rmere pÃ¥ noen av vÃ¥re referanser sÃ¥ kan du trykke <a href="under/r_prosjekt.php">her</a> for mer
+            informasjon. Her vil du ogsÃ¥ finne et flott bildegalleri.</p>
 
         </div>
       </div>
