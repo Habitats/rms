@@ -21,10 +21,6 @@ class Layout extends React.Component {
 }
 
 export default Marty.createContainer(Layout, {
-  listenTo: 'helloStore',
-  fetch: {
-    hello() {
-      return this.app.helloStore.getHelloWorld();
-    }
-  }
+  listenTo: 'projectStore',
+  fetch: {}
 });

@@ -1,19 +1,12 @@
 import React from 'react';
+import Marty from 'marty';
 import ProjectListItem from './ProjectListItem.jsx';
 
 export default class Projects extends React.Component {
 
   render() {
     let projects = [];
-    for (let i = 1; i <= 10; i++) {
-      projects.push(
-        <ProjectListItem title={'Prosjekt ' + i}
-                         description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae."
-                         id={i}
-                         params={{id: i}}
-          />
-      );
-    }
+    this.props.projects.forEach(p => projects.push(<ProjectListItem project={p}/>));
     return (
       <div className="row">
         {projects}
@@ -21,4 +14,13 @@ export default class Projects extends React.Component {
     );
   }
 }
+
+export default Marty.createContainer(Projects, {
+  listenTo: 'projectStore',
+  fetch: {
+    projects() {
+      return this.app.projectStore.getProjects();
+    }
+  }
+});
 

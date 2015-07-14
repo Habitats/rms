@@ -6,7 +6,7 @@ export default class PhotoBig extends React.Component {
     return (
       <div>
         <div className="col-md-8">
-          <img className="img-responsive" src="http://placehold.it/750x500" alt=""/>
+          <img className="img-responsive" src={this.props.src} alt=""/>
         </div>
 
         <div className="col-md-4">

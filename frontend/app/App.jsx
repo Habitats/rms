@@ -1,8 +1,8 @@
 import 'babel-core/polyfill';
 import './index.html';
 import './scss/base.scss';
-import HelloActionCreators from './HelloActionCreators.js';
-import HelloStore from './HelloStore.js';
+import ProjectActionCreators from './ProjectActionCreators.js';
+import ProjectStore from './ProjectStore.js';
 
 import React from 'react';
 import Marty from 'marty';
@@ -16,8 +16,8 @@ class Application extends Marty.Application {
   constructor(options) {
     super(options);
     this.register({
-      helloStore: HelloStore,
-      helloActionCreators: HelloActionCreators
+      projectStore: ProjectStore,
+      projectActionCreators: ProjectActionCreators
     });
     this.router = router;
   }

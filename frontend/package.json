@@ -39,7 +39,8 @@
     "bootstrap-sass": "^3.3.5",
     "marty": "^0.10.4",
     "flux": "^2.0.3",
-    "font-awesome": "^4.3.0"
+    "font-awesome": "^4.3.0",
+    "react-imageloader": "2.0.0"
   },
   "devDependencies": {
     "react-proxy-loader": "^0.3.1",

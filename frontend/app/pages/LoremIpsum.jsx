@@ -84,6 +84,4 @@ class LoremIpsum extends React.Component {
   }
 }
 
-export default Marty.createContainer(LoremIpsum, {
-  listenTo: 'helloStore'
-});
+export default Marty.createContainer(LoremIpsum, {});
