@@ -1,17 +1,21 @@
 package no.rms
 
-import org.scalatra._
-import scalate.ScalateSupport
+import no.rms.models.Projects
+import org.scalatra.json.JacksonJsonSupport
+import org.json4s.{DefaultFormats, Formats}
 
-class RmsServlet extends BackendStack {
+class RmsServlet extends BackendStack with JacksonJsonSupport {
+  protected implicit val jsonFormats: Formats = DefaultFormats
 
-  get("/") {
-    <html>
-      <body>
-        <h1>Hello, world!</h1>
-        Say <a href="hello-scalate">hello to Scalate</a>.
-      </body>
-    </html>
+  before() {
+    contentType = formats("json")
   }
 
+  get("/hello/") {
+":)"
+  }
+
+  get("/") {
+    Projects.all
+  }
 }
