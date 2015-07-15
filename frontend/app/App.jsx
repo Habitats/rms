@@ -1,8 +1,8 @@
 import 'babel-core/polyfill';
 import './index.html';
 import './scss/base.scss';
-import ProjectActionCreators from './ProjectActionCreators.js';
-import ProjectStore from './ProjectStore.js';
+import ProjectActionCreators from './actions/ProjectActionCreators.js';
+import ProjectStore from './stores/ProjectStore.js';
 
 import React from 'react';
 import Marty from 'marty';

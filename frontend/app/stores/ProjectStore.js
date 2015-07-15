@@ -1,5 +1,5 @@
 import Marty from 'marty';
-import UserConstants from './ProjectConstants.js';
+import UserConstants from './../constants/ProjectConstants.js';
 
 class ProjectStore extends Marty.Store {
   constructor(props) {

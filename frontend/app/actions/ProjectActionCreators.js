@@ -1,5 +1,5 @@
 import Marty from 'marty';
-import ProjectConstants from './ProjectConstants.js';
+import ProjectConstants from './../constants/ProjectConstants.js';
 
 class ProjectActionCreators extends Marty.ActionCreators {
 
