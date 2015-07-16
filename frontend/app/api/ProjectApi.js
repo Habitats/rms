@@ -5,7 +5,7 @@ const baseUrl = 'http://localhost:8080/';
 class ProjectApi extends Marty.HttpStateSource {
 
   getProjects() {
-    return this.get(`${baseUrl}projects/`).then(res => {
+    return this.get(`${baseUrl}projects`).then(res => {
       if (res.status === 200) {
         return res.body;
       }

@@ -9,7 +9,7 @@ object BackendBuild extends Build {
   val Name = "backend"
   val Version = "0.1.0-SNAPSHOT"
   val ScalaVersion = "2.11.6"
-  val ScalatraVersion = "2.3.0"
+  val ScalatraVersion = "2.4.0.M2"
 
   lazy val project = Project(
     "backend",
@@ -31,7 +31,10 @@ object BackendBuild extends Build {
         "ch.qos.logback" % "logback-classic" % "1.1.2" % "runtime",
         "org.eclipse.jetty" % "jetty-webapp" % "9.2.10.v20150310" % "container",
         "javax.servlet" % "javax.servlet-api" % "3.1.0" % "provided",
-        "org.json4s" %% "json4s-jackson" % "3.2.9"
+        "com.typesafe.slick" %% "slick" % "3.0.0-RC1",
+        "com.h2database" % "h2" % "1.4.181",
+        "org.json4s" %% "json4s-jackson" % "3.2.9",
+        "com.mchange" % "c3p0" % "0.9.5.1"
       ),
       scalateTemplateConfig in Compile <<= (sourceDirectory in Compile) { base =>
         Seq(
