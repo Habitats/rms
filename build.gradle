@@ -20,6 +20,7 @@ idea {
                 file('build'),
                 file('frontend/node_modules'),
                 file('frontend/build'),
+                file('frontend/project/target'),
                 file('out'),
                 file('.idea'),
                 file('gradle')
