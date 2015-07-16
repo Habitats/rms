@@ -1,5 +1,6 @@
 package no.rms.db
 
+import no.rms.models.Project
 import slick.driver.JdbcDriver.api._
 
 object RmsDb {
@@ -37,6 +38,11 @@ object RmsDb {
 
     val createDatabase = DBIO.seq(createSchemaAction, insertProjects)
     db.run(createDatabase)
+  }
+
+  def store(project: Project, db: Database) {
+    val data = RmsDb.projects +=(project.id, project.title, project.description, project.img.mkString(","))
+    db.run(data)
   }
 
   val projects = TableQuery[Projects]

@@ -9,7 +9,7 @@ object BackendBuild extends Build {
   val Name = "backend"
   val Version = "0.1.0-SNAPSHOT"
   val ScalaVersion = "2.11.6"
-  val ScalatraVersion = "2.4.0.M2"
+  val ScalatraVersion = "2.3.1"
 
   lazy val project = Project(
     "backend",
@@ -18,14 +18,20 @@ object BackendBuild extends Build {
       organization := Organization,
       name := Name,
       version := Version,
+      ivyScala := ivyScala.value map {
+        _.copy(overrideScalaVersion = true)
+      },
       scalaVersion := ScalaVersion,
       resolvers += Classpaths.typesafeReleases,
       resolvers += "Scalaz Bintray Repo" at "http://dl.bintray.com/scalaz/releases",
       libraryDependencies ++= Seq(
         "org.scalatra" %% "scalatra" % ScalatraVersion,
         "org.scalatra" %% "scalatra-scalate" % ScalatraVersion,
-        "org.scalatra.scalate" %% "scalate-core" % "1.7.0",
+        "org.scalatra.scalate" %% "scalate-core" % "1.7.0" % "compile" intransitive(),
         "org.scala-lang" % "scala-reflect" % ScalaVersion,
+        "org.scala-lang" % "scala-compiler" % ScalaVersion,
+        "org.scala-lang" % "scalap" % ScalaVersion,
+        "org.scala-lang.modules" % "scala-parser-combinators_2.11" % "1.0.4",
         "org.scalatra" %% "scalatra-json" % ScalatraVersion,
         "org.scalatra" %% "scalatra-specs2" % ScalatraVersion % "test",
         "ch.qos.logback" % "logback-classic" % "1.1.2" % "runtime",
@@ -33,7 +39,8 @@ object BackendBuild extends Build {
         "javax.servlet" % "javax.servlet-api" % "3.1.0" % "provided",
         "com.typesafe.slick" %% "slick" % "3.0.0-RC1",
         "com.h2database" % "h2" % "1.4.181",
-        "org.json4s" %% "json4s-jackson" % "3.2.9",
+        "org.json4s" % "json4s-jackson_2.11" % "3.3.0.RC3",
+        "org.json4s" % "json4s-native_2.11" % "3.3.0.RC3",
         "com.mchange" % "c3p0" % "0.9.5.1"
       ),
       scalateTemplateConfig in Compile <<= (sourceDirectory in Compile) { base =>

@@ -30,5 +30,14 @@ class RmsServlet(val db: Database) extends BackendStack with FutureSupport with 
     }
     )
   }
+
+  post("/?") {
+    println("yolo?")
+    val project = parsedBody.extract[Project]
+    println(project)
+    RmsDb.store(project, db)
+
+    project
+  }
 }
 

@@ -21,8 +21,10 @@ class ProjectStore extends Marty.Store {
     this.hasChanged();
   }
 
-  addProject() {
+  addProject(project) {
     console.log('adding project not implmeneted');
+    this.state[this.state.length] = project;
+    this.hasChanged();
   }
 
   getProjects() {

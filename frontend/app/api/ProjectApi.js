@@ -16,7 +16,7 @@ class ProjectApi extends Marty.HttpStateSource {
 
   save(project) {
     return this.post({url: baseUrl, body: project}).then(res => {
-      if (res.info.ok) {
+      if (res.status === 200) {
         return res.body;
       }
 

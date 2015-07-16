@@ -7,6 +7,14 @@ class ProjectActionCreators extends Marty.ActionCreators {
     console.log('FLUX > action > Project world');
     this.dispatch(ProjectConstants.UPDATED_PROJECT, msg);
   }
+
+  save(data) {
+    this.app.projectApi.save(data).then(project => {
+      this.dispatch(ProjectConstants.ADD_PROJECT, project);
+    }, error => {
+      this.dispatch(ProjectConstants.ADD_PROJECT_FAILED, error);
+    });
+  }
 }
 
 export default ProjectActionCreators;
