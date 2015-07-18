@@ -22,9 +22,9 @@ class ProjectStore extends Marty.Store {
   }
 
   addProject(project) {
-    console.log('adding project not implmeneted');
     this.state[this.state.length] = project;
     this.hasChanged();
+    this.app.router.transitionTo('references');
   }
 
   getProjects() {

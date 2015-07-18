@@ -12,6 +12,7 @@ import Contact from './pages/Contact.jsx';
 import About from './pages/About.jsx';
 import References from './pages/References.jsx';
 import Project from './pages/Project.jsx';
+import ProjectAdd from './pages/ProjectAdd.jsx';
 import ProjectListItem from './components/ProjectListItem.jsx';
 import ReferencesList from './components/text/ReferencesList.jsx';
 
@@ -26,6 +27,7 @@ let routes = (
       <Route handler={ProjectListItem} name="private" path="private/:id/"/>
     </Route>
     <Route handler={Project} name="referenceItem" path="ref/:id/"/>
+    <Route handler={ProjectAdd} name="project_add" path="ref/add"/>
     <Route handler={ReferencesList} name="referencesList" path="referanseliste/"/>
     <NotFoundRoute handler={NotFound}/>
   </Route>

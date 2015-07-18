@@ -4,10 +4,14 @@ import ProjectListItem from './ProjectListItem.jsx';
 
 export default class Projects extends React.Component {
 
+  genId() {
+    return this.props.projects.length + 1;
+  }
+
   onSave(e) {
     e.preventDefault();
     this.app.projectActionCreators.save({
-      id: Math.random(),
+      id: this.genId(),
       title: 'Yoloswag',
       description: 'Descbitchion',
       img: ['http://www.romerike-markise.no/images/ref_nannestad.vgs_3.jpg',
@@ -24,7 +28,6 @@ export default class Projects extends React.Component {
         <div className="row">
           {projects}
         </div>
-        <button className="btn btn-default" onClick={this.onSave.bind(this)}>Lagre</button>
       </div>
     );
   }
