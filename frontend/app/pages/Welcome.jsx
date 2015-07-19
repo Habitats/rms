@@ -9,8 +9,8 @@ export default class Welcome extends React.Component {
     return (
       <div className="container">
         <div className="box">
-          <Carousel />
-          <BigHeadline small="Velkommen til" big="Romerike Markiseservice AS" />
+          <Carousel img="http://www.pic2014.com/wp-content/uploads/2014-nice-cat-picture.jpg"/>
+          <BigHeadline small="Velkommen til" big="Romerike Markiseservice AS"/>
         </div>
         <div className="box">
           <WelcomeText />

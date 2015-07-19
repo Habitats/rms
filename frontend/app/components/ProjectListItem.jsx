@@ -1,6 +1,5 @@
 import React from 'react';
 import Router from 'react-router';
-import ImageLoader from 'react-imageloader';
 let Link = Router.Link;
 
 export default class ProjectListItem extends React.Component {
@@ -10,7 +9,7 @@ export default class ProjectListItem extends React.Component {
       <div className="col-md-6">
 
         <h3>
-          <Link params={{id: this.props.project.id}} to="referenceItem">
+          <Link params={{id: this.props.project.id, selected: 0}} to="referenceItem">
             {this.props.project.title}
             <img className="img-responsive" src={this.props.project.img[0]}/>
           </Link>

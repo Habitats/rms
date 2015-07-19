@@ -16,10 +16,6 @@ export default class About extends React.Component {
           solskjerming. Vi er meget stolte av og ha blitt valgt, og vi kjøper alt derfra.
           Familiebedrift som går så det suser her er intet oppdrag for lite intet for stort.</p>
 
-        <p>Her er noen bilder av butikken slik den ser ut i dag, med showroom og verksted.</p>
-
-        <p>Trykk på bildene for å se dem i høyere oppløsning.</p>
-
       </div>
     );
   }

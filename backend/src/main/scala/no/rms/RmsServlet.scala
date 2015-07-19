@@ -22,11 +22,6 @@ class RmsServlet(val db: Database) extends BackendStack with FutureSupport with 
     contentType = formats("json")
   }
 
-  def extractRequiredParam(paramName: String): String = {
-    val param = params.get(paramName)
-    param.get
-  }
-
   get("/hello/") {
     ":)"
   }

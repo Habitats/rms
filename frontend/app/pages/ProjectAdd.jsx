@@ -19,7 +19,7 @@ export default class ProjectAdd extends React.Component {
   onSave(e) {
     e.preventDefault();
     this.app.projectActionCreators.save({
-      id: Math.random(),
+      id: this.props.id,
       title: this.state.title,
       description: this.state.description,
       img: this.state.img
@@ -54,7 +54,11 @@ export default class ProjectAdd extends React.Component {
 
 export default Marty.createContainer(ProjectAdd, {
   listenTo: 'projectStore',
-  fetch: {}
+  fetch: {
+    id() {
+      return this.app.projectStore.getProjects().length + 1;
+    }
+  }
 });
 
 

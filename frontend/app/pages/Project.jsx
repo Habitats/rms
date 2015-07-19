@@ -8,6 +8,7 @@ export default class Project extends React.Component {
 
   render() {
     let project = this.props.projects[this.props.params.id - 1];
+    let selected = this.props.params.selected || 0;
     return (
       <div className="container">
         <div className="box col-md-12">
@@ -17,14 +18,14 @@ export default class Project extends React.Component {
 
           <div className="row">
             <PhotoBig
-              src={project.img[2]}
+              src={project.img[selected]}
               description={project.description}
               details=""/>
 
           </div>
           <div className="row">
             <BigHeadline small="Flere bilder" big=""/>
-            <PhotoLine id="someId" img={project.img}/>
+            <PhotoLine id={project.id} img={project.img} selected={selected}/>
             <hr/>
           </div>
         </div>
