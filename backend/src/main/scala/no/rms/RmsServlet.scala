@@ -1,5 +1,7 @@
 package no.rms
 
+import java.io.File
+
 import no.rms.db.RmsDb
 import no.rms.models.Project
 import org.json4s.{DefaultFormats, Formats}
@@ -20,6 +22,11 @@ class RmsServlet(val db: Database) extends BackendStack with FutureSupport with 
     contentType = formats("json")
   }
 
+  def extractRequiredParam(paramName: String): String = {
+    val param = params.get(paramName)
+    param.get
+  }
+
   get("/hello/") {
     ":)"
   }
@@ -29,6 +36,13 @@ class RmsServlet(val db: Database) extends BackendStack with FutureSupport with 
       case (id, title, description, img) => Project(id, title, description, img.split(",").toList)
     }
     )
+  }
+
+  get("/images/:id/?") {
+    val id = params.get("id")
+    contentType = "image"
+    val image = params.get("id").map(id => new File("images/" + id)).filter(_.exists).getOrElse(new File("images/not_found.jpg"))
+    image
   }
 
   post("/?") {

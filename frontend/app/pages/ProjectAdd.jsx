@@ -13,7 +13,7 @@ export default class ProjectAdd extends React.Component {
   }
 
   handleImagesChange(event) {
-    this.setState({img: event.target.value});
+    this.setState({img: event.target.value.split(',')});
   }
 
   onSave(e) {
@@ -22,9 +22,7 @@ export default class ProjectAdd extends React.Component {
       id: Math.random(),
       title: this.state.title,
       description: this.state.description,
-      img: ['http://www.romerike-markise.no/images/ref_nannestad.vgs_3.jpg',
-            'http://www.romerike-markise.no/images/ref_nannestad.vgs_4.jpg']
-
+      img: this.state.img
     });
   }
 
