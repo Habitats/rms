@@ -23,7 +23,7 @@ body {
 
 .box {
   margin-bottom: 20px;
-  padding: 30px 15px;
+  padding: 30px 30px;
   background: #fff;
   background: rgba(255, 255, 255, 0.9);
 }
@@ -67,7 +67,16 @@ i {
   margin-right: 5px;
 }
 
+.photo{
+  margin-top: 15px;
+}
+
 .photo-selected{
   background-color: black;
   opacity: 0.5;
+}
+
+#map-canvas{
+  height: 400px;
+  width: 100%;
 }

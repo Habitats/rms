@@ -23,7 +23,7 @@ export default class PhotoLine extends React.Component {
   }
 
   getClasses(img) {
-    return this.props.img[this.props.selected] === img ? 'photo-selected' : 'photo';
+    return this.props.img[this.props.selected] === img ? 'photo photo-selected' : 'photo';
   }
 }
 

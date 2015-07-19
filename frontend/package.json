@@ -40,7 +40,8 @@
     "marty": "^0.10.4",
     "flux": "^2.0.3",
     "font-awesome": "^4.3.0",
-    "react-imageloader": "2.0.0"
+    "react-imageloader": "2.0.0",
+    "react-async-script": "0.3.2"
   },
   "devDependencies": {
     "react-proxy-loader": "^0.3.1",

@@ -7,7 +7,7 @@ export default class ContactText extends React.Component {
       <div>
 
         <div className="row">
-          <div className="col-md-6">
+          <div className="col-md-12">
             <h3>Adresse:</h3>
 
             <p>Romerike Markiseservice AS<br />
@@ -25,8 +25,6 @@ export default class ContactText extends React.Component {
               E-post Roar: <a href="mailto:roar@romerike-markiseservice.no">roar@romerike-markiseservice.no</a>
             </p>
 
-          </div>
-          <div className="col-md-6">
             <h3>Kontortid:</h3>
 
             <p>Mandag-fredag: 0900-1600</p>

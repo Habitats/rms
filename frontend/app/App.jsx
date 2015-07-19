@@ -5,6 +5,8 @@ import ProjectActionCreators from './actions/ProjectActionCreators.js';
 import ProjectStore from './stores/ProjectStore.js';
 import ProjectQueries from './queries/ProjectQueries.js';
 import ProjectApi from './api/ProjectApi.js';
+import MiscStore from './stores/MiscStore.js';
+import MiscActionCreators from './actions/MiscActionCreators.js';
 
 import React from 'react';
 import Marty from 'marty';
@@ -21,7 +23,9 @@ class Application extends Marty.Application {
       projectStore: ProjectStore,
       projectActionCreators: ProjectActionCreators,
       projectQueries: ProjectQueries,
-      projectApi: ProjectApi
+      projectApi: ProjectApi,
+      miscStore: MiscStore,
+      miscActionCreators: MiscActionCreators
     });
     this.router = router;
   }
