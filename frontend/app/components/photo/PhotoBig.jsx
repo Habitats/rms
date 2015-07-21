@@ -1,12 +1,13 @@
 import React from 'react';
+import Photo from './Photo.jsx';
 
 export default class PhotoBig extends React.Component {
 
   render() {
     return (
       <div>
-        <div className="col-md-8">
-          <img className="img-responsive" src={this.props.src} alt=""/>
+        <div className="col-md-8 no-pad">
+          <Photo src={this.props.src} className="col-md-12" height="500"/>
         </div>
 
         <div className="col-md-4">

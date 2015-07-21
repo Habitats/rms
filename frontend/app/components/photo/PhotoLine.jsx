@@ -4,6 +4,10 @@ let Link = Router.Link;
 
 export default class PhotoLine extends React.Component {
 
+  getClasses(img) {
+    return this.props.img[this.props.selected] === img ? 'photo photo-selected' : 'photo';
+  }
+
   render() {
     let images = this.props.img.map(i =>
         <div className="col-lg-3 col-xs-6">
@@ -20,10 +24,6 @@ export default class PhotoLine extends React.Component {
         {images}
       </div>
     );
-  }
-
-  getClasses(img) {
-    return this.props.img[this.props.selected] === img ? 'photo photo-selected' : 'photo';
   }
 }
 
