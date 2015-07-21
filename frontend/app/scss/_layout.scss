@@ -81,10 +81,14 @@ i {
   width: 100%;
 }
 
-.photo-container {
+.photo-container-wrapper {
   background-repeat: no-repeat;
   background-size: cover;
   padding-bottom: 15px;
+}
+
+.photo-container{
+  background-size: cover !important;
 }
 
 .no-pad {

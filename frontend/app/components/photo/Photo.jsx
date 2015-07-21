@@ -44,7 +44,7 @@ export default class Photo extends React.Component {
     let src = this.props.src;
     let height = this.props.height;
     let width = this.props.width;
-    let className = this.props.className + ' photo-container ' + this.state.classes;
+    let className = this.props.className + ' photo-container-wrapper ' + this.state.classes;
     let style = {
       background: 'url(' + src + ') no-repeat center center',
       backgroundSize: 'cover !important',
@@ -55,7 +55,7 @@ export default class Photo extends React.Component {
     return (
       <div>
         <div className={className}>
-          <div style={style} onClick={this.toggle.bind(this)}/>
+          <div style={style} className="photo-container" onClick={this.toggle.bind(this)}/>
         </div>
         <div className={this.state.backdrop} onClick={this.toggle.bind(this)}></div>
         <div className={this.state.backdropPhoto} onClick={this.toggle.bind(this)}>
