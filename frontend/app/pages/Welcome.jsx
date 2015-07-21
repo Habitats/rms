@@ -2,6 +2,7 @@ import React from 'react';
 import WelcomeText from './../components/text/WelcomeText.jsx';
 import Carousel from './../components/photo/Carousel.jsx';
 import BigHeadline from './../components/text/BigHeadline.jsx';
+import Features from './../components/feature/Features.jsx';
 
 export default class Welcome extends React.Component {
 
@@ -14,6 +15,9 @@ export default class Welcome extends React.Component {
         </div>
         <div className="box">
           <WelcomeText />
+        </div>
+        <div className="box">
+          <Features />
         </div>
       </div>
     );

@@ -8,8 +8,6 @@ export default class WelcomeText extends React.Component {
         <h1>Velkommen</h1>
 
         <div>
-          <p>Hei, velkommen til det nye nettstedet for Romerike Markiseservice AS.</p>
-
           <p>På disse sidene finner du nødvendig informasjon om oss, og om våre produkter.<br />
             Du kan guide deg til sidene ved hjelp av menyen over.</p>
 
