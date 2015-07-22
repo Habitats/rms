@@ -11,7 +11,7 @@ export default class ProjectListItem extends React.Component {
         <h2>
           <Link params={{id: this.props.project.id, selected: 0}} to="referenceItem">
             {this.props.project.title}
-            <img className="img-responsive" src={this.props.project.img[0]}/>
+            <img className="img-responsive" src={this.props.project.img[0].url}/>
           </Link>
         </h2>
 

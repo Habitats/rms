@@ -1,4 +1,4 @@
 package no.rms.models
 
-case class Project (id: String, title: String, description: String, img: List[String])
+case class Project (id: String, title: String, description: String, img: List[Image])
 

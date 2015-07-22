@@ -12,6 +12,16 @@ class ProjectQueries extends Marty.Queries {
         console.log(err);
       });
   }
+
+  getImages() {
+    return this.app.projectApi.getImages()
+      .then(images => {
+        this.dispatch(ProjectConstants.RECEIVE_IMAGES, images);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
 }
 
 export default ProjectQueries;

@@ -16,5 +16,3 @@ backend/.gradle
 frontend/$npm_package_config_buildDir
 frontend/node_modules
 frontend/build
-
-

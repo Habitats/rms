@@ -13,7 +13,7 @@ export default class PhotoLine extends React.Component {
         <div className="col-lg-3 col-xs-6">
           <Link params={{id: this.props.id, selected: this.props.img.indexOf(i)}} to="referenceItem">
             <div className={this.getClasses(i)}>
-              <img className="img-responsive portfolio-item" src={i} alt=""/>
+              <img className="img-responsive portfolio-item" src={i.url} alt=""/>
             </div>
           </Link>
         </div>

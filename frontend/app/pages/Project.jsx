@@ -18,7 +18,7 @@ export default class Project extends React.Component {
 
           <div className="row">
             <PhotoBig
-              src={project.img[selected]}
+              src={project.img[selected].url}
               description={project.description}
               details=""/>
 

@@ -42,7 +42,7 @@ object RmsDb {
   }
 
   def store(project: Project, db: Database) {
-    val data = RmsDb.projects +=(project.id, project.title, project.description, project.img.mkString(","))
+    val data = RmsDb.projects +=(project.id, project.title, project.description, project.img.map(_.url).mkString(","))
     db.run(data)
   }
 

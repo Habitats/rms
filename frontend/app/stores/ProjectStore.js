@@ -8,6 +8,7 @@ class ProjectStore extends Marty.Store {
     this.handlers = {
       updateProject: ProjectConstants.UPDATE_PROJECT,
       receiveProjects: ProjectConstants.RECEIVE_PROJECTS,
+      receiveImages: ProjectConstants.RECEIVE_IMAGES,
       addProject: ProjectConstants.ADD_PROJECT
     };
   }
@@ -17,14 +18,17 @@ class ProjectStore extends Marty.Store {
   }
 
   receiveProjects(projects) {
-    this.state = projects;
-    this.hasChanged();
+    this.setState({projects: projects});
+  }
+
+  receiveImages(images) {
+    this.setState({images: images});
   }
 
   addProject(project) {
-    this.state[this.state.length] = project;
-    this.hasChanged();
+    this.state.projects[this.state.projects.length] = project;
     this.app.router.transitionTo('references');
+    this.hasChanged();
   }
 
   getProjects() {
@@ -32,11 +36,25 @@ class ProjectStore extends Marty.Store {
       id: 'projects',
       locally() {
         if (this.hasAlreadyFetched('projects')) {
-          return this.state;
+          return this.state.projects;
         }
       },
       remotely() {
         return this.app.projectQueries.getProjects();
+      }
+    });
+  }
+
+  getImages() {
+    return this.fetch({
+      id: 'images',
+      locally() {
+        if (this.hasAlreadyFetched('images')) {
+          return this.state.images;
+        }
+      },
+      remotely() {
+        return this.app.projectQueries.getImages();
       }
     });
   }

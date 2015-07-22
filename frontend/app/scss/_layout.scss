@@ -87,7 +87,7 @@ i {
   padding-bottom: 15px;
 }
 
-.photo-container{
+.photo-container {
   background-size: cover !important;
 }
 
@@ -124,6 +124,12 @@ i {
   position: relative;
 }
 
-.overlay-photo-wrapper img{
+.overlay-photo-wrapper img {
   max-width: 70%;
+}
+
+.hide-overflow {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }

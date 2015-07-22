@@ -14,6 +14,16 @@ class ProjectApi extends Marty.HttpStateSource {
     });
   }
 
+  getImages(){
+    return this.get(`${baseUrl}images`).then(res => {
+      if (res.status === 200) {
+        return res.body;
+      }
+
+      throw res.info;
+    });
+  }
+
   save(project) {
     return this.post({url: baseUrl, body: project}).then(res => {
       if (res.status === 200) {

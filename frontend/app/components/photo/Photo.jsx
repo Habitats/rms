@@ -52,10 +52,13 @@ export default class Photo extends React.Component {
       width: width
     };
     let bigImg = this.state.backdropPhoto.length > 0 ? <img src={src}/> : '';
+    // if onClick is defined, use the defined callback
+    let onClick = this.props.onClick ? this.props.onClick.bind(this, src) : this.toggle.bind(this);
     return (
+
       <div>
         <div className={className}>
-          <div style={style} className="photo-container" onClick={this.toggle.bind(this)}/>
+          <div style={style} className="photo-container" onClick={onClick}/>
         </div>
         <div className={this.state.backdrop} onClick={this.toggle.bind(this)}></div>
         <div className={this.state.backdropPhoto} onClick={this.toggle.bind(this)}>
@@ -64,7 +67,8 @@ export default class Photo extends React.Component {
           </div>
         </div>
       </div>
-    );
+    )
+      ;
   }
 }
 
