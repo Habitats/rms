@@ -20,7 +20,7 @@ import ReferencesList from './components/text/ReferencesList.jsx';
 
 // declare our routes and their hierarchy
 let routes = (
-  <Route handler={Layout} ignoreScrollBehavior={true} path="/">
+  <Route handler={Layout} path="/">
     <DefaultRoute handler={Welcome} name="welcome"/>
     <Route handler={Contact} name="contact" path="kontakt"/>
     <Route handler={About} name="about" path="om"/>
@@ -30,6 +30,7 @@ let routes = (
     <Route handler={Products} name="products" path="tjenester"/>
     <Route handler={Private} name="private" path="privat"/>
     <Route handler={Project} name="referenceItem" path="ref/:id/:selected"/>
+    <Route handler={Project} ignoreScrollBehavior={true} name="referenceItemClick" path="ref/:id/:selected"/>
     <Route handler={ProjectAdd} name="project_add" path="ref/add"/>
     <Route handler={ReferencesList} name="referencesList" path="referanseliste/"/>
     <NotFoundRoute handler={NotFound}/>

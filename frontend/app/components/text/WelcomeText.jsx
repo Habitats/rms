@@ -5,7 +5,7 @@ export default class WelcomeText extends React.Component {
   render() {
     return (
       <div>
-        <h1>Velkommen</h1>
+        <h3>Velkommen</h3>
 
         <div>
           <p>På disse sidene finner du nødvendig informasjon om oss, og om våre produkter.<br />
@@ -15,7 +15,7 @@ export default class WelcomeText extends React.Component {
             Send oss gjerne en mail, eller bruk <a href="under/skjema.php">kontaktskjemaet</a> og vi vil være behjelpelig med dine
             spørsmål.</p>
 
-          <h2>Firmabeskrivelse</h2>
+          <h3>Firmabeskrivelse</h3>
 
           <p>Romerike Markiseservice AS er offisiell forhandler av Luxaflex-produkter fra Hunter Douglas. HD er verdens ledende
             leverandør, produsent og produktutvikler av solskjermingsprodukter.</p>

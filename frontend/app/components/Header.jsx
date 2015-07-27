@@ -8,21 +8,22 @@ export default class Header extends React.Component {
   render() {
     return (
       <div>
-        <div className="brand" to="welcome">Romerike Markiseservice AS</div>
-        <div className="address-bar">Nannestadvegen 510 2032 Maura</div>
 
-        <nav className="navbar navbar-default" role="navigation">
+        <nav className="navbar navbar-default navbar-fixed-top">
           <div className="container">
             <div className="navbar-header">
-              <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+
+              <button type="button" className="navbar-toggle">
                 <span className="sr-only">Toggle navigation</span>
                 <span className="icon-bar"></span>
                 <span className="icon-bar"></span>
                 <span className="icon-bar"></span>
               </button>
+              <a className="navbar-brand" href="#"><img src="http://localhost:8080/images/rms.png"/></a>
             </div>
-            <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul className="nav navbar-nav">
+
+            <div className="collapse navbar-collapse">
+              <ul className="nav pull-right navbar-nav">
                 <li><Link to="welcome">Hjem</Link></li>
                 <li><Link to="references">Prosjekt</Link></li>
                 <li><Link to="private">Privat</Link></li>

@@ -3,9 +3,12 @@ import React from 'react';
 export default class BigHeadline extends React.Component {
 
   render() {
+    let style = {
+      marginBottom: 20
+    };
     return (
       <div className="row">
-        <div className="col-lg-12 text-center">
+        <div className="col-lg-12 text-center" style={style}>
           <h2 className="brand-before">
             <small>{this.props.small}</small>
           </h2>

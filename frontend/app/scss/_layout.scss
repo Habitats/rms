@@ -1,31 +1,86 @@
+/* Custom, iPhone Retina */
+@media only screen and (min-width: 320px) {
+  h1 {
+    font-size: 3em;
+  }
+
+  h2 {
+    font-size: 2em;
+  }
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width: 1000px) {
+  h1 {
+    font-size: 4em;
+  }
+
+  h2 {
+    font-size: 2em;
+  }
+}
+
+h1, h2, h3, h4 {
+  font-variant: small-caps;
+  font-weight: 100;
+  color: black;
+}
 
 html {
   position: relative;
+  min-height: 100%;
 }
 
 body {
-  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background: url('../img/bg.jpg') no-repeat center center fixed;
+  font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  background-color: $backgroundColor;
   background-size: cover;
+  margin-top: $header-height + 20;
+  margin-bottom: $footer-height;
+  width: 100%;
 }
 
-body {
-  padding: 10px 0;
+.container {
+  max-width: 1000px;
+}
 
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: $footer-height;
+.brand {
+  display: inherit;
+  margin: 0;
+  padding: 70px 0 10px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  font-family: "Josefin Slab", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 5em;
+  font-weight: 700;
+  line-height: normal;
+  color: #fff;
+}
 
-  background-color: $navbar-inverse-bg;
-  border-top: 1px solid $navbar-inverse-border;
+.address-bar {
+  display: inherit;
+  margin: 0;
+  padding: 0 0 40px;
+  text-align: center;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  text-transform: uppercase;
+  font-size: 1.25em;
+  font-weight: 400;
+  letter-spacing: 3px;
+  color: #fff;
 }
 
 .box {
   margin-bottom: 20px;
-  padding: 30px 30px;
+  padding: $marginBox $marginBox;
   background: #fff;
-  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0px 0px 35px 3px rgba(0, 0, 0, 0.16);
+}
+
+.box-shaded {
+  padding: $marginBox $marginBox;
+  height: 100%;
+  box-shadow: inset 0px 0px 149px -1px rgba(0, 0, 0, 0.05);
 }
 
 .center-block {
@@ -63,7 +118,6 @@ p {
 }
 
 i {
-  margin-left: 20px;
   margin-right: 5px;
 }
 
@@ -72,7 +126,6 @@ i {
 }
 
 .photo-selected {
-  background-color: black;
   opacity: 0.5;
 }
 
@@ -89,6 +142,7 @@ i {
 
 .photo-container {
   background-size: cover !important;
+  position: relative;
 }
 
 .no-pad {
@@ -128,8 +182,25 @@ i {
   max-width: 70%;
 }
 
+.photo-overlay-box {
+  background: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  width: 100%;
+  height: 60px;
+  bottom: 0;
+  padding-top: 15px;
+  color: white;
+  text-align: center;
+}
+
 .hide-overflow {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+
+.divider {
+  margin-left: 20px;
+}
+
+

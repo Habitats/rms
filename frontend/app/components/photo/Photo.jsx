@@ -47,18 +47,23 @@ export default class Photo extends React.Component {
     let className = this.props.className + ' photo-container-wrapper ' + this.state.classes;
     let style = {
       background: 'url(' + src + ') no-repeat center center',
-      backgroundSize: 'cover !important',
+      backgroundSize: this.props.crop ? 'cover !important' : 'contain !important',
       height: height,
       width: width
     };
     let bigImg = this.state.backdropPhoto.length > 0 ? <img src={src}/> : '';
     // if onClick is defined, use the defined callback
-    let onClick = this.props.onClick ? this.props.onClick.bind(this, src) : this.toggle.bind(this);
+    let onClick;
+    if (this.props.clickable) {
+      onClick = this.props.onClick ? this.props.onClick.bind(this, src) : this.toggle.bind(this);
+    }
     return (
 
       <div>
         <div className={className}>
-          <div style={style} className="photo-container" onClick={onClick}/>
+          <div style={style} className="photo-container" onClick={onClick}>
+            {this.props.children}
+          </div>
         </div>
         <div className={this.state.backdrop} onClick={this.toggle.bind(this)}></div>
         <div className={this.state.backdropPhoto} onClick={this.toggle.bind(this)}>
@@ -74,7 +79,9 @@ export default class Photo extends React.Component {
 
 Photo.defaultProps = {
   height: '100%',
-  width: '100%'
+  width: '100%',
+  clickable: true,
+  crop: true
 };
 
 Photo.propTypes = {

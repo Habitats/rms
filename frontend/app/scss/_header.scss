@@ -1,101 +1,55 @@
-@media screen and (min-width: 768px) {
-  .brand {
-    display: inherit;
-    margin: 0;
-    padding: 70px 0 10px;
-    text-align: center;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-    font-family: "Josefin Slab", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 5em;
-    font-weight: 700;
-    line-height: normal;
-    color: #fff;
-  }
+.navbar {
+  border-radius: 0;
+}
 
-  .top-divider {
-    margin-top: 0;
-  }
+.navbar {
+  min-height: $header-height;
+  opacity: .94;
+}
 
-  .img-left {
-    float: left;
-    margin-right: 25px;
-  }
+.nav {
+  padding-right: 10px;
+}
 
-  .address-bar {
-    display: inherit;
-    margin: 0;
-    padding: 0 0 40px;
-    text-align: center;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-    text-transform: uppercase;
-    font-size: 1.25em;
-    font-weight: 400;
-    letter-spacing: 3px;
-    color: #fff;
-  }
+.navbar-default {
+  border: none;
+  background: #fff;
+  box-shadow: 0 0 $dropShadowWidth 0 $dropShadowColor;
+}
 
-  .navbar {
-    border-radius: 0;
-  }
+.navbar-brand {
+  margin: 0;
+  padding: 0;
+}
 
-  .navbar-header {
-    display: none;
-  }
+.navbar-brand img {
+  opacity: 0.8;
+  margin-left: $marginBox;
+}
 
-  .navbar {
-    min-height: 0;
-  }
-
-  .navbar-default {
-    border: none;
-    background: #fff;
-    background: rgba(255, 255, 255, 0.9);
-  }
-
+/* Custom, iPhone Retina */
+@media only screen and (min-width: 320px) {
   .nav > li > a {
-    padding: 35px;
-  }
-
-  .navbar-nav > li > a {
-    line-height: normal;
-  }
-
-  .navbar-nav {
-    display: table;
-    float: none;
-    margin: 0 auto;
-    table-layout: fixed;
-    font-size: 1.25em;
+    padding: 35px 20px 35px 10px;
   }
 }
 
-.brand,
-.address-bar {
-  display: none;
+/* Small Devices, Tablets */
+@media only screen and (min-width: 1000px) {
+  .nav > li > a {
+    padding: 35px 20px 35px 20px;
+  }
 }
 
-.brand {
-  display: inherit;
-  margin: 0;
-  padding: 120px 0 10px;
-  text-align: center;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-  font-family: "Josefin Slab", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 5em;
-  font-weight: 700;
+.navbar-nav > li > a {
   line-height: normal;
-  color: #fff;
 }
 
-.address-bar {
-  display: inherit;
-  margin: 0;
-  padding: 0 0 40px;
-  text-align: center;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-  text-transform: uppercase;
+.navbar-nav {
+  display: table;
+  float: none;
+  table-layout: fixed;
   font-size: 1.25em;
-  font-weight: 400;
-  letter-spacing: 3px;
-  color: #fff;
+  font-variant: small-caps;
 }
+

@@ -7,7 +7,7 @@ export default class Private extends React.Component {
   render() {
     return (
       <div className="container">
-        <div className="box col-md-12">
+        <div className="box">
           <BigHeadline big="Privat"/>
         </div>
       </div>
