@@ -16,8 +16,10 @@ export default class Contact extends React.Component {
               <MapWrapper />
 
             </div>
-            <BigHeadline small="" big="Kontakt"/>
+          </div>
+          <BigHeadline small="" big="Kontakt"/>
 
+          <div className="row">
             <div className="col-md-4 col-md-offset-2">
               <h3>Adresse</h3>
 
@@ -65,10 +67,15 @@ export default class Contact extends React.Component {
               <p><a href="mailto:roar@romerike-markiseservice.no">roar@romerike-markiseservice.no</a></p>
 
             </div>
+          </div>
+        </div>
+        <div className="box">
 
-            <BigHeadline small="Send oss en forespørsel" big="Spørsmål?"/>
+          <BigHeadline small="Send oss en forespørsel" big="Spørsmål?"/>
 
-            <div className="col-md-10 col-md-offset-1">
+          <div className="row">
+
+            <div className="col-md-8 col-md-offset-2">
               <ContactForm />
             </div>
 
