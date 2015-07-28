@@ -3,13 +3,13 @@ package no.rms
 import java.io.File
 
 import no.rms.db.RmsDb
-import no.rms.models.{Image, Project}
+import no.rms.models.{Email, Image, Project}
 import org.json4s.{DefaultFormats, Formats}
 import org.scalatra.json.JacksonJsonSupport
 import org.scalatra.{CorsSupport, FutureSupport}
 import slick.driver.JdbcDriver.api._
 
-class RmsServlet(val db: Database) extends BackendStack with FutureSupport with JacksonJsonSupport with CorsSupport {
+class RmsServlet(val db: Database) extends BackendStack with FutureSupport with JacksonJsonSupport with CorsSupport with RmsMailer {
   protected implicit def executor = scala.concurrent.ExecutionContext.Implicits.global
 
   protected implicit val jsonFormats: Formats = DefaultFormats
@@ -22,15 +22,22 @@ class RmsServlet(val db: Database) extends BackendStack with FutureSupport with 
     contentType = formats("json")
   }
 
-  get("/hello/") {
+  get("/hello/?") {
     ":)"
   }
 
-  get("/projects") {
+  get("/projects/?") {
     db.run(RmsDb.projects.result).map(res => res.map {
       case (id, title, description, img) => Project(id, title, description, img.split(",").map(i => Image(i.split("/").last, i)).toList)
     }
     )
+  }
+
+  post("/mail/?") {
+    val email = parsedBody.extract[Email]
+    contentType = "text"
+    send(email)
+    "delived message"
   }
 
   get("/images/:id/?") {

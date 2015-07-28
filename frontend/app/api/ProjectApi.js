@@ -34,6 +34,16 @@ class ProjectApi extends Marty.HttpStateSource {
     });
   }
 
+  sendMail(email) {
+    return this.post({url: baseUrl + 'mail', body: email}).then(res => {
+      if (res.status === 200) {
+        return res.body;
+      }
+
+      throw res.info;
+    });
+  }
+
   remove(project) {
     let url = `${baseUrl}${project.get('id')}`;
     return this.delete(url).then(res => {

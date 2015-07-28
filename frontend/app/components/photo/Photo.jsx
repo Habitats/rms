@@ -8,10 +8,10 @@ export default class Photo extends React.Component {
     this.state = {toggled: true, backdrop: '', backdropPhoto: ''};
   }
 
-  handleEscapeKeyDown(event) {
-    if ((event.key === 'Escape' || event.keyCode === 27) && !this.state.toggled) {
-      event.stopPropagation();
-      event.preventDefault();
+  handleEscapeKeyDown(e) {
+    if ((e.key === 'Escape' || e.keyCode === 27) && !this.state.toggled) {
+      e.stopPropagation();
+      e.preventDefault();
       this.toggle();
     }
   }

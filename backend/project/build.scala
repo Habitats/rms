@@ -24,7 +24,9 @@ object BackendBuild extends Build {
       scalaVersion := ScalaVersion,
       resolvers += Classpaths.typesafeReleases,
       resolvers += "Scalaz Bintray Repo" at "http://dl.bintray.com/scalaz/releases",
-      libraryDependencies ++= Seq(
+      resolvers += "softprops-maven" at "http://dl.bintray.com/content/softprops/maven",
+
+        libraryDependencies ++= Seq(
         "org.scalatra" %% "scalatra" % ScalatraVersion,
         "org.scalatra" %% "scalatra-scalate" % ScalatraVersion,
         "org.scalatra.scalate" %% "scalate-core" % "1.7.0" % "compile" intransitive(),
@@ -44,8 +46,9 @@ object BackendBuild extends Build {
         "com.mchange" % "c3p0" % "0.9.5.1",
         "com.sksamuel.scrimage" %% "scrimage-core" % "2.0.1",
         "com.sksamuel.scrimage" %% "scrimage-io" % "2.0.1",
-        "com.sksamuel.scrimage" %% "scrimage-filters" % "2.0.1"
-      ),
+        "com.sksamuel.scrimage" %% "scrimage-filters" % "2.0.1",
+        "me.lessis" %% "courier" % "0.1.3"
+        ),
       scalateTemplateConfig in Compile <<= (sourceDirectory in Compile) { base =>
         Seq(
           TemplateConfig(

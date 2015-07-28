@@ -4,8 +4,9 @@ let ProjectConstants = Marty.createConstants([
   'UPDATE_PROJECT',
   'ADD_PROJECT',
   'RECEIVE_PROJECTS',
-  'ADD_PROJECT_FAILED',
-  'RECEIVE_IMAGES'
+  'ADD_PROJECT',
+  'RECEIVE_IMAGES',
+  'SEND_EMAIL'
 ]);
 
 export default ProjectConstants;
