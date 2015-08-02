@@ -9,6 +9,7 @@ class ProjectStore extends Marty.Store {
       updateProject: ProjectConstants.UPDATE_PROJECT,
       receiveProjects: ProjectConstants.RECEIVE_PROJECTS,
       receiveImages: ProjectConstants.RECEIVE_IMAGES,
+      receivePrivate: ProjectConstants.RECEIVE_PRIVATE,
       addProject: ProjectConstants.ADD_PROJECT
     };
   }
@@ -23,6 +24,10 @@ class ProjectStore extends Marty.Store {
 
   receiveImages(images) {
     this.setState({images: images});
+  }
+
+  receivePrivate(images) {
+    this.setState({private: images});
   }
 
   addProject(project) {
@@ -55,6 +60,20 @@ class ProjectStore extends Marty.Store {
       },
       remotely() {
         return this.app.projectQueries.getImages();
+      }
+    });
+  }
+
+  getPrivate() {
+    return this.fetch({
+      id: 'private',
+      locally() {
+        if (this.hasAlreadyFetched('private')) {
+          return this.state.private;
+        }
+      },
+      remotely() {
+        return this.app.projectQueries.getPrivate();
       }
     });
   }

@@ -6,15 +6,17 @@ import Photo from './../components/photo/Photo.jsx';
 export default class Private extends React.Component {
 
   render() {
-    let photos = [];
-    for (let i = 0; i < 20; i++) {
-      let index = parseInt(Math.random() * 5) + 1;
-      let img = 'http://localhost:8080/images/refpriv_kunde_' + index + '.jpg';
+    let photos = this.props.private.map(i => (<Photo src={i.url} height="150" className="col-md-4 col-sm-6 col-lg-3"/>));
+    //let photos = [];
+    //for (let i = 0; i < 20; i++) {
+    //  let index = parseInt(Math.random() * 5) + 1;
+    //  let img = 'http://localhost:8080/images/refpriv_kunde_' + index + '.jpg';
+    //
+    //  photos.push(
+    //    <Photo src={img} height="150" className="col-md-4 col-sm-6 col-lg-3"/>
+    //  );
+    //}
 
-      photos.push(
-        <Photo src={img} height="150" className="col-md-4 col-sm-6 col-lg-3"/>
-      );
-    }
     return (
       <div className="container">
         <div className="box">
@@ -53,8 +55,8 @@ export default class Private extends React.Component {
 export default Marty.createContainer(Private, {
   listenTo: 'projectStore',
   fetch: {
-    projects() {
-      return this.app.projectStore.getProjects();
+    private() {
+      return this.app.projectStore.getPrivate();
     }
   }
 });

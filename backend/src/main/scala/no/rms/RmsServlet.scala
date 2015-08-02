@@ -52,6 +52,18 @@ class RmsServlet(val db: Database) extends BackendStack with FutureSupport with 
     images
   }
 
+  get("/private/:id/?") {
+    val id = params.get("id")
+    contentType = "image"
+    val image = params.get("id").map(id => new File("images/private/" + id)).filter(_.exists).getOrElse(new File("images/not_found.jpg"))
+    image
+  }
+
+  get("/private") {
+    val images = new File("images/private/").listFiles.map(_.getName).filter(f => f.endsWith(".jpg") || f.endsWith(".png")).map(f => Image(f, "http://localhost:8080/private/" + f)).toList
+    images
+  }
+
   post("/?") {
     val project = parsedBody.extract[Project]
     println("received: " + project)
