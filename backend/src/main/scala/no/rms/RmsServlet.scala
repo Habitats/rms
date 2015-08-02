@@ -24,7 +24,6 @@ class RmsServlet(val db: Database) extends BackendStack with FutureSupport with 
 
   get("/hello/?") {
     ":)"
-    new File("")
   }
 
   get("/projects/?") {

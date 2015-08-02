@@ -7,7 +7,7 @@ export default class Private extends React.Component {
 
   render() {
     let photos = [];
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 20; i++) {
       let index = parseInt(Math.random() * 5) + 1;
       let img = 'http://localhost:8080/images/refpriv_kunde_' + index + '.jpg';
 

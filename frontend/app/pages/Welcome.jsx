@@ -13,7 +13,7 @@ export default class Welcome extends React.Component {
         <div className="container">
           <div className="box">
 
-            <Carousel src="http://www.pic2014.com/wp-content/uploads/2014-nice-cat-picture.jpg">
+            <Carousel src="http://localhost:8080/images/refpriv_kunde_5.jpg">
               <div className="brand" to="welcome">Profesjonell solskjerming</div>
               <div className="address-bar">Nannestadvegen 510 2032 Maura</div>
             </Carousel>
