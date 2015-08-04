@@ -12,7 +12,7 @@ export default class Private extends React.Component {
       <div className="container">
         <div className="box">
           <div className="row">
-            <Photo src="http://localhost:8080/images/refpriv_kunde_5.jpg" height="415" className="col-md-12"/>
+            <Photo src="/images/refpriv_kunde_5.jpg" height="415" className="col-md-12"/>
           </div>
           <BigHeadline big="Privat" small="Kunden i sentrum"/>
 

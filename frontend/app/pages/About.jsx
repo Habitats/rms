@@ -11,11 +11,11 @@ export default class About extends React.Component {
         <div className="box">
           <div className="row">
             <div className="col-md-8 no-pad">
-              <Photo src="http://localhost:8080/images/butikken_.jpg" height="415" className="col-md-12"/>
+              <Photo src="/images/butikken_.jpg" height="415" className="col-md-12"/>
             </div>
             <div className="col-md-4 no-pad">
-              <Photo src="http://localhost:8080/images/butikken_inne_1.jpg" height="200" className="col-md-12"/>
-              <Photo src="http://localhost:8080/images/butikken_inne_2.jpg" height="200" className="col-md-12"/>
+              <Photo src="/images/butikken_inne_1.jpg" height="200" className="col-md-12"/>
+              <Photo src="/images/butikken_inne_2.jpg" height="200" className="col-md-12"/>
             </div>
           </div>
           <BigHeadline small="Om bedriften" big="Romerike Markiseservice AS"/>

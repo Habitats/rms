@@ -1,6 +1,5 @@
 var path = require('path');
 var util = require('util');
-var crypto = require('crypto');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var autoprefixer = require('autoprefixer-core');
 var webpack = require('webpack');
@@ -10,12 +9,8 @@ var DEBUG = process.env.NODE_ENV === 'development';
 
 var contextPath = '';
 
-function md5(str) {
-  return crypto.createHash('md5').update(str).digest('hex');
-}
-var hash = md5((new Date()).getTime() + '');
-var cssBundle = path.join('css', util.format('[name].%s.css', hash));
-var jsBundle = path.join('js', util.format('[name].%s.js', hash));
+var cssBundle = 'css/rms.css';
+var jsBundle = 'js/rms.js';
 
 var cssExtractTextPlugin = new ExtractTextPlugin(cssBundle, {
   allChunks: true
@@ -54,21 +49,21 @@ var loaders = [
     loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader')
   },
   {
+    test: /\.json$/,
+    exclude: /node_modules/,
+    loaders: 'json-loader'
+  },
+  {
     test: /\.jpe?g$|\.gif$|\.png$|\.ico|\.svg$|\.woff$|\.ttf$/,
-    loader: 'file-loader?name=[path][name]-[hash].[ext]'
+    loader: 'file-loader?name=[path][name].[ext]'
   },
   {
     test: /\.(woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/, // handle font-awesome versions
-    loader: 'url-loader?limit=10000&minetype=application/font-woff&name=fonts/[name]-[hash].[ext]'
+    loader: 'url-loader?limit=10000&minetype=application/font-woff&name=fonts/[name].[ext]'
   },
   {
     test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, // handle font-awesome versions
-    loader: 'file-loader?name=fonts/[name]-[hash].[ext]'
-  },
-  {
-    test: /\.json$/,
-    exclude: /node_modules/,
-    loaders: ['json-loader']
+    loader: 'file-loader?name=fonts/[name].[ext]'
   },
   {
     test: /\.html$/,
@@ -77,9 +72,7 @@ var loaders = [
       'template-html-loader?' + [
         'raw=true',
         'engine=lodash',
-        'hash=' + hash,
-        'contextPath=' + contextPath,
-        'title=' + pkg.name
+        'contextPath=' + contextPath
       ].join('&')
     ].join('!')
   },

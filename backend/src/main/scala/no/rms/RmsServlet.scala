@@ -54,7 +54,7 @@ class RmsServlet(val db: Database) extends BackendStack with FutureSupport with 
   }
 
   get("/images") {
-    val images = new File("images/").listFiles.map(_.getName).filter(f => f.endsWith(".jpg") || f.endsWith(".png")).map(f => Image(f, "http://localhost:8080/images/" + f)).toList
+    val images = new File("images/").listFiles.map(_.getName).filter(f => f.endsWith(".jpg") || f.endsWith(".png")).map(f => Image(f, "/images/" + f)).toList
     images
   }
 
@@ -66,7 +66,7 @@ class RmsServlet(val db: Database) extends BackendStack with FutureSupport with 
   }
 
   get("/private") {
-    val images = new File("images/private/").listFiles.map(_.getName).filter(f => f.endsWith(".jpg") || f.endsWith(".png")).map(f => Image(f, "http://localhost:8080/private/" + f)).toList
+    val images = new File("images/private/").listFiles.map(_.getName).filter(f => f.endsWith(".jpg") || f.endsWith(".png")).map(f => Image(f, "/private/" + f)).toList
     images
   }
 

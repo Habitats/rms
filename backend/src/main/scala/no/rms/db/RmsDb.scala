@@ -18,7 +18,7 @@ object RmsDb {
   }
 
   def p(imgs: List[String]): String = {
-    imgs.map("http://localhost:8080/images/" + _).mkString(",")
+    imgs.map("/images/" + _).mkString(",")
   }
 
   def init(db: Database) {

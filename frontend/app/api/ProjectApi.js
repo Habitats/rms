@@ -1,6 +1,6 @@
 import Marty from 'marty';
 
-const baseUrl = 'http://localhost:8080/';
+const baseUrl = '/';
 
 class ProjectApi extends Marty.HttpStateSource {
 
