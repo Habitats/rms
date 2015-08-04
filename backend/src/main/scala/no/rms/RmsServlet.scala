@@ -26,6 +26,12 @@ class RmsServlet(val db: Database) extends BackendStack with FutureSupport with 
     ":)"
   }
 
+  get("/?") {
+    contentType = "text/html"
+    println(new File(servletContext.getResource("/index.html").getFile).getAbsolutePath)
+    new File(servletContext.getResource("/index.html").getFile)
+  }
+
   get("/projects/?") {
     db.run(RmsDb.projects.result).map(res => res.map {
       case (id, title, description, img) => Project(id, title, description, img.split(",").map(i => Image(i.split("/").last, i)).toList)

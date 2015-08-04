@@ -8,12 +8,12 @@ var pkg = require('./package.json');
 
 var DEBUG = process.env.NODE_ENV === 'development';
 
-var contextPath = DEBUG ? '' : 'rms/';
+var contextPath = '';
 
 function md5(str) {
   return crypto.createHash('md5').update(str).digest('hex');
 }
-var hash = md5((new Date).getTime() + '');
+var hash = md5((new Date()).getTime() + '');
 var cssBundle = path.join('css', util.format('[name].%s.css', hash));
 var jsBundle = path.join('js', util.format('[name].%s.js', hash));
 
@@ -59,11 +59,11 @@ var loaders = [
   },
   {
     test: /\.(woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/, // handle font-awesome versions
-    loader: "url-loader?limit=10000&minetype=application/font-woff&name=fonts/[name]-[hash].[ext]"
+    loader: 'url-loader?limit=10000&minetype=application/font-woff&name=fonts/[name]-[hash].[ext]'
   },
   {
     test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, // handle font-awesome versions
-    loader: "file-loader?name=fonts/[name]-[hash].[ext]"
+    loader: 'file-loader?name=fonts/[name]-[hash].[ext]'
   },
   {
     test: /\.json$/,
@@ -107,7 +107,6 @@ if (DEBUG) {
   var url = util.format('http://%s:%d', pkg.config.devHost, pkg.config.devPort);
   entry.app.push('webpack-dev-server/client?' + url);
   entry.app.push('webpack/hot/only-dev-server');
-  //entry.app.push('webpack/hot/dev-server');
 }
 
 var config = {
@@ -139,7 +138,7 @@ var config = {
     noInfo: false,
     inline: true,
     proxy: {
-      '/rms/*': 'http://localhost:8080/'
+      '/*': 'http://localhost:8080/'
     },
     stats: {colors: true}
   }
