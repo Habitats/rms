@@ -14,7 +14,7 @@ trait RmsMailer {
       .startTtls(true)()
 
     mailer(Envelope.from(new InternetAddress("kontaktskjema@romerike-markiseservice.no"))
-      .to(new InternetAddress("mail@habitats.no"))
+      .to(new InternetAddress("morten@romerike-markiseservice.no"))
       .subject(email.subject)
       .content(Multipart()
       .html("<html><body><h1>Forespørsel</h1>" +
@@ -27,6 +27,23 @@ trait RmsMailer {
       .onSuccess {
       case _ => {
         println("delivered message")
+      }
+    }
+
+    mailer(Envelope.from(new InternetAddress("kontaktskjema@romerike-markiseservice.no"))
+      .to(new InternetAddress(email.contactEmail))
+      .subject("Kopi av forespørsel til Romerike Markiseservice: " + email.subject)
+      .content(Multipart()
+      .html("<html><body><h1>Kopi av forespørsel</h1>" +
+      "<p>Melding fra: " + email.name + "</p>" +
+      "<p>Telefon: " + email.contactPhone + "</p>" +
+      "<p>Epost: " + email.contactEmail + "</p>" +
+      "<p>Emne: " + email.subject + "</p>" +
+      "<p>Melding: " + email.message + "</p>" +
+      "</body></html>")))
+      .onSuccess {
+      case _ => {
+        println("delivered copy to " + email.contactEmail)
       }
     }
   }

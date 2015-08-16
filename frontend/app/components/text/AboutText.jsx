@@ -4,17 +4,18 @@ export default class About extends React.Component {
 
   render() {
     return (
-
       <div>
-        <p>
-          Romerike Markiseservice ble etablert i 1986 i Maura. Da med to ansatte pluss en montør.
-          Vokst fort ut av lokalene og etablerte seg i Dølengården der de er pr dags dato. Det er i
-          dag 6 ansatte med et meget høyt kompetanse nivå, både når det gjelder markiser og
-          solskjerming. Leverer både til privat og næringskunder er en totallevrandør med en meget
-          høy servicegrad. Satser mye på servicearbeid det vil si at vi reparerer de gamle persiennene.
-          Romerike Markiseservice representerer Hunter Douglas som er verdens største innen
-          solskjerming. Vi er meget stolte av og ha blitt valgt, og vi kjøper alt derfra.
-          Familiebedrift som går så det suser her er intet oppdrag for lite intet for stort.</p>
+        <p> Romerike Markiseservice ble etablert i 1986 i Maura av Morten og Roar Skjennum. Sammen på laget hadde de en tredje bror Bjarne
+          som montør samt Anne Grethe med det praktiske kontoransvaret. I dag har bedriften vokst til totalt 6 ansatte, alle med et meget
+          høyt kompetansenivå innenfor sine respektive områder.</p>
+
+        <p> Gjennom mer enn 30 års erfaring har bedriften etterhvert etablert seg til å bli en totalleverandør av solskjerming til både
+          privat- og bedriftsmarkedet, og opererer som en offisiell forhandler av produkter fra Hunter Douglas Solskjerming gjennom et
+          samarbeid med Kjells Markiser.</p>
+
+        <p> Vårt salgsområde tar utgangspunkt i Øvre Romerike, men vi gjennomfører også oppdrag utenfor disse. Som kunde hos oss, kan du til
+          enhver tid forvente produkter av høy standard og rask levering, kvalitetssikret av våre egne montører. I tillegg har vi gjennom
+          årene opparbeidet oss en særegen ekspertise innen service og vedlikehold av næringsbygg.</p>
 
       </div>
     );

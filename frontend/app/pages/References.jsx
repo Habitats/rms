@@ -13,7 +13,6 @@ export default class References extends React.Component {
       <div className="container">
         <div className="box col-md-12">
           <BigHeadline small="Våre referanser" big="Prosjekt" />
-          <ReferencesText />
           <Link to="project_add">Ny</Link>
           <Projects />
         </div>

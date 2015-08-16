@@ -11,20 +11,21 @@ export default class Project extends React.Component {
     let selected = this.props.params.selected || 0;
     return (
       <div className="container">
-        <div className="box col-md-12">
-          <div className="row">
-            <BigHeadline small="Prosjekt" big={project.title}/>
-          </div>
+        <div className="box">
+          <BigHeadline small="Prosjekt" big={project.title}/>
 
           <div className="row">
-            <PhotoBig
-              src={project.img[selected].url}
-              description={project.description}
-              details=""/>
-
+            <div className="col-md-12">
+              <PhotoBig
+                src={project.img[selected].url}
+                description={project.description}
+                details=""/>
+            </div>
           </div>
+
+          <BigHeadline small="Flere bilder" big=""/>
+
           <div className="row">
-            <BigHeadline small="Flere bilder" big=""/>
             <PhotoLine id={project.id} img={project.img} selected={selected}/>
             <hr/>
           </div>

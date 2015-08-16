@@ -26,7 +26,7 @@ object BackendBuild extends Build {
       resolvers += "Scalaz Bintray Repo" at "http://dl.bintray.com/scalaz/releases",
       resolvers += "softprops-maven" at "http://dl.bintray.com/content/softprops/maven",
 
-        libraryDependencies ++= Seq(
+      libraryDependencies ++= Seq(
         "org.scalatra" %% "scalatra" % ScalatraVersion,
         "org.scalatra" %% "scalatra-scalate" % ScalatraVersion,
         "org.scalatra.scalate" %% "scalate-core" % "1.7.0" % "compile" intransitive(),
@@ -35,7 +35,6 @@ object BackendBuild extends Build {
         "org.scala-lang" % "scalap" % ScalaVersion,
         "org.scala-lang.modules" % "scala-parser-combinators_2.11" % "1.0.4",
         "org.scalatra" %% "scalatra-json" % ScalatraVersion,
-        "org.scalatra" %% "scalatra-specs2" % ScalatraVersion % "test",
         "ch.qos.logback" % "logback-classic" % "1.1.2" % "runtime",
         "org.eclipse.jetty" % "jetty-webapp" % "9.2.10.v20150310" % "container",
         "javax.servlet" % "javax.servlet-api" % "3.1.0" % "provided",
@@ -47,8 +46,11 @@ object BackendBuild extends Build {
         "com.sksamuel.scrimage" %% "scrimage-core" % "2.0.1",
         "com.sksamuel.scrimage" %% "scrimage-io" % "2.0.1",
         "com.sksamuel.scrimage" %% "scrimage-filters" % "2.0.1",
-        "me.lessis" %% "courier" % "0.1.3"
-        ),
+        "me.lessis" %% "courier" % "0.1.3",
+        "com.dropbox.core" % "dropbox-core-sdk" % "1.7.7",
+        "org.scalatest" % "scalatest_2.11" % "3.0.0-M7",
+        "org.scalatra" %% "scalatra-auth" % "2.3.0"
+      ),
       scalateTemplateConfig in Compile <<= (sourceDirectory in Compile) { base =>
         Seq(
           TemplateConfig(

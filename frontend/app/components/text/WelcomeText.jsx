@@ -1,32 +1,25 @@
 import React from 'react';
+import Router from 'react-router';
+let Link = Router.Link;
 
 export default class WelcomeText extends React.Component {
 
   render() {
     return (
       <div>
-        <h3>Velkommen</h3>
 
         <div>
-          <p>På disse sidene finner du nødvendig informasjon om oss, og om våre produkter.<br />
-            Du kan guide deg til sidene ved hjelp av menyen over.</p>
+          <p> Romerike Markiseservice er en ledende og profesjonell forhandler av solskjermingsprodukter med kunden i sentrum.</p>
 
-          <p>Skulle du ha noen spørsmål, finner du kontaktinformasjon <a href="under/skjema.php">her</a>.<br/>
-            Send oss gjerne en mail, eller bruk <a href="under/skjema.php">kontaktskjemaet</a> og vi vil være behjelpelig med dine
-            spørsmål.</p>
+          <p> Med Øvre Romerike og Oslo som våre primære kjerneområder, leverer vi et bredt spekter av solskjermingsløsninger til både
+            privat- og bedriftsmarkedet.</p>
 
-          <h3>Firmabeskrivelse</h3>
+          <p>På våre nettsider vil du finne oppdatert informasjon om våre <Link to="references">referanser</Link>, og en oversikt over våre
+            <Link to="products">produkter</Link> og <Link to="about">eksterne
+              samarbeidspartnere.</Link></p>
 
-          <p>Romerike Markiseservice AS er offisiell forhandler av Luxaflex-produkter fra Hunter Douglas. HD er verdens ledende
-            leverandør, produsent og produktutvikler av solskjermingsprodukter.</p>
-
-          <p>Luxaflex står for spesialtilpassede solskjermingsprodukter til private hjem og offentlige bygninger.</p>
-
-          <p>Vårt salgsområde er Akerhus nord, men vi tar gjerne oppdrag også utenfor dette området. Vi ønsker å tilby produkter av høy
-            kvalitet med raske leveringstider til konkurransedyktige priser.</p>
-
-          <p>Er du interessert i å se nærmere på noen av våre referanser så kan du trykke <a href="under/r_prosjekt.php">her</a> for mer
-            informasjon. Her vil du også finne et flott bildegalleri.</p>
+          <p>Skulle du ha noen spørsmål, kan du enten sende en forespørsel gjennom vårt <Link to="contact">kontaktskjema</Link>, eller ringe oss direkte på 63999532.
+            Øvrig kontaktinformasjon er tilgjengelig <Link to="contact">her</Link>.</p>
 
         </div>
       </div>

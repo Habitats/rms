@@ -58,7 +58,7 @@ class ContactForm extends React.Component {
     let valid = this.valid;
     var clicked = this.state.clicked;
     var sent = this.state.sent;
-    let nameClasses = 'col-md-4 disabled' + (!clicked || sent ? '' : (valid.name ? 'has-success' : 'has-error'));
+    let nameClasses = 'col-md-4 disabled ' + (!clicked || sent ? '' : (valid.name ? 'has-success' : 'has-error'));
     let contactPhoneClasses = 'col-md-4 ' + (!clicked || sent ? '' : (valid.contactPhone ? 'has-success' : 'has-error'));
     let contactEmailClasses = 'col-md-4 ' + (!clicked || sent ? '' : (valid.contactEmail ? 'has-success' : 'has-error'));
     let subjectClasses = 'col-md-12 ' + (!clicked || sent ? '' : (valid.subject ? 'has-success' : 'has-error'));

@@ -12,7 +12,9 @@ export default class Products extends React.Component {
     return (
       <div className="container">
         <div className="box col-md-12">
-          <BigHeadline small="Våre produkter og tjenester" big="Produkter" />
+          <BigHeadline small="Våre produkter og tjenester" big="Produkter"/>
+        </div>
+        <div>
         </div>
       </div>
     );

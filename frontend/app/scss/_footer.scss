@@ -5,8 +5,5 @@ footer {
   /* Set the fixed height of the footer here */
   height: $footer-height;
   background: rgba(255,255,255,0.9);
-}
-
-footer p{
-  margin-top: 20px;
+  padding-top: 20px;
 }

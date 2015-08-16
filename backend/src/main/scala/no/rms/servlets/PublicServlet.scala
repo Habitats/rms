@@ -1,15 +1,16 @@
-package no.rms
+package no.rms.servlets
 
 import java.io.File
 
 import no.rms.db.RmsDb
 import no.rms.models.{Email, Image, Project}
+import no.rms.{BackendStack, RmsMailer}
 import org.json4s.{DefaultFormats, Formats}
 import org.scalatra.json.JacksonJsonSupport
 import org.scalatra.{CorsSupport, FutureSupport}
 import slick.driver.JdbcDriver.api._
 
-class RmsServlet(val db: Database) extends BackendStack with FutureSupport with JacksonJsonSupport with CorsSupport with RmsMailer {
+class PublicServlet(val db: Database) extends BackendStack with FutureSupport with JacksonJsonSupport with CorsSupport with RmsMailer {
   protected implicit def executor = scala.concurrent.ExecutionContext.Implicits.global
 
   protected implicit val jsonFormats: Formats = DefaultFormats
