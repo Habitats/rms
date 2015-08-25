@@ -2,6 +2,7 @@ package no.rms.servlets
 
 import java.io.File
 
+import no.rms.auth.AuthenticationSupport
 import no.rms.db.RmsDb
 import no.rms.models.{Email, Image, Project}
 import no.rms.{BackendStack, RmsMailer}
@@ -10,8 +11,10 @@ import org.scalatra.json.JacksonJsonSupport
 import org.scalatra.{CorsSupport, FutureSupport}
 import slick.driver.JdbcDriver.api._
 
-class PublicServlet(val db: Database) extends BackendStack with FutureSupport with JacksonJsonSupport with CorsSupport with RmsMailer {
-  protected implicit def executor = scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.ExecutionContext
+
+class PublicServlet(val db: Database) extends BackendStack with FutureSupport with JacksonJsonSupport with CorsSupport with RmsMailer with AuthenticationSupport {
+  protected implicit def executor = ExecutionContext.Implicits.global
 
   protected implicit val jsonFormats: Formats = DefaultFormats
 
@@ -29,8 +32,9 @@ class PublicServlet(val db: Database) extends BackendStack with FutureSupport wi
 
   get("/?") {
     contentType = "text/html"
-    println(new File(servletContext.getResource("/index.html").getFile).getAbsolutePath)
-    new File(servletContext.getResource("/index.html").getFile)
+    val index = new File(servletContext.getResource("/index.html").getFile)
+    println(index.getAbsolutePath)
+    index
   }
 
   get("/projects/?") {
@@ -47,16 +51,16 @@ class PublicServlet(val db: Database) extends BackendStack with FutureSupport wi
     "delived message"
   }
 
+  get("/images") {
+    val images = new File("images/").listFiles.map(_.getName).filter(f => f.endsWith(".jpg") || f.endsWith(".png")).map(f => Image(f, "/images/" + f)).toList
+    images
+  }
+
   get("/images/:id/?") {
     val id = params.get("id")
     contentType = "image"
     val image = params.get("id").map(id => new File("images/" + id)).filter(_.exists).getOrElse(new File("images/not_found.jpg"))
     image
-  }
-
-  get("/images") {
-    val images = new File("images/").listFiles.map(_.getName).filter(f => f.endsWith(".jpg") || f.endsWith(".png")).map(f => Image(f, "/images/" + f)).toList
-    images
   }
 
   get("/private/:id/?") {
@@ -69,14 +73,6 @@ class PublicServlet(val db: Database) extends BackendStack with FutureSupport wi
   get("/private") {
     val images = new File("images/private/").listFiles.map(_.getName).filter(f => f.endsWith(".jpg") || f.endsWith(".png")).map(f => Image(f, "/private/" + f)).toList
     images
-  }
-
-  post("/?") {
-    val project = parsedBody.extract[Project]
-    println("received: " + project)
-    RmsDb.store(project, db)
-
-    project
   }
 }
 

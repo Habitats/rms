@@ -24,5 +24,5 @@ export default class ProjectListItem extends React.Component {
 }
 
 ProjectListItem.propTypes = {
-  project: React.PropType.object.isRequired
+  project: React.PropTypes.object.isRequired
 };

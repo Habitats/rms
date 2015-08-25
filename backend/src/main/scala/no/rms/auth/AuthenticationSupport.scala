@@ -2,6 +2,7 @@ package no.rms.auth
 
 import javax.servlet.http.{HttpServletRequest, HttpServletResponse}
 
+import no.rms.Config
 import org.scalatra.ScalatraBase
 import org.scalatra.auth.strategy.{BasicAuthStrategy, BasicAuthSupport}
 import org.scalatra.auth.{ScentryConfig, ScentrySupport}
@@ -9,7 +10,7 @@ import org.scalatra.auth.{ScentryConfig, ScentrySupport}
 class OurBasicAuthStrategy(protected override val app: ScalatraBase, realm: String) extends BasicAuthStrategy[User](app, realm) {
 
   protected def validate(username: String, password: String)(implicit request: HttpServletRequest, response: HttpServletResponse): Option[User] = {
-    if (username == "scalatra" && password == "scalatra") Some(User("scalatra")) else None
+    if (username == Config.username && password == Config.password) Some(User(username)) else None
   }
 
   protected def getUserId(user: User)(implicit request: HttpServletRequest, response: HttpServletResponse): String = user.id

@@ -7,7 +7,7 @@ export default class PhotoBig extends React.Component {
     return (
       <div>
         <div className="col-md-12 no-pad">
-          <Photo height="500" src={this.props.src}>
+          <Photo height={500} src={this.props.src}>
             <h4>
               <div className="photo-overlay-box hide-overflow">
                 {this.props.description}

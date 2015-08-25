@@ -48,8 +48,8 @@ export default class Photo extends React.Component {
     let style = {
       background: 'url(' + src + ') no-repeat center center',
       backgroundSize: this.props.crop ? 'cover !important' : 'contain !important',
-      height: height,
-      width: width
+      height: height || '100%',
+      width: width || '100%'
     };
     let bigImg = this.state.backdropPhoto.length > 0 ? <img src={src}/> : '';
     // if onClick is defined, use the defined callback
@@ -78,11 +78,8 @@ export default class Photo extends React.Component {
 }
 
 Photo.defaultProps = {
-  height: '100%',
-  width: '100%',
   className: '',
   clickable: true,
-  children: '',
   crop: true
 };
 
@@ -90,8 +87,8 @@ Photo.propTypes = {
   height: React.PropTypes.number,
   width: React.PropTypes.number,
   className: React.PropTypes.string,
-  clickable: React.PropTypes.boolean,
-  crop: React.PropTypes.boolean,
+  clickable: React.PropTypes.bool,
+  crop: React.PropTypes.bool,
   children: React.PropTypes.object,
 
   src: React.PropTypes.string.isRequired,

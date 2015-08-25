@@ -10,8 +10,10 @@ class ProjectActionCreators extends Marty.ActionCreators {
 
   save(data) {
     this.app.projectApi.save(data).then(project => {
+      console.log('INFO: Save project success');
       this.dispatch(ProjectConstants.ADD_PROJECT, project);
     }, error => {
+      console.log('WARN: Save project fail');
       this.dispatch(ProjectConstants.ADD_PROJECT_FAILED, error);
     });
   }

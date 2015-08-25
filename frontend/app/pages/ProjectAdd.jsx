@@ -45,7 +45,7 @@ export default class ProjectAdd extends React.Component {
   }
 
   render() {
-    let images = this.props.images.map(i => (<Photo className="col-md-3" height="100" onClick={this.onSelect.bind(this)} src={i.url}/>));
+    let images = this.props.images.map(i => (<Photo className="col-md-3" height={100} onClick={this.onSelect.bind(this)} src={i.url}/>));
     let chosenImages = [];
     for (let i of this.state.chosenImages.values()) {
       chosenImages.push(<div className="hide-overflow">- {i.name}</div>);
@@ -60,11 +60,11 @@ export default class ProjectAdd extends React.Component {
           <div className="col-md-8">
             <form className="form">
               <div className="form-group">
-                <label className="col-md-2 control-label">Tittel</label>
+                <label>Tittel</label>
                 <input className="form-control" onChange={this.handleTitleChange.bind(this)} placeholder="Prosjekttittel" type="text"/>
               </div>
               <div className="form-group">
-                <label className="col-md-2 control-label">Beskrivelse</label>
+                <label>Beskrivelse</label>
 
                 <textarea className="form-control" onChange={this.handleDescriptionChange.bind(this)}
                           placeholder="Skriv en prosjektbeskrivelse her." rows="7"/>
@@ -77,7 +77,7 @@ export default class ProjectAdd extends React.Component {
           <div className="col-md-4">
             <form className="form">
               <div className="form-group">
-                <label className="col-md-2 control-label">Valgte bilder</label>
+                <label>Valgte bilder</label>
                 {chosenImages}
               </div>
             </form>
@@ -107,7 +107,7 @@ export default Marty.createContainer(ProjectAdd, {
 });
 
 ProjectAdd.propTypes = {
-  images: React.PropType.array,
-  projects: React.PropType.array
+  images: React.PropTypes.array,
+  projects: React.PropTypes.array
 };
 

@@ -26,6 +26,6 @@ BigHeadline.defaultProps = {
 };
 
 BigHeadline.propTypes = {
-  small: React.PropType.string,
-  big: React.PropType.string
+  small: React.PropTypes.string,
+  big: React.PropTypes.string
 };

@@ -29,7 +29,7 @@ export default class PhotoLine extends React.Component {
 }
 
 PhotoLine.propTypes = {
-  img: React.PropType.array.isRequired,
-  selected: React.PropType.boolean.isRequired,
-  id: React.PropType.string.isRequired
+  img: React.PropTypes.array.isRequired,
+  selected: React.PropTypes.bool.isRequired,
+  id: React.PropTypes.string.isRequired
 };
