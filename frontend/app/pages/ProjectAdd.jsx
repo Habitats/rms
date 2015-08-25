@@ -45,7 +45,7 @@ export default class ProjectAdd extends React.Component {
   }
 
   render() {
-    let images = this.props.images.map(i => (<Photo src={i.url} height="100" className="col-md-3" onClick={this.onSelect.bind(this)}/>));
+    let images = this.props.images.map(i => (<Photo className="col-md-3" height="100" onClick={this.onSelect.bind(this)} src={i.url}/>));
     let chosenImages = [];
     for (let i of this.state.chosenImages.values()) {
       chosenImages.push(<div className="hide-overflow">- {i.name}</div>);
@@ -54,32 +54,30 @@ export default class ProjectAdd extends React.Component {
       <div className="container">
         <div className="row box">
           <div className="col-md-12">
-            <BigHeadline small="Prosjekt" big="Legg til ny"/>
+            <BigHeadline big="Legg til ny" small="Prosjekt"/>
           </div>
 
           <div className="col-md-8">
             <form className="form">
               <div className="form-group">
-                <label for="title" class="col-md-2 control-label">Tittel</label>
-
-                <input className="form-control" id="title" type="text" onChange={this.handleTitleChange.bind(this)}
-                       placeholder="Prosjekttittel"/>
+                <label className="col-md-2 control-label">Tittel</label>
+                <input className="form-control" onChange={this.handleTitleChange.bind(this)} placeholder="Prosjekttittel" type="text"/>
               </div>
               <div className="form-group">
-                <label for="description" class="col-md-2 control-label">Beskrivelse</label>
+                <label className="col-md-2 control-label">Beskrivelse</label>
 
-              <textarea className="form-control" id="description" onChange={this.handleDescriptionChange.bind(this)}
-                        placeholder="Skriv en prosjektbeskrivelse her." rows="7"/>
+                <textarea className="form-control" onChange={this.handleDescriptionChange.bind(this)}
+                          placeholder="Skriv en prosjektbeskrivelse her." rows="7"/>
               </div>
               <div className="form-group">
-                <button type="submit" className="btn btn-primary btn-lg btn-block" onClick={this.onSave.bind(this)}>Lagre prosjekt</button>
+                <button className="btn btn-primary btn-lg btn-block" onClick={this.onSave.bind(this)} type="submit">Lagre prosjekt</button>
               </div>
             </form>
           </div>
           <div className="col-md-4">
             <form className="form">
               <div className="form-group">
-                <label for="description" class="col-md-2 control-label">Valgte bilder</label>
+                <label className="col-md-2 control-label">Valgte bilder</label>
                 {chosenImages}
               </div>
             </form>
@@ -87,7 +85,7 @@ export default class ProjectAdd extends React.Component {
         </div>
         <div className="row box">
           <div className="col-md-12">
-            <BigHeadline small="" big="Velg bilder"/>
+            <BigHeadline big="Velg bilder"/>
           </div>
           {images}
         </div>
@@ -108,4 +106,8 @@ export default Marty.createContainer(ProjectAdd, {
   }
 });
 
+ProjectAdd.propTypes = {
+  images: React.PropType.array,
+  projects: React.PropType.array
+};
 

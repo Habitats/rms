@@ -23,5 +23,9 @@ export default class BigHeadline extends React.Component {
 BigHeadline.defaultProps = {
   small: '',
   big: ''
-}
+};
 
+BigHeadline.propTypes = {
+  small: React.PropType.string,
+  big: React.PropType.string
+};

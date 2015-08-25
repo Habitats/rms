@@ -21,7 +21,7 @@ class Application extends Marty.Application {
       projectStore: ProjectStore,
       projectActionCreators: ProjectActionCreators,
       projectQueries: ProjectQueries,
-      projectApi: ProjectApi,
+      projectApi: ProjectApi
     });
     this.router = router;
   }
@@ -36,7 +36,3 @@ app.router.run(Handler => {
       </ApplicationContainer>)
     , document.body);
 });
-
-
-
-

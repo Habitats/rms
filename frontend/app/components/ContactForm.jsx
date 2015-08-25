@@ -67,7 +67,7 @@ class ContactForm extends React.Component {
     let error = this.isValid() || !clicked || sent ? '' : (<p>Fyll inn alle feltene!</p>);
     let button =
       sent ? <h4>Din forespørsel er sendt!</h4> :
-      (<button type="submit" className="btn btn-default btn-block" onClick={this.handleSubmit.bind(this)}>Send</button>);
+      (<button className="btn btn-default btn-block" onClick={this.handleSubmit.bind(this)} type="submit">Send</button>);
 
     return (
       <div>
@@ -75,31 +75,33 @@ class ContactForm extends React.Component {
           <div className="form-group">
 
             <div className={nameClasses}>
-              <input name="name" disabled={disabled} onChange={this.onNameChange.bind(this)} type="text" placeholder="Navn"
-                     className="form-control"/>
+              <input className="form-control " disabled={disabled} onChange={this.onNameChange.bind(this)} placeholder="Navn" type="text"
+              />
             </div>
 
             <div className={contactEmailClasses}>
-              <input name="email" disabled={disabled} onChange={this.onAddressChange.bind(this)} type="text" placeholder="Epost"
-                     className="form-control "/>
+              <input className="form-control " disabled={disabled} onChange={this.onAddressChange.bind(this)} placeholder="Epost"
+                     type="text"
+              />
             </div>
 
             <div className={contactPhoneClasses}>
-              <input name="phone" disabled={disabled} onChange={this.onPhoneChange.bind(this)} type="text" placeholder="Telefon"
-                     className="form-control"/>
+              <input className="form-control " disabled={disabled} onChange={this.onPhoneChange.bind(this)} placeholder="Telefon"
+                     type="text"
+              />
             </div>
           </div>
           <div className="form-group">
 
             <div className={subjectClasses}>
-              <input name="subject" disabled={disabled} onChange={this.onSubjectChange.bind(this)} type="text" placeholder="Emne"
-                     className="form-control"/>
+              <input className="form-control " disabled={disabled} onChange={this.onSubjectChange.bind(this)} placeholder="Emne"
+                     type="text"/>
             </div>
           </div>
           <div className="form-group">
 
             <div className={messageClasses}>
-            <textarea onChange={this.onMessageChange.bind(this)} disabled={disabled} className="form-control" id="message" name="message"
+            <textarea className="form-control" disabled={disabled} onChange={this.onMessageChange.bind(this)}
                       placeholder="Send oss en forespørsel, og vi vil komme tilbake til deg så fort som mulig." rows="7"/>
             </div>
           </div>

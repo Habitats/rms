@@ -1,10 +1,7 @@
 import React from 'react';
-import ReferencesText from './../components/text/ReferencesText.jsx';
-import Projects from './../components/Projects.jsx';
 import BigHeadline from './../components/text/BigHeadline.jsx';
-import Router from 'react-router';
-
-let Link = Router.Link;
+//import Router from 'react-router';
+//let Link = Router.Link;
 
 export default class Products extends React.Component {
 
@@ -12,7 +9,7 @@ export default class Products extends React.Component {
     return (
       <div className="container">
         <div className="box col-md-12">
-          <BigHeadline small="Våre produkter og tjenester" big="Produkter"/>
+          <BigHeadline big="Produkter" small="Våre produkter og tjenester"/>
         </div>
         <div>
         </div>

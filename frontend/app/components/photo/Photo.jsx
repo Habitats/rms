@@ -61,7 +61,7 @@ export default class Photo extends React.Component {
 
       <div>
         <div className={className}>
-          <div style={style} className="photo-container" onClick={onClick}>
+          <div className="photo-container" onClick={onClick} style={style}>
             {this.props.children}
           </div>
         </div>
@@ -80,7 +80,9 @@ export default class Photo extends React.Component {
 Photo.defaultProps = {
   height: '100%',
   width: '100%',
+  className: '',
   clickable: true,
+  children: '',
   crop: true
 };
 
@@ -88,7 +90,12 @@ Photo.propTypes = {
   height: React.PropTypes.number,
   width: React.PropTypes.number,
   className: React.PropTypes.string,
-  src: React.PropTypes.string.isRequired
+  clickable: React.PropTypes.boolean,
+  crop: React.PropTypes.boolean,
+  children: React.PropTypes.object,
+
+  src: React.PropTypes.string.isRequired,
+  onClick: React.PropTypes.func.isRequired
 };
 
 

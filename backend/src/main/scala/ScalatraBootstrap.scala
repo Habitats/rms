@@ -16,6 +16,7 @@ class ScalatraBootstrap extends LifeCycle {
     val db = Database.forDataSource(cpds)
     RmsDb.init(db)
     context.mount(new PublicServlet(db), "/*")
+    context.mount(new SecretServlet(db), "/secret/*")
   }
 
   private def closeDbConnection(): Unit = {

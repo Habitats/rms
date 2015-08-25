@@ -10,7 +10,7 @@ export default class ProjectListItem extends React.Component {
       <div className="col-md-6">
 
         <Link params={{id: this.props.project.id, selected: 0}} to="referenceItem">
-          <Photo src={this.props.project.img[0].url} height={250} clickable={false}>
+          <Photo clickable={false} height={250} src={this.props.project.img[0].url}>
             <h3>
               <div className="photo-overlay-box hide-overflow">
                 {this.props.project.title}
@@ -23,3 +23,6 @@ export default class ProjectListItem extends React.Component {
   }
 }
 
+ProjectListItem.propTypes = {
+  project: React.PropType.object.isRequired
+};

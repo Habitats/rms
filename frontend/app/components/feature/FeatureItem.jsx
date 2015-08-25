@@ -18,3 +18,8 @@ export default class FeatureItem extends React.Component {
   }
 }
 
+FeatureItem.propTypes = {
+  icon: React.PropTypes.string.isRequired,
+  title: React.PropTypes.string.isRequired,
+  description: React.PropTypes.string.isRequired
+};

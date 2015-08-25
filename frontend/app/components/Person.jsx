@@ -11,7 +11,7 @@ export default class Person extends React.Component {
     return (
       <div className="row">
         <div className="col-md-4 col-sm-4 col-xs-4">
-          <Photo src={this.props.photo} height={120} clickable={false}/>
+          <Photo clickable={false} height={120} src={this.props.photo}/>
         </div>
         <div className="col-md-8 col-sm-8 col-xs-8">
           <h3>{this.props.name}</h3>
@@ -24,3 +24,10 @@ export default class Person extends React.Component {
   }
 }
 
+Person.propTypes = {
+  mail: React.PropTypes.string,
+  title: React.PropTypes.string,
+  phone: React.PropTypes.string,
+  name: React.PropTypes.string,
+  photo: React.PropTypes.string
+};

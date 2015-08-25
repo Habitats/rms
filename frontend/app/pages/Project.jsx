@@ -7,23 +7,20 @@ import PhotoLine from './../components/photo/PhotoLine.jsx';
 export default class Project extends React.Component {
 
   render() {
-    let project = this.props.projects[this.props.params.id - 1];
-    let selected = this.props.params.selected || 0;
+    let project = this.props.projects[parseInt(this.props.params.id) - 1];
+    let selected = parseInt(this.props.params.selected || 0);
     return (
       <div className="container">
         <div className="box">
-          <BigHeadline small="Prosjekt" big={project.title}/>
+          <BigHeadline big={project.title} small="Prosjekt"/>
 
           <div className="row">
             <div className="col-md-12">
-              <PhotoBig
-                src={project.img[selected].url}
-                description={project.description}
-                details=""/>
+              <PhotoBig description={project.description} src={project.img[selected].url}/>
             </div>
           </div>
 
-          <BigHeadline small="Flere bilder" big=""/>
+          <BigHeadline small="Flere bilder"/>
 
           <div className="row">
             <PhotoLine id={project.id} img={project.img} selected={selected}/>
@@ -44,4 +41,7 @@ export default Marty.createContainer(Project, {
   }
 });
 
-
+Project.propTypes = {
+  projects: React.PropTypes.array,
+  params: React.PropTypes.object
+};

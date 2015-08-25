@@ -12,7 +12,7 @@ export default class Header extends React.Component {
           <div className="container">
             <div className="navbar-header">
 
-              <button type="button" className="navbar-toggle">
+              <button className="navbar-toggle" type="button">
                 <span className="sr-only">Toggle navigation</span>
                 <span className="icon-bar"></span>
                 <span className="icon-bar"></span>

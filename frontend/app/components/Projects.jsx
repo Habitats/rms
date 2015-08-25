@@ -26,3 +26,6 @@ export default Marty.createContainer(Projects, {
   }
 });
 
+Projects.propTypes = {
+  projects: React.PropTypes.array.isRequired
+};

@@ -6,7 +6,7 @@ export default class Carousel extends React.Component {
   render() {
     return (
       <div >
-        <Photo src={this.props.src} height="500px">
+        <Photo height="500px" src={this.props.src}>
           {this.props.children}
         </Photo>
       </div>
@@ -14,3 +14,7 @@ export default class Carousel extends React.Component {
   }
 }
 
+Carousel.propTypes = {
+  children: React.PropTypes.object,
+  src: React.PropTypes.array.isRequired
+};

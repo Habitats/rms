@@ -7,16 +7,16 @@ export default class Features extends React.Component {
     return (
       <div className="row">
         <div className="col-md-4">
-          <FeatureItem icon="fa-cogs" title="Lang erfaring"
-                       description="Med over 30 års erfaring stiller vi med kompetanse på høyeste nivå. "/>
+          <FeatureItem description="Med over 30 års erfaring stiller vi med kompetanse på høyeste nivå. " icon="fa-cogs"
+                       title="Lang erfaring"/>
         </div>
         <div className="col-md-4">
-          <FeatureItem icon="fa-heart" title="Trygghet for kunden"
-                       description="Vi sørger for din trygghet gjennom tett oppfølging og service."/>
+          <FeatureItem description="Vi sørger for din trygghet gjennom tett oppfølging og service." icon="fa-heart"
+                       title="Trygghet for kunden"/>
         </div>
         <div className="col-md-4">
-          <FeatureItem icon="fa-star" title="Smarte løsninger"
-                       description="Skreddersydde og varige løsninger med prosjektering og rådgiving i etter dine behov."/>
+          <FeatureItem description="Skreddersydde og varige løsninger med prosjektering og rådgiving i etter dine behov." icon="fa-star"
+                       title="Smarte løsninger"/>
         </div>
       </div>
     );

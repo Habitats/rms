@@ -9,7 +9,7 @@ class LoremIpsum extends React.Component {
         <div>
           <div className="row">
             <div className="col-lg-12 text-center box">
-              <img className="img-responsive img-full" src={'http://www.pic2014.com/wp-content/uploads/2014-nice-cat-picture.jpg'} alt=""/>
+              <img className="img-responsive img-full" src={'http://www.pic2014.com/wp-content/uploads/2014-nice-cat-picture.jpg'}/>
 
               <h2 className="brand-before">
                 <small>Welcome to</small>
