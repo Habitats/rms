@@ -28,6 +28,10 @@ let routes = (
       <Route handler={ProjectListItem} name="project" path="prosjekt/:id/"/>
     </Route>
     <Route handler={Products} name="products" path="tjenester"/>
+    <Route handler={About} name="products_ext" path="produkter/interior"/>
+    <Route handler={Welcome} name="products_int" path="produkter/eksterior"/>
+    <Route handler={Welcome} name="products_div" path=""/>
+    <Route handler={Welcome} name="products_services" path=""/>
     <Route handler={Private} name="private" path="privat"/>
     <Route handler={Project} name="referenceItem" path="ref/:id/:selected"/>
     <Route handler={Project} ignoreScrollBehavior={true} name="referenceItemClick" path="ref/:id/:selected"/>

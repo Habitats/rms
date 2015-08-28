@@ -55,32 +55,32 @@ export default class Contact extends React.Component {
               <Person mail="morten@romerike-markise.no"
                       name="Morten Skjennum"
                       phone="+47 90 73 19 07"
-                      photo="/images/p_morten.jpg"
+                      photo="image/p_morten.jpg"
                       title="Daglig leder og prosjektansvarlig"/>
               <Person mail="bjarne@romerike-markise.no"
                       name="Bjarne Skjennum"
                       phone="+47 90 99 57 56"
-                      photo="/images/p_bjarne.jpg"
+                      photo="image/p_bjarne.jpg"
                       title="Montør"/>
               <Person mail="mail@annegrethe.no"
                       name="Anne Grethe Lorentzen Skjennum"
-                      photo="/images/p_anne.jpg"
+                      photo="image/p_anne.jpg"
                       title="Kontormedarbeider"/>
             </div>
             <div className="col-md-6 col-md-offset-0 col-sm-8 col-sm-offset-2 col-xs-12 col-xs-offset-0">
               <Person mail="roar@romerike-markise.no"
                       name="Roar Skjennum"
                       phone="+47 90 73 18 80"
-                      photo="/images/p_roar.jpg"
+                      photo="image/p_roar.jpg"
                       title="Salgskonsulent, privat"/>
               <Person mail="zenit-prosjekt@live.no"
                       name="Knut M. Sørensen"
                       phone="+47 47 39 24 36"
-                      photo="/images/p_knut.jpg"
+                      photo="image/p_knut.jpg"
                       title="Montør"/>
               <Person mail="mail@habitats.no"
                       name="Patrick Skjennum"
-                      photo="/images/p_patrick.jpg"
+                      photo="image/p_patrick.jpg"
                       title="IT-ansvarlig"/>
             </div>
           </div>

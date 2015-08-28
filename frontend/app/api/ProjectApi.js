@@ -25,7 +25,7 @@ class ProjectApi extends Marty.HttpStateSource {
   }
 
   getPrivate(){
-    return this.get(`${baseUrl}private`).then(res => {
+    return this.get(`${baseUrl}privates`).then(res => {
       if (res.status === 200) {
         return res.body;
       }

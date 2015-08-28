@@ -1,6 +1,6 @@
 import React from 'react';
-import Router from 'react-router';
 import Photo from './photo/Photo.jsx';
+import Router from 'react-router';
 let Link = Router.Link;
 
 export default class ProjectListItem extends React.Component {

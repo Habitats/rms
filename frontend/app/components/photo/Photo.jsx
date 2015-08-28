@@ -90,9 +90,9 @@ Photo.propTypes = {
   clickable: React.PropTypes.bool,
   crop: React.PropTypes.bool,
   children: React.PropTypes.object,
+  onClick: React.PropTypes.func,
 
-  src: React.PropTypes.string.isRequired,
-  onClick: React.PropTypes.func.isRequired
+  src: React.PropTypes.string.isRequired
 };
 
 

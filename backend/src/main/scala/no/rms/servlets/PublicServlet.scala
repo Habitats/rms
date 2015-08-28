@@ -1,6 +1,7 @@
 package no.rms.servlets
 
 import java.io.File
+import java.nio.file.Paths
 
 import no.rms.auth.AuthenticationSupport
 import no.rms.db.RmsDb
@@ -51,28 +52,32 @@ class PublicServlet(val db: Database) extends BackendStack with FutureSupport wi
     "delived message"
   }
 
-  get("/images") {
-    val images = new File("images/").listFiles.map(_.getName).filter(f => f.endsWith(".jpg") || f.endsWith(".png")).map(f => Image(f, "/images/" + f)).toList
+
+  get("/images/?") {
+    val images = Paths.get("img").toFile.listFiles.map(_.getName).filter(f => f.endsWith(".jpg") || f.endsWith(".png")).map(f => Image(f, "/image/" + f)).toList
     images
   }
 
-  get("/images/:id/?") {
+  get("/image/:id/?") {
     val id = params.get("id")
     contentType = "image"
-    val image = params.get("id").map(id => new File("images/" + id)).filter(_.exists).getOrElse(new File("images/not_found.jpg"))
+    println(new File("").getAbsolutePath)
+    val image = params.get("id").map(id => Paths.get("img", id).toFile).filter(_.exists).getOrElse(Paths.get("img", "not_found.jpg").toFile)
     image
+  }
+
+  get("/privates/?") {
+    val images = Paths.get("img", "private").toFile.listFiles.map(_.getName).filter(f => f.endsWith(".jpg") || f.endsWith(".png")).map(f => Image(f, "private/" + f)).toList
+    println("allprivates")
+    images
   }
 
   get("/private/:id/?") {
     val id = params.get("id")
     contentType = "image"
-    val image = params.get("id").map(id => new File("images/private/" + id)).filter(_.exists).getOrElse(new File("images/not_found.jpg"))
+    println("private")
+    val image = params.get("id").map(id => Paths.get("img", "private", id).toFile).filter(_.exists).getOrElse(Paths.get("img", "not_found.jpg").toFile)
     image
-  }
-
-  get("/private") {
-    val images = new File("images/private/").listFiles.map(_.getName).filter(f => f.endsWith(".jpg") || f.endsWith(".png")).map(f => Image(f, "/private/" + f)).toList
-    images
   }
 }
 
