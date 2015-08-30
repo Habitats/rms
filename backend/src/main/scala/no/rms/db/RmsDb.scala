@@ -1,5 +1,8 @@
 package no.rms.db
 
+import java.io.File
+
+import no.rms.Config
 import no.rms.models.Project
 import slick.driver.JdbcDriver.api._
 
@@ -22,23 +25,28 @@ object RmsDb {
   }
 
   def init(db: Database) {
-    val vgsImgs = List("ref_nannestad.vgs_1.jpg", "ref_nannestad.vgs_2.jpg", "ref_nannestad.vgs_3.jpg", "ref_nannestad.vgs_4.jpg")
-    val komImgs = List("ref_nannestad.kommunehus_1.jpg", "ref_nannestad.kommunehus_2.jpg", "ref_nannestad.kommunehus_3.jpg", "ref_nannestad.kommunehus_4.jpg")
-    
+    if (!new File("rms.mv.db").exists) {
+      if (Config.test) {
+        val vgsImgs = List("ref_nannestad.vgs_1.jpg", "ref_nannestad.vgs_2.jpg", "ref_nannestad.vgs_3.jpg", "ref_nannestad.vgs_4.jpg")
+        val komImgs = List("ref_nannestad.kommunehus_1.jpg", "ref_nannestad.kommunehus_2.jpg", "ref_nannestad.kommunehus_3.jpg", "ref_nannestad.kommunehus_4.jpg")
 
-    val insertProjects = DBIO.seq(
-      RmsDb.projects +=("1", "Nannestad VGS", "Hos Nannestad VGS har vi stått for levering av utvendige persienner, og masse annet rart. Stort prosjekt!", p(vgsImgs)),
-      RmsDb.projects +=("2", "Nannestad Kommunehus", "Hos Nannestad VGS har vi stått for levering av utvendige persienner, og masse annet rart. Stort prosjekt!", p(komImgs)),
-      RmsDb.projects +=("3", "Manesjen, Jessheim", "Hos Nannestad VGS har vi stått for levering av utvendige persienner, og masse annet rart. Stort prosjekt!", p(vgsImgs)),
-      RmsDb.projects +=("4", "Jessheim Kulturhus", "Hos Nannestad VGS har vi stått for levering av utvendige persienner, og masse annet rart. Stort prosjekt!", p(vgsImgs)),
-      RmsDb.projects +=("5", "Nannestad VGS", "Hos Nannestad VGS har vi stått for levering av utvendige persienner, og masse annet rart. Stort prosjekt!", p(vgsImgs)),
-      RmsDb.projects +=("6", "Nannestad Kommunehus", "Hos Nannestad VGS har vi stått for levering av utvendige persienner, og masse annet rart. Stort prosjekt!", p(vgsImgs)),
-      RmsDb.projects +=("7", "Manesjen, Jessheim", "Hos Nannestad VGS har vi stått for levering av utvendige persienner, og masse annet rart. Stort prosjekt!", p(vgsImgs)),
-      RmsDb.projects +=("8", "Jessheim Kulturhus", "Hos Nannestad VGS har vi stått for levering av utvendige persienner, og masse annet rart. Stort prosjekt!", p(vgsImgs))
-    )
+        val insertProjects = DBIO.seq(
+          RmsDb.projects +=("1", "Nannestad VGS", "Hos Nannestad VGS har vi stått for levering av utvendige persienner, og masse annet rart. Stort prosjekt!", p(vgsImgs)),
+          RmsDb.projects +=("2", "Nannestad Kommunehus", "Hos Nannestad VGS har vi stått for levering av utvendige persienner, og masse annet rart. Stort prosjekt!", p(komImgs)),
+          RmsDb.projects +=("3", "Manesjen, Jessheim", "Hos Nannestad VGS har vi stått for levering av utvendige persienner, og masse annet rart. Stort prosjekt!", p(vgsImgs)),
+          RmsDb.projects +=("4", "Jessheim Kulturhus", "Hos Nannestad VGS har vi stått for levering av utvendige persienner, og masse annet rart. Stort prosjekt!", p(vgsImgs)),
+          RmsDb.projects +=("5", "Nannestad VGS", "Hos Nannestad VGS har vi stått for levering av utvendige persienner, og masse annet rart. Stort prosjekt!", p(vgsImgs)),
+          RmsDb.projects +=("6", "Nannestad Kommunehus", "Hos Nannestad VGS har vi stått for levering av utvendige persienner, og masse annet rart. Stort prosjekt!", p(vgsImgs)),
+          RmsDb.projects +=("7", "Manesjen, Jessheim", "Hos Nannestad VGS har vi stått for levering av utvendige persienner, og masse annet rart. Stort prosjekt!", p(vgsImgs)),
+          RmsDb.projects +=("8", "Jessheim Kulturhus", "Hos Nannestad VGS har vi stått for levering av utvendige persienner, og masse annet rart. Stort prosjekt!", p(vgsImgs))
+        )
 
-    val createDatabase = DBIO.seq(createSchemaAction, insertProjects)
-    db.run(createDatabase)
+        val createDatabase = DBIO.seq(createSchemaAction, insertProjects)
+        db.run(createDatabase)
+      } else {
+        db.run(createSchemaAction)
+      }
+    }
   }
 
   def store(project: Project, db: Database) {

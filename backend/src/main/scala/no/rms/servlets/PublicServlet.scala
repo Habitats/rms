@@ -52,7 +52,6 @@ class PublicServlet(val db: Database) extends BackendStack with FutureSupport wi
     "delived message"
   }
 
-
   get("/images/?") {
     val images = Paths.get("img").toFile.listFiles.map(_.getName).filter(f => f.endsWith(".jpg") || f.endsWith(".png")).map(f => Image(f, "/image/" + f)).toList
     images

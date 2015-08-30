@@ -123,7 +123,7 @@ var config = {
   ],
   plugins: plugins,
   resolve: {
-    extensions: ['', '.js', '.json', '.jsx']
+    extensions: ['', '.js', '.json', '.jsx','.scss']
   },
   devServer: {
     contentBase: path.resolve(pkg.config.buildDir),

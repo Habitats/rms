@@ -16,6 +16,8 @@ object Config {
   def dropboxAppKey = conf.getProperty("dropbox_app_key")
 
   def dropboxAppSecret = conf.getProperty("dropbox_app_secret")
+
+  def test = conf.getProperty("test").toBoolean
 }
 
 
