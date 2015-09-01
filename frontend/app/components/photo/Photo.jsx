@@ -80,7 +80,8 @@ export default class Photo extends React.Component {
 Photo.defaultProps = {
   className: '',
   clickable: true,
-  crop: true
+  crop: true,
+  src: 'image/not_found.jpg'
 };
 
 Photo.propTypes = {

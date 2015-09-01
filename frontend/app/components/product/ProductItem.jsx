@@ -1,27 +1,34 @@
 import React from 'react';
 import Photo from './../photo/Photo.jsx';
+import BigHeadline from './../text/BigHeadline.jsx';
 
 export default class ProductItem extends React.Component {
 
   render() {
+    let style = {
+      height: 350,
+      marginBottom: 50
+    }
     return (
-      <div>
-        <div className="col-md-12 col-md-offset-0">
-          <div className="row">
-            <div className="col-md-4">
-              <Photo src="image/not_found.jpg" height={120}/>
-            </div>
-            <div className="col-md-8">
-              <h2>{this.props.title}</h2>
-              <p>{this.props.description}</p>
-            </div>
+      <div className="col-md-6 col-md-offset-0" style={style}>
+        <div className="row">
+          <div className="col-md-12">
+            <Photo src={this.props.src} height={250}>
+              <h3>
+                <div className="photo-overlay-box hide-overflow">
+                  {this.props.title}
+                </div>
+              </h3>
+            </Photo>
+          </div>
+          <div className="col-md-12">
+            <p>{this.props.description}</p>
           </div>
         </div>
       </div>
     )
   }
 }
-ProductItem.defaultProps = {};
 
 ProductItem.propTypes = {
   title: React.PropTypes.string.isRequired,

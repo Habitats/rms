@@ -11,7 +11,7 @@ export default class PhotoLine extends React.Component {
 
   render() {
     let images = this.props.img.map(i =>
-                                      <div className="col-lg-3 col-xs-6">
+                                      <div className="col-lg-3 col-xs-4 col-sm-3">
                                         <Link params={{id: this.props.id, selected: this.props.img.indexOf(i)}} to="referenceItemClick">
                                           <div className={this.getClasses(i)}>
                                             <Photo clickable={false} height={150} src={i.url}/>

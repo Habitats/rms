@@ -125,7 +125,11 @@ p {
 i {
   margin-right: 5px;
   text-align: center;
-  width: 16px;
+  min-width: 16px;
+}
+
+.fa-empty {
+  margin-right: 21px;
 }
 
 .photo {

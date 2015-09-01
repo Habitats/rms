@@ -5,6 +5,10 @@ import ProjectActionCreators from './actions/ProjectActionCreators.js';
 import ProjectStore from './stores/ProjectStore.js';
 import ProjectQueries from './queries/ProjectQueries.js';
 import ProjectApi from './api/ProjectApi.js';
+import SessionActionCreators from './actions/SessionActionCreators.js';
+import SessionStore from './stores/SessionStore.js';
+import SessionQueries from './queries/SessionQueries.js';
+import SessionApi from './api/SessionApi.js';
 
 import React from 'react';
 import Marty from 'marty';
@@ -21,7 +25,11 @@ class Application extends Marty.Application {
       projectStore: ProjectStore,
       projectActionCreators: ProjectActionCreators,
       projectQueries: ProjectQueries,
-      projectApi: ProjectApi
+      projectApi: ProjectApi,
+      sessionStore: SessionStore,
+      sessionActionCreators: SessionActionCreators,
+      sessionQueries: SessionQueries,
+      sessionApi: SessionApi
     });
     this.router = router;
   }

@@ -4,7 +4,7 @@ export default class Menu extends React.Component {
 
   render() {
     return (
-      <div style={{borderRight : 0.5}}>
+      <div style={{marginLeft: -21}}>
         {this.props.children}
       </div>
     )

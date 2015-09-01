@@ -15,7 +15,7 @@ export default class Features extends React.Component {
                        title="Trygghet for kunden"/>
         </div>
         <div className="col-md-4">
-          <FeatureItem description="Skreddersydde og varige løsninger med prosjektering og rådgiving i etter dine behov." icon="fa-star"
+          <FeatureItem description="Skreddersydde og varige løsninger med prosjektering og rådgiving etter dine behov." icon="fa-star"
                        title="Smarte løsninger"/>
         </div>
       </div>

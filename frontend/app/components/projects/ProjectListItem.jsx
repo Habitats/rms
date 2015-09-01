@@ -1,5 +1,5 @@
 import React from 'react';
-import Photo from './photo/Photo.jsx';
+import Photo from './../photo/Photo.jsx';
 import Router from 'react-router';
 let Link = Router.Link;
 

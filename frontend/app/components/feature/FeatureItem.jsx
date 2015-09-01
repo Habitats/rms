@@ -10,8 +10,8 @@ export default class FeatureItem extends React.Component {
 
         <h2>{this.props.title}</h2>
 
-        <div className="">
-          <p>{this.props.description}</p>
+        <div>
+          <p className="text-center">{this.props.description}</p>
         </div>
       </div>
     );

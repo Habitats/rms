@@ -7,7 +7,7 @@ export default class MenuItem extends React.Component {
   render() {
     return (
       <div>
-        <Link to={this.props.linkTo}><h5 style={{color: '#3e3e3e', marginLeft: 15}}>{this.props.title}</h5></Link>
+        <Link to={this.props.linkTo}><h5 style={{color: '#3e3e3e', marginLeft: 35}}>{this.props.title}</h5></Link>
       </div>
     );
   }

@@ -18,10 +18,10 @@ export default class About extends React.Component {
               <Photo className="col-md-12" height={200} src="image/butikken_inne_2.jpg"/>
             </div>
           </div>
-          <BigHeadline big="Romerike Markiseservice" small="Om bedriften"/>
+          <BigHeadline big="Om bedriften" small="Romerike Markiseservice"/>
 
           <div className="row">
-            <div className="col-md-10 col-md-offset-1">
+            <div className="col-md-8 col-md-offset-2">
               <AboutText />
             </div>
           </div>

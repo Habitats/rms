@@ -4,7 +4,7 @@ import javax.servlet.ServletContext
 import com.mchange.v2.c3p0.ComboPooledDataSource
 import no.rms.Logger
 import no.rms.db.RmsDb
-import no.rms.servlets.{SecretServlet, PublicServlet}
+import no.rms.servlets.{PublicServlet, SecretServlet, SessionServlet}
 import org.scalatra._
 import slick.driver.JdbcDriver.api._
 
@@ -16,6 +16,7 @@ class ScalatraBootstrap extends LifeCycle {
     val db = Database.forDataSource(cpds)
     RmsDb.init(db)
     context.mount(new SecretServlet(db), "/secret/*")
+    context.mount(new SessionServlet, "/session/*")
     context.mount(new PublicServlet(db), "/*")
   }
 

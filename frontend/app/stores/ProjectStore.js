@@ -10,8 +10,13 @@ class ProjectStore extends Marty.Store {
       receiveProjects: ProjectConstants.RECEIVE_PROJECTS,
       receiveImages: ProjectConstants.RECEIVE_IMAGES,
       receivePrivate: ProjectConstants.RECEIVE_PRIVATE,
-      addProject: ProjectConstants.ADD_PROJECT
+      addProject: ProjectConstants.ADD_PROJECT,
+      selectCategory: ProjectConstants.SELECT_CATEGORY
     };
+  }
+
+  selectCategory(category){
+    this.setState({category: category});
   }
 
   updateProject(msg) {
@@ -34,6 +39,10 @@ class ProjectStore extends Marty.Store {
     this.state.projects[this.state.projects.length] = project;
     this.app.router.transitionTo('references');
     this.hasChanged();
+  }
+
+  getSelectedCategory(){
+    return this.state.category;
   }
 
   getProjects() {

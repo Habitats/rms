@@ -14,7 +14,7 @@ class ProjectApi extends Marty.HttpStateSource {
     });
   }
 
-  getImages(){
+  getImages() {
     return this.get(`${baseUrl}images`).then(res => {
       if (res.status === 200) {
         return res.body;
@@ -24,7 +24,7 @@ class ProjectApi extends Marty.HttpStateSource {
     });
   }
 
-  getPrivate(){
+  getPrivate() {
     return this.get(`${baseUrl}privates`).then(res => {
       if (res.status === 200) {
         return res.body;

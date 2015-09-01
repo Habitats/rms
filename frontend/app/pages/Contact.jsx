@@ -1,7 +1,7 @@
 import React from 'react';
 import ContactForm from './../components/ContactForm.jsx';
 import BigHeadline from './../components/text/BigHeadline.jsx';
-import MapWrapper from './../components/MapWrapper.jsx';
+import MapWrapper from './../components/map/MapWrapper.jsx';
 import Person from './../components/Person.jsx';
 
 export default class Contact extends React.Component {

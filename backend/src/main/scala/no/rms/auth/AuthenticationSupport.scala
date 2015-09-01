@@ -1,29 +1,17 @@
 package no.rms.auth
 
-import javax.servlet.http.{HttpServletRequest, HttpServletResponse}
-
-import no.rms.Config
+import no.rms.auth.strategies.PasswordStrategy
 import org.scalatra.ScalatraBase
-import org.scalatra.auth.strategy.{BasicAuthStrategy, BasicAuthSupport}
 import org.scalatra.auth.{ScentryConfig, ScentrySupport}
 
-class AuthenticationStrategy(protected override val app: ScalatraBase, realm: String) extends BasicAuthStrategy[User](app, realm) {
 
-  protected def validate(username: String, password: String)(implicit request: HttpServletRequest, response: HttpServletResponse): Option[User] = {
-    if (username == Config.username && password == Config.password) Some(User(username)) else None
-  }
-
-  protected def getUserId(user: User)(implicit request: HttpServletRequest, response: HttpServletResponse): String = user.id
-
-}
-
-trait AuthenticationSupport extends ScentrySupport[User] with BasicAuthSupport[User] {
+trait AuthenticationSupport extends ScalatraBase with ScentrySupport[User] {
   self: ScalatraBase =>
 
   val realm = "Romerike Markiseservice AS"
 
   protected def fromSession = {
-    case id: String => User(id)
+    case id: String => if(Users.active.contains(id)) Users.findById(id) else null
   }
 
   protected def toSession = {
@@ -37,8 +25,9 @@ trait AuthenticationSupport extends ScentrySupport[User] with BasicAuthSupport[U
    * run the unauthenticated() method on the UserPasswordStrategy.
    */
   override protected def configureScentry = {
+
     scentry.unauthenticated {
-      scentry.strategies("Basic").unauthenticated()
+      scentry.strategies("UserPassword").unauthenticated()
     }
   }
 
@@ -47,7 +36,9 @@ trait AuthenticationSupport extends ScentrySupport[User] with BasicAuthSupport[U
    * progressively use all registered strategies to log the user in, falling back if necessary.
    */
   override protected def registerAuthStrategies = {
-    scentry.register("Basic", app => new AuthenticationStrategy(app, realm))
+    //    scentry.register("Basic", app => new BasicAuthenticationStrategy(app, realm))
+//    scentry.register("RememberMe", app => new RememberMeStrategy(app))
+    scentry.register("UserPassword", app => new PasswordStrategy(app))
   }
 }
 

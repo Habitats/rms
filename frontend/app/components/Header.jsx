@@ -26,7 +26,7 @@ export default class Header extends React.Component {
                 <li><Link to="welcome">Hjem</Link></li>
                 <li><Link to="references">Prosjekt</Link></li>
                 <li><Link to="private">Privat</Link></li>
-                <li><Link to="products">Produkter</Link></li>
+                <li><Link to="products_ext">Produkter</Link></li>
                 <li><Link to="about">Om</Link></li>
                 <li><Link to="contact">Kontakt</Link></li>
               </ul>

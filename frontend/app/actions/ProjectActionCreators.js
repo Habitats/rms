@@ -25,6 +25,10 @@ class ProjectActionCreators extends Marty.ActionCreators {
       this.dispatch(ProjectConstants.SEND_EMAIL_FAILED, error);
     });
   }
+
+  selectCategory(category){
+    this.dispatch(ProjectConstants.SELECT_CATEGORY, category);
+  }
 }
 
 export default ProjectActionCreators;

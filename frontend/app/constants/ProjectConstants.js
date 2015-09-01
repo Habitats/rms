@@ -7,7 +7,8 @@ let ProjectConstants = Marty.createConstants([
   'ADD_PROJECT',
   'RECEIVE_IMAGES',
   'RECEIVE_PRIVATE',
-  'SEND_EMAIL'
+  'SEND_EMAIL',
+  'SELECT_CATEGORY'
 ]);
 
 export default ProjectConstants;

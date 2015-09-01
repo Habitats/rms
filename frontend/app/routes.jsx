@@ -14,8 +14,13 @@ import References from './pages/References.jsx';
 import Project from './pages/Project.jsx';
 import Private from './pages/Private.jsx';
 import Products from './pages/Products.jsx';
+import Interior from './components/product/Interior.jsx';
+import Exterior from './components/product/Exterior.jsx';
+import Services from './components/product/Services.jsx';
+import Other from './components/product/Other.jsx';
 import ProjectAdd from './pages/ProjectAdd.jsx';
-import ProjectListItem from './components/ProjectListItem.jsx';
+import Login from './pages/Login.jsx';
+import ProjectListItem from './components/projects/ProjectListItem.jsx';
 import ReferencesList from './components/text/ReferencesList.jsx';
 
 // declare our routes and their hierarchy
@@ -27,12 +32,14 @@ let routes = (
     <Route handler={References} name="references" path="referanser/">
       <Route handler={ProjectListItem} name="project" path="prosjekt/:id/"/>
     </Route>
-    <Route handler={Products} name="products" path="tjenester"/>
-    <Route handler={About} name="products_ext" path="produkter/interior"/>
-    <Route handler={Welcome} name="products_int" path="produkter/eksterior"/>
-    <Route handler={Welcome} name="products_div" path=""/>
-    <Route handler={Welcome} name="products_services" path=""/>
+    <Route handler={Products} name="products" path="tjenester">
+      <Route handler={Exterior} name="products_ext" path="eksterior"/>
+      <Route handler={Interior} name="products_int" path="interior"/>
+      <Route handler={Services} name="products_services" path="tjenester"/>
+      <Route handler={Other} name="products_other" path="diverse"/>
+    </Route>
     <Route handler={Private} name="private" path="privat"/>
+    <Route handler={Login} name="login" path="login"/>
     <Route handler={Project} name="referenceItem" path="ref/:id/:selected"/>
     <Route handler={Project} ignoreScrollBehavior={true} name="referenceItemClick" path="ref/:id/:selected"/>
     <Route handler={ProjectAdd} name="project_add" path="ref/add"/>
