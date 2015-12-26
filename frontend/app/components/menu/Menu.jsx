@@ -7,10 +7,12 @@ export default class Menu extends React.Component {
       <div style={{marginLeft: -21}}>
         {this.props.children}
       </div>
-    )
+    );
   }
 }
-Menu.defaultProps = {};
+Menu.defaultProps = {
+  children: React.PropTypes.object.isRequired
+};
 
 Menu.propTypes = {};
 

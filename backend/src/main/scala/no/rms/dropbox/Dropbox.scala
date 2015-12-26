@@ -25,7 +25,7 @@ object Dropbox {
     val token = authFinish.accessToken
     val f = new PrintWriter(new File("secret/dropbox_token"))
     f.write(token)
-    f.close
+    f.close()
     val client = new DbxClient(config, token)
     println("Linked account: " + client.getAccountInfo.displayName)
     token

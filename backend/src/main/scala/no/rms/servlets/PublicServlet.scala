@@ -21,7 +21,7 @@ class PublicServlet(val db: Database) extends BackendStack with FutureSupport wi
   protected implicit val jsonFormats: Formats = DefaultFormats
 
   options("/*") {
-    response.setHeader("Access-Control-Allow-Headers", request.getHeader("Access-Control-Request-Headers"));
+    response.setHeader("Access-Control-Allow-Headers", request.getHeader("Access-Control-Request-Headers"))
   }
 
   before() {
@@ -68,7 +68,7 @@ class PublicServlet(val db: Database) extends BackendStack with FutureSupport wi
     val id = params.get("id")
     Logger.info("GET: image/" + id.getOrElse(""))
     contentType = "image"
-    val image = params.get("id").map(id => Paths.get("img", id).toFile).filter(_.exists).getOrElse(notFound)
+    val image = params.get("id").map(id => Paths.get("img", id).toFile).filter(_.exists).getOrElse(notFound())
     image
   }
 
@@ -82,7 +82,7 @@ class PublicServlet(val db: Database) extends BackendStack with FutureSupport wi
     val id = params.get("id")
     Logger.info("GET: private/" + id.getOrElse(""))
     contentType = "image"
-    val image = params.get("id").map(id => Paths.get("img", "private", id).toFile).filter(_.exists).getOrElse(notFound)
+    val image = params.get("id").map(id => Paths.get("img", "private", id).toFile).filter(_.exists).getOrElse(notFound())
     image
   }
 }

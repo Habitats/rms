@@ -16,7 +16,7 @@ class SessionActionCreators extends Marty.ActionCreators {
     this.app.sessionApi.save(data).then(session => {
       this.app.clearState(); // Clear all stores when we receive an updated session
       this.dispatch(SessionConstants.RECEIVE_SESSION, session);
-      this.app.router.transitionTo("welcome");
+      this.app.router.transitionTo('welcome');
     }).catch(error => {
       console.log(error);
     });

@@ -56,11 +56,11 @@ object RmsDb {
 
   val projects = TableQuery[Projects]
 
-  val createSchemaAction = (projects.schema).create
+  val createSchemaAction = projects.schema.create
 
-  val dropSchemaAction = (projects.schema).drop
+  val dropSchemaAction = projects.schema.drop
 
   val selectProjectTitles = {
-    for {c <- projects} yield (c.title)
+    for {c <- projects} yield c.title
   }
 }

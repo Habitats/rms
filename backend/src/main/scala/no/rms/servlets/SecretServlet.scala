@@ -17,7 +17,7 @@ class SecretServlet(val db: Database) extends BackendStack with FutureSupport wi
   protected implicit val jsonFormats: Formats = DefaultFormats
 
   options("/*") {
-    response.setHeader("Access-Control-Allow-Headers", request.getHeader("Access-Control-Request-Headers"));
+    response.setHeader("Access-Control-Allow-Headers", request.getHeader("Access-Control-Request-Headers"))
   }
 
   before() {

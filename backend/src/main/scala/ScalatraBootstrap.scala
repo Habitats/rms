@@ -22,11 +22,11 @@ class ScalatraBootstrap extends LifeCycle {
 
   private def closeDbConnection(): Unit = {
     Logger.info("Closing c3po connection pool")
-    cpds.close
+    cpds.close()
   }
 
   override def destroy(context: ServletContext): Unit = {
     super.destroy(context)
-    closeDbConnection
+    closeDbConnection()
   }
 }

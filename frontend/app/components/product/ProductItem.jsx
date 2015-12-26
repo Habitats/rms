@@ -1,6 +1,5 @@
 import React from 'react';
 import Photo from './../photo/Photo.jsx';
-import BigHeadline from './../text/BigHeadline.jsx';
 
 export default class ProductItem extends React.Component {
 
@@ -8,7 +7,7 @@ export default class ProductItem extends React.Component {
     let style = {
       height: 350,
       marginBottom: 50
-    }
+    };
     return (
       <div className="col-md-6 col-md-offset-0" style={style}>
         <div className="row">
@@ -26,7 +25,7 @@ export default class ProductItem extends React.Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 

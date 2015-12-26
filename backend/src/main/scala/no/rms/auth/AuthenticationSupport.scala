@@ -18,7 +18,7 @@ trait AuthenticationSupport extends ScalatraBase with ScentrySupport[User] {
     case user: User => user.id
   }
 
-  protected val scentryConfig = (new ScentryConfig {}).asInstanceOf[ScentryConfiguration]
+  protected val scentryConfig = new ScentryConfig {}.asInstanceOf[ScentryConfiguration]
 
   /**
    * If an unauthenticated user attempts to access a route which is protected by Scentry,

@@ -9,16 +9,13 @@ import org.scalatra.{CorsSupport, FutureSupport}
 
 import scala.concurrent.ExecutionContext
 
-/**
- * Created by mail on 30.08.2015.
- */
 class SessionServlet extends BackendStack with FutureSupport with JacksonJsonSupport with CorsSupport with AuthenticationSupport {
   protected implicit def executor = ExecutionContext.Implicits.global
 
   protected implicit val jsonFormats: Formats = DefaultFormats
 
   options("/*") {
-    response.setHeader("Access-Control-Allow-Headers", request.getHeader("Access-Control-Request-Headers"));
+    response.setHeader("Access-Control-Allow-Headers", request.getHeader("Access-Control-Request-Headers"))
   }
 
   before() {

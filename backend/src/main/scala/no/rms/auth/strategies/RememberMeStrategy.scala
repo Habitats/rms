@@ -22,7 +22,7 @@ class RememberMeStrategy(protected val app: ScalatraBase)(implicit request: Http
   }
 
   override def isValid(implicit request: HttpServletRequest): Boolean = {
-    Logger.info("RememberMeStrategy: determining isValid: " + (tokenVal != "").toString())
+    Logger.info("RememberMeStrategy: determining isValid: " + (tokenVal != "").toString)
     tokenVal != ""
   }
 
@@ -47,7 +47,7 @@ class RememberMeStrategy(protected val app: ScalatraBase)(implicit request: Http
   override def beforeLogout(user: User)(implicit request: HttpServletRequest, response: HttpServletResponse) = {
     Logger.info("rememberMe: beforeLogout")
     if (user != null) {
-      user.forgetMe
+      user.forgetMe()
     }
 
     app.cookies.delete(COOKIE_KEY)(CookieOptions(path = "/"))
