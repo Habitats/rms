@@ -1,5 +1,6 @@
 import Marty from 'marty';
 import ProjectConstants from './../constants/ProjectConstants.js';
+import history from './../history'
 
 class ProjectStore extends Marty.Store {
   constructor(props) {
@@ -15,7 +16,7 @@ class ProjectStore extends Marty.Store {
     };
   }
 
-  selectCategory(category){
+  selectCategory(category) {
     this.setState({category: category});
   }
 
@@ -37,11 +38,12 @@ class ProjectStore extends Marty.Store {
 
   addProject(project) {
     this.state.projects[this.state.projects.length] = project;
-    this.app.router.transitionTo('references');
+    history.pushState(null, '/prosjekt');
+
     this.hasChanged();
   }
 
-  getSelectedCategory(){
+  getSelectedCategory() {
     return this.state.category;
   }
 

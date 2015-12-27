@@ -21,7 +21,7 @@ object RmsDb {
   }
 
   def p(imgs: List[String]): String = {
-    imgs.map("image/" + _).mkString(",")
+    imgs.map("/image/" + _).mkString(",")
   }
 
   def init(db: Database) {

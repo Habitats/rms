@@ -1,7 +1,6 @@
 import React from 'react';
 import Marty from 'marty';
-import Router from 'react-router';
-let Link = Router.Link;
+import {Link} from 'react-router';
 
 export default class Category extends React.Component {
 

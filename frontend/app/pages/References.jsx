@@ -1,10 +1,8 @@
 import React from 'react';
+import {Link} from 'react-router';
 import Marty from 'marty';
 import Projects from './../components/projects/Projects.jsx';
 import BigHeadline from './../components/text/BigHeadline.jsx';
-import Router from 'react-router';
-
-let Link = Router.Link;
 
 export default class References extends React.Component {
 
@@ -13,7 +11,7 @@ export default class References extends React.Component {
     if (this.props.session.admin) {
       newButton = (
         <div className="form-group">
-          <Link to="project_add">
+          <Link to="/prosjekt/ny">
             <button className="btn btn-primary btn-block" type="submit">Legg til nytt prosjekt</button>
           </Link>
         </div>
@@ -31,7 +29,6 @@ export default class References extends React.Component {
   }
 }
 
-
 export default Marty.createContainer(References, {
   listenTo: 'sessionStore',
   fetch: {
@@ -41,3 +38,6 @@ export default Marty.createContainer(References, {
   }
 });
 
+References.propTypes = {
+  session: React.PropTypes.object.isRequired
+};

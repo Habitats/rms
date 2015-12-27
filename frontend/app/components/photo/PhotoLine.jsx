@@ -1,7 +1,6 @@
 import React from 'react';
-import Router from 'react-router';
+import {Link} from 'react-router';
 import Photo from './Photo.jsx';
-let Link = Router.Link;
 
 export default class PhotoLine extends React.Component {
 
@@ -11,13 +10,13 @@ export default class PhotoLine extends React.Component {
 
   render() {
     let images = this.props.img.map(i =>
-                                      <div className="col-lg-3 col-xs-4 col-sm-3">
-                                        <Link params={{id: this.props.id, selected: this.props.img.indexOf(i)}} to="referenceItemClick">
-                                          <div className={this.getClasses(i)}>
-                                            <Photo clickable={false} height={150} src={i.url}/>
-                                          </div>
-                                        </Link>
-                                      </div>
+      <div className="col-lg-3 col-xs-4 col-sm-3">
+        <Link to={`/prosjekt/${this.props.id}/${this.props.img.indexOf(i)}`}>
+          <div className={this.getClasses(i)}>
+            <Photo clickable={false} height={150} src={i.url}/>
+          </div>
+        </Link>
+      </div>
     );
 
     return (
@@ -30,6 +29,6 @@ export default class PhotoLine extends React.Component {
 
 PhotoLine.propTypes = {
   img: React.PropTypes.array.isRequired,
-  selected: React.PropTypes.bool.isRequired,
+  selected: React.PropTypes.number.isRequired,
   id: React.PropTypes.string.isRequired
 };

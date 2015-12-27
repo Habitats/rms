@@ -41,11 +41,11 @@ export default class Login extends React.Component {
   }
 
   render() {
-    console.log(this.state);
     let login = this.props.session.admin ?
                 <p>Logget inn som <strong>{this.props.session.username}</strong></p> : '';
 
     let loginForm;
+    console.log(this.state);
     if (!this.props.session.admin) {
       loginForm = (
         <div>
@@ -57,7 +57,7 @@ export default class Login extends React.Component {
             <label>Passord</label>
             <input className="form-control" onChange={this.handlePasswordChange.bind(this)} placeholder="Passord" type="password"/>
           </div>
-          <div class="checkbox">
+          <div className="checkbox">
             <label>
               <input type="checkbox" onChange={this.handleRememberMeChange.bind(this)}> Husk meg</input>
             </label>
@@ -98,4 +98,8 @@ export default Marty.createContainer(Login, {
     }
   }
 });
+
+Login.propTypes = {
+  session: React.PropTypes.object.isRequired
+};
 

@@ -16,5 +16,5 @@ export default class Carousel extends React.Component {
 
 Carousel.propTypes = {
   children: React.PropTypes.object,
-  src: React.PropTypes.array.isRequired
+  src: React.PropTypes.string.isRequired
 };

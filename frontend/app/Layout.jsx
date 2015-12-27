@@ -3,7 +3,6 @@ import Marty from 'marty';
 import Router from 'react-router';
 import Footer from './components/Footer.jsx';
 import Header from './components/Header.jsx';
-let RouteHandler = Router.RouteHandler;
 
 class Layout extends React.Component {
 
@@ -12,7 +11,7 @@ class Layout extends React.Component {
     return (
       <div>
         <Header />
-        <RouteHandler/>
+        {this.props.children}
         <Footer />
       </div>
 
@@ -24,3 +23,7 @@ export default Marty.createContainer(Layout, {
   listenTo: 'projectStore',
   fetch: {}
 });
+
+Layout.propTypes = {
+  children: React.PropTypes.object.isRequired
+};

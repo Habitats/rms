@@ -1,7 +1,6 @@
 import React from 'react';
+import {Link} from 'react-router';
 import Photo from './../photo/Photo.jsx';
-import Router from 'react-router';
-let Link = Router.Link;
 
 export default class ProjectListItem extends React.Component {
 
@@ -9,7 +8,7 @@ export default class ProjectListItem extends React.Component {
     return (
       <div className="col-md-6">
 
-        <Link params={{id: this.props.project.id, selected: 0}} to="referenceItem">
+        <Link to={`/prosjekt/${this.props.project.id}/0`}>
           <Photo clickable={false} height={250} src={this.props.project.img[0].url}>
             <h3>
               <div className="photo-overlay-box hide-overflow">

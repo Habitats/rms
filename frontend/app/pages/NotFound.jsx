@@ -1,10 +1,15 @@
 import React from 'react';
+import BigHeadline from './../components/text/BigHeadline.jsx';
 
 export default class NotFound extends React.Component {
 
   render() {
     return (
-      <h2>Denne siden finnes ikke.</h2>
+        <div className="container">
+          <div className="box">
+            <BigHeadline big="Denne siden finnes ikke." small="404"/>
+        </div>
+      </div>
     );
   }
 }

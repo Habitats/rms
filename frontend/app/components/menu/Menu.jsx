@@ -10,13 +10,7 @@ export default class Menu extends React.Component {
     );
   }
 }
-Menu.defaultProps = {
+
+Menu.propTypes = {
   children: React.PropTypes.object.isRequired
 };
-
-Menu.propTypes = {};
-
-
-
-
-

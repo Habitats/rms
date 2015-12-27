@@ -1,6 +1,5 @@
 import React from 'react';
-import Router from 'react-router';
-let Link = Router.Link;
+import {Link} from 'react-router';
 
 export default class Header extends React.Component {
 
@@ -18,17 +17,17 @@ export default class Header extends React.Component {
                 <span className="icon-bar"></span>
                 <span className="icon-bar"></span>
               </button>
-              <a className="navbar-brand" href="#"><img src="image/rms.png"/></a>
+              <a className="navbar-brand" href="#"><img src="/image/rms.png"/></a>
             </div>
 
             <div className="collapse navbar-collapse">
               <ul className="nav pull-right navbar-nav">
-                <li><Link to="welcome">Hjem</Link></li>
-                <li><Link to="references">Prosjekt</Link></li>
-                <li><Link to="private">Privat</Link></li>
-                <li><Link to="products_ext">Produkter</Link></li>
-                <li><Link to="about">Om</Link></li>
-                <li><Link to="contact">Kontakt</Link></li>
+                <li><Link to="/">Hjem</Link></li>
+                <li><Link to="/prosjekt">Prosjekt</Link></li>
+                <li><Link to="/privat">Privat</Link></li>
+                <li><Link to="/produkter/eksterior">Produkter</Link></li>
+                <li><Link to="/om">Om</Link></li>
+                <li><Link to="/kontakt">Kontakt</Link></li>
               </ul>
             </div>
           </div>

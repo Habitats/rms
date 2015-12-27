@@ -9,12 +9,10 @@ export default class Welcome extends React.Component {
   render() {
     return (
       <div>
-
         <div className="container">
           <div className="box">
 
-            <Carousel src="image/refpriv_kunde_5.jpg">
-            </Carousel>
+            <Carousel src="/image/refpriv_kunde_5.jpg"/>
             <BigHeadline big="Profesjonell solskjerming" small="Romerike Markiseservice"/>
 
             <div className="row">

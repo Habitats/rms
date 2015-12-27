@@ -4,7 +4,7 @@ object Users {
 
   var active = Map[String, User]()
 
-  def add(user: User) = {
+  def add(user: User) {
     active += (user.id -> user)
   }
 

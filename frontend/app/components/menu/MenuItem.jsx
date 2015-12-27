@@ -1,6 +1,5 @@
 import React from 'react';
-import Router from 'react-router';
-let Link = Router.Link;
+import {Link} from 'react-router';
 
 export default class MenuItem extends React.Component {
 
