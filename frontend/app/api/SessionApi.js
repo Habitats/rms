@@ -23,11 +23,12 @@ export function logout(user) {
 
 export function save(session) {
   return fetch(`${baseUrl}session`, {
-    method: 'post',
-    body: JSON.stringify({
-      ...session,
-      modified: new Date().getMilliseconds()
-    })
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(session)
   }).then(res => {
     if (res.status === 200) {
       return res.json();

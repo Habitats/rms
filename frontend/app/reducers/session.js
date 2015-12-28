@@ -1,17 +1,22 @@
 import * as SessionConstants from '../constants/SessionConstants'
 
 const initialState = {
-  user: null,
+  id: null,
+  username: 'none',
+  password: null,
+  rememberMe: null,
   admin: false,
   modified: new Date().getMilliseconds()
 }
 
 export default function session(state = initialState, action) {
   switch (action.type) {
-    case SessionConstants.RECEIVE_SESSION:
-      return action.payload;
-    case SessionConstants.RECEIVE_SESSION_FAIL:
-      return state;
+    case SessionConstants.UPDATE:
+      return action.session;
+    case SessionConstants.NEW:
+      return action.session;
+    case SessionConstants.LOGIN_SUCCESS:
+      return action.session;
     default:
       return state;
   }

@@ -1,38 +1,37 @@
 import history from './../history'
-import * as SessionConstants from './../constants/SessionConstants'
+import * as C from './../constants/SessionConstants'
 import * as sessionApi from './../api/SessionApi'
-
-function success(session) {
-  return {type: SessionConstants.RECEIVE_SESSION, session}
-}
-
-function fail() {
-  return {type: SessionConstants.RECEIVE_SESSION_FAIL}
-}
 
 export function login(data) {
   return (dispatch) => {
-    sessionApi.save(data).then(
-      session => dispatch(success(session)),
-      error => dispatch(fail)
+    return sessionApi.save(data).then(
+      session => dispatch({type: C.LOGIN_SUCCESS, session}),
+      error => dispatch({type: C.LOGIN_FAIL})
     )
   }
 }
 
 export function logout(data) {
   return (dispatch) => {
-    sessionApi.logout(data).then(
-      session => dispatch(success(session)),
-      error => dispatch(fail)
+    return sessionApi.logout(data).then(
+      session => dispatch({type: C.LOGOUT_SUCCESS, session}),
+      error => dispatch({type: C.LOGOUT_FAIL})
     )
   }
 }
 
-export function session(data = {}) {
+export function session(data) {
   return (dispatch) => {
-    sessionApi.newSession().then(
-      session => dispatch(success(session)),
-      error => dispatch(fail)
-    )
+    if (!data) {
+      return sessionApi.newSession().then(
+        session => dispatch({type: C.NEW, session}),
+        error => dispatch({type: C.NEW_FAIL})
+      )
+    } else {
+      return sessionApi.save(data).then(
+        session => dispatch({type: C.UPDATE, session}),
+        error => dispatch({type: C.UPDATE_FAIL})
+      )
+    }
   }
 }
