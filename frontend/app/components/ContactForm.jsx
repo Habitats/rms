@@ -1,7 +1,8 @@
 import React from 'react';
-import Marty from 'marty';
+import { connect } from 'react-redux'
+import * as GeneralActionCreators from './../actions/GeneralActionCreators'
 
-class ContactForm extends React.Component {
+export default class ContactForm extends React.Component {
 
   constructor(props) {
     super(props);
@@ -13,7 +14,7 @@ class ContactForm extends React.Component {
     e.preventDefault();
     this.setState({clicked: true});
     if (this.isValid()) {
-      this.app.projectActionCreators.sendMail(this.state);
+      this.props.dispatch(GeneralActionCreators.sendMail(this.state));
       console.log('Sending email ...');
       this.setState({sent: true});
     }
@@ -117,7 +118,4 @@ class ContactForm extends React.Component {
   }
 }
 
-export default Marty.createContainer(ContactForm, {
-  listenTo: 'projectStore',
-  fetch: {}
-});
+export default connect()(ContactForm)

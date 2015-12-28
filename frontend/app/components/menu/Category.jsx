@@ -1,11 +1,12 @@
 import React from 'react';
-import Marty from 'marty';
+import { connect } from 'react-redux'
 import {Link} from 'react-router';
+import * as generalActionCreators from './../../actions/GeneralActionCreators'
 
 export default class Category extends React.Component {
 
   onClick() {
-    this.app.projectActionCreators.selectCategory(this.props.title);
+    this.props.dispatch(generalActionCreators.selectCategory(this.props.title));
   }
 
   render() {
@@ -26,21 +27,13 @@ Category.defaultProps = {
 };
 
 Category.propTypes = {
+  dispatch: React.PropTypes.func.isRequired,
   linkTo: React.PropTypes.string,
   title: React.PropTypes.string.isRequired,
   children: React.PropTypes.object.isRequired,
   category: React.PropTypes.string.isRequired
 };
 
-export default Marty.createContainer(Category, {
-  listenTo: 'projectStore',
-  fetch: {
-    category() {
-      return this.app.projectStore.getSelectedCategory();
-    }
-  }
-});
-
-
-
-
+export default connect(state => ({
+  category: state.general.category
+}))(Category)

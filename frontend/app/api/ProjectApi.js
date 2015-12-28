@@ -1,69 +1,74 @@
-import Marty from 'marty';
-
 const baseUrl = '/';
-
-class ProjectApi extends Marty.HttpStateSource {
-
-  getProjects() {
-    return this.get(`${baseUrl}projects`).then(res => {
+export function getProjects() {
+  return fetch(`${baseUrl}projects`)
+    .then(res => {
       if (res.status === 200) {
-        return res.body;
+        return res.json()
       }
-
-      throw res.info;
-    });
-  }
-
-  getImages() {
-    return this.get(`${baseUrl}images`).then(res => {
-      if (res.status === 200) {
-        return res.body;
-      }
-
-      throw res.info;
-    });
-  }
-
-  getPrivate() {
-    return this.get(`${baseUrl}privates`).then(res => {
-      if (res.status === 200) {
-        return res.body;
-      }
-
-      throw res.info;
-    });
-  }
-
-  save(project) {
-    return this.post({url: `${baseUrl}secret`, body: project}).then(res => {
-      if (res.status === 200) {
-        return res.body;
-      }
-
-      throw res.info;
-    });
-  }
-
-  sendMail(email) {
-    return this.post({url: baseUrl + 'mail', body: email}).then(res => {
-      if (res.status === 200) {
-        return res.body;
-      }
-
-      throw res.info;
-    });
-  }
-
-  remove(project) {
-    let url = `${baseUrl}${project.get('id')}`;
-    return this.delete(url).then(res => {
-      if (res.info.ok) {
-        return project;
-      }
-
-      throw res.info;
-    });
-  }
+      throw res.info
+    })
+    .catch(ex => console.log(ex))
 }
 
-export default ProjectApi;
+export function getImages() {
+  return fetch(`${baseUrl}images`)
+    .then(res => {
+      if (res.status === 200) {
+        return res.json()
+      }
+      throw res.info
+    })
+    .catch(ex => console.log(ex))
+}
+
+export function getPrivates() {
+  return fetch(`${baseUrl}privates`)
+    .then(res => {
+      if (res.status === 200) {
+        return res.json();
+      }
+
+      throw res.info;
+    })
+    .catch(ex => console.log(ex))
+}
+
+export function save(project) {
+  return fetch(`${baseUrl}secret`, {
+    method: 'post',
+    body: project
+  })
+    .then(res => {
+      if (res.status === 200) {
+        return res.json();
+      }
+
+      throw res.info;
+    })
+    .catch(ex => console.log(ex))
+}
+
+export function sendMail(email) {
+  return fetch(baseUrl + 'mail', {
+      body: email,
+      method: 'post'
+    }
+  ).then(res => {
+    if (res.status === 200) {
+      return res.body;
+    }
+    throw res.info;
+  });
+}
+
+export function remove(project) {
+  let url = `${baseUrl}${project.get('id')}`;
+  return fetch(url, {
+    method: 'delete'
+  }).then(res => {
+    if (res.info.ok) {
+      return project;
+    }
+    throw res.info;
+  });
+}

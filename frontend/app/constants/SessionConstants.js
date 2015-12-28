@@ -1,8 +1,3 @@
-import Marty from 'marty';
-
-let SessionConstants = Marty.createConstants([
-  'RECEIVE_SESSION'
-]);
-
-export default SessionConstants;
+export const RECEIVE_SESSION =  'RECEIVE_SESSION'
+export const RECEIVE_SESSION_FAIL =  'RECEIVE_SESSION_FAIL'
 

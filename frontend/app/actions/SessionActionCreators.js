@@ -1,36 +1,38 @@
-import Marty from 'marty';
 import history from './../history'
-import SessionConstants from '../constants/SessionConstants';
+import * as SessionConstants from './../constants/SessionConstants'
+import * as sessionApi from './../api/SessionApi'
 
-class SessionActionCreators extends Marty.ActionCreators {
+function success(session) {
+  return {type: SessionConstants.RECEIVE_SESSION, session}
+}
 
-  updateSession(data) {
-    this.app.sessionApi.save(data).then(session => {
-      this.app.clearState(); // Clear all stores when we receive an updated session
-      this.dispatch(SessionConstants.RECEIVE_SESSION, session);
-    }).catch(error => {
-      console.log(error);
-    });
-  }
+function fail() {
+  return {type: SessionConstants.RECEIVE_SESSION_FAIL}
+}
 
-  login(data) {
-    this.app.sessionApi.save(data).then(session => {
-      this.app.clearState(); // Clear all stores when we receive an updated session
-      this.dispatch(SessionConstants.RECEIVE_SESSION, session);
-      history.pushState(null, '/prosjekt')
-    }).catch(error => {
-      console.log(error);
-    });
-  }
-
-  logout(data) {
-    this.app.sessionApi.logout(data).then(session => {
-      this.app.clearState(); // Clear all stores when we receive an updated session
-      this.dispatch(SessionConstants.RECEIVE_SESSION, session);
-    }).catch(error => {
-      console.log(error);
-    });
+export function login(data) {
+  return (dispatch) => {
+    sessionApi.save(data).then(
+      session => dispatch(success(session)),
+      error => dispatch(fail)
+    )
   }
 }
 
-export default SessionActionCreators;
+export function logout(data) {
+  return (dispatch) => {
+    sessionApi.logout(data).then(
+      session => dispatch(success(session)),
+      error => dispatch(fail)
+    )
+  }
+}
+
+export function session(data = {}) {
+  return (dispatch) => {
+    sessionApi.newSession().then(
+      session => dispatch(success(session)),
+      error => dispatch(fail)
+    )
+  }
+}

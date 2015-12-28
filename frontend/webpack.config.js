@@ -43,10 +43,7 @@ var loaders = [
   {
     test: /\.jsx?|\.js?$/,
     exclude: /node_modules/,
-    loader: 'babel',
-    query: {
-      presets: ['react', 'es2015']
-    }
+    loader: 'babel'
   },
   {
     test: /\.css$/,
@@ -101,7 +98,7 @@ var loaders = [
 ];
 
 var entry = {
-  app: ['./App.jsx']
+  app: ['./index.js']
 
 };
 

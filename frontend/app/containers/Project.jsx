@@ -1,5 +1,5 @@
 import React from 'react';
-import Marty from 'marty';
+import { connect } from 'react-redux'
 import BigHeadline from './../components/text/BigHeadline.jsx';
 import PhotoBig from './../components/photo/PhotoBig.jsx';
 import PhotoLine from './../components/photo/PhotoLine.jsx';
@@ -32,16 +32,12 @@ export default class Project extends React.Component {
   }
 }
 
-export default Marty.createContainer(Project, {
-  listenTo: 'projectStore',
-  fetch: {
-    projects() {
-      return this.app.projectStore.getProjects();
-    }
-  }
-});
-
 Project.propTypes = {
+  dispatch: React.PropTypes.func.isRequired,
   projects: React.PropTypes.array,
   params: React.PropTypes.object
 };
+
+export default connect(state => ({
+  projects: state.general.projects
+}))(Project)

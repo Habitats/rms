@@ -1,6 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux'
 import {Link} from 'react-router';
-import Marty from 'marty';
 import Projects from './../components/projects/Projects.jsx';
 import BigHeadline from './../components/text/BigHeadline.jsx';
 
@@ -29,15 +29,12 @@ export default class References extends React.Component {
   }
 }
 
-export default Marty.createContainer(References, {
-  listenTo: 'sessionStore',
-  fetch: {
-    session() {
-      return this.app.sessionStore.getSession();
-    }
-  }
-});
-
 References.propTypes = {
+  dispatch: React.PropTypes.func.isRequired,
   session: React.PropTypes.object.isRequired
 };
+
+
+export default connect(state => ({
+  session: state.session
+}))(References)

@@ -1,8 +1,13 @@
 import React from 'react';
-import Marty from 'marty';
+import { connect } from 'react-redux'
 import ProjectListItem from './ProjectListItem.jsx';
+import * as generalActionCreators from './../../actions/GeneralActionCreators'
 
 export default class Projects extends React.Component {
+
+  componentDidMount() {
+    this.props.dispatch(generalActionCreators.fetchProjects())
+  }
 
   render() {
     let projects = [];
@@ -17,15 +22,11 @@ export default class Projects extends React.Component {
   }
 }
 
-export default Marty.createContainer(Projects, {
-  listenTo: 'projectStore',
-  fetch: {
-    projects() {
-      return this.app.projectStore.getProjects();
-    }
-  }
-});
-
 Projects.propTypes = {
+  dispatch: React.PropTypes.func.isRequired,
   projects: React.PropTypes.array.isRequired
 };
+
+export default connect(state => ({
+  projects: state.general.projects
+}))(Projects)

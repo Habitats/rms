@@ -4,6 +4,7 @@
     "node": true,
     "es6": true
   },
+  "parser": "babel-eslint",
   "ecmaFeatures": {
     "modules": true,
     "jsx": true
@@ -13,10 +14,6 @@
   ],
   "globals": {},
   "rules": {
-    "indent": [
-      2,
-      2
-    ],
     "quotes": [
       2,
       "single"

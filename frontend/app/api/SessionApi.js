@@ -1,38 +1,37 @@
-import Marty from 'marty';
-
 const baseUrl = '/';
-
-class SessionApi extends Marty.HttpStateSource {
-
-  getSession() {
-    return this.get(`${baseUrl}session`).then(res => {
+export function newSession() {
+  return fetch(`${baseUrl}session`)
+    .then(res => {
       if (res.status === 200) {
-        return res.body;
+        return res.json()
       }
-
-      throw res.info;
-    });
-  }
-
-  logout(user) {
-    return this.post({url: `${baseUrl}session/logout`, body: user}).then(res => {
-      if (res.status === 200) {
-        return res.body;
-      }
-
-      throw res.info;
-    });
-  }
-
-  save(session) {
-    return this.post({url: `${baseUrl}session`, body: session}).then(res => {
-      if (res.status === 200) {
-        return res.body;
-      }
-
-      throw res.info;
-    });
-  }
+      throw new Error(res.info)
+    })
 }
 
-export default SessionApi;
+export function logout(user) {
+  return fetch(`${baseUrl}session/logout`, {
+    method: 'post',
+    body: user
+  }).then(res => {
+    if (res.status === 200) {
+      return res.json();
+    }
+    throw new Error(res.info);
+  });
+}
+
+export function save(session) {
+  return fetch(`${baseUrl}session`, {
+    method: 'post',
+    body: JSON.stringify({
+      ...session,
+      modified: new Date().getMilliseconds()
+    })
+  }).then(res => {
+    if (res.status === 200) {
+      return res.json();
+    }
+    throw new Error(res.info);
+  });
+}

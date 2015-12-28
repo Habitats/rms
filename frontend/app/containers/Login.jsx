@@ -1,6 +1,7 @@
-import Marty from 'marty';
 import React from 'react';
+import { connect } from 'react-redux'
 import BigHeadline from './../components/text/BigHeadline.jsx';
+import * as sessionActionCreators from './../actions/SessionActionCreators'
 
 export default class Login extends React.Component {
 
@@ -23,12 +24,12 @@ export default class Login extends React.Component {
 
   onLogin(e) {
     e.preventDefault();
-    this.app.sessionActionCreators.login(this.getSession());
+    this.props.dispatch(sessionActionCreators.login(this.getSession()));
   }
 
   onLogout(e) {
     e.preventDefault();
-    this.app.sessionActionCreators.logout(this.getSession());
+    this.props.dispatch(sessionActionCreators.logout(this.getSession()));
   }
 
   getSession() {
@@ -90,16 +91,12 @@ export default class Login extends React.Component {
   }
 }
 
-export default Marty.createContainer(Login, {
-  listenTo: 'sessionStore',
-  fetch: {
-    session() {
-      return this.app.sessionStore.getSession();
-    }
-  }
-});
-
 Login.propTypes = {
+  dispatch: React.PropTypes.func.isRequired,
   session: React.PropTypes.object.isRequired
 };
+
+export default connect(state => ({
+  session: state.session
+}))(Login)
 

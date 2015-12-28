@@ -1,7 +1,6 @@
 import React from 'react';
-import Marty from 'marty';
 
-class LoremIpsum extends React.Component {
+export default class LoremIpsum extends React.Component {
   render() {
     console.log('FLUX > rendering > main');
     return (
@@ -83,5 +82,3 @@ class LoremIpsum extends React.Component {
     );
   }
 }
-
-export default Marty.createContainer(LoremIpsum, {});

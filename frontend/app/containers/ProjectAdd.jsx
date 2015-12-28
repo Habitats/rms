@@ -1,7 +1,8 @@
 import React from 'react';
-import Marty from 'marty';
+import { connect } from 'react-redux'
 import BigHeadline from './../components/text/BigHeadline.jsx';
 import Photo from './../components/photo/Photo.jsx';
+import * as generalActionCreators from './../actions/GeneralActionCreators'
 
 export default class ProjectAdd extends React.Component {
 
@@ -36,12 +37,12 @@ export default class ProjectAdd extends React.Component {
   onSave(e) {
     e.preventDefault();
     let id = this.props.projects.length + 1;
-    this.app.projectActionCreators.save({
+    this.props.dispatch(generalActionCreators.save({
       id: id,
       title: this.state.title,
       description: this.state.description,
       img: this.state.chosenImages
-    });
+    }));
   }
 
   render() {
@@ -94,20 +95,13 @@ export default class ProjectAdd extends React.Component {
   }
 }
 
-export default Marty.createContainer(ProjectAdd, {
-  listenTo: 'projectStore',
-  fetch: {
-    projects() {
-      return this.app.projectStore.getProjects();
-    },
-    images() {
-      return this.app.projectStore.getImages();
-    }
-  }
-});
-
 ProjectAdd.propTypes = {
+  dispatch: React.PropTypes.func.isRequired,
   images: React.PropTypes.array,
   projects: React.PropTypes.array
 };
 
+export default connect(state => ({
+  images: state.general.images,
+  projects: state.general.projects
+}))(ProjectAdd)

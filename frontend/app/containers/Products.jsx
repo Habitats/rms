@@ -1,5 +1,5 @@
 import React from 'react';
-import Marty from 'marty';
+import { connect } from 'react-redux'
 import BigHeadline from './../components/text/BigHeadline.jsx';
 import PhotoBig from './../components/photo/PhotoBig.jsx';
 import ProductItem from './../components/product/ProductItem.jsx';
@@ -53,20 +53,12 @@ export default class Products extends React.Component {
   }
 }
 
-export default Marty.createContainer(Products, {
-  listenTo: 'projectStore',
-  fetch: {
-    category() {
-      return this.app.projectStore.getSelectedCategory();
-    }
-  }
-});
-
-Products.defaultProps = {
-  category: 'Eksteriør'
-};
-
 Products.propTypes = {
+  dispatch: React.PropTypes.func.isRequired,
   children: React.PropTypes.object.isRequired,
   category: React.PropTypes.string.isRequired,
 };
+
+export default connect(state => ({
+  category: state.general.category
+}))(Products)

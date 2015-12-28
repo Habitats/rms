@@ -1,5 +1,4 @@
 import React from 'react';
-import Marty from 'marty';
 import PhotoBig from './../photo/PhotoBig.jsx';
 import BigHeadline from './../text/BigHeadline.jsx';
 import ProductItem from './ProductItem.jsx';
