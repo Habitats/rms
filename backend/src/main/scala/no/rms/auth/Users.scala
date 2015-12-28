@@ -2,9 +2,9 @@ package no.rms.auth
 
 object Users {
 
-  var active = Map[String, User]()
+  val active = scala.collection.mutable.Map[String, User]()
 
-  def add(user: User) {
+  def add(user: User) = {
     active += (user.id -> user)
   }
 

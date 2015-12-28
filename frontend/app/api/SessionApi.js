@@ -9,10 +9,14 @@ export function newSession() {
     })
 }
 
-export function logout(user) {
+export function logout(session) {
   return fetch(`${baseUrl}session/logout`, {
-    method: 'post',
-    body: user
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(session)
   }).then(res => {
     if (res.status === 200) {
       return res.json();

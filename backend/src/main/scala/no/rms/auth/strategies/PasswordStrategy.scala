@@ -11,19 +11,21 @@ class PasswordStrategy(protected val app: ScalatraBase)(implicit request: HttpSe
 
   override def name: String = "UserPassword"
 
-  private def login = app.params.getOrElse("login", "")
+  private def login: String = app.params.getOrElse("login", "")
 
-  private def password = app.params.getOrElse("password", "")
+  private def password: String = app.params.getOrElse("password", "")
+
+  private def id: String = app.cookies.get("ID").getOrElse("NONE")
 
   override def isValid(implicit request: HttpServletRequest) = {
-    val user = Users.findById(app.cookies.get("ID").get)
-    val valid = user.username.nonEmpty && user.password.nonEmpty
-    valid
+    Logger.info("Session ID: " + id)
+    val user = Users.findById(id)
+    user.username.nonEmpty && user.password.nonEmpty
   }
 
   def authenticate()(implicit request: HttpServletRequest, response: HttpServletResponse): Option[User] = {
     Logger.info("UserPasswordStrategy: attempting authentication")
-    val user = Users.findById(app.cookies.get("ID").get)
+    val user = Users.findById(id)
     val valid = user.username.get == Config.username && user.password.get == Config.password
     if (valid) {
       Logger.info("login success")

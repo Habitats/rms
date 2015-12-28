@@ -36,7 +36,7 @@ class RememberMeStrategy(protected val app: ScalatraBase)(implicit request: Http
     app.redirect("/session/new")
   }
 
-  override def afterAuthenticate(winningStrategy: String, user: User)(implicit request: HttpServletRequest, response: HttpServletResponse) {
+  override def afterAuthenticate(winningStrategy: String, user: User)(implicit request: HttpServletRequest, response: HttpServletResponse) = {
     Logger.info("rememberMe: afterAuth fired")
     if (winningStrategy == "RememberMe" || winningStrategy == "UserPassword") {
       val token = user.id
@@ -44,7 +44,7 @@ class RememberMeStrategy(protected val app: ScalatraBase)(implicit request: Http
     }
   }
 
-  override def beforeLogout(user: User)(implicit request: HttpServletRequest, response: HttpServletResponse) {
+  override def beforeLogout(user: User)(implicit request: HttpServletRequest, response: HttpServletResponse) = {
     Logger.info("rememberMe: beforeLogout")
     if (user != null) {
       user.forgetMe()
