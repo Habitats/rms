@@ -10,7 +10,7 @@ export default class Footer extends React.Component {
   }
 
   render() {
-    let {username, admin} = this.props.session
+    let {username} = this.props.session
     let userField = username ? ` (${username})` : ''
     return (
       <footer>

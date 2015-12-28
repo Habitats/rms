@@ -11,6 +11,10 @@ export default class ProjectAdd extends React.Component {
     this.state = ({chosenImages: new Map()});
   }
 
+  componentDidMount(){
+    this.props.dispatch(generalActionCreators.fetchImages())
+  }
+
   handleTitleChange(event) {
     this.setState({title: event.target.value});
   }
