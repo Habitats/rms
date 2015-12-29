@@ -18,6 +18,7 @@ idea {
     module {
         excludeDirs += [
                 file('build'),
+                file('backend/target'),
                 file('frontend/node_modules'),
                 file('frontend/build'),
                 file('frontend/project/target'),

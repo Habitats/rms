@@ -1,23 +1,36 @@
-/target
-/backend/secret
-# common
-build/
-.gradle/
-gradle
+### JetBrains template
 *.iml
-.idea
-out
+
+## Directory-based project format:
+.idea/
+
+## File-based project format:
+*.ipr
+*.iws
+
+## Plugin-specific files:
+
+# IntelliJ
+/out/
+
+# mpeltonen/sbt-idea plugin
+.idea_modules/
+
+### Windows template
+# Windows image file caches
 Thumbs.db
-*.log
+ehthumbs.db
 
-# backend
-backend/build
-backend/.gradle
+# Folder config file
+Desktop.ini
 
-# frontend
-frontend/$npm_package_config_buildDir
-frontend/node_modules
-frontend/build
+# Windows shortcuts
+*.lnk
+### Gradle template
+.gradle
+build/
+gradle/
 
-*.tmp
-backend/rms.mv.db
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
+

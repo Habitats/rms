@@ -1,0 +1,3 @@
+/$npm_package_config_buildDir
+/node_modules
+/frontend.iml
