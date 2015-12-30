@@ -1,4 +1,4 @@
-import * as ProjectConstants from './../constants/ProjectConstants'
+import * as C from './../constants/ProjectConstants'
 
 const initialState = {
   projects: [],
@@ -9,22 +9,22 @@ const initialState = {
 
 export default function general(state = initialState, action) {
   switch (action.type) {
-    case ProjectConstants.RECEIVE_PROJECTS:
+    case C.RECEIVE_PROJECTS:
       return {...state, projects: action.projects};
 
-    case ProjectConstants.RECEIVE_IMAGES:
+    case C.RECEIVE_IMAGES:
       return {...state, images: action.images};
 
-    case ProjectConstants.RECEIVE_PRIVATES:
+    case C.RECEIVE_PRIVATES:
       return {...state, privates: action.privates};
 
-    case ProjectConstants.ADD_PROJECT:
+    case C.ADD_PROJECT:
       return {...state, projects: state.projects.concat(action.projects)};
 
-    case ProjectConstants.UPDATE_PROJECT:
+    case C.UPDATE_PROJECT:
       return {...state, projects: state.projects.concat(action.projects)};
 
-    case ProjectConstants.SELECT_CATEGORY:
+    case C.SELECT_CATEGORY:
       return {...state, category: action.category};
 
     default:

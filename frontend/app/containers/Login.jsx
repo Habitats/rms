@@ -7,7 +7,12 @@ export default class Login extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {rememberMe: false};
+    this.state = {
+      username: "",
+      password: "",
+      rememberMe: false,
+      admin: false
+    };
   }
 
   handleUsernameChange(event) {
@@ -20,33 +25,23 @@ export default class Login extends React.Component {
 
   handleRememberMeChange(event) {
     this.setState({rememberMe: event.target.checked});
+    this.props.dispatch(sessionActionCreators.session(this.state))
   }
 
   onLogin(e) {
     e.preventDefault();
-    this.props.dispatch(sessionActionCreators.login(this.getSession()));
+    this.props.dispatch(sessionActionCreators.login(this.state));
   }
 
   onLogout(e) {
     e.preventDefault();
-    this.props.dispatch(sessionActionCreators.logout(this.getSession()));
-  }
-
-  getSession() {
-    return {
-      id: this.props.session.id,
-      username: this.state.username,
-      password: this.state.password,
-      rememberMe: this.state.rememberMe
-    };
+    this.props.dispatch(sessionActionCreators.logout(this.state));
   }
 
   render() {
     let login = this.props.session.admin ?
                 <p>Logget inn som <strong>{this.props.session.username}</strong></p> : '';
-
     let loginForm;
-    console.log(this.state);
     if (!this.props.session.admin) {
       loginForm = (
         <div>

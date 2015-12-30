@@ -1,16 +1,17 @@
 const baseUrl = '/';
-export function newSession() {
+
+export function retrieve() {
   return fetch(`${baseUrl}session`)
     .then(res => {
       if (res.status === 200) {
-        return res.json()
+        return res.json();
       }
-      throw new Error(res.info)
-    })
+      throw new Error(res.info);
+    });
 }
 
-export function logout(session) {
-  return fetch(`${baseUrl}session/logout`, {
+function post(session, path) {
+  return fetch(`${baseUrl}session/${path}`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -26,17 +27,15 @@ export function logout(session) {
 }
 
 export function save(session) {
-  return fetch(`${baseUrl}session`, {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(session)
-  }).then(res => {
-    if (res.status === 200) {
-      return res.json();
-    }
-    throw new Error(res.info);
-  });
+  return post(session, "")
 }
+
+export function logout(session) {
+  return post(session, "logout")
+}
+
+export function login(session) {
+  return post(session, "login")
+}
+
+

@@ -1,22 +1,27 @@
-import * as SessionConstants from '../constants/SessionConstants'
+import * as C from '../constants/SessionConstants'
+import { UPDATE_PATH } from 'redux-simple-router'
 
 const initialState = {
-  id: null,
   username: 'none',
   password: null,
   rememberMe: null,
-  admin: false,
-  modified: new Date().getMilliseconds()
+  admin: false
 }
 
 export default function session(state = initialState, action) {
   switch (action.type) {
-    case SessionConstants.UPDATE:
+    case C.NEW:
       return action.session;
-    case SessionConstants.NEW:
+
+    case C.UPDATE:
       return action.session;
-    case SessionConstants.LOGIN_SUCCESS:
+
+    case C.LOGIN_SUCCESS:
       return action.session;
+
+    case UPDATE_PATH:
+      return {... state, path: action.payload.path}
+
     default:
       return state;
   }

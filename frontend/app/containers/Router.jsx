@@ -1,6 +1,7 @@
 import React from 'react';
 import {Router, Route, IndexRoute, Link} from 'react-router';
 import history from '../history';
+import { connect } from 'react-redux'
 
 import Layout from '../Layout.jsx';
 import NotFound from '../containers/NotFound.jsx';
@@ -46,3 +47,4 @@ export default class App extends React.Component {
     )
   }
 }
+

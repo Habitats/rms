@@ -31,8 +31,10 @@ class PublicServlet(val db: Database) extends BackendStack with FutureSupport wi
   def notFound(): File = Random.shuffle(Paths.get("img", "not_found").toFile.listFiles.toList).head
 
   get("/hello/?") {
+    contentType = formats("txt")
+    requireLogin()
     Logger.info("hello!")
-    ":)"
+    "HELLO MR. ADMIN"
   }
 
   get("/?") {

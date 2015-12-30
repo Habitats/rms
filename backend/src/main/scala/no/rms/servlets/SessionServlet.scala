@@ -1,8 +1,8 @@
 package no.rms.servlets
 
-import no.rms.auth.{AuthenticationSupport, User, Users}
-import no.rms.{BackendStack, Logger}
-import org.joda.time.DateTime
+import no.rms.{Logger, BackendStack}
+import no.rms.auth.{AuthenticationSupport, SafeUser, User, Users}
+import org.eclipse.jetty.http.HttpStatus
 import org.json4s.{DefaultFormats, Formats}
 import org.scalatra.json.JacksonJsonSupport
 import org.scalatra.{CorsSupport, FutureSupport}
@@ -20,35 +20,38 @@ class SessionServlet extends BackendStack with FutureSupport with JacksonJsonSup
 
   before() {
     contentType = formats("json")
+    scentry.authenticate("RememberMe")
   }
 
   get("/?") {
-    if (!isAuthenticated) {
-      val id = DateTime.now.getMillis.toString
-      cookies.set("ID", id)
-      user = User(id = id, admin = isAuthenticated)
-      Logger.info("GET: new session: " + user)
-      user
-    } else {
-      Logger.info("GET: using old session: " + user)
-      user
-    }
+    user
+  }
+
+  get("/test/?") {
+    Users.update(user.copy(username = Some(System.currentTimeMillis.toString)))
   }
 
   post("/?") {
-    user = parsedBody.extract[User]
-    Logger.info("POST: authenticating " + user.id + " ...")
-    Users.add(user)
-    val authedUser = scentry.authenticate("UserPassword").get
-    Users.add(authedUser)
-    Logger.info("Authenticated: " + authedUser)
-    authedUser
+    if (!isAuthenticated) {
+      halt(HttpStatus.UNAUTHORIZED_401)
+    } else {
+      Logger.info(user)
+      val safeUser = parsedBody.extract[SafeUser]
+      Users.update(user.update(safeUser))
+      safeUser
+    }
   }
 
   post("/logout/?") {
     val user = parsedBody.extract[User]
-    Logger.info("GET: logout")
+    Users.logout(user)
     scentry.logout
-    user.copy(username = None, password = None, admin = false)
+  }
+
+  post("/login/?"){
+    val login = parsedBody.extract[User]
+    Users.login(login.copy(id = user.id))
+    scentry.authenticate("Admin")
+    new SafeUser(user)
   }
 }

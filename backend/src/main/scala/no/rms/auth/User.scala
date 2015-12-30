@@ -1,9 +1,6 @@
 package no.rms.auth
 
-case class User(id: String, username: Option[String] = None, password: Option[String] = None, rememberMe: Boolean = false, admin: Boolean = false) {
+case class User(id: String = "NO_ID", username: Option[String] = None, password: Option[String] = None, rememberMe: Boolean = false, admin: Boolean = false) {
 
-  def forgetMe() = {
-    println("User: this is where you'd invalidate the saved token in you User model")
-  }
+  def update(safeUser: SafeUser): User = copy(username = safeUser.username, rememberMe = safeUser.rememberMe)
 }
-

@@ -3,7 +3,7 @@ package no.rms.servlets
 import no.rms.auth.AuthenticationSupport
 import no.rms.db.RmsDb
 import no.rms.models.Project
-import no.rms.{Logger, BackendStack, RmsMailer}
+import no.rms.{BackendStack, Logger, RmsMailer}
 import org.json4s.{DefaultFormats, Formats}
 import org.scalatra.json.JacksonJsonSupport
 import org.scalatra.{CorsSupport, FutureSupport}
@@ -22,9 +22,7 @@ class SecretServlet(val db: Database) extends BackendStack with FutureSupport wi
 
   before() {
     contentType = formats("json")
-    if(!isAuthenticated){
-      halt(403)
-    }
+    requireLogin()
   }
 
   get("/?") {

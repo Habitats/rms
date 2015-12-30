@@ -18,6 +18,10 @@ object Config {
   def dropboxAppSecret = conf.getProperty("dropbox_app_secret")
 
   def test = conf.getProperty("test").toBoolean
+
+  val COOKIE_ID = "YOLO"
+
+  val ONE_WEEK = 7 * 24 * 3600
 }
 
 
