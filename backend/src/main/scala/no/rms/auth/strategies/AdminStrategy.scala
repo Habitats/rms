@@ -12,14 +12,22 @@ class AdminStrategy(protected val app: ScalatraBase)(implicit request: HttpServl
 
   override def authenticate()(implicit request: HttpServletRequest, response: HttpServletResponse): Option[User] = {
     Logger.info("Admin > Authenticate ...")
-    val user = Users.active(app.cookies(Config.COOKIE_ID))
-    if (user.admin) {
-      Logger.info(s"Admin > Login success: ${user}");
-      Some(user)
+    val user = app.cookies.get(Config.COOKIE_ID) match {
+      case Some(id) => Users.active.get(id)
+      case _ => None
+    }
+    if (user.filter(_.admin).nonEmpty) {
+      Logger.info(s"Admin > Login success!");
     } else {
       Logger.info("Admin > Login failed!")
-      None
     }
+    user
+  }
+
+  override def afterLogout(user: User)(implicit request: HttpServletRequest, response: HttpServletResponse): Unit = {
+    Logger.info(s"Admin > Removing cookie!")
+    Users.logout(user)
+    app.cookies.delete(Config.COOKIE_ID)
   }
 
   override def unauthenticated()(implicit request: HttpServletRequest, response: HttpServletResponse): Unit = {

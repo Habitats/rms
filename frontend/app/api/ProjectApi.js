@@ -1,74 +1,54 @@
 const baseUrl = '/';
+
 export function getProjects() {
-  return fetch(`${baseUrl}projects`)
-    .then(res => {
-      if (res.status === 200) {
-        return res.json()
-      }
-      throw res.info
-    })
-    .catch(ex => console.log(ex))
+  return retrieve('projects')
 }
 
 export function getImages() {
-  return fetch(`${baseUrl}images`)
-    .then(res => {
-      if (res.status === 200) {
-        return res.json()
-      }
-      throw res.info
-    })
-    .catch(ex => console.log(ex))
+  return retrieve('images')
 }
 
 export function getPrivates() {
-  return fetch(`${baseUrl}privates`)
-    .then(res => {
-      if (res.status === 200) {
-        return res.json();
-      }
-
-      throw res.info;
-    })
-    .catch(ex => console.log(ex))
+  return retrieve('privates')
 }
 
 export function save(project) {
-  return fetch(`${baseUrl}secret`, {
-    method: 'post',
-    body: project
-  })
-    .then(res => {
-      if (res.status === 200) {
-        return res.json();
-      }
-
-      throw res.info;
-    })
-    .catch(ex => console.log(ex))
+  return post(project, 'secret')
 }
 
 export function sendMail(email) {
-  return fetch(baseUrl + 'mail', {
-      body: email,
-      method: 'post'
-    }
-  ).then(res => {
-    if (res.status === 200) {
-      return res.body;
-    }
-    throw res.info;
-  });
+  return post(email, 'mail')
+}
+
+export function retrieve(path) {
+  return fetch(`${baseUrl}${path}`, {
+    method: 'GET',
+    credentials: 'include'
+  }).then(parseJson)
+}
+
+function post(body, path) {
+  return fetch(`${baseUrl}/${path}`, {
+    method: 'POST',
+    credentials: 'include',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body)
+  }).then(parseJson)
+}
+
+function parseJson(res) {
+  if (res.status === 200) {
+    return res.json();
+  }
+  throw new Error(res.info);
 }
 
 export function remove(project) {
   let url = `${baseUrl}${project.get('id')}`;
   return fetch(url, {
     method: 'delete'
-  }).then(res => {
-    if (res.info.ok) {
-      return project;
-    }
-    throw res.info;
-  });
+  }).then(parseJson)
 }

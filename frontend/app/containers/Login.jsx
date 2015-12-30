@@ -8,10 +8,10 @@ export default class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
+      username: this.props.session.username,
       password: "",
-      rememberMe: false,
-      admin: false
+      rememberMe: this.props.session.rememberMe,
+      admin: this.props.session.admin
     };
   }
 
@@ -24,7 +24,7 @@ export default class Login extends React.Component {
   }
 
   handleRememberMeChange(event) {
-    this.setState({rememberMe: event.target.checked});
+    this.state = {...this.state, rememberMe : event.target.checked}
     this.props.dispatch(sessionActionCreators.session(this.state))
   }
 
@@ -55,7 +55,8 @@ export default class Login extends React.Component {
           </div>
           <div className="checkbox">
             <label>
-              <input type="checkbox" onChange={this.handleRememberMeChange.bind(this)}> Husk meg</input>
+              <input type="checkbox" checked={this.state.rememberMe} onChange={this.handleRememberMeChange.bind(this)}> Husk
+                meg</input>
             </label>
           </div>
           <div className="form-group">

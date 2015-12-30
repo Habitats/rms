@@ -43,14 +43,15 @@ class SessionServlet extends BackendStack with FutureSupport with JacksonJsonSup
   }
 
   post("/logout/?") {
-    val user = parsedBody.extract[User]
-    Users.logout(user)
     scentry.logout
+    new SafeUser(user.copy(admin = false))
   }
 
   post("/login/?"){
+    // add user to "users", session will fetch it from there and euthenticate
     val login = parsedBody.extract[User]
     Users.login(login.copy(id = user.id))
+
     scentry.authenticate("Admin")
     new SafeUser(user)
   }

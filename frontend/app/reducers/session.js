@@ -19,6 +19,9 @@ export default function session(state = initialState, action) {
     case C.LOGIN_SUCCESS:
       return action.session;
 
+    case C.LOGOUT_SUCCESS:
+      return action.session;
+
     case UPDATE_PATH:
       return {... state, path: action.payload.path}
 
