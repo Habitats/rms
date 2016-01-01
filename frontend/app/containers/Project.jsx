@@ -7,7 +7,7 @@ import PhotoLine from './../components/photo/PhotoLine.jsx';
 export default class Project extends React.Component {
 
   render() {
-    let project = this.props.projects[parseInt(this.props.params.id) - 1];
+    let project = this.props.projects.find(p => p.id == this.props.params.id);
     let selected = parseInt(this.props.params.selected || 0);
     return (
       <div className="container">

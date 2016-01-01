@@ -4,6 +4,10 @@ export function getProjects() {
   return retrieve('projects')
 }
 
+export function getProject(id) {
+  return retrieve(`project/${id}`)
+}
+
 export function getImages() {
   return retrieve('images')
 }

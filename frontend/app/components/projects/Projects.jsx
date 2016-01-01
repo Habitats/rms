@@ -11,7 +11,7 @@ export default class Projects extends React.Component {
 
   render() {
     let projects = [];
-    this.props.projects.forEach(p => projects.push(<ProjectListItem project={p}/>));
+    this.props.projects.sort((a, b) => new Date(b.created) - new Date(a.created)).forEach(p => projects.push(<ProjectListItem project={p}/>));
     return (
       <div>
         <div className="row">
