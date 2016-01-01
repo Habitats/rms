@@ -2,12 +2,14 @@ package no.rms.servlets
 
 import java.io.File
 import java.nio.file.Paths
+import java.time.LocalDateTime
 
 import no.rms.auth.AuthenticationSupport
 import no.rms.db.RmsDb
-import no.rms.models.{Email, Image, Project}
-import no.rms.{BackendStack, Logger, RmsMailer}
-import org.json4s.{DefaultFormats, Formats}
+import no.rms.models.{Email, Image}
+import no.rms.{BackendStack, Config, Logger, RmsMailer}
+import org.json4s.JsonAST.JString
+import org.json4s.{CustomSerializer, DefaultFormats, Formats}
 import org.scalatra.json.JacksonJsonSupport
 import org.scalatra.{CorsSupport, FutureSupport}
 import slick.driver.JdbcDriver.api._
@@ -18,7 +20,17 @@ import scala.util.Random
 class PublicServlet(val db: Database) extends BackendStack with FutureSupport with JacksonJsonSupport with CorsSupport with RmsMailer with AuthenticationSupport {
   protected implicit def executor = ExecutionContext.Implicits.global
 
-  protected implicit val jsonFormats: Formats = DefaultFormats
+  protected implicit val jsonFormats: Formats = {
+    DefaultFormats + new LocalDateTimeSerializer
+  }
+
+  class LocalDateTimeSerializer extends CustomSerializer[LocalDateTime](
+    format => ( {
+      case v: JString => Config.parse(v.toString)
+    }, {
+      case d: LocalDateTime => JString(Config.format(d))
+    })
+  )
 
   options("/*") {
     response.setHeader("Access-Control-Allow-Headers", request.getHeader("Access-Control-Request-Headers"))
@@ -46,10 +58,13 @@ class PublicServlet(val db: Database) extends BackendStack with FutureSupport wi
 
   get("/projects/?") {
     Logger.info("GET: projects")
-    db.run(RmsDb.projects.result).map(res => res.map {
-      case (id, title, description, img) => Project(id, title, description, img.split(",").map(i => Image(i.split("/").last, i)).toList)
-    }
-    )
+    RmsDb.allProjects(db)
+  }
+
+  get("/project/:id/?") {
+    val id = params.get("id").get
+    Logger.info("GET: project/" + id)
+    RmsDb.project(id, db)
   }
 
   post("/mail/?") {
@@ -57,7 +72,7 @@ class PublicServlet(val db: Database) extends BackendStack with FutureSupport wi
     val email = parsedBody.extract[Email]
     contentType = "text"
     send(email)
-    "delived message"
+    "delivered message"
   }
 
   get("/images/?") {
