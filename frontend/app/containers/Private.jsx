@@ -1,8 +1,8 @@
-import React from 'react';
+import React from 'react'
 import { connect } from 'react-redux'
-import BigHeadline from './../components/text/BigHeadline.jsx';
-import Photo from './../components/photo/Photo.jsx';
-import * as generalActionCreator from  './../actions/GeneralActionCreators'
+import BigHeadline from './../components/text/BigHeadline.jsx'
+import Photo from './../components/photo/Photo.jsx'
+import * as generalActionCreator from  '../redux/actions/GeneralActionCreators'
 
 export default class Private extends React.Component {
   componentDidMount() {
@@ -10,7 +10,7 @@ export default class Private extends React.Component {
   }
 
   render() {
-    let photos = this.props.privates.map(i => (<Photo className="col-md-4 col-sm-6 col-lg-3" height={150} src={i.url}/>));
+    let photos = this.props.privates.map(i => (<Photo className="col-md-4 col-sm-6 col-lg-3" height={150} src={i.url}/>))
 
     return (
       <div className="container">
@@ -22,14 +22,14 @@ export default class Private extends React.Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
 Private.propTypes = {
   dispatch: React.PropTypes.func.isRequired,
   privates: React.PropTypes.array.isRequired
-};
+}
 
 export default connect(state => ({
   privates: state.general.privates

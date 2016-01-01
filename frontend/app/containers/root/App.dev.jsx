@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import Router from './../Router.jsx'
 import DevTools from './../Devtools'
 

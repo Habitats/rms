@@ -1,11 +1,11 @@
-import React from 'react';
-import {Link} from 'react-router';
-import Photo from './Photo.jsx';
+import React from 'react'
+import {Link} from 'react-router'
+import Photo from './Photo.jsx'
 
 export default class PhotoLine extends React.Component {
 
   getClasses(img) {
-    return this.props.img[this.props.selected] === img ? 'photo photo-selected' : 'photo';
+    return this.props.img[this.props.selected] === img ? 'photo photo-selected' : 'photo'
   }
 
   render() {
@@ -17,13 +17,13 @@ export default class PhotoLine extends React.Component {
           </div>
         </Link>
       </div>
-    );
+    )
 
     return (
       <div>
         {images}
       </div>
-    );
+    )
   }
 }
 
@@ -31,4 +31,4 @@ PhotoLine.propTypes = {
   img: React.PropTypes.array.isRequired,
   selected: React.PropTypes.number.isRequired,
   id: React.PropTypes.string.isRequired
-};
+}

@@ -1,14 +1,14 @@
-import React from 'react';
+import React from 'react'
 import { connect } from 'react-redux'
-import BigHeadline from './../components/text/BigHeadline.jsx';
-import Photo from './../components/photo/Photo.jsx';
-import * as generalActionCreators from './../actions/GeneralActionCreators'
+import BigHeadline from './../components/text/BigHeadline.jsx'
+import Photo from './../components/photo/Photo.jsx'
+import * as generalActionCreators from '../redux/actions/GeneralActionCreators'
 
 export default class ProjectAdd extends React.Component {
 
   constructor(props) {
-    super(props);
-    this.state = ({chosenImages: new Map()});
+    super(props)
+    this.state = ({chosenImages: new Map()})
   }
 
   componentDidMount(){
@@ -16,44 +16,44 @@ export default class ProjectAdd extends React.Component {
   }
 
   handleTitleChange(event) {
-    this.setState({title: event.target.value});
+    this.setState({title: event.target.value})
   }
 
   handleDescriptionChange(event) {
-    this.setState({description: event.target.value});
+    this.setState({description: event.target.value})
   }
 
   handleImagesChange(event) {
-    this.setState({img: event.target.value.split(',')});
+    this.setState({img: event.target.value.split(',')})
   }
 
   onSelect(url) {
-    let chosenImages = this.state.chosenImages;
+    let chosenImages = this.state.chosenImages
     if (chosenImages.has(url)) {
-      chosenImages.delete(url);
+      chosenImages.delete(url)
     } else {
-      let image = this.props.images.find(i => i.url === url);
-      chosenImages.set(url, image);
+      let image = this.props.images.find(i => i.url === url)
+      chosenImages.set(url, image)
     }
-    this.setState({chosenImages: chosenImages});
+    this.setState({chosenImages: chosenImages})
   }
 
   onSave(e) {
-    e.preventDefault();
-    let id = this.props.projects.length + 1;
+    e.preventDefault()
+    let id = this.props.projects.length + 1
     this.props.dispatch(generalActionCreators.save({
       id: id,
       title: this.state.title,
       description: this.state.description,
       img: this.state.chosenImages
-    }));
+    }))
   }
 
   render() {
-    let images = this.props.images.map(i => (<Photo className="col-md-3" height={100} onClick={this.onSelect.bind(this)} src={i.url}/>));
-    let chosenImages = [];
+    let images = this.props.images.map(i => (<Photo className="col-md-3" height={100} onClick={this.onSelect.bind(this)} src={i.url}/>))
+    let chosenImages = []
     for (let i of this.state.chosenImages.values()) {
-      chosenImages.push(<div className="hide-overflow">- {i.name}</div>);
+      chosenImages.push(<div className="hide-overflow">- {i.name}</div>)
     }
     return (
       <div className="container">
@@ -95,7 +95,7 @@ export default class ProjectAdd extends React.Component {
           {images}
         </div>
       </div>
-    );
+    )
   }
 }
 
@@ -103,7 +103,7 @@ ProjectAdd.propTypes = {
   dispatch: React.PropTypes.func.isRequired,
   images: React.PropTypes.array,
   projects: React.PropTypes.array
-};
+}
 
 export default connect(state => ({
   images: state.general.images,

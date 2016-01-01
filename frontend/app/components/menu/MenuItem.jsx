@@ -1,5 +1,5 @@
-import React from 'react';
-import {Link} from 'react-router';
+import React from 'react'
+import {Link} from 'react-router'
 
 export default class MenuItem extends React.Component {
 
@@ -8,18 +8,18 @@ export default class MenuItem extends React.Component {
       <div>
         <Link to={this.props.linkTo}><h5 style={{color: '#3e3e3e', marginLeft: 35}}>{this.props.title}</h5></Link>
       </div>
-    );
+    )
   }
 }
 
 MenuItem.defaultProps = {
   linkTo: 'welcome'
-};
+}
 
 MenuItem.propTypes = {
   linkTo: React.PropTypes.string,
   title: React.PropTypes.string.isRequired
-};
+}
 
 
 

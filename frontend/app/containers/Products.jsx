@@ -1,11 +1,11 @@
-import React from 'react';
+import React from 'react'
 import { connect } from 'react-redux'
-import BigHeadline from './../components/text/BigHeadline.jsx';
-import PhotoBig from './../components/photo/PhotoBig.jsx';
-import ProductItem from './../components/product/ProductItem.jsx';
-import Menu from './../components/menu/Menu.jsx';
-import Category from './../components/menu/Category.jsx';
-import MenuItem from './../components/menu/MenuItem.jsx';
+import BigHeadline from './../components/text/BigHeadline.jsx'
+import PhotoBig from './../components/photo/PhotoBig.jsx'
+import ProductItem from './../components/product/ProductItem.jsx'
+import Menu from './../components/menu/Menu.jsx'
+import Category from './../components/menu/Category.jsx'
+import MenuItem from './../components/menu/MenuItem.jsx'
 
 export default class Products extends React.Component {
 
@@ -49,7 +49,7 @@ export default class Products extends React.Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
@@ -57,7 +57,7 @@ Products.propTypes = {
   dispatch: React.PropTypes.func.isRequired,
   children: React.PropTypes.object.isRequired,
   category: React.PropTypes.string.isRequired,
-};
+}
 
 export default connect(state => ({
   category: state.general.category

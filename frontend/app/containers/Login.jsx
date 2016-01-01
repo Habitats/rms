@@ -1,26 +1,26 @@
-import React from 'react';
+import React from 'react'
 import { connect } from 'react-redux'
-import BigHeadline from './../components/text/BigHeadline.jsx';
-import * as sessionActionCreators from './../actions/SessionActionCreators'
+import BigHeadline from './../components/text/BigHeadline.jsx'
+import * as sessionActionCreators from '../redux/actions/SessionActionCreators'
 
 export default class Login extends React.Component {
 
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       username: this.props.session.username,
       password: "",
       rememberMe: this.props.session.rememberMe,
       admin: this.props.session.admin
-    };
+    }
   }
 
   handleUsernameChange(event) {
-    this.setState({username: event.target.value});
+    this.setState({username: event.target.value})
   }
 
   handlePasswordChange(event) {
-    this.setState({password: event.target.value});
+    this.setState({password: event.target.value})
   }
 
   handleRememberMeChange(event) {
@@ -29,19 +29,19 @@ export default class Login extends React.Component {
   }
 
   onLogin(e) {
-    e.preventDefault();
-    this.props.dispatch(sessionActionCreators.login(this.state));
+    e.preventDefault()
+    this.props.dispatch(sessionActionCreators.login(this.state))
   }
 
   onLogout(e) {
-    e.preventDefault();
-    this.props.dispatch(sessionActionCreators.logout(this.state));
+    e.preventDefault()
+    this.props.dispatch(sessionActionCreators.logout(this.state))
   }
 
   render() {
     let login = this.props.session.admin ?
-                <p>Logget inn som <strong>{this.props.session.username}</strong></p> : '';
-    let loginForm;
+                <p>Logget inn som <strong>{this.props.session.username}</strong></p> : ''
+    let loginForm
     if (!this.props.session.admin) {
       loginForm = (
         <div>
@@ -63,12 +63,12 @@ export default class Login extends React.Component {
             <button className="btn btn-primary btn-block" onClick={this.onLogin.bind(this)} type="submit">Logg inn</button>
           </div>
         </div>
-      );
+      )
     } else {
       loginForm = (
         <div className="form-group">
           <button className="btn btn-primary btn-block" onClick={this.onLogout.bind(this)} type="submit">Logg ut</button>
-        </div>);
+        </div>)
     }
     return (
       <div className="container">
@@ -83,14 +83,14 @@ export default class Login extends React.Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
 Login.propTypes = {
   dispatch: React.PropTypes.func.isRequired,
   session: React.PropTypes.object.isRequired
-};
+}
 
 export default connect(state => ({
   session: state.session

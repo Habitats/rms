@@ -1,5 +1,5 @@
-import React from 'react';
-import FeatureItem from './FeatureItem.jsx';
+import React from 'react'
+import FeatureItem from './FeatureItem.jsx'
 
 export default class Features extends React.Component {
 
@@ -19,7 +19,7 @@ export default class Features extends React.Component {
                        title="Smarte løsninger"/>
         </div>
       </div>
-    );
+    )
   }
 }
 

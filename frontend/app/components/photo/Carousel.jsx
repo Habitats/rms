@@ -1,5 +1,5 @@
-import React from 'react';
-import Photo from './Photo.jsx';
+import React from 'react'
+import Photo from './Photo.jsx'
 
 export default class Carousel extends React.Component {
 
@@ -10,11 +10,11 @@ export default class Carousel extends React.Component {
           {this.props.children}
         </Photo>
       </div>
-    );
+    )
   }
 }
 
 Carousel.propTypes = {
   children: React.PropTypes.object,
   src: React.PropTypes.string.isRequired
-};
+}

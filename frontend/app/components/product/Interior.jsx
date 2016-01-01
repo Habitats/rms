@@ -1,7 +1,7 @@
-import React from 'react';
-import PhotoBig from './../photo/PhotoBig.jsx';
-import BigHeadline from './../text/BigHeadline.jsx';
-import ProductItem from './ProductItem.jsx';
+import React from 'react'
+import PhotoBig from './../photo/PhotoBig.jsx'
+import BigHeadline from './../text/BigHeadline.jsx'
+import ProductItem from './ProductItem.jsx'
 
 export default class Interior extends React.Component {
 
@@ -18,6 +18,6 @@ export default class Interior extends React.Component {
                      description="Dekorativt produkt med bikakestruktur som gir høy isoleringseffekt. Spesielt egnet for vinduer med avvikende form, med en eksklusiv kolleksjon av farger, mønster og design."
                      src="/image/p_duette.png"/>
       </div>
-    );
+    )
   }
 }

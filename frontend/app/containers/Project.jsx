@@ -1,14 +1,14 @@
-import React from 'react';
+import React from 'react'
 import { connect } from 'react-redux'
-import BigHeadline from './../components/text/BigHeadline.jsx';
-import PhotoBig from './../components/photo/PhotoBig.jsx';
-import PhotoLine from './../components/photo/PhotoLine.jsx';
+import BigHeadline from './../components/text/BigHeadline.jsx'
+import PhotoBig from './../components/photo/PhotoBig.jsx'
+import PhotoLine from './../components/photo/PhotoLine.jsx'
 
 export default class Project extends React.Component {
 
   render() {
-    let project = this.props.projects.find(p => p.id == this.props.params.id);
-    let selected = parseInt(this.props.params.selected || 0);
+    let project = this.props.projects.find(p => p.id == this.props.params.id)
+    let selected = parseInt(this.props.params.selected || 0)
     return (
       <div className="container">
         <div className="box">
@@ -28,7 +28,7 @@ export default class Project extends React.Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
@@ -36,7 +36,7 @@ Project.propTypes = {
   dispatch: React.PropTypes.func.isRequired,
   projects: React.PropTypes.array,
   params: React.PropTypes.object
-};
+}
 
 export default connect(state => ({
   projects: state.general.projects

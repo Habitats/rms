@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 export default class Menu extends React.Component {
 
@@ -7,10 +7,10 @@ export default class Menu extends React.Component {
       <div style={{marginLeft: -21}}>
         {this.props.children}
       </div>
-    );
+    )
   }
 }
 
 Menu.propTypes = {
   children: React.PropTypes.object.isRequired
-};
+}

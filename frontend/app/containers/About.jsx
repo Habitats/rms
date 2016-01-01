@@ -1,7 +1,7 @@
-import AboutText from './../components/text/AboutText.jsx';
-import Photo from './../components/photo/Photo.jsx';
-import React from 'react';
-import BigHeadline from './../components/text/BigHeadline.jsx';
+import AboutText from './../components/text/AboutText.jsx'
+import Photo from './../components/photo/Photo.jsx'
+import React from 'react'
+import BigHeadline from './../components/text/BigHeadline.jsx'
 
 export default class About extends React.Component {
 
@@ -64,6 +64,6 @@ export default class About extends React.Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }

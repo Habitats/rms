@@ -1,7 +1,7 @@
-import React from 'react';
-import PhotoBig from './../photo/PhotoBig.jsx';
-import BigHeadline from './../text/BigHeadline.jsx';
-import ProductItem from './ProductItem.jsx';
+import React from 'react'
+import PhotoBig from './../photo/PhotoBig.jsx'
+import BigHeadline from './../text/BigHeadline.jsx'
+import ProductItem from './ProductItem.jsx'
 
 export default class Services extends React.Component {
 
@@ -13,7 +13,7 @@ export default class Services extends React.Component {
                      src="/image/p_service_vedlikehold.png"
         />
       </div>
-    );
+    )
   }
 }
 

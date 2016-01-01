@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 export default class About extends React.Component {
 
@@ -18,7 +18,7 @@ export default class About extends React.Component {
           årene opparbeidet oss en særegen ekspertise innen service og vedlikehold av næringsbygg.</p>
 
       </div>
-    );
+    )
   }
 }
 

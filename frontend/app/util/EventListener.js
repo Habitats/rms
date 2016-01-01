@@ -8,16 +8,16 @@
 class EventListener {
   listen(target, eventType, callback) {
     if (target.addEventListener) {
-      target.addEventListener(eventType, callback, false); // false -> during bubble phase, not capturing
+      target.addEventListener(eventType, callback, false) // false -> during bubble phase, not capturing
       return {
         remove() {
-          target.removeEventListener(eventType, callback, false);
+          target.removeEventListener(eventType, callback, false)
         }
-      };
+      }
     } else {
-      console.log('tried to attach unknown event in EventListener');
+      console.log('tried to attach unknown event in EventListener')
     }
   }
 }
 
-export default new EventListener();
+export default new EventListener()

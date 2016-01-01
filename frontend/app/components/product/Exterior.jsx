@@ -1,7 +1,7 @@
-import React from 'react';
-import PhotoBig from './../photo/PhotoBig.jsx';
-import BigHeadline from './../text/BigHeadline.jsx';
-import ProductItem from './ProductItem.jsx';
+import React from 'react'
+import PhotoBig from './../photo/PhotoBig.jsx'
+import BigHeadline from './../text/BigHeadline.jsx'
+import ProductItem from './ProductItem.jsx'
 
 export default class Exterior extends React.Component {
 
@@ -20,7 +20,7 @@ export default class Exterior extends React.Component {
                      description="Forleng den trivelige utesesongen med en varmelampe. Våre varmelamper er kortbølgede, og når maksimal varme på kun få sekunder."
                      src="/image/p_varme.png"/>
       </div>
-    );
+    )
   }
 }
 

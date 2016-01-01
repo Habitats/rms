@@ -1,7 +1,7 @@
-import React from 'react';
-import PhotoBig from './../photo/PhotoBig.jsx';
-import BigHeadline from './../text/BigHeadline.jsx';
-import ProductItem from './ProductItem.jsx';
+import React from 'react'
+import PhotoBig from './../photo/PhotoBig.jsx'
+import BigHeadline from './../text/BigHeadline.jsx'
+import ProductItem from './ProductItem.jsx'
 
 export default class Other extends React.Component {
 
@@ -15,7 +15,7 @@ export default class Other extends React.Component {
         <ProductItem title="Garasjeporter" description="" src="/image/p_garasjeport.png"/>
         <ProductItem title="Sprosser" description="Sett et personlig preg på vinduene." src="/image/p_sprosser.png"/>
       </div>
-    );
+    )
   }
 }
 

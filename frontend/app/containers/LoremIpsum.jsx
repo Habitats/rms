@@ -1,8 +1,8 @@
-import React from 'react';
+import React from 'react'
 
 export default class LoremIpsum extends React.Component {
   render() {
-    console.log('FLUX > rendering > main');
+    console.log('FLUX > rendering > main')
     return (
       <div>
         <div>
@@ -79,6 +79,6 @@ export default class LoremIpsum extends React.Component {
         </div>
 
       </div>
-    );
+    )
   }
 }

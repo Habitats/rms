@@ -1,4 +1,4 @@
-const baseUrl = '/';
+const baseUrl = '/'
 
 export function retrieve() {
   return fetch(`${baseUrl}session`, {
@@ -21,9 +21,9 @@ function post(session, path) {
 
 function parseJson(res) {
   if (res.status === 200) {
-    return res.json();
+    return res.json()
   }
-  throw new Error(res.info);
+  throw new Error(res.info)
 }
 
 export function save(session) {

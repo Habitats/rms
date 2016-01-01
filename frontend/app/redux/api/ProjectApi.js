@@ -1,4 +1,4 @@
-const baseUrl = '/';
+const baseUrl = '/'
 
 export function getProjects() {
   return retrieve('projects')
@@ -45,13 +45,13 @@ function post(body, path) {
 
 function parseJson(res) {
   if (res.status === 200) {
-    return res.json();
+    return res.json()
   }
-  throw new Error(res.info);
+  throw new Error(res.info)
 }
 
 export function remove(project) {
-  let url = `${baseUrl}${project.get('id')}`;
+  let url = `${baseUrl}${project.get('id')}`
   return fetch(url, {
     method: 'delete'
   }).then(parseJson)

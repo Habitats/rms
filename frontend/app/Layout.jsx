@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import Router from 'react-router';
 import Footer from './components/Footer.jsx';
 import Header from './components/Header.jsx';
-import * as sessionActionCreators from './actions/SessionActionCreators'
+import * as sessionActionCreators from './redux/actions/SessionActionCreators'
 
 export default class Layout extends React.Component {
 

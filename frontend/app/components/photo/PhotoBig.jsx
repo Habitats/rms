@@ -1,5 +1,5 @@
-import React from 'react';
-import Photo from './Photo.jsx';
+import React from 'react'
+import Photo from './Photo.jsx'
 
 export default class PhotoBig extends React.Component {
 
@@ -16,7 +16,7 @@ export default class PhotoBig extends React.Component {
           </Photo>
         </div>
       </div>
-    );
+    )
   }
 }
 
@@ -26,10 +26,10 @@ PhotoBig.propTypes = {
   height: React.PropTypes.number,
   width: React.PropTypes.number,
   onClick: React.PropTypes.func
-};
+}
 
 PhotoBig.defaultProps = {
   description: '',
   height: 500,
   width: undefined
-};
+}

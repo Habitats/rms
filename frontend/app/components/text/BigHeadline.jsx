@@ -1,11 +1,11 @@
-import React from 'react';
+import React from 'react'
 
 export default class BigHeadline extends React.Component {
 
   render() {
     let style = {
       marginBottom: 20
-    };
+    }
     return (
       <div className="row">
         <div className="col-lg-12 text-center" style={style}>
@@ -16,16 +16,16 @@ export default class BigHeadline extends React.Component {
           <hr/>
         </div>
       </div>
-    );
+    )
   }
 }
 
 BigHeadline.defaultProps = {
   small: '',
   big: ''
-};
+}
 
 BigHeadline.propTypes = {
   small: React.PropTypes.string,
   big: React.PropTypes.string
-};
+}

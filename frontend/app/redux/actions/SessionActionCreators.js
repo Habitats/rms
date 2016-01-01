@@ -1,4 +1,4 @@
-import history from './../history'
+import history from './../../history'
 import * as C from './../constants/SessionConstants'
 import * as sessionApi from './../api/SessionApi'
 

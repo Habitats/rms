@@ -1,9 +1,9 @@
-import React from 'react';
+import React from 'react'
 
 export default class FeatureItem extends React.Component {
 
   render() {
-    let classes = 'fa fa-4x ' + this.props.icon;
+    let classes = 'fa fa-4x ' + this.props.icon
     return (
       <div className="text-center">
         <i className={classes}/>
@@ -14,7 +14,7 @@ export default class FeatureItem extends React.Component {
           <p className="text-center">{this.props.description}</p>
         </div>
       </div>
-    );
+    )
   }
 }
 
@@ -22,4 +22,4 @@ FeatureItem.propTypes = {
   icon: React.PropTypes.string.isRequired,
   title: React.PropTypes.string.isRequired,
   description: React.PropTypes.string.isRequired
-};
+}

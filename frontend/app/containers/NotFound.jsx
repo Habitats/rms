@@ -1,5 +1,5 @@
-import React from 'react';
-import BigHeadline from './../components/text/BigHeadline.jsx';
+import React from 'react'
+import BigHeadline from './../components/text/BigHeadline.jsx'
 
 export default class NotFound extends React.Component {
 
@@ -10,6 +10,6 @@ export default class NotFound extends React.Component {
             <BigHeadline big="Denne siden finnes ikke." small="404"/>
         </div>
       </div>
-    );
+    )
   }
 }

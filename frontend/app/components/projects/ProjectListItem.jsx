@@ -1,6 +1,6 @@
-import React from 'react';
-import {Link} from 'react-router';
-import Photo from './../photo/Photo.jsx';
+import React from 'react'
+import {Link} from 'react-router'
+import Photo from './../photo/Photo.jsx'
 
 export default class ProjectListItem extends React.Component {
 
@@ -18,10 +18,10 @@ export default class ProjectListItem extends React.Component {
           </Photo>
         </Link>
       </div>
-    );
+    )
   }
 }
 
 ProjectListItem.propTypes = {
   project: React.PropTypes.object.isRequired
-};
+}

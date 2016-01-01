@@ -1,74 +1,74 @@
-import React from 'react';
+import React from 'react'
 import { connect } from 'react-redux'
-import * as GeneralActionCreators from './../actions/GeneralActionCreators'
+import * as GeneralActionCreators from '../redux/actions/GeneralActionCreators'
 
 export default class ContactForm extends React.Component {
 
   constructor(props) {
-    super(props);
-    this.state = {clicked: false, sent: false};
-    this.valid = {};
+    super(props)
+    this.state = {clicked: false, sent: false}
+    this.valid = {}
   }
 
   handleSubmit(e) {
-    e.preventDefault();
-    this.setState({clicked: true});
+    e.preventDefault()
+    this.setState({clicked: true})
     if (this.isValid()) {
-      this.props.dispatch(GeneralActionCreators.sendMail(this.state));
-      console.log('Sending email ...');
-      this.setState({sent: true});
+      this.props.dispatch(GeneralActionCreators.sendMail(this.state))
+      console.log('Sending email ...')
+      this.setState({sent: true})
     }
   }
 
   isValid() {
-    let valid = this.valid;
-    return valid.name && valid.contactEmail && valid.contactPhone && valid.subject && valid.message;
+    let valid = this.valid
+    return valid.name && valid.contactEmail && valid.contactPhone && valid.subject && valid.message
   }
 
   onNameChange(e) {
-    let name = e.target.value;
-    this.setState({name: name});
-    this.valid.name = name.length > 0;
+    let name = e.target.value
+    this.setState({name: name})
+    this.valid.name = name.length > 0
   }
 
   onPhoneChange(e) {
-    let contactPhone = e.target.value;
-    this.setState({contactPhone: contactPhone});
-    this.valid.contactPhone = contactPhone.length > 0;
+    let contactPhone = e.target.value
+    this.setState({contactPhone: contactPhone})
+    this.valid.contactPhone = contactPhone.length > 0
   }
 
   onAddressChange(e) {
-    let contactEmail = e.target.value;
-    this.setState({contactEmail: contactEmail});
-    this.valid.contactEmail = contactEmail.match('.+\@.+\..+');
+    let contactEmail = e.target.value
+    this.setState({contactEmail: contactEmail})
+    this.valid.contactEmail = contactEmail.match('.+\@.+\..+')
   }
 
   onSubjectChange(e) {
-    let subject = e.target.value;
-    this.setState({subject: subject});
-    this.valid.subject = subject.length > 0;
+    let subject = e.target.value
+    this.setState({subject: subject})
+    this.valid.subject = subject.length > 0
   }
 
   onMessageChange(e) {
-    let message = e.target.value;
-    this.setState({message: message});
-    this.valid.message = message.length > 0;
+    let message = e.target.value
+    this.setState({message: message})
+    this.valid.message = message.length > 0
   }
 
   render() {
-    let valid = this.valid;
-    var clicked = this.state.clicked;
-    var sent = this.state.sent;
-    let nameClasses = 'col-md-4 disabled ' + (!clicked || sent ? '' : (valid.name ? 'has-success' : 'has-error'));
-    let contactPhoneClasses = 'col-md-4 ' + (!clicked || sent ? '' : (valid.contactPhone ? 'has-success' : 'has-error'));
-    let contactEmailClasses = 'col-md-4 ' + (!clicked || sent ? '' : (valid.contactEmail ? 'has-success' : 'has-error'));
-    let subjectClasses = 'col-md-12 ' + (!clicked || sent ? '' : (valid.subject ? 'has-success' : 'has-error'));
-    let messageClasses = 'col-md-12 ' + (!clicked || sent ? '' : (valid.message ? 'has-success' : 'has-error'));
-    let disabled = sent ? 'disabled' : undefined;
-    let error = this.isValid() || !clicked || sent ? '' : (<p>Fyll inn alle feltene!</p>);
+    let valid = this.valid
+    var clicked = this.state.clicked
+    var sent = this.state.sent
+    let nameClasses = 'col-md-4 disabled ' + (!clicked || sent ? '' : (valid.name ? 'has-success' : 'has-error'))
+    let contactPhoneClasses = 'col-md-4 ' + (!clicked || sent ? '' : (valid.contactPhone ? 'has-success' : 'has-error'))
+    let contactEmailClasses = 'col-md-4 ' + (!clicked || sent ? '' : (valid.contactEmail ? 'has-success' : 'has-error'))
+    let subjectClasses = 'col-md-12 ' + (!clicked || sent ? '' : (valid.subject ? 'has-success' : 'has-error'))
+    let messageClasses = 'col-md-12 ' + (!clicked || sent ? '' : (valid.message ? 'has-success' : 'has-error'))
+    let disabled = sent ? 'disabled' : undefined
+    let error = this.isValid() || !clicked || sent ? '' : (<p>Fyll inn alle feltene!</p>)
     let button =
       sent ? <h4>Din forespørsel er sendt!</h4> :
-      (<button className="btn btn-default btn-block" onClick={this.handleSubmit.bind(this)} type="submit">Send</button>);
+      (<button className="btn btn-default btn-block" onClick={this.handleSubmit.bind(this)} type="submit">Send</button>)
 
     return (
       <div>
@@ -114,7 +114,7 @@ export default class ContactForm extends React.Component {
         </form>
         {error}
       </div>
-    );
+    )
   }
 }
 

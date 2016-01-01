@@ -1,5 +1,5 @@
-import React from 'react';
-import {Link} from 'react-router';
+import React from 'react'
+import {Link} from 'react-router'
 
 export default class WelcomeText extends React.Component {
 
@@ -21,7 +21,7 @@ export default class WelcomeText extends React.Component {
             Øvrig kontaktinformasjon er tilgjengelig på våre <Link to="/kontakt">kontaktsider</Link>.</p>
         </div>
       </div>
-    );
+    )
   }
 }
 

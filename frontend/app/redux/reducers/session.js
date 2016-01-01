@@ -11,21 +11,21 @@ const initialState = {
 export default function session(state = initialState, action) {
   switch (action.type) {
     case C.NEW:
-      return action.session;
+      return action.session
 
     case C.UPDATE:
-      return action.session;
+      return action.session
 
     case C.LOGIN_SUCCESS:
-      return action.session;
+      return action.session
 
     case C.LOGOUT_SUCCESS:
-      return action.session;
+      return action.session
 
     case UPDATE_PATH:
       return {... state, path: action.payload.path}
 
     default:
-      return state;
+      return state
   }
 }

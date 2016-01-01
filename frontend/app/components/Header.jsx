@@ -1,5 +1,5 @@
-import React from 'react';
-import {Link} from 'react-router';
+import React from 'react'
+import {Link} from 'react-router'
 
 export default class Header extends React.Component {
 
@@ -33,7 +33,7 @@ export default class Header extends React.Component {
           </div>
         </nav>
       </div>
-    );
+    )
   }
 }
 

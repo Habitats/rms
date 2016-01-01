@@ -1,7 +1,7 @@
-import React from 'react';
-import {Link} from 'react-router';
+import React from 'react'
+import {Link} from 'react-router'
 import { connect } from 'react-redux'
-import * as sessionActionCreator from './../actions/SessionActionCreators'
+import * as sessionActionCreator from '../redux/actions/SessionActionCreators'
 
 export default class Footer extends React.Component {
 
@@ -24,7 +24,7 @@ export default class Footer extends React.Component {
           </ul>
         </div>
       </footer>
-    );
+    )
   }
 }
 
