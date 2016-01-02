@@ -1,9 +1,9 @@
-import React from 'react';
+import React from 'react'
 import { connect } from 'react-redux'
-import Router from 'react-router';
-import Footer from './components/Footer.jsx';
-import Header from './components/Header.jsx';
-import * as sessionActionCreators from './redux/actions/SessionActionCreators'
+import Router from 'react-router'
+import Footer from './../components/Footer.jsx'
+import Header from './../components/Header.jsx'
+import * as sessionActionCreators from './../redux/actions/SessionActionCreators'
 
 export default class Layout extends React.Component {
 
@@ -12,7 +12,7 @@ export default class Layout extends React.Component {
   }
 
   render() {
-    console.log('FLUX > rendering > layout');
+    console.log('FLUX > rendering > layout')
     return (
       <div>
         <Header />
@@ -20,13 +20,13 @@ export default class Layout extends React.Component {
         <Footer />
       </div>
 
-    );
+    )
   }
 }
 
 Layout.propTypes = {
   children: React.PropTypes.object.isRequired
-};
+}
 
 export default connect(state => ({
   session: state.session

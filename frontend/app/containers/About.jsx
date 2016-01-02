@@ -1,6 +1,6 @@
-import AboutText from './../components/text/AboutText.jsx'
-import Photo from './../components/photo/Photo.jsx'
 import React from 'react'
+import {Link} from 'react-router'
+import Photo from './../components/photo/Photo.jsx'
 import BigHeadline from './../components/text/BigHeadline.jsx'
 
 export default class About extends React.Component {
@@ -23,7 +23,26 @@ export default class About extends React.Component {
 
           <div className="row">
             <div className="col-md-8 col-md-offset-2">
-              <AboutText />
+              <div>
+                <p> Romerike Markiseservice ble etablert i 1986 i Maura av Morten og Roar Skjennum. Sammen på laget hadde de en tredje bror,
+                  Bjarne,
+                  som montør samt Anne Grethe med det praktiske kontoransvaret. I dag har bedriften vokst til totalt seks ansatte, alle med
+                  et meget
+                  høyt kompetansenivå innenfor sine respektive områder.</p>
+
+                <p> Gjennom mer enn 30 års erfaring har bedriften etterhvert etablert seg til å bli en totalleverandør av solskjerming til
+                  både
+                  privat- og bedriftsmarkedet, og opererer som en offisiell forhandler av produkter fra <em>Hunter Douglas Solskjerming</em>
+                  gjennom et
+                  samarbeid med <em>Kjells Markiser</em>.</p>
+
+                <p> Vårt salgsområde tar utgangspunkt i Øvre Romerike, men vi gjennomfører også oppdrag utenfor disse. Som kunde hos oss kan
+                  du til
+                  enhver tid forvente produkter av høy standard og rask levering, samt kvalitetssikret av våre egne montører. I tillegg har
+                  vi gjennom
+                  årene opparbeidet oss en særegen ekspertise innen service og vedlikehold av næringsbygg.</p>
+                <br />
+              </div>
             </div>
           </div>
         </div>
