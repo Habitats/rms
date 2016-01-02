@@ -43,8 +43,9 @@ class SessionServlet extends BackendStack with FutureSupport with JacksonJsonSup
   }
 
   post("/logout/?") {
+    val u = new SafeUser(user.copy(admin = false))
     scentry.logout
-    new SafeUser(user.copy(admin = false))
+    u
   }
 
   post("/login/?"){

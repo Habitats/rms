@@ -41,15 +41,15 @@ export default class Photo extends React.Component {
   }
 
   render() {
-    let src = this.props.src
-    let height = this.props.height
-    let width = this.props.width
+    let {src, height, width, margin, crop} = this.props
     let className = this.props.className + ' photo-container-wrapper ' + this.state.classes
     let style = {
       background: 'url(' + src + ') no-repeat center center',
-      backgroundSize: this.props.crop ? 'cover !important' : 'contain !important',
+      backgroundSize: crop ? 'cover !important' : 'contain !important',
       height: height || '100%',
-      width: width || '100%'
+      width: width || '100%',
+      marginTop: margin,
+      marginBottom: margin
     }
     let bigImg = this.state.backdropPhoto.length > 0 ? <img src={src}/> : ''
     // if onClick is defined, use the defined callback
@@ -81,6 +81,7 @@ Photo.defaultProps = {
   className: '',
   clickable: true,
   crop: true,
+  margin: 0,
   src: 'image/not_found.jpg'
 }
 
