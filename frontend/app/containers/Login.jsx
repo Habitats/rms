@@ -9,7 +9,7 @@ export default class Login extends React.Component {
     super(props)
     this.state = {
       username: this.props.session.username,
-      password: "",
+      password: '',
       rememberMe: this.props.session.rememberMe,
       admin: this.props.session.admin
     }

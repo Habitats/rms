@@ -32,7 +32,7 @@ export function retrieve(path) {
 }
 
 function post(body, path) {
-  return fetch(`${baseUrl}/${path}`, {
+  return fetch(`${baseUrl}${path}`, {
     method: 'POST',
     credentials: 'include',
     headers: {

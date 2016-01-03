@@ -25,7 +25,8 @@ export default class Layout extends React.Component {
 }
 
 Layout.propTypes = {
-  children: React.PropTypes.object.isRequired
+  children: React.PropTypes.object.isRequired,
+  dispatch: React.PropTypes.func.isRequired
 }
 
 export default connect(state => ({

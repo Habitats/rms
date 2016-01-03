@@ -75,10 +75,6 @@ object RmsDb {
   }
 
   def store(project: Project, db: Database) {
-    update(project.copy(created = LocalDateTime.now), db)
-  }
-
-  def update(project: Project, db: Database) {
     val data = projects +=(project.id, project.title, project.description, project.img.map(_.url).mkString(","), Config.format(project.created))
     Logger.info("Adding project: " + project)
     db.run(data)

@@ -28,6 +28,11 @@ export default class Footer extends React.Component {
   }
 }
 
+Footer.propTypes = {
+  dispatch: React.PropTypes.func.isRequired,
+  session: React.PropTypes.object.isRequired
+}
+
 export default connect(state => ({
   session: state.session
 }))(Footer)

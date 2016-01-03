@@ -27,15 +27,15 @@ function parseJson(res) {
 }
 
 export function save(session) {
-  return post(session, "")
+  return post(session, '')
 }
 
 export function logout(session) {
-  return post(session, "logout")
+  return post(session, 'logout')
 }
 
 export function login(session) {
-  return post(session, "login")
+  return post(session, 'login')
 }
 
 

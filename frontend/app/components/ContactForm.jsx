@@ -118,4 +118,8 @@ export default class ContactForm extends React.Component {
   }
 }
 
+ContactForm.propTypes = {
+  dispatch: React.PropTypes.func.isRequired
+}
+
 export default connect()(ContactForm)

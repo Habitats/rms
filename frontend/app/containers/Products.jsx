@@ -1,15 +1,15 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { pushPath } from 'redux-simple-router'
+import { replacePath } from 'redux-simple-router'
 import BigHeadline from './../components/text/BigHeadline.jsx'
 import Menu from './../components/menu/Menu.jsx'
 import Category from './../components/product/Category.jsx'
 
 export default class Products extends React.Component {
 
-  componentWillMount(){
-    if(!this.props.params.category){
-      this.props.dispatch(pushPath('/produkter/eksterior'))
+  componentWillMount() {
+    if (!this.props.params.category) {
+      this.props.dispatch(replacePath('/produkter/eksterior'))
     }
   }
 
@@ -38,6 +38,10 @@ export default class Products extends React.Component {
 
 Products.propTypes = {
   dispatch: React.PropTypes.func.isRequired,
+  children: React.PropTypes.object.isRequired,
+  params: React.PropTypes.shape({
+    category: React.PropTypes.string
+  }),
   categories: React.PropTypes.array.isRequired
 }
 

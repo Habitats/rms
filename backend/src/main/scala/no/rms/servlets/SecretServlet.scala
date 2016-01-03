@@ -21,8 +21,8 @@ class SecretServlet(val db: Database) extends BackendStack with FutureSupport wi
   }
 
   before() {
-    contentType = formats("json")
     requireLogin()
+    contentType = formats("json")
   }
 
   get("/?") {
@@ -33,7 +33,8 @@ class SecretServlet(val db: Database) extends BackendStack with FutureSupport wi
 
   post("/?") {
     Logger.info("POST: project")
-    val project = parsedBody.extract[Project]
+    val p = parsedBody
+    val project = p.extract[Project]
     println("received: " + project)
     RmsDb.store(project, db)
 

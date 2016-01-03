@@ -6,7 +6,8 @@ import ProductItem from './ProductItem.jsx'
 export default class Category extends React.Component {
 
   render() {
-    let category = this.props.categories.find(c => c.short === this.props.params.category)
+    let {params, categories} = this.props
+    let category = categories.find(c => c.short === params.category)
     let products = category.sub.map(p => <ProductItem title={p.name} description={p.desc} src="/image/p_automatikk.png"/>)
     return (
       <div className="row">
@@ -17,12 +18,8 @@ export default class Category extends React.Component {
 }
 
 Category.propTypes = {
-  category: React.PropTypes.shape({
-    name: React.PropTypes.string.isRequired,
-    short: React.PropTypes.string.isRequired,
-    desc: React.PropTypes.string.isRequired,
-    sub: React.PropTypes.array.isRequired
-  })
+  params: React.PropTypes.shape({category: React.PropTypes.string.isRequired}),
+  categories: React.PropTypes.object.isRequired
 }
 
 export default connect(state => ({
