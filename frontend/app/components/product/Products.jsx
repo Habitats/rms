@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { replacePath } from 'redux-simple-router'
-import BigHeadline from './../components/text/BigHeadline.jsx'
-import Menu from './../components/menu/Menu.jsx'
-import Category from './../components/product/Category.jsx'
+import BigHeadline from './../text/BigHeadline.jsx'
+import Menu from './../menu/Menu.jsx'
+import Category from './Category.jsx'
 
 export default class Products extends React.Component {
 

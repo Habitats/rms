@@ -5,5 +5,5 @@ export function selectProduct(product) {
 }
 
 export function selectCategory(category) {
-  return {type: C.SELECT_CATEGORY, category: category}
+  return (dispatch) => dispatch({type: C.SELECT_CATEGORY, category: category})
 }

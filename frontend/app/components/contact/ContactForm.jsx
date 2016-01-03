@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import * as GeneralActionCreators from '../redux/actions/GeneralActionCreators'
+import * as GeneralActionCreators from '../../redux/actions/GeneralActionCreators'
 
 export default class ContactForm extends React.Component {
 

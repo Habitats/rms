@@ -18,7 +18,7 @@ const DevTools = createDevTools(
                defaultSize={250}
   >
     <LogMonitor theme='tomorrow'
-                select={state => state}
+                select={state => state.general.project}
     />
   </DockMonitor>
 )

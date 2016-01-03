@@ -1,17 +1,23 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import BigHeadline from './../components/text/BigHeadline.jsx'
-import Photo from './../components/photo/Photo.jsx'
-import * as generalActionCreators from '../redux/actions/GeneralActionCreators'
+import {pushPath} from 'redux-simple-router'
+import BigHeadline from './../text/BigHeadline.jsx'
+import Photo from './../photo/Photo.jsx'
+import * as generalActionCreators from '../../redux/actions/GeneralActionCreators'
 
 export default class ProjectAdd extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = ({chosenImages: new Map()})
+    this.state = ({
+      chosenImages: new Map(),
+      description: '',
+      title: '',
+      error: ''
+    })
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.props.dispatch(generalActionCreators.fetchImages())
   }
 
@@ -38,15 +44,24 @@ export default class ProjectAdd extends React.Component {
     this.setState({chosenImages: chosenImages})
   }
 
+  isValid(){
+    return this.state.chosenImages.size > 0 && this.state.title.length > 0 && this.state.description.length > 0
+  }
+
   onSave(e) {
     e.preventDefault()
-    let id = this.props.projects.length + 1
-    this.props.dispatch(generalActionCreators.save({
-      id: id,
-      title: this.state.title,
-      description: this.state.description,
-      img: this.state.chosenImages
-    }))
+    if (this.isValid()) {
+      let id = this.props.projects.length + 1
+      this.props.dispatch(generalActionCreators.save({
+        id: id,
+        title: this.state.title,
+        description: this.state.description,
+        img: this.state.chosenImages
+      }))
+      this.props.dispatch(pushPath('/prosjekt'))
+    } else {
+      this.setState({error: 'Fyll ut alle felt og velg noen bilder!'})
+    }
   }
 
   render() {
@@ -55,6 +70,7 @@ export default class ProjectAdd extends React.Component {
     for (let i of this.state.chosenImages.values()) {
       chosenImages.push(<div className="hide-overflow">- {i.name}</div>)
     }
+    let error = <div>{this.state.error}</div>
     return (
       <div className="container">
         <div className="row box">
@@ -78,6 +94,7 @@ export default class ProjectAdd extends React.Component {
                 <button className="btn btn-primary btn-lg btn-block" onClick={this.onSave.bind(this)} type="submit">Lagre prosjekt</button>
               </div>
             </form>
+            {error}
           </div>
           <div className="col-md-4">
             <form className="form">

@@ -7,16 +7,16 @@ import BigHeadline from './../components/text/BigHeadline.jsx'
 export default class References extends React.Component {
 
   render() {
-    let newButton
-    if (this.props.session.admin) {
-      newButton = (
-        <div className="form-group">
-          <Link to="/prosjekt/ny">
-            <button className="btn btn-primary btn-block" type="submit">Legg til nytt prosjekt</button>
-          </Link>
-        </div>
-      )
-    }
+    let {session: {admin}} = this.props
+    let newButton = admin ?
+                    (
+                      <div className="form-group">
+                        <Link to="/prosjekt/ny">
+                          <button className="btn btn-primary btn-block" type="submit">Legg til nytt prosjekt</button>
+                        </Link>
+                      </div>
+                    ) :
+                    ''
     return (
       <div className="container">
         <div className="box col-md-12">
@@ -33,7 +33,6 @@ References.propTypes = {
   dispatch: React.PropTypes.func.isRequired,
   session: React.PropTypes.object.isRequired
 }
-
 
 export default connect(state => ({
   session: state.session

@@ -1,5 +1,5 @@
 import React from 'react'
-import Photo from './photo/Photo.jsx'
+import Photo from './../photo/Photo.jsx'
 
 export default class Person extends React.Component {
 

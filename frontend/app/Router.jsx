@@ -9,11 +9,11 @@ import Welcome from './containers/Welcome.jsx'
 import Contact from './containers/Contact.jsx'
 import About from './containers/About.jsx'
 import References from './containers/References.jsx'
-import Project from './containers/Project.jsx'
+import ProjectWrapper from './containers/ProjectWrapper.jsx'
 import Private from './containers/Private.jsx'
-import Products from './containers/Products.jsx'
+import Products from './components/product/Products.jsx'
 import Category from './components/product/Category.jsx'
-import ProjectAdd from './containers/ProjectAdd.jsx'
+import ProjectAdd from './components/projects/ProjectAdd.jsx'
 import Login from './containers/Login.jsx'
 import ProjectListItem from './components/projects/ProjectListItem.jsx'
 import ReferencesList from './components/text/ReferencesList.jsx'
@@ -30,7 +30,7 @@ export default class App extends React.Component {
             <Route component={Category} path=":category"/>
           </Route>
           <Route component={References} path="prosjekt"/>
-          <Route component={Project} ignoreScrollBehavior={true} path="prosjekt/:id/:selected"/>
+          <Route component={ProjectWrapper} ignoreScrollBehavior={true} path="prosjekt/:id/:selected"/>
           <Route component={ProjectAdd} path="prosjekt/ny"/>
           <Route component={Private} path="privat"/>
           <Route component={ReferencesList} path="referanseliste"/>
