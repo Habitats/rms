@@ -8,6 +8,10 @@ export default class Services extends React.Component {
   render() {
     return (
       <div className="row">
+        <ProductItem title="Prosjektering"
+                     description="Skriv noe lurt her."
+                     src="/image/p_service_prosjektering.png"
+        />
         <ProductItem title="Service-arbeid og vedlikehold"
                      description="I tillegg til å montere nye produkter tar vi også vare på de gamle. Enten det er en røket snor, eller renovering av gamle anleggsbygg, stiller vi ekspertise over hele planet."
                      src="/image/p_service_vedlikehold.png"

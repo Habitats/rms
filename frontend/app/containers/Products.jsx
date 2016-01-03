@@ -39,6 +39,7 @@ export default class Products extends React.Component {
                   <MenuItem title="Sprosser"/>
                 </Category>
                 <Category linkTo="/produkter/tjenester" title="Tjenester">
+                  <MenuItem title="Prosjektering"/>
                   <MenuItem title="Service-arbeid"/>
                 </Category>
               </Menu>
