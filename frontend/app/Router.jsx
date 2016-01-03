@@ -12,10 +12,7 @@ import References from './containers/References.jsx'
 import Project from './containers/Project.jsx'
 import Private from './containers/Private.jsx'
 import Products from './containers/Products.jsx'
-import Interior from './components/product/Interior.jsx'
-import Exterior from './components/product/Exterior.jsx'
-import Services from './components/product/Services.jsx'
-import Other from './components/product/Other.jsx'
+import Category from './components/product/Category.jsx'
 import ProjectAdd from './containers/ProjectAdd.jsx'
 import Login from './containers/Login.jsx'
 import ProjectListItem from './components/projects/ProjectListItem.jsx'
@@ -30,10 +27,7 @@ export default class App extends React.Component {
           <Route component={Contact} path="kontakt"/>
           <Route component={About} path="om"/>
           <Route component={Products} path="produkter">
-            <Route component={Exterior} path="eksterior"/>
-            <Route component={Interior} path="interior"/>
-            <Route component={Services} path="tjenester"/>
-            <Route component={Other} path="diverse"/>
+            <Route component={Category} path=":category"/>
           </Route>
           <Route component={References} path="prosjekt"/>
           <Route component={Project} ignoreScrollBehavior={true} path="prosjekt/:id/:selected"/>

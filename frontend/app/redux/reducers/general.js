@@ -24,9 +24,6 @@ export default function general(state = initialState, action) {
     case C.UPDATE_PROJECT:
       return {...state, projects: state.projects.concat(action.projects)}
 
-    case C.SELECT_CATEGORY:
-      return {...state, category: action.category}
-
     default:
       return state
   }

@@ -4,7 +4,6 @@ import Photo from './../photo/Photo.jsx'
 export default class ProductItem extends React.Component {
 
   render() {
-    let {title, description, src} = this.props
     let style = {
       height: 350,
       marginBottom: 50
@@ -13,16 +12,16 @@ export default class ProductItem extends React.Component {
       <div className="col-md-6 col-md-offset-0" style={style}>
         <div className="row">
           <div className="col-md-12">
-            <Photo src={src} height={250}>
+            <Photo src={this.props.src} height={250}>
               <h3>
                 <div className="photo-overlay-box hide-overflow">
-                  {title}
+                  {this.props.title}
                 </div>
               </h3>
             </Photo>
           </div>
           <div className="col-md-12">
-            <p>{description}</p>
+            <p>{this.props.description}</p>
           </div>
         </div>
       </div>
@@ -33,7 +32,7 @@ export default class ProductItem extends React.Component {
 ProductItem.propTypes = {
   title: React.PropTypes.string.isRequired,
   description: React.PropTypes.string.isRequired,
-  src: React.PropTypes.array.isRequired
+  src: React.PropTypes.array.isRequied
 }
 
 
