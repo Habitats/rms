@@ -47,6 +47,7 @@ object BackendBuild extends Build {
         "com.sksamuel.scrimage" %% "scrimage-core" % "2.0.1",
         "com.sksamuel.scrimage" %% "scrimage-io" % "2.0.1",
         "com.sksamuel.scrimage" %% "scrimage-filters" % "2.0.1",
+        "org.apache.xmlgraphics" % "batik-codec" % "1.7",
         "me.lessis" %% "courier" % "0.1.3",
         "com.dropbox.core" % "dropbox-core-sdk" % "1.7.7",
         "org.scalatest" % "scalatest_2.11" % "3.0.0-M7",

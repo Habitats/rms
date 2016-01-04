@@ -5,7 +5,12 @@ export default class Photo extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = {toggled: true, backdrop: '', backdropPhoto: ''}
+    this.state = {
+      toggled: true,
+      backdrop: '',
+      size: props.size,
+      backdropPhoto: ''
+    }
   }
 
   handleEscapeKeyDown(e) {
@@ -23,10 +28,10 @@ export default class Photo extends React.Component {
   toggle() {
     if (this.state.toggled) {
       this.addKeyListener()
-      this.setState({toggled: false, backdrop: 'overlay', backdropPhoto: 'overlay-photo'})
+      this.setState({toggled: false, backdrop: 'overlay', backdropPhoto: 'overlay-photo', size: 'raw'})
     } else {
       this.removeListener()
-      this.setState({toggled: true, backdrop: '', backdropPhoto: ''})
+      this.setState({toggled: true, backdrop: '', backdropPhoto: '', size: this.props.size})
     }
   }
 
@@ -44,8 +49,9 @@ export default class Photo extends React.Component {
     let {src, height, width, margin, crop} = this.props
     let className = this.props.className + ' photo-container-wrapper ' + this.state.classes
     let style = {
-      background: 'url(' + src + ') no-repeat center center',
+      background: 'url(' + src + '/' + this.state.size + ') no-repeat center center',
       backgroundSize: crop ? 'cover !important' : 'contain !important',
+      backgroundColor: '#fafafa',
       height: height || '100%',
       width: width || '100%',
       marginTop: margin,
@@ -82,6 +88,7 @@ Photo.defaultProps = {
   clickable: true,
   crop: true,
   margin: 0,
+  size: 'raw',
   src: 'image/not_found.jpg'
 }
 

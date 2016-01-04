@@ -10,7 +10,7 @@ export default class Private extends React.Component {
   }
 
   render() {
-    let photos = this.props.privates.map(i => (<Photo className="col-md-4 col-sm-6 col-lg-3" height={150} src={i.url}/>))
+    let photos = this.props.privates.map(i => (<Photo size={"low"} className="col-md-4 col-sm-6 col-lg-3" height={150} src={i.url}/>))
 
     return (
       <div className="container">

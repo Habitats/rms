@@ -65,7 +65,7 @@ export default class ProjectAdd extends React.Component {
   }
 
   render() {
-    let images = this.props.images.map(i => (<Photo className="col-md-3" height={100} onClick={this.onSelect.bind(this)} src={i.url}/>))
+    let images = this.props.images.map(i => (<Photo size={'low'} className="col-md-3" height={100} onClick={this.onSelect.bind(this)} src={i.url}/>))
     let chosenImages = []
     for (let i of this.state.chosenImages.values()) {
       chosenImages.push(<div className="hide-overflow">- {i.name}</div>)
