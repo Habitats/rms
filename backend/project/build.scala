@@ -8,7 +8,7 @@ object BackendBuild extends Build {
   val Organization = "no.rms"
   val Name = "backend"
   val Version = "0.1.0-SNAPSHOT"
-  val ScalaVersion = "2.11.6"
+  val ScalaVersion = "2.11.7"
   val ScalatraVersion = "2.3.1"
 
   lazy val project = Project(
