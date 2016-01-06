@@ -5,6 +5,7 @@ const initialState = {
   username: 'none',
   password: null,
   rememberMe: null,
+  loginFailed: false,
   admin: false
 }
 
@@ -18,6 +19,9 @@ export default function session(state = initialState, action) {
 
     case C.LOGIN_SUCCESS:
       return action.session
+
+    case C.LOGIN_FAIL:
+      return {... state, loginFailed: true}
 
     case C.LOGOUT_SUCCESS:
       return action.session

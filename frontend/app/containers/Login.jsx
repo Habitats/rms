@@ -10,8 +10,7 @@ export default class Login extends React.Component {
     this.state = {
       username: this.props.session.username,
       password: '',
-      rememberMe: this.props.session.rememberMe,
-      admin: this.props.session.admin
+      rememberMe: this.props.session.rememberMe
     }
   }
 
@@ -24,8 +23,9 @@ export default class Login extends React.Component {
   }
 
   handleRememberMeChange(event) {
-    this.state = {...this.state, rememberMe : event.target.checked}
-    this.props.dispatch(sessionActionCreators.session(this.state))
+    const rememberMe = event.target.checked
+    this.setState({rememberMe})
+    this.props.dispatch(sessionActionCreators.session({... this.props.session, rememberMe}))
   }
 
   onLogin(e) {
@@ -38,44 +38,51 @@ export default class Login extends React.Component {
     this.props.dispatch(sessionActionCreators.logout(this.state))
   }
 
-  render() {
-    let login = this.props.session.admin ?
-                <p>Logget inn som <strong>{this.props.session.username}</strong></p> : ''
-    let loginForm
-    if (!this.props.session.admin) {
-      loginForm = (
-        <div>
-          <div className="form-group">
-            <label>Brukernavn</label>
-            <input className="form-control" onChange={this.handleUsernameChange.bind(this)} placeholder="Brukernavn" type="text"/>
-          </div>
-          <div className="form-group">
-            <label>Passord</label>
-            <input className="form-control" onChange={this.handlePasswordChange.bind(this)} placeholder="Passord" type="password"/>
-          </div>
-          <div className="checkbox">
-            <label>
-              <input type="checkbox" checked={this.state.rememberMe} onChange={this.handleRememberMeChange.bind(this)}> Husk
-                meg</input>
-            </label>
-          </div>
-          <div className="form-group">
-            <button className="btn btn-primary btn-block" onClick={this.onLogin.bind(this)} type="submit">Logg inn</button>
-          </div>
-        </div>
-      )
-    } else {
-      loginForm = (
+  notLoggedIn() {
+    const loginError = this.props.session.loginFailed ? <div>{'Login feilet!'}</div> : ''
+    return (
+      <div>
         <div className="form-group">
-          <button className="btn btn-primary btn-block" onClick={this.onLogout.bind(this)} type="submit">Logg ut</button>
-        </div>)
-    }
+          <label>Brukernavn</label>
+          <input className="form-control" onChange={this.handleUsernameChange.bind(this)} placeholder="Brukernavn" type="text"/>
+        </div>
+        <div className="form-group">
+          <label>Passord</label>
+          <input className="form-control" onChange={this.handlePasswordChange.bind(this)} placeholder="Passord" type="password"/>
+        </div>
+        <div className="checkbox">
+          <label>
+            <input type="checkbox" checked={this.state.rememberMe} onChange={this.handleRememberMeChange.bind(this)}>
+              Husk meg
+            </input>
+          </label>
+        </div>
+        <div className="form-group">
+          <button className="btn btn-primary btn-block" onClick={this.onLogin.bind(this)} type="submit">
+            Logg inn
+          </button>
+        </div>
+        {loginError}
+      </div>
+    )
+  }
+
+  isLoggedIn() {
+    return (
+      <div className="form-group">
+        <p>Logget inn som <strong>{this.props.session.username}</strong></p>
+        <button className="btn btn-primary btn-block" onClick={this.onLogout.bind(this)} type="submit">Logg ut</button>
+      </div>
+    )
+  }
+
+  render() {
+    const loginForm = this.props.session.admin ? this.isLoggedIn() : this.notLoggedIn()
     return (
       <div className="container">
         <div className="box">
           <div className="row">
             <div className="col-md-4 col-md-offset-4 col-sm-5 col-sm-offset-2">
-              {login}
               <form className="form">
                 {loginForm}
               </form>

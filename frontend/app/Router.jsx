@@ -1,5 +1,6 @@
 import React from 'react'
 import {Router, Route, IndexRoute, Link} from 'react-router'
+import {pushPath} from 'redux-simple-router'
 import { connect } from 'react-redux'
 
 import history from './history'
@@ -19,6 +20,13 @@ import ProjectListItem from './components/projects/ProjectListItem.jsx'
 import ReferencesList from './components/text/ReferencesList.jsx'
 
 export default class App extends React.Component {
+
+  requireLogin() {
+    if (!this.props.session.admin) {
+      this.props.dispatch(pushPath('login'))
+    }
+  }
+
   render() {
     return (
       <Router history={history}>
@@ -31,7 +39,7 @@ export default class App extends React.Component {
           </Route>
           <Route component={References} path="prosjekt"/>
           <Route component={ProjectWrapper} ignoreScrollBehavior={true} path="prosjekt/:id/:selected"/>
-          <Route component={ProjectAdd} path="prosjekt/ny"/>
+          <Route component={ProjectAdd} onEnter={this.requireLogin.bind(this)} path="prosjekt/ny"/>
           <Route component={Private} path="privat"/>
           <Route component={ReferencesList} path="referanseliste"/>
           <Route component={Login} path="login"/>
@@ -41,4 +49,8 @@ export default class App extends React.Component {
     )
   }
 }
+
+export default connect(state => ({
+  session: state.session
+}))(App)
 

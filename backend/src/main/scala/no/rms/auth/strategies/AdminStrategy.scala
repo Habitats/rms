@@ -17,11 +17,12 @@ class AdminStrategy(protected val app: ScalatraBase)(implicit request: HttpServl
       case _ => None
     }
     if (user.filter(_.admin).nonEmpty) {
-      Logger.info(s"Admin > Login success!");
+      Logger.info(s"Admin > Login success!")
+      user
     } else {
       Logger.info("Admin > Login failed!")
+      app.halt(HttpStatus.UNAUTHORIZED_401)
     }
-    user
   }
 
   override def afterLogout(user: User)(implicit request: HttpServletRequest, response: HttpServletResponse): Unit = {
