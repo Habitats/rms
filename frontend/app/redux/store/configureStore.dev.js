@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import { persistState } from 'redux-devtools'
 import rootReducer from '../reducers/rootReducer'
-import DevTools from '../../containers/DevTools'
+import DevTools from '../../containers/Devtools'
 import thunkMiddleware from 'redux-thunk'
 
 const finalCreateStore = compose(

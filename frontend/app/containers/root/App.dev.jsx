@@ -1,6 +1,6 @@
 import React from 'react'
 import Router from './../../Router.jsx'
-import DevTools from './../Devtools'
+import DevTools from './../Devtools.jsx'
 
 export default class App extends React.Component {
   render() {
