@@ -5,10 +5,6 @@ import * as sessionActionCreator from '../redux/actions/SessionActionCreators'
 
 export default class Footer extends React.Component {
 
-  componentDidMount(){
-    this.props.dispatch(sessionActionCreator.session())
-  }
-
   render() {
     let {username} = this.props.session
     let userField = username ? ` (${username})` : ''

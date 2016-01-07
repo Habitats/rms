@@ -5,6 +5,7 @@ import Photo from './../components/photo/Photo.jsx'
 import * as generalActionCreator from  '../redux/actions/GeneralActionCreators'
 
 export default class Private extends React.Component {
+
   componentDidMount() {
     this.props.dispatch(generalActionCreator.fetchPrivates())
   }

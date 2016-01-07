@@ -7,7 +7,7 @@ import * as sessionActionCreators from './../redux/actions/SessionActionCreators
 
 export default class Layout extends React.Component {
 
-  componentDidMoun() {
+  componentWillMount() {
     this.props.dispatch(sessionActionCreators.session())
   }
 

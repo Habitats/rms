@@ -6,7 +6,7 @@ import PhotoLine from './../components/photo/PhotoLine.jsx'
 import Project from './../components/projects/Project.jsx'
 import * as generalActionCreators from '../redux/actions/GeneralActionCreators'
 
-class ProjectWrapper extends React.Component {
+class ProjectContainer extends React.Component {
 
   componentWillMount() {
     this.props.dispatch(generalActionCreators.fetchProject(this.props.params.id))
@@ -35,4 +35,4 @@ Project.propTypes = {
 
 export default connect(state => ({
   project: state.general.project
-}))(ProjectWrapper)
+}))(ProjectContainer)

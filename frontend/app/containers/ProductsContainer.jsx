@@ -1,11 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { replacePath } from 'redux-simple-router'
-import BigHeadline from './../text/BigHeadline.jsx'
-import Menu from './../menu/Menu.jsx'
-import Category from './Category.jsx'
+import BigHeadline from './../components/text/BigHeadline.jsx'
+import Menu from './../components/menu/Menu.jsx'
+import Category from './CategoryContainer.jsx'
 
-export default class Products extends React.Component {
+export default class ProductsContainer extends React.Component {
 
   componentWillMount() {
     if (!this.props.params.category) {
@@ -24,7 +24,7 @@ export default class Products extends React.Component {
           </div>
           <div className="row">
             <div className="col-md-2 col-sm-3 col-xs-4">
-              <Menu categories={categories} category={category}/>
+              <Menu categories={categories} selected={category.short}/>
             </div>
             <div className="col-md-10 col-sm-9 col-xs-8">
               {children}
@@ -36,7 +36,7 @@ export default class Products extends React.Component {
   }
 }
 
-Products.propTypes = {
+ProductsContainer.propTypes = {
   dispatch: React.PropTypes.func.isRequired,
   children: React.PropTypes.object.isRequired,
   params: React.PropTypes.shape({
@@ -47,4 +47,4 @@ Products.propTypes = {
 
 export default connect(state => ({
   categories: state.products
-}))(Products)
+}))(ProductsContainer)

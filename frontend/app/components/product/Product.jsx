@@ -1,41 +1,34 @@
 import React from 'react'
 import Photo from './../photo/Photo.jsx'
+import {connect} from 'react-redux'
 
-export default class ProductItem extends React.Component {
+export default class Product extends React.Component {
 
   render() {
-    let style = {
-      height: 350,
-      marginBottom: 50
-    }
+    let {name, desc, src} = this.props.product
     return (
-      <div className="col-md-6 col-md-offset-0" style={style}>
-        <div className="row">
-          <div className="col-md-12">
-            <Photo src={this.props.src} height={250}>
-              <h3>
-                <div className="photo-overlay-box hide-overflow">
-                  {this.props.title}
-                </div>
-              </h3>
-            </Photo>
-          </div>
-          <div className="col-md-12">
-            <p>{this.props.description}</p>
-          </div>
+      <div className="col-md-12">
+        <div>
+          <Photo src={src} height={300}>
+            <h3>
+              <div className="photo-overlay-box hide-overflow">
+                {name}
+              </div>
+            </h3>
+          </Photo>
+        </div>
+        <div>
+          <p>{desc}</p>
         </div>
       </div>
     )
   }
 }
 
-ProductItem.propTypes = {
-  title: React.PropTypes.string.isRequired,
-  description: React.PropTypes.string.isRequired,
-  src: React.PropTypes.array.isRequied
+Product.propTypes = {
+  product: React.PropTypes.shape({
+    name: React.PropTypes.string.isRequired,
+    desc: React.PropTypes.string.isRequired,
+    src: React.PropTypes.string.isRequired
+  })
 }
-
-
-
-
-

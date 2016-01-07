@@ -1,14 +1,11 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import PhotoBig from './../photo/PhotoBig.jsx'
 import ProductItem from './ProductItem.jsx'
 
 export default class Category extends React.Component {
 
   render() {
-    let {params, categories} = this.props
-    let category = categories.find(c => c.short === params.category)
-    let products = category.sub.map(p => <ProductItem title={p.name} description={p.desc} src="/image/p_automatikk.png"/>)
+    let {name, sub, short} = this.props.category
+    let products = sub.map(p => <ProductItem product={p} linkTo={`/produkter/${short}/${p.short}`}/>)
     return (
       <div className="row">
         {products}
@@ -18,10 +15,10 @@ export default class Category extends React.Component {
 }
 
 Category.propTypes = {
-  params: React.PropTypes.shape({category: React.PropTypes.string.isRequired}),
-  categories: React.PropTypes.object.isRequired
+  category: React.PropTypes.shape({
+    name: React.PropTypes.string.isRequired,
+    desc: React.PropTypes.string.isRequired,
+    src: React.PropTypes.string.isRequired,
+    sub: React.PropTypes.object.isRequired
+  })
 }
-
-export default connect(state => ({
-  categories: state.products
-}))(Category)

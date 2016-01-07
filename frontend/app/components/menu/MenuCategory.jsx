@@ -7,15 +7,17 @@ import MenuItem from './MenuItem.jsx'
 export default class MenuCategory extends React.Component {
 
   render() {
-    let {active, category} = this.props
-    let selected = active ?
-                   <i className="fa fa-genderless" style={{color: 'darkRed'}}/> :
-                   <span className="fa-empty"/>
+    let {selectedCategory, category} = this.props
+    let active = category.short === selectedCategory ?
+                 <i className="fa fa-genderless" style={{color: 'darkRed'}}/> :
+                 <span className="fa-empty"/>
 
-    let sub = category.sub.map(p => <MenuItem product={p} category={category}/>)
+    let sub = category.sub.map(p => <MenuItem product={p}
+                                              linkTo={`/produkter/${category.short}/${p.short}`}
+    />)
     return (
       <div style={{marginBottom: 30}}>
-        <Link to={`/produkter/${category.short}`}><h4>{selected}{category.name}</h4></Link>
+        <Link to={`/produkter/${category.short}`}><h4>{active}{category.name}</h4></Link>
         {sub}
       </div>
     )
@@ -28,6 +30,6 @@ MenuCategory.propTypes = {
     short: React.PropTypes.string.isRequired,
     sub: React.PropTypes.array.isRequired
   }),
-  active: React.PropTypes.bool.isRequired
+  selected: React.PropTypes.string.isRequired
 }
 

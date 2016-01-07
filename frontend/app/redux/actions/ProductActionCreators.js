@@ -1,9 +1,16 @@
 import * as C from './../constants/ProductConstants'
+import {pushPath} from 'redux-simple-router'
 
-export function selectProduct(product) {
-  return {type: C.SELECT_PRODUCT, product: product}
+export function selectProduct(category, product) {
+  return (dispatch) => {
+    dispatch(pushPath(`${product.short}/${category.short}`))
+    dispatch({type: C.SELECT_PRODUCT, category: category, product: product})
+  }
 }
 
 export function selectCategory(category) {
-  return (dispatch) => dispatch({type: C.SELECT_CATEGORY, category: category})
+  return (dispatch) => {
+    dispatch(pushPath(`${category.short}`))
+    dispatch({type: C.SELECT_CATEGORY, category: category})
+  }
 }

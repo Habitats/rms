@@ -3,7 +3,7 @@ import * as ProjectApi from '../api/ProjectApi'
 import Promise from 'bluebird'
 
 export function save(data) {
-  return (dispatch) => {
+  return dispatch => {
     return ProjectApi.    save(data, () => {
       dispatch({type: C.ADD_PROJECT})
     })
@@ -11,7 +11,7 @@ export function save(data) {
 }
 
 export function fetchProjects() {
-  return (dispatch) => {
+  return dispatch => {
     dispatch({type: C.REQUEST_PROJECTS})
     return ProjectApi.getProjects().then(
       projects => dispatch({type: C.RECEIVE_PROJECTS, projects}),
@@ -36,7 +36,7 @@ export function fetchProject(id) {
 }
 
 export function fetchImages() {
-  return (dispatch) => {
+  return dispatch => {
     dispatch({type: C.REQUEST_IMAGES})
     return ProjectApi.getImages().then(
       images => dispatch({type: C.RECEIVE_IMAGES, images}),
@@ -46,7 +46,7 @@ export function fetchImages() {
 }
 
 export function fetchPrivates() {
-  return (dispatch) => {
+  return dispatch => {
     dispatch({type: C.REQUEST_PRIVATES})
     return ProjectApi.getPrivates().then(
       privates => dispatch({type: C.RECEIVE_PRIVATES, privates}),
@@ -56,7 +56,7 @@ export function fetchPrivates() {
 }
 
 export function sendMail(email) {
-  return (dispatch) => {
+  return dispatch => {
     return ProjectApi.sendMail(email, () => {
       dispatch({type: C.SEND_EMAIL})
     })
