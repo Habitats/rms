@@ -51,6 +51,7 @@ object BackendBuild extends Build {
         "me.lessis" %% "courier" % "0.1.3",
         "com.dropbox.core" % "dropbox-core-sdk" % "1.7.7",
         "org.scalatest" % "scalatest_2.11" % "3.0.0-M7",
+        "junit" % "junit" % "4.11",
         "org.scalatra" %% "scalatra-auth" % "2.3.0"
       ),
       scalateTemplateConfig in Compile <<= (sourceDirectory in Compile) { base =>
