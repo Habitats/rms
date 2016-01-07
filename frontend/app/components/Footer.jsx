@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router'
 import { connect } from 'react-redux'
-import * as sessionActionCreator from '../redux/actions/SessionActionCreators'
+import * as sessionActionCreator from '../redux/actions/sessionActions'
 
 export default class Footer extends React.Component {
 

@@ -1,4 +1,4 @@
-import * as C from './../constants/ProductConstants'
+import * as C from './../constants/productConstants'
 import {pushPath} from 'redux-simple-router'
 
 export function selectProduct(category, product) {

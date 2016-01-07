@@ -101,7 +101,6 @@ Photo.propTypes = {
   children: React.PropTypes.object,
   onClick: React.PropTypes.func,
   margin: React.PropTypes.number,
-
   src: React.PropTypes.string.isRequired
 }
 

@@ -10,7 +10,7 @@ import {syncReduxAndRouter} from 'redux-simple-router'
 import {Provider} from 'react-redux'
 
 import configureStore from './redux/store/configureStore'
-import App from './containers/root/App'
+import App from './containers/root/Root'
 
 const store = configureStore()
 syncReduxAndRouter(history, store)

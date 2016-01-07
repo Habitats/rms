@@ -1,5 +1,5 @@
-import * as C from '../constants/ProjectConstants'
-import * as ProjectApi from '../api/ProjectApi'
+import * as C from '../constants/projectConstants'
+import * as ProjectApi from '../api/projectApi'
 import Promise from 'bluebird'
 
 export function save(data) {

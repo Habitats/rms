@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import {pushPath} from 'redux-simple-router'
 import BigHeadline from './../text/BigHeadline.jsx'
 import Photo from './../photo/Photo.jsx'
-import * as generalActionCreators from '../../redux/actions/GeneralActionCreators'
+import * as generalActionCreators from '../../redux/actions/generalActions'
 
 export default class ProjectAdd extends React.Component {
 

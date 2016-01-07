@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import BigHeadline from './../text/BigHeadline.jsx'
 import PhotoBig from './../photo/PhotoBig.jsx'
 import PhotoLine from './../photo/PhotoLine.jsx'
-import * as generalActionCreators from '../../redux/actions/GeneralActionCreators'
+import * as generalActionCreators from '../../redux/actions/generalActions'
 
 export default class Project extends React.Component {
 

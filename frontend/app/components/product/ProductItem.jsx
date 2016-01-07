@@ -2,7 +2,7 @@ import React from 'react'
 import {Link} from 'react-router'
 import {pushPath} from 'redux-simple-router'
 import Photo from './../photo/Photo.jsx'
-import * as ProductActionCreators from  '../../redux/actions/ProductActionCreators'
+import * as ProductActionCreators from  '../../redux/actions/productActions'
 
 export default class ProductItem extends React.Component {
 

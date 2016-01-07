@@ -1,4 +1,4 @@
-import * as C from '../constants/ProductConstants'
+import * as C from '../constants/productConstants'
 
 const initialState = [{
   name: 'Eksteriør',

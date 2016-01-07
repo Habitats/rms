@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import BigHeadline from './../components/text/BigHeadline.jsx'
-import * as sessionActionCreators from '../redux/actions/SessionActionCreators'
+import * as sessionActionCreators from '../redux/actions/sessionActions'
 
 export default class Login extends React.Component {
 

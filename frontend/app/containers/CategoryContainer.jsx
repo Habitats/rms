@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Category from './../components/product/Category.jsx'
-import * as ProductActionCreators from './../redux/actions/ProductActionCreators'
+import * as ProductActionCreators from './../redux/actions/productActions'
 
 export default class CategoryContainer extends React.Component {
 

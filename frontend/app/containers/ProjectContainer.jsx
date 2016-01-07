@@ -4,7 +4,7 @@ import BigHeadline from './../components/text/BigHeadline.jsx'
 import PhotoBig from './../components/photo/PhotoBig.jsx'
 import PhotoLine from './../components/photo/PhotoLine.jsx'
 import Project from './../components/projects/Project.jsx'
-import * as generalActionCreators from '../redux/actions/GeneralActionCreators'
+import * as generalActionCreators from '../redux/actions/generalActions'
 
 class ProjectContainer extends React.Component {
 

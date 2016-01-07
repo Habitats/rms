@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import {Link} from 'react-router'
 import Projects from './../components/projects/Projects.jsx'
 import BigHeadline from './../components/text/BigHeadline.jsx'
-import * as generalActionCreators from './../redux/actions/GeneralActionCreators'
+import * as generalActionCreators from './../redux/actions/generalActions'
 
 export default class References extends React.Component {
 

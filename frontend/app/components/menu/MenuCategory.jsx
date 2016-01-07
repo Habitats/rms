@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import {Link} from 'react-router'
-import * as ProductActionCreators from '../../redux/actions/ProductActionCreators'
+import * as ProductActionCreators from '../../redux/actions/productActions'
 import MenuItem from './MenuItem.jsx'
 
 export default class MenuCategory extends React.Component {

@@ -1,4 +1,4 @@
-import * as C from './../constants/ProjectConstants'
+import * as C from './../constants/projectConstants'
 
 const initialState = {
   projects: [],

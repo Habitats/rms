@@ -19,7 +19,7 @@ import ProjectAdd from './components/projects/ProjectAdd.jsx'
 import Login from './containers/Login.jsx'
 import ProjectListItem from './components/projects/ProjectListItem.jsx'
 import ReferencesList from './components/text/ReferencesList.jsx'
-import * as SessionActionCreators from './redux/actions/SessionActionCreators'
+import * as SessionActionCreators from './redux/actions/sessionActions'
 
 export default class App extends React.Component {
 

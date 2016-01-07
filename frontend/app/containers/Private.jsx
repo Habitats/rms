@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import BigHeadline from './../components/text/BigHeadline.jsx'
 import Photo from './../components/photo/Photo.jsx'
-import * as generalActionCreator from  '../redux/actions/GeneralActionCreators'
+import * as generalActionCreator from  '../redux/actions/generalActions'
 
 export default class Private extends React.Component {
 

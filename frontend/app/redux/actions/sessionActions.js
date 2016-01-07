@@ -1,6 +1,6 @@
 import history from './../../history'
-import * as C from './../constants/SessionConstants'
-import * as sessionApi from './../api/SessionApi'
+import * as C from './../constants/sessionConstants'
+import * as sessionApi from './../api/sessionApi'
 
 export function login(data) {
   return (dispatch) => {
