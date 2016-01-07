@@ -30,6 +30,6 @@ MenuCategory.propTypes = {
     short: React.PropTypes.string.isRequired,
     sub: React.PropTypes.array.isRequired
   }),
-  selected: React.PropTypes.string.isRequired
+  selectedCategory: React.PropTypes.string.isRequired
 }
 

@@ -15,7 +15,10 @@ export default class CategoryContainer extends React.Component {
 }
 
 CategoryContainer.propTypes = {
-  categories: React.PropTypes.object.isRequired
+  categories: React.PropTypes.object.isRequired,
+  params: React.PropTypes.shape({
+    categoy: React.PropTypes.string.isRequired
+  })
 }
 
 export default connect(state => ({

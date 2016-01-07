@@ -25,7 +25,7 @@ class ProjectContainer extends React.Component {
   }
 }
 
-Project.propTypes = {
+ProjectContainer.propTypes = {
   project: React.PropTypes.object,
   params: React.PropTypes.shape({
     id: React.PropTypes.number.isRequired,

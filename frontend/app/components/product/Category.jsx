@@ -17,6 +17,7 @@ export default class Category extends React.Component {
 Category.propTypes = {
   category: React.PropTypes.shape({
     name: React.PropTypes.string.isRequired,
+    short: React.PropTypes.string.isRequired,
     desc: React.PropTypes.string.isRequired,
     src: React.PropTypes.string.isRequired,
     sub: React.PropTypes.object.isRequired

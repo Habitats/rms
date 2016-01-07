@@ -16,7 +16,11 @@ export default class ProductContainer extends React.Component {
 }
 
 ProductContainer.propTypes = {
-  categories: React.PropTypes.object.isRequired
+  categories: React.PropTypes.object.isRequired,
+  params: React.PropTypes.shape({
+    category: React.PropTypes.string.isRequired,
+    product: React.PropTypes.string.isRequired
+  })
 }
 
 export default connect(state => ({

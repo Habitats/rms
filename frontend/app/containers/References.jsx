@@ -33,6 +33,7 @@ export default class References extends React.Component {
 
 References.propTypes = {
   dispatch: React.PropTypes.func.isRequired,
+  projects: React.PropTypes.object.isRequired,
   session: React.PropTypes.object.isRequired
 }
 

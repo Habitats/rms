@@ -96,6 +96,7 @@ Photo.propTypes = {
   height: React.PropTypes.number,
   width: React.PropTypes.number,
   className: React.PropTypes.string,
+  size: React.PropTypes.string,
   clickable: React.PropTypes.bool,
   crop: React.PropTypes.bool,
   children: React.PropTypes.object,
