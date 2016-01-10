@@ -1,5 +1,16 @@
 import * as C from './../constants/productConstants'
 import {pushPath} from 'redux-simple-router'
+import * as GeneralApi from '../api/GeneralApi'
+
+export function fetchProducts() {
+  return dispatch => {
+    dispatch({type: C.REQUEST_PRODUCTS})
+    return GeneralApi.getProducts().then(
+      products => dispatch({type: C.RECEIVE_PRODUCTS, products}),
+      error => dispatch({type: C.RECEIVE_PRODUCTS_FAIL})
+    )
+  }
+}
 
 export function selectProduct(category, product) {
   return (dispatch) => {

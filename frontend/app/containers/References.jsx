@@ -7,8 +7,10 @@ import * as generalActionCreators from './../redux/actions/generalActions'
 
 export default class References extends React.Component {
 
-  componentWillMount(){
-    this.props.dispatch(generalActionCreators.fetchProjects())
+  componentWillMount() {
+    if (this.props.projects.length === 0) {
+      this.props.dispatch(generalActionCreators.fetchProjects())
+    }
   }
 
   render() {

@@ -9,7 +9,7 @@ export default class ProjectListItem extends React.Component {
       <div className="col-md-6">
 
         <Link to={`/prosjekt/${this.props.project.id}/0`}>
-          <Photo clickable={false} height={250} src={this.props.project.img[0].url}>
+          <Photo clickable={false} height={250} src={this.props.project.img[0].src}>
             <h3>
               <div className="photo-overlay-box hide-overflow">
                 {this.props.project.title}

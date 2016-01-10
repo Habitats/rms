@@ -33,13 +33,13 @@ export default class ProjectAdd extends React.Component {
     this.setState({img: event.target.value.split(',')})
   }
 
-  onSelect(url) {
+  onSelect(src) {
     let chosenImages = this.state.chosenImages
-    if (chosenImages.has(url)) {
-      chosenImages.delete(url)
+    if (chosenImages.has(src)) {
+      chosenImages.delete(src)
     } else {
-      let image = this.props.images.find(i => i.url === url)
-      chosenImages.set(url, image)
+      let image = this.props.images.find(i => i.src === src)
+      chosenImages.set(src, image)
     }
     this.setState({chosenImages: chosenImages})
   }
@@ -65,7 +65,7 @@ export default class ProjectAdd extends React.Component {
   }
 
   render() {
-    let images = this.props.images.map(i => (<Photo size={'low'} className="col-md-3" height={100} onClick={this.onSelect.bind(this)} src={i.url}/>))
+    let images = this.props.images.map(i => (<Photo size={'low'} className="col-md-3" height={100} onClick={this.onSelect.bind(this)} src={i.src}/>))
     let chosenImages = []
     for (let i of this.state.chosenImages.values()) {
       chosenImages.push(<div className="hide-overflow">- {i.name}</div>)

@@ -12,6 +12,7 @@ import scala.concurrent.Future
 
 
 object RmsDb {
+  val delim = "___"
 
   class Projects(tag: Tag) extends Table[(String, String, String, String, String)](tag, "PROJECTS") {
     def id = column[String]("ID", O.PrimaryKey)
@@ -30,16 +31,16 @@ object RmsDb {
   def init(db: Database) {
     if (!new File("rms.mv.db").exists) {
       val vgsImgs = Seq(
-        ImageWrapper("1", "image/ref_nannestad.vgs_1.jpg"),
-        ImageWrapper("2", "image/ref_nannestad.vgs_2.jpg"),
-        ImageWrapper("3", "image/ref_nannestad.vgs_3.jpg"),
-        ImageWrapper("4", "image/ref_nannestad.vgs_4.jpg")
+        ImageWrapper("1", "prosjekt/ref_nannestad.vgs_1.jpg"),
+        ImageWrapper("2", "prosjekt/ref_nannestad.vgs_2.jpg"),
+        ImageWrapper("3", "prosjekt/ref_nannestad.vgs_3.jpg"),
+        ImageWrapper("4", "prosjekt/ref_nannestad.vgs_4.jpg")
       )
       val komImgs = Seq(
-        ImageWrapper("1", "image/ref_nannestad.kommunehus_1.jpg"),
-        ImageWrapper("2", "image/ref_nannestad.kommunehus_2.jpg"),
-        ImageWrapper("3", "image/ref_nannestad.kommunehus_3.jpg"),
-        ImageWrapper("4", "image/ref_nannestad.kommunehus_4.jpg")
+        ImageWrapper("1", "prosjekt/ref_nannestad.kommunehus_1.jpg"),
+        ImageWrapper("2", "prosjekt/ref_nannestad.kommunehus_2.jpg"),
+        ImageWrapper("3", "prosjekt/ref_nannestad.kommunehus_3.jpg"),
+        ImageWrapper("4", "prosjekt/ref_nannestad.kommunehus_4.jpg")
       )
 
       val samples = Seq(
@@ -63,19 +64,19 @@ object RmsDb {
 
   def allProjects(db: Database): Future[Seq[Project]] = {
     db.run(projects.result).map(res => res.map {
-      case (id, title, description, img, created) => Project(id, title, description, img.split(",").map(i => ImageWrapper(i.split("/").last, i)).toList, Config.parse(created))
+      case (id, title, description, img, created) => Project(id, title, description, img.split(delim).map(i => ImageWrapper.fromString(i)).toList, Config.parse(created))
     })
   }
 
   def project(id: String, db: Database): Future[Option[Project]] = {
     db.run(projects.filter(_.id === id).result.headOption).map {
-      case Some((id, title, description, img, created)) => Some(Project(id, title, description, img.split(",").map(i => ImageWrapper(i.split("/").last, i)).toList, Config.parse(created)))
+      case Some((id, title, description, img, created)) => Some(Project(id, title, description, img.split(delim).map(i => ImageWrapper.fromString(i)).toList, Config.parse(created)))
       case _ => throw new IllegalArgumentException("INVALID ID")
     }
   }
 
   def store(project: Project, db: Database) {
-    val data = projects +=(project.id, project.title, project.description, project.img.map(_.url).mkString(","), Config.format(project.created))
+    val data = projects +=(project.id, project.title, project.description, project.img.mkString(delim), Config.format(project.created))
     Logger.info("Adding project: " + project)
     db.run(data)
   }

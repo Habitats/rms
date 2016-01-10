@@ -1,13 +1,12 @@
 package no.rms.servlets
 
 import java.io.File
-import java.nio.file.Paths
 import java.time.LocalDateTime
 
 import no.rms._
 import no.rms.auth.AuthenticationSupport
 import no.rms.db.RmsDb
-import no.rms.models.{Email, ImageWrapper}
+import no.rms.models.Email
 import org.json4s.JsonAST.JString
 import org.json4s.{CustomSerializer, DefaultFormats, Formats}
 import org.scalatra.json.JacksonJsonSupport
@@ -64,6 +63,12 @@ class PublicServlet(val db: Database) extends BackendStack with FutureSupport wi
     RmsDb.project(id, db)
   }
 
+  get("/products/?") {
+    Logger.info("GET: products")
+    val products = Products.products
+    products
+  }
+
   post("/mail/?") {
     Logger.info("POST: mail")
     val email = parsedBody.extract[Email]
@@ -74,45 +79,27 @@ class PublicServlet(val db: Database) extends BackendStack with FutureSupport wi
 
   get("/images/?") {
     Logger.info("GET: images/")
-    val images = Paths.get("img", "raw").toFile.listFiles.map(_.getName).filter(f => f.endsWith(".jpg") || f.endsWith(".png")).map(f => ImageWrapper(f, "/image/" + f)).toList
-    images
+    ImageUtils.images()
   }
 
   get("/privates/?") {
     Logger.info("GET: privates/")
-    val images = Paths.get("img", "raw", "private").toFile.listFiles.map(_.getName).filter(f => f.endsWith(".jpg") || f.endsWith(".png")).map(f => ImageWrapper(f, "private/" + f)).toList
-    images
+    ImageUtils.privates
   }
-
 
   get("/image/:id/:size/?") {
-    val id = params.get("id").get
     val size = params.get("size").get
-    Logger.info("GET: image/" + id + "/" + size)
+    val path = params.get("id").get
+    Logger.info("GET: image/" + path + "/" + size)
     contentType = "image"
-    ImageUtils.fetchSize(id, size).getOrElse(ImageUtils.notFound)
-  }
-
-  get("/private/:id/:size/?") {
-    val id = params.get("id").get
-    val size = params.get("size").get
-    Logger.info("GET: private/" + id + "/" + size)
-    contentType = "image"
-    ImageUtils.fetchSize(id, size, "private").getOrElse(ImageUtils.notFound)
+    ImageUtils.fetchPath(path, size).getOrElse(ImageUtils.notFound)
   }
 
   get("/image/:id/?") {
     val id = params.get("id").get
     Logger.info("GET: image/" + id)
     contentType = "image"
-    ImageUtils.fetch(id).getOrElse(ImageUtils.notFound)
-  }
-
-  get("/private/:id/?") {
-    val id = params.get("id").get
-    Logger.info("GET: private/" + id)
-    contentType = "image"
-    ImageUtils.fetch(id, path = "private").getOrElse(ImageUtils.notFound)
+    ImageUtils.fetchPath(id).getOrElse(ImageUtils.notFound)
   }
 }
 

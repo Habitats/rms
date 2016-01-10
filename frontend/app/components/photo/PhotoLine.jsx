@@ -13,7 +13,7 @@ export default class PhotoLine extends React.Component {
       <div className="col-lg-3 col-xs-4 col-sm-3">
         <Link to={`/prosjekt/${this.props.id}/${this.props.img.indexOf(i)}`}>
           <div className={this.getClasses(i)}>
-            <Photo clickable={false} height={150} src={i.url}/>
+            <Photo clickable={false} height={150} src={i.src}/>
           </div>
         </Link>
       </div>

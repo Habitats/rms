@@ -5,6 +5,7 @@ import java.nio.file.Paths
 
 import com.sksamuel.scrimage.Image
 import com.sksamuel.scrimage.nio.JpegWriter
+import no.rms.models.ImageWrapper
 
 import scala.util.Random
 
@@ -12,16 +13,37 @@ object ImageUtils {
   implicit val writer = JpegWriter().withCompression(80).withProgressive(true)
 
   val rootDir = "img"
+  val delim = ","
 
   def notFound(): File = Random.shuffle(Paths.get(rootDir, "not_found").toFile.listFiles.toList).head
 
-  def fetch(id: String, path: String = ""): Option[File] = {
-    val imgDir = if (path != "") Paths.get(rootDir, "raw", path) else Paths.get(rootDir, "raw")
+  def privates: Seq[ImageWrapper] = {
+    val p = images("privat")
+    p
+  }
+
+  def images(path: String = ""): Seq[ImageWrapper] = {
+    val f = new File("img/raw/" + path)
+    if (f.exists) {
+      f.listFiles.map(_.getName).filter(f => f.endsWith(".jpg") || f.endsWith(".png")).map(f => ImageWrapper(f, (if(path.length > 0) (path + "/") else "") + f)).toList
+    } else Nil
+  }
+
+  def fetchPath(urlPath: String, size: String = "raw"): Option[File] = {
+    val args = urlPath.split(ImageUtils.delim)
+    val id = args.last
+    val path = if (args.length > 1) args.take(args.length - 1).mkString("", "/", "/") else ""
+    ImageUtils.fetchSize(id, size, path)
+  }
+
+  private def fetch(id: String, path: String = ""): Option[File] = {
+
+    val imgDir = if (path != "") new File(s"$rootDir/raw/$path") else new File(rootDir + "/raw")
     val image = new File(imgDir.toString, id)
     if (image.exists) Some(image) else None
   }
 
-  def fetchSize(id: String, size: String, path: String = ""): Option[File] = {
+  private def fetchSize(id: String, size: String, path: String = ""): Option[File] = {
     fetch(id, path).map(image => {
       size match {
         case "med" | "low" =>

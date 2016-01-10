@@ -18,7 +18,7 @@ export default class Welcome extends React.Component {
             <div className="row">
               <div className="col-md-8 col-md-offset-2">
                 <div>
-                  <p> Romerike Markiseservice er en ledende og profesjonell forhandler av solskjermingsprodukter med kunden i sentrum.</p>
+                  <p> Romerike Markiseservice er en ledende og profesjonell totalleverandør av solskjermingssystemer med kunden i sentrum.</p>
 
                   <p> Med Øvre Romerike og Oslo som våre primære kjerneområder, leverer vi et bredt spekter av solskjermingsløsninger til både
                     privat- og bedriftsmarkedet.</p>

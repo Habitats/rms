@@ -4,6 +4,7 @@ import { replacePath } from 'redux-simple-router'
 import BigHeadline from './../components/text/BigHeadline.jsx'
 import Menu from './../components/menu/Menu.jsx'
 import Category from './CategoryContainer.jsx'
+import * as productActionCreators from './../redux/actions/productActions'
 
 export default class ProductsContainer extends React.Component {
 
@@ -11,10 +12,16 @@ export default class ProductsContainer extends React.Component {
     if (!this.props.params.category) {
       this.props.dispatch(replacePath('/produkter/eksterior'))
     }
+    if (this.props.categories.length === 0) {
+      this.props.dispatch(productActionCreators.fetchProducts())
+    }
   }
 
   render() {
     let {categories, params, children} = this.props
+    if (categories.length === 0) {
+      return null
+    }
     let category = categories.find(c => c.short === (params.category || 'eksterior'))
     return (
       <div className="container">
@@ -24,7 +31,7 @@ export default class ProductsContainer extends React.Component {
           </div>
           <div className="row">
             <div className="col-md-2 col-sm-3 col-xs-4">
-              <Menu categories={categories} selected={category.short}/>
+              <Menu categories={categories} selectedCategory={category.short}/>
             </div>
             <div className="col-md-10 col-sm-9 col-xs-8">
               {children}

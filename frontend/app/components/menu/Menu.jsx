@@ -4,8 +4,8 @@ import MenuCategory from './MenuCategory.jsx'
 export default class Menu extends React.Component {
 
   render() {
-    let {categories, selected} = this.props
-    let cats = categories.map(c => <MenuCategory category={c} selectedCategory={selected}/>)
+    let {categories, selectedCategory} = this.props
+    let cats = categories.map(c => <MenuCategory category={c} selectedCategory={selectedCategory}/>)
     return (
       <div style={{marginLeft: -21}}>
         {cats}

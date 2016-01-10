@@ -1,6 +1,7 @@
 import React from 'react'
 import Photo from './../photo/Photo.jsx'
 import {connect} from 'react-redux'
+import LoremIpsum from './../LoremIpsum.jsx'
 
 export default class Product extends React.Component {
 
@@ -19,6 +20,7 @@ export default class Product extends React.Component {
         </div>
         <div>
           <p>{desc}</p>
+          <LoremIpsum />
         </div>
       </div>
     )

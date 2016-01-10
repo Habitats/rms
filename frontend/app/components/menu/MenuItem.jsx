@@ -17,7 +17,7 @@ MenuItem.propTypes = {
   product: React.PropTypes.shape({
     name: React.PropTypes.string.isRequired
   }),
-  linkTo: React.PropTypes.string.isRequires
+  linkTo: React.PropTypes.string.isRequired
 }
 
 
