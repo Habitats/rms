@@ -19,7 +19,8 @@ ProductContainer.propTypes = {
   categories: PropTypes.object.isRequired,
   params: PropTypes.shape({
     category: PropTypes.string.isRequired,
-    product: PropTypes.string.isRequired
+    product: PropTypes.string.isRequired,
+    selected: PropTypes.number
   })
 }
 

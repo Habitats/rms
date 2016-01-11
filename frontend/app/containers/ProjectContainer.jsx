@@ -29,7 +29,8 @@ ProjectContainer.propTypes = {
   project: PropTypes.object,
   params: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    selected: PropTypes.number.isRequired
+    toggled: PropTypes.number.isRequired,
+    selected: PropTypes.number
   })
 }
 

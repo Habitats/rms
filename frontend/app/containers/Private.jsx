@@ -13,7 +13,7 @@ export default class Private extends Component {
 
   render() {
     let photos = this.props.privates.map(i => (
-      <Photo size={"low"} className="col-lg-3 col-md-3 col-sm-4 col-xs-6" height={150} src={i.src}/>))
+      <Photo size={"low"} className="col-lg-3 col-md-3 col-sm-4 col-xs-6" height={150} src={i.src} margin={15}/>))
 
     return (
       <Box>

@@ -6,11 +6,9 @@ export default class Header extends Component {
   render() {
     return (
       <div>
-
         <nav className="navbar navbar-default navbar-fixed-top">
-          <div className="container">
+          <div className="container" style={{maxWidth: 1000}}>
             <div className="navbar-header">
-
               <button className="navbar-toggle" type="button">
                 <span className="sr-only">Toggle navigation</span>
                 <span className="icon-bar"></span>

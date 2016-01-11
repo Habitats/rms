@@ -15,7 +15,7 @@ export default class Layout extends Component {
     return (
       <div>
         <Header />
-        <div className="container">
+        <div className="container" style={{maxWidth:1000}}>
           {this.props.children}
         </div>
         <Footer />

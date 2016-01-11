@@ -5,6 +5,7 @@ import BigHeadline from './../components/text/BigHeadline.jsx'
 import Photo from './../components/photo/Photo.jsx'
 import BoxLeft from './../components/BoxLeft.jsx'
 import BoxRight from './../components/BoxRight.jsx'
+import SimpleLabel from './../components/text/SimpleLabel.jsx'
 import * as generalActionCreators from '../redux/actions/generalActions'
 
 export default class ProjectAdd extends Component {
@@ -69,7 +70,7 @@ export default class ProjectAdd extends Component {
   render() {
     let chosenImages = []
     for (let i of this.state.chosenImages.values()) {
-      chosenImages.push(<div className="hide-overflow">- {i.name}</div>)
+      chosenImages.push(<SimpleLabel text={i.name}/>)
     }
     let images = this.props.images.map(i => (
       <Photo size={'low'}
@@ -77,7 +78,9 @@ export default class ProjectAdd extends Component {
              height={100}
              onClick={this.onSelect.bind(this)}
              selected={this.state.chosenImages.has(i.src)}
-             src={i.src}/>
+             src={i.src}
+             margin={15}
+      />
     ))
     let error = <div>{this.state.error}</div>
     return (

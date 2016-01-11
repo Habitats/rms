@@ -4,7 +4,7 @@ export default class LoremIpsum extends Component {
   render() {
     return (
       <div>
-        <h2 className="intro-text text-center">HTML Ipsum Presents</h2>
+        <h2 >HTML Ipsum Presents</h2>
 
         <p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac turpis egestas. Vestibulum
           tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean
@@ -14,7 +14,7 @@ export default class LoremIpsum extends Component {
           pulvinar facilisis. Ut felis.</p>
 
         <hr/>
-        <h2 className="intro-text text-center">Hello header</h2>
+        <h2 >Hello header</h2>
         <hr/>
 
         <dl className="dl-horizontal">
@@ -33,7 +33,7 @@ export default class LoremIpsum extends Component {
           tellus, at luctus turpis elit sit amet quam. Vivamus pretium ornare est.</p></blockquote>
 
         <hr/>
-        <h2 className="intro-text text-center">You are pretty cool</h2>
+        <h2>You are pretty cool</h2>
         <hr/>
 
         <ul>
@@ -44,7 +44,7 @@ export default class LoremIpsum extends Component {
           hac habitasse platea dictumst. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque
           habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
         <hr/>
-        <h2 className="intro-text text-center">Lorem ipsum dolor <strong>sit amet</strong></h2>
+        <h2>Lorem ipsum dolor <strong>sit amet</strong></h2>
         <hr/>
 
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc placerat diam quis nisl vestibulum dignissim. In

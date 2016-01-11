@@ -1,20 +1,17 @@
 import React, {Component, PropTypes} from 'react'
 import {Link} from 'react-router'
 import Photo from './../photo/Photo.jsx'
+import HeadlineOverlay from './../text/HeadlineOverlay.jsx'
 
 export default class ProjectListItem extends Component {
 
   render() {
+    let {project: {title, images, id}} = this.props
     return (
       <div className="col-md-6">
-
-        <Link to={`/prosjekt/${this.props.project.id}/0`}>
-          <Photo clickable={false} height={250} src={this.props.project.images[0].src}>
-            <h3>
-              <div className="photo-overlay-box hide-overflow">
-                {this.props.project.title}
-              </div>
-            </h3>
+        <Link to={`/prosjekt/${id}/0`}>
+          <Photo clickable={false} height={250} src={images[0].src}>
+            <HeadlineOverlay text={title}/>
           </Photo>
         </Link>
       </div>

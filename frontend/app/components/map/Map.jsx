@@ -15,8 +15,9 @@ export default class Map extends Component {
   }
 
   render() {
+    let style = {  height: 450, width: '100%'}
     return (
-      <div id="map-canvas"/>
+      <div id="map-canvas" style={style}/>
     )
   }
 }

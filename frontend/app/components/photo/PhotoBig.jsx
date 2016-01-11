@@ -1,22 +1,15 @@
 import React, {Component, PropTypes} from 'react'
 import Photo from './Photo.jsx'
+import HeadlineOverlay from './../text/HeadlineOverlay.jsx'
 
 export default class PhotoBig extends Component {
 
   render() {
     let {height, width, src, onClick, description} = this.props
     return (
-      <div>
-        <div className="col-md-12 no-pad">
-          <Photo height={height} width={width} src={src} clickable={!!onClick} size={'med'}>
-            <h4>
-              <div className="photo-overlay-box hide-overflow">
-                {description}
-              </div>
-            </h4>
-          </Photo>
-        </div>
-      </div>
+      <Photo crop={true} height={height} width={width} src={src} clickable={!!onClick} size={'med'} margin={0}>
+        <HeadlineOverlay text={description}/>
+      </Photo>
     )
   }
 }

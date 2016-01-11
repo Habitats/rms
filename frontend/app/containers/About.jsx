@@ -18,7 +18,7 @@ export default class About extends Component {
             </div>
             <div className="col-md-4">
               <Photo height={200} src="/image/butikken_inne_1.jpg"/>
-              <Photo height={200} src="/image/butikken_inne_2.jpg"/>
+              <Photo height={200} src="/image/butikken_inne_2.jpg" margin={15}/>
             </div>
           </div>
 

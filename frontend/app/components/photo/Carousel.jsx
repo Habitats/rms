@@ -6,7 +6,7 @@ export default class Carousel extends Component {
   render() {
     return (
       <div >
-        <Photo height={450} src={this.props.src}>
+        <Photo height={450} src={this.props.src} margin={0}>
           {this.props.children}
         </Photo>
       </div>

@@ -3,6 +3,7 @@ import Photo from './../photo/Photo.jsx'
 import PhotoLine from './../photo/PhotoLine.jsx'
 import {connect} from 'react-redux'
 import LoremIpsum from './../LoremIpsum.jsx'
+import HeadlineOverlay from './../text/HeadlineOverlay.jsx'
 
 export default class Product extends Component {
 
@@ -15,11 +16,7 @@ export default class Product extends Component {
       <div>
         <div>
           <Photo src={coverSrc} height={400} size={'med'}>
-            <h3>
-              <div className="photo-overlay-box hide-overflow">
-                {name}
-              </div>
-            </h3>
+            <HeadlineOverlay text={name} />
           </Photo>
         </div>
         <div className="row">
