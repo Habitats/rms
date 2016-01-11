@@ -2,13 +2,12 @@ import React from 'react'
 import {Link} from 'react-router'
 import {pushPath} from 'redux-simple-router'
 import Photo from './../photo/Photo.jsx'
-import PhotoLine from './../photo/PhotoLine.jsx'
 import * as ProductActionCreators from  '../../redux/actions/productActions'
 
 export default class ProductItem extends React.Component {
 
   render() {
-    let {product :{name, desc, images, src}, linkTo} = this.props
+    let {product :{name, desc, src}, linkTo} = this.props
     let style = {
       height: 350,
       marginBottom: 50

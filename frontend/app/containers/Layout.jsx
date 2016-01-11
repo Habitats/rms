@@ -12,14 +12,12 @@ export default class Layout extends React.Component {
   }
 
   render() {
-    console.log('FLUX > rendering > layout')
     return (
       <div>
         <Header />
         {this.props.children}
         <Footer />
       </div>
-
     )
   }
 }

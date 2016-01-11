@@ -35,11 +35,11 @@ export default class App extends React.Component {
         <Route component={Layout} path="/">
           <IndexRoute component={Welcome}/>
           <Route component={References} path="prosjekt"/>
-          <Route component={ProjectContainer} ignoreScrollBehavior={true} path="prosjekt/:id/:selected"/>
+          <Route component={ProjectContainer} ignoreScrollBehavior={true} path="prosjekt/:id(/:selected)"/>
           <Route component={ProjectAdd} onEnter={this.requireLogin.bind(this)} path="prosjekt/ny"/>
           <Route component={Private} path="privat"/>
           <Route component={Products} path="produkter">
-            <Route component={ProductContainer} path=":category/:product"/>
+            <Route component={ProductContainer} path=":category/:product(/:selected)"/>
             <Route component={CategoryContainer} path=":category"/>
           </Route>
           <Route component={About} path="om"/>

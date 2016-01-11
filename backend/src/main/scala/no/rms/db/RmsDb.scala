@@ -76,7 +76,7 @@ object RmsDb {
   }
 
   def store(project: Project, db: Database) {
-    val data = projects +=(project.id, project.title, project.description, project.img.mkString(delim), Config.format(project.created))
+    val data = projects +=(project.id, project.title, project.description, project.images.mkString(delim), Config.format(project.created))
     Logger.info("Adding project: " + project)
     db.run(data)
   }
