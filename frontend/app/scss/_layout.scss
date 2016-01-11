@@ -74,19 +74,6 @@ body {
   color: #fff;
 }
 
-.box {
-  margin-bottom: 20px;
-  padding: $boxPadding $boxPadding $boxPadding $boxPadding;
-  background: #fff;
-  box-shadow: 0 0 35px 3px rgba(0, 0, 0, 0.16);
-}
-
-.box-shaded {
-  padding: $boxPadding $boxPadding $boxPadding $boxPadding;
-  height: 100%;
-  box-shadow: inset 0 0 149px -1px rgba(0, 0, 0, 0.05);
-}
-
 .center-block {
   display: block;
   margin-left: auto;
@@ -134,10 +121,6 @@ i {
 
 .photo {
   margin-top: 15px;
-}
-
-.photo-selected {
-  opacity: 0.5;
 }
 
 #map-canvas {

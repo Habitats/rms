@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
 import BigHeadline from './../components/text/BigHeadline.jsx'
+import Box from './../components/Box.jsx'
 import * as sessionActionCreators from '../redux/actions/sessionActions'
 
 export default class Login extends Component {
@@ -79,17 +80,15 @@ export default class Login extends Component {
   render() {
     const loginForm = this.props.session.admin ? this.isLoggedIn() : this.notLoggedIn()
     return (
-      <div className="container">
-        <div className="box">
-          <div className="row">
-            <div className="col-md-4 col-md-offset-4 col-sm-5 col-sm-offset-2">
-              <form className="form">
-                {loginForm}
-              </form>
-            </div>
+      <Box>
+        <div className="row">
+          <div className="col-md-4 col-md-offset-4 col-sm-5 col-sm-offset-2">
+            <form className="form">
+              {loginForm}
+            </form>
           </div>
         </div>
-      </div>
+      </Box>
     )
   }
 }

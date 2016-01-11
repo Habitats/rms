@@ -1,9 +1,11 @@
 import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
 import {pushPath} from 'redux-simple-router'
-import BigHeadline from './../text/BigHeadline.jsx'
-import Photo from './../photo/Photo.jsx'
-import * as generalActionCreators from '../../redux/actions/generalActions'
+import BigHeadline from './../components/text/BigHeadline.jsx'
+import Photo from './../components/photo/Photo.jsx'
+import BoxLeft from './../components/BoxLeft.jsx'
+import BoxRight from './../components/BoxRight.jsx'
+import * as generalActionCreators from '../redux/actions/generalActions'
 
 export default class ProjectAdd extends Component {
 
@@ -30,7 +32,7 @@ export default class ProjectAdd extends Component {
   }
 
   handleImagesChange(event) {
-    this.setState({img: event.target.value.split(',')})
+    this.setState({images: event.target.value.split(',')})
   }
 
   onSelect(src) {
@@ -44,7 +46,7 @@ export default class ProjectAdd extends Component {
     this.setState({chosenImages: chosenImages})
   }
 
-  isValid(){
+  isValid() {
     return this.state.chosenImages.size > 0 && this.state.title.length > 0 && this.state.description.length > 0
   }
 
@@ -56,7 +58,7 @@ export default class ProjectAdd extends Component {
         id: id,
         title: this.state.title,
         description: this.state.description,
-        img: this.state.chosenImages
+        images: this.state.chosenImages
       }))
       this.props.dispatch(pushPath('/prosjekt'))
     } else {
@@ -65,52 +67,55 @@ export default class ProjectAdd extends Component {
   }
 
   render() {
-    let images = this.props.images.map(i => (<Photo size={'low'} className="col-md-3" height={100} onClick={this.onSelect.bind(this)} src={i.src}/>))
     let chosenImages = []
     for (let i of this.state.chosenImages.values()) {
       chosenImages.push(<div className="hide-overflow">- {i.name}</div>)
     }
+    let images = this.props.images.map(i => (
+      <Photo size={'low'}
+             className="col-lg-3 col-md-3 col-sm-4 col-xs-6"
+             height={100}
+             onClick={this.onSelect.bind(this)}
+             selected={this.state.chosenImages.has(i.src)}
+             src={i.src}/>
+    ))
     let error = <div>{this.state.error}</div>
     return (
-      <div className="container">
-        <div className="row box">
-          <div className="col-md-12">
-            <BigHeadline big="Legg til ny" small="Prosjekt"/>
-          </div>
+      <div>
+        <BoxLeft>
+          <form className="form">
+            <div className="form-group">
+              <label>Valgte bilder</label>
+              {chosenImages}
+            </div>
+          </form>
+        </BoxLeft>
+        <BoxRight>
+          <BigHeadline big="Legg til ny" small="Prosjekt"/>
 
-          <div className="col-md-8">
-            <form className="form">
-              <div className="form-group">
-                <label>Tittel</label>
-                <input className="form-control" onChange={this.handleTitleChange.bind(this)} placeholder="Prosjekttittel" type="text"/>
-              </div>
-              <div className="form-group">
-                <label>Beskrivelse</label>
-
+          <form className="form">
+            <div className="form-group">
+              <label>Tittel</label>
+              <input className="form-control" onChange={this.handleTitleChange.bind(this)} placeholder="Prosjekttittel" type="text"/>
+            </div>
+            <div className="form-group">
+              <label>Beskrivelse</label>
                 <textarea className="form-control" onChange={this.handleDescriptionChange.bind(this)}
-                          placeholder="Skriv en prosjektbeskrivelse her." rows="7"/>
-              </div>
-              <div className="form-group">
-                <button className="btn btn-primary btn-lg btn-block" onClick={this.onSave.bind(this)} type="submit">Lagre prosjekt</button>
-              </div>
-            </form>
-            {error}
+                          placeholder="Skriv en prosjektbeskrivelse her." rows="5"/>
+            </div>
+            <div className="form-group">
+              <button className="btn btn-primary btn-block" onClick={this.onSave.bind(this)} type="submit">Lagre prosjekt</button>
+            </div>
+          </form>
+          {error}
+        </BoxRight>
+
+        <BoxRight>
+          <BigHeadline big="Velg bilder"/>
+          <div className="row">
+            {images}
           </div>
-          <div className="col-md-4">
-            <form className="form">
-              <div className="form-group">
-                <label>Valgte bilder</label>
-                {chosenImages}
-              </div>
-            </form>
-          </div>
-        </div>
-        <div className="row box">
-          <div className="col-md-12">
-            <BigHeadline big="Velg bilder"/>
-          </div>
-          {images}
-        </div>
+        </BoxRight>
       </div>
     )
   }

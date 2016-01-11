@@ -4,6 +4,8 @@ import { replacePath } from 'redux-simple-router'
 import BigHeadline from './../components/text/BigHeadline.jsx'
 import Menu from './../components/menu/Menu.jsx'
 import Category from './CategoryContainer.jsx'
+import BoxLeft from './../components/BoxLeft.jsx'
+import BoxRight from './../components/BoxRight.jsx'
 import * as productActionCreators from './../redux/actions/productActions'
 
 export default class ProductsContainer extends Component {
@@ -25,12 +27,12 @@ export default class ProductsContainer extends Component {
 
     let category = categories.find(c => c.short === (params.category || 'eksterior'))
     return (
-      <div className="container">
-        <div className="box affix" style={{width: 190, paddingRight: 0}}>
+      <div>
+        <BoxLeft>
           <Menu categories={categories} selectedCategory={category.short}/>
-        </div>
+        </BoxLeft>
 
-        <div className="box" style={{marginLeft: 205}}>
+        <BoxRight>
           <div className="row">
             <BigHeadline big={category.name} small="Våre produkter og tjenester"/>
           </div>
@@ -39,7 +41,7 @@ export default class ProductsContainer extends Component {
               {children}
             </div>
           </div>
-        </div>
+        </BoxRight>
       </div>
     )
   }

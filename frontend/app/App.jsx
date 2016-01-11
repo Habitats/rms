@@ -15,7 +15,7 @@ import Private from './containers/Private.jsx'
 import Products from './containers/ProductsContainer.jsx'
 import ProductContainer from './containers/ProductContainer.jsx'
 import CategoryContainer from './containers/CategoryContainer.jsx'
-import ProjectAdd from './components/projects/ProjectAdd.jsx'
+import ProjectAdd from './containers/ProjectAdd.jsx'
 import Login from './containers/Login.jsx'
 import ProjectListItem from './components/projects/ProjectListItem.jsx'
 import ReferencesList from './components/text/ReferencesList.jsx'
@@ -35,8 +35,8 @@ export default class App extends Component {
         <Route component={Layout} path="/">
           <IndexRoute component={Welcome}/>
           <Route component={References} path="prosjekt"/>
-          <Route component={ProjectContainer} ignoreScrollBehavior={true} path="prosjekt/:id(/:selected)"/>
           <Route component={ProjectAdd} onEnter={this.requireLogin.bind(this)} path="prosjekt/ny"/>
+          <Route component={ProjectContainer} ignoreScrollBehavior={true} path="prosjekt/:id(/:selected)"/>
           <Route component={Private} path="privat"/>
           <Route component={Products} path="produkter">
             <Route component={ProductContainer} path=":category/:product(/:selected)"/>

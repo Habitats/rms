@@ -3,9 +3,9 @@ import * as GeneralApi from '../api/GeneralApi'
 
 export function save(data) {
   return dispatch => {
-    return GeneralApi.    save(data, () => {
+    return GeneralApi.save(data, () => {
       dispatch({type: C.ADD_PROJECT})
-    })
+    }).then(dispatch(fetchProjects()))
   }
 }
 
@@ -53,7 +53,6 @@ export function fetchPrivates() {
     )
   }
 }
-
 
 export function sendMail(email) {
   return dispatch => {

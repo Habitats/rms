@@ -5,7 +5,7 @@ export default class Features extends Component {
 
   render() {
     return (
-      <div className="row">
+      <div className="row" style={{marginTop: 20}}>
         <div className="col-md-4">
           <FeatureItem description="Med over 30 års erfaring stiller vi med kompetanse på høyeste nivå. " icon="fa-cogs"
                        title="Lang erfaring"/>

@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router'
 import Projects from './../components/projects/Projects.jsx'
 import BigHeadline from './../components/text/BigHeadline.jsx'
+import Box from './../components/Box.jsx'
 import * as generalActionCreators from './../redux/actions/generalActions'
 
 export default class References extends Component {
@@ -22,13 +23,11 @@ export default class References extends Component {
                       </Link>
                     </div> : null
     return (
-      <div className="container">
-        <div className="box col-md-12">
-          <BigHeadline big="Prosjekt" small="Våre referanser"/>
-          {newButton}
-          <Projects projects={projects}/>
-        </div>
-      </div>
+      <Box>
+        <BigHeadline big="Prosjekt" small="Våre referanser"/>
+        {newButton}
+        <Projects projects={projects}/>
+      </Box>
     )
   }
 }

@@ -2,51 +2,52 @@ import React, {Component, PropTypes} from 'react'
 import {Link} from 'react-router'
 import Photo from './../components/photo/Photo.jsx'
 import BigHeadline from './../components/text/BigHeadline.jsx'
+import TextBox from './../components/text/TextBox.jsx'
+import Box from './../components/Box.jsx'
 
 export default class About extends Component {
 
   render() {
     let margin = 40
     return (
-      <div className="container">
-        <div className="box">
+      <div>
+        <Box>
           <div className="row">
-            <div className="col-md-8 no-pad">
-              <Photo className="col-md-12" height={415} src="/image/butikken_.jpg"/>
+            <div className="col-md-8">
+              <Photo height={415} src="/image/butikken_.jpg"/>
             </div>
-            <div className="col-md-4 no-pad">
-              <Photo className="col-md-12" height={200} src="/image/butikken_inne_1.jpg"/>
-              <Photo className="col-md-12" height={200} src="/image/butikken_inne_2.jpg"/>
+            <div className="col-md-4">
+              <Photo height={200} src="/image/butikken_inne_1.jpg"/>
+              <Photo height={200} src="/image/butikken_inne_2.jpg"/>
             </div>
           </div>
+
           <BigHeadline big="Om bedriften" small="Romerike Markiseservice"/>
 
-          <div className="row">
-            <div className="col-md-8 col-md-offset-2">
-              <div>
-                <p> Romerike Markiseservice ble etablert i 1986 i Maura av Morten og Roar Skjennum. Sammen på laget hadde de en tredje bror,
-                  Bjarne,
-                  som montør samt Anne Grethe med det praktiske kontoransvaret. I dag har bedriften vokst til totalt seks ansatte, alle med
-                  et meget
-                  høyt kompetansenivå innenfor sine respektive områder.</p>
+          <TextBox>
+            <div>
+              <p> Romerike Markiseservice ble etablert i 1986 i Maura av Morten og Roar Skjennum. Sammen på laget hadde de en tredje bror,
+                Bjarne,
+                som montør samt Anne Grethe med det praktiske kontoransvaret. I dag har bedriften vokst til totalt seks ansatte, alle med
+                et meget
+                høyt kompetansenivå innenfor sine respektive områder.</p>
 
-                <p> Gjennom mer enn 30 års erfaring har bedriften etterhvert etablert seg til å bli en totalleverandør av solskjerming til
-                  både
-                  privat- og bedriftsmarkedet, og opererer som en offisiell forhandler av produkter fra <em>Hunter Douglas
-                    Solskjerming</em> gjennom et samarbeid med <em>Kjells Markiser</em>.</p>
+              <p> Gjennom mer enn 30 års erfaring har bedriften etterhvert etablert seg til å bli en totalleverandør av solskjerming til
+                både
+                privat- og bedriftsmarkedet, og opererer som en offisiell forhandler av produkter fra <em>Hunter Douglas
+                  Solskjerming</em> gjennom et samarbeid med <em>Kjells Markiser</em>.</p>
 
-                <p> Vårt salgsområde tar utgangspunkt i Øvre Romerike, men vi gjennomfører også oppdrag utenfor disse. Som kunde hos oss kan
-                  du til
-                  enhver tid forvente produkter av høy standard og rask levering, samt kvalitetssikret av våre egne montører. I tillegg har
-                  vi gjennom
-                  årene opparbeidet oss en særegen ekspertise innen service og vedlikehold av næringsbygg.</p>
-                <br />
-              </div>
+              <p> Vårt salgsområde tar utgangspunkt i Øvre Romerike, men vi gjennomfører også oppdrag utenfor disse. Som kunde hos oss kan
+                du til
+                enhver tid forvente produkter av høy standard og rask levering, samt kvalitetssikret av våre egne montører. I tillegg har
+                vi gjennom
+                årene opparbeidet oss en særegen ekspertise innen service og vedlikehold av næringsbygg.</p>
+              <br />
             </div>
-          </div>
-        </div>
+          </TextBox>
+        </Box>
 
-        <div className="box">
+        <Box>
           <BigHeadline big="Samarbeidspartnere" small="Leverandører og forhandlere"/>
 
           <div className="row">
@@ -85,7 +86,7 @@ export default class About extends Component {
               </div>
             </div>
           </div>
-        </div>
+        </Box>
       </div>
     )
   }

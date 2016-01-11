@@ -46,8 +46,10 @@ export default class Photo extends Component {
   }
 
   render() {
-    let {src, height, width, margin, crop} = this.props
-    let className = this.props.className + ' photo-container-wrapper ' + this.state.classes
+    let {src, height, width, margin, crop, selected} = this.props
+    let className = this.props.className +
+                    ' photo-container-wrapper ' +
+                    this.state.classes
     let style = {
       background: 'url(' + src + '/' + this.state.size + ') no-repeat center center',
       backgroundSize: crop ? 'cover !important' : 'contain !important',
@@ -55,6 +57,7 @@ export default class Photo extends Component {
       height: height || '100%',
       width: width || '100%',
       marginTop: margin,
+      opacity: selected ? 0.5 : 1,
       marginBottom: margin
     }
     let bigImg = this.state.backdropPhoto.length > 0 ? <img src={src}/> : ''
