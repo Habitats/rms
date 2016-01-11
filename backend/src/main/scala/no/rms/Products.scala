@@ -3,7 +3,7 @@ package no.rms
 import no.rms.models.Product
 
 object Products {
-  def products = {
+  val products = {
     val products = Set(
       Product("Eksteriør", "", Seq(
         Product("Markiser", "Markiser kommer i mange former og fasonger. Vi fører alt fra større terrassemarkiser, til enkle vindusmarkiser."),

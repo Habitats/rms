@@ -12,9 +12,9 @@ export default class Product extends React.Component {
     // failsafe if there're no images
     let coverSrc = s != -1 ? images[s].src : src
     return (
-      <div className="col-md-12">
+      <div>
         <div>
-          <Photo src={coverSrc} height={400}>
+          <Photo src={coverSrc} height={400} size={'med'}>
             <h3>
               <div className="photo-overlay-box hide-overflow">
                 {name}

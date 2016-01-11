@@ -4,7 +4,7 @@ export default class BigHeadline extends React.Component {
 
   render() {
     let style = {
-      marginBottom: 40
+      marginBottom: 30
     }
     return (
       <div className="row">

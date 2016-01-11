@@ -17,7 +17,7 @@ export default class Project extends React.Component {
 
           <div className="row">
             <div className="col-md-12">
-              <PhotoBig description={project.description} src={project.images[selected].src}/>
+              <PhotoBig description={project.description} src={project.images[selected].src} />
             </div>
           </div>
 

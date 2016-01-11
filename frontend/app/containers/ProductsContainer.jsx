@@ -22,18 +22,20 @@ export default class ProductsContainer extends React.Component {
     if (categories.length === 0) {
       return null
     }
+
     let category = categories.find(c => c.short === (params.category || 'eksterior'))
     return (
       <div className="container">
-        <div className="box">
-          <div className="col-md-12 col-sm-12">
+        <div className="box affix" style={{width: 190, paddingRight: 0}}>
+          <Menu categories={categories} selectedCategory={category.short}/>
+        </div>
+
+        <div className="box" style={{marginLeft: 205}}>
+          <div className="row">
             <BigHeadline big={category.name} small="Våre produkter og tjenester"/>
           </div>
           <div className="row">
-            <div className="col-md-2 col-sm-3 col-xs-4">
-              <Menu categories={categories} selectedCategory={category.short}/>
-            </div>
-            <div className="col-md-10 col-sm-9 col-xs-8">
+            <div className="col-md-12">
               {children}
             </div>
           </div>

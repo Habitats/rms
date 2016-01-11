@@ -9,8 +9,8 @@ export default class ProductItem extends React.Component {
   render() {
     let {product :{name, desc, src}, linkTo} = this.props
     let style = {
-      height: 350,
-      marginBottom: 50
+      height: 250,
+      marginBottom: 25
     }
     return (
       <div className="col-md-6 col-md-offset-0" style={style}>
@@ -25,9 +25,6 @@ export default class ProductItem extends React.Component {
                 </h3>
               </Photo>
             </Link>
-          </div>
-          <div className="col-md-12">
-            <p>{desc}</p>
           </div>
         </div>
       </div>

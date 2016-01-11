@@ -51,7 +51,7 @@ export default class Photo extends React.Component {
     let style = {
       background: 'url(' + src + '/' + this.state.size + ') no-repeat center center',
       backgroundSize: crop ? 'cover !important' : 'contain !important',
-      backgroundColor: '#fafafa',
+      backgroundColor: '#ffffff',
       height: height || '100%',
       width: width || '100%',
       marginTop: margin,
