@@ -1,6 +1,6 @@
-import React from 'react'
+import React, {Component, PropTypes} from 'react'
 
-export default class BigHeadline extends React.Component {
+export default class BigHeadline extends Component {
 
   render() {
     let style = {
@@ -26,6 +26,6 @@ BigHeadline.defaultProps = {
 }
 
 BigHeadline.propTypes = {
-  small: React.PropTypes.string,
-  big: React.PropTypes.string
+  small: PropTypes.string,
+  big: PropTypes.string
 }

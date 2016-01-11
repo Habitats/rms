@@ -1,9 +1,9 @@
-import React from 'react'
+import React, {Component, PropTypes} from 'react'
 import {Link} from 'react-router'
-import { connect } from 'react-redux'
+import {connect} from 'react-redux'
 import * as sessionActionCreator from '../redux/actions/sessionActions'
 
-export default class Footer extends React.Component {
+export default class Footer extends Component {
 
   render() {
     let {username} = this.props.session
@@ -25,8 +25,8 @@ export default class Footer extends React.Component {
 }
 
 Footer.propTypes = {
-  dispatch: React.PropTypes.func.isRequired,
-  session: React.PropTypes.object.isRequired
+  dispatch: PropTypes.func.isRequired,
+  session: PropTypes.object.isRequired
 }
 
 export default connect(state => ({

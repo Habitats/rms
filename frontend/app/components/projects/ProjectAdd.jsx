@@ -1,11 +1,11 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React, {Component, PropTypes} from 'react'
+import {connect} from 'react-redux'
 import {pushPath} from 'redux-simple-router'
 import BigHeadline from './../text/BigHeadline.jsx'
 import Photo from './../photo/Photo.jsx'
 import * as generalActionCreators from '../../redux/actions/generalActions'
 
-export default class ProjectAdd extends React.Component {
+export default class ProjectAdd extends Component {
 
   constructor(props) {
     super(props)
@@ -117,9 +117,9 @@ export default class ProjectAdd extends React.Component {
 }
 
 ProjectAdd.propTypes = {
-  dispatch: React.PropTypes.func.isRequired,
-  images: React.PropTypes.array,
-  projects: React.PropTypes.array
+  dispatch: PropTypes.func.isRequired,
+  images: PropTypes.array,
+  projects: PropTypes.array
 }
 
 export default connect(state => ({

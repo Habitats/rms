@@ -1,8 +1,8 @@
-import React from 'react'
+import React, {Component, PropTypes} from 'react'
 import {Link} from 'react-router'
 import Photo from './../photo/Photo.jsx'
 
-export default class ProjectListItem extends React.Component {
+export default class ProjectListItem extends Component {
 
   render() {
     return (
@@ -23,5 +23,5 @@ export default class ProjectListItem extends React.Component {
 }
 
 ProjectListItem.propTypes = {
-  project: React.PropTypes.object.isRequired
+  project: PropTypes.object.isRequired
 }

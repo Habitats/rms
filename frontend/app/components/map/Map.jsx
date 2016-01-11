@@ -1,6 +1,6 @@
-import React from 'react'
+import React, {Component, PropTypes} from 'react'
 
-export default class Map extends React.Component {
+export default class Map extends Component {
 
   componentDidUpdate() {
     window.initialize()

@@ -1,10 +1,10 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React, {Component, PropTypes} from 'react'
+import {connect} from 'react-redux'
 import {Link} from 'react-router'
 import * as ProductActionCreators from '../../redux/actions/productActions'
 import MenuItem from './MenuItem.jsx'
 
-export default class MenuCategory extends React.Component {
+export default class MenuCategory extends Component {
 
   render() {
     let {selectedCategory, category} = this.props
@@ -25,11 +25,11 @@ export default class MenuCategory extends React.Component {
 }
 
 MenuCategory.propTypes = {
-  category: React.PropTypes.shape({
-    name: React.PropTypes.string.isRequired,
-    short: React.PropTypes.string.isRequired,
-    sub: React.PropTypes.array.isRequired
+  category: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    short: PropTypes.string.isRequired,
+    sub: PropTypes.array.isRequired
   }),
-  selectedCategory: React.PropTypes.string.isRequired
+  selectedCategory: PropTypes.string.isRequired
 }
 

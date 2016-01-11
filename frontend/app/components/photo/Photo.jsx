@@ -1,7 +1,7 @@
-import React from 'react'
+import React, {Component, PropTypes} from 'react'
 import EventListener from '../../util/EventListener.js'
 
-export default class Photo extends React.Component {
+export default class Photo extends Component {
 
   constructor(props) {
     super(props)
@@ -93,16 +93,16 @@ Photo.defaultProps = {
 }
 
 Photo.propTypes = {
-  height: React.PropTypes.number,
-  width: React.PropTypes.number,
-  className: React.PropTypes.string,
-  size: React.PropTypes.string,
-  clickable: React.PropTypes.bool,
-  crop: React.PropTypes.bool,
-  children: React.PropTypes.object,
-  onClick: React.PropTypes.func,
-  margin: React.PropTypes.number,
-  src: React.PropTypes.string.isRequired
+  height: PropTypes.number,
+  width: PropTypes.number,
+  className: PropTypes.string,
+  size: PropTypes.string,
+  clickable: PropTypes.bool,
+  crop: PropTypes.bool,
+  children: PropTypes.object,
+  onClick: PropTypes.func,
+  margin: PropTypes.number,
+  src: PropTypes.string.isRequired
 }
 
 

@@ -1,6 +1,6 @@
-import React from 'react'
+import React, {Component, PropTypes} from 'react'
 
-export default class ReferencesList extends React.Component {
+export default class ReferencesList extends Component {
 
   render() {
     return (

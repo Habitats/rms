@@ -1,7 +1,7 @@
-import React from 'react'
+import React, {Component, PropTypes} from 'react'
 import {Router, Route, IndexRoute, Link} from 'react-router'
 import {pushPath} from 'redux-simple-router'
-import { connect } from 'react-redux'
+import {connect} from 'react-redux'
 
 import history from './history'
 import Layout from './containers/Layout.jsx'
@@ -21,7 +21,7 @@ import ProjectListItem from './components/projects/ProjectListItem.jsx'
 import ReferencesList from './components/text/ReferencesList.jsx'
 import * as SessionActionCreators from './redux/actions/sessionActions'
 
-export default class App extends React.Component {
+export default class App extends Component {
 
   requireLogin() {
     if (!this.props.session.admin) {

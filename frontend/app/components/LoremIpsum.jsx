@@ -1,6 +1,6 @@
-import React from 'react'
+import React, {Component, PropTypes} from 'react'
 
-export default class LoremIpsum extends React.Component {
+export default class LoremIpsum extends Component {
   render() {
     return (
       <div>

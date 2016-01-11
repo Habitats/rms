@@ -1,8 +1,8 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React, {Component, PropTypes} from 'react'
+import {connect} from 'react-redux'
 import ProjectListItem from './ProjectListItem.jsx'
 
-export default class Projects extends React.Component {
+export default class Projects extends Component {
 
   render() {
     let {projects} = this.props
@@ -20,5 +20,5 @@ export default class Projects extends React.Component {
 }
 
 Projects.propTypes = {
-  projects: React.PropTypes.array.isRequired
+  projects: PropTypes.array.isRequired
 }

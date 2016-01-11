@@ -1,10 +1,10 @@
-import React from 'react'
+import React, {Component, PropTypes} from 'react'
 import {Link} from 'react-router'
 import Carousel from './../components/photo/Carousel.jsx'
 import BigHeadline from './../components/text/BigHeadline.jsx'
 import Features from './../components/feature/Features.jsx'
 
-export default class Welcome extends React.Component {
+export default class Welcome extends Component {
 
   render() {
     return (

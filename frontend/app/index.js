@@ -3,7 +3,7 @@ import 'whatwg-fetch'
 import './index.html'
 import './scss/base.scss'
 
-import React from 'react'
+import React, {Component, PropTypes} from 'react'
 import {render} from 'react-dom'
 import history from './history'
 import {syncReduxAndRouter} from 'redux-simple-router'

@@ -1,7 +1,7 @@
-import React from 'react'
+import React, {Component, PropTypes} from 'react'
 import Photo from './Photo.jsx'
 
-export default class Carousel extends React.Component {
+export default class Carousel extends Component {
 
   render() {
     return (
@@ -15,6 +15,6 @@ export default class Carousel extends React.Component {
 }
 
 Carousel.propTypes = {
-  children: React.PropTypes.object,
-  src: React.PropTypes.string.isRequired
+  children: PropTypes.object,
+  src: PropTypes.string.isRequired
 }

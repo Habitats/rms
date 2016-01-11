@@ -1,6 +1,6 @@
-import React from 'react'
+import React, {Component, PropTypes} from 'react'
 
-export default class FeatureItem extends React.Component {
+export default class FeatureItem extends Component {
 
   render() {
     let classes = 'fa fa-4x ' + this.props.icon
@@ -19,7 +19,7 @@ export default class FeatureItem extends React.Component {
 }
 
 FeatureItem.propTypes = {
-  icon: React.PropTypes.string.isRequired,
-  title: React.PropTypes.string.isRequired,
-  description: React.PropTypes.string.isRequired
+  icon: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired
 }

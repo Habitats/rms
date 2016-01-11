@@ -1,10 +1,10 @@
-import React from 'react'
+import React, {Component, PropTypes} from 'react'
 import {Link} from 'react-router'
 import {pushPath} from 'redux-simple-router'
 import Photo from './../photo/Photo.jsx'
 import * as ProductActionCreators from  '../../redux/actions/productActions'
 
-export default class ProductItem extends React.Component {
+export default class ProductItem extends Component {
 
   render() {
     let {product :{name, desc, src}, linkTo} = this.props
@@ -33,10 +33,10 @@ export default class ProductItem extends React.Component {
 }
 
 ProductItem.propTypes = {
-  product: React.PropTypes.shape({
-    name: React.PropTypes.string.isRequired,
-    desc: React.PropTypes.string.isRequired,
-    short: React.PropTypes.string.isRequired
+  product: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    desc: PropTypes.string.isRequired,
+    short: PropTypes.string.isRequired
   }),
-  linkTo: React.PropTypes.string.isRequired
+  linkTo: PropTypes.string.isRequired
 }

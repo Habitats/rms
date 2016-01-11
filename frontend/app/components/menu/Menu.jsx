@@ -1,7 +1,7 @@
-import React from 'react'
+import React, {Component, PropTypes} from 'react'
 import MenuCategory from './MenuCategory.jsx'
 
-export default class Menu extends React.Component {
+export default class Menu extends Component {
 
   render() {
     let {categories, selectedCategory} = this.props
@@ -15,6 +15,6 @@ export default class Menu extends React.Component {
 }
 
 Menu.propTypes = {
-  categories: React.PropTypes.array.isRequired,
-  selectedCategory: React.PropTypes.string.isRequired
+  categories: PropTypes.array.isRequired,
+  selectedCategory: PropTypes.string.isRequired
 }

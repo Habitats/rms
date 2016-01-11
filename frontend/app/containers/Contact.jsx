@@ -1,10 +1,10 @@
-import React from 'react'
+import React, {Component, PropTypes} from 'react'
 import ContactForm from './../components/contact/ContactForm.jsx'
 import BigHeadline from './../components/text/BigHeadline.jsx'
 import MapWrapper from './../components/map/MapWrapper.jsx'
 import Person from './../components/contact/Person.jsx'
 
-export default class Contact extends React.Component {
+export default class Contact extends Component {
 
   render() {
     return (

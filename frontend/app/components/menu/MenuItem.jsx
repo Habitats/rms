@@ -1,7 +1,7 @@
-import React from 'react'
+import React, {Component, PropTypes} from 'react'
 import {Link} from 'react-router'
 
-export default class MenuItem extends React.Component {
+export default class MenuItem extends Component {
 
   render() {
     let {product: {name}, linkTo} = this.props
@@ -14,10 +14,10 @@ export default class MenuItem extends React.Component {
 }
 
 MenuItem.propTypes = {
-  product: React.PropTypes.shape({
-    name: React.PropTypes.string.isRequired
+  product: PropTypes.shape({
+    name: PropTypes.string.isRequired
   }),
-  linkTo: React.PropTypes.string.isRequired
+  linkTo: PropTypes.string.isRequired
 }
 
 

@@ -1,12 +1,12 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React, {Component, PropTypes} from 'react'
+import {connect} from 'react-redux'
 import BigHeadline from './../components/text/BigHeadline.jsx'
 import PhotoBig from './../components/photo/PhotoBig.jsx'
 import PhotoLine from './../components/photo/PhotoLine.jsx'
 import Project from './../components/projects/Project.jsx'
 import * as generalActionCreators from '../redux/actions/generalActions'
 
-class ProjectContainer extends React.Component {
+class ProjectContainer extends Component {
 
   componentWillMount() {
     this.props.dispatch(generalActionCreators.fetchProject(this.props.params.id))
@@ -26,10 +26,10 @@ class ProjectContainer extends React.Component {
 }
 
 ProjectContainer.propTypes = {
-  project: React.PropTypes.object,
-  params: React.PropTypes.shape({
-    id: React.PropTypes.number.isRequired,
-    selected: React.PropTypes.number.isRequired
+  project: PropTypes.object,
+  params: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    selected: PropTypes.number.isRequired
   })
 }
 

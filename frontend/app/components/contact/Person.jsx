@@ -1,7 +1,7 @@
-import React from 'react'
+import React, {Component, PropTypes} from 'react'
 import Photo from './../photo/Photo.jsx'
 
-export default class Person extends React.Component {
+export default class Person extends Component {
 
   render() {
     let title = this.props.title ? <p><i className="fa fa-user"/>&nbsp; {this.props.title} </p> : ''
@@ -25,9 +25,9 @@ export default class Person extends React.Component {
 }
 
 Person.propTypes = {
-  mail: React.PropTypes.string,
-  title: React.PropTypes.string,
-  phone: React.PropTypes.string,
-  name: React.PropTypes.string,
-  photo: React.PropTypes.string
+  mail: PropTypes.string,
+  title: PropTypes.string,
+  phone: PropTypes.string,
+  name: PropTypes.string,
+  photo: PropTypes.string
 }

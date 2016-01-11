@@ -1,9 +1,9 @@
-import React from 'react'
+import React, {Component, PropTypes} from 'react'
 import {Link} from 'react-router'
 import Photo from './../components/photo/Photo.jsx'
 import BigHeadline from './../components/text/BigHeadline.jsx'
 
-export default class About extends React.Component {
+export default class About extends Component {
 
   render() {
     let margin = 40

@@ -1,10 +1,10 @@
-import React from 'react'
+import React, {Component, PropTypes} from 'react'
 import {Link} from 'react-router'
 import {pushPath} from 'redux-simple-router'
 import {connect} from 'react-redux'
 import Photo from './Photo.jsx'
 
-export default class PhotoLine extends React.Component {
+export default class PhotoLine extends Component {
 
   onSelect(path) {
     this.props.dispatch(pushPath(path))
@@ -39,9 +39,9 @@ PhotoLine.defaultProps = {
 }
 
 PhotoLine.propTypes = {
-  images: React.PropTypes.array.isRequired,
-  selected: React.PropTypes.number.isRequired,
-  id: React.PropTypes.string.isRequired
+  images: PropTypes.array.isRequired,
+  selected: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired
 }
 
 export default connect()(PhotoLine)

@@ -1,5 +1,4 @@
-import React from 'react'
-
+import React, {Component, PropTypes} from 'react'
 // Exported from redux-devtools
 import { createDevTools } from 'redux-devtools'
 

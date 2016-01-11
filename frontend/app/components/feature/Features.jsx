@@ -1,7 +1,7 @@
-import React from 'react'
+import React, {Component, PropTypes} from 'react'
 import FeatureItem from './FeatureItem.jsx'
 
-export default class Features extends React.Component {
+export default class Features extends Component {
 
   render() {
     return (

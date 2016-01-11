@@ -1,8 +1,8 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React, {Component, PropTypes} from 'react'
+import {connect} from 'react-redux'
 import * as GeneralActionCreators from '../../redux/actions/generalActions'
 
-export default class ContactForm extends React.Component {
+export default class ContactForm extends Component {
 
   constructor(props) {
     super(props)
@@ -119,7 +119,7 @@ export default class ContactForm extends React.Component {
 }
 
 ContactForm.propTypes = {
-  dispatch: React.PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired
 }
 
 export default connect()(ContactForm)

@@ -1,9 +1,9 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React, {Component, PropTypes} from 'react'
+import {connect} from 'react-redux'
 import BigHeadline from './../components/text/BigHeadline.jsx'
 import * as sessionActionCreators from '../redux/actions/sessionActions'
 
-export default class Login extends React.Component {
+export default class Login extends Component {
 
   constructor(props) {
     super(props)
@@ -95,8 +95,8 @@ export default class Login extends React.Component {
 }
 
 Login.propTypes = {
-  dispatch: React.PropTypes.func.isRequired,
-  session: React.PropTypes.object.isRequired
+  dispatch: PropTypes.func.isRequired,
+  session: PropTypes.object.isRequired
 }
 
 export default connect(state => ({

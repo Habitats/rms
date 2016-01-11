@@ -1,12 +1,12 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React, {Component, PropTypes} from 'react'
+import {connect} from 'react-redux'
 import { replacePath } from 'redux-simple-router'
 import BigHeadline from './../components/text/BigHeadline.jsx'
 import Menu from './../components/menu/Menu.jsx'
 import Category from './CategoryContainer.jsx'
 import * as productActionCreators from './../redux/actions/productActions'
 
-export default class ProductsContainer extends React.Component {
+export default class ProductsContainer extends Component {
 
   componentWillMount() {
     if (!this.props.params.category) {
@@ -46,12 +46,12 @@ export default class ProductsContainer extends React.Component {
 }
 
 ProductsContainer.propTypes = {
-  dispatch: React.PropTypes.func.isRequired,
-  children: React.PropTypes.object.isRequired,
-  params: React.PropTypes.shape({
-    category: React.PropTypes.string
+  dispatch: PropTypes.func.isRequired,
+  children: PropTypes.object.isRequired,
+  params: PropTypes.shape({
+    category: PropTypes.string
   }),
-  categories: React.PropTypes.array.isRequired
+  categories: PropTypes.array.isRequired
 }
 
 export default connect(state => ({

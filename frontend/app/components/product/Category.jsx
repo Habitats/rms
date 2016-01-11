@@ -1,7 +1,7 @@
-import React from 'react'
+import React, {Component, PropTypes} from 'react'
 import ProductItem from './ProductItem.jsx'
 
-export default class Category extends React.Component {
+export default class Category extends Component {
 
   render() {
     let {name, sub, short} = this.props.category
@@ -15,11 +15,11 @@ export default class Category extends React.Component {
 }
 
 Category.propTypes = {
-  category: React.PropTypes.shape({
-    name: React.PropTypes.string.isRequired,
-    short: React.PropTypes.string.isRequired,
-    desc: React.PropTypes.string.isRequired,
-    src: React.PropTypes.string.isRequired,
-    sub: React.PropTypes.object.isRequired
+  category: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    short: PropTypes.string.isRequired,
+    desc: PropTypes.string.isRequired,
+    src: PropTypes.string.isRequired,
+    sub: PropTypes.object.isRequired
   })
 }

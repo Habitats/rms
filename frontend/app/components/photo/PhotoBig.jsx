@@ -1,7 +1,7 @@
-import React from 'react'
+import React, {Component, PropTypes} from 'react'
 import Photo from './Photo.jsx'
 
-export default class PhotoBig extends React.Component {
+export default class PhotoBig extends Component {
 
   render() {
     let {height, width, src, onClick, description} = this.props
@@ -22,11 +22,11 @@ export default class PhotoBig extends React.Component {
 }
 
 PhotoBig.propTypes = {
-  description: React.PropTypes.string,
-  src: React.PropTypes.string.isRequired,
-  height: React.PropTypes.number,
-  width: React.PropTypes.number,
-  onClick: React.PropTypes.func
+  description: PropTypes.string,
+  src: PropTypes.string.isRequired,
+  height: PropTypes.number,
+  width: PropTypes.number,
+  onClick: PropTypes.func
 }
 
 PhotoBig.defaultProps = {

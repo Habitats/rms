@@ -1,10 +1,10 @@
-import React from 'react'
+import React, {Component, PropTypes} from 'react'
 import Photo from './../photo/Photo.jsx'
 import PhotoLine from './../photo/PhotoLine.jsx'
 import {connect} from 'react-redux'
 import LoremIpsum from './../LoremIpsum.jsx'
 
-export default class Product extends React.Component {
+export default class Product extends Component {
 
   render() {
     let {product: {name, desc, src, images}, linkTo, selected} = this.props
@@ -35,9 +35,9 @@ export default class Product extends React.Component {
 }
 
 Product.propTypes = {
-  product: React.PropTypes.shape({
-    name: React.PropTypes.string.isRequired,
-    desc: React.PropTypes.string.isRequired,
-    src: React.PropTypes.string.isRequired
+  product: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    desc: PropTypes.string.isRequired,
+    src: PropTypes.string.isRequired
   })
 }

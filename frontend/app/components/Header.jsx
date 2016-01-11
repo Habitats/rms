@@ -1,7 +1,7 @@
-import React from 'react'
+import React, {Component, PropTypes} from 'react'
 import {Link} from 'react-router'
 
-export default class Header extends React.Component {
+export default class Header extends Component {
 
   render() {
     return (

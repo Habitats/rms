@@ -1,11 +1,11 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React, {Component, PropTypes} from 'react'
+import {connect} from 'react-redux'
 import {Link} from 'react-router'
 import Projects from './../components/projects/Projects.jsx'
 import BigHeadline from './../components/text/BigHeadline.jsx'
 import * as generalActionCreators from './../redux/actions/generalActions'
 
-export default class References extends React.Component {
+export default class References extends Component {
 
   componentWillMount() {
     if (this.props.projects.length === 0) {
@@ -34,9 +34,9 @@ export default class References extends React.Component {
 }
 
 References.propTypes = {
-  dispatch: React.PropTypes.func.isRequired,
-  projects: React.PropTypes.object.isRequired,
-  session: React.PropTypes.object.isRequired
+  dispatch: PropTypes.func.isRequired,
+  projects: PropTypes.object.isRequired,
+  session: PropTypes.object.isRequired
 }
 
 export default connect(state => ({

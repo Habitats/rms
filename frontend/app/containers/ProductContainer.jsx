@@ -1,9 +1,9 @@
-import React from 'react'
+import React, {Component, PropTypes} from 'react'
 import Photo from './../components/photo/Photo.jsx'
 import Product from './../components/product/Product.jsx'
 import {connect} from 'react-redux'
 
-export default class ProductContainer extends React.Component {
+export default class ProductContainer extends Component {
 
   render() {
     let {categories, params} = this.props
@@ -16,10 +16,10 @@ export default class ProductContainer extends React.Component {
 }
 
 ProductContainer.propTypes = {
-  categories: React.PropTypes.object.isRequired,
-  params: React.PropTypes.shape({
-    category: React.PropTypes.string.isRequired,
-    product: React.PropTypes.string.isRequired
+  categories: PropTypes.object.isRequired,
+  params: PropTypes.shape({
+    category: PropTypes.string.isRequired,
+    product: PropTypes.string.isRequired
   })
 }
 

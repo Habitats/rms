@@ -1,11 +1,11 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React, {Component, PropTypes} from 'react'
+import {connect} from 'react-redux'
 import BigHeadline from './../text/BigHeadline.jsx'
 import PhotoBig from './../photo/PhotoBig.jsx'
 import PhotoLine from './../photo/PhotoLine.jsx'
 import * as generalActionCreators from '../../redux/actions/generalActions'
 
-export default class Project extends React.Component {
+export default class Project extends Component {
 
   render() {
     let {project, selected} = this.props
@@ -33,6 +33,6 @@ export default class Project extends React.Component {
 }
 
 Project.propTypes = {
-  project: React.PropTypes.object,
-  selected: React.PropTypes.number.isRequired
+  project: PropTypes.object,
+  selected: PropTypes.number.isRequired
 }
