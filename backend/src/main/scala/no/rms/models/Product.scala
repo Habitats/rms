@@ -8,7 +8,7 @@ case class Product private(name: String, desc: String, sub: Seq[Product], short:
     val nestedCategory = s"$category/$short"
     val newSub = sub.map(_.attachCategory(nestedCategory))
 
-    val images = ImageUtils.images(nestedCategory)
+    val images = ImageUtils.fetchUrls(nestedCategory)
     val coverSrc = images.find(_.name == "main.jpg").orElse(images.headOption).map(_.src).getOrElse(src)
     val c = copy(category = category, sub = newSub, images = images, src = coverSrc)
     c

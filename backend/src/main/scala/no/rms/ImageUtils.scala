@@ -1,7 +1,7 @@
 package no.rms
 
 import java.io.File
-import java.nio.file.Paths
+import java.nio.file.{Files, Paths}
 
 import com.sksamuel.scrimage.Image
 import com.sksamuel.scrimage.nio.JpegWriter
@@ -18,14 +18,28 @@ object ImageUtils {
   def notFound(): File = Random.shuffle(Paths.get(rootDir, "not_found").toFile.listFiles.toList).head
 
   def privates: Seq[ImageWrapper] = {
-    val p = images("privat")
+    val p = fetchUrls("privat")
     p
   }
 
-  def images(path: String = ""): Seq[ImageWrapper] = {
+  def rename(f: File): File = {
+    if (f.getName.contains(" ")) {
+      val renamed = Paths.get(f.getParent, f.getName.replaceAll(" ", "_")).toFile
+      Files.move(f.toPath, renamed.toPath)
+      Logger.info("Renaming: " + f.getName + " > " + renamed.getName)
+      renamed
+    } else {
+      f
+    }
+  }
+
+  def fetchUrls(path: String = ""): Seq[ImageWrapper] = {
     val f = new File("img/raw/" + path)
     if (f.exists) {
-      f.listFiles.map(_.getName).filter(f => f.endsWith(".jpg") || f.endsWith(".png")).map(f => ImageWrapper(f, (if(path.length > 0) (path + "/") else "") + f)).toList
+      f.listFiles
+        .map(rename)
+        .map(_.getName).filter(f => f.endsWith(".jpg") || f.endsWith(".png"))
+        .map(f => ImageWrapper(f, (if (path.length > 0) (path + "/") else "") + f)).toList
     } else Nil
   }
 
@@ -33,11 +47,10 @@ object ImageUtils {
     val args = urlPath.split(ImageUtils.delim)
     val id = args.last
     val path = if (args.length > 1) args.take(args.length - 1).mkString("", "/", "/") else ""
-    ImageUtils.fetchSize(id, size, path)
+    ImageUtils.fetchSize(id, size, path).map(rename)
   }
 
   private def fetch(id: String, path: String = ""): Option[File] = {
-
     val imgDir = if (path != "") new File(s"$rootDir/raw/$path") else new File(rootDir + "/raw")
     val image = new File(imgDir.toString, id)
     if (image.exists) Some(image) else None

@@ -79,7 +79,7 @@ class PublicServlet(val db: Database) extends BackendStack with FutureSupport wi
 
   get("/images/?") {
     Logger.info("GET: images/")
-    ImageUtils.images("prosjekt")
+    ImageUtils.fetchUrls("prosjekt")
   }
 
   get("/privates/?") {
