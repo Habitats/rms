@@ -12,7 +12,7 @@ export default class Welcome extends Component {
     return (
       <div>
         <Box>
-          <Carousel src="/image/refpriv_kunde_5.jpg"/>
+          <Carousel src="/image/index.jpg"/>
           <BigHeadline big="Profesjonell solskjerming" small="Romerike Markiseservice"/>
           <TextBox >
             <p> Romerike Markiseservice er en ledende og profesjonell totalleverandør av solskjermingssystemer med kunden i sentrum.</p>

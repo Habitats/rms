@@ -7,10 +7,6 @@ import * as sessionActionCreators from './../redux/actions/sessionActions'
 
 export default class Layout extends Component {
 
-  componentWillMount() {
-    this.props.dispatch(sessionActionCreators.session())
-  }
-
   render() {
     return (
       <div>
@@ -25,10 +21,5 @@ export default class Layout extends Component {
 }
 
 Layout.propTypes = {
-  children: PropTypes.object.isRequired,
-  dispatch: PropTypes.func.isRequired
+  children: PropTypes.element.isRequired
 }
-
-export default connect(state => ({
-  session: state.session
-}))(Layout)

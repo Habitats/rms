@@ -32,6 +32,11 @@ export default class Project extends Component {
 }
 
 Project.propTypes = {
-  project: PropTypes.object,
+  project: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    images: PropTypes.array.isRequired
+  }),
   selected: PropTypes.number.isRequired
 }

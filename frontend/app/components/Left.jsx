@@ -15,5 +15,5 @@ export default class Left extends Component {
 }
 
 Left.propTypes = {
-  children: PropTypes.object.isRequired
+  children: PropTypes.element.isRequired
 }

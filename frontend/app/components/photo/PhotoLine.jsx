@@ -13,7 +13,7 @@ export default class PhotoLine extends Component {
   render() {
     let {images, root, selected, clickable} = this.props
     let photos = images.map(image =>
-      <div className="col-lg-3 col-md-3 col-sm-4 col-xs-6">
+      <div className="col-lg-3 col-md-3 col-sm-4 col-xs-6" key={image.src}>
         {!clickable ?
          <div className={'photo'}>
            <Photo onClick={this.onSelect.bind(this, '/' + root + '/' + images.indexOf(image))} height={120}
@@ -37,13 +37,15 @@ export default class PhotoLine extends Component {
 
 PhotoLine.defaultProps = {
   selected: 0,
-  clickable: false
+  clickable: false,
+  root: null
 }
 
 PhotoLine.propTypes = {
+  dispatch: PropTypes.func.isRequired,
   images: PropTypes.array.isRequired,
-  selected: PropTypes.number.isRequired,
-  id: PropTypes.string.isRequired,
+  root: PropTypes.string,
+  selected: PropTypes.number,
   clickable: PropTypes.bool,
 }
 

@@ -8,7 +8,8 @@ import no.rms.{Config, Logger}
 import slick.driver.JdbcDriver.api._
 
 import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.Future
+import scala.concurrent.{Promise, Future}
+import scala.util.{Failure, Success}
 
 
 object RmsDb {
@@ -19,9 +20,9 @@ object RmsDb {
 
     def title = column[String]("TITLE")
 
-    def description = column[String]("DESCRIPTION")
+    def description = column[String]("DESCRIPTION", O.Length(10000))
 
-    def img = column[String]("IMG")
+    def img = column[String]("IMG", O.Length(10000))
 
     def created = column[String]("CREATED")
 
@@ -45,13 +46,7 @@ object RmsDb {
 
       val samples = Seq(
         Project("1", "Nannestad VGS", "Hos Nannestad VGS har vi stått for levering av utvendige persienner, og masse annet rart. Stort prosjekt!", vgsImgs, LocalDateTime.now),
-        Project("2", "Nannestad Kommunehus", "Hos Nannestad VGS har vi stått for levering av utvendige persienner, og masse annet rart. Stort prosjekt!", komImgs, LocalDateTime.now),
-        Project("3", "Manesjen, Jessheim", "Hos Nannestad VGS har vi stått for levering av utvendige persienner, og masse annet rart. Stort prosjekt!", komImgs, LocalDateTime.now),
-        Project("4", "Jessheim Kulturhus", "Hos Nannestad VGS har vi stått for levering av utvendige persienner, og masse annet rart. Stort prosjekt!", vgsImgs, LocalDateTime.now),
-        Project("5", "Nannestad VGS", "Hos Nannestad VGS har vi stått for levering av utvendige persienner, og masse annet rart. Stort prosjekt!", vgsImgs, LocalDateTime.now),
-        Project("6", "Nannestad Kommunehus", "Hos Nannestad VGS har vi stått for levering av utvendige persienner, og masse annet rart. Stort prosjekt!", vgsImgs, LocalDateTime.now),
-        Project("7", "Manesjen, Jessheim", "Hos Nannestad VGS har vi stått for levering av utvendige persienner, og masse annet rart. Stort prosjekt!", vgsImgs, LocalDateTime.now),
-        Project("8", "Jessheim Kulturhus", "Hos Nannestad VGS har vi stått for levering av utvendige persienner, og masse annet rart. Stort prosjekt!", vgsImgs, LocalDateTime.now)
+        Project("2", "Nannestad Kommunehus", "Hos Nannestad VGS har vi stått for levering av utvendige persienner, og masse annet rart. Stort prosjekt!", komImgs, LocalDateTime.now)
       )
 
       db.run(createSchemaAction).andThen {
@@ -75,10 +70,15 @@ object RmsDb {
     }
   }
 
-  def store(project: Project, db: Database) {
+  def store(project: Project, db: Database): Future[Project] = {
     val data = projects +=(project.id, project.title, project.description, project.images.mkString(delim), Config.format(project.created))
     Logger.info("Adding project: " + project)
-    db.run(data)
+    val promise = Promise[Project]()
+    db.run(data).andThen {
+      case Success(res) => promise.success(project)
+      case Failure(ex) => throw new Exception(ex)
+    }
+    promise.future
   }
 
   lazy val projects = TableQuery[Projects]

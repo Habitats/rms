@@ -16,7 +16,7 @@ export default class ProductContainer extends Component {
 }
 
 ProductContainer.propTypes = {
-  categories: PropTypes.object.isRequired,
+  categories: PropTypes.array.isRequired,
   params: PropTypes.shape({
     category: PropTypes.string.isRequired,
     product: PropTypes.string.isRequired,

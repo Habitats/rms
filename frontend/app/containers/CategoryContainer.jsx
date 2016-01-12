@@ -22,9 +22,9 @@ export default class CategoryContainer extends Component {
 }
 
 CategoryContainer.propTypes = {
-  categories: PropTypes.object.isRequired,
+  categories: PropTypes.array.isRequired,
   params: PropTypes.shape({
-    categoy: PropTypes.string.isRequired
+    category: PropTypes.string.isRequired
   })
 }
 

@@ -23,10 +23,15 @@ import * as SessionActionCreators from './redux/actions/sessionActions'
 
 export default class App extends Component {
 
+  constructor(props) {
+    super(props)
+    this.props.dispatch(SessionActionCreators.session())
+  }
+
   requireLogin() {
-    if (!this.props.session.admin) {
-      this.props.dispatch(pushPath('login'))
-    }
+    //if (!this.props.session.admin) {
+    //  this.props.dispatch(pushPath('login'))
+    //}
   }
 
   render() {
@@ -50,6 +55,14 @@ export default class App extends Component {
       </Router>
     )
   }
+}
+
+App.propTypes = {
+  session: PropTypes.shape({
+    admin: PropTypes.bool.isRequired,
+    username: PropTypes.string
+  }),
+  dispatch: PropTypes.func.isRequired
 }
 
 export default connect(state => ({

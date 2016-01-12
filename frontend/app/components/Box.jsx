@@ -19,5 +19,8 @@ export default class Box extends Component {
 }
 
 Box.propTypes = {
-  children: PropTypes.object.isRequired
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ])
 }

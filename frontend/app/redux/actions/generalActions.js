@@ -3,9 +3,11 @@ import * as GeneralApi from '../api/GeneralApi'
 
 export function save(data) {
   return dispatch => {
-    return GeneralApi.save(data, () => {
-      dispatch({type: C.ADD_PROJECT})
-    }).then(dispatch(fetchProjects()))
+    dispatch({type: C.SAVE_PROJECTS_INIT})
+    return GeneralApi.save(data).then(
+      project => dispatch({type: C.SAVE_PROJECTS_SUCCESS, project}),
+      error => dispatch({type: C.SAVE_PROJECTS_FAIL})
+    )
   }
 }
 

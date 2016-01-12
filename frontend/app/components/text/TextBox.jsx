@@ -15,5 +15,8 @@ export default class TextBox extends Component {
 }
 
 TextBox.propTypes = {
-  children: PropTypes.object.isRequired
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ])
 }

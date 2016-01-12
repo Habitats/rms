@@ -23,8 +23,7 @@ export default class Photo extends Component {
   }
 
   render() {
-    let {src, height, width, margin, crop, selected, children, clickable, size, linkTo, dispatch} = this.props
-    let className = this.props.className
+    let {src, height, width, margin, crop, selected, children, clickable, size, linkTo, dispatch, className} = this.props
     let {toggled, hover} = this.state
 
     let photoStyle = {
@@ -46,7 +45,6 @@ export default class Photo extends Component {
       height: '100%',
       width: '100%'
     }
-    console.log('render p: ' + toggled)
     return (
       <div>
         <div onMouseEnter={this.toggleHover.bind(this)} onMouseLeave={this.toggleHover.bind(this)} className={className}>
@@ -62,25 +60,33 @@ export default class Photo extends Component {
 }
 
 Photo.defaultProps = {
-  className: '',
+  src: 'image/not_found.jpg',
   clickable: false,
+  selected: false,
+  className: '',
+  linkTo: null,
+  size: 'raw',
   crop: true,
   margin: 0,
-  size: 'raw',
-  src: 'image/not_found.jpg'
 }
 
 Photo.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  src: PropTypes.string.isRequired,
+  className: PropTypes.string,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]),
+  clickable: PropTypes.bool,
+  margin: PropTypes.number,
+  linkTo: PropTypes.string,
+  selected: PropTypes.bool,
   height: PropTypes.number,
   width: PropTypes.number,
-  className: PropTypes.string,
-  size: PropTypes.string,
-  clickable: PropTypes.bool,
-  crop: PropTypes.bool,
-  children: PropTypes.object,
   onClick: PropTypes.func,
-  margin: PropTypes.number,
-  src: PropTypes.string.isRequired
+  size: PropTypes.string,
+  crop: PropTypes.bool,
 }
 
 export default connect()(Photo)

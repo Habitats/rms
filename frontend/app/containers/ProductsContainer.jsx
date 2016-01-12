@@ -22,7 +22,7 @@ export default class ProductsContainer extends Component {
 
   render() {
     let {categories, params, children} = this.props
-    if (categories.length === 0) {
+    if (categories.length === 0 || !children) {
       return null
     }
 
@@ -43,7 +43,7 @@ export default class ProductsContainer extends Component {
 
 ProductsContainer.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  children: PropTypes.object.isRequired,
+  children: PropTypes.element.isRequired,
   params: PropTypes.shape({
     category: PropTypes.string
   }),

@@ -12,8 +12,7 @@ export default class MenuCategory extends Component {
                  <i className="fa fa-genderless" style={{color: 'darkRed'}}/> :
                  <span className="fa-empty"/>
 
-    let sub = category.sub.map(p => <MenuItem product={p}
-                                              linkTo={`/produkter/${category.short}/${p.short}`}
+    let sub = category.sub.map(p => <MenuItem product={p} key={p.short} linkTo={`/produkter/${category.short}/${p.short}`}
     />)
     return (
       <div style={{marginBottom: 30}}>

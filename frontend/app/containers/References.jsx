@@ -34,7 +34,7 @@ export default class References extends Component {
 
 References.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  projects: PropTypes.object.isRequired,
+  projects: PropTypes.array.isRequired,
   session: PropTypes.object.isRequired
 }
 

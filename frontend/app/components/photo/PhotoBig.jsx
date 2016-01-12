@@ -6,7 +6,7 @@ import TextOverlay from './../text/TextOverlay.jsx'
 export default class PhotoBig extends Component {
 
   render() {
-    let {height, width, src, onClick, description, title} = this.props
+    let {height, width, src, description, title} = this.props
     return (
       <Photo crop={true} height={height} width={width} src={src} clickable={true} size={'med'} margin={0}>
         {title ? <HeadlineOverlay text={title}/> : null}
@@ -17,15 +17,17 @@ export default class PhotoBig extends Component {
 }
 
 PhotoBig.propTypes = {
-  description: PropTypes.string,
   src: PropTypes.string.isRequired,
+  description: PropTypes.string,
   height: PropTypes.number,
+  title: PropTypes.string,
   width: PropTypes.number,
   onClick: PropTypes.func
 }
 
 PhotoBig.defaultProps = {
   description: '',
-  height: 500,
-  width: undefined
+  title: '',
+  width: undefined,
+  height: 500
 }

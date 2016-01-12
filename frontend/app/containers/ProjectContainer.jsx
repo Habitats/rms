@@ -27,10 +27,10 @@ class ProjectContainer extends Component {
 
 ProjectContainer.propTypes = {
   project: PropTypes.object,
+  dispatch: PropTypes.func.isRequired,
   params: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    toggled: PropTypes.number.isRequired,
-    selected: PropTypes.number
+    id: PropTypes.string.isRequired,
+    selected: PropTypes.string
   })
 }
 

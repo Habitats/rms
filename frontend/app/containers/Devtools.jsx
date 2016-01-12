@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 // Exported from redux-devtools
-import { createDevTools } from 'redux-devtools'
+import {createDevTools} from 'redux-devtools'
 
 // Monitors are separate packages, and you can make a custom one
 import LogMonitor from 'redux-devtools-log-monitor'
@@ -14,11 +14,9 @@ const DevTools = createDevTools(
   <DockMonitor toggleVisibilityKey='alt-q'
                changePositionKey='alt-a'
                fluid={false}
-               defaultSize={250}
-  >
-    <LogMonitor theme='tomorrow'
-                select={state => state.general.projects}
-    />
+               defaultIsVisible={false}
+               defaultSize={250}>
+    <LogMonitor theme='tomorrow' select={state => state.general.projects}/>
   </DockMonitor>
 )
 

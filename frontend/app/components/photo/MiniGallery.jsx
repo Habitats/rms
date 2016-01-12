@@ -44,12 +44,12 @@ export default class MiniGallery extends Component {
     let {images} = this.props
     let {hover, hoverRight, hoverLeft, selected} = this.state
 
-    let coverClasses = images.length > 4 ? "col-md-8 col-sm-8" : "col-md-9 col-sm-9"
-    let thumbsClasses = images.length > 4 ? "col-md-4 col-sm-4" : "col-md-3 col-sm-3"
-    let thumbsPhotoClasses = images.length > 4 ? "col-lg-6 col-md-6 col-sm-12 col-xs-12" : "col-lg-12 col-md-12 col-sm-12 col-xs-12"
+    let coverClasses = images.length > 4 ? 'col-md-8 col-sm-8' : 'col-md-9 col-sm-9'
+    let thumbsClasses = images.length > 4 ? 'col-md-4 col-sm-4' : 'col-md-3 col-sm-3'
+    let thumbsPhotoClasses = images.length > 4 ? 'col-lg-6 col-md-6 col-sm-12 col-xs-12' : 'col-lg-12 col-md-12 col-sm-12 col-xs-12'
 
     let photos = images.map(image =>
-      <div className={thumbsPhotoClasses} style={{padding: 0, margin: 0}}>
+      <div key={image.src} className={thumbsPhotoClasses} style={{padding: 0, margin: 0}}>
         <div className={'photo'} style={{marginBottom: 15, marginLeft: 15}}>
           <Photo onClick={this.onSelect.bind(this, image)} height={90} src={image.src} size={'low'} selected={selected === image}/>
         </div>

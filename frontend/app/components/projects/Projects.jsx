@@ -8,7 +8,7 @@ export default class Projects extends Component {
     let {projects} = this.props
     let sorted = projects
       .sort((a, b) => new Date(b.created) - new Date(a.created))
-      .map(p => <ProjectListItem project={p}/>)
+      .map(p => <ProjectListItem key={p.id} project={p}/>)
     return (
       <div>
         <div className="row">

@@ -5,7 +5,7 @@ export default class Category extends Component {
 
   render() {
     let {name, sub, short} = this.props.category
-    let products = sub.map(p => <ProductItem product={p} category={name} linkTo={`/produkter/${short}/${p.short}`}/>)
+    let products = sub.map(p => <ProductItem key={`${short}:${p.short}`} product={p} category={name} linkTo={`/produkter/${short}/${p.short}`}/>)
     return (
         <div className="row">
           {products}
@@ -20,6 +20,6 @@ Category.propTypes = {
     short: PropTypes.string.isRequired,
     desc: PropTypes.string.isRequired,
     src: PropTypes.string.isRequired,
-    sub: PropTypes.object.isRequired
+    sub: PropTypes.array.isRequired
   })
 }

@@ -17,7 +17,7 @@ export default class Product extends Component {
     // failsafe if there're no images
     let coverSrc = s != -1 ? images[s].src : src
 
-    let subContent = sub.map(p => <SubProduct product={p}/>)
+    let subContent = sub.map(p => <SubProduct key={p.short} product={p}/>)
     return (
       <div>
         <Box>
@@ -39,10 +39,19 @@ export default class Product extends Component {
   }
 }
 
+Product.defaultProps = {
+  selected: 0
+}
+
 Product.propTypes = {
   product: PropTypes.shape({
     name: PropTypes.string.isRequired,
     desc: PropTypes.string.isRequired,
+    images: PropTypes.array.isRequired,
+    sub: PropTypes.array.isRequired,
     src: PropTypes.string.isRequired
-  })
+  }),
+  linkTo: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired,
+  selected: PropTypes.number
 }

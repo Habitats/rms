@@ -24,11 +24,8 @@ export default function general(state = initialState, action) {
     case C.RECEIVE_PRIVATES:
       return {...state, privates: action.privates}
 
-    case C.ADD_PROJECT:
-      return {...state, projects: state.projects.concat(action.projects)}
-
-    case C.UPDATE_PROJECT:
-      return {...state, projects: state.projects.concat(action.projects)}
+    case C.SAVE_PROJECTS_SUCCESS:
+      return {...state, projects: state.projects.concat(action.project)}
 
     default:
       return state

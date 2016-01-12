@@ -72,7 +72,7 @@ export default class Contact extends Component {
         </Box>
 
         <Box>
-          <BigHeadline big="Spørsmål?" small="Send oss en forespørsel"/>
+          <BigHeadline big="Spørsmål?" />
           <ContactForm />
         </Box>
       </div>

@@ -6,7 +6,7 @@ export default class Menu extends Component {
 
   render() {
     let {categories, selectedCategory} = this.props
-    let cats = categories.map(c => <MenuCategory category={c} selectedCategory={selectedCategory}/>)
+    let cats = categories.map(c => <MenuCategory key={c.short} category={c} selectedCategory={selectedCategory}/>)
     return (
       <Box>
         <div style={{marginLeft: -21, marginRight: -21}}>

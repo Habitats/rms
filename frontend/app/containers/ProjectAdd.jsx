@@ -69,21 +69,27 @@ export default class ProjectAdd extends Component {
   }
 
   render() {
-    let chosenImages = []
-    for (let i of this.state.chosenImages.values()) {
-      chosenImages.push(<SimpleLabel text={i.name}/>)
+    let {projects, images} = this.props
+    let {chosenImages, error} = this.state
+
+    let chosenLabels = []
+    for (let i of chosenImages.values()) {
+      chosenLabels.push(<SimpleLabel key={i.src} text={i.name}/>)
     }
-    let images = this.props.images.map(i => (
+
+    let usedImages = projects.length > 0 ? [... new Set(projects.map(p => p.images).reduce((a, b) => a.concat(b)).map(i => i.src))] : []
+    let filteredImages = images.length > 0 ? [... new Set(images.filter(i => !usedImages.includes(i.src)))] : []
+    let photos = filteredImages.map(i => (
       <Photo size={'low'}
+             key={i.src}
              className="col-lg-3 col-md-3 col-sm-4 col-xs-6"
              height={100}
              onClick={this.onSelect.bind(this)}
-             selected={this.state.chosenImages.has(i.src)}
+             selected={chosenImages.has(i.src)}
              src={i.src}
              margin={15}
       />
     ))
-    let error = <div>{this.state.error}</div>
     return (
       <div>
         <Left>
@@ -91,7 +97,7 @@ export default class ProjectAdd extends Component {
             <form className="form">
               <div className="form-group">
                 <label>Valgte bilder</label>
-                {chosenImages}
+                {chosenLabels}
               </div>
             </form>
           </Box>
@@ -114,10 +120,10 @@ export default class ProjectAdd extends Component {
                 <button className="btn btn-primary btn-block" onClick={this.onSave.bind(this)} type="submit">Lagre prosjekt</button>
               </div>
             </form>
-            {error}
+            <div>{error}</div>
             <BigHeadline big="Velg bilder"/>
             <div className="row">
-              {images}
+              {photos}
             </div>
           </Box>
         </Right>
