@@ -50,7 +50,7 @@ export default class PhotoOverlay extends Component {
       width: '100%',
       height: '100%',
       background: 'black',
-      opacity: 0.5,
+      opacity: 0.8,
       textAlign: 'center',
       top: 0,
       left: 0,

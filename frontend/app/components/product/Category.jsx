@@ -5,7 +5,7 @@ export default class Category extends Component {
 
   render() {
     let {name, sub, short} = this.props.category
-    let products = sub.map(p => <ProductItem product={p} linkTo={`/produkter/${short}/${p.short}`}/>)
+    let products = sub.map(p => <ProductItem product={p} category={name} linkTo={`/produkter/${short}/${p.short}`}/>)
     return (
       <div className="row">
         {products}

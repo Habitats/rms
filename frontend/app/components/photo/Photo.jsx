@@ -16,12 +16,12 @@ export default class Photo extends Component {
   }
 
   render() {
-    let {src, height, width, margin, crop, selected, children, clickable} = this.props
+    let {src, height, width, margin, crop, selected, children, clickable, size} = this.props
     let className = this.props.className
     let toggled = this.state.toggled
 
     let photoStyle = {
-      background: 'url(' + src + '/' + this.state.size + ') no-repeat center center',
+      background: 'url(' + src + '/' + size + ') no-repeat center center',
       backgroundColor: '#ffffff',
       height: height || '100%',
       width: width || '100%',

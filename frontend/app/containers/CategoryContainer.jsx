@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
 import Category from './../components/product/Category.jsx'
+import BigHeadline from './../components/text/BigHeadline.jsx'
 import * as ProductActionCreators from './../redux/actions/productActions'
 
 export default class CategoryContainer extends Component {
@@ -9,7 +10,10 @@ export default class CategoryContainer extends Component {
     let {categories, params} = this.props
     let category = categories.find(c => c.short === params.category)
     return (
-      <Category category={category}/>
+      <div>
+        <BigHeadline big={category.name} small="Våre produkter og tjenester"/>
+        <Category category={category}/>
+      </div>
     )
   }
 }

@@ -33,14 +33,7 @@ export default class ProductsContainer extends Component {
         </BoxLeft>
 
         <BoxRight>
-          <div className="row">
-            <BigHeadline big={category.name} small="Våre produkter og tjenester"/>
-          </div>
-          <div className="row">
-            <div className="col-md-12">
-              {children}
-            </div>
-          </div>
+          {children}
         </BoxRight>
       </div>
     )
