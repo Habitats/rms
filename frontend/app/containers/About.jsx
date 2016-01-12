@@ -14,11 +14,11 @@ export default class About extends Component {
         <Box>
           <div className="row">
             <div className="col-md-8">
-              <Photo height={415} src="/image/butikken_.jpg"/>
+              <Photo clickable={false} height={415} src="/image/butikken_.jpg"/>
             </div>
             <div className="col-md-4">
-              <Photo height={200} src="/image/butikken_inne_1.jpg"/>
-              <Photo height={200} src="/image/butikken_inne_2.jpg" margin={15}/>
+              <Photo clickable={false} height={200} src="/image/butikken_inne_1.jpg"/>
+              <Photo clickable={false} height={200} src="/image/butikken_inne_2.jpg" margin={15}/>
             </div>
           </div>
 

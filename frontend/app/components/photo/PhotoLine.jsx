@@ -15,14 +15,13 @@ export default class PhotoLine extends Component {
     let photos = images.map(image =>
       <div className="col-lg-3 col-md-3 col-sm-4 col-xs-6">
         {!clickable ?
-         <div onClick={this.onSelect.bind(this, '/' + root + '/' + images.indexOf(image))}>
-           <div className={'photo'}>
-             <Photo clickable={clickable} height={120} src={image.src} size={'low'} selected={images[selected] === image} margin={15}/>
-           </div>
+         <div className={'photo'}>
+           <Photo onClick={this.onSelect.bind(this, '/' + root + '/' + images.indexOf(image))} height={120}
+                  src={image.src} size={'low'} selected={images[selected] === image} margin={15}/>
          </div>
           :
          <div className={'photo'}>
-           <Photo clickable={clickable} height={120} src={image.src} size={'low'} margin={15}/>
+           <Photo height={120} src={image.src} size={'low'} margin={15}/>
          </div>
         }
       </div>

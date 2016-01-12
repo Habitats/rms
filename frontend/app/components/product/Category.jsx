@@ -7,9 +7,9 @@ export default class Category extends Component {
     let {name, sub, short} = this.props.category
     let products = sub.map(p => <ProductItem product={p} category={name} linkTo={`/produkter/${short}/${p.short}`}/>)
     return (
-      <div className="row">
-        {products}
-      </div>
+        <div className="row">
+          {products}
+        </div>
     )
   }
 }

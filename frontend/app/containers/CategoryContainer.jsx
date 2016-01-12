@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import Category from './../components/product/Category.jsx'
 import BigHeadline from './../components/text/BigHeadline.jsx'
 import * as ProductActionCreators from './../redux/actions/productActions'
+import Box from './../components/Box.jsx'
 
 export default class CategoryContainer extends Component {
 
@@ -11,8 +12,10 @@ export default class CategoryContainer extends Component {
     let category = categories.find(c => c.short === params.category)
     return (
       <div>
-        <BigHeadline big={category.name} small="Våre produkter og tjenester"/>
-        <Category category={category}/>
+        <Box>
+          <BigHeadline big={category.name} small="Våre produkter og tjenester"/>
+          <Category category={category}/>
+        </Box>
       </div>
     )
   }

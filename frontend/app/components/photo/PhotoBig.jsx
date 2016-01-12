@@ -8,7 +8,7 @@ export default class PhotoBig extends Component {
   render() {
     let {height, width, src, onClick, description, title} = this.props
     return (
-      <Photo crop={true} height={height} width={width} src={src} clickable={!!onClick} size={'med'} margin={0}>
+      <Photo crop={true} height={height} width={width} src={src} clickable={true} size={'med'} margin={0}>
         {title ? <HeadlineOverlay text={title}/> : null}
         {description ? <TextOverlay text={description}/> : null}
       </Photo>

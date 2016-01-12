@@ -3,8 +3,9 @@ import {connect} from 'react-redux'
 import {pushPath} from 'redux-simple-router'
 import BigHeadline from './../components/text/BigHeadline.jsx'
 import Photo from './../components/photo/Photo.jsx'
-import BoxLeft from './../components/BoxLeft.jsx'
-import BoxRight from './../components/BoxRight.jsx'
+import Left from './../components/Left.jsx'
+import Right from './../components/Right.jsx'
+import Box from './../components/Box.jsx'
 import SimpleLabel from './../components/text/SimpleLabel.jsx'
 import * as generalActionCreators from '../redux/actions/generalActions'
 
@@ -85,40 +86,41 @@ export default class ProjectAdd extends Component {
     let error = <div>{this.state.error}</div>
     return (
       <div>
-        <BoxLeft>
-          <form className="form">
-            <div className="form-group">
-              <label>Valgte bilder</label>
-              {chosenImages}
-            </div>
-          </form>
-        </BoxLeft>
-        <BoxRight>
-          <BigHeadline big="Legg til ny" small="Prosjekt"/>
+        <Left>
+          <Box>
+            <form className="form">
+              <div className="form-group">
+                <label>Valgte bilder</label>
+                {chosenImages}
+              </div>
+            </form>
+          </Box>
+        </Left>
+        <Right>
+          <Box>
+            <BigHeadline big="Legg til ny" small="Prosjekt"/>
 
-          <form className="form">
-            <div className="form-group">
-              <label>Tittel</label>
-              <input className="form-control" onChange={this.handleTitleChange.bind(this)} placeholder="Prosjekttittel" type="text"/>
-            </div>
-            <div className="form-group">
-              <label>Beskrivelse</label>
+            <form className="form">
+              <div className="form-group">
+                <label>Tittel</label>
+                <input className="form-control" onChange={this.handleTitleChange.bind(this)} placeholder="Prosjekttittel" type="text"/>
+              </div>
+              <div className="form-group">
+                <label>Beskrivelse</label>
                 <textarea className="form-control" onChange={this.handleDescriptionChange.bind(this)}
                           placeholder="Skriv en prosjektbeskrivelse her." rows="5"/>
+              </div>
+              <div className="form-group">
+                <button className="btn btn-primary btn-block" onClick={this.onSave.bind(this)} type="submit">Lagre prosjekt</button>
+              </div>
+            </form>
+            {error}
+            <BigHeadline big="Velg bilder"/>
+            <div className="row">
+              {images}
             </div>
-            <div className="form-group">
-              <button className="btn btn-primary btn-block" onClick={this.onSave.bind(this)} type="submit">Lagre prosjekt</button>
-            </div>
-          </form>
-          {error}
-        </BoxRight>
-
-        <BoxRight>
-          <BigHeadline big="Velg bilder"/>
-          <div className="row">
-            {images}
-          </div>
-        </BoxRight>
+          </Box>
+        </Right>
       </div>
     )
   }

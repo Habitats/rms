@@ -1,6 +1,8 @@
 import React, {Component, PropTypes} from 'react'
 import EventListener from '../../util/EventListener.js'
 import PhotoOverlay from './PhotoOverlay.jsx'
+import {pushPath} from 'redux-simple-router'
+import {connect} from 'react-redux'
 
 export default class Photo extends Component {
 
@@ -8,6 +10,7 @@ export default class Photo extends Component {
     super(props)
     this.state = {
       toggled: false,
+      hover: false
     }
   }
 
@@ -15,30 +18,41 @@ export default class Photo extends Component {
     this.setState({toggled: true})
   }
 
+  toggleHover() {
+    this.setState({hover: !this.state.hover, toggled: false})
+  }
+
   render() {
-    let {src, height, width, margin, crop, selected, children, clickable, size} = this.props
+    let {src, height, width, margin, crop, selected, children, clickable, size, linkTo, dispatch} = this.props
     let className = this.props.className
-    let toggled = this.state.toggled
+    let {toggled, hover} = this.state
 
     let photoStyle = {
       background: 'url(' + src + '/' + size + ') no-repeat center center',
-      backgroundColor: '#ffffff',
+      backgroundColor: 'white',
       height: height || '100%',
       width: width || '100%',
       marginTop: margin,
-      opacity: selected ? 0.5 : 1,
       marginBottom: margin,
       position: 'relative'
     }
-
     // if onClick is defined, use the defined callback
-    let photoClick = this.props.onClick ? this.props.onClick.bind(this, src) : (clickable ? this.toggle.bind(this) : null)
-
+    let photoClick = linkTo ? () => dispatch(pushPath(linkTo)) :
+                     this.props.onClick ? this.props.onClick.bind(this, src) :
+                     (clickable ? this.toggle.bind(this) : null)
+    let hoverStyle = {
+      background: `rgba(0, 0, 0, ${selected ? 0.2 : 0})`,
+      boxShadow: 'inset 0px 0 50px 0px rgba(0,0,0,0.5)',
+      height: '100%',
+      width: '100%'
+    }
+    console.log('render p: ' + toggled)
     return (
       <div>
-        <div className={className}>
+        <div onMouseEnter={this.toggleHover.bind(this)} onMouseLeave={this.toggleHover.bind(this)} className={className}>
           <div onClick={photoClick} style={photoStyle} className={crop ? 'cover' : 'contain'}>
             {children}
+            {((hover || selected) && photoClick) ? <div style={hoverStyle}/> : null}
           </div>
           {clickable ? <PhotoOverlay src={src} toggled={toggled}/> : null}
         </div>
@@ -49,7 +63,7 @@ export default class Photo extends Component {
 
 Photo.defaultProps = {
   className: '',
-  clickable: true,
+  clickable: false,
   crop: true,
   margin: 0,
   size: 'raw',
@@ -69,6 +83,4 @@ Photo.propTypes = {
   src: PropTypes.string.isRequired
 }
 
-
-
-
+export default connect()(Photo)

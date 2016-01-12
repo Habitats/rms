@@ -3,7 +3,7 @@ package no.rms
 import no.rms.models.Product
 
 object Products {
-  val products = {
+  def products = {
     val products = Set(
       Product("Eksteriør", "", Seq(
         Product("Markiser", "Markiser kommer i mange former og fasonger. Vi fører alt fra større terrassemarkiser, til enkle vindusmarkiser.", Seq(
@@ -26,7 +26,7 @@ object Products {
           Product("Mini screen", "Mini screens har kompakt og elegant kassett som kan benyttes på mindre vinduer, gjerne i kombinasjon med andre screens.")
         )),
         Product("Varme og belysning", "Forleng den trivelige utesesongen med en varmelampe. Våre varmelamper er kortbølgede, og når maksimal varme på kun få sekunder.", Seq(
-          Product("Somfy kvartsvarmer", "Terrassevarmer på 2000 W. Varmer ikke opp luften men bare det som stopper strålene, noe som gjør at det er mye enklere å styre varmen. Grunnet kvartselementet når kretsvarmeren sin maks temperatur på under et sekund. Levetid element: 7.000-10.000 timer."),
+          Product("Somfy kretsvarmer", "Terrassevarmer på 2000 W. Varmer ikke opp luften men bare det som stopper strålene, noe som gjør at det er mye enklere å styre varmen. Grunnet kvartselementet når kretsvarmeren sin maks temperatur på under et sekund. Levetid element: 7.000-10.000 timer."),
           Product("Somfy lyslist", "Lakkert, med feste for tak/vegg. Leveres i fargen antrasitt, sølv eller hvit, med lengde på 3 meter.")
         )),
         Product("Sprosser", "Sett et personlig preg på vinduene. Sprosser brukes for å pusse opp fasaden på huset. Huset blir ikke til å kjenne igjen. Huset får en helt annen stil. Sprosserammer gjør noe med sjelen i huset."),

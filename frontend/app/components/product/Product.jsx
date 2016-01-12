@@ -7,6 +7,7 @@ import HeadlineOverlay from './../text/HeadlineOverlay.jsx'
 import SubProduct from './SubProduct.jsx'
 import BigHeadline from './../text/BigHeadline.jsx'
 import TextBox from './../text/TextBox.jsx'
+import Box from './../Box.jsx'
 
 export default class Product extends Component {
 
@@ -19,17 +20,19 @@ export default class Product extends Component {
     let subContent = sub.map(p => <SubProduct product={p}/>)
     return (
       <div>
-        <BigHeadline big={name} small={category}/>
-        <PhotoBig src={coverSrc} height={400} size={'med'}/>
-        <div className="row">
-          {images.length > 1 ? <PhotoLine images={images} root={linkTo} selected={s}/> : null}
-        </div>
-        <TextBox>
-          <div style={{paddingTop: 20, paddingBottom: 20}}>
-            <hr />
+        <Box>
+          <BigHeadline big={name} small={category}/>
+          <PhotoBig src={coverSrc} height={400} size={'med'}/>
+          <div className="row">
+            {images.length > 1 ? <PhotoLine images={images} root={linkTo} selected={s}/> : null}
           </div>
-          <p>{desc}</p>
-        </TextBox>
+          <TextBox>
+            <div style={{paddingTop: 20, paddingBottom: 20}}>
+              <hr />
+            </div>
+            <p>{desc}</p>
+          </TextBox>
+        </Box>
         {subContent}
       </div>
     )

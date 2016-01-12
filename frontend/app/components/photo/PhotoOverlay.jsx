@@ -10,7 +10,7 @@ export default class PhotoOverlay extends Component {
   }
 
   toggle() {
-    this.setState({toggled: false})
+    this.setState({toggled: !this.state.toggled})
     this.removeListener()
   }
 
@@ -23,7 +23,9 @@ export default class PhotoOverlay extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({toggled: nextProps.toggled})
+    if(nextProps.toggled) {
+      this.setState({toggled: nextProps.toggled})
+    }
   }
 
   componentWillUnmount() {
@@ -43,7 +45,6 @@ export default class PhotoOverlay extends Component {
   render() {
     let {src} = this.props
     let toggled = this.state.toggled
-
     let overlayStyle = {
       position: 'fixed',
       display: 'inline-flex',
