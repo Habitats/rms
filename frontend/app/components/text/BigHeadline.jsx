@@ -19,9 +19,9 @@ export default class BigHeadline extends Component {
     return (
       <div className="row">
         <div className="col-lg-12 text-center" style={style}>
-          <h2 style={smallStyle}>
+          <h5 style={smallStyle}>
             {this.props.small}
-          </h2>
+          </h5>
           <h1 style={bigStyle}>{this.props.big}</h1>
           <hr style={{marginBottom: 70,marginTop: 70}}/>
         </div>

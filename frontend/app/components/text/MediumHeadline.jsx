@@ -13,7 +13,7 @@ export default class MediumHeadline extends Component {
     return (
       <div className="row">
         <div className="col-lg-12 text-center">
-          <h5 style={bigStyle}>{this.props.big}</h5>
+          <h2 style={bigStyle}>{this.props.big}</h2>
           <hr style={{marginBottom: 50,marginTop: 40}}/>
         </div>
       </div>
