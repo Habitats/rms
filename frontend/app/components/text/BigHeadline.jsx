@@ -4,16 +4,26 @@ export default class BigHeadline extends Component {
 
   render() {
     let style = {
-      marginBottom: 30
+      marginTop: 50
+    }
+    let bigStyle = {
+      fontWeight: 700,
+      paddingBottom: 0,
+      paddingTop: 10,
+      color: '#2D2D2D'
+    }
+    let smallStyle = {
+      color: '#777777',
+      fontWeight: 200
     }
     return (
       <div className="row">
         <div className="col-lg-12 text-center" style={style}>
-          <h2 className="brand-before">
-            <small>{this.props.small}</small>
+          <h2 style={smallStyle}>
+            {this.props.small}
           </h2>
-          <h1 className="brand-name">{this.props.big}</h1>
-          <hr/>
+          <h1 style={bigStyle}>{this.props.big}</h1>
+          <hr style={{marginBottom: 70,marginTop: 70}}/>
         </div>
       </div>
     )

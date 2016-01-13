@@ -9,7 +9,7 @@ export default class Person extends Component {
     let mailTo = 'mailto:' + this.props.mail
     let mail = this.props.mail ? <p><i className="fa fa-envelope"/>&nbsp; <a href={mailTo}> {this.props.mail} </a></p> : ''
     return (
-      <div className="row" style={{height: 200, marginLeft: 20}}>
+      <div className="row" style={{height: 200, marginLeft: 30}}>
         <div className="col-md-4 col-sm-4 col-xs-4" style={{marginTop: 23}}>
           <Photo clickable={false} height={120} src={this.props.photo}/>
         </div>

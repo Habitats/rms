@@ -8,12 +8,12 @@ export default class HeadlineOverlay extends Component {
       overflow: 'hidden',
       whiteSpace: 'nowrap',
       textOverflow: 'ellipsis',
-      background: 'rgba(0, 0, 0, 0.6)',
+      background: 'rgba(0, 0, 0, 0.7)',
       position: 'absolute',
       width: '100%',
       height: 50,
       bottom: 0,
-      paddingTop: 10,
+      paddingTop: 13,
       color: '#fff',
       textAlign: 'center'
     }

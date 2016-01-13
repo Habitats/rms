@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react'
-import {Link} from 'react-router'
+import Link from './Link.jsx'
 
 export default class Header extends Component {
 
@@ -15,7 +15,9 @@ export default class Header extends Component {
                 <span className="icon-bar"></span>
                 <span className="icon-bar"></span>
               </button>
-              <a className="navbar-brand" href="#"><img src="/image/rms.png"/></a>
+              <Link to="/">
+                <div className="navbar-brand"><img src="/image/rms.png"/></div>
+              </Link>
             </div>
 
             <div className="collapse navbar-collapse">

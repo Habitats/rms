@@ -3,14 +3,18 @@ import React, {Component, PropTypes} from 'react'
 export default class MediumHeadline extends Component {
 
   render() {
-    let style = {
-      marginBottom: 10
+
+    let bigStyle = {
+      fontWeight: 700,
+      paddingBottom: 0,
+      paddingTop: 20,
+      color: '#2D2D2D'
     }
     return (
       <div className="row">
-        <div className="col-lg-12" style={style}>
-          <h3 className="brand-name">{this.props.big}</h3>
-          <hr/>
+        <div className="col-lg-12 text-center">
+          <h5 style={bigStyle}>{this.props.big}</h5>
+          <hr style={{marginBottom: 50,marginTop: 40}}/>
         </div>
       </div>
     )

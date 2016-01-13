@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react'
-import {Router, Route, IndexRoute, Link} from 'react-router'
+import {Router, Route, IndexRoute} from 'react-router'
 import {pushPath} from 'redux-simple-router'
 import {connect} from 'react-redux'
 

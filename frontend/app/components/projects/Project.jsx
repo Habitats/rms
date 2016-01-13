@@ -21,8 +21,6 @@ export default class Project extends Component {
           </div>
         </div>
 
-        <BigHeadline small="Flere bilder"/>
-
         <div className="row">
           <PhotoLine root={`prosjekt/${project.id}`} images={project.images} selected={selected}/>
         </div>

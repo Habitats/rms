@@ -30,7 +30,7 @@ export default class ProductsContainer extends Component {
     return (
       <div>
         <Left>
-          <Menu categories={categories} selectedCategory={category.short}/>
+          <Menu categories={categories} active={{category: params.category, product: params.product}} linkTo={'/produkter'}/>
         </Left>
 
         <Right>
@@ -45,7 +45,8 @@ ProductsContainer.propTypes = {
   dispatch: PropTypes.func.isRequired,
   children: PropTypes.element.isRequired,
   params: PropTypes.shape({
-    category: PropTypes.string
+    category: PropTypes.string,
+    product: PropTypes.string
   }),
   categories: PropTypes.array.isRequired
 }

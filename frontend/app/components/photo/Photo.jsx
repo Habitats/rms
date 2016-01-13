@@ -18,14 +18,18 @@ export default class Photo extends Component {
     this.setState({toggled: true})
   }
 
-  toggleHover() {
-    this.setState({hover: !this.state.hover, toggled: false})
+  toggleHover(hover) {
+    this.setState({hover: hover, toggled: false})
   }
 
   render() {
     let {src, height, width, margin, crop, selected, children, clickable, size, linkTo, dispatch, className} = this.props
     let {toggled, hover} = this.state
 
+    // if onClick is defined, use the defined callback
+    let photoClick = linkTo ? () => dispatch(pushPath(linkTo)) :
+                     this.props.onClick ? this.props.onClick.bind(this, src) :
+                     (clickable ? this.toggle.bind(this) : null)
     let photoStyle = {
       background: 'url(' + src + '/' + size + ') no-repeat center center',
       backgroundColor: 'white',
@@ -33,12 +37,9 @@ export default class Photo extends Component {
       width: width || '100%',
       marginTop: margin,
       marginBottom: margin,
+      cursor: photoClick ? 'pointer' : null,
       position: 'relative'
     }
-    // if onClick is defined, use the defined callback
-    let photoClick = linkTo ? () => dispatch(pushPath(linkTo)) :
-                     this.props.onClick ? this.props.onClick.bind(this, src) :
-                     (clickable ? this.toggle.bind(this) : null)
     let hoverStyle = {
       background: `rgba(0, 0, 0, ${selected ? 0.2 : 0})`,
       boxShadow: 'inset 0px 0 50px 0px rgba(0,0,0,0.5)',
@@ -46,8 +47,8 @@ export default class Photo extends Component {
       width: '100%'
     }
     return (
-      <div>
-        <div onMouseEnter={this.toggleHover.bind(this)} onMouseLeave={this.toggleHover.bind(this)} className={className}>
+      <div >
+        <div onMouseEnter={this.toggleHover.bind(this, true)} onMouseLeave={this.toggleHover.bind(this, false)} className={className}>
           <div onClick={photoClick} style={photoStyle} className={crop ? 'cover' : 'contain'}>
             {children}
             {((hover || selected) && photoClick) ? <div style={hoverStyle}/> : null}

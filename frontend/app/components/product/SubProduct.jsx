@@ -4,7 +4,7 @@ import PhotoLine from './../photo/PhotoLine.jsx'
 import MiniGallery from './../photo/MiniGallery.jsx'
 import HeadlineOverlay from './../text/HeadlineOverlay.jsx'
 import TextBox from './../text/TextBox.jsx'
-import MediumHealine from './../text/MediumHeadline.jsx'
+import MediumHeadline from './../text/MediumHeadline.jsx'
 import BigHeadline from './../text/BigHeadline.jsx'
 import Box from './../Box.jsx'
 
@@ -16,14 +16,16 @@ export default class SubProduct extends Component {
     return (
       <div>
         <Box>
-          <BigHeadline big={name}/>
-          <TextBox>
-            <p>{desc}</p>
-          </TextBox>
-          <hr/>
-          <div style={{padding: 10}} />
+          <MediumHeadline big={name}/>
           <div className="row">
-            {src.includes('main.jpg') ? <MiniGallery images={images} />: <PhotoLine images={images} clickable={true}/>}
+            {src.includes('main.jpg') ? <MiniGallery images={images}/> : <PhotoLine images={images} clickable={true}/>}
+          </div>
+          <div style={{marginBottom: 0,marginTop: 30}}>
+            <TextBox>
+              <hr />
+              <p>{desc}</p>
+              <hr />
+            </TextBox>
           </div>
         </Box>
       </div>

@@ -9,13 +9,14 @@ export default class Map extends Component {
   componentDidMount() {
     window.initialize = () => {
       let home = {lat: 60.255074, lng: 11.026707}
-      let map = new google.maps.Map(document.getElementById('map-canvas'), {zoom: 15, center: home}) //eslint-disable-line
+      let map = new google.maps.Map(document.getElementById('map-canvas'), {zoom: 11, center: home}) //eslint-disable-line
       let marker = new google.maps.Marker({position: home, map: map}) //eslint-disable-line
     }
   }
 
   render() {
-    let style = {  height: 450, width: '100%'}
+    let {height} = this.props
+    let style = {height: height ? height : 450, width: '100%'}
     return (
       <div id="map-canvas" style={style}/>
     )

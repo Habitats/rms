@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react'
-import {Link} from 'react-router'
+import Link from './../Link.jsx'
 import {pushPath} from 'redux-simple-router'
 import {connect} from 'react-redux'
 import Photo from './Photo.jsx'

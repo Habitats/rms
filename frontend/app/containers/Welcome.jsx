@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react'
-import {Link} from 'react-router'
+import Link from './../components/Link.jsx'
 import Carousel from './../components/photo/Carousel.jsx'
 import BigHeadline from './../components/text/BigHeadline.jsx'
 import Features from './../components/feature/Features.jsx'

@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react'
-import {Link} from 'react-router'
+import Link from './../components/Link.jsx'
 import Photo from './../components/photo/Photo.jsx'
 import BigHeadline from './../components/text/BigHeadline.jsx'
 import TextBox from './../components/text/TextBox.jsx'
@@ -48,40 +48,43 @@ export default class About extends Component {
         </Box>
 
         <Box>
-          <BigHeadline big="Samarbeidspartnere" small="Leverandører og forhandlere"/>
-
-          <div className="row">
-            <div className="col-md-10 col-md-offset-1">
-              <div className="row">
-                <div className="col-md-6">
-                  <a href="http://www.vental.no/" target="_blank">
-                    <Photo clickable={false} crop={false} height={80} margin={margin} src="/image/logo_vental.png"/>
-                  </a>
+          <div style={{paddingBottom: 60}}>
+            <BigHeadline big="Partnere" small="Leverandører og forhandlere"/>
+            <div className="row">
+              <div className="col-md-10 col-md-offset-1">
+                <div className="row">
+                  <div className="col-md-6">
+                    <a href="http://www.vental.no/" target="_blank">
+                      <Photo clickable={false} crop={false} height={80} margin={margin} src="/image/logo_vental.png"/>
+                    </a>
+                  </div>
+                  <div className="col-md-6">
+                    <a href="http://www.kjellsmarkiser.no/" target="_blank">
+                      <Photo clickable={false} crop={false} height={80} margin={margin} src="/image/logo_kjells.jpg"/>
+                    </a>
+                  </div>
                 </div>
-                <div className="col-md-6">
-                  <a href="http://www.kjellsmarkiser.no/" target="_blank">
-                    <Photo clickable={false} crop={false} height={100} margin={margin} src="/image/logo_kjells.jpg"/>
-                  </a>
+                <div className="row">
+                  <div className="col-md-6">
+                    <a href="https://www.somfy.no/" target="_blank">
+                      <Photo clickable={false} crop={false} height={80} margin={margin} src="/image/logo_somfy.jpg"/>
+                    </a>
+                  </div>
+                  <div className="col-md-6">
+                    <a href="http://vemaprodukter.no/" target="_blank">
+                      <Photo clickable={false} crop={false} height={80} margin={margin} src="/image/logo_vema.png"/>
+                    </a>
+                  </div>
                 </div>
-              </div>
-              <div className="row">
-                <div className="col-md-6">
-                  <a href="https://www.somfy.no/" target="_blank">
-                    <Photo clickable={false} crop={false} height={100} margin={margin} src="/image/logo_somfy.jpg"/>
-                  </a>
-                </div>
-                <div className="col-md-6">
-                  <a href="http://vemaprodukter.no/" target="_blank">
-                    <Photo clickable={false} crop={false} height={100} margin={margin} src="/image/logo_vema.png"/>
-                  </a>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-md-4 col-md-offset-4 text-center">
-                  <a href="http://www.solskjerming.no/" target="_blank">
-                    <Photo clickable={false} crop={false} height={120} src="/image/medlem_logo.png"/>
-                  </a>
-                  <i>Romerike Markiseservice er medlem av Norges Solskjermingsforbund</i>
+                <div className="row">
+                  <div className="col-md-4 col-md-offset-4 text-center">
+                    <a href="http://www.solskjerming.no/" target="_blank">
+                      <Photo clickable={false} crop={false} height={110} src="/image/medlem_logo.png"/>
+                    </a>
+                    <div style={{paddingTop: 10, maxWidth: 215, display: 'inline-block'}}>
+                      <i >Romerike Markiseservice er medlem av Norges Solskjermingsforbund</i>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
