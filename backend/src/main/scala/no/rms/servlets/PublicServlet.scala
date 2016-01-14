@@ -65,7 +65,7 @@ class PublicServlet(val db: Database) extends BackendStack with FutureSupport wi
 
   get("/products/?") {
     Logger.info("GET: products")
-    val products = Products.products
+    val products = RmsDb.allProducts(db)
     products
   }
 

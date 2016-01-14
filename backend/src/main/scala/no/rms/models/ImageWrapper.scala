@@ -8,7 +8,10 @@ class ImageWrapper(val name: String, val src: String) {
 }
 
 object ImageWrapper {
-  def fromString(i: String): ImageWrapper = new ImageWrapper(i.split(" - ")(0), i.split(" - ")(1))
+  def fromString(i: String): ImageWrapper = {
+    val split = i.split(" - ")
+    new ImageWrapper(split(0), split(1))
+  }
 
   def apply(name: String, src: String): ImageWrapper = {
     new ImageWrapper(name, "image/" + src.replaceAll("/", ImageUtils.delim))
