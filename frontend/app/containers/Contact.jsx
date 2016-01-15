@@ -21,8 +21,8 @@ export default class Contact extends Component {
                   Nannestadvegen 510<br />
                   2032 MAURA
                 </p>
-                <p><i className="fa fa-phone"/>&nbsp; +47 63 99 95 32</p>
-                <p><i className="fa fa-envelope"/>&nbsp; <a href="mailto:post@romerike-markise.no">post@romerike-markise.no</a></p>
+                <p style={{paddingTop: 4}}><i className="fa fa-phone"/>&nbsp; +47 63 99 95 32 <br/>
+                  <i className="fa fa-envelope"/>&nbsp; <a href="mailto:post@romerike-markise.no">post@romerike-markise.no</a></p>
               </div>
               <div className="col-md-3 col-md-offset-1 col-sm-5 col-xs-6">
                 <h3>Kontortid</h3>

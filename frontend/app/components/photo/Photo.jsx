@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import EventListener from '../../util/EventListener.js'
 import PhotoOverlay from './PhotoOverlay.jsx'
+import HeadlineOverlay from './../text/HeadlineOverlay.jsx'
 import {pushPath} from 'redux-simple-router'
 import {connect} from 'react-redux'
 

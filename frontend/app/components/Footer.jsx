@@ -25,24 +25,24 @@ export default class Footer extends Component {
       <div style={style}>
         <div className="container" style={{maxWidth: 1000}}>
           <div className="row">
-            <div className="col-md-3 col-sm-4 col-xs-12">
+            <div className="col-md-3 col-sm-4 col-xs-7">
               <h3>Adresse</h3>
               <p>Romerike Markiseservice AS<br />
                 Nannestadvegen 510<br />
                 2032 MAURA
               </p>
-              <p><i className="fa fa-phone"/>&nbsp; +47 63 99 95 32</p>
-              <p><i className="fa fa-envelope"/>&nbsp; <a href="mailto:post@romerike-markise.no">post@romerike-markise.no</a></p>
+              <p style={{paddingTop: 4}}><i className="fa fa-phone"/>&nbsp; +47 63 99 95 32 <br/>
+              <i className="fa fa-envelope"/>&nbsp; <a href="mailto:post@romerike-markise.no">post@romerike-markise.no</a></p>
             </div>
-            <div className="col-md-3 col-sm-3 col-xs-12">
+            <div className="col-md-3 col-sm-4 col-xs-5">
               <h3>Kontortid</h3>
               <p>Mandag-fredag: 0900-1600</p>
               <h3>Telefonbetjening</h3>
               <p>Mandag-fredag: 0800-2000<br />
                 Lørdag: 1000-1400</p>
             </div>
-            <div className="col-md-6 col-sm-5 col-xs-12" style={{paddingTop: 20}}>
-              <MapWrapper height={130}/>
+            <div className="col-md-6 col-sm-4 hidden-xs" style={{paddingTop: 20}}>
+              <MapWrapper height={143} zoom={7} />
             </div>
           </div>
         </div>

@@ -9,7 +9,7 @@ export default class Layout extends Component {
 
   render() {
     return (
-      <div style={{backgroundImage: '/image/bg.png'}}>
+      <div>
         <Header />
         <div className="container" style={{maxWidth:1000, marginBottom: 250}}>
           {this.props.children}

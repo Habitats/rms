@@ -17,13 +17,15 @@ export default class ProductsContainer extends Component {
     }
   }
 
+
+
   render() {
     let {categories, params, children} = this.props
     if (!categories.hasOwnProperty('sub')) {
       return null
     }
 
-    let rootCategories = categories.sub.map(c => <ProductItem key={`${c.short}:${c.short}`} product={c} category="lol"
+    let rootCategories = categories.sub.map(c => <ProductItem key={`${c.short}:${c.short}`} product={c}
                                                               linkTo={`/produkter/${c.short}`}/>)
     let content = (!params.category && !params.product) ?
                   <Box>
