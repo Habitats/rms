@@ -1,6 +1,6 @@
 import * as C from '../constants/productConstants'
 
-export default function product(state = [], action) {
+export default function product(state = {}, action) {
   switch (action.type) {
 
     case C.SELECT_CATEGORIES:

@@ -4,7 +4,7 @@ import no.rms.models.Product
 
 object Products {
   def products = {
-    val products = Seq(
+    Product("Produkter", "", Seq(
       Product("Eksteriør", "", Seq(
         Product("Markiser", "Markiser kommer i mange former og fasonger. Vi fører alt fra større terrassemarkiser, til enkle vindusmarkiser.", Seq(
           Product("Nova", "Nova er en meget sterk og solid terrassemarkise."),
@@ -58,7 +58,6 @@ object Products {
         Product("Snortskift", ""),
         Product("Service-arbeid", "")
       ))
-    )
-    products.map(_.attachCategory())
+    )).attachCategory()
   }
 }

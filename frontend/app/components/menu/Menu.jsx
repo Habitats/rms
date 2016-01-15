@@ -6,7 +6,7 @@ export default class Menu extends Component {
 
   render() {
     let {categories, active, linkTo} = this.props
-    let cats = categories.map(c => <MenuCategory key={c.short} linkTo={`${linkTo}/${c.short}`} category={c} active={active}/>)
+    let cats = categories.sub.map(c => <MenuCategory key={c.short} linkTo={`${linkTo}/${c.short}`} category={c} active={active}/>)
     return (
       <Box>
         <div style={{marginLeft: -21, marginRight: -21}}>
@@ -18,7 +18,7 @@ export default class Menu extends Component {
 }
 
 Menu.propTypes = {
-  categories: PropTypes.array.isRequired,
+  categories: PropTypes.object.isRequired,
   linkTo: PropTypes.string.isRequired,
   active: PropTypes.shape({
     product: PropTypes.string,

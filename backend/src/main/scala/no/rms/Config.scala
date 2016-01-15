@@ -12,23 +12,16 @@ object Config {
   conf.load(new FileReader(new File("secret/conf.properties")))
 
   def username = conf.getProperty("username")
-
   def password = conf.getProperty("password")
-
   def token = new File("secret/dropbox_token")
-
   def dropboxAppKey = conf.getProperty("dropbox_app_key")
-
   def dropboxAppSecret = conf.getProperty("dropbox_app_secret")
-
   def test = conf.getProperty("test").toBoolean
 
   val COOKIE_ID = "YOLO"
-
   val ONE_WEEK = 7 * 24 * 3600
 
   def parse(date: String): LocalDateTime = LocalDateTime.parse(date)
-
   def format(date: LocalDateTime): String = date.format(df)
 }
 

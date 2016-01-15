@@ -36,12 +36,12 @@ export default class App extends Component {
 
   render() {
     return (
-      <Router history={history}>
+      <Router onUpdate={() => window.scrollTo(0, 0)} history={history}>
         <Route component={Layout} path="/">
           <IndexRoute component={Welcome}/>
           <Route component={References} path="prosjekt"/>
           <Route component={ProjectAdd} onEnter={this.requireLogin.bind(this)} path="prosjekt/ny"/>
-          <Route component={ProjectContainer} ignoreScrollBehavior={true} path="prosjekt/:id(/:selected)"/>
+          <Route component={ProjectContainer} path="prosjekt/:id(/:selected)"/>
           <Route component={Private} path="privat"/>
           <Route component={Products} path="produkter">
             <Route component={ProductContainer} path=":category/:product(/:selected)"/>

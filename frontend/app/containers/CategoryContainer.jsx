@@ -9,7 +9,7 @@ export default class CategoryContainer extends Component {
 
   render() {
     let {categories, params} = this.props
-    let category = categories.find(c => c.short === params.category)
+    let category = categories.sub.find(c => c.short === params.category)
     return (
       <div>
         <Box>
@@ -22,7 +22,7 @@ export default class CategoryContainer extends Component {
 }
 
 CategoryContainer.propTypes = {
-  categories: PropTypes.array.isRequired,
+  categories: PropTypes.object.isRequired,
   params: PropTypes.shape({
     category: PropTypes.string.isRequired
   })

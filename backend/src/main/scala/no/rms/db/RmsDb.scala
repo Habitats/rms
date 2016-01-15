@@ -4,7 +4,7 @@ import java.io.File
 import java.time.LocalDateTime
 
 import no.rms.models.{ImageWrapper, Product, ProductWrapper, Project}
-import no.rms.{Products, Config, Logger}
+import no.rms.{Config, Logger, Products}
 import slick.driver.JdbcDriver.api._
 
 import scala.concurrent.ExecutionContext.Implicits.global
@@ -61,7 +61,7 @@ object RmsDb {
       db.run(createSchemaAction).andThen {
         case _ =>
           samples.foreach(p => store(p, db))
-          Products.products.foreach(p => store(p, db))
+          store(Products.products, db)
       }.onSuccess { case r => p.success(true) }
     } else {
       db.run(createSchemaAction).onSuccess { case r => p.success(true) }
@@ -93,7 +93,7 @@ object RmsDb {
     }
   }
 
-  def allProducts(db: Database): Future[Seq[Product]] = {
+  def allProducts(db: Database): Future[Product] = {
     val futureProducts = db.run(products.result)
     futureProducts.map { products =>
       val wrapped = for {

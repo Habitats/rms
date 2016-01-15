@@ -24,7 +24,7 @@ object ImageUtils {
 
   def rename(f: File): File = {
     if (f.getName.contains(" ")) {
-      val renamed = Paths.get(f.getParent, f.getName.replaceAll(" ", "_")).toFile
+      val renamed = Paths.get(f.getParent, f.getName.toLowerCase.replaceAll(" ", "_")).toFile
       if (!renamed.exists) {
         Files.move(f.toPath, renamed.toPath)
       } else{
@@ -42,7 +42,7 @@ object ImageUtils {
     if (f.exists) {
       f.listFiles
         .map(rename)
-        .map(_.getName).filter(f => f.endsWith(".jpg") || f.endsWith(".png"))
+        .map(_.getName.toLowerCase).filter(f => f.endsWith(".jpg") || f.endsWith(".png"))
         .map(f => ImageWrapper(f, (if (path.length > 0) (path + "/") else "") + f))
     } else Nil
   }

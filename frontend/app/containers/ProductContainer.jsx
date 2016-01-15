@@ -7,7 +7,7 @@ export default class ProductContainer extends Component {
 
   render() {
     let {categories, params} = this.props
-    let category = categories.find(c => c.short === params.category)
+    let category = categories.sub.find(c => c.short === params.category)
     let product = category.sub.find(p => p.short === params.product)
     return (
       <Product product={product} category={category.name} linkTo={`produkter/${category.short}/${product.short}`} selected={params.selected}/>
@@ -16,7 +16,7 @@ export default class ProductContainer extends Component {
 }
 
 ProductContainer.propTypes = {
-  categories: PropTypes.array.isRequired,
+  categories: PropTypes.object.isRequired,
   params: PropTypes.shape({
     category: PropTypes.string.isRequired,
     product: PropTypes.string.isRequired,
