@@ -9,7 +9,7 @@ export default class Menu extends Component {
     let cats = categories.sub.map(c => <MenuCategory key={c.short} linkTo={`${linkTo}/${c.short}`} category={c} active={active}/>)
     return (
       <Box>
-        <div style={{marginLeft: -21, marginRight: -21}}>
+        <div style={{marginLeft: -31, marginRight: -21}}>
           {cats}
         </div>
       </Box>

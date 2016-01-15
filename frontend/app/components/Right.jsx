@@ -4,7 +4,7 @@ export default class Right extends Component {
 
   render() {
     let {children} = this.props
-    let style = {marginLeft: 205}
+    let style = {marginLeft: 175}
     return (
       <div style={style}>
         {children}

@@ -46,22 +46,27 @@
 
 // MD
 @media only screen and (min-width: 992px) {
+  // big
   h1 {
     font-size: 6.0em;
   }
 
+  // med
   h2 {
     font-size: 5.0em;
   }
 
+  // menu cat
   h3 {
-    font-size: 1.8em;
+    font-size: 1.7em;
   }
 
+  // menu item
   h4 {
-    font-size: 1.1em;
+    font-size: 1.0em;
   }
 
+  // small
   h5 {
     font-size: 1.4em;
   }
@@ -86,6 +91,8 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   background-color: #2D6891;
   background-size: cover;
+  background-attachment: fixed;
+  background-image: url(/image/bg.jpg/raw);
   font-size: 1.2em;
   margin-top: $header-height + 20;
   margin-bottom: $footer-height + 10;
