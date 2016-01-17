@@ -12,17 +12,11 @@ export default class Menu extends Component {
 
   componentWillMount() {
     window.addEventListener('scroll', this.handleScroll.bind(this))
-  }
-
-  componentDidMount(){
-    this.setState({ menuHeight: ReactDOM.findDOMNode(this).clientHeight})
+    this.setState({menuHeight: ReactDOM.findDOMNode(this).clientHeight})
   }
 
   componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll.bind(this))
-  }
-
-  componentDidUpdate(){
   }
 
   handleScroll() {
@@ -33,7 +27,7 @@ export default class Menu extends Component {
     let threshold = window.innerHeight - margin + scrollBottom
     console.log(`${scrollBottom} ${window.innerHeight - margin} ${window.innerHeight - margin + scrollBottom}`)
     this.setState({
-      transform: threshold <= margin ? threshold -margin : 0
+      transform: threshold <= margin ? threshold - margin : 0
     })
     //console.log(scrollBottom <= 62 ? scrollBottom : 0)
   }

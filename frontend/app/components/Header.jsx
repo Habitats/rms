@@ -13,7 +13,7 @@ export default class Header extends Component {
   }
 
   render() {
-    let cls = (this.state.toggled ? "" : "collapse navbar-collapse")
+    let cls = (this.state.toggled ? null : 'collapse navbar-collapse')
     return (
       <div>
         <nav className="navbar navbar-default navbar-fixed-top">

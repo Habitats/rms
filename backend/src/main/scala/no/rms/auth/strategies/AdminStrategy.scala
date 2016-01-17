@@ -16,7 +16,7 @@ class AdminStrategy(protected val app: ScalatraBase)(implicit request: HttpServl
       case Some(id) => Users.active.get(id)
       case _ => None
     }
-    if (user.filter(_.admin).nonEmpty) {
+    if (user.exists(_.admin)) {
       Logger.info(s"Admin > Login success!")
       user
     } else {
