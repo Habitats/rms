@@ -33,26 +33,47 @@ export default class Photo extends Component {
                      (clickable ? this.toggle.bind(this) : null)
     let photoStyle = {
       background: 'url(' + src + '/' + size + ') no-repeat center center',
-      backgroundColor: 'white',
       height: height || '100%',
       width: width || '100%',
-      marginTop: margin,
-      marginBottom: margin,
+      opacity: 1,
       cursor: photoClick ? 'pointer' : null,
-      position: 'relative'
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      zIndex: 900
     }
     let hoverStyle = {
       background: `rgba(0, 0, 0, ${selected ? 0.2 : 0})`,
       boxShadow: 'inset 0px 0 50px 0px rgba(0,0,0,0.5)',
       height: '100%',
-      width: '100%'
+      position: 'absolute',
+      width: '100%',
+      top: 0,
+      left: 0,
+      zIndex: 950
+    }
+    let spinnerStyle = {
+      textAlign: 'center',
+      height: height || '100%',
+      width: width || '100%',
+      position: 'absolute',
+      margin: '0 auto',
+      color: 'lightGray',
+      zIndex: 800
     }
     return (
       <div >
         <div onMouseEnter={this.toggleHover.bind(this, true)} onMouseLeave={this.toggleHover.bind(this, false)} className={className}>
-          <div onClick={photoClick} style={photoStyle} className={crop ? 'cover' : 'contain'}>
-            {children}
-            {((hover || selected) && photoClick) ? <div style={hoverStyle}/> : null}
+          <div onClick={photoClick} style={{position: 'relative', height: height, width: width, marginTop: margin, marginBottom: margin}}>
+            <div style={spinnerStyle}>
+              <div style={{width: '100%', position: 'relative', top: '50%', marginTop: -22}}>
+                <i className="fa fa-circle-o-notch fa-spin fa-4x"/>
+              </div>
+            </div>
+            <div style={photoStyle} className={crop ? 'cover' : 'contain'}>
+              {children}
+              {((hover || selected) && photoClick) ? <div style={hoverStyle}/> : null}
+            </div>
           </div>
           {clickable ? <PhotoOverlay src={src} toggled={toggled}/> : null}
         </div>

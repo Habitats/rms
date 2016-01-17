@@ -12,6 +12,9 @@ export default class Menu extends Component {
 
   componentWillMount() {
     window.addEventListener('scroll', this.handleScroll.bind(this))
+  }
+
+  componentDidMount(){
     this.setState({menuHeight: ReactDOM.findDOMNode(this).clientHeight})
   }
 

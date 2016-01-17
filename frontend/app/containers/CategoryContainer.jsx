@@ -7,6 +7,12 @@ import Box from './../components/Box.jsx'
 
 export default class CategoryContainer extends Component {
 
+  componentWillMount() {
+    if (Object.keys(this.props.categories).length === 0) {
+      this.props.dispatch(ProductActionCreators.fetchProducts())
+    }
+  }
+
   render() {
     let {categories, params} = this.props
     let category = categories.sub.find(c => c.short === params.category)

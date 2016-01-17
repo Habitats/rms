@@ -93,8 +93,10 @@ html {
 
 body {
   font-family: Arial, Helvetica, sans-serif;
+  background-color: #D3D3D3;
   background-size: cover;
-  background: #D3D3D3 url(/image/bg.jpg/raw) fixed;
+  background-attachment: fixed;
+  background-image: url(/image/bg.jpg/raw);
   font-size: 1.2em;
   margin-top: $header-height + 20;
   margin-bottom: $footer-height + 10;

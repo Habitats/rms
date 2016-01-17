@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import BigHeadline from './../text/BigHeadline.jsx'
 import PhotoBig from './../photo/PhotoBig.jsx'
 import PhotoLine from './../photo/PhotoLine.jsx'
+import MiniGallery from './../photo/MiniGallery.jsx'
 import Box from './../Box.jsx'
 import * as generalActionCreators from '../../redux/actions/generalActions'
 
@@ -16,13 +17,9 @@ export default class Project extends Component {
         <BigHeadline big={project.title} small="Prosjekt"/>
 
         <div className="row">
-          <div className="col-md-12">
-            <PhotoBig description={project.description} src={project.images[selected].src}/>
+          <div className="col-md-12 col-sm-12 col-xs-12">
+            <MiniGallery images={project.images} orientation={'horizontal'} height={400} thumbHeight={100}/>
           </div>
-        </div>
-
-        <div className="row">
-          <PhotoLine root={`prosjekt/${project.id}`} images={project.images} selected={selected}/>
         </div>
       </Box>
     )
