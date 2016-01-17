@@ -62,7 +62,7 @@ export default class ProjectAdd extends Component {
         description: this.state.description,
         images: this.state.chosenImages
       }))
-      this.props.dispatch(pushPath('/prosjekt'))
+      this.props.dispatch(pushPath('/referanser'))
     } else {
       this.setState({error: 'Fyll ut alle felt og velg noen bilder!'})
     }

@@ -29,9 +29,6 @@ export default class Welcome extends Component {
           <p> Med Øvre Romerike og Oslo som våre primære kjerneområder, leverer vi et bredt spekter av solskjermingsløsninger til både
             privat- og bedriftsmarkedet.</p>
 
-          <p>På våre nettsider vil du finne oppdatert informasjon om våre <Link to="/prosjekt">referanser</Link>, og en oversikt over
-            våre <Link to="/produkter/eksterior">produkter</Link> og <Link to="/om">eksterne samarbeidspartnere.</Link></p>
-
           <p>Skulle du ha noen spørsmål, kan du enten sende en forespørsel gjennom vårt <Link to="/kontakt">kontaktskjema</Link>, eller
             ringe
             oss direkte på <em>+47 63 99 95 32</em>.

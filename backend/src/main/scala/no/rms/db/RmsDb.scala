@@ -41,16 +41,16 @@ object RmsDb {
     val dbFile = new File("rms.mv.db")
     if (!dbFile.exists) {
       val vgsImgs = Seq(
-        ImageWrapper("1", "prosjekt/ref_nannestad.vgs_1.jpg"),
-        ImageWrapper("2", "prosjekt/ref_nannestad.vgs_2.jpg"),
-        ImageWrapper("3", "prosjekt/ref_nannestad.vgs_3.jpg"),
-        ImageWrapper("4", "prosjekt/ref_nannestad.vgs_4.jpg")
+        ImageWrapper("1", "referanser/ref_nannestad.vgs_1.jpg"),
+        ImageWrapper("2", "referanser/ref_nannestad.vgs_2.jpg"),
+        ImageWrapper("3", "referanser/ref_nannestad.vgs_3.jpg"),
+        ImageWrapper("4", "referanser/ref_nannestad.vgs_4.jpg")
       )
       val komImgs = Seq(
-        ImageWrapper("1", "prosjekt/ref_nannestad.kommunehus_1.jpg"),
-        ImageWrapper("2", "prosjekt/ref_nannestad.kommunehus_2.jpg"),
-        ImageWrapper("3", "prosjekt/ref_nannestad.kommunehus_3.jpg"),
-        ImageWrapper("4", "prosjekt/ref_nannestad.kommunehus_4.jpg")
+        ImageWrapper("1", "referanser/ref_nannestad.kommunehus_1.jpg"),
+        ImageWrapper("2", "referanser/ref_nannestad.kommunehus_2.jpg"),
+        ImageWrapper("3", "referanser/ref_nannestad.kommunehus_3.jpg"),
+        ImageWrapper("4", "referanser/ref_nannestad.kommunehus_4.jpg")
       )
 
       val samples = Seq(

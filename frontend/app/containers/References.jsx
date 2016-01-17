@@ -18,13 +18,13 @@ export default class References extends Component {
     let {session: {admin}, projects} = this.props
     let newButton = admin ?
                     <div className="form-group">
-                      <Link to="/prosjekt/ny">
+                      <Link to="/referanser/ny">
                         <button className="btn btn-primary btn-block" type="submit">Legg til nytt prosjekt</button>
                       </Link>
                     </div> : null
     return (
       <Box>
-        <BigHeadline big="Prosjekt" small="Våre referanser"/>
+        <BigHeadline big="Referanser"/>
         {newButton}
         <Projects projects={projects}/>
       </Box>
