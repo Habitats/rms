@@ -23,7 +23,7 @@ export default class BigHeadline extends Component {
             {this.props.small}
           </h5>
           <h1 style={bigStyle}>{this.props.big}</h1>
-          <hr style={{marginBottom: 70,marginTop: 70}}/>
+          <hr style={{marginBottom: 70,marginTop: 50}}/>
         </div>
       </div>
     )

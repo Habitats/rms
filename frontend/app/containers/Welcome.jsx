@@ -47,10 +47,16 @@ export default class Welcome extends Component {
   }
 
   render() {
+    let images = [
+      {src: '/image/carousel,c1.jpg', name: 'nice image'},
+      {src: '/image/carousel,c2.jpg', name: 'imagege image'},
+      {src: '/image/carousel,c3.jpg', name: 'oløøøø image'},
+      {src: '/image/carousel,c4.jpg', name: 'nice image'}
+    ]
     return (
       <div>
         <Box>
-          <PhotoBig src="/image/index.jpg"/>
+          <Carousel images={images}/>
           <div className="row">
             <MediumHeadline big={'Profesjonell solskjerming'}/>
             {this.props.categories.hasOwnProperty('sub') ? this.categories() : null}
@@ -71,5 +77,6 @@ Welcome.propTypes = {
 }
 
 export default connect(state => ({
-  categories: state.products
+  categories: state.products,
+  images: state.images
 }))(Welcome)
