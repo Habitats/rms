@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import {Router, Route, IndexRoute} from 'react-router'
-import {pushPath} from 'redux-simple-router'
+import {routeActions} from 'redux-simple-router'
 import {connect} from 'react-redux'
 
 import history from './history'
@@ -11,7 +11,6 @@ import Contact from './containers/Contact.jsx'
 import About from './containers/About.jsx'
 import References from './containers/References.jsx'
 import ProjectContainer from './containers/ProjectContainer.jsx'
-import Private from './containers/Private.jsx'
 import Products from './containers/ProductsContainer.jsx'
 import ProductContainer from './containers/ProductContainer.jsx'
 import CategoryContainer from './containers/CategoryContainer.jsx'
@@ -30,7 +29,7 @@ export default class App extends Component {
 
   requireLogin() {
     //if (!this.props.session.admin) {
-    //  this.props.dispatch(pushPath('login'))
+    //  this.props.dispatch(routeActions.push('login'))
     //}
   }
 

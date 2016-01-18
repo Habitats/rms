@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react'
 import EventListener from '../../util/EventListener.js'
 import PhotoOverlay from './PhotoOverlay.jsx'
 import HeadlineOverlay from './../text/HeadlineOverlay.jsx'
-import {pushPath} from 'redux-simple-router'
+import {routeActions} from 'redux-simple-router'
 import {connect} from 'react-redux'
 
 export default class Photo extends Component {
@@ -28,7 +28,7 @@ export default class Photo extends Component {
     let {toggled, hover} = this.state
 
     // if onClick is defined, use the defined callback
-    let photoClick = linkTo ? () => dispatch(pushPath(linkTo)) :
+    let photoClick = linkTo ? () => dispatch(routeActions.push(linkTo)) :
                      this.props.onClick ? this.props.onClick.bind(this, src) :
                      (clickable ? this.toggle.bind(this) : null)
     let photoStyle = {

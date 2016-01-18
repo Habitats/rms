@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
-import {pushPath} from 'redux-simple-router'
+import {routeActions} from 'redux-simple-router'
 import BigHeadline from './../components/text/BigHeadline.jsx'
 import Photo from './../components/photo/Photo.jsx'
 import Left from './../components/Left.jsx'
@@ -62,7 +62,7 @@ export default class ProjectAdd extends Component {
         description: this.state.description,
         images: this.state.chosenImages
       }))
-      this.props.dispatch(pushPath('/referanser'))
+      this.props.dispatch(routeActions.push('/referanser'))
     } else {
       this.setState({error: 'Fyll ut alle felt og velg noen bilder!'})
     }

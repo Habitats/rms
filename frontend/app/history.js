@@ -1,7 +1,5 @@
-//import createBrowserHistory from 'history/lib/createBrowserHistory'
-//export default createBrowserHistory()
-
-import createHashHistory from 'history/lib/createHashHistory'
-export default createHashHistory({
-  queryKey: false
-})
+import { Router, useRouterHistory } from 'react-router'
+import { createHashHistory } from 'history'
+// useRouterHistory creates a composable higher-order function
+const appHistory = useRouterHistory(createHashHistory)({ queryKey: false })
+export default appHistory

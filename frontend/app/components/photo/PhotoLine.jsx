@@ -1,13 +1,13 @@
 import React, {Component, PropTypes} from 'react'
 import Link from './../Link.jsx'
-import {pushPath} from 'redux-simple-router'
+import {routeActions} from 'redux-simple-router'
 import {connect} from 'react-redux'
 import Photo from './Photo.jsx'
 
 export default class PhotoLine extends Component {
 
   onSelect(path) {
-    this.props.dispatch(pushPath(path))
+    this.props.dispatch(routeActions.push(path))
   }
 
   render() {

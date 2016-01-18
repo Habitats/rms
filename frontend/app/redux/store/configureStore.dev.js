@@ -1,12 +1,17 @@
-import { createStore, applyMiddleware, compose } from 'redux'
-import { persistState } from 'redux-devtools'
+import {createStore, applyMiddleware, compose} from 'redux'
+import {persistState} from 'redux-devtools'
 import rootReducer from '../reducers/rootReducer'
 import DevTools from '../../containers/Devtools'
 import thunkMiddleware from 'redux-thunk'
 
+import history from '../../history'
+import {syncHistory} from 'redux-simple-router'
+
+// Sync dispatched route actions to the history
+const reduxRouterMiddleware = syncHistory(history)
 const finalCreateStore = compose(
   // Middleware you want to use in development:
-  applyMiddleware(thunkMiddleware),
+  applyMiddleware(thunkMiddleware, reduxRouterMiddleware),
   // Required! Enable Redux DevTools with the monitors you chose
   DevTools.instrument(),
   // Optional. Lets you write ?debug_session=<key> in address bar to persist debug sessions

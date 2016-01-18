@@ -5,15 +5,13 @@ import './scss/base.scss'
 
 import React, {Component, PropTypes} from 'react'
 import {render} from 'react-dom'
-import history from './history'
-import {syncReduxAndRouter} from 'redux-simple-router'
 import {Provider} from 'react-redux'
+import {Router, Route} from 'react-router'
 
 import configureStore from './redux/store/configureStore'
 import App from './containers/root/Root'
 
 const store = configureStore()
-syncReduxAndRouter(history, store)
 
 render(
   <Provider store={store}>
