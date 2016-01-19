@@ -11,7 +11,7 @@ import org.json4s.JsonAST.JString
 import org.json4s.{CustomSerializer, DefaultFormats, Formats}
 import org.scalatra.json.JacksonJsonSupport
 import org.scalatra.{CorsSupport, FutureSupport}
-import slick.driver.JdbcDriver.api._
+import slick.driver.H2Driver.api._
 
 import scala.concurrent.ExecutionContext
 

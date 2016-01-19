@@ -24,6 +24,10 @@ export function save(project) {
   return post(project, 'secret')
 }
 
+export function saveProduct(product) {
+  return post(product, 'secret/product')
+}
+
 export function sendMail(email) {
   return post(email, 'mail')
 }

@@ -108,6 +108,10 @@ hr {
   border-color: #999999;
 }
 
+*:focus {
+  outline: none;
+}
+
 blockquote {
   border-left-color: #999999;
 }

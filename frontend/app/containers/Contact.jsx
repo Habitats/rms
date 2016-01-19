@@ -38,7 +38,7 @@ export default class Contact extends Component {
         <Box>
           <BigHeadline big="Hvem er vi?"/>
           <div className="row">
-            <div className="col-md-6 col-md-offset-0 col-sm-6 col-sm-offset-0 col-xs-12 col-xs-offset-0">
+            <div className="col-sm-6 col-xs-12">
               <Person mail="morten@romerike-markise.no"
                       name="Morten Skjennum"
                       phone="+47 90 73 19 07"
@@ -54,7 +54,7 @@ export default class Contact extends Component {
                       photo="/image/p_anne.jpg"
                       title="Kontormedarbeider"/>
             </div>
-            <div className="col-md-6 col-md-offset-0 col-sm-6 col-sm-offset-0 col-xs-12 col-xs-offset-0">
+            <div className="col-sm-6 col-xs-12">
               <Person mail="roar@romerike-markise.no"
                       name="Roar Skjennum"
                       phone="+47 90 73 18 80"

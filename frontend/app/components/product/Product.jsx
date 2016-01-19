@@ -17,7 +17,7 @@ export default class Product extends Component {
     // failsafe if there're no images
     let coverSrc = s != -1 ? images[s].src : src
 
-    let subContent = sub.map(p => <SubProduct key={p.short} product={p}/>)
+    let subContent = sub.sort((a,b) => a.short < b.short ? -1 : (b.short < a.short) ? 1 : 0).map(p => <SubProduct key={p.short} product={p}/>)
     return (
       <div>
         <Box>

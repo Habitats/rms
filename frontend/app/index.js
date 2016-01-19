@@ -11,6 +11,7 @@ import {Router, Route} from 'react-router'
 import configureStore from './redux/store/configureStore'
 import App from './containers/root/Root'
 
+
 const store = configureStore()
 
 render(

@@ -5,7 +5,7 @@ import java.time.LocalDateTime
 
 import no.rms.models.{ImageWrapper, Product, ProductWrapper, Project}
 import no.rms.{Config, Logger, Products}
-import slick.driver.JdbcDriver.api._
+import slick.driver.H2Driver.api._
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.{Future, Promise}
@@ -13,6 +13,13 @@ import scala.util.{Failure, Success}
 
 
 object RmsDb {
+  def storeProduct(product: Product, db: Database): Future[Product] = {
+    for {
+      success <- store(ProductWrapper.wrap(product), db) if success
+      all <- RmsDb.allProducts(db)
+    } yield all
+  }
+
   val delim = "___"
 
   class Projects(tag: Tag) extends Table[(String, String, String, String, String)](tag, "PROJECTS") {
@@ -132,7 +139,7 @@ object RmsDb {
   }
 
   def store(product: ProductWrapper, db: Database): Future[Boolean] = {
-    val data = products +=(product.id, product.name, product.description, product.sub, product.images, product.src)
+    val data = products.insertOrUpdate(product.id, product.name, product.description, product.sub, product.images, product.src)
     val p = Promise[Boolean]
     db.run(data).onComplete {
       case Success(res) => p.success(true)

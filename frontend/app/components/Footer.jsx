@@ -43,6 +43,9 @@ export default class Footer extends Component {
             </div>
             <div className="col-md-6 col-sm-4 hidden-xs" style={{paddingTop: 20}}>
               <MapWrapper height={143} zoom={7} />
+              <div style={{textAlign: 'right', color: 'lightGray', marginTop: 3}}>
+                <Link to="login">Login</Link>
+              </div>
             </div>
           </div>
         </div>

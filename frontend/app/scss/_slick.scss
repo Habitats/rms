@@ -1,18 +1,18 @@
 @charset "UTF-8";
 
-$slick-font-path: "../../node_modules/slick-carousel/slick/fonts/" !default;
-$slick-dot-size: 10px !default;
-$slick-dot-color: black !default;
-$slick-font-family: "slick" !default;
-$slick-loader-path: "./" !default;
-$slick-arrow-color: white !default;
-$slick-dot-color-active: $slick-dot-color !default;
-$slick-prev-character: "←" !default;
-$slick-next-character: "→" !default;
-$slick-dot-character: "•" !default;
-$slick-opacity-default: 0.75 !default;
-$slick-opacity-on-hover: 1 !default;
-$slick-opacity-not-active: 0.25 !default;
+$slick-font-path: "../../node_modules/slick-carousel/slick/fonts/";
+$slick-dot-size: 30px;
+$slick-dot-color: black;
+$slick-font-family: "slick";
+$slick-loader-path: "./";
+$slick-arrow-color: white ;
+$slick-dot-color-active: $slick-dot-color;
+$slick-prev-character: "←";
+$slick-next-character: "→";
+$slick-dot-character: "•";
+$slick-opacity-default: 0.75;
+$slick-opacity-on-hover: 1;
+$slick-opacity-not-active: 0.25;
 
 @function slick-image-url($url) {
   @if function-exists(image-url) {

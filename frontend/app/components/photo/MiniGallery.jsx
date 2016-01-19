@@ -45,15 +45,15 @@ export default class MiniGallery extends Component {
 
     let coverClasses, thumbsClasses, thumbsPhotoClasses, coverStyle, thumbsStyle
     if (orientation === 'vertical') {
-      coverClasses = images.length > 4 ? 'col-md-8 col-sm-8' : 'col-md-9 col-sm-9'
-      thumbsClasses = images.length > 4 ? 'col-md-4 col-sm-4' : 'col-md-3 col-sm-3'
-      thumbsPhotoClasses = images.length > 4 ? 'col-lg-6 col-md-6 col-sm-12 col-xs-12' : 'col-lg-12 col-md-12 col-sm-12 col-xs-12'
+      coverClasses = images.length > 4 ? 'col-sm-8' : 'col-sm-9'
+      thumbsClasses = images.length > 4 ? 'col-sm-4' : 'col-sm-3'
+      thumbsPhotoClasses = images.length > 4 ? 'col-md-6 col-xs-12' : 'col-xs-12'
       coverStyle = {paddingRight: 0}
       thumbsStyle = {paddingRight: 15}
     } else {
-      coverClasses = 'col-md-12 col-sm-12 col-xs-12'
-      thumbsClasses = 'col-md-12 col-sm-12 col-xs-12'
-      thumbsPhotoClasses = 'col-md-3 col-sm-3 col-xs-6'
+      coverClasses = 'col-xs-12'
+      thumbsClasses = 'col-xs-12'
+      thumbsPhotoClasses = 'col-sm-3 col-xs-6'
       coverStyle = {paddingRight: 15}
       thumbsStyle = {paddingTop: 15, paddingRight: 15}
     }

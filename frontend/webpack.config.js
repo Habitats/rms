@@ -1,20 +1,24 @@
-var path = require('path');
-var util = require('util');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var webpack = require('webpack');
-var pkg = require('./package.json');
+const path = require('path');
+const util = require('util');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const webpack = require('webpack');
+const pkg = require('./package.json');
 
-var DEBUG = process.env.NODE_ENV === 'development';
+const DEBUG = process.env.NODE_ENV === 'development';
 
-var contextPath = '';
+const contextPath = '';
 
-var cssExtractTextPlugin = new ExtractTextPlugin('css/rms.css', {
+const cssExtractTextPlugin = new ExtractTextPlugin('css/rms.css', {
   allChunks: true
 });
 
-var plugins = [
+const plugins = [
   new webpack.optimize.OccurenceOrderPlugin(),
-  cssExtractTextPlugin
+  cssExtractTextPlugin,
+  new webpack.ProvidePlugin({
+    $: "jquery",
+    jQuery: "jquery"
+  })
 ];
 
 if (DEBUG) {
@@ -34,7 +38,7 @@ if (DEBUG) {
   );
 }
 
-var loaders = [
+const loaders = [
   {
     test: /\.jsx?|\.js?$/,
     exclude: /node_modules/,
@@ -47,17 +51,14 @@ var loaders = [
   },
   {
     test: /\.css$/,
-    exclude: /node_modules/,
     loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader')
   },
   {
     test: /\.json$/,
-    exclude: /node_modules/,
     loader: 'json-loader'
   },
   {
     test: /\.jpe?g$|\.gif$|\.png$|\.ico|\.svg$|\.woff$|\.ttf$/,
-    exclude: /node_modules/,
     loader: 'file-loader?name=[path][name].[ext]'
   },
   {
@@ -70,7 +71,6 @@ var loaders = [
   },
   {
     test: /\.html$/,
-    exclude: /node_modules/,
     loader: [
       'file-loader?name=[path][name].[ext]',
       'template-html-loader?' + [
@@ -82,11 +82,10 @@ var loaders = [
   },
   {
     test: /\.scss$/,
-    exclude: /node_modules/,
-    loader: cssExtractTextPlugin.extract('style-loader', [
-      'css-loader?sourceMap',
-      'postcss-loader',
-      'sass-loader?' + [
+    loader: cssExtractTextPlugin.extract('style', [
+      'css?sourceMap',
+      'postcss',
+      'sass?' + [
         'sourceMap',
         'sourceMapContents=true',
         'outputStyle=expanded',
@@ -97,18 +96,17 @@ var loaders = [
   }
 ];
 
-var entry = {
-  app: ['./index.js']
-
+const entry = {
+  app: ['bootstrap-loader', './index.js']
 };
 
 if (DEBUG) {
-  var url = util.format('http://%s:%d', pkg.config.devHost, pkg.config.devPort);
+  const url = util.format('http://%s:%d', pkg.config.devHost, pkg.config.devPort);
   entry.app.push('webpack-dev-server/client?' + url);
   entry.app.push('webpack/hot/only-dev-server');
 }
 
-var config = {
+const config = {
   context: path.join(__dirname, 'app'),
   cache: DEBUG,
   debug: DEBUG,

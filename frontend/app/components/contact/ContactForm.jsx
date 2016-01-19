@@ -59,11 +59,11 @@ export default class ContactForm extends Component {
     let valid = this.valid
     var clicked = this.state.clicked
     var sent = this.state.sent
-    let nameClasses = 'col-md-4 col-sm-4 col-xs-4 disabled ' + (!clicked || sent ? '' : (valid.name ? 'has-success' : 'has-error'))
-    let contactPhoneClasses = 'col-md-4 col-sm-4 col-xs-4 ' + (!clicked || sent ? '' : (valid.contactPhone ? 'has-success' : 'has-error'))
-    let contactEmailClasses = 'col-md-4 col-sm-4 col-xs-4 ' + (!clicked || sent ? '' : (valid.contactEmail ? 'has-success' : 'has-error'))
-    let subjectClasses = 'col-md-12 col-sm-12 col-xs-12 ' + (!clicked || sent ? '' : (valid.subject ? 'has-success' : 'has-error'))
-    let messageClasses = 'col-md-12 col-sm-12 col-xs-12 ' + (!clicked || sent ? '' : (valid.message ? 'has-success' : 'has-error'))
+    let nameClasses = 'col-xs-4 disabled ' + (!clicked || sent ? '' : (valid.name ? 'has-success' : 'has-error'))
+    let contactPhoneClasses = 'col-xs-4 ' + (!clicked || sent ? '' : (valid.contactPhone ? 'has-success' : 'has-error'))
+    let contactEmailClasses = 'col-xs-4 ' + (!clicked || sent ? '' : (valid.contactEmail ? 'has-success' : 'has-error'))
+    let subjectClasses = 'col-xs-12 ' + (!clicked || sent ? '' : (valid.subject ? 'has-success' : 'has-error'))
+    let messageClasses = 'col-xs-12 ' + (!clicked || sent ? '' : (valid.message ? 'has-success' : 'has-error'))
     let disabled = sent ? 'disabled' : undefined
     let error = this.isValid() || !clicked || sent ? '' : (<p>Fyll inn alle feltene!</p>)
     let button =

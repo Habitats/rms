@@ -12,6 +12,16 @@ export function fetchProducts() {
   }
 }
 
+export function save(data) {
+  return dispatch => {
+    dispatch({type: C.SAVE_PRODUCT_INIT})
+    return GeneralApi.saveProduct(data).then(
+      products => dispatch({type: C.SAVE_PRODUCT_SUCCESS, products}),
+      error => dispatch({type: C.SAVE_PRODUCT_FAIL})
+    )
+  }
+}
+
 export function selectProduct(category, product) {
   return (dispatch) => {
     dispatch(routeActions.push(`${product.short}/${category.short}`))

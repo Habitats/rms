@@ -41,7 +41,7 @@ export default class Welcome extends Component {
 
   categories() {
     let rootCategories = this.props.categories.sub.map(c => <ProductItem key={`${c.short}:${c.short}`} product={c} height={150}
-                                                                         className="col-md-3 col-sm-3 col-xs-6"
+                                                                         className="col-sm-3 col-xs-6"
                                                                          linkTo={`/produkter/${c.short}`}/>)
     return rootCategories
   }

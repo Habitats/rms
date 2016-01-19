@@ -6,7 +6,7 @@ import no.rms.Logger
 import no.rms.db.RmsDb
 import no.rms.servlets.{PublicServlet, SecretServlet, SessionServlet}
 import org.scalatra._
-import slick.driver.JdbcDriver.api._
+import slick.driver.H2Driver.api._
 
 class ScalatraBootstrap extends LifeCycle {
   val cpds = new ComboPooledDataSource
