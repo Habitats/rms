@@ -40,18 +40,18 @@ export default class Welcome extends Component {
   }
 
   categories() {
-    let rootCategories = this.props.categories.sub.map(c => <ProductItem key={`${c.short}:${c.short}`} product={c} height={150}
+    let rootCategories = this.props.categories.sub.map(c => <ProductItem key={`${c.id}`} product={c} height={150}
                                                                          className="col-sm-3 col-xs-6"
-                                                                         linkTo={`/produkter/${c.short}`}/>)
+                                                                         linkTo={`/produkter/${c.id}`}/>)
     return rootCategories
   }
 
   render() {
     let images = [
-      {src: '/image/carousel,c1.jpg', name: 'nice image'},
-      {src: '/image/carousel,c2.jpg', name: 'imagege image'},
-      {src: '/image/carousel,c3.jpg', name: 'oløøøø image'},
-      {src: '/image/carousel,c4.jpg', name: 'nice image'}
+      {src: '/image/carousel,c1.jpg', title: 'nice image'},
+      {src: '/image/carousel,c2.jpg', title: 'imagege image'},
+      {src: '/image/carousel,c3.jpg', title: 'oløøøø image'},
+      {src: '/image/carousel,c4.jpg', title: 'nice image'}
     ]
     return (
       <div>

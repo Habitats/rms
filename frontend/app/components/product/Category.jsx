@@ -4,8 +4,8 @@ import ProductItem from './ProductItem.jsx'
 export default class Category extends Component {
 
   render() {
-    let {name, sub, short} = this.props.category
-    let products = sub.map(p => <ProductItem key={`${short}:${p.short}`} product={p} category={name} linkTo={`/produkter/${short}/${p.short}`}/>)
+    let {title,id, sub} = this.props.category
+    let products = sub.map(p => <ProductItem key={`${p.id}`} product={p} category={title} linkTo={`/produkter/${id}/${p.id}`}/>)
     return (
         <div className="row">
           {products}
@@ -16,9 +16,9 @@ export default class Category extends Component {
 
 Category.propTypes = {
   category: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    short: PropTypes.string.isRequired,
-    desc: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
     src: PropTypes.string.isRequired,
     sub: PropTypes.array.isRequired
   })

@@ -7,10 +7,10 @@ export default class ProductContainer extends Component {
 
   render() {
     let {categories, params} = this.props
-    let category = categories.sub.find(c => c.short === params.category)
-    let product = category.sub.find(p => p.short === params.product)
+    let category = categories.sub.find(c => c.id === params.category)
+    let product = category.sub.find(p => p.id === params.product)
     return (
-      <Product product={product} category={category.name} linkTo={`produkter/${category.short}/${product.short}`} selected={params.selected}/>
+      <Product product={product} category={category.title} linkTo={`produkter/${category.id}/${product.id}`} selected={params.selected}/>
     )
   }
 }

@@ -26,21 +26,22 @@ object RmsDb {
     def id = column[String]("ID", O.PrimaryKey)
     def title = column[String]("TITLE")
     def description = column[String]("DESCRIPTION", O.Length(10000))
-    def img = column[String]("IMG", O.Length(10000))
+    def images = column[String]("IMAGES", O.Length(10000))
     def created = column[String]("CREATED")
 
-    def * = (id, title, description, img, created)
+    def * = (id, title, description, images, created)
   }
 
-  class Products(tag: Tag) extends Table[(String, String, String, String, String, String)](tag, "PRODUCTS") {
-    def short = column[String]("ID", O.PrimaryKey)
-    def name = column[String]("TITLE")
-    def desc = column[String]("DESCRIPTION", O.Length(10000))
+  class Products(tag: Tag) extends Table[(String, String, String, String, String, String, String)](tag, "PRODUCTS") {
+    def id = column[String]("ID", O.PrimaryKey)
+    def title = column[String]("TITLE")
+    def description = column[String]("DESCRIPTION", O.Length(10000))
     def sub = column[String]("SUB_PRODUCTS", O.Length(10000))
-    def img = column[String]("IMG", O.Length(20000))
+    def images = column[String]("IMAGES", O.Length(20000))
     def src = column[String]("SRC")
+    def category = column[String]("CATEGORY")
 
-    def * = (short, name, desc, sub, img, src)
+    def * = (id, title, description, sub, images, src, category)
   }
 
   def init(db: Database): Future[Boolean] = {
@@ -79,7 +80,7 @@ object RmsDb {
   def allProjects(db: Database): Future[Seq[Project]] = {
     db.run(projects.result).map(res => res.map {
       case (id, title, description, img, created) =>
-        Project(id, title, description, img.split(delim).map(i => ImageWrapper.fromString(i)), Config.parse(created))
+        Project(id = id, title = title, description = description, images = img.split(delim).map(i => ImageWrapper.fromString(i)), created = Config.parse(created))
       case _ => throw new IllegalArgumentException("Couldn't fetch projects")
     })
   }
@@ -87,15 +88,14 @@ object RmsDb {
   def project(id: String, db: Database): Future[Option[Project]] = {
     db.run(projects.filter(_.id === id).result.headOption).map {
       case Some((id, title, description, img, created)) =>
-        Some(Project(id, title, description, img.split(delim).map(i => ImageWrapper.fromString(i)), Config.parse(created)))
+        Some(Project(id = id, title = title, description = description, images = img.split(delim).map(i => ImageWrapper.fromString(i)), created = Config.parse(created)))
       case _ => throw new IllegalArgumentException(s"Couldn't fetch project: $id")
     }
   }
 
   def product(id: String, db: Database): Future[Option[ProductWrapper]] = {
-    db.run(products.filter(_.short === id).result.headOption).map {
-      case Some((id, name, description, sub, images, src)) =>
-        Some(ProductWrapper(id, name, description, sub, images, src))
+    db.run(products.filter(_.id === id).result.headOption).map {
+      case Some(fields) => Some(ProductWrapper.fromFields(fields))
       case _ => throw new IllegalArgumentException(s"Couldn't fetch product: $id")
     }
   }
@@ -104,8 +104,8 @@ object RmsDb {
     val futureProducts = db.run(products.result)
     futureProducts.map { products =>
       val wrapped = for {
-        (id, name, desc, sub, images, src) <- products
-      } yield ProductWrapper(id, name, desc, sub, images, src)
+        fields <- products
+      } yield ProductWrapper.fromFields(fields)
       ProductWrapper.tree(wrapped)
     }
   }
@@ -139,7 +139,7 @@ object RmsDb {
   }
 
   def store(product: ProductWrapper, db: Database): Future[Boolean] = {
-    val data = products.insertOrUpdate(product.id, product.name, product.description, product.sub, product.images, product.src)
+    val data = products.insertOrUpdate(product.id, product.title, product.description, product.sub, product.images, product.src, product.category)
     val p = Promise[Boolean]
     db.run(data).onComplete {
       case Success(res) => p.success(true)

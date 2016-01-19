@@ -6,7 +6,7 @@ import * as ProductActionCreators from  '../../redux/actions/productActions'
 export default class ProductItem extends Component {
 
   render() {
-    let {product :{name, src}, linkTo, height, className} = this.props
+    let {product :{title, src}, linkTo, height, className} = this.props
     let style = {
       height: height,
       marginBottom: 25
@@ -16,7 +16,7 @@ export default class ProductItem extends Component {
         <div className="row">
           <div className="col-md-12">
               <Photo linkTo={linkTo} src={src} height={height} size={'med'}>
-                <HeadlineOverlay text={name} />
+                <HeadlineOverlay text={title} />
               </Photo>
           </div>
         </div>
@@ -32,8 +32,8 @@ ProductItem.defaultProps = {
 
 ProductItem.propTypes = {
   product: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    short: PropTypes.string.isRequired
+    title: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired
   }),
   linkTo: PropTypes.string.isRequired,
   className: PropTypes.string,

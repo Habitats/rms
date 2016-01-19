@@ -24,14 +24,14 @@ export function save(data) {
 
 export function selectProduct(category, product) {
   return (dispatch) => {
-    dispatch(routeActions.push(`${product.short}/${category.short}`))
+    dispatch(routeActions.push(`${category.id}/${product.id}`))
     dispatch({type: C.SELECT_PRODUCT, category: category, product: product})
   }
 }
 
 export function selectCategory(category) {
   return (dispatch) => {
-    dispatch(routeActions.push(`${category.short}`))
+    dispatch(routeActions.push(`${category.id}`))
     dispatch({type: C.SELECT_CATEGORY, category: category})
   }
 }

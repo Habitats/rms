@@ -13,16 +13,16 @@ export default class MenuItem extends Component {
   }
 
   render() {
-    let {product: {name, short}, linkTo, active} = this.props
+    let {product: {title, id}, linkTo, active} = this.props
     let {hover} = this.state
-    let a = short === active.product
+    let a = id === active.product
     let color = hover ? '#224E6D' : a ? 'black' : '#48494B'
     let markerStyle = {color: color, opacity: a ? 1 : 0, fontSize: 7, height: 8, verticalAlign: 'middle'}
     let itemStyle = {color: color, marginLeft: 10, fontWeight: 300}
     return (
       <div onMouseEnter={this.toggleHover.bind(this, true)} onMouseLeave={this.toggleHover.bind(this, false)}>
         <Link to={linkTo}>
-          <h4 style={itemStyle}><i className="fa fa-circle" style={markerStyle}/>{name}</h4>
+          <h4 style={itemStyle}><i className="fa fa-circle" style={markerStyle}/>{title}</h4>
         </Link>
       </div>
     )
@@ -31,8 +31,8 @@ export default class MenuItem extends Component {
 
 MenuItem.propTypes = {
   product: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    short: PropTypes.string.isRequired
+    title: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired
   }),
   active: PropTypes.shape({
     category: PropTypes.string.isRequired,

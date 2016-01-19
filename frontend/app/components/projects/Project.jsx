@@ -10,8 +10,7 @@ import * as generalActionCreators from '../../redux/actions/generalActions'
 export default class Project extends Component {
 
   render() {
-    let {project, selected} = this.props
-    selected = project.images[selected] ? selected : 0
+    let {project} = this.props
     return (
       <Box>
         <BigHeadline big={project.title} small="Prosjekt"/>

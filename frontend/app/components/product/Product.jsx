@@ -1,36 +1,35 @@
 import React, {Component, PropTypes} from 'react'
-import PhotoBig from './../photo/PhotoBig.jsx'
-import PhotoLine from './../photo/PhotoLine.jsx'
+import MiniGallery from './../photo/MiniGallery.jsx'
 import {connect} from 'react-redux'
 import LoremIpsum from './../LoremIpsum.jsx'
 import HeadlineOverlay from './../text/HeadlineOverlay.jsx'
 import SubProduct from './SubProduct.jsx'
 import BigHeadline from './../text/BigHeadline.jsx'
+import Wysiwyg from './../text/Wysiwyg.jsx'
 import TextBox from './../text/TextBox.jsx'
 import Box from './../Box.jsx'
+import * as productActions from '../../redux/actions/productActions'
 
 export default class Product extends Component {
 
   render() {
-    let {product: {name, desc, src, images, sub}, linkTo, selected, category} = this.props
-    let s = selected || images.map(img => img.src).indexOf(src)
-    // failsafe if there're no images
-    let coverSrc = s != -1 ? images[s].src : src
+    let {product, category, dispatch, session: {admin}} = this.props
+    let {title, description, images, sub} = product
 
-    let subContent = sub.sort((a,b) => a.short < b.short ? -1 : (b.short < a.short) ? 1 : 0).map(p => <SubProduct key={p.short} product={p}/>)
+    let subContent = sub.sort((a, b) => a.id < b.id ? -1 : (b.id < a.id) ? 1 : 0).map(p => <SubProduct key={p.id} product={p}/>)
     return (
       <div>
         <Box>
-          <BigHeadline big={name} small={category}/>
-          <PhotoBig src={coverSrc} height={400} size={'med'}/>
-          <div className="row">
-            {images.length > 1 ? <PhotoLine images={images} root={linkTo} selected={s}/> : null}
-          </div>
+          <BigHeadline big={title} small={category}/>
+          <MiniGallery images={images} orientation={'horizontal'} height={350} thumbHeight={80}/>
           <TextBox>
             <div style={{paddingTop: 20, paddingBottom: 20}}>
               <hr />
+              {admin ?
+               <Wysiwyg content={description} onSave={(p) => dispatch(productActions.save({... product, description: p}))}/>
+                : <div dangerouslySetInnerHTML={{__html: description}}/> }
+              <hr />
             </div>
-            <p>{desc}</p>
           </TextBox>
         </Box>
         {subContent}
@@ -45,13 +44,15 @@ Product.defaultProps = {
 
 Product.propTypes = {
   product: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    desc: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
     images: PropTypes.array.isRequired,
     sub: PropTypes.array.isRequired,
-    src: PropTypes.string.isRequired
   }),
   linkTo: PropTypes.string.isRequired,
-  category: PropTypes.string.isRequired,
-  selected: PropTypes.number
+  category: PropTypes.string.isRequired
 }
+
+export default connect(state => ({
+  session: state.session
+}))(Product)

@@ -9,23 +9,18 @@ import MediumHeadline from './../text/MediumHeadline.jsx'
 import BigHeadline from './../text/BigHeadline.jsx'
 import Wysiwyg from './../text/Wysiwyg.jsx'
 import Box from './../Box.jsx'
-import * as productActionCreators from '../../redux/actions/productActions'
+import * as productActions from '../../redux/actions/productActions'
 
 export default class SubProduct extends Component {
 
-  onSave(p) {
-    console.log(p.innerText)
-    let updatedProduct = {... this.props.product, desc: p}
-    this.props.dispatch(productActionCreators.save(updatedProduct))
-  }
-
   render() {
-    let {product: {name, desc, src, images}, session: {admin}} = this.props
+    let {session: {admin}, dispatch, product} = this.props
+    let {title, description, src, images} = product
 
     return (
       <div>
         <Box>
-          <MediumHeadline big={name}/>
+          <MediumHeadline big={title}/>
           <div className="row">
             {src.includes('main.jpg') ?
              <MiniGallery images={images} orientation={'vertical'}/> : <PhotoLine images={images} clickable={true}/>}
@@ -33,7 +28,9 @@ export default class SubProduct extends Component {
           <div style={{marginBottom: 0,marginTop: 30}}>
             <TextBox>
               <hr />
-              {admin ? <Wysiwyg content={desc} onSave={this.onSave.bind(this)}/> : <div dangerouslySetInnerHTML={{__html: desc}}/> }
+              {admin ?
+               <Wysiwyg content={description} onSave={(p) => dispatch(productActions.save({... product, description: p}))}/>
+                : <div dangerouslySetInnerHTML={{__html: description}}/> }
               <hr />
             </TextBox>
           </div>
@@ -45,8 +42,8 @@ export default class SubProduct extends Component {
 
 SubProduct.propTypes = {
   product: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    desc: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
     src: PropTypes.string.isRequired
   })
 }

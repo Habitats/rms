@@ -17,11 +17,6 @@ object ImageUtils {
 
   def notFound(): File = Random.shuffle(Paths.get(rootDir, "not_found").toFile.listFiles.toList).head
 
-  def privates: Seq[ImageWrapper] = {
-    val p = fetchUrls("privat")
-    p
-  }
-
   def rename(f: File): File = {
     if (f.getName.contains(" ")) {
       val renamed = Paths.get(f.getParent, f.getName.toLowerCase.replaceAll(" ", "_")).toFile

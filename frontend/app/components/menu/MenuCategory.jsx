@@ -14,23 +14,23 @@ export default class MenuCategory extends Component {
   }
 
   render() {
-    let {category: {name, short, sub}, linkTo, active} = this.props
+    let {category: {title, id, sub}, linkTo, active} = this.props
     let {hover} = this.state
 
-    let a = short === active.category && !active.product
+    let a = id === active.category && !active.product
     let color = hover ? '#224E6D' : a ? 'black' : '#48494B'
     let markerStyle = {color: color, opacity: a ? 1 : 0, fontSize: 7, height: 8, verticalAlign: 'middle', marginLeft: 3, marginRight: 3}
     let itemStyle = {color: color, marginBottom: 35}
 
-    let menuItems = sub.map(p => <MenuItem product={p} active={active.category === short ? active : {...active, product: ''}}
-                                           key={`${short} ${p.short}`}
-                                           linkTo={`${linkTo}/${p.short}`}/>)
+    let menuItems = sub.map(p => <MenuItem product={p} active={active.category === id ? active : {...active, product: ''}}
+                                           key={`${p.id}`}
+                                           linkTo={`${linkTo}/${p.id}`}/>)
 
     return (
       <div style={itemStyle}>
         <Link to={linkTo}>
           <div onMouseEnter={this.toggleHover.bind(this, true)} onMouseLeave={this.toggleHover.bind(this, false)}>
-            <h3 style={{fontWeight: 600, color: color}}><i className="fa fa-circle" style={markerStyle}/>{name}</h3>
+            <h3 style={{fontWeight: 600, color: color}}><i className="fa fa-circle" style={markerStyle}/>{title}</h3>
           </div>
         </Link>
         {menuItems}
@@ -41,8 +41,8 @@ export default class MenuCategory extends Component {
 
 MenuCategory.propTypes = {
   category: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    short: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
     sub: PropTypes.array.isRequired
   }),
   active: PropTypes.shape({

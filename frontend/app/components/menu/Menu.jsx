@@ -37,7 +37,7 @@ export default class Menu extends Component {
 
   render() {
     let {categories, active, linkTo} = this.props
-    let cats = categories.sub.map(c => <MenuCategory key={c.short} linkTo={`${linkTo}/${c.short}`} category={c} active={active}/>)
+    let cats = categories.sub.map(c => <MenuCategory key={c.id} linkTo={`${linkTo}/${c.id}`} category={c} active={active}/>)
     let {transform} = this.state
 
     return (

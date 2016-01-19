@@ -2,9 +2,8 @@ package no.rms.models
 
 import no.rms.ImageUtils
 
-class ImageWrapper(val name: String, val src: String) {
-
-  override def toString: String = f"$name - $src"
+class ImageWrapper(val title: String, val src: String) {
+  override def toString: String = f"$title - $src"
 }
 
 object ImageWrapper {
@@ -13,10 +12,10 @@ object ImageWrapper {
     new ImageWrapper(split(0), split(1))
   }
 
-  def apply(name: String, src: String): ImageWrapper = {
-    new ImageWrapper(name, "image/" + src.replaceAll("/", ImageUtils.delim))
+  def apply(title: String, src: String): ImageWrapper = {
+    new ImageWrapper(title, "image/" + src.replaceAll("/", ImageUtils.delim))
   }
 
-  def unapply(image: ImageWrapper): (String, String) = (image.name, image.src)
+  def unapply(image: ImageWrapper): (String, String) = (image.title, image.src)
 }
 

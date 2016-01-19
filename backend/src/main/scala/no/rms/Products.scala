@@ -34,7 +34,7 @@ object Products {
       )),
       Product("Interiør", "", Seq(
         Product("Rullegardiner", "Rullegardiner med ensfarget, mønstret, mørklegging og transparent. Velg blant over 130 farger!"),
-        Product("Persienner", "Dekorative design og mønstre. Mange forskjelllige farger. Leveres med lameller i 25 mm bredde, samt utvalgte i 35 mm bredde, begge i meget høy kvalitet."),
+        Product("Persienner", "Dekorative design og mønstre. Mange forskjelllige farger. Leveres med lameller i 25 mm bredde, samt utvalgte i 35 mm bredde, begge i meget høy kvalitet.", id = "innvendige_persienner"),
         Product("Lamellgardiner", "Lamellgardiner har mange anvendelseområder: Som dekorasjon, romdeler og solskjerming. Spesielt egnet for store vindusflater."),
         Product("Plisségardiner", "Våre Plisségardiner er laget av moderne tekstiler og designet i over 120 farger. Når du kontakter oss vedrørende Plisségardiner hjelper vi deg å finne kombinasjonen som vil gi det perfekte resultatet. Velg blant 120 farger og tekstiler."),
         Product("Duette", "Dekorativt produkt med bikakestruktur som gir høy isoleringseffekt. Eksklusiv kolleksjon av farger, mønster og design. Spesielt egnet for vinduer med avvikende form."),

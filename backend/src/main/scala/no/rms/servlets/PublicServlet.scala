@@ -13,7 +13,7 @@ import org.scalatra.json.JacksonJsonSupport
 import org.scalatra.{CorsSupport, FutureSupport}
 import slick.driver.H2Driver.api._
 
-import scala.concurrent.ExecutionContext
+import scala.concurrent.{ExecutionContext, Future}
 
 class PublicServlet(val db: Database) extends BackendStack with FutureSupport with JacksonJsonSupport with CorsSupport with RmsMailer with AuthenticationSupport {
   protected implicit def executor = ExecutionContext.Implicits.global
@@ -79,12 +79,9 @@ class PublicServlet(val db: Database) extends BackendStack with FutureSupport wi
 
   get("/images/?") {
     Logger.info("GET: images/")
-    ImageUtils.fetchUrls("prosjekt")
-  }
-
-  get("/privates/?") {
-    Logger.info("GET: privates/")
-    ImageUtils.privates
+    Future {
+      ImageUtils.fetchUrls("prosjekt")
+    }
   }
 
   get("/image/:id/:size/?") {
@@ -92,7 +89,9 @@ class PublicServlet(val db: Database) extends BackendStack with FutureSupport wi
     val path = params.get("id").get
     Logger.info("GET: image/" + path + "/" + size)
     contentType = "image"
-    ImageUtils.fetchPath(path, size).getOrElse(ImageUtils.notFound)
+    Future {
+      ImageUtils.fetchPath(path, size).getOrElse(ImageUtils.notFound)
+    }
   }
 
   get("/image/:id/?") {

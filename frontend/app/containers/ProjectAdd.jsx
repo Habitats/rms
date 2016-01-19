@@ -74,7 +74,7 @@ export default class ProjectAdd extends Component {
 
     let chosenLabels = []
     for (let i of chosenImages.values()) {
-      chosenLabels.push(<SimpleLabel key={i.src} text={i.name}/>)
+      chosenLabels.push(<SimpleLabel key={i.src} text={i.title}/>)
     }
 
     let usedImages = projects.length > 0 ? [... new Set(projects.map(p => p.images).reduce((a, b) => a.concat(b)).map(i => i.src))] : []

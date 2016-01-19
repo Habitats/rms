@@ -7,12 +7,15 @@ export default class MiniGallery extends Component {
 
   constructor(props) {
     super(props)
-    let coverImage = this.props.images.find(i => i.src.includes('main.jpg')) || this.props.images.length > 0 ? this.props.images[0] : null
-    this.state = {selected: coverImage, hover: false, hoverRight: false, hoverLeft: false}
+    this.state = {selected: null, hover: false, hoverRight: false, hoverLeft: false}
   }
 
   onSelect(selected) {
     this.setState({selected: selected})
+  }
+
+  componentWillReceiveProps(nextProps){
+    this.setState({selected: null})
   }
 
   onRightSelect(images, selected) {
@@ -43,6 +46,9 @@ export default class MiniGallery extends Component {
     let {images, height, orientation} = this.props
     let {hover, hoverRight, hoverLeft, selected} = this.state
 
+    let main = () => images.find(i => i.src.includes('main.jpg'))
+    let cover = selected || (main() || (images.length > 0 ? images[0] : null))
+
     let coverClasses, thumbsClasses, thumbsPhotoClasses, coverStyle, thumbsStyle
     if (orientation === 'vertical') {
       coverClasses = images.length > 4 ? 'col-sm-8' : 'col-sm-9'
@@ -61,7 +67,8 @@ export default class MiniGallery extends Component {
     let photos = images.map(image =>
       <div key={image.src} className={thumbsPhotoClasses} style={{padding: 0, margin: 0}}>
         <div className={'photo'} style={{marginBottom: 15, marginLeft: 15}}>
-          <Photo onClick={this.onSelect.bind(this, image)} height={orientation === 'horizontal' ? 120 : 90} src={image.src} size={'low'} selected={selected === image}/>
+          <Photo onClick={this.onSelect.bind(this, image)} height={orientation === 'horizontal' ? 120 : 90} src={image.src} size={'low'}
+                 selected={cover === image}/>
         </div>
       </div>
     )
@@ -77,14 +84,14 @@ export default class MiniGallery extends Component {
 
     let rightHover = hover ? (
       <div style={{height: '100%', width: 55, float: 'right'}}
-           onClick={this.onRightSelect.bind(this, images, selected)}>
+           onClick={this.onRightSelect.bind(this, images, cover)}>
                <span onMouseEnter={this.toggleHoverRight.bind(this, true)} onMouseLeave={this.toggleHoverRight.bind(this, false)}
                      style={{... iconStyle, color: hoverRight ? 'white' : 'lightGray'}}
                      className="fa fa-chevron-right fa-3x"/>
       </div>) : null
     let leftHover = hover ? (
       <div style={{height: '100%', width: 55, float: 'left'}}
-           onClick={this.onLeftSelect.bind(this, images, selected)}>
+           onClick={this.onLeftSelect.bind(this, images, cover)}>
                <span onMouseEnter={this.toggleHoverLeft.bind(this, true)} onMouseLeave={this.toggleHoverLeft.bind(this, false)}
                      style={{... iconStyle, color: hoverLeft ? 'white' : 'lightGray'}}
                      className="fa fa-chevron-left fa-3x"/>
@@ -94,7 +101,7 @@ export default class MiniGallery extends Component {
       <div>
         <div onMouseEnter={this.toggleHover.bind(this, true)} onMouseLeave={this.toggleHover.bind(this, false)}
              className={coverClasses} style={coverStyle}>
-          <Photo src={selected.src} height={height} size={'med'}>
+          <Photo src={cover.src} height={height} size={'med'}>
             {rightHover}
             {leftHover}
           </Photo>
