@@ -22,9 +22,11 @@ export default class MenuCategory extends Component {
     let markerStyle = {color: color, opacity: a ? 1 : 0, fontSize: 7, height: 8, verticalAlign: 'middle', marginLeft: 3, marginRight: 3}
     let itemStyle = {color: color, marginBottom: 35}
 
-    let menuItems = sub.map(p => <MenuItem product={p} active={active.category === id ? active : {...active, product: ''}}
-                                           key={`${p.id}`}
-                                           linkTo={`${linkTo}/${p.id}`}/>)
+    let menuItems = sub
+      .sort((a, b) => a.id < b.id ? -1 : (b.id < a.id) ? 1 : 0)
+      .map(p => <MenuItem product={p} active={active.category === id ? active : {...active, product: ''}}
+                          key={`${p.id}`}
+                          linkTo={`${linkTo}/${p.id}`}/>)
 
     return (
       <div style={itemStyle}>

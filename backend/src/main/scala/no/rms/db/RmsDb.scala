@@ -25,7 +25,7 @@ object RmsDb {
   class Projects(tag: Tag) extends Table[(String, String, String, String, String)](tag, "PROJECTS") {
     def id = column[String]("ID", O.PrimaryKey)
     def title = column[String]("TITLE")
-    def description = column[String]("DESCRIPTION", O.Length(10000))
+    def description = column[String]("DESCRIPTION", O.Length(1000000))
     def images = column[String]("IMAGES", O.Length(10000))
     def created = column[String]("CREATED")
 
@@ -35,7 +35,7 @@ object RmsDb {
   class Products(tag: Tag) extends Table[(String, String, String, String, String, String, String)](tag, "PRODUCTS") {
     def id = column[String]("ID", O.PrimaryKey)
     def title = column[String]("TITLE")
-    def description = column[String]("DESCRIPTION", O.Length(10000))
+    def description = column[String]("DESCRIPTION", O.Length(1000000))
     def sub = column[String]("SUB_PRODUCTS", O.Length(10000))
     def images = column[String]("IMAGES", O.Length(20000))
     def src = column[String]("SRC")

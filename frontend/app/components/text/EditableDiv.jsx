@@ -1,10 +1,32 @@
 import React, {PropTypes, Component} from 'react'
+import EventListener from '../../util/EventListener'
 
 export default class EditableDiv extends Component {
 
   constructor(props) {
     super(props)
     this.state = {html: this.props.content}
+  }
+
+  componentDidMount(){
+    let editor = this.refs.editor.getDOMNode()
+    editor.addEventListener('paste', this.handlePaste.bind(this), false)
+  }
+
+  handlePaste(e)     {
+      // cancel paste
+      e.preventDefault()
+
+      // get text representation of clipboard
+      var text = text = (event.originalEvent || event).clipboardData.getData('text/plain')
+
+      // insert text manually
+      document.execCommand("insertHTML", false, text)
+  }
+
+  componentWillUnmount() {
+    let editor = this.refs.editor.getDOMNode()
+    editor.removeEventListener('paste')
   }
 
   emitChange() {
@@ -19,10 +41,6 @@ export default class EditableDiv extends Component {
         })
       }).bind(this)
     )
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({html: nextProps.content})
   }
 
   shouldComponentUpdate(nextProps) {
@@ -44,25 +62,23 @@ export default class EditableDiv extends Component {
     }
 
     return (
-      <div >
+      <div>
         <div style={{marginTop: -35}}>
           {headings ?
-          <div className="btn-group" style={buttonSpacing}>
-            <button className="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded={true}>
-              <i className="fa fa-paragraph"/>
-              <i className="fa fa-caret-down"/>
-            </button>
-            <ul className="dropdown-menu" role="menu">
-              <li><a href="javascript:;" onClick={this.execCommand.bind(this, 'formatBlock', 'P')}>Paragraph</a></li>
-              <li><a href="javascript:;" onClick={this.execCommand.bind(this, 'formatBlock', 'BLOCKQUOTE')}>Block Quote</a></li>
-              <li><a href="javascript:;" onClick={this.execCommand.bind(this, 'formatBlock', 'H1')}>H1</a></li>
-              <li><a href="javascript:;" onClick={this.execCommand.bind(this, 'formatBlock', 'H2')}>H2</a></li>
-              <li><a href="javascript:;" onClick={this.execCommand.bind(this, 'formatBlock', 'H3')}>H3</a></li>
-              <li><a href="javascript:;" onClick={this.execCommand.bind(this, 'formatBlock', 'H4')}>H4</a></li>
-              <li><a href="javascript:;" onClick={this.execCommand.bind(this, 'formatBlock', 'H5')}>H5</a></li>
-              <li><a href="javascript:;" onClick={this.execCommand.bind(this, 'formatBlock', 'H6')}>H6</a></li>
-            </ul>
-          </div> : null}
+           <div className="btn-group" style={buttonSpacing}>
+             <button className="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded={true}>
+               <i className="fa fa-paragraph"/>
+               <i className="fa fa-caret-down"/>
+             </button>
+             <ul className="dropdown-menu" role="menu">
+               <li><a href="javascript:;" onClick={this.execCommand.bind(this, 'formatBlock', 'P')}>Paragraf</a></li>
+               <li><a href="javascript:;" onClick={this.execCommand.bind(this, 'formatBlock', 'BLOCKQUOTE')}>
+                 <blockquote>Sitat</blockquote>
+               </a></li>
+               <li><a href="javascript:;" onClick={this.execCommand.bind(this, 'formatBlock', 'H2')}><h2>Overskrift</h2></a></li>
+               <li><a href="javascript:;" onClick={this.execCommand.bind(this, 'formatBlock', 'H3')}><h3>Underoverskrift</h3></a></li>
+             </ul>
+           </div> : null}
 
           <div className="btn-group btn-group-xs" role="group" style={buttonSpacing}>
             <button type="button" className="btn btn-default" onClick={this.execCommand.bind(this, 'bold')}><i className="fa fa-bold"/>
@@ -94,16 +110,16 @@ export default class EditableDiv extends Component {
             </div> : null}
           </div>
           {paragraphs ?
-          <div className="btn-group" style={buttonSpacing}>
-            <button className="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded={false}><i
-              className="fa fa-align-left"/><i className="fa fa-caret-down"/></button>
-            <ul className="dropdown-menu" role="menu">
-              <li><a href="javascript:;" onClick={this.execCommand.bind(this, 'justifyLeft')}>Align Left</a></li>
-              <li><a href="javascript:;" onClick={this.execCommand.bind(this, 'justifyRight')}>Align Right</a></li>
-              <li><a href="javascript:;" onClick={this.execCommand.bind(this, 'justifyCenter')}>Align Center</a></li>
-              <li><a href="javascript:;" onClick={this.execCommand.bind(this, 'justifyFull')}>Align Justify</a></li>
-            </ul>
-          </div> : null}
+           <div className="btn-group" style={buttonSpacing}>
+             <button className="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded={false}><i
+               className="fa fa-align-left"/><i className="fa fa-caret-down"/></button>
+             <ul className="dropdown-menu" role="menu">
+               <li><a href="javascript:;" onClick={this.execCommand.bind(this, 'justifyLeft')}>Align Left</a></li>
+               <li><a href="javascript:;" onClick={this.execCommand.bind(this, 'justifyRight')}>Align Right</a></li>
+               <li><a href="javascript:;" onClick={this.execCommand.bind(this, 'justifyCenter')}>Align Center</a></li>
+               <li><a href="javascript:;" onClick={this.execCommand.bind(this, 'justifyFull')}>Align Justify</a></li>
+             </ul>
+           </div> : null}
           <button type="button" className="btn btn-default btn-xs" onClick={this.execCommand.bind(this, 'removeFormat')}><i
             className="fa fa-eraser"/></button>
         </div>
@@ -116,7 +132,7 @@ export default class EditableDiv extends Component {
 
 EditableDiv.defaultProps = {
   textSize: false,
-  paragraphs: true,
+  paragraphs: false,
   lists: true,
   headings: true
 }
