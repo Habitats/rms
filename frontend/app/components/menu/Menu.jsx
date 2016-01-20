@@ -10,38 +10,42 @@ export default class Menu extends Component {
     this.state = {transform: 0, menuHeight: 0}
   }
 
-  componentWillMount() {
-    window.addEventListener('scroll', this.handleScroll.bind(this))
+  componentDidMount() {
+    this.footerHeight = document.getElementById('footer').clientHeight
+    this.menuHeight = ReactDOM.findDOMNode(this).clientHeight
   }
 
-  componentDidMount(){
-    this.setState({menuHeight: ReactDOM.findDOMNode(this).clientHeight})
+  componentWillMount() {
+    window.addEventListener('scroll', this.handleScroll.bind(this))
   }
 
   componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll.bind(this))
   }
 
-  handleScroll() {
+  handleScroll(event) {
+    if (!event) {
+      return
+    }
     let scrollTop = event.srcElement.body.scrollTop
     let scrollHeight = event.srcElement.body.scrollHeight
     let scrollBottom = scrollHeight - scrollTop - window.innerHeight
-    let margin = this.state.menuHeight - 178
-    let threshold = window.innerHeight - margin + scrollBottom
-    console.log(`${scrollBottom} ${window.innerHeight - margin} ${window.innerHeight - margin + scrollBottom}`)
-    this.setState({
-      transform: threshold <= margin ? threshold - margin : 0
-    })
-    //console.log(scrollBottom <= 62 ? scrollBottom : 0)
+    let margin = this.menuHeight - (this.footerHeight)
+    let threshold = window.innerHeight - margin + scrollBottom - 131
+    let transform = threshold <= margin ? threshold - margin : 0
+    if (transform !== 0) {
+      this.setState({transform: transform})
+    }
   }
 
   render() {
     let {categories, active, linkTo} = this.props
     let cats = categories.sub.map(c => <MenuCategory key={c.id} linkTo={`${linkTo}/${c.id}`} category={c} active={active}/>)
-    let {transform} = this.state
 
+    console.log(this.state.transform)
+    let style = {transform: `translateY(${this.state.transform}px)`}
     return (
-      <div style={{marginTop: transform}}>
+      <div style={style}>
         <Box className="rms-menu">
           <div style={{marginLeft: -31, marginRight: -21}}>
             {cats}

@@ -16,12 +16,10 @@ export default class EditableDiv extends Component {
   handlePaste(e)     {
       // cancel paste
       e.preventDefault()
-
       // get text representation of clipboard
-      var text = text = (event.originalEvent || event).clipboardData.getData('text/plain')
-
+      let text = text = (event.originalEvent || event).clipboardData.getData('text/plain')
       // insert text manually
-      document.execCommand("insertHTML", false, text)
+      document.execCommand('insertHTML', false, text)
   }
 
   componentWillUnmount() {

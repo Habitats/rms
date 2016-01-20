@@ -45,7 +45,9 @@ SubProduct.propTypes = {
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     src: PropTypes.string.isRequired
-  })
+  }),
+  dispatch: PropTypes.func.isRequired,
+  session: PropTypes.shape({admin: PropTypes.bool.isRequired})
 }
 
 export default connect(state => ({

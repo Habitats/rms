@@ -49,7 +49,7 @@ object ProductWrapper {
     val subs = pw.sub.split(RmsDb.delim)
     val sub = products.filter(p => subs.contains(p.id)).map(p => extract(p, products))
     val images = if (pw.images.length > 0) pw.images.split(RmsDb.delim).map(i => ImageWrapper.fromString(i)).toList else Nil
-    Product(id = pw.id, title = pw.title, description = pw.description, sub = sub, images = images, category = pw.category, src = pw.src)
+    Product(id = pw.id, title = pw.title, description = pw.description, sub = sub.sortBy(_.title), images = images, category = pw.category, src = pw.src)
   }
 
   def wrap(p: Product): ProductWrapper = {

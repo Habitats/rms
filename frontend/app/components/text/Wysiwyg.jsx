@@ -9,7 +9,6 @@ export default class Wysiwyg extends Component {
   }
 
   handleChange(e) {
-    console.log(e)
     this.setState({content: e.target.value})
   }
 
@@ -23,7 +22,7 @@ export default class Wysiwyg extends Component {
 
   onSave() {
     this.toggle(false)
-    this.props.onSave(this.state.html)
+    this.props.onSave(this.state.content)
   }
 
   onCancel(){

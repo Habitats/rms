@@ -28,8 +28,9 @@ export default class CategoryContainer extends Component {
 CategoryContainer.propTypes = {
   categories: PropTypes.object.isRequired,
   params: PropTypes.shape({
-    category: PropTypes.string.isRequired
-  })
+    category: PropTypes.string.isRequired,
+  }),
+  dispatch: PropTypes.func.isRequired
 }
 
 export default connect(state => ({

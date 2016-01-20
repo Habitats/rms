@@ -16,7 +16,7 @@ export default class Product extends Component {
     let {product, category, dispatch, session: {admin}} = this.props
     let {title, description, images, sub} = product
 
-    let subContent = sub.sort((a, b) => a.id < b.id ? -1 : (b.id < a.id) ? 1 : 0).map(p => <SubProduct key={p.id} product={p}/>)
+    let subContent = sub.map(p => <SubProduct key={p.id} product={p}/>)
     return (
       <div>
         <Box>
@@ -50,7 +50,9 @@ Product.propTypes = {
     sub: PropTypes.array.isRequired,
   }),
   linkTo: PropTypes.string.isRequired,
-  category: PropTypes.string.isRequired
+  category: PropTypes.string.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  session: PropTypes.shape({admin: PropTypes.bool.isRequired})
 }
 
 export default connect(state => ({

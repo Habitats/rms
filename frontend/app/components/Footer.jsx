@@ -22,7 +22,7 @@ export default class Footer extends Component {
 
     let userField = username ? ` (${username})` : ''
     return (
-      <div style={style}>
+      <div style={style} id="footer">
         <div className="container" style={{maxWidth: 1000}}>
           <div className="row">
             <div className="col-md-3 col-sm-4 col-xs-7">

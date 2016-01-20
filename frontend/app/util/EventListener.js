@@ -15,7 +15,7 @@ class EventListener {
         }
       }
     } else {
-      console.log('tried to attach unknown event in EventListener')
+      console.log('Tried to attach unknown event in EventListener')
     }
   }
 }
