@@ -20,8 +20,8 @@ export function getProducts() {
   return retrieve('products')
 }
 
-export function save(project) {
-  return post(project, 'secret')
+export function saveProject(project) {
+  return post(project, 'secret/project')
 }
 
 export function saveProduct(product) {

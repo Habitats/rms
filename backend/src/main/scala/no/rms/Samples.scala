@@ -1,8 +1,10 @@
 package no.rms
 
-import no.rms.models.Product
+import java.time.LocalDateTime
 
-object Products {
+import no.rms.models.{Project, ImageWrapper, Product}
+
+object Samples {
   def products = {
     Product("Produkter", "", Seq(
       Product("Eksteriør", "", Seq(
@@ -60,4 +62,26 @@ object Products {
       ))
     )).attachCategory()
   }
+
+
+def  projects = {
+  val vgsImgs = Seq(
+    ImageWrapper("1", "referanser/ref_nannestad.vgs_1.jpg"),
+    ImageWrapper("2", "referanser/ref_nannestad.vgs_2.jpg"),
+    ImageWrapper("3", "referanser/ref_nannestad.vgs_3.jpg"),
+    ImageWrapper("4", "referanser/ref_nannestad.vgs_4.jpg")
+  )
+  val komImgs = Seq(
+    ImageWrapper("1", "referanser/ref_nannestad.kommunehus_1.jpg"),
+    ImageWrapper("2", "referanser/ref_nannestad.kommunehus_2.jpg"),
+    ImageWrapper("3", "referanser/ref_nannestad.kommunehus_3.jpg"),
+    ImageWrapper("4", "referanser/ref_nannestad.kommunehus_4.jpg")
+  )
+
+  val samples = Seq(
+    Project("1", "Nannestad VGS", "Hos Nannestad VGS har vi stått for levering av utvendige persienner, og masse annet rart. Stort prosjekt!", vgsImgs, LocalDateTime.now),
+    Project("2", "Nannestad Kommunehus", "Hos Nannestad VGS har vi stått for levering av utvendige persienner, og masse annet rart. Stort prosjekt!", komImgs, LocalDateTime.now)
+  )
+  samples
+}
 }

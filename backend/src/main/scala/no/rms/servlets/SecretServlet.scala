@@ -45,20 +45,19 @@ class SecretServlet(val db: Database) extends BackendStack with FutureSupport wi
     "Autorisert!"
   }
 
-  post("/?") {
+  post("/project/?") {
     Logger.info("POST: project")
-    val p = parsedBody
-    val project = p.extract[Project]
-    println("received: " + project)
-    RmsDb.store(project, db)
+    Try(parsedBody.extract[Project]) match {
+      case Success(p) => RmsDb.storeProject(p, db)
+      case Failure(ex) => Logger.info(ex.getMessage)
+    }
   }
 
   post("/product/?") {
     Logger.info("POST: product")
-    val p = parsedBody
-    Try(p.extract[Product]) match {
+    Try(parsedBody.extract[Product]) match {
       case Success(p) => RmsDb.storeProduct(p, db)
-      case Failure(ex) => ex.printStackTrace
+      case Failure(ex) => Logger.info(ex.getMessage)
     }
   }
 }

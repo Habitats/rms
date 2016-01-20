@@ -60,7 +60,7 @@ class PublicServlet(val db: Database) extends BackendStack with FutureSupport wi
   get("/project/:id/?") {
     val id = params.get("id").get
     Logger.info("GET: project/" + id)
-    RmsDb.project(id, db)
+    RmsDb.fetchProject(id, db)
   }
 
   get("/products/?") {
@@ -80,7 +80,7 @@ class PublicServlet(val db: Database) extends BackendStack with FutureSupport wi
   get("/images/?") {
     Logger.info("GET: images/")
     Future {
-      ImageUtils.fetchUrls("prosjekt")
+      ImageUtils.fetchUrls("referanser")
     }
   }
 

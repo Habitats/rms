@@ -8,6 +8,7 @@ import org.scalatra.json.JacksonJsonSupport
 import org.scalatra.{CorsSupport, FutureSupport}
 
 import scala.concurrent.ExecutionContext
+import scala.util.{Failure, Success, Try}
 
 class SessionServlet extends BackendStack with FutureSupport with JacksonJsonSupport with CorsSupport with AuthenticationSupport {
   protected implicit def executor = ExecutionContext.Implicits.global
@@ -36,9 +37,10 @@ class SessionServlet extends BackendStack with FutureSupport with JacksonJsonSup
       halt(HttpStatus.UNAUTHORIZED_401)
     } else {
       Logger.info(user)
-      val safeUser = parsedBody.extract[SafeUser]
-      Users.update(user.update(safeUser))
-      safeUser
+      Try(parsedBody.extract[SafeUser]) match {
+        case Success(u) => Users.update(user.update(u)); u
+        case Failure(ex) => Logger.info(ex.getMessage)
+      }
     }
   }
 
@@ -50,8 +52,10 @@ class SessionServlet extends BackendStack with FutureSupport with JacksonJsonSup
 
   post("/login/?") {
     // add user to "users", session will fetch it from there and euthenticate
-    val login = parsedBody.extract[User]
-    Users.login(login.copy(id = user.id))
+    Try(parsedBody.extract[User]) match {
+      case Success(u) => Users.login(u.copy(id = user.id))
+      case Failure(ex) => Logger.info(ex.getMessage)
+    }
 
     scentry.authenticate("Admin").map(u => new SafeUser(u))
   }
