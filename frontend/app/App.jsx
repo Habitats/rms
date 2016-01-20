@@ -40,6 +40,7 @@ export default class App extends Component {
           <IndexRoute component={Welcome}/>
           <Route component={References} path="referanser"/>
           <Route component={ProjectAdd} onEnter={this.requireLogin.bind(this)} path="referanser/ny"/>
+          <Route component={ProjectAdd} onEnter={this.requireLogin.bind(this)} path="referanser/endre/:id"/>
           <Route component={ProjectContainer} path="referanser/:id"/>
           <Route component={Products} path="produkter">
             <Route component={ProductContainer} path=":category/:product"/>

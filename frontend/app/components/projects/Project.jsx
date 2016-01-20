@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
+import {routeActions} from 'redux-simple-router'
 import BigHeadline from './../text/BigHeadline.jsx'
 import PhotoBig from './../photo/PhotoBig.jsx'
 import PhotoLine from './../photo/PhotoLine.jsx'
@@ -10,14 +11,16 @@ import * as generalActionCreators from '../../redux/actions/generalActions'
 export default class Project extends Component {
 
   render() {
-    let {project} = this.props
+    let {project, session: {admin}, dispatch} = this.props
     return (
       <Box>
         <BigHeadline big={project.title} small="Prosjekt"/>
-
         <div className="row">
           <div className="col-xs-12">
             <MiniGallery images={project.images} orientation={'horizontal'} height={400} thumbHeight={100}/>
+            {admin ? <button style={{marginTop: 5}} className="btn btn-default btn-block"
+                             onClick={() => dispatch(routeActions.push(`referanser/endre/${project.id}`))}>
+              Endre </button> : null}
           </div>
         </div>
       </Box>
@@ -32,5 +35,11 @@ Project.propTypes = {
     description: PropTypes.string.isRequired,
     images: PropTypes.array.isRequired
   }),
-  selected: PropTypes.number.isRequired
+  selected: PropTypes.number.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  session: PropTypes.shape({admin: PropTypes.bool.isRequired})
 }
+
+export default connect(state => ({
+  session: state.session
+}))(Project)

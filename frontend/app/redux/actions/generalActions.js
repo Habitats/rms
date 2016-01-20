@@ -46,16 +46,6 @@ export function fetchImages() {
   }
 }
 
-export function fetchPrivates() {
-  return dispatch => {
-    dispatch({type: C.REQUEST_PRIVATES})
-    return GeneralApi.getPrivates().then(
-      privates => dispatch({type: C.RECEIVE_PRIVATES, privates}),
-      error => dispatch({type: C.RECEIVE_PRIVATES_FAIL})
-    )
-  }
-}
-
 export function sendMail(email) {
   return dispatch => {
     return GeneralApi.sendMail(email, () => {

@@ -98,7 +98,7 @@ export default class MiniGallery extends Component {
       </div>) : null
 
     return (
-      <div>
+      <div className="row">
         <div onMouseEnter={this.toggleHover.bind(this, true)} onMouseLeave={this.toggleHover.bind(this, false)}
              className={coverClasses} style={coverStyle}>
           <Photo src={cover.src} height={height} size={'med'}>

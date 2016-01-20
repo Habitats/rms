@@ -7,7 +7,7 @@ import Left from './../components/Left.jsx'
 import Right from './../components/Right.jsx'
 import Box from './../components/Box.jsx'
 import SimpleLabel from './../components/text/SimpleLabel.jsx'
-import * as generalActionCreators from '../redux/actions/generalActions'
+import * as generalActions from '../redux/actions/generalActions'
 
 export default class ProjectAdd extends Component {
 
@@ -17,12 +17,31 @@ export default class ProjectAdd extends Component {
       chosenImages: new Map(),
       description: '',
       title: '',
+      id: null,
       error: ''
     })
+    this.setProject(this.props.params.id)
   }
 
-  componentDidMount() {
-    this.props.dispatch(generalActionCreators.fetchImages())
+  setProject(id) {
+    if (this.props.projects.find(p => p.id === id)) {
+      let project = this.props.projects.find(p => p.id === id)
+      this.setState({
+        description: project.description,
+        title: project.title,
+        id: project.id,
+        chosenImages: new Map(project.images.map(i => [i.src, i]))
+      })
+    }
+  }
+
+  componentWillReceiveProps(nextProps){
+    this.setProject(nextProps.params.id)
+  }
+
+  componentWillMount() {
+    this.props.dispatch(generalActions.fetchProjects())
+    this.props.dispatch(generalActions.fetchImages())
   }
 
   handleTitleChange(event) {
@@ -55,9 +74,8 @@ export default class ProjectAdd extends Component {
   onSave(e) {
     e.preventDefault()
     if (this.isValid()) {
-      let id = this.props.projects.length + 1
-      this.props.dispatch(generalActionCreators.save({
-        id: id,
+      this.props.dispatch(generalActions.save({
+        id: this.state.id || (this.props.projects.length + 1),
         title: this.state.title,
         description: this.state.description,
         images: this.state.chosenImages
@@ -69,15 +87,15 @@ export default class ProjectAdd extends Component {
   }
 
   render() {
-    let {projects, images} = this.props
-    let {chosenImages, error} = this.state
+    let {projects, images, dispatch} = this.props
+    let {chosenImages, error, title, description, id} = this.state
 
     let chosenLabels = []
     for (let i of chosenImages.values()) {
       chosenLabels.push(<SimpleLabel key={i.src} text={i.title}/>)
     }
 
-    let usedImages = projects.length > 0 ? [... new Set(projects.map(p => p.images).reduce((a, b) => a.concat(b)).map(i => i.src))] : []
+    let usedImages = projects.length > 0 ? [... new Set(projects.filter(p => p.id !== id).map(p => p.images).reduce((a, b) => a.concat(b)).map(i => i.src))] : []
     let filteredImages = images.length > 0 ? [... new Set(images.filter(i => !usedImages.includes(i.src)))] : []
     let photos = filteredImages.map(i => (
       <Photo size={'low'}
@@ -90,6 +108,7 @@ export default class ProjectAdd extends Component {
              margin={15}
       />
     ))
+
     return (
       <div>
         <Left>
@@ -109,21 +128,26 @@ export default class ProjectAdd extends Component {
             <form className="form">
               <div className="form-group">
                 <label>Tittel</label>
-                <input className="form-control" onChange={this.handleTitleChange.bind(this)} placeholder="Prosjekttittel" type="text"/>
+                <input className="form-control" onChange={this.handleTitleChange.bind(this)} placeholder="Prosjekttittel" type="text" value={title}/>
               </div>
               <div className="form-group">
                 <label>Beskrivelse</label>
                 <textarea className="form-control" onChange={this.handleDescriptionChange.bind(this)}
-                          placeholder="Skriv en prosjektbeskrivelse her." rows="5"/>
-              </div>
-              <div className="form-group">
-                <button className="btn btn-primary btn-block" onClick={this.onSave.bind(this)} type="submit">Lagre prosjekt</button>
+                          placeholder="Skriv en prosjektbeskrivelse her." rows="5" value={description}/>
               </div>
             </form>
             <div>{error}</div>
             <BigHeadline big="Velg bilder"/>
             <div className="row">
               {photos}
+            </div>
+            <div className="row">
+              <div className="col-xs-6">
+                <button className="btn btn-primary btn-block" onClick={() => dispatch(routeActions.goBack())}>Tilbake</button>
+              </div>
+              <div className="col-xs-6">
+                <button className="btn btn-primary btn-block" onClick={this.onSave.bind(this)}>Lagre prosjekt</button>
+              </div>
             </div>
           </Box>
         </Right>
@@ -132,10 +156,15 @@ export default class ProjectAdd extends Component {
   }
 }
 
+ProjectAdd.defaultProps = {
+  params: {id: null}
+}
+
 ProjectAdd.propTypes = {
   dispatch: PropTypes.func.isRequired,
   images: PropTypes.array,
-  projects: PropTypes.array
+  projects: PropTypes.array,
+  params: PropTypes.shape({id: PropTypes.string})
 }
 
 export default connect(state => ({
