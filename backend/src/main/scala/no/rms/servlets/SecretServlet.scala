@@ -53,6 +53,14 @@ class SecretServlet(val db: Database) extends BackendStack with FutureSupport wi
     }
   }
 
+  delete("/project/?"){
+    Logger.info("DELETE: project")
+    Try(parsedBody.extract[String]) match {
+      case Success(p) => RmsDb.remove(p, db).transform(s => RmsDb.allProjects(db), f => f)
+      case Failure(ex) => Logger.info(ex.getMessage)
+    }
+  }
+
   post("/product/?") {
     Logger.info("POST: product")
     Try(parsedBody.extract[Product]) match {

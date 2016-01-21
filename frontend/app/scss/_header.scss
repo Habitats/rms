@@ -1,9 +1,5 @@
 .navbar {
   border-radius: 0;
-}
-
-.navbar {
-  min-height: $header-height;
   opacity: 1;
 }
 
@@ -18,37 +14,31 @@
 }
 
 .navbar-brand {
-  margin: 0;
   padding: 0;
-}
-
-.navbar-brand img {
   opacity: 0.8;
-  margin-left: $boxPadding;
+  background-repeat: no-repeat;
 }
 
-/* Custom, iPhone Retina */
-@media only screen and (min-width: 320px) {
-  .nav > li > a {
-    padding: 35px 20px 35px 10px;
+@media only screen and (max-width: 767px) {
+  .navbar-brand {
+    margin: 7px 0 0 ($boxPaddingSmall + 15px) !important;
+    width: 86px;
+    height: 35px;
+    background-image: url("/image/rms_small.png");
   }
 }
 
-/* Small Devices, Tablets */
-@media only screen and (min-width: 1000px) {
+@media only screen and (min-width: 768px) {
+  .navbar-brand {
+    margin: 17px 0 0 $boxPaddingLarge !important;
+    background-image: url("/image/rms_med.png");
+    width: 123px;
+    height: 50px;
+    background-size: auto !important;
+  }
+
   .nav > li > a {
     padding: 35px 20px 35px 20px;
+    font-size: 1.2em;
   }
 }
-
-.navbar-nav > li > a {
-  line-height: normal;
-}
-
-.navbar-nav {
-  display: table;
-  float: none;
-  table-layout: fixed;
-  font-size: 1.25em;
-}
-

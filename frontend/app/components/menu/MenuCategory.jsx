@@ -14,7 +14,7 @@ export default class MenuCategory extends Component {
   }
 
   render() {
-    let {category: {title, id, sub}, linkTo, active} = this.props
+    let {category: {title, id, sub, index}, linkTo, active} = this.props
     let {hover} = this.state
 
     let a = id === active.category && !active.product

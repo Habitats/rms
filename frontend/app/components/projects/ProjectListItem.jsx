@@ -7,7 +7,7 @@ export default class ProjectListItem extends Component {
   render() {
     let {project: {title, images, id}} = this.props
     return (
-      <div className="col-md-6">
+      <div className="col-xs-6 col-md-4">
         <Photo linkTo={`/referanser/${id}`} height={250} src={images[0].src} margin={15}>
           <HeadlineOverlay text={title}/>
         </Photo>

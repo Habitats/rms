@@ -7,7 +7,7 @@ export default class Projects extends Component {
   render() {
     let {projects} = this.props
     let sorted = projects
-      .sort((a, b) => new Date(b.created) - new Date(a.created))
+      .sort((a, b) => new Date(b.modified) - new Date(a.modified))
       .map(p => <ProjectListItem key={p.id} project={p}/>)
     return (
       <div>

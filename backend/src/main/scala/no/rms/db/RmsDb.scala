@@ -1,6 +1,7 @@
 package no.rms.db
 
 import java.io.File
+import java.time.LocalDateTime
 
 import no.rms.models.{Product, ProductWrapper, Project}
 import no.rms.{Config, Logger, Samples}
@@ -15,12 +16,12 @@ object RmsDb {
     def title = column[String]("TITLE")
     def description = column[String]("DESCRIPTION", O.Length(1000000))
     def images = column[String]("IMAGES", O.Length(10000))
-    def created = column[String]("CREATED")
+    def modified = column[String]("MODIFIED")
 
-    def * = (id, title, description, images, created)
+    def * = (id, title, description, images, modified)
   }
 
-  class Products(tag: Tag) extends Table[(String, String, String, String, String, String, String)](tag, "PRODUCTS") {
+  class Products(tag: Tag) extends Table[(String, String, String, String, String, String, String, Int)](tag, "PRODUCTS") {
     def id = column[String]("ID", O.PrimaryKey)
     def title = column[String]("TITLE")
     def description = column[String]("DESCRIPTION", O.Length(1000000))
@@ -28,8 +29,9 @@ object RmsDb {
     def images = column[String]("IMAGES", O.Length(20000))
     def src = column[String]("SRC")
     def category = column[String]("CATEGORY")
+    def index = column[Int]("INDEX")
 
-    def * = (id, title, description, sub, images, src, category)
+    def * = (id, title, description, sub, images, src, category, index)
   }
 
   lazy val projects = TableQuery[Projects]
@@ -85,10 +87,16 @@ object RmsDb {
     }
   }
 
+  def remove(id: String, db: Database): Future[Boolean] = {
+    val data = projects.filter(_.id === id).delete
+    db.run(data).transform(s => true, f => f)
+  }
+
   def storeProject(project: Project, db: Database): Future[Project] = {
-    val data = projects.insertOrUpdate(project.id, project.title, project.description, project.images.mkString(delim), Config.format(project.created))
+    val modified = LocalDateTime.now
+    val data = projects.insertOrUpdate(project.id, project.title, project.description, project.images.mkString(delim), Config.format(modified))
     Logger.info("Adding project: " + project)
-    db.run(data).transform(s => project, f => f)
+    db.run(data).transform(s => project.copy(modified = modified), f => f)
   }
 
   def storeProduct(product: Product, db: Database): Future[Product] = {
@@ -109,7 +117,7 @@ object RmsDb {
   }
 
   private def store(product: ProductWrapper, db: Database): Future[Boolean] = {
-    val data = products.insertOrUpdate(product.id, product.title, product.description, product.sub, product.images, product.src, product.category)
+    val data = products.insertOrUpdate(product.id, product.title, product.description, product.sub, product.images, product.src, product.category, product.index)
     db.run(data).transform(s => true, f => f)
   }
 }

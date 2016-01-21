@@ -4,26 +4,31 @@ import SimpleLabel from './SimpleLabel.jsx'
 export default class HeadlineOverlay extends Component {
 
   render() {
-    let style = {
+    let wrapperStyle = {
+      background: 'rgba(0, 0, 0, 0.8)',
+      width: '100%',
+      height: 'auto',
+      paddingTop: 7,
+      position: 'absolute',
+      paddingBottom: 7,
+      bottom: 0,
+      textAlign: 'center'
+    }
+    let textStyle = {
       overflow: 'hidden',
       whiteSpace: 'nowrap',
       textOverflow: 'ellipsis',
-      background: 'rgba(0, 0, 0, 0.7)',
-      position: 'absolute',
-      width: '100%',
-      height: 50,
-      bottom: 0,
-      paddingTop: 13,
       color: '#fff',
-      textAlign: 'center'
     }
     let {text} = this.props
     return (
-      <h3>
-        <div style={style}>
+      <div style={wrapperStyle}>
+        <h5 style={{margin: 0}}>
+        <span style={textStyle}>
           {text}
-        </div>
-      </h3>
+        </span>
+        </h5>
+      </div>
     )
   }
 }

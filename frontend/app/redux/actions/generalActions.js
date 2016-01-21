@@ -36,6 +36,16 @@ export function fetchProject(id) {
   }
 }
 
+export function removeProject(id) {
+  return (dispatch) => {
+    dispatch({type: C.DELETE_PROJECT})
+    return GeneralApi.removeProject(id).then(
+      projects => dispatch({type: C.DELETE_PROJECT_SUCCESS, projects}),
+      error => dispatch({type: C.DELETE_PROJECT_FAIL})
+    )
+  }
+}
+
 export function fetchImages() {
   return dispatch => {
     dispatch({type: C.REQUEST_IMAGES})

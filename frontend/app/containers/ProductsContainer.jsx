@@ -35,13 +35,18 @@ export default class ProductsContainer extends Component {
       : children
     return (
       <div>
-        <Left>
-          <Menu categories={categories} active={{category: params.category, product: params.product}} linkTo={'/produkter'}/>
-        </Left>
+        <div className="hidden-xs">
+          <Left>
+            <Menu categories={categories} active={{category: params.category, product: params.product}} linkTo={'/produkter'}/>
+          </Left>
 
-        <Right>
+          <Right>
+            {content}
+          </Right>
+        </div>
+        <div className="visible-xs">
           {content}
-        </Right>
+        </div>
       </div>
     )
   }

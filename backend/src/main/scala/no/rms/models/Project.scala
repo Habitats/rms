@@ -5,23 +5,23 @@ import java.time.LocalDateTime
 import no.rms.Config
 import no.rms.db.RmsDb
 
-case class Project(id: String, title: String, description: String, images: Seq[ImageWrapper], created: LocalDateTime = LocalDateTime.now){
-override  def toString: String = f"$id - $title - $created"
+case class Project(id: String, title: String, description: String, images: Seq[ImageWrapper], modified: LocalDateTime = LocalDateTime.now){
+override  def toString: String = f"$id - $title - $modified"
 }
 
 object Project{
 
   def fromFields(fields: (String, String, String, String, String)): Project = {
-    fields match {case ((id, title, description, img, created)) =>
+    fields match {case ((id, title, description, img, modified)) =>
       Project(
         id = id,
         title = title,
         description = description,
         images = img.split(RmsDb.delim).map(i => ImageWrapper.fromString(i)),
-        created = Config.parse(created)
+        modified = Config.parse(modified)
       )
     }
   }
 }
 
-case class ProjectWrapper(id: String, title: String, description: String, images: String, created: String)
+case class ProjectWrapper(id: String, title: String, description: String, images: String, modified: String)

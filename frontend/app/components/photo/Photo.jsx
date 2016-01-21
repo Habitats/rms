@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react'
+import ReactDOM from 'react-dom'
 import EventListener from '../../util/EventListener.js'
 import PhotoOverlay from './PhotoOverlay.jsx'
 import HeadlineOverlay from './../text/HeadlineOverlay.jsx'
@@ -11,8 +12,46 @@ export default class Photo extends Component {
     super(props)
     this.state = {
       toggled: false,
-      hover: false
+      hover: false,
+      multi: this.computeMulti(),
+      dynamic: !!props.height
     }
+    this.mounted = false
+  }
+
+  computeMulti() {
+    let windowWith = Math.max(document.documentElement.clientWidth, window.innerWidth || 0)
+    let multi = windowWith > 992 ? 1 : (windowWith > 768 ? 0.75 : (windowWith / 768) * 0.75)
+    return multi
+  }
+
+  updateDimension() {
+    if (this.state.dynamic && this.mounted) {
+      let multi = this.computeMulti()
+      if (multi !== this.state.multi) {
+        this.setState({multi: multi})
+      }
+    }
+  }
+
+  componentWillMount() {
+    this.updateDimension()
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return !(nextState === this.state && nextProps === this.props)
+  }
+
+  componentDidMount() {
+    window.addEventListener("resize", this.updateDimension.bind(this))
+    //console.log('mount resize')
+    this.mounted = true
+  }
+
+  componentWillUnmount() {
+    this.mounted = false
+    window.removeEventListener("resize", this.updateDimension.bind(this))
+    //console.log('unmount resize')
   }
 
   toggle() {
@@ -25,7 +64,12 @@ export default class Photo extends Component {
 
   render() {
     let {src, height, width, margin, crop, selected, children, clickable, size, linkTo, dispatch, className} = this.props
-    let {toggled, hover} = this.state
+    let {toggled, hover, multi} = this.state
+
+    if (height) {
+      height = height * multi
+      //console.log('multi: ' + multi)
+    }
 
     // if onClick is defined, use the defined callback
     let photoClick = linkTo ? () => dispatch(routeActions.push(linkTo)) :
@@ -62,11 +106,12 @@ export default class Photo extends Component {
       zIndex: 800
     }
     return (
-      <div >
-        <div onMouseEnter={this.toggleHover.bind(this, true)} onMouseLeave={this.toggleHover.bind(this, false)} className={className}>
+      <div className="photo">
+        <div onMouseEnter={this.toggleHover.bind(this, true)} style={{height: height}} onMouseLeave={this.toggleHover.bind(this, false)}
+             className={className}>
           <div onClick={photoClick} style={{position: 'relative', height: height, width: width, marginTop: margin, marginBottom: margin}}>
             <div style={spinnerStyle}>
-              <div style={{width: '100%', position: 'relative', top: '50%', marginTop: -22}}>
+              <div style={{width: '100%', position: 'relative', top: '50%',height: 'auto', marginTop: -22}}>
                 <i className="fa fa-circle-o-notch fa-spin fa-4x"/>
               </div>
             </div>

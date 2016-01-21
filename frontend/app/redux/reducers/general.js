@@ -13,6 +13,9 @@ export default function general(state = initialState, action) {
     case C.RECEIVE_PROJECTS:
       return {...state, projects: action.projects}
 
+    case C.DELETE_PROJECT_SUCCESS:
+      return {...state, projects: action.projects}
+
     case C.REQUEST_PROJECT:
       return {...state, project: {... action.project, fetching: true}}
     case C.RECEIVE_PROJECT:

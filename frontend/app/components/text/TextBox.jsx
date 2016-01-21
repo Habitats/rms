@@ -5,7 +5,8 @@ export default class TextBox extends Component {
   render() {
     let {children} = this.props
     let style = {
-      paddingBottom: 40
+      paddingBottom: 40,
+      textAlign: 'justify'
     }
     return (
       <div className="row">

@@ -6,12 +6,11 @@ export default class Box extends Component {
     let {children} = this.props
     let style = {
       marginBottom: 20,
-      padding: 30,
       background: '#fff',
       boxShadow: '0 0 35px 3px rgba(0, 0, 0, 0.16)'
     }
     return (
-      <div style={style}>
+      <div style={style} className="box">
         {children}
       </div>
     )

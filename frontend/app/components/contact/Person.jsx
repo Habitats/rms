@@ -4,12 +4,12 @@ import Photo from './../photo/Photo.jsx'
 export default class Person extends Component {
 
   render() {
-    let title = this.props.title ? <p><i className="fa fa-user"/>&nbsp; {this.props.title} </p> : ''
-    let phone = this.props.phone ? <p><i className="fa fa-phone"/>&nbsp; {this.props.phone} </p> : ''
+    let title = this.props.title ? <p><i className="fa fa-user"/>{this.props.title}</p> : ''
+    let phone = this.props.phone ? <p><i className="fa fa-phone"/>{this.props.phone}</p> : ''
     let mailTo = 'mailto:' + this.props.mail
-    let mail = this.props.mail ? <p><i className="fa fa-envelope"/>&nbsp; <a href={mailTo}> {this.props.mail} </a></p> : ''
+    let mail = this.props.mail ? <p><i className="fa fa-envelope"/><a href={mailTo}>{this.props.mail}</a></p> : ''
     return (
-      <div className="row" style={{height: 200, marginLeft: 30}}>
+      <div className="row" style={{height: 200}}>
         <div className="col-xs-4" style={{marginTop: 23}}>
           <Photo clickable={false} height={120} src={this.props.photo}/>
         </div>

@@ -14,7 +14,7 @@ export default class MiniGallery extends Component {
     this.setState({selected: selected})
   }
 
-  componentWillReceiveProps(nextProps){
+  componentWillReceiveProps(nextProps) {
     this.setState({selected: null})
   }
 
@@ -48,28 +48,38 @@ export default class MiniGallery extends Component {
 
     let main = () => images.find(i => i.src.includes('main.jpg'))
     let cover = selected || (main() || (images.length > 0 ? images[0] : null))
+    // no cover? nothing to see here (...)
+    if (!cover) {
+      return null
+    }
 
     let coverClasses, thumbsClasses, thumbsPhotoClasses, coverStyle, thumbsStyle
     if (orientation === 'vertical') {
-      coverClasses = images.length > 4 ? 'col-sm-8' : 'col-sm-9'
-      thumbsClasses = images.length > 4 ? 'col-sm-4' : 'col-sm-3'
+      coverClasses = images.length > 4 ? 'col-xs-8' : 'col-xs-9'
+      thumbsClasses = images.length > 4 ? 'col-xs-4' : 'col-xs-3'
       thumbsPhotoClasses = images.length > 4 ? 'col-md-6 col-xs-12' : 'col-xs-12'
-      coverStyle = {paddingRight: 0}
+      coverStyle = {paddingRight: 0, height: height}
       thumbsStyle = {paddingRight: 15}
     } else {
       coverClasses = 'col-xs-12'
       thumbsClasses = 'col-xs-12'
-      thumbsPhotoClasses = 'col-sm-3 col-xs-6'
-      coverStyle = {paddingRight: 15}
+      thumbsPhotoClasses = 'col-md-2 col-sm-3 col-xs-4'
+      coverStyle = {paddingRight: 15, height: height}
       thumbsStyle = {paddingTop: 15, paddingRight: 15}
     }
 
+    let photoStyle = {
+      paddingBottom: 15,
+      paddingLeft: 15,
+      paddingTop: 0,
+      paddingRight: 0,
+      height: orientation === 'horizontal' ? 120 : 90
+    }
+
     let photos = images.map(image =>
-      <div key={image.src} className={thumbsPhotoClasses} style={{padding: 0, margin: 0}}>
-        <div className={'photo'} style={{marginBottom: 15, marginLeft: 15}}>
-          <Photo onClick={this.onSelect.bind(this, image)} height={orientation === 'horizontal' ? 120 : 90} src={image.src} size={'low'}
-                 selected={cover === image}/>
-        </div>
+      <div key={image.src} className={thumbsPhotoClasses}
+           style={photoStyle}>
+        <Photo onClick={this.onSelect.bind(this, image)} src={image.src} size={'low'} selected={cover === image}/>
       </div>
     )
 
@@ -77,6 +87,7 @@ export default class MiniGallery extends Component {
       cursor: 'pointer',
       position: 'absolute',
       top: '50%',
+      height: 'auto',
       color: 'white',
       paddingLeft: 10,
       textShadow: '5px 2px 3px rgba(0,0,0,0.5)'
@@ -98,10 +109,10 @@ export default class MiniGallery extends Component {
       </div>) : null
 
     return (
-      <div className="row">
+      <div className="row mini-gallery">
         <div onMouseEnter={this.toggleHover.bind(this, true)} onMouseLeave={this.toggleHover.bind(this, false)}
              className={coverClasses} style={coverStyle}>
-          <Photo src={cover.src} height={height} size={'med'}>
+          <Photo src={cover.src} size={'med'}>
             {rightHover}
             {leftHover}
           </Photo>

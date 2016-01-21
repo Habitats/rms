@@ -1,8 +1,10 @@
 import React, {Component, PropTypes} from 'react'
+import Link from '../Link.jsx'
 
 export default class BigHeadline extends Component {
 
   render() {
+    let {small, big} = this.props
     let style = {
       marginTop: 50
     }
@@ -20,9 +22,9 @@ export default class BigHeadline extends Component {
       <div className="row">
         <div className="col-lg-12 text-center" style={style}>
           <h5 style={smallStyle}>
-            {this.props.small}
+            {small}
           </h5>
-          <h1 style={bigStyle}>{this.props.big}</h1>
+          <h1 style={bigStyle}>{big}</h1>
           <hr style={{marginBottom: 70,marginTop: 50}}/>
         </div>
       </div>

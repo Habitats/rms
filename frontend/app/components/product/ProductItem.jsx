@@ -8,16 +8,15 @@ export default class ProductItem extends Component {
   render() {
     let {product :{title, src}, linkTo, height, className} = this.props
     let style = {
-      height: height,
       marginBottom: 25
     }
     return (
       <div className={className} style={style}>
         <div className="row">
           <div className="col-md-12">
-              <Photo linkTo={linkTo} src={src} height={height} size={'med'}>
-                <HeadlineOverlay text={title} />
-              </Photo>
+            <Photo linkTo={linkTo} src={src} height={height} size={'med'}>
+              <HeadlineOverlay text={title}/>
+            </Photo>
           </div>
         </div>
       </div>
@@ -27,7 +26,7 @@ export default class ProductItem extends Component {
 
 ProductItem.defaultProps = {
   height: 250,
-  className: 'col-md-6 col-md-offset-0'
+  className: 'col-md-6 col-sm-12 col-xs-6 col-md-offset-0'
 }
 
 ProductItem.propTypes = {

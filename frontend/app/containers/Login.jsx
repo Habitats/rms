@@ -82,7 +82,7 @@ export default class Login extends Component {
     return (
       <Box>
         <div className="row">
-          <div className="col-md-4 col-md-offset-4 col-sm-5 col-sm-offset-2">
+          <div className="col-sm-4 col-sm-offset-4 col-xs-8 col-xs-offset-2">
             <form className="form">
               {loginForm}
             </form>

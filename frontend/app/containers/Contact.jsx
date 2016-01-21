@@ -21,8 +21,8 @@ export default class Contact extends Component {
                   Nannestadvegen 510<br />
                   2032 MAURA
                 </p>
-                <p style={{paddingTop: 4}}><i className="fa fa-phone"/>&nbsp; +47 63 99 95 32 <br/>
-                  <i className="fa fa-envelope"/>&nbsp; <a href="mailto:post@romerike-markise.no">post@romerike-markise.no</a></p>
+                <p style={{paddingTop: 4}}><i className="fa fa-phone"/>+47 63 99 95 32 <br/>
+                  <i className="fa fa-envelope"/><a href="mailto:post@romerike-markise.no">post@romerike-markise.no</a></p>
               </div>
               <div className="col-md-3 col-md-offset-1 col-sm-5 col-xs-6">
                 <h3>Kontortid</h3>
@@ -38,7 +38,7 @@ export default class Contact extends Component {
         <Box>
           <BigHeadline big="Hvem er vi?"/>
           <div className="row">
-            <div className="col-sm-6 col-xs-12">
+            <div className="col-sm-6 col-sm-offset-0 col-xs-10 col-xs-offset-1">
               <Person mail="morten@romerike-markise.no"
                       name="Morten Skjennum"
                       phone="+47 90 73 19 07"
@@ -50,11 +50,11 @@ export default class Contact extends Component {
                       photo="/image/p_bjarne.jpg"
                       title="Montør"/>
               <Person mail="mail@annegrethe.no"
-                      name="Anne Grethe Lorentzen Skjennum"
+                      name="Anne Grethe L. Skjennum"
                       photo="/image/p_anne.jpg"
                       title="Kontormedarbeider"/>
             </div>
-            <div className="col-sm-6 col-xs-12">
+            <div className="col-sm-6 col-sm-offset-0 col-xs-10 col-xs-offset-1">
               <Person mail="roar@romerike-markise.no"
                       name="Roar Skjennum"
                       phone="+47 90 73 18 80"

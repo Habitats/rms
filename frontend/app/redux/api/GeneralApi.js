@@ -24,6 +24,10 @@ export function saveProject(project) {
   return post(project, 'secret/project')
 }
 
+export function removeProject(project) {
+  return remove(project, 'secret/project')
+}
+
 export function saveProduct(product) {
   return post(product, 'secret/product')
 }
@@ -51,16 +55,21 @@ function post(body, path) {
   }).then(parseJson)
 }
 
+function remove(body, path) {
+  return fetch(`${baseUrl}${path}`, {
+    method: 'DELETE',
+    credentials: 'include',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body)
+  }).then(parseJson)
+}
+
 function parseJson(res) {
   if (res.status === 200) {
     return res.json()
   }
   throw new Error(res.info)
-}
-
-export function remove(project) {
-  let url = `${baseUrl}${project.get('id')}`
-  return fetch(url, {
-    method: 'delete'
-  }).then(parseJson)
 }

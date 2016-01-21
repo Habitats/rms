@@ -8,6 +8,7 @@ export default class Menu extends Component {
   constructor(props) {
     super(props)
     this.state = {transform: 0, menuHeight: 0}
+    this.mounted = false
   }
 
   componentDidMount() {
@@ -17,14 +18,16 @@ export default class Menu extends Component {
 
   componentWillMount() {
     window.addEventListener('scroll', this.handleScroll.bind(this))
+    this.mounted = true
   }
 
   componentWillUnmount() {
+    this.mounted = false
     window.removeEventListener('scroll', this.handleScroll.bind(this))
   }
 
   handleScroll(event) {
-    if (!event) {
+    if (!event && this.mounted) {
       return
     }
     let scrollTop = event.srcElement.body.scrollTop
@@ -41,13 +44,11 @@ export default class Menu extends Component {
   render() {
     let {categories, active, linkTo} = this.props
     let cats = categories.sub.map(c => <MenuCategory key={c.id} linkTo={`${linkTo}/${c.id}`} category={c} active={active}/>)
-
-    console.log(this.state.transform)
     let style = {transform: `translateY(${this.state.transform}px)`}
     return (
       <div style={style}>
         <Box className="rms-menu">
-          <div style={{marginLeft: -31, marginRight: -21}}>
+          <div style={{marginLeft: -30, marginRight: -21}}>
             {cats}
           </div>
         </Box>

@@ -5,7 +5,7 @@ export default class FeatureItem extends Component {
   render() {
     let classes = 'fa fa-4x ' + this.props.icon
     return (
-      <div className="text-center">
+      <div className="text-center" style={{maxWidth: 250, margin: '0 auto'}}>
         <i className={classes}/>
 
         <h5>{this.props.title}</h5>

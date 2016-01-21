@@ -14,7 +14,7 @@ export default class Product extends Component {
 
   render() {
     let {product, category, dispatch, session: {admin}} = this.props
-    let {title, description, images, sub} = product
+    let {title, description, images, sub, id} = product
 
     let subContent = sub.map(p => <SubProduct key={p.id} product={p}/>)
     return (

@@ -21,7 +21,7 @@ export default class SubProduct extends Component {
       <div>
         <Box>
           <MediumHeadline big={title}/>
-          <div className="row">
+          <div>
             {src.includes('main.jpg') ?
              <MiniGallery images={images} orientation={'vertical'}/> : <PhotoLine images={images} clickable={true}/>}
           </div>

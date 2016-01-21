@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
 import {routeActions} from 'redux-simple-router'
 import BigHeadline from './../components/text/BigHeadline.jsx'
+import MediumHeadline from './../components/text/MediumHeadline.jsx'
 import Photo from './../components/photo/Photo.jsx'
 import Left from './../components/Left.jsx'
 import Right from './../components/Right.jsx'
@@ -35,7 +36,7 @@ export default class ProjectAdd extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps){
+  componentWillReceiveProps(nextProps) {
     this.setProject(nextProps.params.id)
   }
 
@@ -71,11 +72,10 @@ export default class ProjectAdd extends Component {
     return this.state.chosenImages.size > 0 && this.state.title.length > 0 && this.state.description.length > 0
   }
 
-  onSave(e) {
-    e.preventDefault()
+  onSave() {
     if (this.isValid()) {
       this.props.dispatch(generalActions.save({
-        id: this.state.id || (this.props.projects.length + 1),
+        id: this.state.id || this.props.projects.map(p => parseInt(p.id)).reduce((a, b) => Math.max(a, b)) + 1,
         title: this.state.title,
         description: this.state.description,
         images: this.state.chosenImages
@@ -84,6 +84,11 @@ export default class ProjectAdd extends Component {
     } else {
       this.setState({error: 'Fyll ut alle felt og velg noen bilder!'})
     }
+  }
+
+  onRemove() {
+    this.props.dispatch(generalActions.removeProject(this.state.id))
+    this.props.dispatch(routeActions.push('/referanser'))
   }
 
   render() {
@@ -95,18 +100,21 @@ export default class ProjectAdd extends Component {
       chosenLabels.push(<SimpleLabel key={i.src} text={i.title}/>)
     }
 
-    let usedImages = projects.length > 0 ? [... new Set(projects.filter(p => p.id !== id).map(p => p.images).reduce((a, b) => a.concat(b)).map(i => i.src))] : []
+    let usedImages = projects.length > 0 ? [... new Set(projects.filter(p => p.id
+                                                                             !== id).map(p => p.images).reduce((a, b) => a.concat(b)).map(i => i.src))]
+      : []
     let filteredImages = images.length > 0 ? [... new Set(images.filter(i => !usedImages.includes(i.src)))] : []
     let photos = filteredImages.map(i => (
-      <Photo size={'low'}
-             key={i.src}
-             className="col-lg-3 col-md-3 col-sm-4 col-xs-6"
-             height={100}
-             onClick={this.onSelect.bind(this)}
-             selected={chosenImages.has(i.src)}
-             src={i.src}
-             margin={15}
-      />
+      <div key={i.src} className="col-sm-3 col-xs-6" style={{padding: 0, margin: 0}}>
+        <div className={'photo'} style={{marginBottom: 15, marginLeft: 15}}>
+          <Photo size={'low'}
+                 height={100}
+                 onClick={this.onSelect.bind(this)}
+                 selected={chosenImages.has(i.src)}
+                 src={i.src}
+          />
+        </div>
+      </div>
     ))
 
     return (
@@ -123,12 +131,13 @@ export default class ProjectAdd extends Component {
         </Left>
         <Right>
           <Box>
-            <BigHeadline big="Legg til ny" small="Prosjekt"/>
+            <MediumHeadline big={id ? "Endre referanse" : "Ny referanse"}/>
 
             <form className="form">
               <div className="form-group">
                 <label>Tittel</label>
-                <input className="form-control" onChange={this.handleTitleChange.bind(this)} placeholder="Prosjekttittel" type="text" value={title}/>
+                <input className="form-control" onChange={this.handleTitleChange.bind(this)} placeholder="Prosjekttittel" type="text"
+                       value={title}/>
               </div>
               <div className="form-group">
                 <label>Beskrivelse</label>
@@ -137,16 +146,19 @@ export default class ProjectAdd extends Component {
               </div>
             </form>
             <div>{error}</div>
-            <BigHeadline big="Velg bilder"/>
-            <div className="row">
+            <MediumHeadline big="Velg bilder"/>
+            <div className="row" style={{marginRight:0}}>
               {photos}
             </div>
             <div className="row">
-              <div className="col-xs-6">
+              <div className={`col-xs-${id ? 4 : 6}`}>
                 <button className="btn btn-primary btn-block" onClick={() => dispatch(routeActions.goBack())}>Tilbake</button>
               </div>
-              <div className="col-xs-6">
-                <button className="btn btn-primary btn-block" onClick={this.onSave.bind(this)}>Lagre prosjekt</button>
+              {id ? <div className={`col-xs-${id ? 4 : 6}`}>
+                <button className="btn btn-primary btn-block" onClick={this.onRemove.bind(this)}>Slett</button>
+              </div> : null }
+              <div className={`col-xs-${id ? 4 : 6}`}>
+                <button className="btn btn-primary btn-block" onClick={this.onSave.bind(this)}>Lagre</button>
               </div>
             </div>
           </Box>
