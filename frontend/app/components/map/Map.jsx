@@ -29,17 +29,10 @@ export default class Map extends Component {
   }
 
   render() {
-    let {height} = this.props
-    let style = {
-      '@media only screen and (max-width: 767px)': {
-        height: height * 0.60
-      },
-      '@media only screen and (min-width: 768px)': {
-        height: height * 0.75
-      },
-      '@media only screen and (min-width: 992px)': {
-        height: height
-      },
+    let {height, style} = this.props
+    style = {
+      ...style,
+      height: height,
       width: '100%',
       color: '#e9e9e9'
     }
@@ -51,11 +44,13 @@ export default class Map extends Component {
 
 Map.defaultProps = {
   zoom: 10,
-  height: 450
+  height: 450,
+  style: {}
 }
 
 Map.propTypes = {
   zoom: PropTypes.number,
+  style: PropTypes.number,
   height: PropTypes.number
 }
 

@@ -5,17 +5,22 @@ import Radium from 'radium'
 class Person extends Component {
 
   render() {
+    let title = this.props.title ? <p><i className="fa fa-user"/>{this.props.title}</p> : ''
+    let phone = this.props.phone ? <p><i className="fa fa-phone"/>{this.props.phone}</p> : ''
+    let {photo, name} = this.props
+    let mailTo = 'mailto:' + this.props.mail
+    let mail = this.props.mail ? <p><i className="fa fa-envelope"/><a href={mailTo}>{this.props.mail}</a></p> : ''
     let style = {
       box: {
         margin: '0 auto',
         '@media only screen and (max-width: 767px)': {
           height: 150,
           paddingLeft: 20,
-          maxWidth: 400,
+          maxWidth: 400
         },
         '@media only screen and (min-width: 768px)': {
           height: 200,
-          paddingLeft: 20
+          paddingLeft: 0
         },
         '@media only screen and (min-width: 992px)': {
           height: 200,
@@ -23,26 +28,23 @@ class Person extends Component {
         }
       },
       photo: {
-        marginTop: 23
+        marginTop: 23,
+        height: 90
       },
       text: {
         maxWidth: 270,
         margin: '0 auto'
       }
     }
-    let title = this.props.title ? <p><i className="fa fa-user"/>{this.props.title}</p> : ''
-    let phone = this.props.phone ? <p><i className="fa fa-phone"/>{this.props.phone}</p> : ''
-    let mailTo = 'mailto:' + this.props.mail
-    let mail = this.props.mail ? <p><i className="fa fa-envelope"/><a href={mailTo}>{this.props.mail}</a></p> : ''
     return (
       <div className="row" style={style.box}>
-        <div className="col-xs-4" style={style.photo}>
-          <div className="row" >
-            <Photo clickable={false} height={120} src={this.props.photo}/>
+        <div className="col-sm-3 col-xs-4">
+          <div className="row" style={style.photo}>
+            <Photo clickable={false} src={photo}/>
           </div>
         </div>
-        <div className="col-sm-8 col-xs-8" style={style.text}>
-          <h3>{this.props.name}</h3>
+        <div className="col-sm-9 col-xs-8" style={style.text}>
+          <h3>{name}</h3>
           {title}
           {mail}
           {phone}

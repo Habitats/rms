@@ -66,63 +66,77 @@ export default class Photo extends Component {
     let {src, height, width, margin, crop, selected, children, clickable, size, linkTo, dispatch, className} = this.props
     let {toggled, hover, multi} = this.state
 
-    if (height) {
+    if (!isNaN(parseFloat(height)) && isFinite(height)) {
       height = height * multi
-      //console.log('multi: ' + multi)
     }
 
     // if onClick is defined, use the defined callback
     let photoClick = linkTo ? () => dispatch(routeActions.push(linkTo)) :
                      this.props.onClick ? this.props.onClick.bind(this, src) :
                      (clickable ? this.toggle.bind(this) : null)
-    let photoStyle = {
-      background: 'url(' + src + '/' + size + ') no-repeat center center',
-      height: height || '100%',
-      width: width || '100%',
-      opacity: 1,
-      cursor: photoClick ? 'pointer' : null,
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      zIndex: 900
-    }
-    let hoverStyle = {
-      background: `rgba(0, 0, 0, ${selected ? 0.2 : 0})`,
-      boxShadow: 'inset 0px 0 50px 0px rgba(0,0,0,0.5)',
-      height: '100%',
-      position: 'absolute',
-      width: '100%',
-      top: 0,
-      left: 0,
-      zIndex: 950
-    }
-    let spinnerStyle = {
-      textAlign: 'center',
-      height: height || '100%',
-      width: width || '100%',
-      position: 'absolute',
-      paddingLeft: 25,
-      margin: '0 auto',
-      color: 'lightGray',
-      zIndex: 800
+    let style = {
+      box: {
+        cursor: photoClick ? 'pointer' : null,
+        position: 'relative',
+        height: height,
+        width: width,
+        marginTop: margin,
+        marginBottom: margin
+      },
+      photo: {
+        background: 'url(' + src + '/' + size + ') no-repeat center center',
+        height: height,
+        width: width,
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        zIndex: 900
+      },
+      hover: {
+        background: `rgba(0, 0, 0, ${selected ? 0.2 : 0})`,
+        boxShadow: 'inset 0px 0 50px 0px rgba(0,0,0,0.5)',
+        height: height,
+        width: width,
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        zIndex: 950
+      },
+      spinnerWrapper: {
+        textAlign: 'center',
+        height: height,
+        width: width,
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        paddingLeft: 25,
+        color: 'lightGray',
+        zIndex: 800
+      },
+      spinner: {
+        width: 'auto',
+        margin: '0 auto',
+        position: 'relative',
+        top: '50%',
+        height: 'auto',
+        marginTop: -22
+      }
     }
     return (
-      <div className="photo">
-        <div onMouseEnter={this.toggleHover.bind(this, true)} style={{height: height}} onMouseLeave={this.toggleHover.bind(this, false)}
-             className={className}>
-          <div onClick={photoClick} style={{position: 'relative', height: height, width: width, marginTop: margin, marginBottom: margin}}>
-            <div style={spinnerStyle}>
-              <div style={{width: '100%', position: 'relative', top: '50%',height: 'auto', marginTop: -22}}>
-                <i className="fa fa-circle-o-notch fa-spin fa-4x"/>
-              </div>
-            </div>
-            <div style={photoStyle} className={crop ? 'cover' : 'contain'}>
-              {children}
-              {((hover || selected) && photoClick) ? <div style={hoverStyle}/> : null}
-            </div>
+      <div className="photo" onClick={photoClick} style={style.box}
+           onMouseEnter={this.toggleHover.bind(this, true)}
+           onMouseLeave={this.toggleHover.bind(this, false)}
+           className={className}>
+        <div style={style.spinnerWrapper}>
+          <div style={style.spinner}>
+            <i className="fa fa-circle-o-notch fa-spin fa-3x"/>
           </div>
-          {clickable ? <PhotoOverlay src={src} toggled={toggled}/> : null}
         </div>
+        <div style={style.photo} className={crop ? 'cover' : 'contain'}>
+          {children}
+        </div>
+        {((hover || selected) && photoClick) ? <div style={style.hover}/> : null}
+        {clickable ? <PhotoOverlay src={src} toggled={toggled}/> : null}
       </div>
     )
   }
@@ -134,9 +148,11 @@ Photo.defaultProps = {
   selected: false,
   className: '',
   linkTo: null,
-  size: 'raw',
+  size: 'med',
   crop: true,
   margin: 0,
+  height: '100%',
+  width: '100%'
 }
 
 Photo.propTypes = {
