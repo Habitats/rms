@@ -101,6 +101,7 @@ export default class Photo extends Component {
       height: height || '100%',
       width: width || '100%',
       position: 'absolute',
+      paddingLeft: 25,
       margin: '0 auto',
       color: 'lightGray',
       zIndex: 800
