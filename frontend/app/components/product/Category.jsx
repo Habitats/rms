@@ -1,14 +1,13 @@
 import React, {Component, PropTypes} from 'react'
-import ProductItem from './ProductItem.jsx'
+import ProductItems from './ProductItems.jsx'
 
 export default class Category extends Component {
 
   render() {
     let {title,id, sub} = this.props.category
-    let products = sub.map(p => <ProductItem key={`${p.id}`} product={p} category={title} linkTo={`/produkter/${id}/${p.id}`}/>)
     return (
         <div className="row">
-          {products}
+          <ProductItems products={sub} category={title} linkTo={`/produkter/${id}/`}/>
         </div>
     )
   }

@@ -19,6 +19,7 @@ import Login from './containers/Login.jsx'
 import ProjectListItem from './components/projects/ProjectListItem.jsx'
 import ReferencesList from './components/text/ReferencesList.jsx'
 import * as SessionActionCreators from './redux/actions/sessionActions'
+import {StyleRoot} from 'radium';
 
 export default class App extends Component {
 
@@ -35,23 +36,25 @@ export default class App extends Component {
 
   render() {
     return (
-      <Router onUpdate={() => window.scrollTo(0, 0)} history={history}>
-        <Route component={Layout} path="/">
-          <IndexRoute component={Welcome}/>
-          <Route component={References} path="referanser"/>
-          <Route component={ProjectAdd} onEnter={this.requireLogin.bind(this)} path="referanser/ny"/>
-          <Route component={ProjectAdd} onEnter={this.requireLogin.bind(this)} path="referanser/endre/:id"/>
-          <Route component={ProjectContainer} path="referanser/:id"/>
-          <Route component={Products} path="produkter">
-            <Route component={ProductContainer} path=":category/:product"/>
-            <Route component={CategoryContainer} path=":category"/>
+      <StyleRoot>
+        <Router onUpdate={() => window.scrollTo(0, 0)} history={history}>
+          <Route component={Layout} path="/">
+            <IndexRoute component={Welcome}/>
+            <Route component={References} path="referanser"/>
+            <Route component={ProjectAdd} onEnter={this.requireLogin.bind(this)} path="referanser/ny"/>
+            <Route component={ProjectAdd} onEnter={this.requireLogin.bind(this)} path="referanser/endre/:id"/>
+            <Route component={ProjectContainer} path="referanser/:id"/>
+            <Route component={Products} path="produkter">
+              <Route component={ProductContainer} path=":category/:product"/>
+              <Route component={CategoryContainer} path=":category"/>
+            </Route>
+            <Route component={About} path="om"/>
+            <Route component={Contact} path="kontakt"/>
+            <Route component={Login} path="login"/>
+            <Route component={NotFound} path="*"/>
           </Route>
-          <Route component={About} path="om"/>
-          <Route component={Contact} path="kontakt"/>
-          <Route component={Login} path="login"/>
-          <Route component={NotFound} path="*"/>
-        </Route>
-      </Router>
+        </Router>
+      </StyleRoot>
     )
   }
 }

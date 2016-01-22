@@ -21,7 +21,7 @@ export default class Product extends Component {
       <div>
         <Box>
           <BigHeadline big={title} small={category}/>
-          <MiniGallery images={images} orientation={'horizontal'} height={350} thumbHeight={80}/>
+          <MiniGallery images={images} orientation={'horizontal'} height={400}/>
           <TextBox>
             <div style={{paddingTop: 20, paddingBottom: 20}}>
               <hr />

@@ -8,6 +8,12 @@ import Person from './../components/contact/Person.jsx'
 export default class Contact extends Component {
 
   render() {
+    let style = {
+      contact: {
+        maxWidth: 230,
+        margin: '0 auto'
+      }
+    }
     return (
       <div>
         <Box >
@@ -15,7 +21,8 @@ export default class Contact extends Component {
             <MapWrapper />
             <BigHeadline big="Hvor er vi?"/>
             <div className="row">
-              <div className="col-md-4 col-md-offset-2 col-sm-6 col-sm-offset-1 col-xs-6">
+              <div className="col-md-4 col-md-offset-2 col-sm-7 col-xs-6">
+                <div style={style.contact}>
                 <h3>Adresse</h3>
                 <p>Romerike Markiseservice AS<br />
                   Nannestadvegen 510<br />
@@ -23,13 +30,16 @@ export default class Contact extends Component {
                 </p>
                 <p style={{paddingTop: 4}}><i className="fa fa-phone"/>+47 63 99 95 32 <br/>
                   <i className="fa fa-envelope"/><a href="mailto:post@romerike-markise.no">post@romerike-markise.no</a></p>
+                </div>
               </div>
               <div className="col-md-3 col-md-offset-1 col-sm-5 col-xs-6">
-                <h3>Kontortid</h3>
-                <p>Mandag-fredag: 0900-1600</p>
-                <h3>Telefonbetjening</h3>
-                <p>Mandag-fredag: 0800-2000<br />
-                  Lørdag: 1000-1400</p>
+                <div style={style.contact}>
+                  <h3>Kontortid</h3>
+                  <p>Mandag-fredag: 0900-1600</p>
+                  <h3>Telefonbetjening</h3>
+                  <p>Mandag-fredag: 0800-2000<br />
+                    Lørdag: 1000-1400</p>
+                </div>
               </div>
             </div>
           </div>

@@ -1,13 +1,21 @@
 import React, {Component, PropTypes} from 'react'
+import Radium from 'radium'
+import * as V from '../vars'
 
-export default class Box extends Component {
+class Box extends Component {
 
   render() {
     let {children} = this.props
     let style = {
       marginBottom: 20,
       background: '#fff',
-      boxShadow: '0 0 35px 3px rgba(0, 0, 0, 0.16)'
+      boxShadow: '0 0 35px 3px rgba(0, 0, 0, 0.16)',
+      '@media only screen and (max-width: 767px)': {
+        padding: V.MARGIN_XS
+      },
+      '@media only screen and (min-width: 768px)': {
+        padding: V.MARGIN_SM
+      }
     }
     return (
       <div style={style} className="box">
@@ -23,3 +31,5 @@ Box.propTypes = {
     PropTypes.node
   ])
 }
+
+export default Radium(Box)

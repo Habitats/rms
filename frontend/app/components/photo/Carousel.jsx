@@ -4,10 +4,11 @@ import Slider from 'react-slick'
 
 export default class Carousel extends Component {
 
+
   render() {
     let {images} = this.props
     let photos = images.map(i => (
-      <div>
+      <div key={i.src}>
         <Photo height={450} src={i.src}/>
       </div>
     ))

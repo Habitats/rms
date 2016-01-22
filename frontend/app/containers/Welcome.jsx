@@ -8,7 +8,7 @@ import Features from './../components/feature/Features.jsx'
 import PhotoBig from './../components/photo/PhotoBig.jsx'
 import TextBox from './../components/text/TextBox.jsx'
 import Box from './../components/Box.jsx'
-import ProductItem from './../components/product/ProductItem.jsx'
+import ProductItems from './../components/product/ProductItems.jsx'
 import * as productActionCreators from './../redux/actions/productActions'
 
 export default class Welcome extends Component {
@@ -39,14 +39,8 @@ export default class Welcome extends Component {
     )
   }
 
-  categories() {
-    let rootCategories = this.props.categories.sub.map(c => <ProductItem key={`${c.id}`} product={c} height={150}
-                                                                         className="col-xs-3"
-                                                                         linkTo={`/produkter/${c.id}`}/>)
-    return rootCategories
-  }
-
   render() {
+    let categories = <ProductItems products={this.props.categories.sub} height={150} className="col-xs-3" linkTo={`/produkter/`}/>
     let images = [
       {src: '/image/carousel,c1.jpg', title: 'nice image'},
       {src: '/image/carousel,c2.jpg', title: 'imagege image'},
@@ -59,7 +53,7 @@ export default class Welcome extends Component {
           <Carousel images={images}/>
           <div className="row">
             <MediumHeadline big={'Profesjonell solskjerming'}/>
-            {this.props.categories.hasOwnProperty('sub') ? this.categories() : null}
+            {this.props.categories.hasOwnProperty('sub') ? categories : null}
           </div>
         </Box>
 

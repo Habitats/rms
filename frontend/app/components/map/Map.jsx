@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react'
+import Radium from 'radium'
 
 export default class Map extends Component {
 
@@ -30,7 +31,15 @@ export default class Map extends Component {
   render() {
     let {height} = this.props
     let style = {
-      height: height,
+      '@media only screen and (max-width: 767px)': {
+        height: height * 0.60
+      },
+      '@media only screen and (min-width: 768px)': {
+        height: height * 0.75
+      },
+      '@media only screen and (min-width: 992px)': {
+        height: height
+      },
       width: '100%',
       color: '#e9e9e9'
     }
@@ -49,3 +58,5 @@ Map.propTypes = {
   zoom: PropTypes.number,
   height: PropTypes.number
 }
+
+export default Radium(Map)

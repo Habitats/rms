@@ -2,13 +2,20 @@ import React, {Component, PropTypes} from 'react'
 import Photo from './../photo/Photo.jsx'
 import HeadlineOverlay from './../text/HeadlineOverlay.jsx'
 import * as ProductActionCreators from  '../../redux/actions/productActions'
+import Radium from 'radium'
 
-export default class ProductItem extends Component {
+class ProductItem extends Component {
 
   render() {
     let {product :{title, src}, linkTo, height, className} = this.props
     let style = {
-      marginBottom: 25
+      '@media only screen and (max-width: 767px)': {
+        marginBottom: 10,
+        paddingLeft: 0
+      },
+      '@media only screen and (min-width: 768px)': {
+        marginBottom: 25
+      }
     }
     return (
       <div className={className} style={style}>
@@ -38,3 +45,5 @@ ProductItem.propTypes = {
   className: PropTypes.string,
   height: PropTypes.number
 }
+
+export default Radium(ProductItem)
