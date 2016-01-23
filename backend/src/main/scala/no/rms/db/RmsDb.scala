@@ -69,7 +69,7 @@ object RmsDb {
       val wrapped = for {
         fields <- products
       } yield ProductWrapper.fromFields(fields)
-      ProductWrapper.tree(wrapped)
+      ProductWrapper.tree(wrapped).attachCategory()
     }
   }
 
