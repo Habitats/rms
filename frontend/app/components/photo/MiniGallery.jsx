@@ -42,7 +42,7 @@ class MiniGallery extends Component {
     this.state.mql.addListener(this.handleMediaChange.bind(this))
   }
 
-  componentDidMount() {
+  componentDidMount(){
     this.handleMediaChange()
   }
 
@@ -122,20 +122,22 @@ class MiniGallery extends Component {
         <div className={classes.cover} style={style.cover}>
           <CoverPhoto src={cover.src} onRightSelect={this.onRightSelect.bind(this, images, cover)}
                       onLeftSelect={this.onLeftSelect.bind(this, images, cover)}/>
+
         </div>
-        <div className={classes.thumbWrapper}>
-          <div style={style.thumbs}>
-            <Draggable axis="x" zIndex={100} onDrag={this.handleDrag.bind(this)} bounds={{top: 0, left: bound, right: 0, bottom: 0}}>
-              <div style={style.scroller}>
-                {images.map(image =>
-                  <div key={image.src} style={style.photo}>
-                    <Photo key={image.src} className={classes.thumbs} src={image.src} size={'low'}
-                           onClick={this.onSelect.bind(this, image)} selected={cover === image}/>
-                  </div>)}
-              </div>
-            </Draggable>
-          </div>
-        </div>
+        {images.length > 1 ?
+         <div className={classes.thumbWrapper}>
+           <div style={style.thumbs}>
+             <Draggable axis="x" zIndex={100} onDrag={this.handleDrag.bind(this)} bounds={{top: 0, left: bound, right: 0, bottom: 0}}>
+               <div style={style.scroller}>
+                 {images.map(image =>
+                   <div key={image.src} style={style.photo}>
+                     <Photo key={image.src} className={classes.thumbs} src={image.src} size={'low'}
+                            onClick={this.onSelect.bind(this, image)} selected={cover === image}/>
+                   </div>)}
+               </div>
+             </Draggable>
+           </div>
+         </div> : null }
       </div>
     )
   }
@@ -177,16 +179,36 @@ class MiniGallery extends Component {
           <CoverPhoto src={cover.src} onRightSelect={this.onRightSelect.bind(this,images, cover)}
                       onLeftSelect={this.onLeftSelect.bind(this, images, cover)}/>
         </div>
-        <div className={classes.thumbWrapper}>
-          <div style={style.thumbs}>
-            <div style={style.scroller}>
-              {images.map(image =>
-                <div style={style.photo} className={classes.thumbs} key={image.src}>
-                  <Photo onClick={this.onSelect.bind(this, image)} src={image.src} size={'low'} selected={cover === image}/>
-                </div>)}
-            </div>
-          </div>
-        </div>
+        {images.length > 1 ?
+         <div className={classes.thumbWrapper}>
+           <div style={style.thumbs}>
+             <div style={style.scroller}>
+               {images.map(image =>
+                 <div style={style.photo} className={classes.thumbs} key={image.src}>
+                   <Photo onClick={this.onSelect.bind(this, image)} src={image.src} size={'low'} selected={cover === image}/>
+                 </div>)}
+             </div>
+           </div>
+         </div> : null }
+      </div>
+    )
+  }
+
+  render() {
+    let {images, height, orientation} = this.props
+    let {selected, startX, deltaX, small} = this.state
+
+    let main = () => images.find(i => i.src.includes('main.jpg'))
+    let cover = selected || (main() || (images.length > 0 ? images[0] : null))
+    // no cover? nothing to see here (...)
+    if (!cover) {
+      return null
+    }
+
+    return (
+      <div>
+        {small ? this.horizontal(images, cover, height, startX) :
+         orientation === 'horizontal' ? this.horizontal(images, cover, height) : this.vertical(images, cover, height)}
       </div>
     )
   }
