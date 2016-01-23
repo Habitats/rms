@@ -8,6 +8,7 @@ import Left from './../components/Left.jsx'
 import Right from './../components/Right.jsx'
 import Box from './../components/Box.jsx'
 import * as productActionCreators from './../redux/actions/productActions'
+import NotFound from './NotFound.jsx'
 
 export default class ProductsContainer extends Component {
 
@@ -20,42 +21,47 @@ export default class ProductsContainer extends Component {
   render() {
     let {categories, params, children} = this.props
     if (!categories.hasOwnProperty('sub')) {
+      // not ready yet
       return null
     }
 
-    let content = (!params.category && !params.product) ?
+    let content = (!params.categoryId && !params.productId) ?
                   <Box>
                     <BigHeadline big={categories.title}/>
                     <div className="row">
-                      <ProductItems products={categories.sub} linkTo={`/produkter/`}/>
+                      <ProductItems products={categories.sub} parentRoute={`/produkter`}/>
                     </div>
                   </Box>
       : children
-    return (
-      <div>
-        <div className="hidden-xs">
-          <Left>
-            <Menu categories={categories} active={{category: params.category, product: params.product}} linkTo={'/produkter'}/>
-          </Left>
+    if (content) {
+      return (
+        <div>
+          <div className="hidden-xs">
+            <Left>
+              <Menu categories={categories} active={{category: params.categoryId, product: params.productId}} linkTo={'/produkter'}/>
+            </Left>
 
-          <Right>
+            <Right>
+              {content}
+            </Right>
+          </div>
+          <div className="visible-xs">
             {content}
-          </Right>
+          </div>
         </div>
-        <div className="visible-xs">
-          {content}
-        </div>
-      </div>
-    )
+      )
+    } else {
+      return <NotFound />
+    }
   }
 }
 
 ProductsContainer.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  children: PropTypes.element.isRequired,
+  children: PropTypes.element,
   params: PropTypes.shape({
-    category: PropTypes.string,
-    product: PropTypes.string
+    categoryId: PropTypes.string,
+    productId: PropTypes.string
   }),
   categories: PropTypes.object.isRequired
 }

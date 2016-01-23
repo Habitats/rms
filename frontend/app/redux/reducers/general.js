@@ -20,6 +20,8 @@ export default function general(state = initialState, action) {
       return {...state, project: {... action.project, fetching: true}}
     case C.RECEIVE_PROJECT:
       return {...state, project: {... action.project, fetching: false}}
+    case C.RECEIVE_PROJECT_FAIL:
+      return {...state, project: null, fetching: false}
 
     case C.RECEIVE_IMAGES:
       return {...state, images: action.images}

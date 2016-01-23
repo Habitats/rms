@@ -7,7 +7,7 @@ export default class Category extends Component {
     let {title,id, sub} = this.props.category
     return (
         <div className="row">
-          <ProductItems products={sub} category={title} linkTo={`/produkter/${id}/`}/>
+          <ProductItems products={sub} category={title} parentRoute={`/produkter/${id}`}/>
         </div>
     )
   }

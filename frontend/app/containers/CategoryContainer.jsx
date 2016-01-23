@@ -4,6 +4,7 @@ import Category from './../components/product/Category.jsx'
 import BigHeadline from './../components/text/BigHeadline.jsx'
 import * as ProductActionCreators from './../redux/actions/productActions'
 import Box from './../components/Box.jsx'
+import NotFound from './NotFound.jsx'
 
 export default class CategoryContainer extends Component {
 
@@ -13,22 +14,26 @@ export default class CategoryContainer extends Component {
 
   render() {
     let {categories, params} = this.props
-    let category = categories.sub.find(c => c.id === params.category)
-    return (
-      <div>
-        <Box>
-          <BigHeadline big={category.title} small="Våre produkter og tjenester"/>
-          <Category category={category}/>
-        </Box>
-      </div>
-    )
+    let category = categories.sub.find(c => c.id === params.categoryId)
+    if (category) {
+      return (
+        <div>
+          <Box>
+            <BigHeadline big={category.title} small="Våre produkter og tjenester"/>
+            <Category category={category}/>
+          </Box>
+        </div>
+      )
+    } else {
+      return <NotFound />
+    }
   }
 }
 
 CategoryContainer.propTypes = {
   categories: PropTypes.object.isRequired,
   params: PropTypes.shape({
-    category: PropTypes.string.isRequired,
+    categoryId: PropTypes.string.isRequired,
   }),
   dispatch: PropTypes.func.isRequired
 }

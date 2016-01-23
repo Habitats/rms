@@ -48,12 +48,12 @@ export default class Welcome extends Component {
         marginTop: 15
       }
     }
-    let categories = <ProductItems products={this.props.categories.sub} height={150} className="col-sm-3 col-xs-6" linkTo={`/produkter/`}/>
+    let categories = <ProductItems products={this.props.categories.sub} height={150} className="col-sm-3 col-xs-6" parentRoute={`/produkter`}/>
     let images = [
-      {src: '/image/carousel,c1.jpg', title: 'nice image'},
-      {src: '/image/carousel,c2.jpg', title: 'imagege image'},
-      {src: '/image/carousel,c3.jpg', title: 'oløøøø image'},
-      {src: '/image/carousel,c4.jpg', title: 'nice image'}
+      {src: '/image/carousel,c1.jpg'},
+      {src: '/image/carousel,c2.jpg'},
+      {src: '/image/carousel,c3.jpg'},
+      {src: '/image/carousel,c4.jpg'}
     ]
     return (
       <div>

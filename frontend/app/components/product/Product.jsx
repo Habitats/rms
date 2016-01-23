@@ -3,36 +3,45 @@ import MiniGallery from './../photo/MiniGallery.jsx'
 import {connect} from 'react-redux'
 import LoremIpsum from './../LoremIpsum.jsx'
 import HeadlineOverlay from './../text/HeadlineOverlay.jsx'
-import SubProduct from './SubProduct.jsx'
 import BigHeadline from './../text/BigHeadline.jsx'
+import MediumHeadline from './../text/MediumHeadline.jsx'
 import Wysiwyg from './../text/Wysiwyg.jsx'
 import TextBox from './../text/TextBox.jsx'
 import Box from './../Box.jsx'
 import * as productActions from '../../redux/actions/productActions'
+import ProductItems from './ProductItems.jsx'
 
 export default class Product extends Component {
 
   render() {
-    let {product, category, dispatch, session: {admin}} = this.props
+    let {product, category, dispatch, session: {admin}, linkTo} = this.props
     let {title, description, images, sub, id} = product
+    let style = {
+      desc: {
+        paddingTop: 40,
+        paddingBottom: 20,
+        textAlign: 'justify'
+      }
+    }
 
-    let subContent = sub.map(p => <SubProduct key={p.id} product={p}/>)
     return (
       <div>
         <Box>
-          <BigHeadline big={title} small={category}/>
-          <MiniGallery images={images} orientation={'horizontal'} height={400}/>
-          <TextBox>
-            <div style={{paddingTop: 20, paddingBottom: 20}}>
-              <hr />
-              {admin ?
-               <Wysiwyg content={description} onSave={(p) => dispatch(productActions.save({... product, description: p}))}/>
-                : <div dangerouslySetInnerHTML={{__html: description}}/> }
-              <hr />
-            </div>
-          </TextBox>
+          <MediumHeadline big={title} small={category}/>
+          <MiniGallery images={images} orientation={'vertical'} height={400}/>
+          <div style={style.desc}>
+            {admin ?
+             <Wysiwyg content={description} onSave={(p) => dispatch(productActions.save({... product, description: p}))}/>
+              : <div dangerouslySetInnerHTML={{__html: description}}/> }
+          </div>
         </Box>
-        {subContent}
+        {sub && sub.length > 0 ? (
+          <Box>
+            <div className="row">
+              <ProductItems products={product.sub} parentRoute={`${linkTo}`}/>
+            </div>
+          </Box>
+        ) : null}
       </div>
     )
   }

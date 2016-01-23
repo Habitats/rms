@@ -27,7 +27,7 @@ export default class Menu extends Component {
   }
 
   handleScroll(event) {
-    if (!event && this.mounted) {
+    if (!event || !this.mounted) {
       return
     }
     let scrollTop = event.srcElement.body.scrollTop
@@ -57,11 +57,15 @@ export default class Menu extends Component {
   }
 }
 
+Menu.defaultProps ={
+  active: {product: '', category: ''}
+}
+
 Menu.propTypes = {
   categories: PropTypes.object.isRequired,
   linkTo: PropTypes.string.isRequired,
   active: PropTypes.shape({
     product: PropTypes.string,
-    category: PropTypes.string.isRequired
+    category: PropTypes.string,
   }).isRequired
 }
