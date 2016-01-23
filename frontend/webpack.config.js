@@ -3,6 +3,7 @@ const util = require('util');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const webpack = require('webpack');
 const pkg = require('./package.json');
+const BomPlugin = require('webpack-utf8-bom');
 
 const DEBUG = process.env.NODE_ENV === 'development';
 
@@ -18,7 +19,8 @@ const plugins = [
   new webpack.ProvidePlugin({
     $: "jquery",
     jQuery: "jquery"
-  })
+  }),
+  new BomPlugin(true)
 ];
 
 if (DEBUG) {
@@ -58,16 +60,19 @@ const loaders = [
     loader: 'json-loader'
   },
   {
-    test: /\.jpe?g$|\.gif$|\.png$|\.ico|\.svg$|\.woff$|\.ttf$/,
-    loader: 'file-loader?name=[path][name].[ext]'
+    test: /\.(jpe?g|png|gif|svg)(?:\?.*|)$/i,
+    loaders: [
+      'file?hash=sha512&digest=hex&name=assets/[name].[ext]',
+      'image-webpack'
+    ]
+  },
+  {
+    test: /\.(ico|woff|ttf|eot)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+    loader: 'file-loader?name=assets/[name].[ext]'
   },
   {
     test: /\.(woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/, // handle font-awesome versions
-    loader: 'url-loader?limit=10000&minetype=application/font-woff&name=fonts/[name].[ext]'
-  },
-  {
-    test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, // handle font-awesome versions
-    loader: 'file-loader?name=fonts/[name].[ext]'
+    loader: 'url-loader?limit=10000&minetype=application/font-woff&name=assets/[name].[ext]'
   },
   {
     test: /\.html$/,

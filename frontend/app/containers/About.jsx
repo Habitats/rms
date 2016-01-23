@@ -69,33 +69,33 @@ export default class About extends Component {
           <div style={{paddingBottom: 60}}>
             <BigHeadline big="Partnere" small="Leverandører og forhandlere"/>
             <div className="row">
-              <div className="col-md-10 col-md-offset-1">
+              <div className="col-sm-10 col-sm-offset-1">
                 <div className="row">
-                  <div className="col-md-6">
+                  <div className="col-sm-6">
                     <a href="http://www.vental.no/" target="_blank">
                       <Photo clickable={false} crop={false} height={iconHeight} margin={margin} src="/image/logo_vental.png"/>
                     </a>
                   </div>
-                  <div className="col-md-6">
+                  <div className="col-sm-6">
                     <a href="http://www.kjellsmarkiser.no/" target="_blank">
                       <Photo clickable={false} crop={false} height={iconHeight} margin={margin} src="/image/logo_kjells.jpg"/>
                     </a>
                   </div>
                 </div>
                 <div className="row">
-                  <div className="col-md-6">
+                  <div className="col-sm-6">
                     <a href="https://www.somfy.no/" target="_blank">
                       <Photo clickable={false} crop={false} height={iconHeight} margin={margin} src="/image/logo_somfy.jpg"/>
                     </a>
                   </div>
-                  <div className="col-md-6">
+                  <div className="col-sm-6">
                     <a href="http://vemaprodukter.no/" target="_blank">
                       <Photo clickable={false} crop={false} height={iconHeight} margin={margin} src="/image/logo_vema.png"/>
                     </a>
                   </div>
                 </div>
                 <div className="row">
-                  <div className="col-md-4 col-md-offset-4 text-center">
+                  <div className="col-sm-4 col-sm-offset-4 text-center">
                     <a href="http://www.solskjerming.no/" target="_blank">
                       <Photo clickable={false} crop={false} height={iconHeight + 20} src="/image/medlem_logo.png"/>
                     </a>

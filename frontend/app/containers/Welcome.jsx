@@ -40,7 +40,15 @@ export default class Welcome extends Component {
   }
 
   render() {
-    let categories = <ProductItems products={this.props.categories.sub} height={150} className="col-xs-3" linkTo={`/produkter/`}/>
+    let style = {
+      welcome: {
+        height: 500,
+      },
+      carousel: {
+        marginTop: 15
+      }
+    }
+    let categories = <ProductItems products={this.props.categories.sub} height={150} className="col-sm-3 col-xs-6" linkTo={`/produkter/`}/>
     let images = [
       {src: '/image/carousel,c1.jpg', title: 'nice image'},
       {src: '/image/carousel,c2.jpg', title: 'imagege image'},
@@ -51,8 +59,8 @@ export default class Welcome extends Component {
       <div>
         <Box>
           <Carousel images={images}/>
-          <div className="row">
-            <MediumHeadline big={'Profesjonell solskjerming'}/>
+          <BigHeadline big={'Våre tjenester'} />
+          <div className="row" >
             {this.props.categories.hasOwnProperty('sub') ? categories : null}
           </div>
         </Box>

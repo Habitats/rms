@@ -35,9 +35,9 @@ class Footer extends Component {
           textAlign: 'center'
         },
         '@media only screen and (min-width: 768px)': {
-          marginTop: 3,
           textAlign: 'right',
         },
+        marginTop: 20
       }
     }
 
@@ -63,41 +63,24 @@ class Footer extends Component {
         </div>
       ),
       map: (
-        <div>
+        <div style={style.map}>
           <MapWrapper height={143} zoom={7}/>
-          <div style={style.map}>
-            <Link to="login">Login</Link>
-          </div>
+          <Link to="login">Login</Link>
         </div>
       )
     }
     return (
       <div style={style.footer} id="footer">
         <div className="container" style={{maxWidth: 1000}}>
-          <div className="row">
-            <div className="hidden-xs">
-              <div className="col-md-3 col-sm-4">
-                {info.address}
-              </div>
-              <div className="col-md-3 col-sm-4">
-                {info.phone}
-              </div>
-              <div className="col-md-6 col-sm-4" style={{paddingTop: 20}}>
-                {info.map}
-              </div>
+          <div className="row" style={style.text}>
+            <div className="col-md-3 col-sm-4 col-xs-12">
+              {info.address}
             </div>
-            <div className="visible-xs">
-              <div style={style.text}>
-                <div className="col-xs-12">
-                  {info.address}
-                </div>
-                <div className="col-xs-12">
-                  {info.phone}
-                </div>
-                <div className="col-xs-12">
-                  {info.map}
-                </div>
-              </div>
+            <div className="col-md-3 col-sm-4 col-xs-12">
+              {info.phone}
+            </div>
+            <div className="col-md-6 col-sm-4 col-xs-12">
+              {info.map}
             </div>
           </div>
         </div>

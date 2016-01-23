@@ -5,53 +5,16 @@ import PhotoOverlay from './PhotoOverlay.jsx'
 import HeadlineOverlay from './../text/HeadlineOverlay.jsx'
 import {routeActions} from 'redux-simple-router'
 import {connect} from 'react-redux'
+import Radium from 'radium'
 
-export default class Photo extends Component {
+class Photo extends Component {
 
   constructor(props) {
     super(props)
     this.state = {
       toggled: false,
-      hover: false,
-      multi: this.computeMulti(),
-      dynamic: !!props.height
+      hover: false
     }
-    this.mounted = false
-  }
-
-  computeMulti() {
-    let windowWith = Math.max(document.documentElement.clientWidth, window.innerWidth || 0)
-    let multi = windowWith > 992 ? 1 : (windowWith > 768 ? 0.75 : (windowWith / 768) * 0.75)
-    return multi
-  }
-
-  updateDimension() {
-    if (this.state.dynamic && this.mounted) {
-      let multi = this.computeMulti()
-      if (multi !== this.state.multi) {
-        this.setState({multi: multi})
-      }
-    }
-  }
-
-  componentWillMount() {
-    this.updateDimension()
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return !(nextState === this.state && nextProps === this.props)
-  }
-
-  componentDidMount() {
-    window.addEventListener("resize", this.updateDimension.bind(this))
-    //console.log('mount resize')
-    this.mounted = true
-  }
-
-  componentWillUnmount() {
-    this.mounted = false
-    window.removeEventListener("resize", this.updateDimension.bind(this))
-    //console.log('unmount resize')
   }
 
   toggle() {
@@ -62,31 +25,44 @@ export default class Photo extends Component {
     this.setState({hover: hover, toggled: false})
   }
 
+  isNumeric(height) {
+    return (!isNaN(parseFloat(height)) && isFinite(height))
+  }
+
   render() {
     let {src, height, width, margin, crop, selected, children, clickable, size, linkTo, dispatch, className} = this.props
-    let {toggled, hover, multi} = this.state
-
-    if (!isNaN(parseFloat(height)) && isFinite(height)) {
-      height = height * multi
-    }
+    let {toggled, hover} = this.state
 
     // if onClick is defined, use the defined callback
     let photoClick = linkTo ? () => dispatch(routeActions.push(linkTo)) :
                      this.props.onClick ? this.props.onClick.bind(this, src) :
                      (clickable ? this.toggle.bind(this) : null)
+
+    let heightStyles = this.isNumeric(height) ? {
+      '@media only screen and (max-width: 767px)': {
+        height: height * 0.60
+      },
+      '@media only screen and (min-width: 768px)': {
+        height: height * 0.75
+      },
+      '@media only screen and (min-width: 992px)': {
+        height: height
+      }
+    } : {height: '100%'}
+
     let style = {
       box: {
+        ... heightStyles,
+        width: width,
         cursor: photoClick ? 'pointer' : null,
         position: 'relative',
-        height: height,
-        width: width,
         marginTop: margin,
         marginBottom: margin
       },
       photo: {
         background: 'url(' + src + '/' + size + ') no-repeat center center',
-        height: height,
-        width: width,
+        height: '100%',
+        width: '100%',
         position: 'absolute',
         top: 0,
         left: 0,
@@ -95,8 +71,8 @@ export default class Photo extends Component {
       hover: {
         background: `rgba(0, 0, 0, ${selected ? 0.2 : 0})`,
         boxShadow: 'inset 0px 0 50px 0px rgba(0,0,0,0.5)',
-        height: height,
-        width: width,
+        height: '100%',
+        width: '100%',
         position: 'absolute',
         top: 0,
         left: 0,
@@ -104,22 +80,21 @@ export default class Photo extends Component {
       },
       spinnerWrapper: {
         textAlign: 'center',
-        height: height,
-        width: width,
+        height: '100%',
+        width: '100%',
         position: 'absolute',
         top: 0,
         left: 0,
-        paddingLeft: 25,
+        paddingLeft: 11,
         color: 'lightGray',
         zIndex: 800
       },
       spinner: {
         width: 'auto',
-        margin: '0 auto',
         position: 'relative',
         top: '50%',
         height: 'auto',
-        marginTop: -22
+        marginTop: '-18px auto 0 auto'
       }
     }
     return (
@@ -174,4 +149,4 @@ Photo.propTypes = {
   crop: PropTypes.bool,
 }
 
-export default connect()(Photo)
+export default connect()(Radium(Photo))

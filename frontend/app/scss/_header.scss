@@ -21,20 +21,21 @@
 
 @media only screen and (max-width: 767px) {
   .navbar-brand {
-    margin: 7px 0 0 ($boxPaddingSmall + 15px) !important;
+    margin: 7px 0 0 ($boxPaddingSmall) !important;
     width: 86px;
     height: 35px;
-    background-image: url("/image/rms_small.png");
+    background-image: url("../img/rms.svg");
+    background-size: contain !important;
   }
 }
 
 @media only screen and (min-width: 768px) {
   .navbar-brand {
     margin: 17px 0 0 $boxPaddingLarge !important;
-    background-image: url("/image/rms_med.png");
+    background-image: url("../img/rms.svg");
     width: 123px;
     height: 50px;
-    background-size: auto !important;
+    background-size: contain !important;
   }
 
   .nav > li > a {
