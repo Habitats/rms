@@ -39,6 +39,10 @@ export default class MenuCategory extends Component {
   }
 }
 
+MenuCategory.defaultProps ={
+  active: {product: '', category: ''}
+}
+
 MenuCategory.propTypes = {
   category: PropTypes.shape({
     title: PropTypes.string.isRequired,
@@ -46,8 +50,8 @@ MenuCategory.propTypes = {
     sub: PropTypes.array.isRequired
   }),
   active: PropTypes.shape({
-    category: PropTypes.string.isRequired,
-    product: PropTypes.string.isRequired
+    category: PropTypes.string,
+    product: PropTypes.string
   }).isRequired,
   linkTo: PropTypes.string.isRequired
 }

@@ -9,14 +9,14 @@ import * as V from '../../vars'
 class ProductItems extends Component {
 
   render() {
-    let {products, linkTo, className, height} = this.props
+    let {products, parentRoute, className, height} = this.props
     let style = {
       '@media only screen and (max-width: 767px)': {
         paddingLeft: V.MARGIN_XS
       }
     }
     let rootCategories = products.map(c =>
-      <ProductItem key={`${c.id}`} product={c} height={height} className={className} linkTo={`${linkTo}/${c.id}`}/>
+      <ProductItem key={`${c.id}`} product={c} height={height} className={className} linkTo={`${parentRoute}/${c.id}`}/>
     )
     return (
       <div style={style}>
@@ -27,13 +27,13 @@ class ProductItems extends Component {
 }
 
 ProductItems.defaultProps = {
-  height: 250,
+  height: 230,
   className: 'col-sm-6 col-xs-12'
 }
 
 ProductItems.propTypes = {
   products: PropTypes.array.isRequired,
-  linkTo: PropTypes.string.isRequired,
+  parentRoute: PropTypes.string.isRequired,
   className: PropTypes.string,
   height: PropTypes.number
 }

@@ -10,21 +10,25 @@ export default class Map extends Component {
   componentDidMount() {
     window.initialize = () => {
       let home = {lat: 60.255074, lng: 11.026707}
-      let map = new google.maps.Map(document.getElementById('map-canvas'), {zoom: this.props.zoom, center: home}) //eslint-disable-line
-      var styles =
-        [{stylers: [{saturation: -100}, {gamma: 1}]}, {elementType: 'labels.content.stroke', stylers: [{visibility: 'off'}]},
-          {featureType: 'poi.business', elementType: 'labels.content', stylers: [{visibility: 'off'}]},
-          {featureType: 'poi.business', elementType: 'labels.icon', stylers: [{visibility: 'off'}]},
-          {featureType: 'poi.place_of_worship', elementType: 'labels.content', stylers: [{visibility: 'off'}]},
-          {featureType: 'poi.place_of_worship', elementType: 'labels.icon', stylers: [{visibility: 'off'}]},
-          {featureType: 'road', elementType: 'geometry', stylers: [{visibility: 'simplified'}]},
-          {featureType: 'water', stylers: [{visibility: 'on'}, {saturation: 50}, {gamma: 0}, {hue: '#50a5d1'}]},
-          {featureType: 'administrative.neighborhood', elementType: 'labels.content.fill', stylers: [{color: '#333333'}]},
-          {featureType: 'road.local', elementType: 'labels.content', stylers: [{weight: 0.5}, {color: '#333333'}]},
-          {featureType: 'transit.station', elementType: 'labels.icon', stylers: [{gamma: 1}, {saturation: 50}]}]
 
-      map.setOptions({styles: styles});
-      let marker = new google.maps.Marker({position: home, map: map}) //eslint-disable-line
+      try {
+        let map = new google.maps.Map(document.getElementById('map-canvas'), {zoom: this.props.zoom, center: home}) //eslint-disable-line
+        var styles =
+          [{stylers: [{saturation: -100}, {gamma: 1}]}, {elementType: 'labels.content.stroke', stylers: [{visibility: 'off'}]},
+            {featureType: 'poi.business', elementType: 'labels.content', stylers: [{visibility: 'off'}]},
+            {featureType: 'poi.business', elementType: 'labels.icon', stylers: [{visibility: 'off'}]},
+            {featureType: 'poi.place_of_worship', elementType: 'labels.content', stylers: [{visibility: 'off'}]},
+            {featureType: 'poi.place_of_worship', elementType: 'labels.icon', stylers: [{visibility: 'off'}]},
+            {featureType: 'road', elementType: 'geometry', stylers: [{visibility: 'simplified'}]},
+            {featureType: 'water', stylers: [{visibility: 'on'}, {saturation: 50}, {gamma: 0}, {hue: '#50a5d1'}]},
+            {featureType: 'administrative.neighborhood', elementType: 'labels.content.fill', stylers: [{color: '#333333'}]},
+            {featureType: 'road.local', elementType: 'labels.content', stylers: [{weight: 0.5}, {color: '#333333'}]},
+            {featureType: 'transit.station', elementType: 'labels.icon', stylers: [{gamma: 1}, {saturation: 50}]}]
+
+        map.setOptions({styles: styles});
+        let marker = new google.maps.Marker({position: home, map: map}) //eslint-disable-line
+      } catch (ex) {
+      }
     }
   }
 

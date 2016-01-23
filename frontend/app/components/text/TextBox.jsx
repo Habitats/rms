@@ -11,12 +11,14 @@ class TextBox extends Component {
       '@media only screen and (max-width: 767px)': {
         maxWidth: 435
       },
-      maxWidth: 625,
+      '@media only screen and (min-width: 768px)': {
+        maxWidth: 550
+      },
       margin: '0 auto'
     }
     return (
       <div className="row">
-        <div className="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12 col-xs-offset-0">
+        <div className="col-xs-12">
           <div style={style}>
             {children}
           </div>
@@ -25,7 +27,6 @@ class TextBox extends Component {
     )
   }
 }
-
 
 TextBox.propTypes = {
   children: PropTypes.oneOfType([

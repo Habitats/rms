@@ -18,17 +18,19 @@ export default class Header extends Component {
     }
     let fullNav = categories.sub.map(c => {
       if (c.sub.length > 0) {
-        let sub = c.sub.map(p => <li data-toggle="collapse" data-target="#navbar-collapse"><Link
-          to={`produkter/${c.id}/${p.id}`}>{p.title}</Link></li>)
+        let sub = c.sub.map(p =>
+          <li key={p.id} data-toggle="collapse" data-target="#navbar-collapse"><Link
+            to={`produkter/${c.id}/${p.id}`}>{p.title}</Link></li>
+        )
         return (
-          <li data-toggle="collapse" data-target="#navbar-collapse"><Link to={`produkter/${c.id}`}>{c.title}</Link>
+          <li key={c.id} data-toggle="collapse" data-target="#navbar-collapse"><Link to={`produkter/${c.id}`}>{c.title}</Link>
             <ul>
               {sub}
             </ul>
           </li>
         )
       } else {
-        return <li data-toggle="collapse" data-target="#navbar-collapse"><Link to={c.id}>{c.title}</Link></li>
+        return <li key={c.id} data-toggle="collapse" data-target="#navbar-collapse"><Link to={c.id}>{c.title}</Link></li>
       }
     })
     return (
@@ -79,6 +81,11 @@ export default class Header extends Component {
       </div>
     )
   }
+}
+
+Header.propTypes ={
+  categories: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
 }
 
 export default connect(state => ({

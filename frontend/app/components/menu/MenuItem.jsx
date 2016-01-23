@@ -29,14 +29,18 @@ export default class MenuItem extends Component {
   }
 }
 
+MenuItem.defaultProps ={
+  active: {product: '', category: ''}
+}
+
 MenuItem.propTypes = {
   product: PropTypes.shape({
     title: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired
   }),
   active: PropTypes.shape({
-    category: PropTypes.string.isRequired,
-    product: PropTypes.string.isRequired
+    category: PropTypes.string,
+    product: PropTypes.string
   }).isRequired,
   linkTo: PropTypes.string.isRequired
 }

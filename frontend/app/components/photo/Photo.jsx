@@ -30,13 +30,13 @@ class Photo extends Component {
   }
 
   render() {
-    let {src, height, width, margin, crop, selected, children, clickable, size, linkTo, dispatch, className} = this.props
+    let {src, height, width, margin, crop, selected, children, clickable, size, linkTo, dispatch, className, onClick} = this.props
     let {toggled, hover} = this.state
 
     // if onClick is defined, use the defined callback
     let photoClick = linkTo ? () => dispatch(routeActions.push(linkTo)) :
-                     this.props.onClick ? this.props.onClick.bind(this, src) :
-                     (clickable ? this.toggle.bind(this) : null)
+                     onClick ? onClick :
+                     clickable ? this.toggle.bind(this) : null
 
     let heightStyles = this.isNumeric(height) ? {
       '@media only screen and (max-width: 767px)': {
@@ -53,7 +53,7 @@ class Photo extends Component {
     let style = {
       box: {
         ... heightStyles,
-        width: width,
+        width: width || '100%',
         cursor: photoClick ? 'pointer' : null,
         position: 'relative',
         marginTop: margin,
@@ -111,7 +111,6 @@ class Photo extends Component {
           {children}
         </div>
         {((hover || selected) && photoClick) ? <div style={style.hover}/> : null}
-        {clickable ? <PhotoOverlay src={src} toggled={toggled}/> : null}
       </div>
     )
   }
@@ -125,9 +124,7 @@ Photo.defaultProps = {
   linkTo: null,
   size: 'med',
   crop: true,
-  margin: 0,
-  height: '100%',
-  width: '100%'
+  margin: 0
 }
 
 Photo.propTypes = {

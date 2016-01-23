@@ -89,10 +89,5 @@ class Footer extends Component {
   }
 }
 
-Footer.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  session: PropTypes.object.isRequired
-}
-
 export default Radium(Footer)
 

@@ -131,7 +131,7 @@ export default class ProjectAdd extends Component {
         </Left>
         <Right>
           <Box>
-            <MediumHeadline big={id ? "Endre referanse" : "Ny referanse"}/>
+            <MediumHeadline big={id ? 'Endre referanse' : 'Ny referanse'}/>
 
             <form className="form">
               <div className="form-group">
