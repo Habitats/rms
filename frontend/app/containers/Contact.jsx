@@ -36,7 +36,7 @@ export default class Contact extends Component {
             <MapWrapper style={style.map}/>
             <BigHeadline big="Hvor er vi?"/>
             <div className="row">
-              <div className="col-md-4 col-md-offset-2 col-sm-7 col-xs-6">
+              <div className="col-md-4 col-md-offset-2  col-sm-7 col-xs-6 col-xs-offset-0">
                 <div style={style.contact}>
                   <h3>Adresse</h3>
                   <p>Romerike Markiseservice AS<br />
@@ -47,7 +47,7 @@ export default class Contact extends Component {
                     <i className="fa fa-envelope"/><a href="mailto:post@romerike-markise.no">post@romerike-markise.no</a></p>
                 </div>
               </div>
-              <div className="col-md-3 col-md-offset-1 col-sm-5 col-xs-6">
+              <div className="col-md-3 col-md-offset-1 col-sm-5 col-xs-6 col-xs-offset-0">
                 <div style={style.contact}>
                   <h3>Kontortid</h3>
                   <p>Mandag-fredag: 0900-1600</p>
@@ -63,7 +63,7 @@ export default class Contact extends Component {
         <Box>
           <BigHeadline big="Hvem er vi?"/>
           <div className="row">
-            <div className="col-sm-6 col-sm-offset-0 col-xs-10 col-xs-offset-1">
+            <div className="col-sm-6 col-xs-12">
               <Person mail="morten@romerike-markise.no"
                       name="Morten Skjennum"
                       phone="+47 90 73 19 07"
@@ -79,7 +79,7 @@ export default class Contact extends Component {
                       photo="/image/p_anne.jpg"
                       title="Kontormedarbeider"/>
             </div>
-            <div className="col-sm-6 col-sm-offset-0 col-xs-10 col-xs-offset-1">
+            <div className="col-sm-6 col-xs-12">
               <Person mail="roar@romerike-markise.no"
                       name="Roar Skjennum"
                       phone="+47 90 73 18 80"

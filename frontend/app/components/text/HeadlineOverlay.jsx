@@ -23,11 +23,11 @@ export default class HeadlineOverlay extends Component {
     let {text} = this.props
     return (
       <div style={wrapperStyle}>
-        <h5 style={{margin: 0}}>
+        <h3 style={{margin: 0}}>
         <span style={textStyle}>
           {text}
         </span>
-        </h5>
+        </h3>
       </div>
     )
   }

@@ -9,7 +9,7 @@ export default class Carousel extends Component {
     let {images} = this.props
     let photos = images.map(i => (
       <div key={i.src}>
-        <Photo height={450} src={i.src}/>
+        <Photo height={400} src={i.src}/>
       </div>
     ))
     let settings = {

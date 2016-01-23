@@ -13,8 +13,9 @@ class Layout extends Component {
     let style = {
       maxWidth: 1000,
       '@media only screen and (max-width: 767px)': {
-        marginTop: V.HEADER_HEIGHT_XS + 20,
-        marginBottom: V.FOOTER_HEIGHT_XS + 10
+        marginTop: V.HEADER_HEIGHT_XS,
+        marginBottom: V.FOOTER_HEIGHT_XS,
+        padding: 0
       },
       '@media only screen and (min-width: 768px)': {
         marginTop: V.HEADER_HEIGHT_SM + 20,
@@ -23,8 +24,8 @@ class Layout extends Component {
     }
     return (
       <div>
-        <Header />
         <div style={style} className="container" id="root">
+          <Header />
           {this.props.children}
         </div>
         <Footer />

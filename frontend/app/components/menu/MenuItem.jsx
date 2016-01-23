@@ -18,7 +18,7 @@ export default class MenuItem extends Component {
     let a = id === active.product
     let color = hover ? '#224E6D' : a ? 'black' : '#48494B'
     let markerStyle = {color: color, opacity: a ? 1 : 0, fontSize: 7, height: 8, verticalAlign: 'middle'}
-    let itemStyle = {color: color, marginLeft: 10, fontWeight: 300}
+    let itemStyle = {color: color, marginLeft: 10}
     return (
       <div onMouseEnter={this.toggleHover.bind(this, true)} onMouseLeave={this.toggleHover.bind(this, false)}>
         <Link to={linkTo}>

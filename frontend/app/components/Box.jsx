@@ -7,14 +7,16 @@ class Box extends Component {
   render() {
     let {children} = this.props
     let style = {
-      marginBottom: 20,
       background: '#fff',
       boxShadow: '0 0 35px 3px rgba(0, 0, 0, 0.16)',
       '@media only screen and (max-width: 767px)': {
-        padding: V.MARGIN_XS
+        padding: V.MARGIN_XS,
+        width: '100%',
+        marginBottom: 0
       },
       '@media only screen and (min-width: 768px)': {
-        padding: V.MARGIN_SM
+        padding: V.MARGIN_SM,
+        marginBottom: 20
       }
     }
     return (

@@ -30,7 +30,7 @@ class BigHeadline extends Component {
         }
       },
       big: {
-        fontWeight: 700,
+        fontWeight: 100,
         paddingBottom: 0,
         paddingTop: 10,
         color: '#2D2D2D'

@@ -28,7 +28,7 @@ class ProductItems extends Component {
 
 ProductItems.defaultProps = {
   height: 250,
-  className: 'col-md-6 col-sm-12 col-xs-6 col-md-offset-0'
+  className: 'col-sm-6 col-xs-12'
 }
 
 ProductItems.propTypes = {

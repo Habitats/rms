@@ -23,7 +23,6 @@ class MediumHeadline extends Component {
         '@media only screen and (min-width: 768px)': {
           paddingTop: 20
         },
-        fontWeight: 700,
         paddingBottom: 0,
         paddingTop: 20,
         color: '#2D2D2D'

@@ -15,16 +15,16 @@ class Person extends Component {
         margin: '0 auto',
         '@media only screen and (max-width: 767px)': {
           height: 150,
-          paddingLeft: 20,
+          paddingLeft: 0,
           maxWidth: 400
         },
         '@media only screen and (min-width: 768px)': {
-          height: 200,
+          height: 170,
           paddingLeft: 0
         },
         '@media only screen and (min-width: 992px)': {
-          height: 200,
-          paddingLeft: 40
+          height: 170,
+          paddingLeft: 60
         }
       },
       photo: {
