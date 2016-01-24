@@ -1,5 +1,4 @@
 import React, {Component, PropTypes} from 'react'
-import {connect} from 'react-redux'
 import ProjectListItem from './ProjectListItem.jsx'
 
 export default class Projects extends Component {

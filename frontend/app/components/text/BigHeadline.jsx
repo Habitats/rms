@@ -1,11 +1,12 @@
 import React, {Component, PropTypes} from 'react'
 import Link from '../Link.jsx'
 import Radium from 'radium'
+import {HEADING_SMALL, HEADING_BIG} from '../../colors'
 
 class BigHeadline extends Component {
 
   render() {
-    let {small, big} = this.props
+    let {small, big, to} = this.props
     let style = {
       box: {
         '@media only screen and (max-width: 767px)': {
@@ -32,17 +33,17 @@ class BigHeadline extends Component {
       big: {
         paddingBottom: 0,
         paddingTop: 10,
-        color: '#2D2D2D'
+        color: HEADING_BIG
       },
       small: {
-        color: '#777777',
+        color: HEADING_SMALL,
       }
     }
     return (
       <div className="row">
         <div className="col-lg-12 text-center" style={style.box}>
           <h5 style={style.small}>
-            {small}
+            {to ? <Link to={to}>{small}</Link> : small}
           </h5>
           <h1 style={style.big}>{big}</h1>
           <hr style={style.divider}/>
@@ -54,12 +55,14 @@ class BigHeadline extends Component {
 
 BigHeadline.defaultProps = {
   small: '',
-  big: ''
+  big: '',
+  to: null
 }
 
 BigHeadline.propTypes = {
   small: PropTypes.string,
-  big: PropTypes.string
+  big: PropTypes.string,
+  to: PropTypes.string
 }
 
 export default Radium(BigHeadline)

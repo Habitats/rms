@@ -86,19 +86,16 @@
 
 h1, h2 {
   font-family: 'Roboto';
-  color: black;
   font-weight: 400;
 }
 
 h3 {
   font-family: 'Roboto';
-  color: black;
   font-weight: 600;
 }
 
 h4, h5 {
   font-family: 'Roboto';
-  color: black;
   font-weight: 400;
 }
 
@@ -122,7 +119,6 @@ body {
   background-size: cover;
   background-attachment: fixed;
   background-image: url(/image/bg.jpg/raw);
-  color: #3e3e3e;
   font-size: 1.2em;
   width: 100%;
 }
@@ -153,6 +149,10 @@ i {
 
 .fa-empty {
   margin-right: 21px;
+}
+
+.fa-ul {
+  margin-left: 0;
 }
 
 .cover {

@@ -1,13 +1,16 @@
 import React, {Component, PropTypes} from 'react'
 import ReactDOM from 'react-dom'
-import MenuCategory from './MenuCategory.jsx'
+import MenuItem from './MenuItem.jsx'
 import Box from './../Box.jsx'
+import {TEXT, HOVER} from '../../colors'
+import Radium from 'radium'
+import * as V from '../../vars'
 
-export default class Menu extends Component {
+class Menu extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {transform: 0, menuHeight: 0}
+    this.state = {transform: 0, menuHeight: 0, expanded: false}
     this.mounted = false
   }
 
@@ -43,12 +46,19 @@ export default class Menu extends Component {
 
   render() {
     let {categories, active, linkTo} = this.props
-    let cats = categories.sub.map(c => <MenuCategory key={c.id} linkTo={`${linkTo}/${c.id}`} category={c} active={active}/>)
-    let style = {transform: `translateY(${this.state.transform}px)`}
+    let style = {
+      menu: {
+        transform: `translateY(${this.state.transform}px)`
+      },
+      menuContent: {marginRight: -V.MARGIN_SM, marginLeft: -V.MARGIN_SM},
+    }
+    let cats = categories.sub.map(c =>
+      <MenuItem key={c.id} linkTo={`${linkTo}/${c.id}`} product={c} active={active} isRoot={true} style={style} />
+    )
     return (
-      <div style={style}>
-        <Box className="rms-menu">
-          <div style={{marginLeft: -30, marginRight: -21}}>
+      <div style={style.menu}>
+        <Box className="rms-menu" shouldPad={false}>
+          <div style={style.menuContent}>
             {cats}
           </div>
         </Box>
@@ -57,15 +67,14 @@ export default class Menu extends Component {
   }
 }
 
-Menu.defaultProps ={
-  active: {product: '', category: ''}
+Menu.defaultProps = {
+  active: ''
 }
 
 Menu.propTypes = {
   categories: PropTypes.object.isRequired,
   linkTo: PropTypes.string.isRequired,
-  active: PropTypes.shape({
-    product: PropTypes.string,
-    category: PropTypes.string,
-  }).isRequired
+  active: PropTypes.string
 }
+
+export default Radium(Menu)

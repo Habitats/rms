@@ -19,18 +19,18 @@ export default class Header extends Component {
     let fullNav = categories.sub.map(c => {
       if (c.sub.length > 0) {
         let sub = c.sub.map(p =>
-          <li key={p.id} data-toggle="collapse" data-target="#navbar-collapse"><Link
-            to={`produkter/${c.id}/${p.id}`}>{p.title}</Link></li>
+          <li key={p.id} data-toggle="collapse" data-target="#navbar-collapse"><a><Link
+            to={`produkter/${c.id}/${p.id}`}>{p.title}</Link></a></li>
         )
         return (
-          <li key={c.id} data-toggle="collapse" data-target="#navbar-collapse"><Link to={`produkter/${c.id}`}>{c.title}</Link>
+          <li key={c.id} data-toggle="collapse" data-target="#navbar-collapse"><a><Link to={`produkter/${c.id}`}>{c.title}</Link></a>
             <ul>
               {sub}
             </ul>
           </li>
         )
       } else {
-        return <li key={c.id} data-toggle="collapse" data-target="#navbar-collapse"><Link to={c.id}>{c.title}</Link></li>
+        return <li key={c.id} data-toggle="collapse" data-target="#navbar-collapse"><a><Link to={c.id}>{c.title}</Link></a></li>
       }
     })
     return (
@@ -45,16 +45,16 @@ export default class Header extends Component {
                 <span className="icon-bar"></span>
                 <span className="icon-bar"></span>
               </button>
-              <Link to="/">
+              <a><Link to="/">
                 <div className="navbar-brand logo"/>
-              </Link>
+              </Link></a>
             </div>
 
             <div className="collapse navbar-collapse" id="navbar-collapse">
               <div className="visible-xs" style={{marginLeft: 15}}>
                 <ul className="nav navbar-nav navbar-right">
-                  <li data-toggle="collapse" data-target="#navbar-collapse"><Link to="/">Hjem</Link></li>
-                  <li data-toggle="collapse" data-target="#navbar-collapse"><Link to="/referanser">Referanser</Link></li>
+                  <li data-toggle="collapse" data-target="#navbar-collapse"><a><Link to="/">Hjem</Link></a></li>
+                  <li data-toggle="collapse" data-target="#navbar-collapse"><a><Link to="/referanser">Referanser</Link></a></li>
                   <li className="dropdown">
                     <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">Produkter <span className="caret"></span></a>
@@ -62,17 +62,17 @@ export default class Header extends Component {
                       {fullNav}
                     </ul>
                   </li>
-                  <li data-toggle="collapse" data-target="#navbar-collapse"><Link to="/om">Om</Link></li>
-                  <li data-toggle="collapse" data-target="#navbar-collapse"><Link to="/kontakt">Kontakt</Link></li>
+                  <li data-toggle="collapse" data-target="#navbar-collapse"><a><Link to="/om">Om</Link></a></li>
+                  <li data-toggle="collapse" data-target="#navbar-collapse"><a><Link to="/kontakt">Kontakt</Link></a></li>
                 </ul>
               </div>
               <div className="hidden-xs">
                 <ul className="nav pull-right navbar-nav">
-                  <li><Link to="/">Hjem</Link></li>
-                  <li><Link to="/referanser">Referanser</Link></li>
-                  <li><Link to="/produkter">Produkter</Link></li>
-                  <li><Link to="/om">Om</Link></li>
-                  <li><Link to="/kontakt">Kontakt</Link></li>
+                  <li><a><Link to="/">Hjem</Link></a></li>
+                  <li><a><Link to="/referanser">Referanser</Link></a></li>
+                  <li><a><Link to="/produkter">Produkter</Link></a></li>
+                  <li><a><Link to="/om">Om</Link></a></li>
+                  <li><a><Link to="/kontakt">Kontakt</Link></a></li>
                 </ul>
               </div>
             </div>
@@ -83,7 +83,7 @@ export default class Header extends Component {
   }
 }
 
-Header.propTypes ={
+Header.propTypes = {
   categories: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
 }

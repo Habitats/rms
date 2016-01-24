@@ -38,7 +38,7 @@ export default class ProductsContainer extends Component {
         <div>
           <div className="hidden-xs">
             <Left>
-              <Menu categories={categories} active={{category: params.categoryId, product: params.productId}} linkTo={'/produkter'}/>
+              <Menu categories={categories} active={params.subId || params.productId || params.categoryId} linkTo={'/produkter'}/>
             </Left>
 
             <Right>

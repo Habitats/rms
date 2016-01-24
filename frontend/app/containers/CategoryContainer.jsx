@@ -19,7 +19,7 @@ export default class CategoryContainer extends Component {
       return (
         <div>
           <Box>
-            <BigHeadline big={category.title} small="Våre produkter og tjenester"/>
+            <BigHeadline big={category.title} small="Våre produkter og tjenester" to={'/produkter'}/>
             <Category category={category}/>
           </Box>
         </div>

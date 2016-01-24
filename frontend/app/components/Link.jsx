@@ -1,20 +1,33 @@
 import React, {Component, PropTypes} from 'react'
-import {Link as L} from 'react-router'
+import {routeActions} from 'redux-simple-router'
+import {connect} from 'react-redux'
+import Radium from 'radium'
 
-export default class Link extends Component {
+class Link extends Component {
+
+  constructor(props){
+    super(props)
+    this.onClick = () => props.dispatch(routeActions.push(props.to))
+  }
 
   render() {
-    let {to, children} = this.props
-    let style = {
-      textDecoration: 'none',
-      outline: 0
+    let {children, style} = this.props
+    style = {
+      ...style,
+      ':hover' :{
+        ...style[':hover'],
+        cursor: 'pointer'
+      },
     }
     return (
-      <L to={to} style={style}>
+      <span style={style} onClick={this.onClick}>
         {children}
-      </L>
+      </span>
     )
   }
+}
+Link.defaultProps = {
+  style: {}
 }
 
 Link.propTypes = {
@@ -24,3 +37,5 @@ Link.propTypes = {
     PropTypes.node
   ])
 }
+
+export default connect()(Radium(Link))

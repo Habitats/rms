@@ -27,7 +27,7 @@ export default class Product extends Component {
     return (
       <div>
         <Box>
-          <MediumHeadline big={title} small={category}/>
+          <MediumHeadline big={title} small={category} to={linkTo.split('/').reverse().splice(1).reverse().join('/')}/>
           <MiniGallery images={images} orientation={'vertical'} height={400}/>
           <div style={style.desc}>
             {admin ?
