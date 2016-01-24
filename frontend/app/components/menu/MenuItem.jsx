@@ -6,10 +6,8 @@ export default class MenuItem extends Component {
   constructor(props) {
     super(props)
     this.state = {hover: false}
-  }
-
-  toggleHover(hover) {
-    this.setState({hover: hover})
+    this.onMouseEnter = () => this.setState({hover: true})
+    this.onMouseLeave = () => this.setState({hover: false})
   }
 
   render() {
@@ -20,7 +18,7 @@ export default class MenuItem extends Component {
     let markerStyle = {color: color, opacity: a ? 1 : 0, fontSize: 7, height: 8, verticalAlign: 'middle'}
     let itemStyle = {color: color, marginLeft: 10}
     return (
-      <div onMouseEnter={this.toggleHover.bind(this, true)} onMouseLeave={this.toggleHover.bind(this, false)}>
+      <div onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}>
         <Link to={linkTo}>
           <h4 style={itemStyle}><i className="fa fa-circle" style={markerStyle}/>{title}</h4>
         </Link>

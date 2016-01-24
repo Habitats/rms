@@ -9,53 +9,41 @@ class CoverPhoto extends Component {
     this.state = {
       toggled: false,
       hover: false,
-      hoverRight: false,
-      hoverLeft: false
     }
-  }
 
-  toggleHover(hover) {
-    this.setState({hover: hover})
-  }
-
-  toggleHoverRight(hover) {
-    this.setState({hoverRight: hover})
-  }
-
-  toggleHoverLeft(hover) {
-    this.setState({hoverLeft: hover})
+    this.onMouseEnter = () => this.setState({hover: true})
+    this.onMouseLeave = () => this.setState({hover: false})
   }
 
   render() {
     let {src, onRightSelect, onLeftSelect} = this.props
-    let {hover, hoverLeft, hoverRight} = this.state
+    let {hover} = this.state
     let style = {
       icon: {
         cursor: 'pointer',
         position: 'absolute',
         top: '50%',
         height: 'auto',
-        color: 'white',
+        color: 'lightGray',
         paddingLeft: 10,
-        textShadow: '5px 2px 3px rgba(0,0,0,0.5)'
+        textShadow: '5px 2px 3px rgba(0,0,0,0.5)',
+        ':hover': {
+          color: 'white'
+        }
       }
     }
 
     let rightHover = hover ? (
-      <div style={{height: '100%', width: 55, float: 'right'}}
-           onClick={onRightSelect}>
-               <span onMouseEnter={this.toggleHoverRight.bind(this, true)} onMouseLeave={this.toggleHoverRight.bind(this, false)}
-                     style={{... style.icon, color: hoverRight ? 'white' : 'lightGray'}} className="fa fa-chevron-right fa-3x"/>
+      <div style={{height: '100%', width: 55, float: 'right'}} onClick={onRightSelect}>
+        <span key={0} style={style.icon} className="fa fa-chevron-right fa-3x"/>
       </div>) : null
     let leftHover = hover ? (
-      <div style={{height: '100%', width: 55, float: 'left'}}
-           onClick={onLeftSelect}>
-               <span onMouseEnter={this.toggleHoverLeft.bind(this, true)} onMouseLeave={this.toggleHoverLeft.bind(this, false)}
-                     style={{... style.icon, color: hoverLeft ? 'white' : 'lightGray'}} className="fa fa-chevron-left fa-3x"/>
+      <div style={{height: '100%', width: 55, float: 'left'}} onClick={onLeftSelect}>
+        <span key={1} style={style.icon} className="fa fa-chevron-left fa-3x"/>
       </div>) : null
 
     return (
-      <div onMouseEnter={this.toggleHover.bind(this, true)} onMouseLeave={this.toggleHover.bind(this, false)}>
+      <div onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave} style={{height: '100%'}}>
         <Photo src={src}>
           {rightHover}
           {leftHover}
@@ -65,7 +53,7 @@ class CoverPhoto extends Component {
   }
 }
 
-CoverPhoto.propTypes ={
+CoverPhoto.propTypes = {
   src: PropTypes.string.isRequired,
   onRightSelect: PropTypes.func.isRequired,
   onLeftSelect: PropTypes.func.isRequired

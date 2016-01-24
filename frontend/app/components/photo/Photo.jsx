@@ -15,14 +15,12 @@ class Photo extends Component {
       toggled: false,
       hover: false
     }
+    this.onMouseEnter = () => this.setState({hover: true})
+    this.onMouseLeave = () => this.setState({hover: false})
   }
 
   toggle() {
     this.setState({toggled: true})
-  }
-
-  toggleHover(hover) {
-    this.setState({hover: hover, toggled: false})
   }
 
   isNumeric(height) {
@@ -31,7 +29,7 @@ class Photo extends Component {
 
   render() {
     let {src, height, width, margin, crop, selected, children, clickable, size, linkTo, dispatch, className, onClick} = this.props
-    let {toggled, hover} = this.state
+    let {hover} = this.state
 
     // if onClick is defined, use the defined callback
     let photoClick = linkTo ? () => dispatch(routeActions.push(linkTo)) :
@@ -69,7 +67,7 @@ class Photo extends Component {
         zIndex: 900
       },
       hover: {
-        background: `rgba(0, 0, 0, ${selected ? 0.2 : 0})`,
+        background: `rgba(0, 0, 0, ${selected && hover ? 0.3 : selected || hover ? 0.2 : 0})`,
         boxShadow: 'inset 0px 0 50px 0px rgba(0,0,0,0.5)',
         height: '100%',
         width: '100%',
@@ -98,10 +96,7 @@ class Photo extends Component {
       }
     }
     return (
-      <div className="photo" onClick={photoClick} style={style.box}
-           onMouseEnter={this.toggleHover.bind(this, true)}
-           onMouseLeave={this.toggleHover.bind(this, false)}
-           className={className}>
+      <div className={className} onClick={photoClick} style={style.box} onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}>
         <div style={style.spinnerWrapper}>
           <div style={style.spinner}>
             <i className="fa fa-circle-o-notch fa-spin fa-3x"/>

@@ -20,7 +20,7 @@ const plugins = [
     $: "jquery",
     jQuery: "jquery"
   }),
-  new BomPlugin(!DEBUG)
+  //new BomPlugin(!DEBUG)
 ];
 
 if (DEBUG) {

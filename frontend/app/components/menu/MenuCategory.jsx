@@ -7,10 +7,8 @@ export default class MenuCategory extends Component {
   constructor(props) {
     super(props)
     this.state = {hover: false}
-  }
-
-  toggleHover(hover) {
-    this.setState({hover: hover})
+    this.onMouseEnter = () => this.setState({hover: true})
+    this.onMouseLeave = () => this.setState({hover: false})
   }
 
   render() {
@@ -29,7 +27,7 @@ export default class MenuCategory extends Component {
     return (
       <div style={itemStyle}>
         <Link to={linkTo}>
-          <div onMouseEnter={this.toggleHover.bind(this, true)} onMouseLeave={this.toggleHover.bind(this, false)}>
+          <div onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}>
             <h3 style={{fontWeight: 600, color: color}}><i className="fa fa-circle" style={markerStyle}/>{title}</h3>
           </div>
         </Link>
@@ -39,7 +37,7 @@ export default class MenuCategory extends Component {
   }
 }
 
-MenuCategory.defaultProps ={
+MenuCategory.defaultProps = {
   active: {product: '', category: ''}
 }
 
