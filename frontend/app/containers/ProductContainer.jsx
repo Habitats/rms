@@ -11,8 +11,19 @@ export default class ProductContainer extends Component {
     let category = categories.sub.find(c => c.id === params.categoryId)
     let product = category.sub.find(p => p.id === params.productId)
 
+    // targets sub sub product
+    if(params.subSubId){
+      let subProduct = product.sub ? product.sub.find(p => p.id === params.subId) : null
+      let subSubProduct = subProduct.sub ? subProduct.sub.find(p => p.id === params.subSubId) : null
+      if (subSubProduct) {
+        return (
+          <Product product={subSubProduct} category={subProduct.title} linkTo={`produkter/${category.id}/${product.id}/${subProduct.id}/${subSubProduct.id}`}
+                   selected={params.selected}/>
+        )
+      }
+    }
     // targets sub product
-    if (params.subId) {
+    else if (params.subId) {
       let subProduct = product.sub ? product.sub.find(p => p.id === params.subId) : null
       if (subProduct) {
         return (
@@ -37,6 +48,7 @@ ProductContainer.propTypes = {
     categoryId: PropTypes.string.isRequired,
     productId: PropTypes.string.isRequired,
     subId: PropTypes.string,
+    subSubId: PropTypes.string,
     selected: PropTypes.number
   })
 }

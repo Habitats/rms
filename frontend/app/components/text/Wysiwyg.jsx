@@ -32,12 +32,11 @@ export default class Wysiwyg extends Component {
 
   render() {
     let {content, enabled} = this.state
-    let style = {paddingTop: 20, paddingBottom: 20}
     return (
       <div className="row wysiwyg">
         {enabled ?
          <div>
-           <div className="col-xs-12" style={style}>
+           <div className="col-xs-12">
              <EditableDiv content={content} onChange={this.handleChange.bind(this)}/>
            </div>
            <div className="col-xs-6">
@@ -52,9 +51,9 @@ export default class Wysiwyg extends Component {
          </div>
           :
          <div>
-           <div dangerouslySetInnerHTML={{__html: content}} className="col-xs-12" style={style}/>
+           <div dangerouslySetInnerHTML={{__html: content}} className="col-xs-12" />
            <div className="col-xs-12">
-             <button style={{marginTop: 5}} className="btn btn-default btn-block" onClick={this.toggle.bind(this, true)} type="submit">Endre
+             <button style={{marginTop: 45}} className="btn btn-default btn-block" onClick={this.toggle.bind(this, true)} type="submit">Endre
              </button>
            </div>
          </div>}

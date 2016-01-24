@@ -34,15 +34,15 @@ class MenuItem extends Component {
     let expanderClass = (isParent && !isRoot) ? expanded ? 'fa fa-caret-down' : 'fa fa-caret-right' : 'fa fa-empty'
     let style = {
       box: {
-        marginTop: isRoot ? 20 : 3,
+        marginTop: isRoot ? 15 : 1,
         cursor: 'pointer',
         height: 'auto',
         marginLeft: isRoot ? 0 : isParent ? 21 : 25,
       },
       sub: {
         marginLeft: isRoot ? 0 : -8,
-        paddingTop: 3,
-        paddingBottom: 6
+        paddingTop: 0,
+        paddingBottom: expanded ? 5 : 3
       },
       item: {
         color: a ? HOVER : TEXT,

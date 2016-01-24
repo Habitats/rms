@@ -45,6 +45,7 @@ export default class App extends Component {
             <Route component={ProjectAdd} onEnter={this.requireLogin.bind(this)} path="referanser/endre/:id"/>
             <Route component={ProjectContainer} path="referanser/:id"/>
             <Route component={Products} path="produkter">
+              <Route component={ProductContainer} path=":categoryId/:productId/:subId/:subSubId"/>
               <Route component={ProductContainer} path=":categoryId/:productId/:subId"/>
               <Route component={ProductContainer} path=":categoryId/:productId"/>
               <Route component={CategoryContainer} path=":categoryId"/>

@@ -18,30 +18,50 @@ export default class Product extends Component {
     let {title, description, images, sub, id} = product
     let style = {
       desc: {
-        paddingTop: 40,
         paddingBottom: 20,
         textAlign: 'justify'
+      },
+      gallery: {
+        paddingBottom: 40,
       }
     }
 
+    let headline = <MediumHeadline big={title} small={category} to={linkTo.split('/').reverse().splice(1).reverse().join('/')}/>
+    let gal = <div style={style.gallery}><MiniGallery images={images} orientation={'vertical'} height={400} style={style.gallery}/></div>
+    let desc = (
+      <div style={style.desc}>
+        {admin ?
+         <Wysiwyg content={description} onSave={(p) => dispatch(productActions.save({... product, description: p}))}/>
+          :
+         <div dangerouslySetInnerHTML={{__html: description}}/>}
+      </div>
+    )
+    let subCategories = sub && sub.length > 0 ? (
+      <div className="row">
+        <ProductItems products={product.sub} parentRoute={`${linkTo}`}/>
+      </div>
+    ) : null
+
     return (
       <div>
-        <Box>
-          <MediumHeadline big={title} small={category} to={linkTo.split('/').reverse().splice(1).reverse().join('/')}/>
-          <MiniGallery images={images} orientation={'vertical'} height={400}/>
-          <div style={style.desc}>
-            {admin ?
-             <Wysiwyg content={description} onSave={(p) => dispatch(productActions.save({... product, description: p}))}/>
-              : <div dangerouslySetInnerHTML={{__html: description}}/> }
-          </div>
-        </Box>
-        {sub && sub.length > 0 ? (
-          <Box>
-            <div className="row">
-              <ProductItems products={product.sub} parentRoute={`${linkTo}`}/>
-            </div>
-          </Box>
-        ) : null}
+        {images.length > 0 ?
+         <div>
+           <Box>
+             {headline}
+             {gal}
+             {desc}
+           </Box>
+           {sub.length > 0 ?
+            <Box>{
+              subCategories}
+            </Box> : null}
+         </div>
+          :
+         <Box>
+           {headline}
+           {desc}
+           {subCategories}
+         </Box>}
       </div>
     )
   }

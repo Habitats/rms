@@ -42,7 +42,7 @@ class MiniGallery extends Component {
     this.state.mql.addListener(this.handleMediaChange.bind(this))
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.handleMediaChange()
   }
 
@@ -216,6 +216,7 @@ class MiniGallery extends Component {
   render() {
     let {images, height, orientation} = this.props
     let {selected, startX, deltaX, small} = this.state
+    height = images.length > 1 ? height : height * 0.75
 
     let main = () => images.find(i => i.src.includes('main.jpg'))
     let cover = selected || (main() || (images.length > 0 ? images[0] : null))

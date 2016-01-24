@@ -55,7 +55,8 @@ export default class EditableDiv extends Component {
     let editorStyle = {
       paddingTop: 13,
       overflow: 'auto',
-      background: '#F1F1F1',
+      boxShadow: 'inset -1px 1px 17px 0px rgba(0,0,0,0.14)',
+      padding: '40px 15px',
       height: 'auto'
     }
 

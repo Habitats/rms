@@ -14,20 +14,20 @@ class Menu extends Component {
     this.mounted = false
   }
 
-  componentDidMount() {
-    this.footerHeight = document.getElementById('footer').clientHeight
-    this.menuHeight = ReactDOM.findDOMNode(this).clientHeight
-  }
-
-  componentWillMount() {
-    window.addEventListener('scroll', this.handleScroll.bind(this))
-    this.mounted = true
-  }
-
-  componentWillUnmount() {
-    this.mounted = false
-    window.removeEventListener('scroll', this.handleScroll.bind(this))
-  }
+  //componentDidMount() {
+  //  this.footerHeight = document.getElementById('footer').clientHeight
+  //  this.menuHeight = ReactDOM.findDOMNode(this).clientHeight
+  //}
+  //
+  //componentWillMount() {
+  //  window.addEventListener('scroll', this.handleScroll.bind(this))
+  //  this.mounted = true
+  //}
+  //
+  //componentWillUnmount() {
+  //  this.mounted = false
+  //  window.removeEventListener('scroll', this.handleScroll.bind(this))
+  //}
 
   handleScroll(event) {
     if (!event || !this.mounted) {
@@ -50,7 +50,7 @@ class Menu extends Component {
       menu: {
         transform: `translateY(${this.state.transform}px)`
       },
-      menuContent: {marginRight: -V.MARGIN_SM, marginLeft: -V.MARGIN_SM},
+      menuContent: {marginRight: -V.MARGIN_SM , marginLeft: -V.MARGIN_SM + 5},
     }
     let cats = categories.sub.map(c =>
       <MenuItem key={c.id} linkTo={`${linkTo}/${c.id}`} product={c} active={active} isRoot={true} style={style} />
