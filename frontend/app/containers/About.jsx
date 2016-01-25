@@ -24,7 +24,7 @@ export default class About extends Component {
           </div>
           <div className="row visible-sm">
             <div className="col-sm-8" style={{paddingRight: 0}}>
-              <Photo clickable={false} height={315} src="/image/butikken_.jpg"/>
+              <Photo clickable={false} height={320} src="/image/butikken_.jpg"/>
             </div>
             <div className="col-sm-4">
               <Photo clickable={false} height={150} src="/image/butikken_inne_1.jpg"/>
