@@ -9,7 +9,7 @@ class Carousel extends Component {
   render() {
     let {images} = this.props
 
-    let height = 400
+    let height = 450
     let style ={
       carousel: {
         '@media only screen and (max-width: 767px)': {

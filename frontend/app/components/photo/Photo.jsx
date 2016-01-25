@@ -92,7 +92,7 @@ class Photo extends Component {
         position: 'relative',
         top: '50%',
         height: 'auto',
-        marginTop: '-18px auto 0 auto'
+        margin: '-18px auto 0 auto'
       }
     }
     return (
