@@ -10,63 +10,71 @@ import TextBox from './../components/text/TextBox.jsx'
 import Box from './../components/Box.jsx'
 import ProductItems from './../components/product/ProductItems.jsx'
 import * as productActionCreators from './../redux/actions/productActions'
+import Radium from 'radium'
 
 export default class Welcome extends Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      mql: window.matchMedia('only screen and (max-width: 767px)')
+    }
+    this.mounted = false
+    this.handleMediaChange = () => {
+      if (this.mounted) {
+        if (this.state.mql.matches) {
+          this.setState({small: true})
+        } else {
+          this.setState({small: false})
+        }
+      }
+    }
+  }
 
   componentWillMount() {
     if (Object.keys(this.props.categories).length === 0) {
       this.props.dispatch(productActionCreators.fetchProducts())
     }
+    this.mounted = true
+    this.state.mql.addListener(this.handleMediaChange)
   }
 
-  content() {
-    return (
-      <div>
-        <BigHeadline big="Profesjonell solskjerming" small="Romerike Markiseservice"/>
-        <TextBox >
-          <p> Romerike Markiseservice er en ledende og profesjonell totalleverandør av solskjermingssystemer med kunden i sentrum.</p>
+  componentDidMount() {
+    this.handleMediaChange()
+  }
 
-          <p> Med Øvre Romerike og Oslo som våre primære kjerneområder, leverer vi et bredt spekter av solskjermingsløsninger til både
-            privat- og bedriftsmarkedet.</p>
-
-          <p>Skulle du ha noen spørsmål, kan du enten sende en forespørsel gjennom vårt <Link to="/kontakt">kontaktskjema</Link>, eller
-            ringe
-            oss direkte på <em>+47 63 99 95 32</em>.
-            Øvrig kontaktinformasjon er tilgjengelig på våre <Link to="/kontakt">kontaktsider</Link>.
-          </p>
-        </TextBox>
-      </div>
-    )
+  componentWillUnmount() {
+    this.mounted = false
+    this.state.mql.removeListener(this.handleMediaChange)
   }
 
   render() {
-    let style = {
-      welcome: {
-        height: 500,
-      },
-      carousel: {
-        marginTop: 15
-      }
-    }
-    let categories = <ProductItems products={this.props.categories.sub} height={150} className="col-sm-3 col-xs-6" parentRoute={`/produkter`}/>
+    let {small} = this.state
     let images = [
       {src: '/image/carousel,c1.jpg'},
       {src: '/image/carousel,c2.jpg'},
       {src: '/image/carousel,c3.jpg'},
       {src: '/image/carousel,c4.jpg'}
     ]
+
+    let ready = this.props.categories.hasOwnProperty('sub')
+    let catBig = ready ? <ProductItems products={this.props.categories.sub.slice(0,2)} height={small ? 200 : 270}
+                                           className="col-sm-6 col-xs-12" parentRoute={`/produkter`}/> : null
+    let catSmall = ready ? <ProductItems products={this.props.categories.sub.slice(2,5)} height={small ? 200 : 170}
+                                            className="col-sm-4 col-xs-12" parentRoute={`/produkter`}/> : null
     return (
       <div>
         <Box>
           <Carousel images={images}/>
-          <BigHeadline big={'Våre tjenester'} />
-          <div className="row" >
-            {this.props.categories.hasOwnProperty('sub') ? categories : null}
-          </div>
+          <Features />
         </Box>
 
         <Box>
-          <Features />
+          <BigHeadline big={'Våre tjenester'}/>
+          <div className="row">
+            {catBig}
+            {catSmall}
+          </div>
         </Box>
       </div>
     )
@@ -81,4 +89,4 @@ Welcome.propTypes = {
 export default connect(state => ({
   categories: state.products,
   images: state.images
-}))(Welcome)
+}))(Radium(Welcome))

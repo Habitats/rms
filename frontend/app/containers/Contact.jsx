@@ -11,8 +11,9 @@ export default class Contact extends Component {
     let height = 450
     let style = {
       contact: {
-        maxWidth: 230,
-        margin: '0 auto'
+        maxWidth: 430,
+        margin: '0 auto',
+        paddingBottom: 40
       },
       map: {
         '@media only screen and (max-width: 767px)': {
@@ -64,36 +65,40 @@ export default class Contact extends Component {
           <BigHeadline big="Hvem er vi?"/>
           <div className="row">
             <div className="col-sm-6 col-xs-12">
-              <Person mail="morten@romerike-markise.no"
-                      name="Morten Skjennum"
-                      phone="+47 90 73 19 07"
-                      photo="/image/p_morten.jpg"
-                      title="Daglig leder og prosjektansvarlig"/>
-              <Person mail="bjarne@romerike-markise.no"
-                      name="Bjarne Skjennum"
-                      phone="+47 90 99 57 56"
-                      photo="/image/p_bjarne.jpg"
-                      title="Montør"/>
-              <Person mail="mail@annegrethe.no"
-                      name="Anne Grethe L. Skjennum"
-                      photo="/image/p_anne.jpg"
-                      title="Kontormedarbeider"/>
+              <div className="row">
+                <Person mail="morten@romerike-markise.no"
+                        name="Morten Skjennum"
+                        phone="+47 90 73 19 07"
+                        photo="/image/p_morten.jpg"
+                        title="Daglig leder og prosjektansvarlig"/>
+                <Person mail="bjarne@romerike-markise.no"
+                        name="Bjarne Skjennum"
+                        phone="+47 90 99 57 56"
+                        photo="/image/p_bjarne.jpg"
+                        title="Montør"/>
+                <Person mail="mail@annegrethe.no"
+                        name="Anne Grethe L. Skjennum"
+                        photo="/image/p_anne.jpg"
+                        title="Kontormedarbeider"/>
+              </div>
             </div>
             <div className="col-sm-6 col-xs-12">
-              <Person mail="roar@romerike-markise.no"
-                      name="Roar Skjennum"
-                      phone="+47 90 73 18 80"
-                      photo="/image/p_roar.jpg"
-                      title="Salgskonsulent, privat"/>
-              <Person mail="zenit-prosjekt@live.no"
-                      name="Knut M. Sørensen"
-                      phone="+47 47 39 24 36"
-                      photo="/image/p_knut.jpg"
-                      title="Montør"/>
-              <Person mail="mail@habitats.no"
-                      name="Patrick Skjennum"
-                      photo="/image/p_patrick.jpg"
-                      title="IT-ansvarlig"/>
+              <div className="row">
+                <Person mail="roar@romerike-markise.no"
+                        name="Roar Skjennum"
+                        phone="+47 90 73 18 80"
+                        photo="/image/p_roar.jpg"
+                        title="Salgskonsulent, privat"/>
+                <Person mail="zenit-prosjekt@live.no"
+                        name="Knut M. Sørensen"
+                        phone="+47 47 39 24 36"
+                        photo="/image/p_knut.jpg"
+                        title="Montør"/>
+                <Person mail="mail@habitats.no"
+                        name="Patrick Skjennum"
+                        photo="/image/p_patrick.jpg"
+                        title="IT-ansvarlig"/>
+              </div>
             </div>
           </div>
         </Box>
@@ -101,7 +106,11 @@ export default class Contact extends Component {
         <Box>
           <div style={{paddingBottom:70}}>
             <BigHeadline big="Spørsmål?"/>
-            <ContactForm />
+            <div className="col-xs-12">
+            <div style={style.contact}>
+                <ContactForm />
+              </div>
+            </div>
           </div>
         </Box>
       </div>

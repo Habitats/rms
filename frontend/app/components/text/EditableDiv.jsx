@@ -71,11 +71,12 @@ export default class EditableDiv extends Component {
              </button>
              <ul className="dropdown-menu" role="menu">
                <li><a href="javascript:;" onClick={this.execCommand.bind(this, 'formatBlock', 'P')}>Paragraf</a></li>
+               <li><a href="javascript:;" onClick={this.execCommand.bind(this, 'formatBlock', 'H5')}><h3>Stor</h3></a></li>
+               <li><a href="javascript:;" onClick={this.execCommand.bind(this, 'formatBlock', 'H3')}><h3>Større</h3></a></li>
+               <li><a href="javascript:;" onClick={this.execCommand.bind(this, 'formatBlock', 'H2')}><h2>Størst</h2></a></li>
                <li><a href="javascript:;" onClick={this.execCommand.bind(this, 'formatBlock', 'BLOCKQUOTE')}>
                  <blockquote>Sitat</blockquote>
                </a></li>
-               <li><a href="javascript:;" onClick={this.execCommand.bind(this, 'formatBlock', 'H2')}><h2>Overskrift</h2></a></li>
-               <li><a href="javascript:;" onClick={this.execCommand.bind(this, 'formatBlock', 'H3')}><h3>Underoverskrift</h3></a></li>
              </ul>
            </div> : null}
 

@@ -1,5 +1,5 @@
 @media only screen and (max-width: 767px) {
-  p{
+  p, div {
     font-size: 1em
   }
 
@@ -29,6 +29,10 @@
 
 // SM
 @media only screen and (min-width: 768px) {
+  p, div {
+    font-size: 1em
+  }
+
   h1 {
     font-size: 5.0em;
   }
@@ -54,6 +58,10 @@
 
 // MD
 @media only screen and (min-width: 992px) {
+  p, div {
+    font-size: 1em
+  }
+
   // big
   h1 {
     font-size: 6.0em;
@@ -91,17 +99,21 @@ h1, h2 {
 
 h3 {
   font-family: 'Roboto';
-  font-weight: 400;
+  font-weight: 800;
 }
 
 h4, h5 {
   font-family: 'Roboto';
+  line-height: 22px;
   font-weight: 400;
 }
 
 .wysiwyg {
-  h1, h2, h3, h4, h5, h6 {
+  h1, h2 {
     text-align: center;
+  }
+  h3, h4, h5, h6 {
+    text-align: left;
   }
   p, div {
     text-align: justify;
@@ -142,12 +154,26 @@ i {
   min-width: 16px;
 }
 
+ul {
+  padding-left: 15px;
+}
+
 .fa-empty {
   margin-right: 21px;
 }
 
 .fa-ul {
   margin-left: 0;
+}
+
+.form-control {
+  height: auto;
+  margin-bottom: 10px;
+  font-size: 1em;
+}
+
+.form-group {
+  margin: 0;
 }
 
 .cover {

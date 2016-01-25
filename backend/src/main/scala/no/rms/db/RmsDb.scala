@@ -1,6 +1,5 @@
 package no.rms.db
 
-import java.io.File
 import java.time.LocalDateTime
 
 import no.rms.models.{Product, ProductWrapper, Project}
@@ -43,7 +42,7 @@ object RmsDb {
 
   def init(db: Database): Future[Boolean] = {
     val p = Promise[Boolean]()
-    val dbFile = new File("rms.mv.db")
+    val dbFile = Config.DB_FILE
     if (!dbFile.exists) {
       db.run(createSchemaAction).andThen {
         case _ =>

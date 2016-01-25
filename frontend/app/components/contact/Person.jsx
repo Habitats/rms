@@ -15,35 +15,56 @@ class Person extends Component {
         margin: '0 auto',
         '@media only screen and (max-width: 767px)': {
           height: 150,
-          paddingLeft: 0,
-          maxWidth: 400
+          maxWidth: 320
         },
         '@media only screen and (min-width: 768px)': {
           height: 170,
-          paddingLeft: 0
+          paddingLeft: 30,
+          maxWidth: 350,
         },
         '@media only screen and (min-width: 992px)': {
           height: 170,
-          paddingLeft: 60
+          paddingLeft: 50,
+          maxWidth: 410,
         }
       },
       photo: {
+        '@media only screen and (max-width: 767px)': {
+          height: 90,
+          width: 90
+        },
+        '@media only screen and (min-width: 768px)': {
+          height: 90,
+          width: 90
+        },
+        '@media only screen and (min-width: 992px)': {
+          height: 110,
+          width: 110,
+        },
         marginTop: 23,
-        height: 90
+        float: 'left',
+        marginRight: 15,
       },
       text: {
-        maxWidth: 270,
+        '@media only screen and (max-width: 767px)': {
+          maxWidth: 210,
+        },
+        '@media only screen and (min-width: 768px)': {
+          maxWidth: 210,
+        },
+        '@media only screen and (min-width: 992px)': {
+          maxWidth: 240,
+        },
+        float: 'left',
         margin: '0 auto'
       }
     }
     return (
       <div className="row" style={style.box}>
-        <div className="col-sm-3 col-xs-4">
-          <div className="row" style={style.photo}>
-            <Photo clickable={false} src={photo}/>
-          </div>
+        <div style={style.photo}>
+          <Photo clickable={false} src={photo}/>
         </div>
-        <div className="col-sm-9 col-xs-8" style={style.text}>
+        <div style={style.text}>
           <h3>{name}</h3>
           {title}
           {mail}

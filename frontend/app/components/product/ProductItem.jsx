@@ -10,23 +10,24 @@ class ProductItem extends Component {
     let {product :{title, src}, linkTo, height, className} = this.props
     let style = {
       box: {
+        paddingLeft: 0,
         '@media only screen and (max-width: 767px)': {
-          marginBottom: 10,
-          paddingLeft: 0,
+          marginBottom: 15,
           height: height * 0.8
         },
         '@media only screen and (min-width: 768px)': {
-          marginBottom: 25,
+          marginBottom: 15,
           height: height * 0.7
         },
         '@media only screen and (min-width: 992px)': {
-          marginBottom: 25,
+          marginBottom: 30,
+          paddingLeft: 15,
           height: height
         }
       }
     }
     return (
-      <div className={className} style={style.box}>
+      <div className={`product-item ${className}`} style={style.box}>
         <Photo linkTo={linkTo} src={src} size={'med'}>
           <HeadlineOverlay text={title}/>
         </Photo>

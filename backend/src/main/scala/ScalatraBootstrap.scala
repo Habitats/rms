@@ -9,10 +9,11 @@ import org.scalatra._
 import slick.driver.H2Driver.api._
 
 class ScalatraBootstrap extends LifeCycle {
-  val cpds = new ComboPooledDataSource
+  lazy val cpds = new ComboPooledDataSource
   Logger.info("Created c3po connection pool")
 
   override def init(context: ServletContext) {
+//    if (Config.DEBUG) Config.DB_FILE.delete
     val db = Database.forDataSource(cpds)
     RmsDb.init(db)
     context.mount(new SecretServlet(db), "/secret/*")

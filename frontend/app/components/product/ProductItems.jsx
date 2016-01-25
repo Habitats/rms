@@ -12,7 +12,15 @@ class ProductItems extends Component {
     let {products, parentRoute, className, height} = this.props
     let style = {
       '@media only screen and (max-width: 767px)': {
-        paddingLeft: V.MARGIN_XS
+        paddingLeft: V.MARGIN_XS,
+        paddingRigth: V.MARGIN_XS,
+      },
+      '@media only screen and (min-width: 768px)': {
+        paddingLeft: V.MARGIN_XS,
+        paddingRigth: V.MARGIN_XS,
+      },
+      '@media only screen and (min-width: 992px)': {
+        paddingLeft: 0,
       }
     }
     let rootCategories = products.map(c =>

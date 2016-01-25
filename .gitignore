@@ -1,3 +1,4 @@
+*.docx
 /npm-debug.log
 ### JetBrains template
 *.iml

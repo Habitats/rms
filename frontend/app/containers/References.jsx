@@ -6,7 +6,7 @@ import BigHeadline from './../components/text/BigHeadline.jsx'
 import Box from './../components/Box.jsx'
 import * as generalActionCreators from './../redux/actions/generalActions'
 
-export default class References extends Component {
+export default class ProjectsContainer extends Component {
 
   componentWillMount() {
     if (this.props.projects.length === 0) {
@@ -19,20 +19,20 @@ export default class References extends Component {
     let newButton = admin ?
                     <div className="form-group">
                       <Link to="/referanser/ny">
-                        <button className="btn btn-primary btn-block" type="submit">Legg til nytt prosjekt</button>
+                        <button className="btn btn-default btn-block" type="submit">Legg til nytt prosjekt</button>
                       </Link>
                     </div> : null
     return (
       <Box>
         <BigHeadline big="Referanser"/>
-        {newButton}
         <Projects projects={projects}/>
+        {newButton}
       </Box>
     )
   }
 }
 
-References.propTypes = {
+ProjectsContainer.propTypes = {
   dispatch: PropTypes.func.isRequired,
   projects: PropTypes.array.isRequired,
   session: PropTypes.object.isRequired
@@ -41,5 +41,5 @@ References.propTypes = {
 export default connect(state => ({
   session: state.session,
   projects: state.general.projects
-}))(References)
+}))(ProjectsContainer)
 

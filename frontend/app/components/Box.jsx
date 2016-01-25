@@ -8,6 +8,9 @@ class Box extends Component {
     let {children} = this.props
     let style = {
       background: '#fff',
+      float: 'left',
+      position: 'relative',
+      width: '100%',
       boxShadow: '0 0 35px 3px rgba(0, 0, 0, 0.16)',
       '@media only screen and (max-width: 767px)': {
         padding: V.MARGIN_XS,

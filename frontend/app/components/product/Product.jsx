@@ -10,6 +10,7 @@ import TextBox from './../text/TextBox.jsx'
 import Box from './../Box.jsx'
 import * as productActions from '../../redux/actions/productActions'
 import ProductItems from './ProductItems.jsx'
+import ContactForm from '../contact/ContactForm.jsx'
 
 export default class Product extends Component {
 
@@ -19,10 +20,19 @@ export default class Product extends Component {
     let style = {
       desc: {
         paddingBottom: 20,
-        textAlign: 'justify'
+        textAlign: 'justify',
+        maxWidth: 465,
+        margin: '0 auto'
       },
       gallery: {
         paddingBottom: 40,
+      },
+      contact: {
+        maxWidth: 465,
+        margin: '0 auto',
+        paddingBottom: 30,
+        paddingLeft: 15,
+        paddingRight: 15
       }
     }
 
@@ -42,6 +52,18 @@ export default class Product extends Component {
       </div>
     ) : null
 
+    let contact = sub.length === 0 ? (
+      <Box>
+        <MediumHeadline big={'Interessert?'}/>
+        <div className="col-xs-12">
+          <div className="row">
+            <div style={style.contact}>
+              <ContactForm subject={title}/>
+            </div>
+          </div>
+        </div>
+      </Box>
+    ) : null
     return (
       <div>
         {images.length > 0 ?
@@ -62,6 +84,7 @@ export default class Product extends Component {
            {desc}
            {subCategories}
          </Box>}
+        {contact}
       </div>
     )
   }

@@ -20,6 +20,8 @@ object Config {
 
   val COOKIE_ID = "YOLO"
   val ONE_WEEK = 7 * 24 * 3600
+  val DEBUG = true
+  val DB_FILE = new File("rms.mv.db")
 
   def parse(date: String): LocalDateTime = LocalDateTime.parse(date)
   def format(date: LocalDateTime): String = date.format(df)

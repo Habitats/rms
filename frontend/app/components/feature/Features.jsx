@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import FeatureItem from './FeatureItem.jsx'
 import BigHeadline from '../text/BigHeadline.jsx'
+import Link from '../Link.jsx'
 
 export default class Features extends Component {
 
@@ -21,9 +22,9 @@ export default class Features extends Component {
     return (
       <div>
         <div className="row">
-          <h1 style={style.heading}>Hva gjør vi?</h1>
+          <h2 style={style.heading}>Profesjonell solskjerming</h2>
           <div className="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2" style={style.text}>
-            <h5>Romerike Markiseservice er en totalleverandør av profesjonelle solskjermingsløsninger over hele Østlandet.</h5>
+            <h5>Romerike Markiseservice er totalleverandør av profesjonelle solskjermingsløsninger over hele Østlandet.</h5>
           </div>
         </div>
         <div className="row" style={style.features}>

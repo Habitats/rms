@@ -1,3 +1,4 @@
+/rms.lock.db
 /src/main/webapp/_
 /img/thumbs_med
 /img/thumbs_low
@@ -10,7 +11,6 @@
 /src/main/webapp/css
 /src/main/webapp/index.html
 /project/target
-/rms.mv.db
 /.idea
 /backend.iml
 /secret
