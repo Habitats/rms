@@ -13,7 +13,7 @@ case class Product(id: String, title: String, description: String, sub: Seq[Prod
 
     val images = ImageUtils.fetchUrls(nestedCategory)
     val coverSrc = images.find(_.title.toLowerCase == "main.jpg").orElse(images.headOption).map(_.src).getOrElse(src)
-    val c = copy(category = category, sub = newSub, images = images, src = coverSrc, index = index.incrementAndGet)
+    val c = copy(category = category.split("/").last, sub = newSub, images = images, src = coverSrc, index = index.incrementAndGet)
     c
   }
 
@@ -47,14 +47,20 @@ object ProductWrapper {
     }
   }
 
+//  def extract(pw: ProductWrapper, products: Seq[ProductWrapper]): Product = {
+//    val subs = pw.sub.split(RmsDb.delim)
+//    val sub = products
+//      .filter(p => subs.contains(p.id))
+//      .map(p => extract(p, products))
+//      .sortBy(_.index)
+//    val images = if (pw.images.length > 0) pw.images.split(RmsDb.delim).map(i => ImageWrapper.fromString(i)).toList else Nil
+//    Product(id = pw.id, title = pw.title, description = pw.description, sub = sub, images = images, category = pw.category, src = pw.src, index= pw.index)
+//  }
+
   def extract(pw: ProductWrapper, products: Seq[ProductWrapper]): Product = {
-    val subs = pw.sub.split(RmsDb.delim)
-    val sub = products
-      .filter(p => subs.contains(p.id))
-      .map(p => extract(p, products))
-      .sortBy(_.index)
+    val subWrap = products.filter(_.category.split("/").last == pw.id).map(p => extract(p, products.filter(_.id != pw.id)))
     val images = if (pw.images.length > 0) pw.images.split(RmsDb.delim).map(i => ImageWrapper.fromString(i)).toList else Nil
-    Product(id = pw.id, title = pw.title, description = pw.description, sub = sub, images = images, category = pw.category, src = pw.src, index= pw.index)
+    Product(id = pw.id, title = pw.title, description = pw.description, sub = subWrap, images = images, category = pw.category, src = pw.src, index= pw.index)
   }
 
   def wrap(p: Product): ProductWrapper = {

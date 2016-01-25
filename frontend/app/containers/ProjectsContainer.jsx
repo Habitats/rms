@@ -1,41 +1,45 @@
 import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
+import Link from './../components/Link.jsx'
+import Projects from './../components/projects/Projects.jsx'
 import BigHeadline from './../components/text/BigHeadline.jsx'
-import PhotoBig from './../components/photo/PhotoBig.jsx'
-import PhotoLine from './../components/photo/PhotoLine.jsx'
-import Project from './../components/projects/Project.jsx'
-import * as generalActionCreators from '../redux/actions/generalActions'
-import NotFound from './NotFound.jsx'
+import Box from './../components/Box.jsx'
+import * as generalActionCreators from './../redux/actions/generalActions'
 
-class ProjectContainer extends Component {
+export default class ProjectsContainer extends Component {
 
   componentWillMount() {
-    this.props.dispatch(generalActionCreators.fetchProject(this.props.params.id))
+    if (this.props.projects.length === 0) {
+      this.props.dispatch(generalActionCreators.fetchProjects())
+    }
   }
 
   render() {
-    let {project, params} = this.props
-    let selected = parseInt(params.selected)
-    if (!project) {
-      return <NotFound />
-    } else if (project.fetching) {
-      // not ready yet
-      return null
-    } else {
-      return <Project project={project} selected={selected || 0}/>
-    }
+    let {session: {admin}, projects} = this.props
+    let newButton = admin ?
+                    <div className="form-group">
+                      <Link to="/referanser/ny">
+                        <button className="btn btn-default btn-block" type="submit">Legg til nytt prosjekt</button>
+                      </Link>
+                    </div> : null
+    return (
+      <Box>
+        <BigHeadline big="Referanser"/>
+        <Projects projects={projects}/>
+        {newButton}
+      </Box>
+    )
   }
 }
 
-ProjectContainer.propTypes = {
-  project: PropTypes.object,
+ProjectsContainer.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  params: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    selected: PropTypes.string
-  })
+  projects: PropTypes.array.isRequired,
+  session: PropTypes.object.isRequired
 }
 
 export default connect(state => ({
-  project: state.general.project
-}))(ProjectContainer)
+  session: state.session,
+  projects: state.general.projects
+}))(ProjectsContainer)
+

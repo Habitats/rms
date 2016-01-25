@@ -28,6 +28,10 @@ export function removeProject(project) {
   return remove(project, 'secret/project')
 }
 
+export function removeProduct(product) {
+  return remove(product, 'secret/product')
+}
+
 export function saveProduct(product) {
   return post(product, 'secret/product')
 }

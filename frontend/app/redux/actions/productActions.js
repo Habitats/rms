@@ -22,6 +22,16 @@ export function save(data) {
   }
 }
 
+export function removeProduct(id) {
+  return (dispatch) => {
+    dispatch({type: C.DELETE_PRODUCT_INIT})
+    return GeneralApi.removeProduct(id).then(
+      products => dispatch({type: C.DELETE_PRODUCT_SUCCESS, products}),
+      error => dispatch({type: C.DELETE_PRODUCT_FAIL})
+    )
+  }
+}
+
 export function selectProduct(category, product) {
   return (dispatch) => {
     dispatch(routeActions.push(`${category.id}/${product.id}`))

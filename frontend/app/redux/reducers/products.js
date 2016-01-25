@@ -15,6 +15,9 @@ export default function product(state = {}, action) {
     case C.RECEIVE_PRODUCTS:
       return action.products
 
+    case C.DELETE_PRODUCT_SUCCESS:
+      return action.products
+
     case C.SAVE_PRODUCT_SUCCESS:
       return action.products
 

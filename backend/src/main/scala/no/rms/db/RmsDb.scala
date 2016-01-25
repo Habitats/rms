@@ -86,8 +86,13 @@ object RmsDb {
     }
   }
 
-  def remove(id: String, db: Database): Future[Boolean] = {
+  def removeProject(id: String, db: Database): Future[Boolean] = {
     val data = projects.filter(_.id === id).delete
+    db.run(data).transform(s => true, f => f)
+  }
+
+  def removeProduct(id: String, db: Database): Future[Boolean] = {
+    val data = products.filter(_.id === id).delete
     db.run(data).transform(s => true, f => f)
   }
 

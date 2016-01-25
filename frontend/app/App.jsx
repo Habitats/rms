@@ -9,12 +9,13 @@ import NotFound from './containers/NotFound.jsx'
 import Welcome from './containers/Welcome.jsx'
 import Contact from './containers/Contact.jsx'
 import About from './containers/About.jsx'
-import References from './containers/References.jsx'
-import ProjectContainer from './containers/ProjectsContainer.jsx'
-import Products from './containers/ProductsContainer.jsx'
+import References from './containers/ProjectsContainer.jsx'
+import ProjectContainer from './containers/ProjectContainer.jsx'
+import ProductsContainer from './containers/ProductsContainer.jsx'
 import ProductContainer from './containers/ProductContainer.jsx'
 import CategoryContainer from './containers/CategoryContainer.jsx'
 import ProjectAdd from './containers/ProjectAdd.jsx'
+import ProductAdd from './components/product/ProductAdd.jsx'
 import Login from './containers/Login.jsx'
 import ProjectListItem from './components/projects/ProjectListItem.jsx'
 import ReferencesList from './components/text/ReferencesList.jsx'
@@ -44,11 +45,13 @@ export default class App extends Component {
             <Route component={ProjectAdd} onEnter={this.requireLogin.bind(this)} path="referanser/ny"/>
             <Route component={ProjectAdd} onEnter={this.requireLogin.bind(this)} path="referanser/endre/:id"/>
             <Route component={ProjectContainer} path="referanser/:id"/>
-            <Route component={Products} path="produkter">
-              <Route component={ProductContainer} path=":categoryId/:productId/:subId/:subSubId"/>
-              <Route component={ProductContainer} path=":categoryId/:productId/:subId"/>
-              <Route component={ProductContainer} path=":categoryId/:productId"/>
+            <Route component={ProductAdd} path="produkter/ny"/>
+            <Route component={ProductAdd} path="produkter/endre/:productId"/>
+            <Route component={ProductsContainer} path="produkter">
               <Route component={CategoryContainer} path=":categoryId"/>
+              <Route component={ProductContainer} path=":categoryId/:productId"/>
+              <Route component={ProductContainer} path=":categoryId/:productId/:subId"/>
+              <Route component={ProductContainer} path=":categoryId/:productId/:subId/:subSubId"/>
             </Route>
             <Route component={About} path="om"/>
             <Route component={Contact} path="kontakt"/>

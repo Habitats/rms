@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react'
+import Link from '../Link.jsx'
 import MiniGallery from './../photo/MiniGallery.jsx'
 import {connect} from 'react-redux'
 import LoremIpsum from './../LoremIpsum.jsx'
@@ -19,7 +20,7 @@ export default class Product extends Component {
     let {title, description, images, sub, id} = product
     let style = {
       desc: {
-        paddingBottom: 20,
+        paddingBottom: 50,
         textAlign: 'justify',
         maxWidth: 465,
         margin: '0 auto'
@@ -51,6 +52,7 @@ export default class Product extends Component {
         <ProductItems products={product.sub} parentRoute={`${linkTo}`}/>
       </div>
     ) : null
+
 
     let contact = sub.length === 0 ? (
       <Box>
@@ -110,3 +112,4 @@ Product.propTypes = {
 export default connect(state => ({
   session: state.session
 }))(Product)
+
