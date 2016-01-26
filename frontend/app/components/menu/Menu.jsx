@@ -15,34 +15,29 @@ class Menu extends Component {
     this.handleSearch = (e) => this.setState({filter: e.target.value.toLowerCase()})
   }
 
-  //componentDidMount() {
-  //  this.footerHeight = document.getElementById('footer').clientHeight
-  //  this.menuHeight = ReactDOM.findDOMNode(this).clientHeight
-  //}
-  //
-  //componentWillMount() {
-  //  window.addEventListener('scroll', this.handleScroll.bind(this))
-  //  this.mounted = true
-  //}
-  //
-  //componentWillUnmount() {
-  //  this.mounted = false
-  //  window.removeEventListener('scroll', this.handleScroll.bind(this))
-  //}
+  matches(categories, filter) {
+    let flat = (p) => p.sub.length === 0 ? [p] : [p].concat(p.sub.flatMap(s => flat(s)))
+    let all = flat(categories)
+    let matching = all.filter(p => p.title.toLowerCase().includes(filter.toLowerCase()))
 
-  handleScroll(event) {
-    if (!event || !this.mounted) {
-      return
+    let pushParent = (matching) => {
+      let newMatches = new Set()
+      for (let m of matching) {
+        let parent = all.find(c => c.id === m.category)
+        if (parent) {
+          newMatches.add(parent)
+        }
+      }
+      matching = new Set(matching)
+      let allMatches = new Set([... newMatches, ...matching])
+      //allMatches.forEach(c => console.log(c.title))
+      if (allMatches.size > matching.size) {
+        return pushParent(allMatches)
+      } else {
+        return allMatches
+      }
     }
-    let scrollTop = event.srcElement.body.scrollTop
-    let scrollHeight = event.srcElement.body.scrollHeight
-    let scrollBottom = scrollHeight - scrollTop - window.innerHeight
-    let margin = this.menuHeight - (this.footerHeight)
-    let threshold = window.innerHeight - margin + scrollBottom - 131
-    let transform = threshold <= margin ? threshold - margin : 0
-    if (transform !== 0) {
-      this.setState({transform: transform})
-    }
+    return new Set([... pushParent(matching)].map(c => c.id))
   }
 
   render() {
@@ -55,11 +50,12 @@ class Menu extends Component {
       menuContent: {marginRight: -V.MARGIN_SM, marginLeft: -V.MARGIN_SM + 5},
       input: {marginRight: -9, marginLeft: -9}
     }
-    let cats = categories.sub
-      //.filter(p => filter.length === 0 || p.title.toLowerCase().includes(filter))
-      .map(c =>
-        <MenuItem key={c.id} linkTo={`${linkTo}/${c.id}`} product={c} active={active} isRoot={true} style={style} filter={filter}/>
-      )
+    let allMatches = this.matches(categories, filter)
+
+    let cats = categories.sub.map(c =>
+      <MenuItem key={c.id} linkTo={`${linkTo}/${c.id}`} matching={allMatches} product={c} active={active} isRoot={true} style={style}
+                filter={filter}/>
+    )
     return (
       <div style={style.menu}>
         <Box className="rms-menu" shouldPad={false}>
