@@ -53,7 +53,7 @@ export default class Wysiwyg extends Component {
          <div>
            <div dangerouslySetInnerHTML={{__html: content}} className="col-xs-12" />
            <div className="col-xs-12">
-             <button style={{marginTop: 45}} className="btn btn-default btn-block" onClick={this.toggle.bind(this, true)} type="submit">Endre
+             <button style={{marginTop: 45}} className="btn btn-default btn-block" onClick={this.toggle.bind(this, true)} type="submit">Endre beskrivelse
              </button>
            </div>
          </div>}

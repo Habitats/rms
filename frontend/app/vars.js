@@ -5,3 +5,7 @@ export const FOOTER_HEIGHT_SM = 250
 export const MARGIN_XS = 15
 export const MARGIN_SM = 30
 export const MENU_WIDTH = 180
+export const SM = 0.75
+export const XS = 0.55
+export const COVER_HEIGHT = 450
+export const CONTENT_MAX_WIDTH = 465

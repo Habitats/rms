@@ -5,6 +5,7 @@ import Photo from './Photo.jsx'
 import CoverPhoto from './CoverPhoto.jsx'
 import Radium from 'radium'
 import Draggable, {DraggableCore} from 'react-draggable'
+import {SM, XS} from '../../vars'
 
 class MiniGallery extends Component {
 
@@ -76,10 +77,10 @@ class MiniGallery extends Component {
       cover: {
         paddingRight: 15,
         '@media only screen and (max-width: 767px)': {
-          height: height * 0.60
+          height: height * XS
         },
         '@media only screen and (min-width: 768px)': {
-          height: height * 0.75
+          height: height * SM
         },
         '@media only screen and (min-width: 992px)': {
           height: height
@@ -103,10 +104,16 @@ class MiniGallery extends Component {
         paddingLeft: 0,
         paddingTop: 0,
         paddingRight: 15,
-        height: 80,
-        width: 103,
         float: 'none',
-        display: 'inline-block'
+        display: 'inline-block',
+        '@media only screen and (max-width: 767px)': {
+          height: 60,
+          width: 80,
+        },
+        '@media only screen and (min-width: 768px)': {
+          height: 90,
+          width: 103
+        },
       }
     }
 
@@ -163,7 +170,12 @@ class MiniGallery extends Component {
         paddingLeft: 15,
         paddingTop: 0,
         paddingRight: 0,
-        height: 90
+        '@media only screen and (max-width: 767px)': {
+          height: 60,
+        },
+        '@media only screen and (min-width: 768px)': {
+          height: 90,
+        },
       }
     }
 

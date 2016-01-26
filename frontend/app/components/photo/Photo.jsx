@@ -6,6 +6,7 @@ import HeadlineOverlay from './../text/HeadlineOverlay.jsx'
 import {routeActions} from 'redux-simple-router'
 import {connect} from 'react-redux'
 import Radium from 'radium'
+import {SM, XS} from '../../vars'
 
 class Photo extends Component {
 
@@ -38,10 +39,10 @@ class Photo extends Component {
 
     let heightStyles = this.isNumeric(height) ? {
       '@media only screen and (max-width: 767px)': {
-        height: height * 0.60
+        height: height * XS
       },
       '@media only screen and (min-width: 768px)': {
-        height: height * 0.75
+        height: height * SM
       },
       '@media only screen and (min-width: 992px)': {
         height: height

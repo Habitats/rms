@@ -10,6 +10,7 @@ import Box from './../Box.jsx'
 import SimpleLabel from './../text/SimpleLabel.jsx'
 import * as productActions from '../../redux/actions/productActions'
 import Select from 'react-select'
+import {CONTENT_MAX_WIDTH} from '../../vars'
 
 export default class ProductAdd extends Component {
 
@@ -90,7 +91,7 @@ export default class ProductAdd extends Component {
       box: {
         paddingBottom: 50,
         textAlign: 'justify',
-        maxWidth: 465,
+        maxWidth: CONTENT_MAX_WIDTH,
         margin: '0 auto'
       }
     }

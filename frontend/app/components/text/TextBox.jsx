@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import Radium from 'radium'
+import {CONTENT_MAX_WIDTH} from '../../vars'
 
 class TextBox extends Component {
 
@@ -12,7 +13,10 @@ class TextBox extends Component {
         maxWidth: 435
       },
       '@media only screen and (min-width: 768px)': {
-        maxWidth: 550
+        maxWidth: CONTENT_MAX_WIDTH
+      },
+      '@media only screen and (min-width: 992px)': {
+        maxWidth: CONTENT_MAX_WIDTH + 50
       },
       margin: '0 auto'
     }

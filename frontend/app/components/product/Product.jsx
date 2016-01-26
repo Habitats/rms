@@ -12,6 +12,7 @@ import Box from './../Box.jsx'
 import * as productActions from '../../redux/actions/productActions'
 import ProductItems from './ProductItems.jsx'
 import ContactForm from '../contact/ContactForm.jsx'
+import {CONTENT_MAX_WIDTH} from '../../vars'
 
 export default class Product extends Component {
 
@@ -22,14 +23,14 @@ export default class Product extends Component {
       desc: {
         paddingBottom: 50,
         textAlign: 'justify',
-        maxWidth: 465,
+        maxWidth: CONTENT_MAX_WIDTH,
         margin: '0 auto'
       },
       gallery: {
-        paddingBottom: 40,
+        paddingBottom: 30,
       },
       contact: {
-        maxWidth: 465,
+        maxWidth: CONTENT_MAX_WIDTH,
         margin: '0 auto',
         paddingBottom: 30,
         paddingLeft: 15,
@@ -38,7 +39,7 @@ export default class Product extends Component {
     }
 
     let headline = <MediumHeadline big={title} small={category} to={linkTo.split('/').reverse().splice(1).reverse().join('/')}/>
-    let gal = <div style={style.gallery}><MiniGallery images={images} orientation={'vertical'} height={400} style={style.gallery}/></div>
+    let gal = <div style={style.gallery}><MiniGallery images={images} orientation={'vertical'} height={350} style={style.gallery}/></div>
     let desc = (
       <div style={style.desc}>
         {admin ?

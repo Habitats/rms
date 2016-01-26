@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react'
 import Photo from './Photo.jsx'
 import Slider from 'react-slick'
 import Radium from 'radium'
+import {SM, XS, COVER_HEIGHT} from '../../vars'
 
 class Carousel extends Component {
 
@@ -9,14 +10,14 @@ class Carousel extends Component {
   render() {
     let {images} = this.props
 
-    let height = 450
+    let height = COVER_HEIGHT
     let style ={
       carousel: {
         '@media only screen and (max-width: 767px)': {
-          height: height * 0.60
+          height: height * XS
         },
         '@media only screen and (min-width: 768px)': {
-          height: height * 0.75
+          height: height * SM
         },
         '@media only screen and (min-width: 992px)': {
           height: height

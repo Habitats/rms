@@ -4,23 +4,49 @@ import BigHeadline from './../components/text/BigHeadline.jsx'
 import MapWrapper from './../components/map/MapWrapper.jsx'
 import Box from './../components/Box.jsx'
 import Person from './../components/contact/Person.jsx'
+import {SM, XS, COVER_HEIGHT, CONTENT_MAX_WIDTH} from '../vars'
 
 export default class Contact extends Component {
 
   render() {
-    let height = 450
+    let height = COVER_HEIGHT
     let style = {
       contact: {
-        maxWidth: 430,
+        maxWidth: 180,
         margin: '0 auto',
-        paddingBottom: 40
+      },
+      contactWrapper: {
+        '@media only screen and (max-width: 767px)': {
+          paddingBottom: 20
+        },
+        '@media only screen and (min-width: 768px)': {
+          paddingLeft: 40,
+          paddingBottom: 40,
+        },
+        '@media only screen and (min-width: 992px)': {
+          paddingLeft: 40,
+          paddingBottom: 50,
+        },
+      },
+      form: {
+        maxWidth: CONTENT_MAX_WIDTH,
+        margin: '0 auto',
+        '@media only screen and (max-width: 767px)': {
+          paddingBottom: 20
+        },
+        '@media only screen and (min-width: 768px)': {
+          paddingBottom: 40,
+        },
+        '@media only screen and (min-width: 992px)': {
+          paddingBottom: 50,
+        },
       },
       map: {
         '@media only screen and (max-width: 767px)': {
-          height: height * 0.60
+          height: height * XS
         },
         '@media only screen and (min-width: 768px)': {
-          height: height * 0.75
+          height: height * SM
         },
         '@media only screen and (min-width: 992px)': {
           height: height
@@ -32,29 +58,31 @@ export default class Contact extends Component {
 
     return (
       <div>
-        <Box >
-          <div style={{paddingBottom:70}}>
+        <Box>
+          <div>
             <MapWrapper style={style.map}/>
             <BigHeadline big="Hvor er vi?"/>
-            <div className="row">
-              <div className="col-md-4 col-md-offset-2  col-sm-7 col-xs-6 col-xs-offset-0">
-                <div style={style.contact}>
-                  <h3>Adresse</h3>
-                  <p>Romerike Markiseservice AS<br />
-                    Nannestadvegen 510<br />
-                    2032 MAURA
-                  </p>
-                  <p style={{paddingTop: 4}}><i className="fa fa-phone"/>+47 63 99 95 32 <br/>
-                    <i className="fa fa-envelope"/><a href="mailto:post@romerike-markise.no">post@romerike-markise.no</a></p>
+            <div className="col-sm-10 col-sm-offset-1" style={style.contactWrapper}>
+              <div className="row">
+                <div className="col-sm-6">
+                  <div style={style.contact}>
+                    <h3>Adresse</h3>
+                    <p>Romerike Markiseservice AS<br />
+                      Nannestadvegen 510<br />
+                      2032 MAURA
+                    </p>
+                    <p style={{paddingTop: 4}}><i className="fa fa-phone"/>+47 63 99 95 32 <br/>
+                      <i className="fa fa-envelope"/><a href="mailto:post@romerike-markise.no">post@romerike-markise.no</a></p>
+                  </div>
                 </div>
-              </div>
-              <div className="col-md-3 col-md-offset-1 col-sm-5 col-xs-6 col-xs-offset-0">
-                <div style={style.contact}>
-                  <h3>Kontortid</h3>
-                  <p>Mandag-fredag: 0900-1600</p>
-                  <h3>Telefonbetjening</h3>
-                  <p>Mandag-fredag: 0800-2000<br />
-                    Lørdag: 1000-1400</p>
+                <div className="col-sm-6">
+                  <div style={style.contact}>
+                    <h3>Kontortid</h3>
+                    <p>Mandag-fredag: 0900-1600</p>
+                    <h3>Telefonbetjening</h3>
+                    <p>Mandag-fredag: 0800-2000<br />
+                      Lørdag: 1000-1400</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -104,12 +132,10 @@ export default class Contact extends Component {
         </Box>
 
         <Box>
-          <div style={{paddingBottom:70}}>
-            <BigHeadline big="Spørsmål?"/>
-            <div className="col-xs-12">
-            <div style={style.contact}>
-                <ContactForm />
-              </div>
+          <BigHeadline big="Spørsmål?"/>
+          <div className="col-xs-12">
+            <div style={style.form}>
+              <ContactForm />
             </div>
           </div>
         </Box>

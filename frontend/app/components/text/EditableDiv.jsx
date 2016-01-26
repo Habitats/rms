@@ -56,13 +56,13 @@ export default class EditableDiv extends Component {
       paddingTop: 13,
       overflow: 'auto',
       boxShadow: 'inset -1px 1px 17px 0px rgba(0,0,0,0.14)',
-      padding: '40px 15px',
+      padding: '30px 15px',
       height: 'auto'
     }
 
     return (
       <div>
-        <div style={{marginTop: -35}}>
+        <div>
           {headings ?
            <div className="btn-group" style={buttonSpacing}>
              <button className="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded={true}>
@@ -71,7 +71,7 @@ export default class EditableDiv extends Component {
              </button>
              <ul className="dropdown-menu" role="menu">
                <li><a href="javascript:;" onClick={this.execCommand.bind(this, 'formatBlock', 'P')}>Paragraf</a></li>
-               <li><a href="javascript:;" onClick={this.execCommand.bind(this, 'formatBlock', 'H5')}><h3>Stor</h3></a></li>
+               <li><a href="javascript:;" onClick={this.execCommand.bind(this, 'formatBlock', 'H5')}><h5>Stor</h5></a></li>
                <li><a href="javascript:;" onClick={this.execCommand.bind(this, 'formatBlock', 'H3')}><h3>Større</h3></a></li>
                <li><a href="javascript:;" onClick={this.execCommand.bind(this, 'formatBlock', 'H2')}><h2>Størst</h2></a></li>
                <li><a href="javascript:;" onClick={this.execCommand.bind(this, 'formatBlock', 'BLOCKQUOTE')}>
