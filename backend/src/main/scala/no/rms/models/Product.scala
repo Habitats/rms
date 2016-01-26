@@ -21,6 +21,7 @@ case class Product(id: String, title: String, description: String, sub: Seq[Prod
     f"\n$title > $description > $category > ${sub.mkString(", ")}"
   }
 
+  val sortKey = if(sub.nonEmpty) index - 1000 else index
 }
 
 object Product {
@@ -57,8 +58,12 @@ object ProductWrapper {
 //    Product(id = pw.id, title = pw.title, description = pw.description, sub = sub, images = images, category = pw.category, src = pw.src, index= pw.index)
 //  }
 
+
   def extract(pw: ProductWrapper, products: Seq[ProductWrapper]): Product = {
-    val subWrap = products.filter(_.category.split("/").last == pw.id).map(p => extract(p, products.filter(_.id != pw.id)))
+    val subWrap = products
+      .filter(_.category.split("/").last == pw.id)
+      .map(p => extract(p, products.filter(_.id != pw.id)))
+      .sortBy(p => p.sortKey)
     val images = if (pw.images.length > 0) pw.images.split(RmsDb.delim).map(i => ImageWrapper.fromString(i)).toList else Nil
     Product(id = pw.id, title = pw.title, description = pw.description, sub = subWrap, images = images, category = pw.category, src = pw.src, index= pw.index)
   }

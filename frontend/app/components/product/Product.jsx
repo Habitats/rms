@@ -3,6 +3,7 @@ import Link from '../Link.jsx'
 import MiniGallery from './../photo/MiniGallery.jsx'
 import {connect} from 'react-redux'
 import LoremIpsum from './../LoremIpsum.jsx'
+import {routeActions} from 'redux-simple-router'
 import HeadlineOverlay from './../text/HeadlineOverlay.jsx'
 import BigHeadline from './../text/BigHeadline.jsx'
 import MediumHeadline from './../text/MediumHeadline.jsx'
@@ -46,6 +47,9 @@ export default class Product extends Component {
          <Wysiwyg content={description} onSave={(p) => dispatch(productActions.save({... product, description: p}))}/>
           :
          <div dangerouslySetInnerHTML={{__html: description}}/>}
+        {admin ? <button style={{marginTop: 5}} className="btn btn-default btn-block" type="submit"
+                         onClick={() => dispatch(routeActions.push(`produkter/endre/${id}`))}>
+          Admin </button> : null}
       </div>
     )
     let subCategories = sub && sub.length > 0 ? (

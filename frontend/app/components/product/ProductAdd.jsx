@@ -39,7 +39,7 @@ export default class ProductAdd extends Component {
         this.props.dispatch(productActions.save(product))
         this.props.dispatch(routeActions.push('/produkter'))
       } else {
-        this.setState({error: 'Fyll ut alle felt og velg noen bilder!'})
+        this.setState({error: 'Velg tittel og kategori!'})
       }
     }
     this.onRemove = () => {
@@ -76,7 +76,7 @@ export default class ProductAdd extends Component {
 
   isValid() {
     let uniqueId = this.state.edit || !this.flatten(this.props.products).map(p => p.id).includes(this.state.id)
-    return uniqueId && this.state.title.length > 0 && this.state.description.length > 0
+    return uniqueId && this.state.title.length > 0
   }
 
   render() {
