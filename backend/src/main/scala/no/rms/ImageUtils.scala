@@ -18,18 +18,14 @@ object ImageUtils {
   def notFound(): File = Random.shuffle(Paths.get(rootDir, "not_found").toFile.listFiles.toList).head
 
   def rename(f: File): File = {
-    if (f.getName.contains(" ")) {
-      val renamed = Paths.get(f.getParent, f.getName.toLowerCase.replaceAll(" ", "_")).toFile
+    val renamed = Paths.get(f.getParent, f.getName.toLowerCase.replaceAll("\\s+|,|[øæå]", "_")).toFile
+    if (renamed.getName != f.getName) {
       if (!renamed.exists) {
         Files.move(f.toPath, renamed.toPath)
-      } else{
-        Files.delete(f.toPath)
       }
       Logger.info("Renaming: " + f.getName + " > " + renamed.getName)
       renamed
-    } else {
-      f
-    }
+    } else f
   }
 
   def fetchUrls(path: String = ""): Seq[ImageWrapper] = {

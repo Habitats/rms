@@ -33,11 +33,11 @@ export default class ProductAdd extends Component {
           title: this.state.title,
           category: this.state.category,
           description: this.state.description,
-          src: 'main.jpg',
+          src: this.state.src || 'main.jpg',
           index: props.products.sub.flatMap(c => c.sub).length + 1
         }
         this.props.dispatch(productActions.save(product))
-        this.props.dispatch(routeActions.push('/produkter'))
+        this.props.dispatch(routeActions.goBack())
       } else {
         this.setState({error: 'Velg tittel og kategori!'})
       }
@@ -130,6 +130,7 @@ export default class ProductAdd extends Component {
             </div>
           </div>
         </div>
+        <pre style={{maxWidth:700, margin: '0 auto'}}> {JSON.stringify(this.state, undefined, 1)}} </pre>
       </Box>
     )
   }
