@@ -22,8 +22,8 @@ object ImageUtils {
     if (renamed.getName != f.getName) {
       if (!renamed.exists) {
         Files.move(f.toPath, renamed.toPath)
+        Logger.info("Renaming: " + f.getName + " > " + renamed.getName)
       }
-      Logger.info("Renaming: " + f.getName + " > " + renamed.getName)
       renamed
     } else f
   }

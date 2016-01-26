@@ -21,7 +21,12 @@ object Config {
   val COOKIE_ID = "YOLO"
   val ONE_WEEK = 7 * 24 * 3600
   val DEBUG = true
-  val DB_FILE = new File("rms.mv.db")
+  val DB_FILE = {
+    val home = System.getProperty("user.home")
+    val f = new File(home + "/" + "rms/rms.mv.db")
+    Logger.info("------ DATABASE: " + f.getAbsolutePath)
+    f
+  }
 
   def parse(date: String): LocalDateTime = LocalDateTime.parse(date)
   def format(date: LocalDateTime): String = date.format(df)
