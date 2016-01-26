@@ -10,19 +10,29 @@ class MenuItem extends Component {
     this.state = {
       hover: false,
       expanded: this.shouldExpand(props.product, props.active),
-      common: this.longestCommonSubstring(props.product.title.toLowerCase(), props.filter.toLowerCase())
+      common: this.longestCommonSubstring(props.product.title.toLowerCase(), props.filter.toLowerCase()),
+      //matchingChild: false,
     }
+    this.didMatch = false
     this.onExpand = () => {
       if (!props.isRoot) {
         this.setState({expanded: !this.state.expanded})
       }
     }
-  }
 
-  expandParent() {
-    console.log(this.props.product.id + ' matching child')
-    this.props.expandParent()
-    this.setState({matchingChild: true})
+    this.onChildMatch = (child, match) => {
+      if (!this.state.matchingChild && match ) {
+        this.didMatch = true
+        //console.log(this.props.product.id + ' has matching child ' + child.id)
+        this.setState({matchingChild: true})
+      }
+      else if (this.state.matchingChild && !this.didMatch && !match) {
+        //this.didMatch = true
+        this.didMatch = true
+        //console.log(this.props.product.id + ' has unmatching child ' + child.id)
+        this.setState({matchingChild: false})
+      }
+    }
   }
 
   shouldExpand(node, id, callback = (n) => n.id === id, root = node) {
@@ -34,28 +44,28 @@ class MenuItem extends Component {
     if (!str1 || !str2) {
       return {
         length: 0,
-        sequence: "",
+        sequence: '',
         offset: 0
       }
     }
 
-    var sequence = "",
-      str1Length = str1.length,
-      str2Length = str2.length,
-      num = new Array(str1Length),
-      maxlen = 0,
-      lastSubsBegin = 0;
+    let sequence = ''
+    let str1Length = str1.length
+    let str2Length = str2.length
+    let num = new Array(str1Length)
+    let maxlen = 0
+    let lastSubsBegin = 0
 
-    for (var i = 0; i < str1Length; i++) {
-      var subArray = new Array(str2Length);
-      for (var j = 0; j < str2Length; j++) {
-        subArray[j] = 0;
+    for (let i = 0; i < str1Length; i++) {
+      let subArray = new Array(str2Length)
+      for (let j = 0; j < str2Length; j++) {
+        subArray[j] = 0
       }
-      num[i] = subArray;
+      num[i] = subArray
     }
-    var thisSubsBegin = null;
-    for (var i = 0; i < str1Length; i++) {
-      for (var j = 0; j < str2Length; j++) {
+    let thisSubsBegin = null;
+    for (let i = 0; i < str1Length; i++) {
+      for (let j = 0; j < str2Length; j++) {
         if (str1[i] !== str2[j]) {
           num[i][j] = 0;
         } else {
@@ -66,16 +76,16 @@ class MenuItem extends Component {
           }
 
           if (num[i][j] > maxlen) {
-            maxlen = num[i][j];
-            thisSubsBegin = i - num[i][j] + 1;
-            if (lastSubsBegin === thisSubsBegin) {//if the current LCS is the same as the last time this block ran
-              sequence += str1[i];
-            }
-            else //this block resets the string builder if a different LCS is found
-            {
+            maxlen = num[i][j]
+            thisSubsBegin = i - num[i][j] + 1
+            if (lastSubsBegin === thisSubsBegin) {
+              //if the current LCS is the same as the last time this block ran
+              sequence += str1[i]
+            } else {
+              //this block resets the string builder if a different LCS is found
               lastSubsBegin = thisSubsBegin;
-              sequence = ""; //clear it
-              sequence += str1.substr(lastSubsBegin, (i + 1) - lastSubsBegin);
+              sequence = ''; //clear it
+              sequence += str1.substr(lastSubsBegin, (i + 1) - lastSubsBegin)
             }
           }
         }
@@ -85,40 +95,60 @@ class MenuItem extends Component {
       length: maxlen,
       sequence: sequence,
       offset: thisSubsBegin
-    };
+    }
   }
 
   componentWillReceiveProps(nextProps) {
-    //if (nextProps.filter.length > 0 && nextProps.product.title.includes(nextProps.filter)) {
-    //  nextProps.expandParent()
-    //}
-    let common = this.longestCommonSubstring(nextProps.product.title.toLowerCase(), nextProps.filter.toLowerCase())
-    let matching = nextProps.filter.length > 0 && common.length === nextProps.filter.length
-    this.setState({
-      common: common,
-      expanded: this.shouldExpand(nextProps.product, nextProps.active),
-      matchingChild: matching
-    })
-    if (matching) {
-      console.log(nextProps.product.id + ' ' + matching + ' ' + nextProps.filter)
-      this.props.expandParent()
-      this.setState({matchingChild: true})
+    let {product, filter, active, onChildMatch} = nextProps
+    if (filter.length === 0) {
+      this.setState({
+        expanded: this.shouldExpand(product, active),
+        matchingChild: false
+      })
+    } else {
+      let common = this.longestCommonSubstring(product.title.toLowerCase(), filter.toLowerCase())
+      let matching = filter.length > 0 && common.length === filter.length
+      this.setState({
+        common: common,
+        expanded: this.state.expanded ? true : this.shouldExpand(product, active),
+      })
+      if (matching || this.state.matchingChild) {
+        //console.log(product.id + ' matching ' + filter + ', parent should expand')
+        onChildMatch(product, true)
+      } else if(!matching && !this.state.matchingChild) {
+        //console.log(product.id + ' no longer matching ' + filter + ', parent should contract')
+        onChildMatch(product, false)
+      }
+      this.didMatch = false
     }
   }
 
   render() {
-    let {product: {title, id, sub}, linkTo, active, isRoot, filter, expandParent} = this.props
+    let {product: {title, id, sub}, linkTo, active, isRoot, filter, parentExpanded} = this.props
+    if (parentExpanded) {
+      //console.log(id + ' has parent expanded')
+    }
     let isParent = sub.length > 0;
-    let expanded = (isParent || isRoot) && (this.state.expanded || this.state.matchingChild)
+    let expanded = isRoot || (isParent && (this.state.expanded || this.state.matchingChild))
     let {common} = this.state
-    let a = id === active
+    let s = common.offset
+    let l = common.length
+    let matching = filter.length === l
+    let isActive = id === active
+
     let expanderClass = (isParent && !isRoot) ? expanded ? 'fa fa-caret-down' : 'fa fa-caret-right' : 'fa fa-empty'
+
+    let filterEnabled = filter.length > 0
+    let showItem = filterEnabled ? (matching || this.state.matchingChild) : parentExpanded
+
     let style = {
       box: {
         marginTop: isRoot ? 15 : 1,
         cursor: 'pointer',
         height: 'auto',
         marginLeft: isRoot ? 0 : isParent ? 21 : 25,
+        //opacity: showItem ? 1 :  0.5,
+        display: showItem ? 'block' : 'none'
       },
       sub: {
         marginLeft: isRoot ? 0 : -8,
@@ -126,9 +156,9 @@ class MenuItem extends Component {
         paddingBottom: expanded ? 5 : 3
       },
       item: {
-        color: a ? HOVER : TEXT,
+        color: isActive ? HOVER : TEXT,
         fontSize: isRoot ? '1.5em' : '1em',
-        fontWeight: a || expanded ? '800' : isRoot ? '600' : '400',
+        fontWeight: isActive || expanded ? '800' : isRoot ? '600' : '400',
         fontFamily: 'Roboto',
         marginBottom: 0,
         ':hover': {
@@ -137,7 +167,7 @@ class MenuItem extends Component {
         }
       },
       icon: {
-        color: a ? HOVER : TEXT,
+        color: isActive ? HOVER : TEXT,
         marginLeft: 0,
         marginRight: 0,
         textAlign: 'center',
@@ -159,12 +189,10 @@ class MenuItem extends Component {
     }
     let subItems = sub
     //.filter(p => filter.length === 0 || p.title.toLowerCase().includes(filter))
-      .map(p => <MenuItem key={p.id} product={p} active={active} linkTo={`${linkTo}/${p.id}`} filter={filter}
-                          expandParent={() => {console.log('prop from ' + id); expandParent}}/>)
-    let s = common.offset
-    let l = common.length
+      .map(p => <MenuItem key={p.id} product={p} active={active} linkTo={`${linkTo}/${p.id}`} parentExpanded={expanded} filter={filter}
+                          onChildMatch={this.onChildMatch}/>)
 
-    let matching = filter.length === l ? (
+    let matched = matching ? (
       <span>
         {s ? title.substring(0, s) : ''}
         <span style={style.marked}>{title.substring(s, s + l)}</span>
@@ -173,13 +201,13 @@ class MenuItem extends Component {
 
     return (
       <div style={style.box}>
-        <div onClick={(isParent && !isRoot)  ? this.onExpand : null}>
+        <div onClick={this.onExpand}>
           {isParent ? <i key={id + '1'} style={style.icon} className={expanderClass}/> : null}
           <Link key={id+'2'} to={linkTo} style={style.item}>
-            {matching}
+            {matched}
           </Link>
         </div>
-        {(isRoot || expanded) ? <div style={style.sub}>{subItems}</div> : null}
+        <div style={style.sub}>{subItems}</div>
       </div>
     )
   }
@@ -188,10 +216,12 @@ class MenuItem extends Component {
 MenuItem.defaultProps = {
   active: '',
   margin: 0,
-  expandParent: () => {
+  onChildMatch: () => {
+    //console.log('root has not parent, no expansion')
   },
   isRoot: false,
   filter: '',
+  parentExpanded: true,
   product: {title: '', id: null}
 }
 
@@ -203,7 +233,8 @@ MenuItem.propTypes = {
   active: PropTypes.string,
   linkTo: PropTypes.string.isRequired,
   margin: PropTypes.number,
-  expandParent: PropTypes.func,
+  parentExpanded: PropTypes.bool,
+  onChildMatch: PropTypes.func,
   filter: PropTypes.string
 }
 
