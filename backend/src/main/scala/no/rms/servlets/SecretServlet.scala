@@ -64,7 +64,7 @@ class SecretServlet(val db: Database) extends BackendStack with FutureSupport wi
   post("/product/?") {
     Logger.info("POST: product")
     Try(parsedBody.extract[Product]) match {
-      case Success(p) => RmsDb.storeProduct(p, db)
+      case Success(p) => if(p.id == "-1") RmsDb.newProduct(p, db) else RmsDb.storeProduct(p, db)
       case Failure(ex) => Logger.info(ex.getMessage)
     }
   }

@@ -3,7 +3,7 @@ package no.rms.models
 import no.rms.ImageUtils
 
 class ImageWrapper(val title: String, val src: String) {
-  override def toString: String = f"$title - $src"
+  override def toString: String = s"$title - $src"
 }
 
 object ImageWrapper {

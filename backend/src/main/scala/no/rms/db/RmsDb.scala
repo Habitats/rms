@@ -102,6 +102,9 @@ object RmsDb {
     Logger.info("Adding project: " + project)
     db.run(data).transform(s => project.copy(modified = modified), f => f)
   }
+  def newProduct(product: Product, db: Database): Future[Product] = {
+    storeProduct(Product(title = product.title, description = product.description, index = product.sub.length + 1), db)
+  }
 
   def storeProduct(product: Product, db: Database): Future[Product] = {
     for {

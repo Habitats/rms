@@ -62,8 +62,8 @@ export default class ContactForm extends Component {
   render() {
     let {subject} = this.props
     let valid = this.valid
-    var clicked = this.state.clicked
-    var sent = this.state.sent
+    let clicked = this.state.clicked
+    let sent = this.state.sent
     let nameClasses = 'col-xs-12 col-sm-6 ' + (!clicked || sent ? '' : (valid.name ? 'has-success' : 'has-error'))
     let contactPhoneClasses = 'col-xs-12 col-sm-6 ' + (!clicked || sent ? '' : (valid.contactPhone ? 'has-success' : 'has-error'))
     let contactEmailClasses = 'col-xs-12 ' + (!clicked || sent ? '' : (valid.contactEmail ? 'has-success' : 'has-error'))

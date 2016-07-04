@@ -29,7 +29,7 @@ export default class ProductAdd extends Component {
     this.onSave = () => {
       if (this.isValid()) {
         let product = {
-          id: this.state.edit ? this.state.id : this.state.title.toLowerCase(),
+          id: this.state.edit ? this.state.id : -1,
           title: this.state.title,
           category: this.state.category,
           description: this.state.description,

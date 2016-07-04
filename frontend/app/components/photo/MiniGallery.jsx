@@ -209,25 +209,6 @@ class MiniGallery extends Component {
   render() {
     let {images, height, orientation} = this.props
     let {selected, startX, deltaX, small} = this.state
-
-    let main = () => images.find(i => i.src.includes('main.jpg'))
-    let cover = selected || (main() || (images.length > 0 ? images[0] : null))
-    // no cover? nothing to see here (...)
-    if (!cover) {
-      return null
-    }
-
-    return (
-      <div>
-        {small ? this.horizontal(images, cover, height, startX) :
-         orientation === 'horizontal' ? this.horizontal(images, cover, height) : this.vertical(images, cover, height)}
-      </div>
-    )
-  }
-
-  render() {
-    let {images, height, orientation} = this.props
-    let {selected, startX, deltaX, small} = this.state
     height = images.length > 1 ? height : height * 0.75
 
     let main = () => images.find(i => i.src.includes('main.jpg'))
