@@ -1,0 +1,1761 @@
+Scala Binary: 2.11 - Scala Version: 2.11.6 - Java: 1.8
+:backend:dependencies
+
+------------------------------------------------------------
+Project :backend
+------------------------------------------------------------
+
+archives - Configuration for archive artifacts.
+No dependencies
+
+compile - Compile classpath for source set 'main'.
++--- org.scala-lang:scala-library:2.11.6
++--- org.scala-lang:scala-compiler:2.11.6
+|    +--- org.scala-lang:scala-library:2.11.6
+|    +--- org.scala-lang:scala-reflect:2.11.6
+|    |    \--- org.scala-lang:scala-library:2.11.6
+|    +--- org.scala-lang.modules:scala-xml_2.11:1.0.3 -> 1.0.4
+|    |    \--- org.scala-lang:scala-library:2.11.4 -> 2.11.6
+|    \--- org.scala-lang.modules:scala-parser-combinators_2.11:1.0.3 -> 1.0.4
+|         \--- org.scala-lang:scala-library:2.11.6
++--- org.scala-lang:scala-reflect:2.11.6 (*)
++--- org.scala-lang:scalap:2.11.6
+|    \--- org.scala-lang:scala-compiler:2.11.6 (*)
++--- org.scala-lang.modules:scala-parser-combinators_2.11:1.0.4 (*)
++--- com.github.jsimone:webapp-runner:8.0.33.1
+|    +--- org.apache.tomcat.embed:tomcat-embed-core:8.0.33
+|    +--- org.apache.tomcat.embed:tomcat-embed-logging-juli:8.0.33
+|    +--- org.apache.tomcat.embed:tomcat-embed-jasper:8.0.33
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-core:8.0.33
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-el:8.0.33
+|    |    \--- org.eclipse.jdt.core.compiler:ecj:4.5
+|    +--- org.apache.tomcat:tomcat-jasper:8.0.33
+|    |    +--- org.apache.tomcat:tomcat-servlet-api:8.0.33
+|    |    +--- org.apache.tomcat:tomcat-juli:8.0.33
+|    |    +--- org.apache.tomcat:tomcat-jsp-api:8.0.33
+|    |    |    +--- org.apache.tomcat:tomcat-el-api:8.0.33
+|    |    |    \--- org.apache.tomcat:tomcat-servlet-api:8.0.33
+|    |    +--- org.apache.tomcat:tomcat-el-api:8.0.33
+|    |    +--- org.eclipse.jdt.core.compiler:ecj:4.5
+|    |    +--- org.apache.tomcat:tomcat-jasper-el:8.0.33
+|    |    |    \--- org.apache.tomcat:tomcat-el-api:8.0.33
+|    |    +--- org.apache.tomcat:tomcat-api:8.0.33
+|    |    |    \--- org.apache.tomcat:tomcat-servlet-api:8.0.33
+|    |    \--- org.apache.tomcat:tomcat-util-scan:8.0.33
+|    |         +--- org.apache.tomcat:tomcat-util:8.0.33
+|    |         |    \--- org.apache.tomcat:tomcat-juli:8.0.33
+|    |         +--- org.apache.tomcat:tomcat-juli:8.0.33
+|    |         \--- org.apache.tomcat:tomcat-api:8.0.33 (*)
+|    +--- org.apache.tomcat:tomcat-jasper-el:8.0.33 (*)
+|    +--- org.apache.tomcat:tomcat-jsp-api:8.0.33 (*)
+|    +--- com.github.jkutner:tomcat-redis-session:8.0.18.1
+|    |    +--- redis.clients:jedis:2.6.2
+|    |    |    \--- org.apache.commons:commons-pool2:2.0 -> 2.3
+|    |    \--- org.apache.commons:commons-pool2:2.3
+|    +--- com.beust:jcommander:1.27
+|    +--- commons-io:commons-io:2.3 -> 2.4
+|    \--- de.javakaffee.msm:memcached-session-manager-tc8:1.8.3
+|         +--- de.javakaffee.msm:memcached-session-manager:1.8.3
+|         |    +--- net.spy:spymemcached:2.11.1
+|         |    +--- com.couchbase.client:couchbase-client:1.4.0
+|         |    |    +--- io.netty:netty:3.5.5.Final
+|         |    |    +--- org.codehaus.jettison:jettison:1.1
+|         |    |    |    \--- stax:stax-api:1.0.1
+|         |    |    +--- commons-codec:commons-codec:1.5
+|         |    |    +--- net.spy:spymemcached:2.11.1
+|         |    |    +--- org.apache.httpcomponents:httpcore:4.3
+|         |    |    \--- org.apache.httpcomponents:httpcore-nio:4.3
+|         |    |         \--- org.apache.httpcomponents:httpcore:4.3
+|         |    +--- com.google.code.findbugs:jsr305:1.3.9
+|         |    \--- com.google.code.findbugs:annotations:1.3.9
+|         +--- com.google.code.findbugs:jsr305:1.3.9
+|         \--- com.google.code.findbugs:annotations:1.3.9
++--- org.scalatra:scalatra_2.11:2.3.1
+|    +--- org.scala-lang:scala-library:2.11.6
+|    +--- org.scalatra:scalatra-common_2.11:2.3.1
+|    |    \--- org.scala-lang:scala-library:2.11.6
+|    +--- org.slf4j:slf4j-api:1.7.10
+|    +--- org.clapper:grizzled-slf4j_2.11:1.0.2
+|    |    +--- org.scala-lang:scala-library:2.11.0 -> 2.11.6
+|    |    \--- org.slf4j:slf4j-api:1.7.7 -> 1.7.10
+|    +--- org.scalatra.rl:rl_2.11:0.4.10
+|    |    \--- org.scala-lang:scala-library:2.11.0 -> 2.11.6
+|    +--- com.googlecode.juniversalchardet:juniversalchardet:1.0.3
+|    +--- eu.medsea.mimeutil:mime-util:2.1.3
+|    |    \--- org.slf4j:slf4j-api:1.5.6 -> 1.7.10
+|    +--- joda-time:joda-time:2.7
+|    +--- org.joda:joda-convert:1.7
+|    +--- org.scala-lang.modules:scala-parser-combinators_2.11:1.0.3 -> 1.0.4 (*)
+|    \--- org.scala-lang.modules:scala-xml_2.11:1.0.3 -> 1.0.4 (*)
++--- org.scalatra:scalatra-scalate_2.11:2.3.1
+|    +--- org.scala-lang:scala-library:2.11.6
+|    +--- org.scalatra:scalatra_2.11:2.3.1 (*)
+|    \--- org.scalatra.scalate:scalate-core_2.11:1.7.1
+|         +--- org.scalatra.scalate:scalate-util_2.11:1.7.1
+|         |    +--- org.slf4j:slf4j-api:1.6.1 -> 1.7.10
+|         |    +--- org.scala-lang:scala-library:2.11.0 -> 2.11.6
+|         |    +--- org.scala-lang.modules:scala-xml_2.11:1.0.1 -> 1.0.4 (*)
+|         |    \--- org.scala-lang.modules:scala-parser-combinators_2.11:1.0.1 -> 1.0.4 (*)
+|         +--- org.slf4j:slf4j-api:1.6.1 -> 1.7.10
+|         \--- org.scala-lang:scala-compiler:2.11.0 -> 2.11.6 (*)
++--- org.scalatra.scalate:scalate-core_2.11:1.7.0 -> 1.7.1 (*)
++--- org.scalatra:scalatra-json_2.11:2.3.1
+|    +--- org.scala-lang:scala-library:2.11.6
+|    +--- org.scalatra:scalatra_2.11:2.3.1 (*)
+|    \--- org.json4s:json4s-core_2.11:3.2.11 -> 3.3.0.RC3
+|         +--- org.scala-lang:scala-library:2.11.7 -> 2.11.6
+|         +--- org.json4s:json4s-ast_2.11:3.3.0.RC3
+|         |    \--- org.scala-lang:scala-library:2.11.7 -> 2.11.6
+|         +--- org.json4s:json4s-scalap_2.11:3.3.0.RC3
+|         |    \--- org.scala-lang:scala-library:2.11.7 -> 2.11.6
+|         +--- com.thoughtworks.paranamer:paranamer:2.7
+|         \--- org.scala-lang.modules:scala-xml_2.11:1.0.4 (*)
++--- org.scalatra:scalatra-auth_2.11:2.3.1
+|    +--- org.scala-lang:scala-library:2.11.6
+|    +--- org.scalatra:scalatra_2.11:2.3.1 (*)
+|    \--- net.iharder:base64:2.3.8
++--- javax.servlet:javax.servlet-api:3.1.0
++--- org.eclipse.jetty:jetty-webapp:9.2.10.v20150310
+|    +--- org.eclipse.jetty:jetty-xml:9.2.10.v20150310
+|    |    \--- org.eclipse.jetty:jetty-util:9.2.10.v20150310
+|    \--- org.eclipse.jetty:jetty-servlet:9.2.10.v20150310
+|         \--- org.eclipse.jetty:jetty-security:9.2.10.v20150310
+|              \--- org.eclipse.jetty:jetty-server:9.2.10.v20150310
+|                   +--- javax.servlet:javax.servlet-api:3.1.0
+|                   +--- org.eclipse.jetty:jetty-http:9.2.10.v20150310
+|                   |    \--- org.eclipse.jetty:jetty-util:9.2.10.v20150310
+|                   \--- org.eclipse.jetty:jetty-io:9.2.10.v20150310
+|                        \--- org.eclipse.jetty:jetty-util:9.2.10.v20150310
++--- ch.qos.logback:logback-classic:1.1.2
+|    +--- ch.qos.logback:logback-core:1.1.2
+|    \--- org.slf4j:slf4j-api:1.7.6 -> 1.7.10
++--- com.typesafe.slick:slick_2.11:3.1.1
+|    +--- org.scala-lang:scala-library:2.11.6
+|    +--- org.slf4j:slf4j-api:1.7.10
+|    +--- com.typesafe:config:1.2.1 -> 1.3.0
+|    \--- org.reactivestreams:reactive-streams:1.0.0
++--- com.typesafe:config:1.3.0
++--- com.h2database:h2:1.4.190
++--- org.json4s:json4s-jackson_2.11:3.3.0.RC3
+|    +--- org.scala-lang:scala-library:2.11.7 -> 2.11.6
+|    +--- org.json4s:json4s-core_2.11:3.3.0.RC3 (*)
+|    \--- com.fasterxml.jackson.core:jackson-databind:2.5.3
+|         +--- com.fasterxml.jackson.core:jackson-annotations:2.5.0
+|         \--- com.fasterxml.jackson.core:jackson-core:2.5.3
++--- org.json4s:json4s-native_2.11:3.3.0.RC3
+|    +--- org.scala-lang:scala-library:2.11.7 -> 2.11.6
+|    \--- org.json4s:json4s-core_2.11:3.3.0.RC3 (*)
++--- com.mchange:c3p0:0.9.5.1
+|    \--- com.mchange:mchange-commons-java:0.2.10
++--- com.sksamuel.scrimage:scrimage-core_2.11:2.0.1
+|    +--- org.scala-lang:scala-library:2.11.6
+|    +--- org.slf4j:slf4j-api:1.7.7 -> 1.7.10
+|    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1
+|    |    |    \--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1
+|    |         +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |         \--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-jpeg:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.imageio:imageio-metadata:3.1.1
+|    |    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    +--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.drewnoakes:metadata-extractor:2.8.1
+|    |    \--- com.adobe.xmp:xmpcore:5.1.2
+|    +--- commons-io:commons-io:2.4
+|    \--- ar.com.hjg:pngj:2.1.0
++--- com.sksamuel.scrimage:scrimage-io_2.11:2.0.1
+|    +--- org.scala-lang:scala-library:2.11.6
+|    +--- com.sksamuel.scrimage:scrimage-core_2.11:2.0.1 (*)
+|    +--- org.slf4j:slf4j-api:1.7.7 -> 1.7.10
+|    +--- com.twelvemonkeys.imageio:imageio-batik:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-bmp:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-jpeg:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-icns:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-iff:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-pcx:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-pict:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-pdf:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-pnm:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-psd:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.imageio:imageio-metadata:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-sgi:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-tiff:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.imageio:imageio-metadata:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-tga:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    \--- com.twelvemonkeys.imageio:imageio-thumbsdb:3.1.1
+|         +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|         +--- com.twelvemonkeys.common:common-lang:3.1.1
+|         +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|         \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
++--- com.sksamuel.scrimage:scrimage-filters_2.11:2.0.1
+|    +--- org.scala-lang:scala-library:2.11.6
+|    +--- com.sksamuel.scrimage:scrimage-core_2.11:2.0.1 (*)
+|    +--- org.slf4j:slf4j-api:1.7.7 -> 1.7.10
+|    \--- commons-io:commons-io:2.4
++--- org.apache.xmlgraphics:batik-codec:1.7
+|    +--- org.apache.xmlgraphics:batik-awt-util:1.7
+|    |    \--- org.apache.xmlgraphics:batik-util:1.7
+|    +--- org.apache.xmlgraphics:batik-bridge:1.7
+|    |    +--- org.apache.xmlgraphics:batik-anim:1.7
+|    |    |    +--- org.apache.xmlgraphics:batik-awt-util:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-dom:1.7
+|    |    |    |    +--- org.apache.xmlgraphics:batik-css:1.7
+|    |    |    |    |    +--- org.apache.xmlgraphics:batik-ext:1.7
+|    |    |    |    |    |    \--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    |    |    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    |    |    +--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    |    |    |    \--- xml-apis:xml-apis-ext:1.3.04
+|    |    |    |    +--- org.apache.xmlgraphics:batik-ext:1.7 (*)
+|    |    |    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    |    +--- org.apache.xmlgraphics:batik-xml:1.7
+|    |    |    |    |    \--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    |    +--- xalan:xalan:2.6.0
+|    |    |    |    |    \--- xml-apis:xml-apis:2.0.2 -> 1.4.01
+|    |    |    |    +--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    |    |    \--- xml-apis:xml-apis-ext:1.3.04
+|    |    |    +--- org.apache.xmlgraphics:batik-ext:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-parser:1.7
+|    |    |    |    +--- org.apache.xmlgraphics:batik-awt-util:1.7 (*)
+|    |    |    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    |    \--- org.apache.xmlgraphics:batik-xml:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-svg-dom:1.7
+|    |    |    |    +--- org.apache.xmlgraphics:batik-anim:1.7 (*)
+|    |    |    |    +--- org.apache.xmlgraphics:batik-awt-util:1.7 (*)
+|    |    |    |    +--- org.apache.xmlgraphics:batik-css:1.7 (*)
+|    |    |    |    +--- org.apache.xmlgraphics:batik-dom:1.7 (*)
+|    |    |    |    +--- org.apache.xmlgraphics:batik-ext:1.7 (*)
+|    |    |    |    +--- org.apache.xmlgraphics:batik-parser:1.7 (*)
+|    |    |    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    |    +--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    |    |    \--- xml-apis:xml-apis-ext:1.3.04
+|    |    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    +--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    |    \--- xml-apis:xml-apis-ext:1.3.04
+|    |    +--- org.apache.xmlgraphics:batik-awt-util:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-css:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-dom:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-ext:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-gvt:1.7
+|    |    |    +--- org.apache.xmlgraphics:batik-awt-util:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-bridge:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    \--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    +--- org.apache.xmlgraphics:batik-parser:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-script:1.7
+|    |    |    +--- org.apache.xmlgraphics:batik-bridge:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-dom:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-ext:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-svg-dom:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    +--- org.apache.xmlgraphics:batik-js:1.7
+|    |    |    |    \--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    |    \--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    +--- org.apache.xmlgraphics:batik-svg-dom:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    +--- org.apache.xmlgraphics:batik-xml:1.7 (*)
+|    |    +--- xalan:xalan:2.6.0 (*)
+|    |    +--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    \--- xml-apis:xml-apis-ext:1.3.04
+|    +--- org.apache.xmlgraphics:batik-transcoder:1.7
+|    |    +--- org.apache.xmlgraphics:fop:0.94
+|    |    |    +--- org.apache.xmlgraphics:xmlgraphics-commons:1.2
+|    |    |    |    \--- commons-io:commons-io:1.1 -> 2.4
+|    |    |    +--- commons-logging:commons-logging:1.0.4
+|    |    |    +--- commons-io:commons-io:1.1 -> 2.4
+|    |    |    +--- org.apache.avalon.framework:avalon-framework-api:4.3.1
+|    |    |    \--- org.apache.avalon.framework:avalon-framework-impl:4.3.1
+|    |    |         \--- org.apache.avalon.framework:avalon-framework-api:4.3.1
+|    |    +--- org.apache.xmlgraphics:batik-awt-util:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-bridge:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-dom:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-gvt:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-svg-dom:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-svggen:1.7
+|    |    |    +--- org.apache.xmlgraphics:batik-awt-util:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    \--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    +--- org.apache.xmlgraphics:batik-xml:1.7 (*)
+|    |    +--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    \--- xml-apis:xml-apis-ext:1.3.04
+|    +--- org.apache.xmlgraphics:batik-util:1.7
+|    \--- xml-apis:xml-apis:1.3.04 -> 1.4.01
++--- me.lessis:courier_2.11:0.1.3
+|    +--- org.scala-lang:scala-library:2.11.1 -> 2.11.6
+|    +--- javax.mail:mail:1.4.7
+|    |    \--- javax.activation:activation:1.1 -> 1.1.1
+|    \--- javax.activation:activation:1.1.1
++--- com.dropbox.core:dropbox-core-sdk:1.7.7
+|    \--- com.fasterxml.jackson.core:jackson-core:[2.2,2.4) -> 2.5.3
+\--- org.scalatest:scalatest_2.11:3.0.0-M7
+     +--- org.scala-lang:scala-library:2.11.7 -> 2.11.6
+     +--- org.scalactic:scalactic_2.11:3.0.0-M7
+     |    +--- org.scala-lang:scala-library:2.11.7 -> 2.11.6
+     |    \--- org.scala-lang:scala-reflect:2.11.7 -> 2.11.6 (*)
+     +--- org.scala-lang:scala-reflect:2.11.7 -> 2.11.6 (*)
+     +--- org.scala-lang.modules:scala-xml_2.11:1.0.2 -> 1.0.4 (*)
+     \--- org.scala-lang.modules:scala-parser-combinators_2.11:1.0.4 (*)
+
+default - Configuration for default artifacts.
++--- org.scala-lang:scala-library:2.11.6
++--- org.scala-lang:scala-compiler:2.11.6
+|    +--- org.scala-lang:scala-library:2.11.6
+|    +--- org.scala-lang:scala-reflect:2.11.6
+|    |    \--- org.scala-lang:scala-library:2.11.6
+|    +--- org.scala-lang.modules:scala-xml_2.11:1.0.3 -> 1.0.4
+|    |    \--- org.scala-lang:scala-library:2.11.4 -> 2.11.6
+|    \--- org.scala-lang.modules:scala-parser-combinators_2.11:1.0.3 -> 1.0.4
+|         \--- org.scala-lang:scala-library:2.11.6
++--- org.scala-lang:scala-reflect:2.11.6 (*)
++--- org.scala-lang:scalap:2.11.6
+|    \--- org.scala-lang:scala-compiler:2.11.6 (*)
++--- org.scala-lang.modules:scala-parser-combinators_2.11:1.0.4 (*)
++--- com.github.jsimone:webapp-runner:8.0.33.1
+|    +--- org.apache.tomcat.embed:tomcat-embed-core:8.0.33
+|    +--- org.apache.tomcat.embed:tomcat-embed-logging-juli:8.0.33
+|    +--- org.apache.tomcat.embed:tomcat-embed-jasper:8.0.33
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-core:8.0.33
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-el:8.0.33
+|    |    \--- org.eclipse.jdt.core.compiler:ecj:4.5
+|    +--- org.apache.tomcat:tomcat-jasper:8.0.33
+|    |    +--- org.apache.tomcat:tomcat-servlet-api:8.0.33
+|    |    +--- org.apache.tomcat:tomcat-juli:8.0.33
+|    |    +--- org.apache.tomcat:tomcat-jsp-api:8.0.33
+|    |    |    +--- org.apache.tomcat:tomcat-el-api:8.0.33
+|    |    |    \--- org.apache.tomcat:tomcat-servlet-api:8.0.33
+|    |    +--- org.apache.tomcat:tomcat-el-api:8.0.33
+|    |    +--- org.eclipse.jdt.core.compiler:ecj:4.5
+|    |    +--- org.apache.tomcat:tomcat-jasper-el:8.0.33
+|    |    |    \--- org.apache.tomcat:tomcat-el-api:8.0.33
+|    |    +--- org.apache.tomcat:tomcat-api:8.0.33
+|    |    |    \--- org.apache.tomcat:tomcat-servlet-api:8.0.33
+|    |    \--- org.apache.tomcat:tomcat-util-scan:8.0.33
+|    |         +--- org.apache.tomcat:tomcat-util:8.0.33
+|    |         |    \--- org.apache.tomcat:tomcat-juli:8.0.33
+|    |         +--- org.apache.tomcat:tomcat-juli:8.0.33
+|    |         \--- org.apache.tomcat:tomcat-api:8.0.33 (*)
+|    +--- org.apache.tomcat:tomcat-jasper-el:8.0.33 (*)
+|    +--- org.apache.tomcat:tomcat-jsp-api:8.0.33 (*)
+|    +--- com.github.jkutner:tomcat-redis-session:8.0.18.1
+|    |    +--- redis.clients:jedis:2.6.2
+|    |    |    \--- org.apache.commons:commons-pool2:2.0 -> 2.3
+|    |    \--- org.apache.commons:commons-pool2:2.3
+|    +--- com.beust:jcommander:1.27
+|    +--- commons-io:commons-io:2.3 -> 2.4
+|    \--- de.javakaffee.msm:memcached-session-manager-tc8:1.8.3
+|         +--- de.javakaffee.msm:memcached-session-manager:1.8.3
+|         |    +--- net.spy:spymemcached:2.11.1
+|         |    +--- com.couchbase.client:couchbase-client:1.4.0
+|         |    |    +--- io.netty:netty:3.5.5.Final
+|         |    |    +--- org.codehaus.jettison:jettison:1.1
+|         |    |    |    \--- stax:stax-api:1.0.1
+|         |    |    +--- commons-codec:commons-codec:1.5
+|         |    |    +--- net.spy:spymemcached:2.11.1
+|         |    |    +--- org.apache.httpcomponents:httpcore:4.3
+|         |    |    \--- org.apache.httpcomponents:httpcore-nio:4.3
+|         |    |         \--- org.apache.httpcomponents:httpcore:4.3
+|         |    +--- com.google.code.findbugs:jsr305:1.3.9
+|         |    \--- com.google.code.findbugs:annotations:1.3.9
+|         +--- com.google.code.findbugs:jsr305:1.3.9
+|         \--- com.google.code.findbugs:annotations:1.3.9
++--- org.scalatra:scalatra_2.11:2.3.1
+|    +--- org.scala-lang:scala-library:2.11.6
+|    +--- org.scalatra:scalatra-common_2.11:2.3.1
+|    |    \--- org.scala-lang:scala-library:2.11.6
+|    +--- org.slf4j:slf4j-api:1.7.10
+|    +--- org.clapper:grizzled-slf4j_2.11:1.0.2
+|    |    +--- org.scala-lang:scala-library:2.11.0 -> 2.11.6
+|    |    \--- org.slf4j:slf4j-api:1.7.7 -> 1.7.10
+|    +--- org.scalatra.rl:rl_2.11:0.4.10
+|    |    \--- org.scala-lang:scala-library:2.11.0 -> 2.11.6
+|    +--- com.googlecode.juniversalchardet:juniversalchardet:1.0.3
+|    +--- eu.medsea.mimeutil:mime-util:2.1.3
+|    |    \--- org.slf4j:slf4j-api:1.5.6 -> 1.7.10
+|    +--- joda-time:joda-time:2.7
+|    +--- org.joda:joda-convert:1.7
+|    +--- org.scala-lang.modules:scala-parser-combinators_2.11:1.0.3 -> 1.0.4 (*)
+|    \--- org.scala-lang.modules:scala-xml_2.11:1.0.3 -> 1.0.4 (*)
++--- org.scalatra:scalatra-scalate_2.11:2.3.1
+|    +--- org.scala-lang:scala-library:2.11.6
+|    +--- org.scalatra:scalatra_2.11:2.3.1 (*)
+|    \--- org.scalatra.scalate:scalate-core_2.11:1.7.1
+|         +--- org.scalatra.scalate:scalate-util_2.11:1.7.1
+|         |    +--- org.slf4j:slf4j-api:1.6.1 -> 1.7.10
+|         |    +--- org.scala-lang:scala-library:2.11.0 -> 2.11.6
+|         |    +--- org.scala-lang.modules:scala-xml_2.11:1.0.1 -> 1.0.4 (*)
+|         |    \--- org.scala-lang.modules:scala-parser-combinators_2.11:1.0.1 -> 1.0.4 (*)
+|         +--- org.slf4j:slf4j-api:1.6.1 -> 1.7.10
+|         \--- org.scala-lang:scala-compiler:2.11.0 -> 2.11.6 (*)
++--- org.scalatra.scalate:scalate-core_2.11:1.7.0 -> 1.7.1 (*)
++--- org.scalatra:scalatra-json_2.11:2.3.1
+|    +--- org.scala-lang:scala-library:2.11.6
+|    +--- org.scalatra:scalatra_2.11:2.3.1 (*)
+|    \--- org.json4s:json4s-core_2.11:3.2.11 -> 3.3.0.RC3
+|         +--- org.scala-lang:scala-library:2.11.7 -> 2.11.6
+|         +--- org.json4s:json4s-ast_2.11:3.3.0.RC3
+|         |    \--- org.scala-lang:scala-library:2.11.7 -> 2.11.6
+|         +--- org.json4s:json4s-scalap_2.11:3.3.0.RC3
+|         |    \--- org.scala-lang:scala-library:2.11.7 -> 2.11.6
+|         +--- com.thoughtworks.paranamer:paranamer:2.7
+|         \--- org.scala-lang.modules:scala-xml_2.11:1.0.4 (*)
++--- org.scalatra:scalatra-auth_2.11:2.3.1
+|    +--- org.scala-lang:scala-library:2.11.6
+|    +--- org.scalatra:scalatra_2.11:2.3.1 (*)
+|    \--- net.iharder:base64:2.3.8
++--- javax.servlet:javax.servlet-api:3.1.0
++--- org.eclipse.jetty:jetty-webapp:9.2.10.v20150310
+|    +--- org.eclipse.jetty:jetty-xml:9.2.10.v20150310
+|    |    \--- org.eclipse.jetty:jetty-util:9.2.10.v20150310
+|    \--- org.eclipse.jetty:jetty-servlet:9.2.10.v20150310
+|         \--- org.eclipse.jetty:jetty-security:9.2.10.v20150310
+|              \--- org.eclipse.jetty:jetty-server:9.2.10.v20150310
+|                   +--- javax.servlet:javax.servlet-api:3.1.0
+|                   +--- org.eclipse.jetty:jetty-http:9.2.10.v20150310
+|                   |    \--- org.eclipse.jetty:jetty-util:9.2.10.v20150310
+|                   \--- org.eclipse.jetty:jetty-io:9.2.10.v20150310
+|                        \--- org.eclipse.jetty:jetty-util:9.2.10.v20150310
++--- ch.qos.logback:logback-classic:1.1.2
+|    +--- ch.qos.logback:logback-core:1.1.2
+|    \--- org.slf4j:slf4j-api:1.7.6 -> 1.7.10
++--- com.typesafe.slick:slick_2.11:3.1.1
+|    +--- org.scala-lang:scala-library:2.11.6
+|    +--- org.slf4j:slf4j-api:1.7.10
+|    +--- com.typesafe:config:1.2.1 -> 1.3.0
+|    \--- org.reactivestreams:reactive-streams:1.0.0
++--- com.typesafe:config:1.3.0
++--- com.h2database:h2:1.4.190
++--- org.json4s:json4s-jackson_2.11:3.3.0.RC3
+|    +--- org.scala-lang:scala-library:2.11.7 -> 2.11.6
+|    +--- org.json4s:json4s-core_2.11:3.3.0.RC3 (*)
+|    \--- com.fasterxml.jackson.core:jackson-databind:2.5.3
+|         +--- com.fasterxml.jackson.core:jackson-annotations:2.5.0
+|         \--- com.fasterxml.jackson.core:jackson-core:2.5.3
++--- org.json4s:json4s-native_2.11:3.3.0.RC3
+|    +--- org.scala-lang:scala-library:2.11.7 -> 2.11.6
+|    \--- org.json4s:json4s-core_2.11:3.3.0.RC3 (*)
++--- com.mchange:c3p0:0.9.5.1
+|    \--- com.mchange:mchange-commons-java:0.2.10
++--- com.sksamuel.scrimage:scrimage-core_2.11:2.0.1
+|    +--- org.scala-lang:scala-library:2.11.6
+|    +--- org.slf4j:slf4j-api:1.7.7 -> 1.7.10
+|    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1
+|    |    |    \--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1
+|    |         +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |         \--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-jpeg:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.imageio:imageio-metadata:3.1.1
+|    |    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    +--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.drewnoakes:metadata-extractor:2.8.1
+|    |    \--- com.adobe.xmp:xmpcore:5.1.2
+|    +--- commons-io:commons-io:2.4
+|    \--- ar.com.hjg:pngj:2.1.0
++--- com.sksamuel.scrimage:scrimage-io_2.11:2.0.1
+|    +--- org.scala-lang:scala-library:2.11.6
+|    +--- com.sksamuel.scrimage:scrimage-core_2.11:2.0.1 (*)
+|    +--- org.slf4j:slf4j-api:1.7.7 -> 1.7.10
+|    +--- com.twelvemonkeys.imageio:imageio-batik:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-bmp:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-jpeg:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-icns:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-iff:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-pcx:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-pict:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-pdf:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-pnm:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-psd:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.imageio:imageio-metadata:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-sgi:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-tiff:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.imageio:imageio-metadata:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-tga:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    \--- com.twelvemonkeys.imageio:imageio-thumbsdb:3.1.1
+|         +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|         +--- com.twelvemonkeys.common:common-lang:3.1.1
+|         +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|         \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
++--- com.sksamuel.scrimage:scrimage-filters_2.11:2.0.1
+|    +--- org.scala-lang:scala-library:2.11.6
+|    +--- com.sksamuel.scrimage:scrimage-core_2.11:2.0.1 (*)
+|    +--- org.slf4j:slf4j-api:1.7.7 -> 1.7.10
+|    \--- commons-io:commons-io:2.4
++--- org.apache.xmlgraphics:batik-codec:1.7
+|    +--- org.apache.xmlgraphics:batik-awt-util:1.7
+|    |    \--- org.apache.xmlgraphics:batik-util:1.7
+|    +--- org.apache.xmlgraphics:batik-bridge:1.7
+|    |    +--- org.apache.xmlgraphics:batik-anim:1.7
+|    |    |    +--- org.apache.xmlgraphics:batik-awt-util:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-dom:1.7
+|    |    |    |    +--- org.apache.xmlgraphics:batik-css:1.7
+|    |    |    |    |    +--- org.apache.xmlgraphics:batik-ext:1.7
+|    |    |    |    |    |    \--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    |    |    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    |    |    +--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    |    |    |    \--- xml-apis:xml-apis-ext:1.3.04
+|    |    |    |    +--- org.apache.xmlgraphics:batik-ext:1.7 (*)
+|    |    |    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    |    +--- org.apache.xmlgraphics:batik-xml:1.7
+|    |    |    |    |    \--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    |    +--- xalan:xalan:2.6.0
+|    |    |    |    |    \--- xml-apis:xml-apis:2.0.2 -> 1.4.01
+|    |    |    |    +--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    |    |    \--- xml-apis:xml-apis-ext:1.3.04
+|    |    |    +--- org.apache.xmlgraphics:batik-ext:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-parser:1.7
+|    |    |    |    +--- org.apache.xmlgraphics:batik-awt-util:1.7 (*)
+|    |    |    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    |    \--- org.apache.xmlgraphics:batik-xml:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-svg-dom:1.7
+|    |    |    |    +--- org.apache.xmlgraphics:batik-anim:1.7 (*)
+|    |    |    |    +--- org.apache.xmlgraphics:batik-awt-util:1.7 (*)
+|    |    |    |    +--- org.apache.xmlgraphics:batik-css:1.7 (*)
+|    |    |    |    +--- org.apache.xmlgraphics:batik-dom:1.7 (*)
+|    |    |    |    +--- org.apache.xmlgraphics:batik-ext:1.7 (*)
+|    |    |    |    +--- org.apache.xmlgraphics:batik-parser:1.7 (*)
+|    |    |    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    |    +--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    |    |    \--- xml-apis:xml-apis-ext:1.3.04
+|    |    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    +--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    |    \--- xml-apis:xml-apis-ext:1.3.04
+|    |    +--- org.apache.xmlgraphics:batik-awt-util:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-css:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-dom:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-ext:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-gvt:1.7
+|    |    |    +--- org.apache.xmlgraphics:batik-awt-util:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-bridge:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    \--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    +--- org.apache.xmlgraphics:batik-parser:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-script:1.7
+|    |    |    +--- org.apache.xmlgraphics:batik-bridge:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-dom:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-ext:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-svg-dom:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    +--- org.apache.xmlgraphics:batik-js:1.7
+|    |    |    |    \--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    |    \--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    +--- org.apache.xmlgraphics:batik-svg-dom:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    +--- org.apache.xmlgraphics:batik-xml:1.7 (*)
+|    |    +--- xalan:xalan:2.6.0 (*)
+|    |    +--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    \--- xml-apis:xml-apis-ext:1.3.04
+|    +--- org.apache.xmlgraphics:batik-transcoder:1.7
+|    |    +--- org.apache.xmlgraphics:fop:0.94
+|    |    |    +--- org.apache.xmlgraphics:xmlgraphics-commons:1.2
+|    |    |    |    \--- commons-io:commons-io:1.1 -> 2.4
+|    |    |    +--- commons-logging:commons-logging:1.0.4
+|    |    |    +--- commons-io:commons-io:1.1 -> 2.4
+|    |    |    +--- org.apache.avalon.framework:avalon-framework-api:4.3.1
+|    |    |    \--- org.apache.avalon.framework:avalon-framework-impl:4.3.1
+|    |    |         \--- org.apache.avalon.framework:avalon-framework-api:4.3.1
+|    |    +--- org.apache.xmlgraphics:batik-awt-util:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-bridge:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-dom:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-gvt:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-svg-dom:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-svggen:1.7
+|    |    |    +--- org.apache.xmlgraphics:batik-awt-util:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    \--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    +--- org.apache.xmlgraphics:batik-xml:1.7 (*)
+|    |    +--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    \--- xml-apis:xml-apis-ext:1.3.04
+|    +--- org.apache.xmlgraphics:batik-util:1.7
+|    \--- xml-apis:xml-apis:1.3.04 -> 1.4.01
++--- me.lessis:courier_2.11:0.1.3
+|    +--- org.scala-lang:scala-library:2.11.1 -> 2.11.6
+|    +--- javax.mail:mail:1.4.7
+|    |    \--- javax.activation:activation:1.1 -> 1.1.1
+|    \--- javax.activation:activation:1.1.1
++--- com.dropbox.core:dropbox-core-sdk:1.7.7
+|    \--- com.fasterxml.jackson.core:jackson-core:[2.2,2.4) -> 2.5.3
+\--- org.scalatest:scalatest_2.11:3.0.0-M7
+     +--- org.scala-lang:scala-library:2.11.7 -> 2.11.6
+     +--- org.scalactic:scalactic_2.11:3.0.0-M7
+     |    +--- org.scala-lang:scala-library:2.11.7 -> 2.11.6
+     |    \--- org.scala-lang:scala-reflect:2.11.7 -> 2.11.6 (*)
+     +--- org.scala-lang:scala-reflect:2.11.7 -> 2.11.6 (*)
+     +--- org.scala-lang.modules:scala-xml_2.11:1.0.2 -> 1.0.4 (*)
+     \--- org.scala-lang.modules:scala-parser-combinators_2.11:1.0.4 (*)
+
+providedCompile - Additional compile classpath for libraries that should not be part of the WAR archive.
+No dependencies
+
+providedRuntime - Additional runtime classpath for libraries that should not be part of the WAR archive.
+No dependencies
+
+runtime - Runtime classpath for source set 'main'.
++--- org.scala-lang:scala-library:2.11.6
++--- org.scala-lang:scala-compiler:2.11.6
+|    +--- org.scala-lang:scala-library:2.11.6
+|    +--- org.scala-lang:scala-reflect:2.11.6
+|    |    \--- org.scala-lang:scala-library:2.11.6
+|    +--- org.scala-lang.modules:scala-xml_2.11:1.0.3 -> 1.0.4
+|    |    \--- org.scala-lang:scala-library:2.11.4 -> 2.11.6
+|    \--- org.scala-lang.modules:scala-parser-combinators_2.11:1.0.3 -> 1.0.4
+|         \--- org.scala-lang:scala-library:2.11.6
++--- org.scala-lang:scala-reflect:2.11.6 (*)
++--- org.scala-lang:scalap:2.11.6
+|    \--- org.scala-lang:scala-compiler:2.11.6 (*)
++--- org.scala-lang.modules:scala-parser-combinators_2.11:1.0.4 (*)
++--- com.github.jsimone:webapp-runner:8.0.33.1
+|    +--- org.apache.tomcat.embed:tomcat-embed-core:8.0.33
+|    +--- org.apache.tomcat.embed:tomcat-embed-logging-juli:8.0.33
+|    +--- org.apache.tomcat.embed:tomcat-embed-jasper:8.0.33
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-core:8.0.33
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-el:8.0.33
+|    |    \--- org.eclipse.jdt.core.compiler:ecj:4.5
+|    +--- org.apache.tomcat:tomcat-jasper:8.0.33
+|    |    +--- org.apache.tomcat:tomcat-servlet-api:8.0.33
+|    |    +--- org.apache.tomcat:tomcat-juli:8.0.33
+|    |    +--- org.apache.tomcat:tomcat-jsp-api:8.0.33
+|    |    |    +--- org.apache.tomcat:tomcat-el-api:8.0.33
+|    |    |    \--- org.apache.tomcat:tomcat-servlet-api:8.0.33
+|    |    +--- org.apache.tomcat:tomcat-el-api:8.0.33
+|    |    +--- org.eclipse.jdt.core.compiler:ecj:4.5
+|    |    +--- org.apache.tomcat:tomcat-jasper-el:8.0.33
+|    |    |    \--- org.apache.tomcat:tomcat-el-api:8.0.33
+|    |    +--- org.apache.tomcat:tomcat-api:8.0.33
+|    |    |    \--- org.apache.tomcat:tomcat-servlet-api:8.0.33
+|    |    \--- org.apache.tomcat:tomcat-util-scan:8.0.33
+|    |         +--- org.apache.tomcat:tomcat-util:8.0.33
+|    |         |    \--- org.apache.tomcat:tomcat-juli:8.0.33
+|    |         +--- org.apache.tomcat:tomcat-juli:8.0.33
+|    |         \--- org.apache.tomcat:tomcat-api:8.0.33 (*)
+|    +--- org.apache.tomcat:tomcat-jasper-el:8.0.33 (*)
+|    +--- org.apache.tomcat:tomcat-jsp-api:8.0.33 (*)
+|    +--- com.github.jkutner:tomcat-redis-session:8.0.18.1
+|    |    +--- redis.clients:jedis:2.6.2
+|    |    |    \--- org.apache.commons:commons-pool2:2.0 -> 2.3
+|    |    \--- org.apache.commons:commons-pool2:2.3
+|    +--- com.beust:jcommander:1.27
+|    +--- commons-io:commons-io:2.3 -> 2.4
+|    \--- de.javakaffee.msm:memcached-session-manager-tc8:1.8.3
+|         +--- de.javakaffee.msm:memcached-session-manager:1.8.3
+|         |    +--- net.spy:spymemcached:2.11.1
+|         |    +--- com.couchbase.client:couchbase-client:1.4.0
+|         |    |    +--- io.netty:netty:3.5.5.Final
+|         |    |    +--- org.codehaus.jettison:jettison:1.1
+|         |    |    |    \--- stax:stax-api:1.0.1
+|         |    |    +--- commons-codec:commons-codec:1.5
+|         |    |    +--- net.spy:spymemcached:2.11.1
+|         |    |    +--- org.apache.httpcomponents:httpcore:4.3
+|         |    |    \--- org.apache.httpcomponents:httpcore-nio:4.3
+|         |    |         \--- org.apache.httpcomponents:httpcore:4.3
+|         |    +--- com.google.code.findbugs:jsr305:1.3.9
+|         |    \--- com.google.code.findbugs:annotations:1.3.9
+|         +--- com.google.code.findbugs:jsr305:1.3.9
+|         \--- com.google.code.findbugs:annotations:1.3.9
++--- org.scalatra:scalatra_2.11:2.3.1
+|    +--- org.scala-lang:scala-library:2.11.6
+|    +--- org.scalatra:scalatra-common_2.11:2.3.1
+|    |    \--- org.scala-lang:scala-library:2.11.6
+|    +--- org.slf4j:slf4j-api:1.7.10
+|    +--- org.clapper:grizzled-slf4j_2.11:1.0.2
+|    |    +--- org.scala-lang:scala-library:2.11.0 -> 2.11.6
+|    |    \--- org.slf4j:slf4j-api:1.7.7 -> 1.7.10
+|    +--- org.scalatra.rl:rl_2.11:0.4.10
+|    |    \--- org.scala-lang:scala-library:2.11.0 -> 2.11.6
+|    +--- com.googlecode.juniversalchardet:juniversalchardet:1.0.3
+|    +--- eu.medsea.mimeutil:mime-util:2.1.3
+|    |    \--- org.slf4j:slf4j-api:1.5.6 -> 1.7.10
+|    +--- joda-time:joda-time:2.7
+|    +--- org.joda:joda-convert:1.7
+|    +--- org.scala-lang.modules:scala-parser-combinators_2.11:1.0.3 -> 1.0.4 (*)
+|    \--- org.scala-lang.modules:scala-xml_2.11:1.0.3 -> 1.0.4 (*)
++--- org.scalatra:scalatra-scalate_2.11:2.3.1
+|    +--- org.scala-lang:scala-library:2.11.6
+|    +--- org.scalatra:scalatra_2.11:2.3.1 (*)
+|    \--- org.scalatra.scalate:scalate-core_2.11:1.7.1
+|         +--- org.scalatra.scalate:scalate-util_2.11:1.7.1
+|         |    +--- org.slf4j:slf4j-api:1.6.1 -> 1.7.10
+|         |    +--- org.scala-lang:scala-library:2.11.0 -> 2.11.6
+|         |    +--- org.scala-lang.modules:scala-xml_2.11:1.0.1 -> 1.0.4 (*)
+|         |    \--- org.scala-lang.modules:scala-parser-combinators_2.11:1.0.1 -> 1.0.4 (*)
+|         +--- org.slf4j:slf4j-api:1.6.1 -> 1.7.10
+|         \--- org.scala-lang:scala-compiler:2.11.0 -> 2.11.6 (*)
++--- org.scalatra.scalate:scalate-core_2.11:1.7.0 -> 1.7.1 (*)
++--- org.scalatra:scalatra-json_2.11:2.3.1
+|    +--- org.scala-lang:scala-library:2.11.6
+|    +--- org.scalatra:scalatra_2.11:2.3.1 (*)
+|    \--- org.json4s:json4s-core_2.11:3.2.11 -> 3.3.0.RC3
+|         +--- org.scala-lang:scala-library:2.11.7 -> 2.11.6
+|         +--- org.json4s:json4s-ast_2.11:3.3.0.RC3
+|         |    \--- org.scala-lang:scala-library:2.11.7 -> 2.11.6
+|         +--- org.json4s:json4s-scalap_2.11:3.3.0.RC3
+|         |    \--- org.scala-lang:scala-library:2.11.7 -> 2.11.6
+|         +--- com.thoughtworks.paranamer:paranamer:2.7
+|         \--- org.scala-lang.modules:scala-xml_2.11:1.0.4 (*)
++--- org.scalatra:scalatra-auth_2.11:2.3.1
+|    +--- org.scala-lang:scala-library:2.11.6
+|    +--- org.scalatra:scalatra_2.11:2.3.1 (*)
+|    \--- net.iharder:base64:2.3.8
++--- javax.servlet:javax.servlet-api:3.1.0
++--- org.eclipse.jetty:jetty-webapp:9.2.10.v20150310
+|    +--- org.eclipse.jetty:jetty-xml:9.2.10.v20150310
+|    |    \--- org.eclipse.jetty:jetty-util:9.2.10.v20150310
+|    \--- org.eclipse.jetty:jetty-servlet:9.2.10.v20150310
+|         \--- org.eclipse.jetty:jetty-security:9.2.10.v20150310
+|              \--- org.eclipse.jetty:jetty-server:9.2.10.v20150310
+|                   +--- javax.servlet:javax.servlet-api:3.1.0
+|                   +--- org.eclipse.jetty:jetty-http:9.2.10.v20150310
+|                   |    \--- org.eclipse.jetty:jetty-util:9.2.10.v20150310
+|                   \--- org.eclipse.jetty:jetty-io:9.2.10.v20150310
+|                        \--- org.eclipse.jetty:jetty-util:9.2.10.v20150310
++--- ch.qos.logback:logback-classic:1.1.2
+|    +--- ch.qos.logback:logback-core:1.1.2
+|    \--- org.slf4j:slf4j-api:1.7.6 -> 1.7.10
++--- com.typesafe.slick:slick_2.11:3.1.1
+|    +--- org.scala-lang:scala-library:2.11.6
+|    +--- org.slf4j:slf4j-api:1.7.10
+|    +--- com.typesafe:config:1.2.1 -> 1.3.0
+|    \--- org.reactivestreams:reactive-streams:1.0.0
++--- com.typesafe:config:1.3.0
++--- com.h2database:h2:1.4.190
++--- org.json4s:json4s-jackson_2.11:3.3.0.RC3
+|    +--- org.scala-lang:scala-library:2.11.7 -> 2.11.6
+|    +--- org.json4s:json4s-core_2.11:3.3.0.RC3 (*)
+|    \--- com.fasterxml.jackson.core:jackson-databind:2.5.3
+|         +--- com.fasterxml.jackson.core:jackson-annotations:2.5.0
+|         \--- com.fasterxml.jackson.core:jackson-core:2.5.3
++--- org.json4s:json4s-native_2.11:3.3.0.RC3
+|    +--- org.scala-lang:scala-library:2.11.7 -> 2.11.6
+|    \--- org.json4s:json4s-core_2.11:3.3.0.RC3 (*)
++--- com.mchange:c3p0:0.9.5.1
+|    \--- com.mchange:mchange-commons-java:0.2.10
++--- com.sksamuel.scrimage:scrimage-core_2.11:2.0.1
+|    +--- org.scala-lang:scala-library:2.11.6
+|    +--- org.slf4j:slf4j-api:1.7.7 -> 1.7.10
+|    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1
+|    |    |    \--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1
+|    |         +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |         \--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-jpeg:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.imageio:imageio-metadata:3.1.1
+|    |    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    +--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.drewnoakes:metadata-extractor:2.8.1
+|    |    \--- com.adobe.xmp:xmpcore:5.1.2
+|    +--- commons-io:commons-io:2.4
+|    \--- ar.com.hjg:pngj:2.1.0
++--- com.sksamuel.scrimage:scrimage-io_2.11:2.0.1
+|    +--- org.scala-lang:scala-library:2.11.6
+|    +--- com.sksamuel.scrimage:scrimage-core_2.11:2.0.1 (*)
+|    +--- org.slf4j:slf4j-api:1.7.7 -> 1.7.10
+|    +--- com.twelvemonkeys.imageio:imageio-batik:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-bmp:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-jpeg:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-icns:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-iff:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-pcx:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-pict:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-pdf:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-pnm:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-psd:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.imageio:imageio-metadata:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-sgi:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-tiff:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.imageio:imageio-metadata:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-tga:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    \--- com.twelvemonkeys.imageio:imageio-thumbsdb:3.1.1
+|         +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|         +--- com.twelvemonkeys.common:common-lang:3.1.1
+|         +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|         \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
++--- com.sksamuel.scrimage:scrimage-filters_2.11:2.0.1
+|    +--- org.scala-lang:scala-library:2.11.6
+|    +--- com.sksamuel.scrimage:scrimage-core_2.11:2.0.1 (*)
+|    +--- org.slf4j:slf4j-api:1.7.7 -> 1.7.10
+|    \--- commons-io:commons-io:2.4
++--- org.apache.xmlgraphics:batik-codec:1.7
+|    +--- org.apache.xmlgraphics:batik-awt-util:1.7
+|    |    \--- org.apache.xmlgraphics:batik-util:1.7
+|    +--- org.apache.xmlgraphics:batik-bridge:1.7
+|    |    +--- org.apache.xmlgraphics:batik-anim:1.7
+|    |    |    +--- org.apache.xmlgraphics:batik-awt-util:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-dom:1.7
+|    |    |    |    +--- org.apache.xmlgraphics:batik-css:1.7
+|    |    |    |    |    +--- org.apache.xmlgraphics:batik-ext:1.7
+|    |    |    |    |    |    \--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    |    |    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    |    |    +--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    |    |    |    \--- xml-apis:xml-apis-ext:1.3.04
+|    |    |    |    +--- org.apache.xmlgraphics:batik-ext:1.7 (*)
+|    |    |    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    |    +--- org.apache.xmlgraphics:batik-xml:1.7
+|    |    |    |    |    \--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    |    +--- xalan:xalan:2.6.0
+|    |    |    |    |    \--- xml-apis:xml-apis:2.0.2 -> 1.4.01
+|    |    |    |    +--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    |    |    \--- xml-apis:xml-apis-ext:1.3.04
+|    |    |    +--- org.apache.xmlgraphics:batik-ext:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-parser:1.7
+|    |    |    |    +--- org.apache.xmlgraphics:batik-awt-util:1.7 (*)
+|    |    |    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    |    \--- org.apache.xmlgraphics:batik-xml:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-svg-dom:1.7
+|    |    |    |    +--- org.apache.xmlgraphics:batik-anim:1.7 (*)
+|    |    |    |    +--- org.apache.xmlgraphics:batik-awt-util:1.7 (*)
+|    |    |    |    +--- org.apache.xmlgraphics:batik-css:1.7 (*)
+|    |    |    |    +--- org.apache.xmlgraphics:batik-dom:1.7 (*)
+|    |    |    |    +--- org.apache.xmlgraphics:batik-ext:1.7 (*)
+|    |    |    |    +--- org.apache.xmlgraphics:batik-parser:1.7 (*)
+|    |    |    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    |    +--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    |    |    \--- xml-apis:xml-apis-ext:1.3.04
+|    |    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    +--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    |    \--- xml-apis:xml-apis-ext:1.3.04
+|    |    +--- org.apache.xmlgraphics:batik-awt-util:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-css:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-dom:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-ext:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-gvt:1.7
+|    |    |    +--- org.apache.xmlgraphics:batik-awt-util:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-bridge:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    \--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    +--- org.apache.xmlgraphics:batik-parser:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-script:1.7
+|    |    |    +--- org.apache.xmlgraphics:batik-bridge:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-dom:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-ext:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-svg-dom:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    +--- org.apache.xmlgraphics:batik-js:1.7
+|    |    |    |    \--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    |    \--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    +--- org.apache.xmlgraphics:batik-svg-dom:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    +--- org.apache.xmlgraphics:batik-xml:1.7 (*)
+|    |    +--- xalan:xalan:2.6.0 (*)
+|    |    +--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    \--- xml-apis:xml-apis-ext:1.3.04
+|    +--- org.apache.xmlgraphics:batik-transcoder:1.7
+|    |    +--- org.apache.xmlgraphics:fop:0.94
+|    |    |    +--- org.apache.xmlgraphics:xmlgraphics-commons:1.2
+|    |    |    |    \--- commons-io:commons-io:1.1 -> 2.4
+|    |    |    +--- commons-logging:commons-logging:1.0.4
+|    |    |    +--- commons-io:commons-io:1.1 -> 2.4
+|    |    |    +--- org.apache.avalon.framework:avalon-framework-api:4.3.1
+|    |    |    \--- org.apache.avalon.framework:avalon-framework-impl:4.3.1
+|    |    |         \--- org.apache.avalon.framework:avalon-framework-api:4.3.1
+|    |    +--- org.apache.xmlgraphics:batik-awt-util:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-bridge:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-dom:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-gvt:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-svg-dom:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-svggen:1.7
+|    |    |    +--- org.apache.xmlgraphics:batik-awt-util:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    \--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    +--- org.apache.xmlgraphics:batik-xml:1.7 (*)
+|    |    +--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    \--- xml-apis:xml-apis-ext:1.3.04
+|    +--- org.apache.xmlgraphics:batik-util:1.7
+|    \--- xml-apis:xml-apis:1.3.04 -> 1.4.01
++--- me.lessis:courier_2.11:0.1.3
+|    +--- org.scala-lang:scala-library:2.11.1 -> 2.11.6
+|    +--- javax.mail:mail:1.4.7
+|    |    \--- javax.activation:activation:1.1 -> 1.1.1
+|    \--- javax.activation:activation:1.1.1
++--- com.dropbox.core:dropbox-core-sdk:1.7.7
+|    \--- com.fasterxml.jackson.core:jackson-core:[2.2,2.4) -> 2.5.3
+\--- org.scalatest:scalatest_2.11:3.0.0-M7
+     +--- org.scala-lang:scala-library:2.11.7 -> 2.11.6
+     +--- org.scalactic:scalactic_2.11:3.0.0-M7
+     |    +--- org.scala-lang:scala-library:2.11.7 -> 2.11.6
+     |    \--- org.scala-lang:scala-reflect:2.11.7 -> 2.11.6 (*)
+     +--- org.scala-lang:scala-reflect:2.11.7 -> 2.11.6 (*)
+     +--- org.scala-lang.modules:scala-xml_2.11:1.0.2 -> 1.0.4 (*)
+     \--- org.scala-lang.modules:scala-parser-combinators_2.11:1.0.4 (*)
+
+testCompile - Compile classpath for source set 'test'.
++--- org.scala-lang:scala-library:2.11.6
++--- org.scala-lang:scala-compiler:2.11.6
+|    +--- org.scala-lang:scala-library:2.11.6
+|    +--- org.scala-lang:scala-reflect:2.11.6
+|    |    \--- org.scala-lang:scala-library:2.11.6
+|    +--- org.scala-lang.modules:scala-xml_2.11:1.0.3 -> 1.0.4
+|    |    \--- org.scala-lang:scala-library:2.11.4 -> 2.11.6
+|    \--- org.scala-lang.modules:scala-parser-combinators_2.11:1.0.3 -> 1.0.4
+|         \--- org.scala-lang:scala-library:2.11.6
++--- org.scala-lang:scala-reflect:2.11.6 (*)
++--- org.scala-lang:scalap:2.11.6
+|    \--- org.scala-lang:scala-compiler:2.11.6 (*)
++--- org.scala-lang.modules:scala-parser-combinators_2.11:1.0.4 (*)
++--- com.github.jsimone:webapp-runner:8.0.33.1
+|    +--- org.apache.tomcat.embed:tomcat-embed-core:8.0.33
+|    +--- org.apache.tomcat.embed:tomcat-embed-logging-juli:8.0.33
+|    +--- org.apache.tomcat.embed:tomcat-embed-jasper:8.0.33
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-core:8.0.33
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-el:8.0.33
+|    |    \--- org.eclipse.jdt.core.compiler:ecj:4.5
+|    +--- org.apache.tomcat:tomcat-jasper:8.0.33
+|    |    +--- org.apache.tomcat:tomcat-servlet-api:8.0.33
+|    |    +--- org.apache.tomcat:tomcat-juli:8.0.33
+|    |    +--- org.apache.tomcat:tomcat-jsp-api:8.0.33
+|    |    |    +--- org.apache.tomcat:tomcat-el-api:8.0.33
+|    |    |    \--- org.apache.tomcat:tomcat-servlet-api:8.0.33
+|    |    +--- org.apache.tomcat:tomcat-el-api:8.0.33
+|    |    +--- org.eclipse.jdt.core.compiler:ecj:4.5
+|    |    +--- org.apache.tomcat:tomcat-jasper-el:8.0.33
+|    |    |    \--- org.apache.tomcat:tomcat-el-api:8.0.33
+|    |    +--- org.apache.tomcat:tomcat-api:8.0.33
+|    |    |    \--- org.apache.tomcat:tomcat-servlet-api:8.0.33
+|    |    \--- org.apache.tomcat:tomcat-util-scan:8.0.33
+|    |         +--- org.apache.tomcat:tomcat-util:8.0.33
+|    |         |    \--- org.apache.tomcat:tomcat-juli:8.0.33
+|    |         +--- org.apache.tomcat:tomcat-juli:8.0.33
+|    |         \--- org.apache.tomcat:tomcat-api:8.0.33 (*)
+|    +--- org.apache.tomcat:tomcat-jasper-el:8.0.33 (*)
+|    +--- org.apache.tomcat:tomcat-jsp-api:8.0.33 (*)
+|    +--- com.github.jkutner:tomcat-redis-session:8.0.18.1
+|    |    +--- redis.clients:jedis:2.6.2
+|    |    |    \--- org.apache.commons:commons-pool2:2.0 -> 2.3
+|    |    \--- org.apache.commons:commons-pool2:2.3
+|    +--- com.beust:jcommander:1.27
+|    +--- commons-io:commons-io:2.3 -> 2.4
+|    \--- de.javakaffee.msm:memcached-session-manager-tc8:1.8.3
+|         +--- de.javakaffee.msm:memcached-session-manager:1.8.3
+|         |    +--- net.spy:spymemcached:2.11.1
+|         |    +--- com.couchbase.client:couchbase-client:1.4.0
+|         |    |    +--- io.netty:netty:3.5.5.Final
+|         |    |    +--- org.codehaus.jettison:jettison:1.1
+|         |    |    |    \--- stax:stax-api:1.0.1
+|         |    |    +--- commons-codec:commons-codec:1.5
+|         |    |    +--- net.spy:spymemcached:2.11.1
+|         |    |    +--- org.apache.httpcomponents:httpcore:4.3
+|         |    |    \--- org.apache.httpcomponents:httpcore-nio:4.3
+|         |    |         \--- org.apache.httpcomponents:httpcore:4.3
+|         |    +--- com.google.code.findbugs:jsr305:1.3.9
+|         |    \--- com.google.code.findbugs:annotations:1.3.9
+|         +--- com.google.code.findbugs:jsr305:1.3.9
+|         \--- com.google.code.findbugs:annotations:1.3.9
++--- org.scalatra:scalatra_2.11:2.3.1
+|    +--- org.scala-lang:scala-library:2.11.6
+|    +--- org.scalatra:scalatra-common_2.11:2.3.1
+|    |    \--- org.scala-lang:scala-library:2.11.6
+|    +--- org.slf4j:slf4j-api:1.7.10
+|    +--- org.clapper:grizzled-slf4j_2.11:1.0.2
+|    |    +--- org.scala-lang:scala-library:2.11.0 -> 2.11.6
+|    |    \--- org.slf4j:slf4j-api:1.7.7 -> 1.7.10
+|    +--- org.scalatra.rl:rl_2.11:0.4.10
+|    |    \--- org.scala-lang:scala-library:2.11.0 -> 2.11.6
+|    +--- com.googlecode.juniversalchardet:juniversalchardet:1.0.3
+|    +--- eu.medsea.mimeutil:mime-util:2.1.3
+|    |    \--- org.slf4j:slf4j-api:1.5.6 -> 1.7.10
+|    +--- joda-time:joda-time:2.7
+|    +--- org.joda:joda-convert:1.7
+|    +--- org.scala-lang.modules:scala-parser-combinators_2.11:1.0.3 -> 1.0.4 (*)
+|    \--- org.scala-lang.modules:scala-xml_2.11:1.0.3 -> 1.0.4 (*)
++--- org.scalatra:scalatra-scalate_2.11:2.3.1
+|    +--- org.scala-lang:scala-library:2.11.6
+|    +--- org.scalatra:scalatra_2.11:2.3.1 (*)
+|    \--- org.scalatra.scalate:scalate-core_2.11:1.7.1
+|         +--- org.scalatra.scalate:scalate-util_2.11:1.7.1
+|         |    +--- org.slf4j:slf4j-api:1.6.1 -> 1.7.10
+|         |    +--- org.scala-lang:scala-library:2.11.0 -> 2.11.6
+|         |    +--- org.scala-lang.modules:scala-xml_2.11:1.0.1 -> 1.0.4 (*)
+|         |    \--- org.scala-lang.modules:scala-parser-combinators_2.11:1.0.1 -> 1.0.4 (*)
+|         +--- org.slf4j:slf4j-api:1.6.1 -> 1.7.10
+|         \--- org.scala-lang:scala-compiler:2.11.0 -> 2.11.6 (*)
++--- org.scalatra.scalate:scalate-core_2.11:1.7.0 -> 1.7.1 (*)
++--- org.scalatra:scalatra-json_2.11:2.3.1
+|    +--- org.scala-lang:scala-library:2.11.6
+|    +--- org.scalatra:scalatra_2.11:2.3.1 (*)
+|    \--- org.json4s:json4s-core_2.11:3.2.11 -> 3.3.0.RC3
+|         +--- org.scala-lang:scala-library:2.11.7 -> 2.11.6
+|         +--- org.json4s:json4s-ast_2.11:3.3.0.RC3
+|         |    \--- org.scala-lang:scala-library:2.11.7 -> 2.11.6
+|         +--- org.json4s:json4s-scalap_2.11:3.3.0.RC3
+|         |    \--- org.scala-lang:scala-library:2.11.7 -> 2.11.6
+|         +--- com.thoughtworks.paranamer:paranamer:2.7
+|         \--- org.scala-lang.modules:scala-xml_2.11:1.0.4 (*)
++--- org.scalatra:scalatra-auth_2.11:2.3.1
+|    +--- org.scala-lang:scala-library:2.11.6
+|    +--- org.scalatra:scalatra_2.11:2.3.1 (*)
+|    \--- net.iharder:base64:2.3.8
++--- javax.servlet:javax.servlet-api:3.1.0
++--- org.eclipse.jetty:jetty-webapp:9.2.10.v20150310
+|    +--- org.eclipse.jetty:jetty-xml:9.2.10.v20150310
+|    |    \--- org.eclipse.jetty:jetty-util:9.2.10.v20150310
+|    \--- org.eclipse.jetty:jetty-servlet:9.2.10.v20150310
+|         \--- org.eclipse.jetty:jetty-security:9.2.10.v20150310
+|              \--- org.eclipse.jetty:jetty-server:9.2.10.v20150310
+|                   +--- javax.servlet:javax.servlet-api:3.1.0
+|                   +--- org.eclipse.jetty:jetty-http:9.2.10.v20150310
+|                   |    \--- org.eclipse.jetty:jetty-util:9.2.10.v20150310
+|                   \--- org.eclipse.jetty:jetty-io:9.2.10.v20150310
+|                        \--- org.eclipse.jetty:jetty-util:9.2.10.v20150310
++--- ch.qos.logback:logback-classic:1.1.2
+|    +--- ch.qos.logback:logback-core:1.1.2
+|    \--- org.slf4j:slf4j-api:1.7.6 -> 1.7.10
++--- com.typesafe.slick:slick_2.11:3.1.1
+|    +--- org.scala-lang:scala-library:2.11.6
+|    +--- org.slf4j:slf4j-api:1.7.10
+|    +--- com.typesafe:config:1.2.1 -> 1.3.0
+|    \--- org.reactivestreams:reactive-streams:1.0.0
++--- com.typesafe:config:1.3.0
++--- com.h2database:h2:1.4.190
++--- org.json4s:json4s-jackson_2.11:3.3.0.RC3
+|    +--- org.scala-lang:scala-library:2.11.7 -> 2.11.6
+|    +--- org.json4s:json4s-core_2.11:3.3.0.RC3 (*)
+|    \--- com.fasterxml.jackson.core:jackson-databind:2.5.3
+|         +--- com.fasterxml.jackson.core:jackson-annotations:2.5.0
+|         \--- com.fasterxml.jackson.core:jackson-core:2.5.3
++--- org.json4s:json4s-native_2.11:3.3.0.RC3
+|    +--- org.scala-lang:scala-library:2.11.7 -> 2.11.6
+|    \--- org.json4s:json4s-core_2.11:3.3.0.RC3 (*)
++--- com.mchange:c3p0:0.9.5.1
+|    \--- com.mchange:mchange-commons-java:0.2.10
++--- com.sksamuel.scrimage:scrimage-core_2.11:2.0.1
+|    +--- org.scala-lang:scala-library:2.11.6
+|    +--- org.slf4j:slf4j-api:1.7.7 -> 1.7.10
+|    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1
+|    |    |    \--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1
+|    |         +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |         \--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-jpeg:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.imageio:imageio-metadata:3.1.1
+|    |    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    +--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.drewnoakes:metadata-extractor:2.8.1
+|    |    \--- com.adobe.xmp:xmpcore:5.1.2
+|    +--- commons-io:commons-io:2.4
+|    \--- ar.com.hjg:pngj:2.1.0
++--- com.sksamuel.scrimage:scrimage-io_2.11:2.0.1
+|    +--- org.scala-lang:scala-library:2.11.6
+|    +--- com.sksamuel.scrimage:scrimage-core_2.11:2.0.1 (*)
+|    +--- org.slf4j:slf4j-api:1.7.7 -> 1.7.10
+|    +--- com.twelvemonkeys.imageio:imageio-batik:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-bmp:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-jpeg:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-icns:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-iff:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-pcx:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-pict:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-pdf:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-pnm:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-psd:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.imageio:imageio-metadata:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-sgi:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-tiff:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.imageio:imageio-metadata:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-tga:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    \--- com.twelvemonkeys.imageio:imageio-thumbsdb:3.1.1
+|         +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|         +--- com.twelvemonkeys.common:common-lang:3.1.1
+|         +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|         \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
++--- com.sksamuel.scrimage:scrimage-filters_2.11:2.0.1
+|    +--- org.scala-lang:scala-library:2.11.6
+|    +--- com.sksamuel.scrimage:scrimage-core_2.11:2.0.1 (*)
+|    +--- org.slf4j:slf4j-api:1.7.7 -> 1.7.10
+|    \--- commons-io:commons-io:2.4
++--- org.apache.xmlgraphics:batik-codec:1.7
+|    +--- org.apache.xmlgraphics:batik-awt-util:1.7
+|    |    \--- org.apache.xmlgraphics:batik-util:1.7
+|    +--- org.apache.xmlgraphics:batik-bridge:1.7
+|    |    +--- org.apache.xmlgraphics:batik-anim:1.7
+|    |    |    +--- org.apache.xmlgraphics:batik-awt-util:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-dom:1.7
+|    |    |    |    +--- org.apache.xmlgraphics:batik-css:1.7
+|    |    |    |    |    +--- org.apache.xmlgraphics:batik-ext:1.7
+|    |    |    |    |    |    \--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    |    |    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    |    |    +--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    |    |    |    \--- xml-apis:xml-apis-ext:1.3.04
+|    |    |    |    +--- org.apache.xmlgraphics:batik-ext:1.7 (*)
+|    |    |    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    |    +--- org.apache.xmlgraphics:batik-xml:1.7
+|    |    |    |    |    \--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    |    +--- xalan:xalan:2.6.0
+|    |    |    |    |    \--- xml-apis:xml-apis:2.0.2 -> 1.4.01
+|    |    |    |    +--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    |    |    \--- xml-apis:xml-apis-ext:1.3.04
+|    |    |    +--- org.apache.xmlgraphics:batik-ext:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-parser:1.7
+|    |    |    |    +--- org.apache.xmlgraphics:batik-awt-util:1.7 (*)
+|    |    |    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    |    \--- org.apache.xmlgraphics:batik-xml:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-svg-dom:1.7
+|    |    |    |    +--- org.apache.xmlgraphics:batik-anim:1.7 (*)
+|    |    |    |    +--- org.apache.xmlgraphics:batik-awt-util:1.7 (*)
+|    |    |    |    +--- org.apache.xmlgraphics:batik-css:1.7 (*)
+|    |    |    |    +--- org.apache.xmlgraphics:batik-dom:1.7 (*)
+|    |    |    |    +--- org.apache.xmlgraphics:batik-ext:1.7 (*)
+|    |    |    |    +--- org.apache.xmlgraphics:batik-parser:1.7 (*)
+|    |    |    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    |    +--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    |    |    \--- xml-apis:xml-apis-ext:1.3.04
+|    |    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    +--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    |    \--- xml-apis:xml-apis-ext:1.3.04
+|    |    +--- org.apache.xmlgraphics:batik-awt-util:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-css:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-dom:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-ext:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-gvt:1.7
+|    |    |    +--- org.apache.xmlgraphics:batik-awt-util:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-bridge:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    \--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    +--- org.apache.xmlgraphics:batik-parser:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-script:1.7
+|    |    |    +--- org.apache.xmlgraphics:batik-bridge:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-dom:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-ext:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-svg-dom:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    +--- org.apache.xmlgraphics:batik-js:1.7
+|    |    |    |    \--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    |    \--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    +--- org.apache.xmlgraphics:batik-svg-dom:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    +--- org.apache.xmlgraphics:batik-xml:1.7 (*)
+|    |    +--- xalan:xalan:2.6.0 (*)
+|    |    +--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    \--- xml-apis:xml-apis-ext:1.3.04
+|    +--- org.apache.xmlgraphics:batik-transcoder:1.7
+|    |    +--- org.apache.xmlgraphics:fop:0.94
+|    |    |    +--- org.apache.xmlgraphics:xmlgraphics-commons:1.2
+|    |    |    |    \--- commons-io:commons-io:1.1 -> 2.4
+|    |    |    +--- commons-logging:commons-logging:1.0.4
+|    |    |    +--- commons-io:commons-io:1.1 -> 2.4
+|    |    |    +--- org.apache.avalon.framework:avalon-framework-api:4.3.1
+|    |    |    \--- org.apache.avalon.framework:avalon-framework-impl:4.3.1
+|    |    |         \--- org.apache.avalon.framework:avalon-framework-api:4.3.1
+|    |    +--- org.apache.xmlgraphics:batik-awt-util:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-bridge:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-dom:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-gvt:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-svg-dom:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-svggen:1.7
+|    |    |    +--- org.apache.xmlgraphics:batik-awt-util:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    \--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    +--- org.apache.xmlgraphics:batik-xml:1.7 (*)
+|    |    +--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    \--- xml-apis:xml-apis-ext:1.3.04
+|    +--- org.apache.xmlgraphics:batik-util:1.7
+|    \--- xml-apis:xml-apis:1.3.04 -> 1.4.01
++--- me.lessis:courier_2.11:0.1.3
+|    +--- org.scala-lang:scala-library:2.11.1 -> 2.11.6
+|    +--- javax.mail:mail:1.4.7
+|    |    \--- javax.activation:activation:1.1 -> 1.1.1
+|    \--- javax.activation:activation:1.1.1
++--- com.dropbox.core:dropbox-core-sdk:1.7.7
+|    \--- com.fasterxml.jackson.core:jackson-core:[2.2,2.4) -> 2.5.3
++--- org.scalatest:scalatest_2.11:3.0.0-M7
+|    +--- org.scala-lang:scala-library:2.11.7 -> 2.11.6
+|    +--- org.scalactic:scalactic_2.11:3.0.0-M7
+|    |    +--- org.scala-lang:scala-library:2.11.7 -> 2.11.6
+|    |    \--- org.scala-lang:scala-reflect:2.11.7 -> 2.11.6 (*)
+|    +--- org.scala-lang:scala-reflect:2.11.7 -> 2.11.6 (*)
+|    +--- org.scala-lang.modules:scala-xml_2.11:1.0.2 -> 1.0.4 (*)
+|    \--- org.scala-lang.modules:scala-parser-combinators_2.11:1.0.4 (*)
+\--- junit:junit:4.11
+     \--- org.hamcrest:hamcrest-core:1.3
+
+testRuntime - Runtime classpath for source set 'test'.
++--- org.scala-lang:scala-library:2.11.6
++--- org.scala-lang:scala-compiler:2.11.6
+|    +--- org.scala-lang:scala-library:2.11.6
+|    +--- org.scala-lang:scala-reflect:2.11.6
+|    |    \--- org.scala-lang:scala-library:2.11.6
+|    +--- org.scala-lang.modules:scala-xml_2.11:1.0.3 -> 1.0.4
+|    |    \--- org.scala-lang:scala-library:2.11.4 -> 2.11.6
+|    \--- org.scala-lang.modules:scala-parser-combinators_2.11:1.0.3 -> 1.0.4
+|         \--- org.scala-lang:scala-library:2.11.6
++--- org.scala-lang:scala-reflect:2.11.6 (*)
++--- org.scala-lang:scalap:2.11.6
+|    \--- org.scala-lang:scala-compiler:2.11.6 (*)
++--- org.scala-lang.modules:scala-parser-combinators_2.11:1.0.4 (*)
++--- com.github.jsimone:webapp-runner:8.0.33.1
+|    +--- org.apache.tomcat.embed:tomcat-embed-core:8.0.33
+|    +--- org.apache.tomcat.embed:tomcat-embed-logging-juli:8.0.33
+|    +--- org.apache.tomcat.embed:tomcat-embed-jasper:8.0.33
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-core:8.0.33
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-el:8.0.33
+|    |    \--- org.eclipse.jdt.core.compiler:ecj:4.5
+|    +--- org.apache.tomcat:tomcat-jasper:8.0.33
+|    |    +--- org.apache.tomcat:tomcat-servlet-api:8.0.33
+|    |    +--- org.apache.tomcat:tomcat-juli:8.0.33
+|    |    +--- org.apache.tomcat:tomcat-jsp-api:8.0.33
+|    |    |    +--- org.apache.tomcat:tomcat-el-api:8.0.33
+|    |    |    \--- org.apache.tomcat:tomcat-servlet-api:8.0.33
+|    |    +--- org.apache.tomcat:tomcat-el-api:8.0.33
+|    |    +--- org.eclipse.jdt.core.compiler:ecj:4.5
+|    |    +--- org.apache.tomcat:tomcat-jasper-el:8.0.33
+|    |    |    \--- org.apache.tomcat:tomcat-el-api:8.0.33
+|    |    +--- org.apache.tomcat:tomcat-api:8.0.33
+|    |    |    \--- org.apache.tomcat:tomcat-servlet-api:8.0.33
+|    |    \--- org.apache.tomcat:tomcat-util-scan:8.0.33
+|    |         +--- org.apache.tomcat:tomcat-util:8.0.33
+|    |         |    \--- org.apache.tomcat:tomcat-juli:8.0.33
+|    |         +--- org.apache.tomcat:tomcat-juli:8.0.33
+|    |         \--- org.apache.tomcat:tomcat-api:8.0.33 (*)
+|    +--- org.apache.tomcat:tomcat-jasper-el:8.0.33 (*)
+|    +--- org.apache.tomcat:tomcat-jsp-api:8.0.33 (*)
+|    +--- com.github.jkutner:tomcat-redis-session:8.0.18.1
+|    |    +--- redis.clients:jedis:2.6.2
+|    |    |    \--- org.apache.commons:commons-pool2:2.0 -> 2.3
+|    |    \--- org.apache.commons:commons-pool2:2.3
+|    +--- com.beust:jcommander:1.27
+|    +--- commons-io:commons-io:2.3 -> 2.4
+|    \--- de.javakaffee.msm:memcached-session-manager-tc8:1.8.3
+|         +--- de.javakaffee.msm:memcached-session-manager:1.8.3
+|         |    +--- net.spy:spymemcached:2.11.1
+|         |    +--- com.couchbase.client:couchbase-client:1.4.0
+|         |    |    +--- io.netty:netty:3.5.5.Final
+|         |    |    +--- org.codehaus.jettison:jettison:1.1
+|         |    |    |    \--- stax:stax-api:1.0.1
+|         |    |    +--- commons-codec:commons-codec:1.5
+|         |    |    +--- net.spy:spymemcached:2.11.1
+|         |    |    +--- org.apache.httpcomponents:httpcore:4.3
+|         |    |    \--- org.apache.httpcomponents:httpcore-nio:4.3
+|         |    |         \--- org.apache.httpcomponents:httpcore:4.3
+|         |    +--- com.google.code.findbugs:jsr305:1.3.9
+|         |    \--- com.google.code.findbugs:annotations:1.3.9
+|         +--- com.google.code.findbugs:jsr305:1.3.9
+|         \--- com.google.code.findbugs:annotations:1.3.9
++--- org.scalatra:scalatra_2.11:2.3.1
+|    +--- org.scala-lang:scala-library:2.11.6
+|    +--- org.scalatra:scalatra-common_2.11:2.3.1
+|    |    \--- org.scala-lang:scala-library:2.11.6
+|    +--- org.slf4j:slf4j-api:1.7.10
+|    +--- org.clapper:grizzled-slf4j_2.11:1.0.2
+|    |    +--- org.scala-lang:scala-library:2.11.0 -> 2.11.6
+|    |    \--- org.slf4j:slf4j-api:1.7.7 -> 1.7.10
+|    +--- org.scalatra.rl:rl_2.11:0.4.10
+|    |    \--- org.scala-lang:scala-library:2.11.0 -> 2.11.6
+|    +--- com.googlecode.juniversalchardet:juniversalchardet:1.0.3
+|    +--- eu.medsea.mimeutil:mime-util:2.1.3
+|    |    \--- org.slf4j:slf4j-api:1.5.6 -> 1.7.10
+|    +--- joda-time:joda-time:2.7
+|    +--- org.joda:joda-convert:1.7
+|    +--- org.scala-lang.modules:scala-parser-combinators_2.11:1.0.3 -> 1.0.4 (*)
+|    \--- org.scala-lang.modules:scala-xml_2.11:1.0.3 -> 1.0.4 (*)
++--- org.scalatra:scalatra-scalate_2.11:2.3.1
+|    +--- org.scala-lang:scala-library:2.11.6
+|    +--- org.scalatra:scalatra_2.11:2.3.1 (*)
+|    \--- org.scalatra.scalate:scalate-core_2.11:1.7.1
+|         +--- org.scalatra.scalate:scalate-util_2.11:1.7.1
+|         |    +--- org.slf4j:slf4j-api:1.6.1 -> 1.7.10
+|         |    +--- org.scala-lang:scala-library:2.11.0 -> 2.11.6
+|         |    +--- org.scala-lang.modules:scala-xml_2.11:1.0.1 -> 1.0.4 (*)
+|         |    \--- org.scala-lang.modules:scala-parser-combinators_2.11:1.0.1 -> 1.0.4 (*)
+|         +--- org.slf4j:slf4j-api:1.6.1 -> 1.7.10
+|         \--- org.scala-lang:scala-compiler:2.11.0 -> 2.11.6 (*)
++--- org.scalatra.scalate:scalate-core_2.11:1.7.0 -> 1.7.1 (*)
++--- org.scalatra:scalatra-json_2.11:2.3.1
+|    +--- org.scala-lang:scala-library:2.11.6
+|    +--- org.scalatra:scalatra_2.11:2.3.1 (*)
+|    \--- org.json4s:json4s-core_2.11:3.2.11 -> 3.3.0.RC3
+|         +--- org.scala-lang:scala-library:2.11.7 -> 2.11.6
+|         +--- org.json4s:json4s-ast_2.11:3.3.0.RC3
+|         |    \--- org.scala-lang:scala-library:2.11.7 -> 2.11.6
+|         +--- org.json4s:json4s-scalap_2.11:3.3.0.RC3
+|         |    \--- org.scala-lang:scala-library:2.11.7 -> 2.11.6
+|         +--- com.thoughtworks.paranamer:paranamer:2.7
+|         \--- org.scala-lang.modules:scala-xml_2.11:1.0.4 (*)
++--- org.scalatra:scalatra-auth_2.11:2.3.1
+|    +--- org.scala-lang:scala-library:2.11.6
+|    +--- org.scalatra:scalatra_2.11:2.3.1 (*)
+|    \--- net.iharder:base64:2.3.8
++--- javax.servlet:javax.servlet-api:3.1.0
++--- org.eclipse.jetty:jetty-webapp:9.2.10.v20150310
+|    +--- org.eclipse.jetty:jetty-xml:9.2.10.v20150310
+|    |    \--- org.eclipse.jetty:jetty-util:9.2.10.v20150310
+|    \--- org.eclipse.jetty:jetty-servlet:9.2.10.v20150310
+|         \--- org.eclipse.jetty:jetty-security:9.2.10.v20150310
+|              \--- org.eclipse.jetty:jetty-server:9.2.10.v20150310
+|                   +--- javax.servlet:javax.servlet-api:3.1.0
+|                   +--- org.eclipse.jetty:jetty-http:9.2.10.v20150310
+|                   |    \--- org.eclipse.jetty:jetty-util:9.2.10.v20150310
+|                   \--- org.eclipse.jetty:jetty-io:9.2.10.v20150310
+|                        \--- org.eclipse.jetty:jetty-util:9.2.10.v20150310
++--- ch.qos.logback:logback-classic:1.1.2
+|    +--- ch.qos.logback:logback-core:1.1.2
+|    \--- org.slf4j:slf4j-api:1.7.6 -> 1.7.10
++--- com.typesafe.slick:slick_2.11:3.1.1
+|    +--- org.scala-lang:scala-library:2.11.6
+|    +--- org.slf4j:slf4j-api:1.7.10
+|    +--- com.typesafe:config:1.2.1 -> 1.3.0
+|    \--- org.reactivestreams:reactive-streams:1.0.0
++--- com.typesafe:config:1.3.0
++--- com.h2database:h2:1.4.190
++--- org.json4s:json4s-jackson_2.11:3.3.0.RC3
+|    +--- org.scala-lang:scala-library:2.11.7 -> 2.11.6
+|    +--- org.json4s:json4s-core_2.11:3.3.0.RC3 (*)
+|    \--- com.fasterxml.jackson.core:jackson-databind:2.5.3
+|         +--- com.fasterxml.jackson.core:jackson-annotations:2.5.0
+|         \--- com.fasterxml.jackson.core:jackson-core:2.5.3
++--- org.json4s:json4s-native_2.11:3.3.0.RC3
+|    +--- org.scala-lang:scala-library:2.11.7 -> 2.11.6
+|    \--- org.json4s:json4s-core_2.11:3.3.0.RC3 (*)
++--- com.mchange:c3p0:0.9.5.1
+|    \--- com.mchange:mchange-commons-java:0.2.10
++--- com.sksamuel.scrimage:scrimage-core_2.11:2.0.1
+|    +--- org.scala-lang:scala-library:2.11.6
+|    +--- org.slf4j:slf4j-api:1.7.7 -> 1.7.10
+|    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1
+|    |    |    \--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1
+|    |         +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |         \--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-jpeg:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.imageio:imageio-metadata:3.1.1
+|    |    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    +--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.drewnoakes:metadata-extractor:2.8.1
+|    |    \--- com.adobe.xmp:xmpcore:5.1.2
+|    +--- commons-io:commons-io:2.4
+|    \--- ar.com.hjg:pngj:2.1.0
++--- com.sksamuel.scrimage:scrimage-io_2.11:2.0.1
+|    +--- org.scala-lang:scala-library:2.11.6
+|    +--- com.sksamuel.scrimage:scrimage-core_2.11:2.0.1 (*)
+|    +--- org.slf4j:slf4j-api:1.7.7 -> 1.7.10
+|    +--- com.twelvemonkeys.imageio:imageio-batik:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-bmp:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-jpeg:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-icns:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-iff:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-pcx:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-pict:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-pdf:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-pnm:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-psd:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.imageio:imageio-metadata:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-sgi:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-tiff:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.imageio:imageio-metadata:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    +--- com.twelvemonkeys.imageio:imageio-tga:3.1.1
+|    |    +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|    |    +--- com.twelvemonkeys.common:common-lang:3.1.1
+|    |    +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|    |    \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
+|    \--- com.twelvemonkeys.imageio:imageio-thumbsdb:3.1.1
+|         +--- com.twelvemonkeys.imageio:imageio-core:3.1.1 (*)
+|         +--- com.twelvemonkeys.common:common-lang:3.1.1
+|         +--- com.twelvemonkeys.common:common-io:3.1.1 (*)
+|         \--- com.twelvemonkeys.common:common-image:3.1.1 (*)
++--- com.sksamuel.scrimage:scrimage-filters_2.11:2.0.1
+|    +--- org.scala-lang:scala-library:2.11.6
+|    +--- com.sksamuel.scrimage:scrimage-core_2.11:2.0.1 (*)
+|    +--- org.slf4j:slf4j-api:1.7.7 -> 1.7.10
+|    \--- commons-io:commons-io:2.4
++--- org.apache.xmlgraphics:batik-codec:1.7
+|    +--- org.apache.xmlgraphics:batik-awt-util:1.7
+|    |    \--- org.apache.xmlgraphics:batik-util:1.7
+|    +--- org.apache.xmlgraphics:batik-bridge:1.7
+|    |    +--- org.apache.xmlgraphics:batik-anim:1.7
+|    |    |    +--- org.apache.xmlgraphics:batik-awt-util:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-dom:1.7
+|    |    |    |    +--- org.apache.xmlgraphics:batik-css:1.7
+|    |    |    |    |    +--- org.apache.xmlgraphics:batik-ext:1.7
+|    |    |    |    |    |    \--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    |    |    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    |    |    +--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    |    |    |    \--- xml-apis:xml-apis-ext:1.3.04
+|    |    |    |    +--- org.apache.xmlgraphics:batik-ext:1.7 (*)
+|    |    |    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    |    +--- org.apache.xmlgraphics:batik-xml:1.7
+|    |    |    |    |    \--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    |    +--- xalan:xalan:2.6.0
+|    |    |    |    |    \--- xml-apis:xml-apis:2.0.2 -> 1.4.01
+|    |    |    |    +--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    |    |    \--- xml-apis:xml-apis-ext:1.3.04
+|    |    |    +--- org.apache.xmlgraphics:batik-ext:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-parser:1.7
+|    |    |    |    +--- org.apache.xmlgraphics:batik-awt-util:1.7 (*)
+|    |    |    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    |    \--- org.apache.xmlgraphics:batik-xml:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-svg-dom:1.7
+|    |    |    |    +--- org.apache.xmlgraphics:batik-anim:1.7 (*)
+|    |    |    |    +--- org.apache.xmlgraphics:batik-awt-util:1.7 (*)
+|    |    |    |    +--- org.apache.xmlgraphics:batik-css:1.7 (*)
+|    |    |    |    +--- org.apache.xmlgraphics:batik-dom:1.7 (*)
+|    |    |    |    +--- org.apache.xmlgraphics:batik-ext:1.7 (*)
+|    |    |    |    +--- org.apache.xmlgraphics:batik-parser:1.7 (*)
+|    |    |    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    |    +--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    |    |    \--- xml-apis:xml-apis-ext:1.3.04
+|    |    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    +--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    |    \--- xml-apis:xml-apis-ext:1.3.04
+|    |    +--- org.apache.xmlgraphics:batik-awt-util:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-css:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-dom:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-ext:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-gvt:1.7
+|    |    |    +--- org.apache.xmlgraphics:batik-awt-util:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-bridge:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    \--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    +--- org.apache.xmlgraphics:batik-parser:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-script:1.7
+|    |    |    +--- org.apache.xmlgraphics:batik-bridge:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-dom:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-ext:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-svg-dom:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    +--- org.apache.xmlgraphics:batik-js:1.7
+|    |    |    |    \--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    |    \--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    +--- org.apache.xmlgraphics:batik-svg-dom:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    +--- org.apache.xmlgraphics:batik-xml:1.7 (*)
+|    |    +--- xalan:xalan:2.6.0 (*)
+|    |    +--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    \--- xml-apis:xml-apis-ext:1.3.04
+|    +--- org.apache.xmlgraphics:batik-transcoder:1.7
+|    |    +--- org.apache.xmlgraphics:fop:0.94
+|    |    |    +--- org.apache.xmlgraphics:xmlgraphics-commons:1.2
+|    |    |    |    \--- commons-io:commons-io:1.1 -> 2.4
+|    |    |    +--- commons-logging:commons-logging:1.0.4
+|    |    |    +--- commons-io:commons-io:1.1 -> 2.4
+|    |    |    +--- org.apache.avalon.framework:avalon-framework-api:4.3.1
+|    |    |    \--- org.apache.avalon.framework:avalon-framework-impl:4.3.1
+|    |    |         \--- org.apache.avalon.framework:avalon-framework-api:4.3.1
+|    |    +--- org.apache.xmlgraphics:batik-awt-util:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-bridge:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-dom:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-gvt:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-svg-dom:1.7 (*)
+|    |    +--- org.apache.xmlgraphics:batik-svggen:1.7
+|    |    |    +--- org.apache.xmlgraphics:batik-awt-util:1.7 (*)
+|    |    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    \--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    +--- org.apache.xmlgraphics:batik-xml:1.7 (*)
+|    |    +--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    \--- xml-apis:xml-apis-ext:1.3.04
+|    +--- org.apache.xmlgraphics:batik-util:1.7
+|    \--- xml-apis:xml-apis:1.3.04 -> 1.4.01
++--- me.lessis:courier_2.11:0.1.3
+|    +--- org.scala-lang:scala-library:2.11.1 -> 2.11.6
+|    +--- javax.mail:mail:1.4.7
+|    |    \--- javax.activation:activation:1.1 -> 1.1.1
+|    \--- javax.activation:activation:1.1.1
++--- com.dropbox.core:dropbox-core-sdk:1.7.7
+|    \--- com.fasterxml.jackson.core:jackson-core:[2.2,2.4) -> 2.5.3
++--- org.scalatest:scalatest_2.11:3.0.0-M7
+|    +--- org.scala-lang:scala-library:2.11.7 -> 2.11.6
+|    +--- org.scalactic:scalactic_2.11:3.0.0-M7
+|    |    +--- org.scala-lang:scala-library:2.11.7 -> 2.11.6
+|    |    \--- org.scala-lang:scala-reflect:2.11.7 -> 2.11.6 (*)
+|    +--- org.scala-lang:scala-reflect:2.11.7 -> 2.11.6 (*)
+|    +--- org.scala-lang.modules:scala-xml_2.11:1.0.2 -> 1.0.4 (*)
+|    \--- org.scala-lang.modules:scala-parser-combinators_2.11:1.0.4 (*)
+\--- junit:junit:4.11
+     \--- org.hamcrest:hamcrest-core:1.3
+
+zinc - The Zinc incremental compiler to be used for this Scala project.
+No dependencies
+
+BUILD SUCCESSFUL
+
+Total time: 6.925 secs
