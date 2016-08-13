@@ -28,3 +28,7 @@ idea {
         ]
     }
 }
+
+task stage {
+    dependsOn clean, build
+}
