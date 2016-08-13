@@ -60,7 +60,7 @@ const loaders = [
     loader: 'json-loader'
   },
   {
-    test: /\.(jpe?g|png|gif|svg)(?:\?.*|)$/i,
+    test: /\.(jpe?g|png|gif)(?:\?.*|)$/i,
     loaders: [
       'file?hash=sha512&digest=hex&name=assets/[name].[ext]',
       'image-webpack'
@@ -73,6 +73,10 @@ const loaders = [
   {
     test: /\.(woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/, // handle font-awesome versions
     loader: 'url-loader?limit=10000&minetype=application/font-woff&name=assets/[name].[ext]'
+  },
+  {
+    test: /\.svg/,
+    loader: 'svg-url-loader?name=assets/[name].[ext]'
   },
   {
     test: /\.html$/,
