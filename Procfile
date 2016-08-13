@@ -1,1 +1,1 @@
-web: gradle backend:run
+web: gradlew backend:run
