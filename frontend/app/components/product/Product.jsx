@@ -1,14 +1,14 @@
-import React, {Component, PropTypes} from "react";
-import MiniGallery from "./../photo/MiniGallery.jsx";
-import {connect} from "react-redux";
-import {routeActions} from "redux-simple-router";
-import MediumHeadline from "./../text/MediumHeadline.jsx";
-import Wysiwyg from "./../text/Wysiwyg.jsx";
-import Box from "./../Box.jsx";
-import * as productActions from "../../redux/actions/productActions";
-import ProductItems from "./ProductItems.jsx";
-import ContactForm from "../contact/ContactForm.jsx";
-import {CONTENT_MAX_WIDTH} from "../../vars";
+import React, {Component, PropTypes} from 'react'
+import MiniGallery from './../photo/MiniGallery.jsx'
+import {connect} from 'react-redux'
+import {browserHistory} from 'react-router'
+import MediumHeadline from './../text/MediumHeadline.jsx'
+import Wysiwyg from './../text/Wysiwyg.jsx'
+import Box from './../Box.jsx'
+import * as productActions from '../../redux/actions/productActions'
+import ProductItems from './ProductItems.jsx'
+import ContactForm from '../contact/ContactForm.jsx'
+import {CONTENT_MAX_WIDTH} from '../../vars'
 
 export default class Product extends Component {
 
@@ -43,7 +43,7 @@ export default class Product extends Component {
           :
          <div dangerouslySetInnerHTML={{__html: description}}/>}
         {admin ? <button style={{marginTop: 5}} className="btn btn-default btn-block" type="submit"
-                         onClick={() => dispatch(routeActions.push(`produkter/endre/${id}`))}>
+                         onClick={() => dispatch(browserHistory.push(`produkter/endre/${id}`))}>
           Admin </button> : null}
       </div>
     )

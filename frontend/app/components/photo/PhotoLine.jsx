@@ -1,12 +1,12 @@
-import React, {Component, PropTypes} from "react";
-import {routeActions} from "redux-simple-router";
-import {connect} from "react-redux";
-import Photo from "./Photo.jsx";
+import React, {Component, PropTypes} from 'react'
+import {browserHistory} from 'react-router'
+import {connect} from 'react-redux'
+import Photo from './Photo.jsx'
 
 export default class PhotoLine extends Component {
 
   onSelect(path) {
-    this.props.dispatch(routeActions.push(path))
+    this.props.dispatch(browserHistory.push(path))
   }
 
   render() {

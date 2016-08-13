@@ -1,11 +1,11 @@
-import React, {Component, PropTypes} from "react";
-import {connect} from "react-redux";
-import {routeActions} from "redux-simple-router";
-import MediumHeadline from "./../text/MediumHeadline.jsx";
-import Box from "./../Box.jsx";
-import * as productActions from "../../redux/actions/productActions";
-import Select from "react-select";
-import {CONTENT_MAX_WIDTH} from "../../vars";
+import React, {Component, PropTypes} from 'react'
+import {connect} from 'react-redux'
+import {browserHistory} from 'react-router'
+import MediumHeadline from './../text/MediumHeadline.jsx'
+import Box from './../Box.jsx'
+import * as productActions from '../../redux/actions/productActions'
+import Select from 'react-select'
+import {CONTENT_MAX_WIDTH} from '../../vars'
 
 export default class ProductAdd extends Component {
 
@@ -32,14 +32,14 @@ export default class ProductAdd extends Component {
           index: props.products.sub.flatMap(c => c.sub).length + 1
         }
         this.props.dispatch(productActions.save(product))
-        this.props.dispatch(routeActions.goBack())
+        this.props.dispatch(browserHistory.goBack())
       } else {
         this.setState({error: 'Velg tittel og kategori!'})
       }
     }
     this.onRemove = () => {
       this.props.dispatch(productActions.removeProduct(this.state.id))
-      this.props.dispatch(routeActions.push('/produkter'))
+      this.props.dispatch(browserHistory.push('/produkter'))
     }
     this.handleSelect = (category) => {
       this.setState({category: category.value})
@@ -115,7 +115,7 @@ export default class ProductAdd extends Component {
           <div>{error}</div>
           <div className="row">
             <div className={`col-xs-${id ? 4 : 6}`}>
-              <button className="btn btn-primary btn-block" onClick={() => dispatch(routeActions.goBack())}>Tilbake</button>
+              <button className="btn btn-primary btn-block" onClick={() => dispatch(browserHistory.goBack())}>Tilbake</button>
             </div>
             {id ? <div className={`col-xs-${id ? 4 : 6}`}>
               <button className="btn btn-primary btn-block" onClick={this.onRemove}>Slett</button>

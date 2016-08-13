@@ -1,9 +1,9 @@
-import React, {Component, PropTypes} from "react";
-import {connect} from "react-redux";
-import {routeActions} from "redux-simple-router";
-import BigHeadline from "./../text/BigHeadline.jsx";
-import MiniGallery from "./../photo/MiniGallery.jsx";
-import Box from "./../Box.jsx";
+import React, {Component, PropTypes} from 'react'
+import {connect} from 'react-redux'
+import {browserHistory} from 'react-router'
+import BigHeadline from './../text/BigHeadline.jsx'
+import MiniGallery from './../photo/MiniGallery.jsx'
+import Box from './../Box.jsx'
 
 export default class Project extends Component {
 
@@ -16,7 +16,7 @@ export default class Project extends Component {
           <div className="col-xs-12">
             <MiniGallery images={project.images} orientation={'horizontal'} height={400} thumbHeight={100}/>
             {admin ? <button style={{marginTop: 5}} className="btn btn-default btn-block" type="submit"
-                             onClick={() => dispatch(routeActions.push(`referanser/endre/${project.id}`))}>
+                             onClick={() => dispatch(browserHistory.push(`referanser/endre/${project.id}`))}>
               Endre </button> : null}
           </div>
         </div>

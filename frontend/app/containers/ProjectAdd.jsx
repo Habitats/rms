@@ -1,13 +1,13 @@
-import React, {Component, PropTypes} from "react";
-import {connect} from "react-redux";
-import {routeActions} from "redux-simple-router";
-import MediumHeadline from "./../components/text/MediumHeadline.jsx";
-import Photo from "./../components/photo/Photo.jsx";
-import Left from "./../components/Left.jsx";
-import Right from "./../components/Right.jsx";
-import Box from "./../components/Box.jsx";
-import SimpleLabel from "./../components/text/SimpleLabel.jsx";
-import * as generalActions from "../redux/actions/generalActions";
+import React, {Component, PropTypes} from 'react'
+import {connect} from 'react-redux'
+import {browserHistory} from 'react-router'
+import MediumHeadline from './../components/text/MediumHeadline.jsx'
+import Photo from './../components/photo/Photo.jsx'
+import Left from './../components/Left.jsx'
+import Right from './../components/Right.jsx'
+import Box from './../components/Box.jsx'
+import SimpleLabel from './../components/text/SimpleLabel.jsx'
+import * as generalActions from '../redux/actions/generalActions'
 
 export default class ProjectAdd extends Component {
 
@@ -79,7 +79,7 @@ export default class ProjectAdd extends Component {
         description: this.state.description,
         images: this.state.chosenImages
       }))
-      this.props.dispatch(routeActions.push('/referanser'))
+      this.props.dispatch(browserHistory.push('/referanser'))
     } else {
       this.setState({error: 'Fyll ut alle felt og velg noen bilder!'})
     }
@@ -87,7 +87,7 @@ export default class ProjectAdd extends Component {
 
   onRemove() {
     this.props.dispatch(generalActions.removeProject(this.state.id))
-    this.props.dispatch(routeActions.push('/referanser'))
+    this.props.dispatch(browserHistory.push('/referanser'))
   }
 
   render() {
@@ -151,7 +151,7 @@ export default class ProjectAdd extends Component {
             </div>
             <div className="row">
               <div className={`col-xs-${id ? 4 : 6}`}>
-                <button className="btn btn-primary btn-block" onClick={() => dispatch(routeActions.goBack())}>Tilbake</button>
+                <button className="btn btn-primary btn-block" onClick={() => dispatch(browserHistory.goBack())}>Tilbake</button>
               </div>
               {id ? <div className={`col-xs-${id ? 4 : 6}`}>
                 <button className="btn btn-primary btn-block" onClick={this.onRemove.bind(this)}>Slett</button>

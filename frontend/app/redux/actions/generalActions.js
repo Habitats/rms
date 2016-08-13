@@ -1,5 +1,5 @@
-import * as C from "../constants/GeneralConstants";
-import * as GeneralApi from "../api/GeneralApi";
+import * as C from '../constants/GeneralConstants'
+import * as GeneralApi from '../api/GeneralApi'
 
 export function save(data) {
   return dispatch => {

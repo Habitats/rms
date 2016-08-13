@@ -1,8 +1,8 @@
-import React, {Component, PropTypes} from "react";
-import {routeActions} from "redux-simple-router";
-import {connect} from "react-redux";
-import Radium from "radium";
-import {SM, XS} from "../../vars";
+import React, {Component, PropTypes} from 'react'
+import {browserHistory} from 'react-router'
+import {connect} from 'react-redux'
+import Radium from 'radium'
+import {SM, XS} from '../../vars'
 
 class Photo extends Component {
 
@@ -29,7 +29,7 @@ class Photo extends Component {
     let {hover} = this.state
 
     // if onClick is defined, use the defined callback
-    let photoClick = linkTo ? () => dispatch(routeActions.push(linkTo)) :
+    let photoClick = linkTo ? () => dispatch(browserHistory.push(linkTo)) :
                      onClick ? onClick :
                      clickable ? this.toggle.bind(this) : null
 

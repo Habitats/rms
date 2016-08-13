@@ -1,6 +1,6 @@
-import * as C from "./../constants/productConstants";
-import {routeActions} from "redux-simple-router";
-import * as GeneralApi from "../api/GeneralApi";
+import * as C from './../constants/productConstants'
+import {browserHistory} from 'react-router'
+import * as GeneralApi from '../api/GeneralApi'
 
 export function fetchProducts() {
   return dispatch => {
@@ -34,14 +34,14 @@ export function removeProduct(id) {
 
 export function selectProduct(category, product) {
   return (dispatch) => {
-    dispatch(routeActions.push(`${category.id}/${product.id}`))
+    dispatch(browserHistory.push(`${category.id}/${product.id}`))
     dispatch({type: C.SELECT_PRODUCT, category: category, product: product})
   }
 }
 
 export function selectCategory(category) {
   return (dispatch) => {
-    dispatch(routeActions.push(`${category.id}`))
+    dispatch(browserHistory.push(`${category.id}`))
     dispatch({type: C.SELECT_CATEGORY, category: category})
   }
 }
