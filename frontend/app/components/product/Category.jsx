@@ -1,14 +1,14 @@
-import React, {Component, PropTypes} from 'react'
-import ProductItems from './ProductItems.jsx'
+import React, {Component, PropTypes} from "react";
+import ProductItems from "./ProductItems.jsx";
 
 export default class Category extends Component {
 
   render() {
-    let {title,id, sub} = this.props.category
+    let {title, id, sub} = this.props.category
     return (
-        <div className="row">
-          <ProductItems products={sub} category={title} parentRoute={`/produkter/${id}`}/>
-        </div>
+      <div className="row">
+        <ProductItems products={sub} category={title} parentRoute={`/produkter/${id}`}/>
+      </div>
     )
   }
 }

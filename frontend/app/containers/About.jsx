@@ -1,10 +1,8 @@
-import React, {Component, PropTypes} from 'react'
-import Link from './../components/Link.jsx'
-import Photo from './../components/photo/Photo.jsx'
-import BigHeadline from './../components/text/BigHeadline.jsx'
-import TextBox from './../components/text/TextBox.jsx'
-import Box from './../components/Box.jsx'
-import {COVER_HEIGHT} from '../vars'
+import React, {Component, PropTypes} from "react";
+import Photo from "./../components/photo/Photo.jsx";
+import BigHeadline from "./../components/text/BigHeadline.jsx";
+import TextBox from "./../components/text/TextBox.jsx";
+import Box from "./../components/Box.jsx";
 
 export default class About extends Component {
 

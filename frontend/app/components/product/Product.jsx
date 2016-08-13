@@ -1,19 +1,14 @@
-import React, {Component, PropTypes} from 'react'
-import Link from '../Link.jsx'
-import MiniGallery from './../photo/MiniGallery.jsx'
-import {connect} from 'react-redux'
-import LoremIpsum from './../LoremIpsum.jsx'
-import {routeActions} from 'redux-simple-router'
-import HeadlineOverlay from './../text/HeadlineOverlay.jsx'
-import BigHeadline from './../text/BigHeadline.jsx'
-import MediumHeadline from './../text/MediumHeadline.jsx'
-import Wysiwyg from './../text/Wysiwyg.jsx'
-import TextBox from './../text/TextBox.jsx'
-import Box from './../Box.jsx'
-import * as productActions from '../../redux/actions/productActions'
-import ProductItems from './ProductItems.jsx'
-import ContactForm from '../contact/ContactForm.jsx'
-import {CONTENT_MAX_WIDTH} from '../../vars'
+import React, {Component, PropTypes} from "react";
+import MiniGallery from "./../photo/MiniGallery.jsx";
+import {connect} from "react-redux";
+import {routeActions} from "redux-simple-router";
+import MediumHeadline from "./../text/MediumHeadline.jsx";
+import Wysiwyg from "./../text/Wysiwyg.jsx";
+import Box from "./../Box.jsx";
+import * as productActions from "../../redux/actions/productActions";
+import ProductItems from "./ProductItems.jsx";
+import ContactForm from "../contact/ContactForm.jsx";
+import {CONTENT_MAX_WIDTH} from "../../vars";
 
 export default class Product extends Component {
 
@@ -57,7 +52,6 @@ export default class Product extends Component {
         <ProductItems products={product.sub} parentRoute={`${linkTo}`}/>
       </div>
     ) : null
-
 
     let contact = sub.length === 0 ? (
       <Box>

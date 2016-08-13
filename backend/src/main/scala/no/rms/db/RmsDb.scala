@@ -37,7 +37,7 @@ object RmsDb {
   lazy val products = TableQuery[Products]
 
   lazy val createSchemaAction = (products.schema ++ projects.schema).create
-  lazy val dropSchemaAction = (products.schema ++ projects.schema).drop
+  lazy val dropSchemaAction   = (products.schema ++ projects.schema).drop
   val delim = "___"
 
   def init(db: Database): Future[Boolean] = {

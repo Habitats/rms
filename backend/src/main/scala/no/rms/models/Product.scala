@@ -36,7 +36,7 @@ case class Product(id: String, title: String, description: String, sub: Seq[Prod
     f"\n$title > $description > $category > ${sub.mkString(", ")}"
   }
 
-  val sortKey = if(sub.nonEmpty) index - 1000 else index
+  val sortKey = if (sub.nonEmpty) index - 1000 else index
 }
 
 case class ProductWrapper(id: String, title: String, description: String, sub: String, images: String, src: String, category: String, index: Int)
@@ -49,16 +49,15 @@ object ProductWrapper {
     }
   }
 
-//  def extract(pw: ProductWrapper, products: Seq[ProductWrapper]): Product = {
-//    val subs = pw.sub.split(RmsDb.delim)
-//    val sub = products
-//      .filter(p => subs.contains(p.id))
-//      .map(p => extract(p, products))
-//      .sortBy(_.index)
-//    val images = if (pw.images.length > 0) pw.images.split(RmsDb.delim).map(i => ImageWrapper.fromString(i)).toList else Nil
-//    Product(id = pw.id, title = pw.title, description = pw.description, sub = sub, images = images, category = pw.category, src = pw.src, index= pw.index)
-//  }
-
+  //  def extract(pw: ProductWrapper, products: Seq[ProductWrapper]): Product = {
+  //    val subs = pw.sub.split(RmsDb.delim)
+  //    val sub = products
+  //      .filter(p => subs.contains(p.id))
+  //      .map(p => extract(p, products))
+  //      .sortBy(_.index)
+  //    val images = if (pw.images.length > 0) pw.images.split(RmsDb.delim).map(i => ImageWrapper.fromString(i)).toList else Nil
+  //    Product(id = pw.id, title = pw.title, description = pw.description, sub = sub, images = images, category = pw.category, src = pw.src, index= pw.index)
+  //  }
 
   def extract(pw: ProductWrapper, products: Seq[ProductWrapper]): Product = {
     val subWrap = products
@@ -66,7 +65,7 @@ object ProductWrapper {
       .map(p => extract(p, products.filter(_.id != pw.id)))
       .sortBy(p => p.sortKey)
     val images = if (pw.images.length > 0) pw.images.split(RmsDb.delim).map(i => ImageWrapper.fromString(i)).toList else Nil
-    Product(id = pw.id, title = pw.title, description = pw.description, sub = subWrap, images = images, category = pw.category, src = pw.src, index= pw.index)
+    Product(id = pw.id, title = pw.title, description = pw.description, sub = subWrap, images = images, category = pw.category, src = pw.src, index = pw.index)
   }
 
   def wrap(p: Product): ProductWrapper = {

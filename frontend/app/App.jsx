@@ -1,26 +1,23 @@
-import React, {Component, PropTypes} from 'react'
-import {Router, Route, IndexRoute} from 'react-router'
-import {routeActions} from 'redux-simple-router'
-import {connect} from 'react-redux'
-
-import history from './history'
-import Layout from './containers/Layout.jsx'
-import NotFound from './containers/NotFound.jsx'
-import Welcome from './containers/Welcome.jsx'
-import Contact from './containers/Contact.jsx'
-import About from './containers/About.jsx'
-import References from './containers/ProjectsContainer.jsx'
-import ProjectContainer from './containers/ProjectContainer.jsx'
-import ProductsContainer from './containers/ProductsContainer.jsx'
-import ProductContainer from './containers/ProductContainer.jsx'
-import CategoryContainer from './containers/CategoryContainer.jsx'
-import ProjectAdd from './containers/ProjectAdd.jsx'
-import ProductAdd from './components/product/ProductAdd.jsx'
-import Login from './containers/Login.jsx'
-import ProjectListItem from './components/projects/ProjectListItem.jsx'
-import ReferencesList from './components/text/ReferencesList.jsx'
-import * as SessionActionCreators from './redux/actions/sessionActions'
-import {StyleRoot} from 'radium';
+import React, {Component, PropTypes} from "react";
+import {Router, Route, IndexRoute} from "react-router";
+import {routeActions} from "redux-simple-router";
+import {connect} from "react-redux";
+import history from "./history";
+import Layout from "./containers/Layout.jsx";
+import NotFound from "./containers/NotFound.jsx";
+import Welcome from "./containers/Welcome.jsx";
+import Contact from "./containers/Contact.jsx";
+import About from "./containers/About.jsx";
+import References from "./containers/ProjectsContainer.jsx";
+import ProjectContainer from "./containers/ProjectContainer.jsx";
+import ProductsContainer from "./containers/ProductsContainer.jsx";
+import ProductContainer from "./containers/ProductContainer.jsx";
+import CategoryContainer from "./containers/CategoryContainer.jsx";
+import ProjectAdd from "./containers/ProjectAdd.jsx";
+import ProductAdd from "./components/product/ProductAdd.jsx";
+import Login from "./containers/Login.jsx";
+import * as SessionActionCreators from "./redux/actions/sessionActions";
+import {StyleRoot} from "radium";
 
 export default class App extends Component {
 

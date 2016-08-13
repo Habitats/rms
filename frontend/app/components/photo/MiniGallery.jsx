@@ -1,11 +1,9 @@
-import React, {Component, PropTypes} from 'react'
-import Link from './../Link.jsx'
-import {connect} from 'react-redux'
-import Photo from './Photo.jsx'
-import CoverPhoto from './CoverPhoto.jsx'
-import Radium from 'radium'
-import Draggable, {DraggableCore} from 'react-draggable'
-import {SM, XS} from '../../vars'
+import React, {Component, PropTypes} from "react";
+import Photo from "./Photo.jsx";
+import CoverPhoto from "./CoverPhoto.jsx";
+import Radium from "radium";
+import Draggable, {DraggableCore} from "react-draggable";
+import {SM, XS} from "../../vars";
 
 class MiniGallery extends Component {
 
@@ -188,7 +186,7 @@ class MiniGallery extends Component {
     return (
       <div className="row mini-gallery">
         <div className={classes.cover} style={style.cover}>
-          <CoverPhoto src={cover.src} onRightSelect={this.onRightSelect.bind(this,images, cover)}
+          <CoverPhoto src={cover.src} onRightSelect={this.onRightSelect.bind(this, images, cover)}
                       onLeftSelect={this.onLeftSelect.bind(this, images, cover)}/>
         </div>
         {images.length > 1 ?

@@ -8,7 +8,7 @@ object Logger {
   val logger = LoggerFactory.getLogger(getClass)
 
   def info(msg: AnyRef) {
-//    logger.info(msg)
+    //    logger.info(msg)
     println(LocalDateTime.now + " > " + msg)
   }
 }

@@ -1,8 +1,7 @@
-import React, {Component, PropTypes} from 'react'
-import Link from './../Link.jsx'
-import {routeActions} from 'redux-simple-router'
-import {connect} from 'react-redux'
-import Photo from './Photo.jsx'
+import React, {Component, PropTypes} from "react";
+import {routeActions} from "redux-simple-router";
+import {connect} from "react-redux";
+import Photo from "./Photo.jsx";
 
 export default class PhotoLine extends Component {
 

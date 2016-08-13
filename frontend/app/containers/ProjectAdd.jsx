@@ -1,14 +1,13 @@
-import React, {Component, PropTypes} from 'react'
-import {connect} from 'react-redux'
-import {routeActions} from 'redux-simple-router'
-import BigHeadline from './../components/text/BigHeadline.jsx'
-import MediumHeadline from './../components/text/MediumHeadline.jsx'
-import Photo from './../components/photo/Photo.jsx'
-import Left from './../components/Left.jsx'
-import Right from './../components/Right.jsx'
-import Box from './../components/Box.jsx'
-import SimpleLabel from './../components/text/SimpleLabel.jsx'
-import * as generalActions from '../redux/actions/generalActions'
+import React, {Component, PropTypes} from "react";
+import {connect} from "react-redux";
+import {routeActions} from "redux-simple-router";
+import MediumHeadline from "./../components/text/MediumHeadline.jsx";
+import Photo from "./../components/photo/Photo.jsx";
+import Left from "./../components/Left.jsx";
+import Right from "./../components/Right.jsx";
+import Box from "./../components/Box.jsx";
+import SimpleLabel from "./../components/text/SimpleLabel.jsx";
+import * as generalActions from "../redux/actions/generalActions";
 
 export default class ProjectAdd extends Component {
 
@@ -147,7 +146,7 @@ export default class ProjectAdd extends Component {
             </form>
             <div>{error}</div>
             <MediumHeadline big="Velg bilder"/>
-            <div className="row" style={{marginRight:0}}>
+            <div className="row" style={{marginRight: 0}}>
               {photos}
             </div>
             <div className="row">

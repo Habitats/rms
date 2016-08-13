@@ -1,12 +1,8 @@
-import React, {Component, PropTypes} from 'react'
-import ReactDOM from 'react-dom'
-import EventListener from '../../util/EventListener.js'
-import PhotoOverlay from './PhotoOverlay.jsx'
-import HeadlineOverlay from './../text/HeadlineOverlay.jsx'
-import {routeActions} from 'redux-simple-router'
-import {connect} from 'react-redux'
-import Radium from 'radium'
-import {SM, XS} from '../../vars'
+import React, {Component, PropTypes} from "react";
+import {routeActions} from "redux-simple-router";
+import {connect} from "react-redux";
+import Radium from "radium";
+import {SM, XS} from "../../vars";
 
 class Photo extends Component {
 

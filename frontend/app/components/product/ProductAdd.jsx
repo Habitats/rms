@@ -1,16 +1,11 @@
-import React, {Component, PropTypes} from 'react'
-import {connect} from 'react-redux'
-import {routeActions} from 'redux-simple-router'
-import BigHeadline from './../text/BigHeadline.jsx'
-import MediumHeadline from './../text/MediumHeadline.jsx'
-import Photo from './../photo/Photo.jsx'
-import Left from './../Left.jsx'
-import Right from './../Right.jsx'
-import Box from './../Box.jsx'
-import SimpleLabel from './../text/SimpleLabel.jsx'
-import * as productActions from '../../redux/actions/productActions'
-import Select from 'react-select'
-import {CONTENT_MAX_WIDTH} from '../../vars'
+import React, {Component, PropTypes} from "react";
+import {connect} from "react-redux";
+import {routeActions} from "redux-simple-router";
+import MediumHeadline from "./../text/MediumHeadline.jsx";
+import Box from "./../Box.jsx";
+import * as productActions from "../../redux/actions/productActions";
+import Select from "react-select";
+import {CONTENT_MAX_WIDTH} from "../../vars";
 
 export default class ProductAdd extends Component {
 
@@ -108,8 +103,8 @@ export default class ProductAdd extends Component {
             </div>
             <div className="form-group">
               <label>Beskrivelse</label>
-                <textarea className="form-control" onChange={this.handleDescriptionChange}
-                          placeholder="Skriv en produktbeskrivelse her." rows="15" value={description}/>
+              <textarea className="form-control" onChange={this.handleDescriptionChange}
+                        placeholder="Skriv en produktbeskrivelse her." rows="15" value={description}/>
             </div>
           </form>
           <Select style={{marginBottom: 15}}
@@ -130,7 +125,7 @@ export default class ProductAdd extends Component {
             </div>
           </div>
         </div>
-        <pre style={{maxWidth:700, margin: '0 auto'}}> {JSON.stringify(this.state, undefined, 1)}} </pre>
+        <pre style={{maxWidth: 700, margin: '0 auto'}}> {JSON.stringify(this.state, undefined, 1)}} </pre>
       </Box>
     )
   }

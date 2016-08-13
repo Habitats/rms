@@ -1,5 +1,5 @@
-import React, {Component, PropTypes} from 'react'
-import ProjectListItem from './ProjectListItem.jsx'
+import React, {Component, PropTypes} from "react";
+import ProjectListItem from "./ProjectListItem.jsx";
 
 export default class Projects extends Component {
 

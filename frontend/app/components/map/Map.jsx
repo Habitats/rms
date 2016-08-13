@@ -1,5 +1,5 @@
-import React, {Component, PropTypes} from 'react'
-import Radium from 'radium'
+import React, {Component, PropTypes} from "react";
+import Radium from "radium";
 
 export default class Map extends Component {
 

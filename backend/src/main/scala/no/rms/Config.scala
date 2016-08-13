@@ -19,9 +19,9 @@ object Config {
   def test = conf.getProperty("test").toBoolean
 
   val COOKIE_ID = "YOLO"
-  val ONE_WEEK = 7 * 24 * 3600
-  val DEBUG = true
-  val DB_FILE = {
+  val ONE_WEEK  = 7 * 24 * 3600
+  val DEBUG     = true
+  val DB_FILE   = {
     val home = System.getProperty("user.home")
     val f = new File(home + "/" + "rms/rms.mv.db")
     Logger.info("------ DATABASE: " + f.getAbsolutePath)

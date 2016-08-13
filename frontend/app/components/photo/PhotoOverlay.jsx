@@ -1,6 +1,5 @@
-import React, {Component, PropTypes} from 'react'
-import EventListener from '../../util/EventListener.js'
-import Photo from './Photo.jsx'
+import React, {Component, PropTypes} from "react";
+import EventListener from "../../util/EventListener.js";
 
 export default class PhotoOverlay extends Component {
 
@@ -23,7 +22,7 @@ export default class PhotoOverlay extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.toggled) {
+    if (nextProps.toggled) {
       this.setState({toggled: nextProps.toggled})
     }
   }

@@ -1,6 +1,6 @@
-import React, {Component, PropTypes} from 'react'
-import Radium from 'radium'
-import {CONTENT_MAX_WIDTH} from '../../vars'
+import React, {Component, PropTypes} from "react";
+import Radium from "radium";
+import {CONTENT_MAX_WIDTH} from "../../vars";
 
 class TextBox extends Component {
 

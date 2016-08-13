@@ -1,5 +1,4 @@
-import React, {Component, PropTypes} from 'react'
-import SimpleLabel from './SimpleLabel.jsx'
+import React, {Component, PropTypes} from "react";
 
 export default class HeadlineOverlay extends Component {
 

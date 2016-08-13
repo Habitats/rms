@@ -1,7 +1,7 @@
-import React, {Component, PropTypes} from 'react'
-import Photo from './../photo/Photo.jsx'
-import HeadlineOverlay from './../text/HeadlineOverlay.jsx'
-import Radium from 'radium'
+import React, {Component, PropTypes} from "react";
+import Photo from "./../photo/Photo.jsx";
+import HeadlineOverlay from "./../text/HeadlineOverlay.jsx";
+import Radium from "radium";
 
 class ProjectListItem extends Component {
 

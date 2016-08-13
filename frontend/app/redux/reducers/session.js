@@ -1,5 +1,5 @@
-import * as C from '../constants/sessionConstants'
-import { UPDATE_PATH } from 'redux-simple-router'
+import * as C from "../constants/sessionConstants";
+import {UPDATE_PATH} from "redux-simple-router";
 
 const initialState = {
   username: 'none',

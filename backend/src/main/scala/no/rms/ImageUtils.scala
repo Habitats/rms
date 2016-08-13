@@ -13,7 +13,7 @@ object ImageUtils {
   implicit val writer = JpegWriter().withCompression(80).withProgressive(true)
 
   val rootDir = "img"
-  val delim = ","
+  val delim   = ","
 
   def notFound(): File = Random.shuffle(Paths.get(rootDir, "not_found").toFile.listFiles.toList).head
 

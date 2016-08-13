@@ -1,6 +1,5 @@
-import React, {Component, PropTypes} from 'react'
-import Box from './Box.jsx'
-import {MENU_WIDTH} from '../vars'
+import React, {Component, PropTypes} from "react";
+import {MENU_WIDTH} from "../vars";
 
 export default class Left extends Component {
 

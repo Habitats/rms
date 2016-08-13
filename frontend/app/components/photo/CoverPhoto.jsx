@@ -1,6 +1,6 @@
-import React, {Component, PropTypes} from 'react'
-import Radium from 'radium'
-import Photo from './Photo.jsx'
+import React, {Component, PropTypes} from "react";
+import Radium from "radium";
+import Photo from "./Photo.jsx";
 
 class CoverPhoto extends Component {
 

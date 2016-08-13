@@ -1,11 +1,8 @@
-import React, {Component, PropTypes} from 'react'
-import {connect} from 'react-redux'
-import Router from 'react-router'
-import Footer from './../components/Footer.jsx'
-import Header from './../components/Header.jsx'
-import * as sessionActionCreators from './../redux/actions/sessionActions'
-import Radium from 'radium'
-import * as V from '../vars'
+import React, {Component, PropTypes} from "react";
+import Footer from "./../components/Footer.jsx";
+import Header from "./../components/Header.jsx";
+import Radium from "radium";
+import * as V from "../vars";
 
 class Layout extends Component {
 

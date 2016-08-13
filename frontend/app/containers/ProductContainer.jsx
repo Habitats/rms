@@ -1,8 +1,7 @@
-import React, {Component, PropTypes} from 'react'
-import Photo from './../components/photo/Photo.jsx'
-import Product from './../components/product/Product.jsx'
-import {connect} from 'react-redux'
-import NotFound from './NotFound.jsx'
+import React, {Component, PropTypes} from "react";
+import Product from "./../components/product/Product.jsx";
+import {connect} from "react-redux";
+import NotFound from "./NotFound.jsx";
 
 export default class ProductContainer extends Component {
 
@@ -12,7 +11,7 @@ export default class ProductContainer extends Component {
     let product = category.sub.find(p => p.id === params.productId)
 
     // targets sub sub product
-    if(params.subSubId){
+    if (params.subSubId) {
       let subProduct = product.sub ? product.sub.find(p => p.id === params.subId) : null
       let subSubProduct = subProduct.sub ? subProduct.sub.find(p => p.id === params.subSubId) : null
       if (subSubProduct) {

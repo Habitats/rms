@@ -1,6 +1,6 @@
-import React, {Component, PropTypes} from 'react'
-import App from './../../App.jsx'
-import DevTools from './../Devtools.jsx'
+import React, {Component, PropTypes} from "react";
+import App from "./../../App.jsx";
+import DevTools from "./../Devtools.jsx";
 
 export default class Root extends Component {
 

@@ -1,11 +1,8 @@
-import React, {Component, PropTypes} from 'react'
-import {connect} from 'react-redux'
-import BigHeadline from './../components/text/BigHeadline.jsx'
-import PhotoBig from './../components/photo/PhotoBig.jsx'
-import PhotoLine from './../components/photo/PhotoLine.jsx'
-import Project from './../components/projects/Project.jsx'
-import * as generalActionCreators from '../redux/actions/generalActions'
-import NotFound from './NotFound.jsx'
+import React, {Component, PropTypes} from "react";
+import {connect} from "react-redux";
+import Project from "./../components/projects/Project.jsx";
+import * as generalActionCreators from "../redux/actions/generalActions";
+import NotFound from "./NotFound.jsx";
 
 class ProjectContainer extends Component {
 

@@ -1,9 +1,8 @@
-import React, {Component, PropTypes} from 'react'
-import Link from './Link.jsx'
-import MapWrapper from './../components/map/MapWrapper.jsx'
-import * as sessionActionCreator from '../redux/actions/sessionActions'
-import * as V from '../vars'
-import Radium from 'radium'
+import React, {Component, PropTypes} from "react";
+import Link from "./Link.jsx";
+import MapWrapper from "./../components/map/MapWrapper.jsx";
+import * as V from "../vars";
+import Radium from "radium";
 
 class Footer extends Component {
 

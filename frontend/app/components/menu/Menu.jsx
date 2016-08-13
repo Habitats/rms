@@ -1,10 +1,8 @@
-import React, {Component, PropTypes} from 'react'
-import ReactDOM from 'react-dom'
-import MenuItem from './MenuItem.jsx'
-import Box from './../Box.jsx'
-import {TEXT, HOVER} from '../../colors'
-import Radium from 'radium'
-import * as V from '../../vars'
+import React, {Component, PropTypes} from "react";
+import MenuItem from "./MenuItem.jsx";
+import Box from "./../Box.jsx";
+import Radium from "radium";
+import * as V from "../../vars";
 
 class Menu extends Component {
 

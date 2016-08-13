@@ -1,12 +1,9 @@
-import React, {Component, PropTypes} from 'react'
-import {connect} from 'react-redux'
-import {routeActions} from 'redux-simple-router'
-import BigHeadline from './../text/BigHeadline.jsx'
-import PhotoBig from './../photo/PhotoBig.jsx'
-import PhotoLine from './../photo/PhotoLine.jsx'
-import MiniGallery from './../photo/MiniGallery.jsx'
-import Box from './../Box.jsx'
-import * as generalActionCreators from '../../redux/actions/generalActions'
+import React, {Component, PropTypes} from "react";
+import {connect} from "react-redux";
+import {routeActions} from "redux-simple-router";
+import BigHeadline from "./../text/BigHeadline.jsx";
+import MiniGallery from "./../photo/MiniGallery.jsx";
+import Box from "./../Box.jsx";
 
 export default class Project extends Component {
 

@@ -1,7 +1,7 @@
-import React, {Component, PropTypes} from 'react'
-import {connect} from 'react-redux'
-import Link from './Link.jsx'
-import * as productActions from './../redux/actions/productActions'
+import React, {Component, PropTypes} from "react";
+import {connect} from "react-redux";
+import Link from "./Link.jsx";
+import * as productActions from "./../redux/actions/productActions";
 
 export default class Header extends Component {
 

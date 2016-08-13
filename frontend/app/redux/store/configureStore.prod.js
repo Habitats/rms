@@ -1,9 +1,8 @@
-import {createStore, applyMiddleware, compose} from 'redux'
-import rootReducer from '../reducers/rootReducer'
-import thunkMiddleware from 'redux-thunk'
-
-import history from '../../history'
-import {syncHistory} from 'redux-simple-router'
+import {createStore, applyMiddleware, compose} from "redux";
+import rootReducer from "../reducers/rootReducer";
+import thunkMiddleware from "redux-thunk";
+import history from "../../history";
+import {syncHistory} from "redux-simple-router";
 
 // Sync dispatched route actions to the history
 const reduxRouterMiddleware = syncHistory(history)

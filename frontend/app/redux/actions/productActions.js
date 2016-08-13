@@ -1,6 +1,6 @@
-import * as C from './../constants/productConstants'
-import {routeActions} from 'redux-simple-router'
-import * as GeneralApi from '../api/GeneralApi'
+import * as C from "./../constants/productConstants";
+import {routeActions} from "redux-simple-router";
+import * as GeneralApi from "../api/GeneralApi";
 
 export function fetchProducts() {
   return dispatch => {

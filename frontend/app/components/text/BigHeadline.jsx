@@ -1,7 +1,7 @@
-import React, {Component, PropTypes} from 'react'
-import Link from '../Link.jsx'
-import Radium from 'radium'
-import {HEADING_SMALL, HEADING_BIG} from '../../colors'
+import React, {Component, PropTypes} from "react";
+import Link from "../Link.jsx";
+import Radium from "radium";
+import {HEADING_SMALL, HEADING_BIG} from "../../colors";
 
 class BigHeadline extends Component {
 

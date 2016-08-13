@@ -1,7 +1,7 @@
-import React, {Component, PropTypes} from 'react'
-import Link from './../Link.jsx'
-import Radium from 'radium'
-import {TEXT, HOVER, BACKGROUND_HOVER, BACKGROUND_LIGHT, FILTER} from '../../colors'
+import React, {Component, PropTypes} from "react";
+import Link from "./../Link.jsx";
+import Radium from "radium";
+import {TEXT, HOVER, FILTER} from "../../colors";
 
 class MenuItem extends Component {
 
@@ -138,7 +138,7 @@ class MenuItem extends Component {
       <div style={style.box}>
         <div onClick={this.onExpand}>
           {isParent ? <i key={id + '1'} style={style.icon} className={expanderClass}/> : null}
-          <Link key={id+'2'} to={linkTo} style={style.item}>
+          <Link key={id + '2'} to={linkTo} style={style.item}>
             {matched}
           </Link>
         </div>

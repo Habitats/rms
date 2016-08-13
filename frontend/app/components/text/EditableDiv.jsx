@@ -1,5 +1,4 @@
-import React, {PropTypes, Component} from 'react'
-import EventListener from '../../util/EventListener'
+import React, {PropTypes, Component} from "react";
 
 export default class EditableDiv extends Component {
 
@@ -8,18 +7,18 @@ export default class EditableDiv extends Component {
     this.state = {html: this.props.content}
   }
 
-  componentDidMount(){
+  componentDidMount() {
     let editor = this.refs.editor.getDOMNode()
     editor.addEventListener('paste', this.handlePaste.bind(this), false)
   }
 
-  handlePaste(e)     {
-      // cancel paste
-      e.preventDefault()
-      // get text representation of clipboard
-      let text = text = (event.originalEvent || event).clipboardData.getData('text/plain')
-      // insert text manually
-      document.execCommand('insertHTML', false, text)
+  handlePaste(e) {
+    // cancel paste
+    e.preventDefault()
+    // get text representation of clipboard
+    let text = text = (event.originalEvent || event).clipboardData.getData('text/plain')
+    // insert text manually
+    document.execCommand('insertHTML', false, text)
   }
 
   componentWillUnmount() {
@@ -123,7 +122,7 @@ export default class EditableDiv extends Component {
           <button type="button" className="btn btn-default btn-xs" onClick={this.execCommand.bind(this, 'removeFormat')}><i
             className="fa fa-eraser"/></button>
         </div>
-        <div style={editorStyle} ref="editor" contentEditable={true} dangerouslySetInnerHTML={{__html : this.state.html}}
+        <div style={editorStyle} ref="editor" contentEditable={true} dangerouslySetInnerHTML={{__html: this.state.html}}
              onInput={this.emitChange.bind(this)}/>
       </div>
     );

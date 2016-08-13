@@ -1,7 +1,7 @@
-import React, {Component, PropTypes} from 'react'
-import Photo from './Photo.jsx'
-import HeadlineOverlay from './../text/HeadlineOverlay.jsx'
-import TextOverlay from './../text/TextOverlay.jsx'
+import React, {Component, PropTypes} from "react";
+import Photo from "./Photo.jsx";
+import HeadlineOverlay from "./../text/HeadlineOverlay.jsx";
+import TextOverlay from "./../text/TextOverlay.jsx";
 
 export default class PhotoBig extends Component {
 

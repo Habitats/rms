@@ -1,8 +1,7 @@
-import React, {Component, PropTypes} from 'react'
-import {connect} from 'react-redux'
-import BigHeadline from './../components/text/BigHeadline.jsx'
-import Box from './../components/Box.jsx'
-import * as sessionActionCreators from '../redux/actions/sessionActions'
+import React, {Component, PropTypes} from "react";
+import {connect} from "react-redux";
+import Box from "./../components/Box.jsx";
+import * as sessionActionCreators from "../redux/actions/sessionActions";
 
 export default class Login extends Component {
 

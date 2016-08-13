@@ -1,5 +1,5 @@
-import React, {Component, PropTypes} from 'react'
-import {MENU_WIDTH, MARGIN_XS} from '../vars'
+import React, {Component, PropTypes} from "react";
+import {MENU_WIDTH, MARGIN_XS} from "../vars";
 
 export default class Right extends Component {
 

@@ -1,11 +1,11 @@
-import React, {Component, PropTypes} from 'react'
-import {routeActions} from 'redux-simple-router'
-import {connect} from 'react-redux'
-import Radium from 'radium'
+import React, {Component, PropTypes} from "react";
+import {routeActions} from "redux-simple-router";
+import {connect} from "react-redux";
+import Radium from "radium";
 
 class Link extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props)
     this.onClick = () => props.dispatch(routeActions.push(props.to))
   }
@@ -14,7 +14,7 @@ class Link extends Component {
     let {children, style} = this.props
     style = {
       ...style,
-      ':hover' :{
+      ':hover': {
         ...style[':hover'],
         cursor: 'pointer'
       },

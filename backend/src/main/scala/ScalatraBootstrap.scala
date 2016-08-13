@@ -13,7 +13,7 @@ class ScalatraBootstrap extends LifeCycle {
   Logger.info("Created c3po connection pool")
 
   override def init(context: ServletContext) {
-//    if (Config.DEBUG) Config.DB_FILE.delete
+    //    if (Config.DEBUG) Config.DB_FILE.delete
     val db = Database.forDataSource(cpds)
     RmsDb.init(db)
     context.mount(new SecretServlet(db), "/secret/*")

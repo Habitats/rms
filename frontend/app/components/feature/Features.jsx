@@ -1,7 +1,5 @@
-import React, {Component, PropTypes} from 'react'
-import FeatureItem from './FeatureItem.jsx'
-import BigHeadline from '../text/BigHeadline.jsx'
-import Link from '../Link.jsx'
+import React, {Component, PropTypes} from "react";
+import FeatureItem from "./FeatureItem.jsx";
 
 export default class Features extends Component {
 

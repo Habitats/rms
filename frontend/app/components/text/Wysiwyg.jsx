@@ -1,5 +1,5 @@
-import React, {Component, PropTypes} from 'react'
-import EditableDiv from './EditableDiv.jsx'
+import React, {Component, PropTypes} from "react";
+import EditableDiv from "./EditableDiv.jsx";
 
 export default class Wysiwyg extends Component {
 
@@ -12,7 +12,7 @@ export default class Wysiwyg extends Component {
     this.setState({content: e.target.value})
   }
 
-  componentWillReceiveProps(nextProps){
+  componentWillReceiveProps(nextProps) {
     this.setState({enabled: false, content: nextProps.content})
   }
 
@@ -25,7 +25,7 @@ export default class Wysiwyg extends Component {
     this.props.onSave(this.state.content)
   }
 
-  onCancel(){
+  onCancel() {
     this.toggle(false)
     this.setState({content: this.props.content})
   }
@@ -51,7 +51,7 @@ export default class Wysiwyg extends Component {
          </div>
           :
          <div>
-           <div dangerouslySetInnerHTML={{__html: content}} className="col-xs-12" />
+           <div dangerouslySetInnerHTML={{__html: content}} className="col-xs-12"/>
            <div className="col-xs-12">
              <button style={{marginTop: 45}} className="btn btn-default btn-block" onClick={this.toggle.bind(this, true)} type="submit">Endre beskrivelse
              </button>

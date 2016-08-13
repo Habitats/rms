@@ -1,10 +1,7 @@
-import React, {Component, PropTypes} from 'react'
-import Photo from './../photo/Photo.jsx'
-import HeadlineOverlay from './../text/HeadlineOverlay.jsx'
-import * as ProductActionCreators from  '../../redux/actions/productActions'
-import ProductItem from './ProductItem.jsx'
-import Radium from 'radium'
-import * as V from '../../vars'
+import React, {Component, PropTypes} from "react";
+import ProductItem from "./ProductItem.jsx";
+import Radium from "radium";
+import * as V from "../../vars";
 
 class ProductItems extends Component {
 

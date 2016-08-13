@@ -1,6 +1,6 @@
-import React, {Component, PropTypes} from 'react'
-import Photo from './../photo/Photo.jsx'
-import Radium from 'radium'
+import React, {Component, PropTypes} from "react";
+import Photo from "./../photo/Photo.jsx";
+import Radium from "radium";
 
 class Person extends Component {
 

@@ -1,4 +1,4 @@
-import * as C from './../constants/GeneralConstants'
+import * as C from "./../constants/GeneralConstants";
 
 const initialState = {
   projects: [],
