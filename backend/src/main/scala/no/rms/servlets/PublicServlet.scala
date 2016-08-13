@@ -90,7 +90,7 @@ class PublicServlet(val db: Database) extends BackendStack with FutureSupport wi
     Logger.info("GET: image/" + path + "/" + size)
     contentType = "image"
     Future {
-      ImageUtils.fetchPath(path, size).getOrElse(ImageUtils.notFound)
+      ImageUtils.fetchPath(path, size).getOrElse(ImageUtils.notFound())
     }
   }
 
@@ -98,7 +98,7 @@ class PublicServlet(val db: Database) extends BackendStack with FutureSupport wi
     val id = params.get("id").get
     Logger.info("GET: image/" + id)
     contentType = "image"
-    ImageUtils.fetchPath(id).getOrElse(ImageUtils.notFound)
+    ImageUtils.fetchPath(id).getOrElse(ImageUtils.notFound())
   }
 }
 

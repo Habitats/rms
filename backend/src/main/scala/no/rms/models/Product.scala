@@ -8,7 +8,7 @@ import no.rms.db.RmsDb
 object Product {
 
   def apply(title: String, description: String, sub: Seq[Product] = Nil, id: String = null, index: Int = 0): Product = {
-    new Product(if (id == null) genId(title) else id, title = title, description = description, sub = sub, category = "", images = Nil, src = "image/" + ImageUtils.notFound.getName, index = index)
+    new Product(if (id == null) genId(title) else id, title = title, description = description, sub = sub, category = "", images = Nil, src = "image/" + ImageUtils.notFound().getName, index = index)
   }
 
   def genId(title: String) = title.toLowerCase

@@ -20,5 +20,5 @@ idea {
 }
 
 task stage {
-    dependsOn clean, backend:war
+    dependsOn clean, build
 }
