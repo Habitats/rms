@@ -37,20 +37,5 @@ build/
 
 *.idlk
 backend/img/cover.indd
-img/raw/produkter/eksterior/faste_skjermer/
-img/raw/produkter/eksterior/markiser/anne_gtrethe_markise/
-img/raw/produkter/eksterior/markiser/fasademarkise/
-img/raw/produkter/eksterior/markiser/horisontalmarkise/
-img/raw/produkter/eksterior/markiser/mortensmarkise/
-img/raw/produkter/eksterior/markiser/restaurantmarkise/
-img/raw/produkter/eksterior/markiser/terrassemarkise/class_marcesa/
-img/raw/produkter/eksterior/markiser/terrassemarkise/nova_marcesa/
-img/raw/produkter/eksterior/markiser/tullemarkise/
-img/raw/produkter/eksterior/screen/new_folder/
-img/raw/produkter/styringssystemer/sol-_og_vindsensor/
-img/raw/produkter/vindusfilm/dekor_og_folie/
-img/raw/produkter/vindusfilm/film_for_glasstak/
-img/raw/produkter/vindusfilm/sikkerhetsfilm/
-img/raw/produkter/vindusfilm/solfilm/
 rms.mv.tmp/
 src/test/resources/
