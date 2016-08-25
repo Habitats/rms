@@ -6,7 +6,7 @@ import BigHeadline from "./../components/text/BigHeadline.jsx";
 import Box from "./../components/Box.jsx";
 import * as generalActionCreators from "./../redux/actions/generalActions";
 
-export default class ProjectsContainer extends Component {
+class ProjectsContainer extends Component {
 
   componentWillMount() {
     if (this.props.projects.length === 0) {

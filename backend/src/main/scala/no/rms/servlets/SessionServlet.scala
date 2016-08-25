@@ -28,6 +28,12 @@ class SessionServlet extends BackendStack with FutureSupport with JacksonJsonSup
     user
   }
 
+  get("/health/?") {
+    contentType = formats("txt")
+    Logger.info("hello!")
+    "SESSION OK"
+  }
+
   get("/test/?") {
     Users.update(user.copy(username = Some(System.currentTimeMillis.toString)))
   }

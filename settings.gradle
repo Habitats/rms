@@ -1,4 +1,4 @@
 rootProject.name = 'rms'
 
-include 'backend'
+include 'backend', 'frontend'
 

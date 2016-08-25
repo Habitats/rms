@@ -6,7 +6,7 @@ import * as ProductActionCreators from "./../redux/actions/productActions";
 import Box from "./../components/Box.jsx";
 import NotFound from "./NotFound.jsx";
 
-export default class CategoryContainer extends Component {
+class CategoryContainer extends Component {
 
   componentWillMount() {
     this.props.dispatch(ProductActionCreators.fetchProducts())

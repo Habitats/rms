@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import * as GeneralActionCreators from "../../redux/actions/generalActions";
 import Radium from "radium";
 
-export default class ContactForm extends Component {
+class ContactForm extends Component {
 
   constructor(props) {
     super(props)

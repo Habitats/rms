@@ -34,23 +34,23 @@ class PublicServlet(val db: Database) extends BackendStack with FutureSupport wi
     response.setHeader("Access-Control-Allow-Headers", request.getHeader("Access-Control-Request-Headers"))
   }
 
-  before() {
-    contentType = formats("json")
-  }
-
-  get("/hello/?") {
-    contentType = formats("txt")
-    requireLogin()
-    Logger.info("hello!")
-    "HELLO MR. ADMIN"
-  }
-
   get("/?") {
     Logger.info("GET: /")
     contentType = "text/html"
     val index = new File(servletContext.getResource("/index.html").getFile)
     index
   }
+
+  before() {
+    contentType = formats("json")
+  }
+
+  get("/health/?") {
+    contentType = formats("txt")
+    Logger.info("hello!")
+    "API OK"
+  }
+
 
   get("/projects/?") {
     Logger.info("GET: projects")

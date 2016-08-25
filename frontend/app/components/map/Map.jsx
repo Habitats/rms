@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from "react";
 import Radium from "radium";
 
-export default class Map extends Component {
+class Map extends Component {
 
   componentDidUpdate() {
     window.initialize()

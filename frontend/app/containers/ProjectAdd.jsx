@@ -9,7 +9,7 @@ import Box from './../components/Box.jsx'
 import SimpleLabel from './../components/text/SimpleLabel.jsx'
 import * as generalActions from '../redux/actions/generalActions'
 
-export default class ProjectAdd extends Component {
+class ProjectAdd extends Component {
 
   constructor(props) {
     super(props)

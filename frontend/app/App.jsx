@@ -20,7 +20,7 @@ import Login from './containers/Login.jsx'
 import * as SessionActionCreators from './redux/actions/sessionActions'
 import {StyleRoot} from 'radium'
 
-export default class App extends Component {
+class App extends Component {
 
   constructor(props) {
     super(props)

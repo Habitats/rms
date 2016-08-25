@@ -39,6 +39,12 @@ class SecretServlet(val db: Database) extends BackendStack with FutureSupport wi
     contentType = formats("json")
   }
 
+  get("/health/?") {
+    contentType = formats("txt")
+    Logger.info("hello!")
+    "SECRET OK"
+  }
+
   get("/?") {
     Logger.info("GET: secret")
     contentType = "text"
@@ -53,7 +59,7 @@ class SecretServlet(val db: Database) extends BackendStack with FutureSupport wi
     }
   }
 
-  delete("/project/?"){
+  delete("/project/?") {
     Logger.info("DELETE: project")
     Try(parsedBody.extract[String]) match {
       case Success(p) => RmsDb.removeProject(p, db).transform(s => RmsDb.allProjects(db), f => f)
@@ -64,12 +70,12 @@ class SecretServlet(val db: Database) extends BackendStack with FutureSupport wi
   post("/product/?") {
     Logger.info("POST: product")
     Try(parsedBody.extract[Product]) match {
-      case Success(p) => if(p.id == "-1") RmsDb.newProduct(p, db) else RmsDb.storeProduct(p, db)
+      case Success(p) => if (p.id == "-1") RmsDb.newProduct(p, db) else RmsDb.storeProduct(p, db)
       case Failure(ex) => Logger.info(ex.getMessage)
     }
   }
 
-  delete("/product/?"){
+  delete("/product/?") {
     Logger.info("DELETE: product")
     Try(parsedBody.extract[String]) match {
       case Success(p) => RmsDb.removeProduct(p, db).transform(s => RmsDb.allProducts(db), f => f)

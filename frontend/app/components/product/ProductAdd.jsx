@@ -7,7 +7,7 @@ import * as productActions from '../../redux/actions/productActions'
 import Select from 'react-select'
 import {CONTENT_MAX_WIDTH} from '../../vars'
 
-export default class ProductAdd extends Component {
+class ProductAdd extends Component {
 
   constructor(props) {
     super(props)

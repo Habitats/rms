@@ -3,7 +3,7 @@ import Product from "./../components/product/Product.jsx";
 import {connect} from "react-redux";
 import NotFound from "./NotFound.jsx";
 
-export default class ProductContainer extends Component {
+class ProductContainer extends Component {
 
   render() {
     let {categories, params} = this.props

@@ -1,7 +1,6 @@
 apply plugin: 'scala'
 apply plugin: 'application'
 apply plugin: 'war'
-apply plugin: 'jetty'
 
 import org.apache.tools.ant.taskdefs.condition.Os
 
@@ -32,6 +31,11 @@ repositories {
 
 compileScala {
     scalaCompileOptions.useCompileDaemon = true
+}
+
+
+war {
+    dependsOn ':frontend:bundle'
 }
 
 tasks.withType(ScalaCompile) {

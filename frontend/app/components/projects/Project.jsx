@@ -5,7 +5,7 @@ import BigHeadline from './../text/BigHeadline.jsx'
 import MiniGallery from './../photo/MiniGallery.jsx'
 import Box from './../Box.jsx'
 
-export default class Project extends Component {
+class Project extends Component {
 
   render() {
     let {project, session: {admin}, dispatch} = this.props

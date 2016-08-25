@@ -9,6 +9,7 @@ const DEBUG = process.env.NODE_ENV === 'development';
 
 const contextPath = '';
 
+// https://github.com/webpack/extract-text-webpack-plugin
 const cssExtractTextPlugin = new ExtractTextPlugin('css/rms.css', {
   allChunks: true
 });
@@ -116,7 +117,7 @@ if (DEBUG) {
 }
 
 const config = {
-  context: path.join(__dirname, 'app'),
+  context: path.join(__dirname, '/app'),
   cache: DEBUG,
   debug: DEBUG,
   target: 'web',
@@ -143,9 +144,6 @@ const config = {
     hot: true,
     noInfo: false,
     inline: true,
-    proxy: {
-      '/*': 'http://localhost:8080/'
-    },
     stats: {colors: true}
   }
 };

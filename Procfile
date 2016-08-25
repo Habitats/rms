@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -Dserver.port=$PORT -jar backend/build/libs/*.war
+web: java $JAVA_OPTS -Dserver.port=$PORT -jar rms*.war

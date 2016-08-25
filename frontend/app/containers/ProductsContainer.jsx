@@ -11,7 +11,7 @@ import * as productActionCreators from './../redux/actions/productActions'
 import NotFound from './NotFound.jsx'
 import Link from '../components/Link.jsx'
 
-export default class ProductsContainer extends Component {
+class ProductsContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {

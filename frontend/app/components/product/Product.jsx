@@ -10,7 +10,7 @@ import ProductItems from './ProductItems.jsx'
 import ContactForm from '../contact/ContactForm.jsx'
 import {CONTENT_MAX_WIDTH} from '../../vars'
 
-export default class Product extends Component {
+class Product extends Component {
 
   render() {
     let {product, category, dispatch, session: {admin}, linkTo} = this.props

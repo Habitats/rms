@@ -1,19 +1,25 @@
-var util = require('util')
-var webpack = require('webpack')
-var WebpackDevServer = require('webpack-dev-server')
-var config = require('./webpack.config')
-var pkg = require('./package.json')
+const util = require('util')
+const webpack = require('webpack')
+const WebpackDevServer = require('webpack-dev-server')
+const config = require('./webpack.config')
+const pkg = require('./package.json')
+const proxy = require('http-proxy-middleware')
 
-var port = pkg.config.devPort
-var host = pkg.config.devHost
+const port = pkg.config.devPort
+const host = pkg.config.devHost
 
-var server = new WebpackDevServer(
+const server = new WebpackDevServer(
   webpack(config),
   config.devServer
 )
 
 server.listen(port, host, function (err) {
   if (err) { console.log(err) }
-  var url = util.format('http://%s:%d', host, port)
+  const url = util.format('http://%s:%d', host, port)
   console.log('Listening at %s', url)
 })
+
+server.use('/*', proxy({
+  target: 'http://localhost:8080',
+  changeOrigin: true
+}))

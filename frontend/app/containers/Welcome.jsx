@@ -8,7 +8,7 @@ import ProductItems from "./../components/product/ProductItems.jsx";
 import * as productActionCreators from "./../redux/actions/productActions";
 import Radium from "radium";
 
-export default class Welcome extends Component {
+class Welcome extends Component {
 
   constructor(props) {
     super(props)
