@@ -24,7 +24,7 @@ object Config {
   val ONE_WEEK  = 7 * 24 * 3600
   val DEBUG     = true
   val DB_FILE: File   = {
-    val f = new File(getClass.getResource("/rms.mv.db").getFile)
+    val f = new File("db/rms.mv.db")
     f
   }
 

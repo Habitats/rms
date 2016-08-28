@@ -17,3 +17,9 @@
 /secret
 /src/main/webapp/assets
 /img/raw
+/src/main/resources/c3p0.properties
+/src/main/resources/dropbox_token
+/src/main/resources/conf.properties
+/src/main/resources/rms.mv.db
+/db/rms.trace.db
+/db/rms.h2.db

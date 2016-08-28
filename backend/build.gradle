@@ -36,6 +36,10 @@ compileScala {
 
 war {
     dependsOn ':frontend:bundle'
+    from(project.rootDir.absolutePath + '/backend/db') {
+        include 'rms.mv.db'
+        into('db')
+    }
 }
 
 tasks.withType(ScalaCompile) {
