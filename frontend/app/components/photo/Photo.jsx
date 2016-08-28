@@ -55,7 +55,7 @@ class Photo extends Component {
         marginBottom: margin
       },
       photo: {
-        background: 'url(' + src + '/' + size + ') no-repeat center center',
+        background: 'url(/' + src + '/' + size + ') no-repeat center center',
         height: '100%',
         width: '100%',
         position: 'absolute',

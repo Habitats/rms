@@ -14,25 +14,25 @@ export default class About extends Component {
         <Box>
           <div className="row visible-md visible-lg">
             <div className="col-md-8" style={{paddingRight: 0}}>
-              <Photo clickable={false} height={415} src="/image/butikken_.jpg"/>
+              <Photo clickable={false} height={415} src="image/butikken_.jpg"/>
             </div>
             <div className="col-md-4">
-              <Photo clickable={false} height={200} src="/image/butikken_inne_1.jpg"/>
-              <Photo clickable={false} height={200} src="/image/butikken_inne_2.jpg" margin={15}/>
+              <Photo clickable={false} height={200} src="image/butikken_inne_1.jpg"/>
+              <Photo clickable={false} height={200} src="image/butikken_inne_2.jpg" margin={15}/>
             </div>
           </div>
           <div className="row visible-sm">
             <div className="col-sm-8" style={{paddingRight: 0}}>
-              <Photo clickable={false} height={320} src="/image/butikken_.jpg"/>
+              <Photo clickable={false} height={320} src="image/butikken_.jpg"/>
             </div>
             <div className="col-sm-4">
-              <Photo clickable={false} height={150} src="/image/butikken_inne_1.jpg"/>
-              <Photo clickable={false} height={150} src="/image/butikken_inne_2.jpg" margin={15}/>
+              <Photo clickable={false} height={150} src="image/butikken_inne_1.jpg"/>
+              <Photo clickable={false} height={150} src="image/butikken_inne_2.jpg" margin={15}/>
             </div>
           </div>
           <div className="row visible-xs">
             <div className="col-sm-12">
-              <Photo clickable={false} height={300} crop={true} src="/image/butikken_.jpg"/>
+              <Photo clickable={false} height={300} crop={true} src="image/butikken_.jpg"/>
             </div>
           </div>
 
@@ -65,31 +65,31 @@ export default class About extends Component {
                 <div className="row">
                   <div className="col-sm-6">
                     <a href="http://www.vental.no/" target="_blank">
-                      <Photo clickable={false} crop={false} height={iconHeight} margin={margin} src="/image/logo_vental.png"/>
+                      <Photo clickable={false} crop={false} height={iconHeight} margin={margin} src="image/logo_vental.png"/>
                     </a>
                   </div>
                   <div className="col-sm-6">
                     <a href="http://www.kjellsmarkiser.no/" target="_blank">
-                      <Photo clickable={false} crop={false} height={iconHeight} margin={margin} src="/image/logo_kjells.jpg"/>
+                      <Photo clickable={false} crop={false} height={iconHeight} margin={margin} src="image/logo_kjells.jpg"/>
                     </a>
                   </div>
                 </div>
                 <div className="row">
                   <div className="col-sm-6">
                     <a href="https://www.somfy.no/" target="_blank">
-                      <Photo clickable={false} crop={false} height={iconHeight} margin={margin} src="/image/logo_somfy.jpg"/>
+                      <Photo clickable={false} crop={false} height={iconHeight} margin={margin} src="image/logo_somfy.jpg"/>
                     </a>
                   </div>
                   <div className="col-sm-6">
                     <a href="http://vemaprodukter.no/" target="_blank">
-                      <Photo clickable={false} crop={false} height={iconHeight} margin={margin} src="/image/logo_vema.png"/>
+                      <Photo clickable={false} crop={false} height={iconHeight} margin={margin} src="image/logo_vema.png"/>
                     </a>
                   </div>
                 </div>
                 <div className="row">
                   <div className="col-sm-4 col-sm-offset-4 text-center">
                     <a href="http://www.solskjerming.no/" target="_blank">
-                      <Photo clickable={false} crop={false} height={iconHeight + 20} src="/image/medlem_logo.png"/>
+                      <Photo clickable={false} crop={false} height={iconHeight + 20} src="image/medlem_logo.png"/>
                     </a>
                     <div style={{paddingTop: 10, maxWidth: 215, display: 'inline-block'}}>
                       <i >Romerike Markiseservice er medlem av Norges Solskjermingsforbund</i>

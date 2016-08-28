@@ -47,10 +47,10 @@ class Welcome extends Component {
   render() {
     let {small} = this.state
     let images = [
-      {src: '/image/carousel,c1.jpg'},
-      {src: '/image/carousel,c2.jpg'},
-      {src: '/image/carousel,c3.jpg'},
-      {src: '/image/carousel,c4.jpg'}
+      {src: 'image/carousel,c1.jpg'},
+      {src: 'image/carousel,c2.jpg'},
+      {src: 'image/carousel,c3.jpg'},
+      {src: 'image/carousel,c4.jpg'}
     ]
 
     let ready = this.props.categories.hasOwnProperty('sub')
