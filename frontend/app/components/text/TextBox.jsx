@@ -1,12 +1,12 @@
-import React, {Component, PropTypes} from "react";
-import Radium from "radium";
-import {CONTENT_MAX_WIDTH} from "../../vars";
+import React, {Component, PropTypes} from 'react'
+import Radium from 'radium'
+import {CONTENT_MAX_WIDTH} from '../../vars'
 
 class TextBox extends Component {
 
   render() {
-    let {children} = this.props
-    let style = {
+    const {children} = this.props
+    const style = {
       paddingBottom: 40,
       textAlign: 'justify',
       '@media only screen and (max-width: 767px)': {

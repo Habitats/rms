@@ -1,8 +1,8 @@
-import React, {Component, PropTypes} from "react";
-import {connect} from "react-redux";
-import Project from "./../components/projects/Project.jsx";
-import * as generalActionCreators from "../redux/actions/generalActions";
-import NotFound from "./NotFound.jsx";
+import React, {Component, PropTypes} from 'react'
+import {connect} from 'react-redux'
+import Project from './../components/projects/Project.jsx'
+import * as generalActionCreators from '../redux/actions/generalActions'
+import NotFound from './NotFound.jsx'
 
 class ProjectContainer extends Component {
 
@@ -11,8 +11,8 @@ class ProjectContainer extends Component {
   }
 
   render() {
-    let {project, params} = this.props
-    let selected = parseInt(params.selected)
+    const {project, params} = this.props
+    const selected = parseInt(params.selected)
     if (!project) {
       return <NotFound />
     } else if (project.fetching) {

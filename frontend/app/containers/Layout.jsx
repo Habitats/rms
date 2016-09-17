@@ -1,13 +1,13 @@
-import React, {Component, PropTypes} from "react";
-import Footer from "./../components/Footer.jsx";
-import Header from "./../components/Header.jsx";
-import Radium from "radium";
-import * as V from "../vars";
+import React, {Component, PropTypes} from 'react'
+import Footer from './../components/Footer.jsx'
+import Header from './../components/Header.jsx'
+import Radium from 'radium'
+import * as V from '../vars'
 
 class Layout extends Component {
 
   render() {
-    let style = {
+    const style = {
       maxWidth: 1000,
       '@media only screen and (max-width: 767px)': {
         marginTop: V.HEADER_HEIGHT_XS,

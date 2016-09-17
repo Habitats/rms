@@ -1,8 +1,6 @@
 import React, {Component, PropTypes} from 'react'
-import {Router, Route, IndexRoute} from 'react-router'
-import {browserHistory} from 'react-router'
+import {Router, Route, IndexRoute, browserHistory} from 'react-router'
 import {connect} from 'react-redux'
-
 import history from './history'
 import Layout from './containers/Layout.jsx'
 import NotFound from './containers/NotFound.jsx'

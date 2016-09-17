@@ -5,8 +5,6 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.Properties
 
-import scala.io.{BufferedSource, Source}
-
 object Config {
   val df = DateTimeFormatter.ISO_LOCAL_DATE_TIME
 
@@ -20,10 +18,10 @@ object Config {
   def dropboxAppSecret = conf.getProperty("dropbox_app_secret")
   def test = conf.getProperty("test").toBoolean
 
-  val COOKIE_ID = "YOLO"
-  val ONE_WEEK  = 7 * 24 * 3600
-  val DEBUG     = true
-  val DB_FILE: File   = {
+  val COOKIE_ID     = "YOLO"
+  val ONE_WEEK      = 7 * 24 * 3600
+  val DEBUG         = true
+  val DB_FILE: File = {
     val f = new File("db/rms.mv.db")
     f
   }

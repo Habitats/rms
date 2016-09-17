@@ -1,4 +1,4 @@
-import React, {PropTypes, Component} from "react";
+import React, {PropTypes, Component} from 'react'
 
 export default class EditableDiv extends Component {
 
@@ -8,7 +8,7 @@ export default class EditableDiv extends Component {
   }
 
   componentDidMount() {
-    let editor = this.refs.editor.getDOMNode()
+    const editor = this.refs.editor.getDOMNode()
     editor.addEventListener('paste', this.handlePaste.bind(this), false)
   }
 
@@ -16,19 +16,19 @@ export default class EditableDiv extends Component {
     // cancel paste
     e.preventDefault()
     // get text representation of clipboard
-    let text = text = (event.originalEvent || event).clipboardData.getData('text/plain')
+    const text = (event.originalEvent || event).clipboardData.getData('text/plain')
     // insert text manually
     document.execCommand('insertHTML', false, text)
   }
 
   componentWillUnmount() {
-    let editor = this.refs.editor.getDOMNode()
+    const editor = this.refs.editor.getDOMNode()
     editor.removeEventListener('paste')
   }
 
   emitChange() {
-    let editor = this.refs.editor.getDOMNode()
-    let newHtml = editor.innerHTML
+    const editor = this.refs.editor.getDOMNode()
+    const newHtml = editor.innerHTML
 
     this.setState({html: newHtml}, (() => {
         this.props.onChange({
@@ -49,9 +49,9 @@ export default class EditableDiv extends Component {
   }
 
   render() {
-    let {paragraphs, lists, textSize, headings} = this.props
-    let buttonSpacing = {marginRight: 2}
-    let editorStyle = {
+    const {paragraphs, lists, textSize, headings} = this.props
+    const buttonSpacing = {marginRight: 2}
+    const editorStyle = {
       paddingTop: 13,
       overflow: 'auto',
       boxShadow: 'inset -1px 1px 17px 0px rgba(0,0,0,0.14)',
@@ -125,7 +125,7 @@ export default class EditableDiv extends Component {
         <div style={editorStyle} ref="editor" contentEditable={true} dangerouslySetInnerHTML={{__html: this.state.html}}
              onInput={this.emitChange.bind(this)}/>
       </div>
-    );
+    )
   }
 }
 

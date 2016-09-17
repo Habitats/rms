@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react'
-import {browserHistory } from 'react-router'
+import {browserHistory} from 'react-router'
 import {connect} from 'react-redux'
 import Radium from 'radium'
 
@@ -11,8 +11,8 @@ class Link extends Component {
   }
 
   render() {
-    let {children, style} = this.props
-    style = {
+    const {children, style} = this.props
+    const linkStyle = {
       ...style,
       ':hover': {
         ...style[':hover'],
@@ -20,7 +20,7 @@ class Link extends Component {
       },
     }
     return (
-      <span style={style} onClick={this.onClick}>
+      <span style={linkStyle} onClick={this.onClick}>
         {children}
       </span>
     )

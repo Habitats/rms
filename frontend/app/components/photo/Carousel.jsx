@@ -1,16 +1,16 @@
-import React, {Component, PropTypes} from "react";
-import Photo from "./Photo.jsx";
-import Slider from "react-slick";
-import Radium from "radium";
-import {SM, XS, COVER_HEIGHT} from "../../vars";
+import React, {Component, PropTypes} from 'react'
+import Photo from './Photo.jsx'
+import Slider from 'react-slick'
+import Radium from 'radium'
+import {SM, XS, COVER_HEIGHT} from '../../vars'
 
 class Carousel extends Component {
 
   render() {
-    let {images} = this.props
+    const {images} = this.props
 
-    let height = COVER_HEIGHT
-    let style = {
+    const height = COVER_HEIGHT
+    const style = {
       carousel: {
         '@media only screen and (max-width: 767px)': {
           height: height * XS
@@ -23,12 +23,12 @@ class Carousel extends Component {
         }
       }
     }
-    let photos = images.map(i => (
+    const photos = images.map(i => (
       <div key={i.src} style={style.carousel}>
         <Photo src={i.src}/>
       </div>
     ))
-    let settings = {
+    const settings = {
       dots: true,
       infinite: true,
       speed: 2000,
@@ -39,7 +39,7 @@ class Carousel extends Component {
       autoplay: true,
       slidesToShow: 1,
       slidesToScroll: 1
-    };
+    }
     return (
       <Slider {...settings}>
         {photos}

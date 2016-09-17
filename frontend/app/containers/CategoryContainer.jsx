@@ -1,10 +1,10 @@
-import React, {Component, PropTypes} from "react";
-import {connect} from "react-redux";
-import Category from "./../components/product/Category.jsx";
-import BigHeadline from "./../components/text/BigHeadline.jsx";
-import * as ProductActionCreators from "./../redux/actions/productActions";
-import Box from "./../components/Box.jsx";
-import NotFound from "./NotFound.jsx";
+import React, {Component, PropTypes} from 'react'
+import {connect} from 'react-redux'
+import Category from './../components/product/Category.jsx'
+import BigHeadline from './../components/text/BigHeadline.jsx'
+import * as ProductActionCreators from './../redux/actions/productActions'
+import Box from './../components/Box.jsx'
+import NotFound from './NotFound.jsx'
 
 class CategoryContainer extends Component {
 
@@ -13,8 +13,8 @@ class CategoryContainer extends Component {
   }
 
   render() {
-    let {categories, params} = this.props
-    let category = categories.sub.find(c => c.id === params.categoryId)
+    const {categories, params} = this.props
+    const category = categories.sub.find(c => c.id === params.categoryId)
     if (category) {
       return (
         <div>

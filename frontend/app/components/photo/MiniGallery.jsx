@@ -1,9 +1,9 @@
-import React, {Component, PropTypes} from "react";
-import Photo from "./Photo.jsx";
-import CoverPhoto from "./CoverPhoto.jsx";
-import Radium from "radium";
-import Draggable, {DraggableCore} from "react-draggable";
-import {SM, XS} from "../../vars";
+import React, {Component, PropTypes} from 'react'
+import Photo from './Photo.jsx'
+import CoverPhoto from './CoverPhoto.jsx'
+import Radium from 'radium'
+import Draggable, {DraggableCore} from 'react-draggable'
+import {SM, XS} from '../../vars'
 
 class MiniGallery extends Component {
 
@@ -51,16 +51,16 @@ class MiniGallery extends Component {
   }
 
   onRightSelect(images, selected) {
-    let selectedIndex = images.indexOf(selected)
-    let newSelectedIndex = (selectedIndex + 1) % images.length
-    let startX = newSelectedIndex <= 3 ? 0 : (images.length - newSelectedIndex) <= 3 ? this.state.startX : (-(newSelectedIndex - 3) * 103)
+    const selectedIndex = images.indexOf(selected)
+    const newSelectedIndex = (selectedIndex + 1) % images.length
+    const startX = newSelectedIndex <= 3 ? 0 : (images.length - newSelectedIndex) <= 3 ? this.state.startX : (-(newSelectedIndex - 3) * 103)
     this.setState({selected: images[newSelectedIndex], startX: startX})
   }
 
   onLeftSelect(images, selected) {
-    let selectedIndex = images.indexOf(selected)
-    let newSelectedIndex = ((selectedIndex - 1) + images.length) % images.length
-    let startX = newSelectedIndex <= 3 ? 0 : (images.length - newSelectedIndex) <= 3 ? this.state.startX : (-(newSelectedIndex - 3) * 103)
+    const selectedIndex = images.indexOf(selected)
+    const newSelectedIndex = ((selectedIndex - 1) + images.length) % images.length
+    const startX = newSelectedIndex <= 3 ? 0 : (images.length - newSelectedIndex) <= 3 ? this.state.startX : (-(newSelectedIndex - 3) * 103)
     this.setState({selected: images[newSelectedIndex], startX: startX})
   }
 
@@ -71,7 +71,7 @@ class MiniGallery extends Component {
   }
 
   horizontal(images, cover, height, startX) {
-    let style = {
+    const style = {
       cover: {
         paddingRight: 15,
         '@media only screen and (max-width: 767px)': {
@@ -115,13 +115,13 @@ class MiniGallery extends Component {
       }
     }
 
-    let classes = {
+    const classes = {
       cover: 'col-xs-12',
       thumbs: 'col-xs-3',
       thumbWrapper: 'col-xs-12'
     }
 
-    let bound = images.length <= 7 ? 0 : -((images.length - 7) * 103)
+    const bound = images.length <= 7 ? 0 : -((images.length - 7) * 103)
     return (
       <div className="row mini-gallery">
         <div className={classes.cover} style={style.cover}>
@@ -148,7 +148,7 @@ class MiniGallery extends Component {
   }
 
   vertical(images, cover, height) {
-    let style = {
+    const style = {
       cover: {
         paddingRight: images.length > 1 ? 0 : null,
         height: height
@@ -177,7 +177,7 @@ class MiniGallery extends Component {
       }
     }
 
-    let classes = {
+    const classes = {
       cover: images.length === 1 ? 'col-xs-12' : images.length > 10 ? 'col-xs-8' : 'col-xs-9',
       thumbs: images.length > 10 ? 'col-md-6 col-xs-12' : 'col-xs-12',
       thumbWrapper: images.length > 10 ? 'col-xs-4' : 'col-xs-3'
@@ -205,12 +205,12 @@ class MiniGallery extends Component {
   }
 
   render() {
-    let {images, height, orientation} = this.props
-    let {selected, startX, deltaX, small} = this.state
-    height = images.length > 1 ? height : height * 0.75
+    const {images, height, orientation} = this.props
+    const {selected, startX, deltaX, small} = this.state
+    const galleryHeight = images.length > 1 ? height : height * 0.75
 
-    let main = () => images.find(i => i.src.includes('main.jpg'))
-    let cover = selected || (main() || (images.length > 0 ? images[0] : null))
+    const main = () => images.find(i => i.src.includes('main.jpg'))
+    const cover = selected || (main() || (images.length > 0 ? images[0] : null))
     // no cover? nothing to see here (...)
     if (!cover) {
       return null
@@ -219,13 +219,13 @@ class MiniGallery extends Component {
     return (
       <div>
         {images.length === 1 ?
-         <div style={{height: height}}>
+         <div style={{height: galleryHeight}}>
            <Photo src={cover.src}/>
          </div>
           :
          <div>
-           {small ? this.horizontal(images, cover, height, startX) :
-            orientation === 'horizontal' ? this.horizontal(images, cover, height) : this.vertical(images, cover, height)}
+           {small ? this.horizontal(images, cover, galleryHeight, startX) :
+            orientation === 'horizontal' ? this.horizontal(images, cover, galleryHeight) : this.vertical(images, cover, galleryHeight)}
          </div>}
       </div>
     )

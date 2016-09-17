@@ -1,12 +1,12 @@
-import React, {Component, PropTypes} from "react";
-import Photo from "./Photo.jsx";
-import HeadlineOverlay from "./../text/HeadlineOverlay.jsx";
-import TextOverlay from "./../text/TextOverlay.jsx";
+import React, {Component, PropTypes} from 'react'
+import Photo from './Photo.jsx'
+import HeadlineOverlay from './../text/HeadlineOverlay.jsx'
+import TextOverlay from './../text/TextOverlay.jsx'
 
 export default class PhotoBig extends Component {
 
   render() {
-    let {height, width, src, description, title} = this.props
+    const {height, width, src, description, title} = this.props
     return (
       <Photo crop={true} height={height} width={width} src={src} clickable={true} size={'med'} margin={0}>
         {title ? <HeadlineOverlay text={title}/> : null}

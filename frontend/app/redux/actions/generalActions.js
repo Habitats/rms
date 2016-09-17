@@ -23,7 +23,7 @@ export function fetchProjects() {
 
 export function fetchProject(id) {
   return (dispatch, getState) => {
-    let project = getState().general.projects.find(p => p.id === id)
+    const project = getState().general.projects.find(p => p.id === id)
     if (!project) {
       dispatch({type: C.REQUEST_PROJECT})
       return GeneralApi.getProject(id).then(

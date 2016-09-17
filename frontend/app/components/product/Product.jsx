@@ -13,9 +13,9 @@ import {CONTENT_MAX_WIDTH} from '../../vars'
 class Product extends Component {
 
   render() {
-    let {product, category, dispatch, session: {admin}, linkTo} = this.props
-    let {title, description, images, sub, id} = product
-    let style = {
+    const {product, category, dispatch, session: {admin}, linkTo} = this.props
+    const {title, description, images, sub, id} = product
+    const style = {
       desc: {
         paddingBottom: 50,
         textAlign: 'justify',
@@ -34,9 +34,9 @@ class Product extends Component {
       }
     }
 
-    let headline = <MediumHeadline big={title} small={category} to={linkTo.split('/').reverse().splice(1).reverse().join('/')}/>
-    let gal = <div style={style.gallery}><MiniGallery images={images} orientation={'vertical'} height={350} style={style.gallery}/></div>
-    let desc = (
+    const headline = <MediumHeadline big={title} small={category} to={linkTo.split('/').reverse().splice(1).reverse().join('/')}/>
+    const gal = <div style={style.gallery}><MiniGallery images={images} orientation={'vertical'} height={350} style={style.gallery}/></div>
+    const desc = (
       <div style={style.desc}>
         {admin ?
          <Wysiwyg content={description} onSave={(p) => dispatch(productActions.save({... product, description: p}))}/>
@@ -47,13 +47,13 @@ class Product extends Component {
           Admin </button> : null}
       </div>
     )
-    let subCategories = sub && sub.length > 0 ? (
+    const subCategories = sub && sub.length > 0 ? (
       <div className="row">
         <ProductItems products={product.sub} parentRoute={`${linkTo}`}/>
       </div>
     ) : null
 
-    let contact = sub.length === 0 ? (
+    const contact = sub.length === 0 ? (
       <Box>
         <MediumHeadline big={'Interessert?'}/>
         <div className="col-xs-12">

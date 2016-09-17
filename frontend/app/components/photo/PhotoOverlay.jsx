@@ -1,5 +1,5 @@
-import React, {Component, PropTypes} from "react";
-import EventListener from "../../util/EventListener.js";
+import React, {Component, PropTypes} from 'react'
+import EventListener from '../../util/EventListener.js'
 
 export default class PhotoOverlay extends Component {
 
@@ -42,9 +42,9 @@ export default class PhotoOverlay extends Component {
   }
 
   render() {
-    let {src} = this.props
-    let toggled = this.state.toggled
-    let overlayStyle = {
+    const {src} = this.props
+    const toggled = this.state.toggled
+    const overlayStyle = {
       position: 'fixed',
       display: 'inline-flex',
       width: '100%',
@@ -56,7 +56,7 @@ export default class PhotoOverlay extends Component {
       left: 0,
       zIndex: 1000
     }
-    let overlayPhotoStyle = {
+    const overlayPhotoStyle = {
       position: 'fixed',
       display: 'inline-flex',
       width: '100%',
@@ -66,7 +66,7 @@ export default class PhotoOverlay extends Component {
       left: 0,
       zIndex: 1000
     }
-    let wrapperStyle = {
+    const wrapperStyle = {
       margin: 'auto 0',
       width: '100%',
       position: 'relative'

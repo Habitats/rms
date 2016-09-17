@@ -66,10 +66,7 @@ class PublicServlet(val db: Database) extends BackendStack with FutureSupport wi
   get("/products/?") {
     Logger.info("GET: products")
     val products: Future[Product] = RmsDb.allProducts(db)
-    import scala.concurrent.{ ExecutionContext, Future, Promise, Await }
-    import scala.concurrent.duration._
-    val p: Product = Await.result(products, 5000 millis)
-    p
+    products
   }
 
   post("/mail/?") {

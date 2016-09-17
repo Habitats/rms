@@ -1,8 +1,8 @@
-import React, {Component, PropTypes} from "react";
-import MenuItem from "./MenuItem.jsx";
-import Box from "./../Box.jsx";
-import Radium from "radium";
-import * as V from "../../vars";
+import React, {Component, PropTypes} from 'react'
+import MenuItem from './MenuItem.jsx'
+import Box from './../Box.jsx'
+import Radium from 'radium'
+import * as V from '../../vars'
 
 class Menu extends Component {
 
@@ -14,20 +14,20 @@ class Menu extends Component {
   }
 
   matches(categories, filter) {
-    let flat = (p) => p.sub.length === 0 ? [p] : [p].concat(p.sub.flatMap(s => flat(s)))
-    let all = flat(categories)
-    let matching = all.filter(p => p.title.toLowerCase().includes(filter.toLowerCase()))
+    const flat = (p) => p.sub.length === 0 ? [p] : [p].concat(p.sub.flatMap(s => flat(s)))
+    const all = flat(categories)
+    const matching = all.filter(p => p.title.toLowerCase().includes(filter.toLowerCase()))
 
-    let pushParent = (matching) => {
-      let newMatches = new Set()
-      for (let m of matching) {
-        let parent = all.find(c => c.id === m.category)
+    const pushParent = (matching) => {
+      const newMatches = new Set()
+      for (const m of matching) {
+        const parent = all.find(c => c.id === m.category)
         if (parent) {
           newMatches.add(parent)
         }
       }
       matching = new Set(matching)
-      let allMatches = new Set([... newMatches, ...matching])
+      const allMatches = new Set([... newMatches, ...matching])
       //allMatches.forEach(c => console.log(c.title))
       if (allMatches.size > matching.size) {
         return pushParent(allMatches)
@@ -39,18 +39,18 @@ class Menu extends Component {
   }
 
   render() {
-    let {categories, active, linkTo} = this.props
-    let {filter} = this.state
-    let style = {
+    const {categories, active, linkTo} = this.props
+    const {filter} = this.state
+    const style = {
       menu: {
         transform: `translateY(${this.state.transform}px)`
       },
       menuContent: {marginRight: -V.MARGIN_SM, marginLeft: -V.MARGIN_SM + 5},
       input: {marginRight: -9, marginLeft: -9}
     }
-    let allMatches = this.matches(categories, filter)
+    const allMatches = this.matches(categories, filter)
 
-    let cats = categories.sub.map(c =>
+    const cats = categories.sub.map(c =>
       <MenuItem key={c.id} linkTo={`${linkTo}/${c.id}`} matching={allMatches} product={c} active={active} isRoot={true} style={style}
                 filter={filter}/>
     )

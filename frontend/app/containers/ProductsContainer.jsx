@@ -51,32 +51,32 @@ class ProductsContainer extends Component {
   }
 
   render() {
-    let {categories, params, children, session:{admin}} = this.props
-    let {small, med} = this.state
+    const {categories, params, children, session:{admin}} = this.props
+    const {small, med} = this.state
     if (!categories.hasOwnProperty('sub')) {
       // not ready yet
       return null
     }
-    let addProduct = admin ?
-                     <div className="form-group">
-                       <Link to="/produkter/ny">
-                         <button className="btn btn-default btn-block" type="submit">Legg til nytt produkt</button>
-                       </Link>
-                     </div> : null
+    const addProduct = admin ?
+                       <div className="form-group">
+                         <Link to="/produkter/ny">
+                           <button className="btn btn-default btn-block" type="submit">Legg til nytt produkt</button>
+                         </Link>
+                       </div> : null
 
-    let catBig = <ProductItems products={this.props.categories.sub.slice(0, med ? 1 : 2)} height={small ? 200 : med ? 320 : 270}
-                               className="col-md-6 col-sm-12 col-xs-12" parentRoute={`/produkter`}/>
-    let catSmall = <ProductItems products={this.props.categories.sub.slice(med ? 1 : 2, 5)} height={small ? 200 : med ? 230 : 170}
-                                 className="col-md-4 col-sm-6 col-xs-12" parentRoute={`/produkter`}/>
-    let content = (!params.categoryId && !params.productId) ?
-                  <Box>
-                    <BigHeadline big={categories.title}/>
-                    <div className="row">
-                      {catBig}
-                      {catSmall}
-                    </div>
-                    {addProduct}
-                  </Box>
+    const catBig = <ProductItems products={this.props.categories.sub.slice(0, med ? 1 : 2)} height={small ? 200 : med ? 320 : 270}
+                                 className="col-md-6 col-sm-12 col-xs-12" parentRoute={`/produkter`}/>
+    const catSmall = <ProductItems products={this.props.categories.sub.slice(med ? 1 : 2, 5)} height={small ? 200 : med ? 230 : 170}
+                                   className="col-md-4 col-sm-6 col-xs-12" parentRoute={`/produkter`}/>
+    const content = (!params.categoryId && !params.productId) ?
+                    <Box>
+                      <BigHeadline big={categories.title}/>
+                      <div className="row">
+                        {catBig}
+                        {catSmall}
+                      </div>
+                      {addProduct}
+                    </Box>
       : children
     if (content) {
       return (

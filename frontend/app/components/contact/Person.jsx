@@ -1,16 +1,16 @@
-import React, {Component, PropTypes} from "react";
-import Photo from "./../photo/Photo.jsx";
-import Radium from "radium";
+import React, {Component, PropTypes} from 'react'
+import Photo from './../photo/Photo.jsx'
+import Radium from 'radium'
 
 class Person extends Component {
 
   render() {
-    let title = this.props.title ? <p><i className="fa fa-user"/>{this.props.title}</p> : ''
-    let phone = this.props.phone ? <p><i className="fa fa-phone"/>{this.props.phone}</p> : ''
-    let {photo, name} = this.props
-    let mailTo = 'mailto:' + this.props.mail
-    let mail = this.props.mail ? <p><i className="fa fa-envelope"/><a href={mailTo}>{this.props.mail}</a></p> : ''
-    let style = {
+    const title = this.props.title ? <p><i className="fa fa-user"/>{this.props.title}</p> : ''
+    const phone = this.props.phone ? <p><i className="fa fa-phone"/>{this.props.phone}</p> : ''
+    const {photo, name} = this.props
+    const mailTo = 'mailto:' + this.props.mail
+    const mail = this.props.mail ? <p><i className="fa fa-envelope"/><a href={mailTo}>{this.props.mail}</a></p> : ''
+    const style = {
       box: {
         margin: '0 auto',
         '@media only screen and (max-width: 767px)': {

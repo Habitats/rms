@@ -12,13 +12,13 @@ class Header extends Component {
   }
 
   render() {
-    let {categories} = this.props
+    const {categories} = this.props
     if (!categories.hasOwnProperty('sub')) {
       return null
     }
-    let fullNav = categories.sub.map(c => {
+    const fullNav = categories.sub.map(c => {
       if (c.sub.length > 0) {
-        let sub = c.sub.map(p =>
+        const sub = c.sub.map(p =>
           <li key={p.id} data-toggle="collapse" data-target="#navbar-collapse"><a><Link
             to={`produkter/${c.id}/${p.id}`}>{p.title}</Link></a></li>
         )
@@ -38,8 +38,7 @@ class Header extends Component {
         <nav className="navbar navbar-default navbar-fixed-top">
           <div className="container" style={{maxWidth: 1000}}>
             <div className="navbar-header">
-              <button className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse"
-                      aria-expanded="false">
+              <button className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
                 <span className="sr-only">Navigasjon</span>
                 <span className="icon-bar"></span>
                 <span className="icon-bar"></span>
@@ -84,7 +83,7 @@ class Header extends Component {
 }
 
 Header.propTypes = {
-  categories: PropTypes.object.isRequired,
+  categories: PropTypes.object,
   dispatch: PropTypes.func.isRequired,
 }
 

@@ -1,9 +1,9 @@
-import React, {Component, PropTypes} from "react";
+import React, {Component, PropTypes} from 'react'
 
 export default class FeatureItem extends Component {
 
   render() {
-    let classes = 'fa fa-4x ' + this.props.icon
+    const classes = 'fa fa-4x ' + this.props.icon
     return (
       <div className="text-center" style={{maxWidth: 250, margin: '0 auto'}}>
         <i className={classes}/>

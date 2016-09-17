@@ -1,5 +1,5 @@
-import React, {Component, PropTypes} from "react";
-import EditableDiv from "./EditableDiv.jsx";
+import React, {Component, PropTypes} from 'react'
+import EditableDiv from './EditableDiv.jsx'
 
 export default class Wysiwyg extends Component {
 
@@ -31,7 +31,7 @@ export default class Wysiwyg extends Component {
   }
 
   render() {
-    let {content, enabled} = this.state
+    const {content, enabled} = this.state
     return (
       <div className="row wysiwyg">
         {enabled ?

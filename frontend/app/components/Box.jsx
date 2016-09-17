@@ -1,12 +1,12 @@
-import React, {Component, PropTypes} from "react";
-import Radium from "radium";
-import * as V from "../vars";
+import React, {Component, PropTypes} from 'react'
+import Radium from 'radium'
+import * as V from '../vars'
 
 class Box extends Component {
 
   render() {
-    let {children} = this.props
-    let style = {
+    const {children} = this.props
+    const style = {
       background: '#fff',
       float: 'left',
       position: 'relative',

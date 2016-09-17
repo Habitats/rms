@@ -1,18 +1,18 @@
-const path = require('path');
-const util = require('util');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const webpack = require('webpack');
-const pkg = require('./package.json');
-const BomPlugin = require('webpack-utf8-bom');
+const path = require('path')
+const util = require('util')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const webpack = require('webpack')
+const pkg = require('./package.json')
+const BomPlugin = require('webpack-utf8-bom')
 
-const DEBUG = process.env.NODE_ENV === 'development';
+const DEBUG = process.env.NODE_ENV === 'development'
 
-const contextPath = '';
+const contextPath = ''
 
 // https://github.com/webpack/extract-text-webpack-plugin
 const cssExtractTextPlugin = new ExtractTextPlugin('css/rms.css', {
   allChunks: true
-});
+})
 
 const plugins = [
   new webpack.optimize.OccurenceOrderPlugin(),
@@ -22,12 +22,12 @@ const plugins = [
     jQuery: "jquery"
   }),
   //new BomPlugin(!DEBUG)
-];
+]
 
 if (DEBUG) {
   plugins.push(
     new webpack.HotModuleReplacementPlugin()
-  );
+  )
 } else {
   plugins.push(
     new webpack.optimize.UglifyJsPlugin(),
@@ -38,7 +38,7 @@ if (DEBUG) {
       }
     }),
     new webpack.NoErrorsPlugin()
-  );
+  )
 }
 
 const loaders = [
@@ -104,16 +104,16 @@ const loaders = [
       ].join('&')
     ].join('!'))
   }
-];
+]
 
 const entry = {
   app: ['bootstrap-loader', './index.js']
-};
+}
 
 if (DEBUG) {
-  const url = util.format('http://%s:%d', pkg.config.devHost, pkg.config.devPort);
-  entry.app.push('webpack-dev-server/client?' + url);
-  entry.app.push('webpack/hot/only-dev-server');
+  const url = util.format('http://%s:%d', pkg.config.devHost, pkg.config.devPort)
+  entry.app.push('webpack-dev-server/client?' + url)
+  entry.app.push('webpack/hot/only-dev-server')
 }
 
 const config = {
@@ -146,6 +146,6 @@ const config = {
     inline: true,
     stats: {colors: true}
   }
-};
+}
 
-module.exports = config;
+module.exports = config

@@ -10,8 +10,8 @@ export default class PhotoLine extends Component {
   }
 
   render() {
-    let {images, root, selected, clickable} = this.props
-    let photos = images.map(image =>
+    const {images, root, selected, clickable} = this.props
+    const photos = images.map(image =>
       <div className="col-md-3 col-sm-4 col-xs-6" key={image.src}>
         {!clickable ?
          <div className={'photo'}>

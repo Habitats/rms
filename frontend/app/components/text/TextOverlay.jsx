@@ -1,9 +1,9 @@
-import React, {Component, PropTypes} from "react";
+import React, {Component, PropTypes} from 'react'
 
 export default class TextOverlay extends Component {
 
   render() {
-    let style = {
+    const style = {
       background: 'rgba(0, 0, 0, 0.6)',
       position: 'absolute',
       padding: 20,
@@ -12,7 +12,7 @@ export default class TextOverlay extends Component {
       bottom: 0,
       color: '#fff'
     }
-    let {text} = this.props
+    const {text} = this.props
     return (
       <h4>
         <div style={style}>

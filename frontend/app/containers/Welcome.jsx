@@ -1,12 +1,12 @@
-import React, {Component, PropTypes} from "react";
-import {connect} from "react-redux";
-import Carousel from "./../components/photo/Carousel.jsx";
-import BigHeadline from "./../components/text/BigHeadline.jsx";
-import Features from "./../components/feature/Features.jsx";
-import Box from "./../components/Box.jsx";
-import ProductItems from "./../components/product/ProductItems.jsx";
-import * as productActionCreators from "./../redux/actions/productActions";
-import Radium from "radium";
+import React, {Component, PropTypes} from 'react'
+import {connect} from 'react-redux'
+import Carousel from './../components/photo/Carousel.jsx'
+import BigHeadline from './../components/text/BigHeadline.jsx'
+import Features from './../components/feature/Features.jsx'
+import Box from './../components/Box.jsx'
+import ProductItems from './../components/product/ProductItems.jsx'
+import * as productActionCreators from './../redux/actions/productActions'
+import Radium from 'radium'
 
 class Welcome extends Component {
 
@@ -45,19 +45,19 @@ class Welcome extends Component {
   }
 
   render() {
-    let {small} = this.state
-    let images = [
+    const {small} = this.state
+    const images = [
       {src: 'image/carousel,c1.jpg'},
       {src: 'image/carousel,c2.jpg'},
       {src: 'image/carousel,c3.jpg'},
       {src: 'image/carousel,c4.jpg'}
     ]
 
-    let ready = this.props.categories.hasOwnProperty('sub')
-    let catBig = ready ? <ProductItems products={this.props.categories.sub.slice(0, 2)} height={small ? 200 : 270}
-                                       className="col-sm-6 col-xs-12" parentRoute={`/produkter`}/> : null
-    let catSmall = ready ? <ProductItems products={this.props.categories.sub.slice(2, 5)} height={small ? 200 : 170}
-                                         className="col-sm-4 col-xs-12" parentRoute={`/produkter`}/> : null
+    const ready = this.props.categories.hasOwnProperty('sub')
+    const catBig = ready ? <ProductItems products={this.props.categories.sub.slice(0, 2)} height={small ? 200 : 270}
+                                         className="col-sm-6 col-xs-12" parentRoute={`/produkter`}/> : null
+    const catSmall = ready ? <ProductItems products={this.props.categories.sub.slice(2, 5)} height={small ? 200 : 170}
+                                           className="col-sm-4 col-xs-12" parentRoute={`/produkter`}/> : null
     return (
       <div>
         <Box>

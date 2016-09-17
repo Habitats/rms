@@ -1,14 +1,14 @@
-import React, {Component, PropTypes} from "react";
+import React, {Component, PropTypes} from 'react'
 
 export default class SimpleLabel extends Component {
 
   render() {
-    let style = {
+    const style = {
       overflow: 'hidden',
       whiteSpace: 'nowrap',
       textOverflow: 'ellipsis'
     }
-    let {text} = this.props
+    const {text} = this.props
     return (
       <div style={style}>
         {text}

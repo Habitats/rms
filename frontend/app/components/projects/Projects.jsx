@@ -1,11 +1,11 @@
-import React, {Component, PropTypes} from "react";
-import ProjectListItem from "./ProjectListItem.jsx";
+import React, {Component, PropTypes} from 'react'
+import ProjectListItem from './ProjectListItem.jsx'
 
 export default class Projects extends Component {
 
   render() {
-    let {projects} = this.props
-    let sorted = projects
+    const {projects} = this.props
+    const sorted = projects
       .sort((a, b) => new Date(b.modified) - new Date(a.modified))
       .map(p => <ProjectListItem key={p.id} project={p}/>)
     return (

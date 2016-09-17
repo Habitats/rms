@@ -1,13 +1,13 @@
-import React, {Component, PropTypes} from "react";
-import ProductItem from "./ProductItem.jsx";
-import Radium from "radium";
-import * as V from "../../vars";
+import React, {Component, PropTypes} from 'react'
+import ProductItem from './ProductItem.jsx'
+import Radium from 'radium'
+import * as V from '../../vars'
 
 class ProductItems extends Component {
 
   render() {
-    let {products, parentRoute, className, height} = this.props
-    let style = {
+    const {products, parentRoute, className, height} = this.props
+    const style = {
       '@media only screen and (max-width: 767px)': {
         paddingLeft: V.MARGIN_XS,
         paddingRigth: V.MARGIN_XS,
@@ -20,7 +20,7 @@ class ProductItems extends Component {
         paddingLeft: 0,
       }
     }
-    let rootCategories = products.map(c =>
+    const rootCategories = products.map(c =>
       <ProductItem key={`${c.id}`} product={c} height={height} className={className} linkTo={`${parentRoute}/${c.id}`}/>
     )
     return (

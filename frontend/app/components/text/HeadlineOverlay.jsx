@@ -1,9 +1,9 @@
-import React, {Component, PropTypes} from "react";
+import React, {Component, PropTypes} from 'react'
 
 export default class HeadlineOverlay extends Component {
 
   render() {
-    let wrapperStyle = {
+    const wrapperStyle = {
       background: 'rgba(0, 0, 0, 0.8)',
       width: '100%',
       height: 'auto',
@@ -13,13 +13,13 @@ export default class HeadlineOverlay extends Component {
       bottom: 0,
       textAlign: 'center'
     }
-    let textStyle = {
+    const textStyle = {
       overflow: 'hidden',
       whiteSpace: 'nowrap',
       textOverflow: 'ellipsis',
       color: '#fff',
     }
-    let {text} = this.props
+    const {text} = this.props
     return (
       <div style={wrapperStyle}>
         <h3 style={{margin: 0}}>

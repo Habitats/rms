@@ -1,13 +1,13 @@
-import React, {Component, PropTypes} from "react";
-import Link from "../Link.jsx";
-import Radium from "radium";
-import {HEADING_SMALL, HEADING_BIG} from "../../colors";
+import React, {Component, PropTypes} from 'react'
+import Link from '../Link.jsx'
+import Radium from 'radium'
+import {HEADING_SMALL, HEADING_BIG} from '../../colors'
 
 class BigHeadline extends Component {
 
   render() {
-    let {small, big, to} = this.props
-    let style = {
+    const {small, big, to} = this.props
+    const style = {
       box: {
         '@media only screen and (max-width: 767px)': {
           marginTop: 20

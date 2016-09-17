@@ -25,15 +25,15 @@ class Photo extends Component {
   }
 
   render() {
-    let {src, height, width, margin, crop, selected, children, clickable, size, linkTo, dispatch, className, onClick} = this.props
-    let {hover} = this.state
+    const {src, height, width, margin, crop, selected, children, clickable, size, linkTo, dispatch, className, onClick} = this.props
+    const {hover} = this.state
 
     // if onClick is defined, use the defined callback
-    let photoClick = linkTo ? () => dispatch(browserHistory.push(linkTo)) :
-                     onClick ? onClick :
-                     clickable ? this.toggle.bind(this) : null
+    const photoClick = linkTo ? () => dispatch(browserHistory.push(linkTo)) :
+                       onClick ? onClick :
+                       clickable ? this.toggle.bind(this) : null
 
-    let heightStyles = this.isNumeric(height) ? {
+    const heightStyles = this.isNumeric(height) ? {
       '@media only screen and (max-width: 767px)': {
         height: height * XS
       },
@@ -45,7 +45,7 @@ class Photo extends Component {
       }
     } : {height: '100%'}
 
-    let style = {
+    const style = {
       box: {
         ... heightStyles,
         width: width || '100%',

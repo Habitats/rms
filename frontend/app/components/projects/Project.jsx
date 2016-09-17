@@ -8,7 +8,7 @@ import Box from './../Box.jsx'
 class Project extends Component {
 
   render() {
-    let {project, session: {admin}, dispatch} = this.props
+    const {project, session: {admin}, dispatch} = this.props
     return (
       <Box>
         <BigHeadline big={project.title} small="Prosjekt"/>

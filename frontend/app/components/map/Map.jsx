@@ -1,5 +1,5 @@
-import React, {Component, PropTypes} from "react";
-import Radium from "radium";
+import React, {Component, PropTypes} from 'react'
+import Radium from 'radium'
 
 class Map extends Component {
 
@@ -9,10 +9,10 @@ class Map extends Component {
 
   componentDidMount() {
     window.initialize = () => {
-      let home = {lat: 60.255074, lng: 11.026707}
+      const home = {lat: 60.255074, lng: 11.026707}
 
       try {
-        let map = new google.maps.Map(document.getElementById('map-canvas'), {zoom: this.props.zoom, center: home}) //eslint-disable-line
+        const map = new google.maps.Map(document.getElementById('map-canvas'), {zoom: this.props.zoom, center: home}) //eslint-disable-line
         var styles =
           [{stylers: [{saturation: -100}, {gamma: 1}]}, {elementType: 'labels.content.stroke', stylers: [{visibility: 'off'}]},
             {featureType: 'poi.business', elementType: 'labels.content', stylers: [{visibility: 'off'}]},
@@ -25,23 +25,23 @@ class Map extends Component {
             {featureType: 'road.local', elementType: 'labels.content', stylers: [{weight: 0.5}, {color: '#333333'}]},
             {featureType: 'transit.station', elementType: 'labels.icon', stylers: [{gamma: 1}, {saturation: 50}]}]
 
-        map.setOptions({styles: styles});
-        let marker = new google.maps.Marker({position: home, map: map}) //eslint-disable-line
+        map.setOptions({styles: styles})
+        const marker = new google.maps.Marker({position: home, map: map}) //eslint-disable-line
       } catch (ex) {
       }
     }
   }
 
   render() {
-    let {height, style} = this.props
-    style = {
+    const {height, style} = this.props
+    const mapStyle = {
       ...style,
       height: height,
       width: '100%',
       color: '#e9e9e9'
     }
     return (
-      <div id="map-canvas" style={style}/>
+      <div id="map-canvas" style={mapStyle}/>
     )
   }
 }

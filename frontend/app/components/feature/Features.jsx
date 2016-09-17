@@ -1,10 +1,10 @@
-import React, {Component, PropTypes} from "react";
-import FeatureItem from "./FeatureItem.jsx";
+import React, {Component, PropTypes} from 'react'
+import FeatureItem from './FeatureItem.jsx'
 
 export default class Features extends Component {
 
   render() {
-    let style = {
+    const style = {
       text: {
         marginTop: 30,
         textAlign: 'center',

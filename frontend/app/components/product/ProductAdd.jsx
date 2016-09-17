@@ -23,7 +23,7 @@ class ProductAdd extends Component {
     this.handleTitleChange = (e) => this.setState({title: e.target.value})
     this.onSave = () => {
       if (this.isValid()) {
-        let product = {
+        const product = {
           id: this.state.edit ? this.state.id : -1,
           title: this.state.title,
           category: this.state.category,
@@ -52,8 +52,8 @@ class ProductAdd extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.products && nextProps.products.hasOwnProperty('sub')) {
-      let flat = this.flatten(nextProps.products)
-      let product = flat.find(c => c.id === nextProps.params.productId || c.title === nextProps.params.productId)
+      const flat = this.flatten(nextProps.products)
+      const product = flat.find(c => c.id === nextProps.params.productId || c.title === nextProps.params.productId)
       if (product) {
         this.setState({... product, edit: true})
       } else {
@@ -63,26 +63,26 @@ class ProductAdd extends Component {
   }
 
   flatten(products) {
-    let flat = (p) => {
+    const flat = (p) => {
       return p.sub.length === 0 ? [p] : [p].concat(p.sub.flatMap(s => flat(s)))
     }
     return flat(products)
   }
 
   isValid() {
-    let uniqueId = this.state.edit || !this.flatten(this.props.products).map(p => p.id).includes(this.state.id)
+    const uniqueId = this.state.edit || !this.flatten(this.props.products).map(p => p.id).includes(this.state.id)
     return uniqueId && this.state.title.length > 0
   }
 
   render() {
-    let {dispatch, products} = this.props
+    const {dispatch, products} = this.props
     if (!products.hasOwnProperty('sub')) {
       return null
     }
-    let {error, title, description, id, category, edit} = this.state
-    let flatProducts = this.flatten(products)
-    let options = flatProducts.map(p => ({value: p.id, label: p.title}))
-    let style = {
+    const {error, title, description, id, category, edit} = this.state
+    const flatProducts = this.flatten(products)
+    const options = flatProducts.map(p => ({value: p.id, label: p.title}))
+    const style = {
       box: {
         paddingBottom: 50,
         textAlign: 'justify',
@@ -132,7 +132,7 @@ class ProductAdd extends Component {
 }
 
 Array.prototype.flatMap = function (lambda) {
-  return Array.prototype.concat.apply([], this.map(lambda));
+  return Array.prototype.concat.apply([], this.map(lambda))
 }
 
 ProductAdd.defaultProps = {

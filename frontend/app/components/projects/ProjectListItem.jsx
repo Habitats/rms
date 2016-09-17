@@ -1,13 +1,13 @@
-import React, {Component, PropTypes} from "react";
-import Photo from "./../photo/Photo.jsx";
-import HeadlineOverlay from "./../text/HeadlineOverlay.jsx";
-import Radium from "radium";
+import React, {Component, PropTypes} from 'react'
+import Photo from './../photo/Photo.jsx'
+import HeadlineOverlay from './../text/HeadlineOverlay.jsx'
+import Radium from 'radium'
 
 class ProjectListItem extends Component {
 
   render() {
-    let {project: {title, images, id}} = this.props
-    let style = {
+    const {project: {title, images, id}} = this.props
+    const style = {
       box: {
         '@media only screen and (max-width: 767px)': {
           marginBottom: 10,

@@ -1,7 +1,7 @@
-import React, {Component, PropTypes} from "react";
-import Link from "./../Link.jsx";
-import Radium from "radium";
-import {TEXT, HOVER, FILTER} from "../../colors";
+import React, {Component, PropTypes} from 'react'
+import Link from './../Link.jsx'
+import Radium from 'radium'
+import {TEXT, HOVER, FILTER} from '../../colors'
 
 class MenuItem extends Component {
 
@@ -24,7 +24,7 @@ class MenuItem extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    let {product, filter, active} = nextProps
+    const {product, filter, active} = nextProps
     if (filter.length === 0) {
       this.setState({
         expanded: this.shouldExpand(product, active),
@@ -37,11 +37,11 @@ class MenuItem extends Component {
   }
 
   substringIndex(seq, subseq) {
-    let subseqLen = subseq.length;
-    let i = -1;
-    let indexes = [];
+    const subseqLen = subseq.length
+    let i = -1
+    const indexes = []
     if (!subseqLen) {
-      return indexes;
+      return indexes
     }
 
     // find the next occurance, in seq, of the first item in subseq:
@@ -53,30 +53,30 @@ class MenuItem extends Component {
       // appear in seq, following the found occurance, in sec, of subseq's first item.
       let c
       for (c = 1; c < subseqLen && seq[i + c] === subseq[c]; c++) {
-        ;
+
       }
 
       // if they do, return the index, in seq, of the first item in subseq:
       if (c >= subseqLen) {
-        indexes.push(i);
+        indexes.push(i)
       }
     }
-    return indexes;
+    return indexes
   }
 
   render() {
-    let {product: {title, id, sub}, linkTo, active, isRoot, filter, parentExpanded, matching} = this.props
-    let filterEnabled = filter.length > 0
-    let isMatch = filterEnabled && matching.has(id)
-    let isParent = sub.length > 0;
-    let expanded = isRoot || (isParent && (this.state.expanded || isMatch))
-    let isActive = id === active
+    const {product: {title, id, sub}, linkTo, active, isRoot, filter, parentExpanded, matching} = this.props
+    const filterEnabled = filter.length > 0
+    const isMatch = filterEnabled && matching.has(id)
+    const isParent = sub.length > 0
+    const expanded = isRoot || (isParent && (this.state.expanded || isMatch))
+    const isActive = id === active
 
-    let expanderClass = (isParent && !isRoot) ? expanded ? 'fa fa-caret-down' : 'fa fa-caret-right' : 'fa fa-empty'
+    const expanderClass = (isParent && !isRoot) ? expanded ? 'fa fa-caret-down' : 'fa fa-caret-right' : 'fa fa-empty'
 
-    let showItem = filterEnabled ? isMatch : parentExpanded
+    const showItem = filterEnabled ? isMatch : parentExpanded
 
-    let style = {
+    const style = {
       box: {
         marginTop: isRoot ? 15 : 1,
         cursor: 'pointer',
@@ -121,13 +121,13 @@ class MenuItem extends Component {
         borderRadius: 2,
       }
     }
-    let subItems = sub
+    const subItems = sub
       .filter(c => filterEnabled ? matching.has(c.id) : true)
       .map(p => <MenuItem key={p.id} product={p} matching={matching} active={active} linkTo={`${linkTo}/${p.id}`} parentExpanded={expanded} filter={filter}
                           onChildMatch={this.onChildMatch}/>)
 
-    let s = isMatch ? this.substringIndex(title.toLowerCase(), filter.toLowerCase())[0] : null
-    let matched = isMatch && title.toLowerCase().includes(filter.toLowerCase()) ? (
+    const s = isMatch ? this.substringIndex(title.toLowerCase(), filter.toLowerCase())[0] : null
+    const matched = isMatch && title.toLowerCase().includes(filter.toLowerCase()) ? (
       <span>
         {s ? title.substring(0, s) : ''}
         <span style={style.marked}>{title.substring(s, s + filter.length)}</span>

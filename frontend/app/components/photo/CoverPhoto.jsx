@@ -1,6 +1,6 @@
-import React, {Component, PropTypes} from "react";
-import Radium from "radium";
-import Photo from "./Photo.jsx";
+import React, {Component, PropTypes} from 'react'
+import Radium from 'radium'
+import Photo from './Photo.jsx'
 
 class CoverPhoto extends Component {
 
@@ -16,9 +16,9 @@ class CoverPhoto extends Component {
   }
 
   render() {
-    let {src, onRightSelect, onLeftSelect} = this.props
-    let {hover} = this.state
-    let style = {
+    const {src, onRightSelect, onLeftSelect} = this.props
+    const {hover} = this.state
+    const style = {
       icon: {
         cursor: 'pointer',
         position: 'absolute',
@@ -33,11 +33,11 @@ class CoverPhoto extends Component {
       }
     }
 
-    let rightHover = hover ? (
+    const rightHover = hover ? (
       <div style={{height: '100%', width: 55, float: 'right'}} onClick={onRightSelect}>
         <span key={0} style={style.icon} className="fa fa-chevron-right fa-3x"/>
       </div>) : null
-    let leftHover = hover ? (
+    const leftHover = hover ? (
       <div style={{height: '100%', width: 55, float: 'left'}} onClick={onLeftSelect}>
         <span key={1} style={style.icon} className="fa fa-chevron-left fa-3x"/>
       </div>) : null

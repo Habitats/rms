@@ -1,13 +1,13 @@
-import React, {Component, PropTypes} from "react";
-import Photo from "./../photo/Photo.jsx";
-import HeadlineOverlay from "./../text/HeadlineOverlay.jsx";
-import Radium from "radium";
+import React, {Component, PropTypes} from 'react'
+import Photo from './../photo/Photo.jsx'
+import HeadlineOverlay from './../text/HeadlineOverlay.jsx'
+import Radium from 'radium'
 
 class ProductItem extends Component {
 
   render() {
-    let {product :{title, src}, linkTo, height, className} = this.props
-    let style = {
+    const {product :{title, src}, linkTo, height, className} = this.props
+    const style = {
       box: {
         paddingLeft: 0,
         '@media only screen and (max-width: 767px)': {

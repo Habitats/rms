@@ -1,13 +1,13 @@
-import React, {Component, PropTypes} from "react";
-import Link from "./Link.jsx";
-import MapWrapper from "./../components/map/MapWrapper.jsx";
-import * as V from "../vars";
-import Radium from "radium";
+import React, {Component, PropTypes} from 'react'
+import Link from './Link.jsx'
+import MapWrapper from './../components/map/MapWrapper.jsx'
+import * as V from '../vars'
+import Radium from 'radium'
 
 class Footer extends Component {
 
   render() {
-    let style = {
+    const style = {
       footer: {
         '@media only screen and (max-width: 767px)': {
           height: V.FOOTER_HEIGHT_XS,
@@ -40,7 +40,7 @@ class Footer extends Component {
       }
     }
 
-    let info = {
+    const info = {
       address: (
         <div>
           <h3>Adresse</h3>

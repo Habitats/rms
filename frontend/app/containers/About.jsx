@@ -1,14 +1,14 @@
-import React, {Component, PropTypes} from "react";
-import Photo from "./../components/photo/Photo.jsx";
-import BigHeadline from "./../components/text/BigHeadline.jsx";
-import TextBox from "./../components/text/TextBox.jsx";
-import Box from "./../components/Box.jsx";
+import React, {Component, PropTypes} from 'react'
+import Photo from './../components/photo/Photo.jsx'
+import BigHeadline from './../components/text/BigHeadline.jsx'
+import TextBox from './../components/text/TextBox.jsx'
+import Box from './../components/Box.jsx'
 
 export default class About extends Component {
 
   render() {
-    let margin = 40
-    let iconHeight = 60
+    const margin = 40
+    const iconHeight = 60
     return (
       <div>
         <Box>

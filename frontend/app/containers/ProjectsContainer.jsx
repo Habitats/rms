@@ -1,10 +1,10 @@
-import React, {Component, PropTypes} from "react";
-import {connect} from "react-redux";
-import Link from "./../components/Link.jsx";
-import Projects from "./../components/projects/Projects.jsx";
-import BigHeadline from "./../components/text/BigHeadline.jsx";
-import Box from "./../components/Box.jsx";
-import * as generalActionCreators from "./../redux/actions/generalActions";
+import React, {Component, PropTypes} from 'react'
+import {connect} from 'react-redux'
+import Link from './../components/Link.jsx'
+import Projects from './../components/projects/Projects.jsx'
+import BigHeadline from './../components/text/BigHeadline.jsx'
+import Box from './../components/Box.jsx'
+import * as generalActionCreators from './../redux/actions/generalActions'
 
 class ProjectsContainer extends Component {
 
@@ -15,13 +15,13 @@ class ProjectsContainer extends Component {
   }
 
   render() {
-    let {session: {admin}, projects} = this.props
-    let newButton = admin ?
-                    <div className="form-group">
-                      <Link to="/referanser/ny">
-                        <button className="btn btn-default btn-block" type="submit">Legg til nytt prosjekt</button>
-                      </Link>
-                    </div> : null
+    const {session: {admin}, projects} = this.props
+    const newButton = admin ?
+                      <div className="form-group">
+                        <Link to="/referanser/ny">
+                          <button className="btn btn-default btn-block" type="submit">Legg til nytt prosjekt</button>
+                        </Link>
+                      </div> : null
     return (
       <Box>
         <BigHeadline big="Referanser"/>

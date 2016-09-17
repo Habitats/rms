@@ -25,7 +25,7 @@ class ProjectAdd extends Component {
 
   setProject(id) {
     if (this.props.projects.find(p => p.id === id)) {
-      let project = this.props.projects.find(p => p.id === id)
+      const project = this.props.projects.find(p => p.id === id)
       this.setState({
         description: project.description,
         title: project.title,
@@ -57,11 +57,11 @@ class ProjectAdd extends Component {
   }
 
   onSelect(src) {
-    let chosenImages = this.state.chosenImages
+    const chosenImages = this.state.chosenImages
     if (chosenImages.has(src)) {
       chosenImages.delete(src)
     } else {
-      let image = this.props.images.find(i => i.src === src)
+      const image = this.props.images.find(i => i.src === src)
       chosenImages.set(src, image)
     }
     this.setState({chosenImages: chosenImages})
@@ -91,19 +91,19 @@ class ProjectAdd extends Component {
   }
 
   render() {
-    let {projects, images, dispatch} = this.props
-    let {chosenImages, error, title, description, id} = this.state
+    const {projects, images, dispatch} = this.props
+    const {chosenImages, error, title, description, id} = this.state
 
-    let chosenLabels = []
-    for (let i of chosenImages.values()) {
+    const chosenLabels = []
+    for (const i of chosenImages.values()) {
       chosenLabels.push(<SimpleLabel key={i.src} text={i.title}/>)
     }
 
-    let usedImages = projects.length > 0 ? [... new Set(projects.filter(p => p.id
-                                                                             !== id).map(p => p.images).reduce((a, b) => a.concat(b)).map(i => i.src))]
+    const usedImages = projects.length > 0 ? [... new Set(projects.filter(p => p.id
+                                                                               !== id).map(p => p.images).reduce((a, b) => a.concat(b)).map(i => i.src))]
       : []
-    let filteredImages = images.length > 0 ? [... new Set(images.filter(i => !usedImages.includes(i.src)))] : []
-    let photos = filteredImages.map(i => (
+    const filteredImages = images.length > 0 ? [... new Set(images.filter(i => !usedImages.includes(i.src)))] : []
+    const photos = filteredImages.map(i => (
       <div key={i.src} className="col-sm-3 col-xs-6" style={{padding: 0, margin: 0}}>
         <div className={'photo'} style={{marginBottom: 15, marginLeft: 15}}>
           <Photo size={'low'}

@@ -1,16 +1,16 @@
-import React, {Component, PropTypes} from "react";
-import ContactForm from "./../components/contact/ContactForm.jsx";
-import BigHeadline from "./../components/text/BigHeadline.jsx";
-import MapWrapper from "./../components/map/MapWrapper.jsx";
-import Box from "./../components/Box.jsx";
-import Person from "./../components/contact/Person.jsx";
-import {SM, XS, COVER_HEIGHT, CONTENT_MAX_WIDTH} from "../vars";
+import React, {Component, PropTypes} from 'react'
+import ContactForm from './../components/contact/ContactForm.jsx'
+import BigHeadline from './../components/text/BigHeadline.jsx'
+import MapWrapper from './../components/map/MapWrapper.jsx'
+import Box from './../components/Box.jsx'
+import Person from './../components/contact/Person.jsx'
+import {SM, XS, COVER_HEIGHT, CONTENT_MAX_WIDTH} from '../vars'
 
 export default class Contact extends Component {
 
   render() {
-    let height = COVER_HEIGHT
-    let style = {
+    const height = COVER_HEIGHT
+    const style = {
       contact: {
         maxWidth: 180,
         margin: '0 auto',

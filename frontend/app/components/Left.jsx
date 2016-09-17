@@ -1,11 +1,11 @@
-import React, {Component, PropTypes} from "react";
-import {MENU_WIDTH} from "../vars";
+import React, {Component, PropTypes} from 'react'
+import {MENU_WIDTH} from '../vars'
 
 export default class Left extends Component {
 
   render() {
-    let {children} = this.props
-    let style = {
+    const {children} = this.props
+    const style = {
       width: MENU_WIDTH,
       paddingRight: 0,
     }
