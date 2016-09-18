@@ -123,8 +123,8 @@ const config = {
   entry: entry,
   output: {
     path: path.resolve(pkg.config.buildDir),
-    publicPath: 'http://localhost:3000/' + contextPath,
-    filename: 'bundle.js',
+    publicPath: '/' + contextPath,
+    filename: 'js/bundle.js',
     pathinfo: false
   },
   module: {
