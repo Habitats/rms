@@ -94,21 +94,16 @@ class ProjectAdd extends Component {
     const {projects, images, dispatch} = this.props
     const {chosenImages, error, title, description, id} = this.state
 
-    const chosenLabels = []
-    for (const i of chosenImages.values()) {
-      chosenLabels.push(<SimpleLabel key={i.src} text={i.title}/>)
-    }
+    const chosenLabels = Array.from(chosenImages.values()).map(i => <SimpleLabel key={i.src} text={i.title}/>)
 
-    const usedImages = projects.length > 0 ? [... new Set(projects.filter(p => p.id
-                                                                               !== id).map(p => p.images).reduce((a, b) => a.concat(b)).map(i => i.src))]
-      : []
+    const usedImages = projects.length > 0 ? [... new Set(projects.filter(p => p.id !== id).map(p => p.images).reduce((a, b) => a.concat(b)).map(i => i.src))] : []
     const filteredImages = images.length > 0 ? [... new Set(images.filter(i => !usedImages.includes(i.src)))] : []
     const photos = filteredImages.map(i => (
       <div key={i.src} className="col-sm-3 col-xs-6" style={{padding: 0, margin: 0}}>
         <div className={'photo'} style={{marginBottom: 15, marginLeft: 15}}>
           <Photo size={'low'}
                  height={100}
-                 onClick={this.onSelect.bind(this)}
+                 onClick={() => this.onSelect(i.src)}
                  selected={chosenImages.has(i.src)}
                  src={i.src}
           />

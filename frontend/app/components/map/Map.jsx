@@ -13,7 +13,7 @@ class Map extends Component {
 
       try {
         const map = new google.maps.Map(document.getElementById('map-canvas'), {zoom: this.props.zoom, center: home}) //eslint-disable-line
-        var styles =
+        let styles =
           [{stylers: [{saturation: -100}, {gamma: 1}]}, {elementType: 'labels.content.stroke', stylers: [{visibility: 'off'}]},
             {featureType: 'poi.business', elementType: 'labels.content', stylers: [{visibility: 'off'}]},
             {featureType: 'poi.business', elementType: 'labels.icon', stylers: [{visibility: 'off'}]},

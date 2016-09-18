@@ -20,7 +20,7 @@ class Menu extends Component {
 
     const pushParent = (matching) => {
       const newMatches = new Set()
-      for (const m of matching) {
+      for (let m of matching) {
         const parent = all.find(c => c.id === m.category)
         if (parent) {
           newMatches.add(parent)
