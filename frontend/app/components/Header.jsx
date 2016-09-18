@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
 import Link from './Link.jsx'
 import * as productActions from './../redux/actions/productActions'
+import * as C from '../colors'
 
 class Header extends Component {
 
@@ -16,21 +17,44 @@ class Header extends Component {
     if (!categories.hasOwnProperty('sub')) {
       return null
     }
+    const style = {
+      ul: {
+        listStyleType: 'none',
+        paddingLeft: 20,
+        paddingTop: 0,
+        paddingBottom: 0
+      },
+      li: {
+        paddingTop: 10,
+        paddingBottom: 10
+      },
+      a: {
+        color: C.TEXT,
+        fontSize: 12,
+        padding: 0
+      }
+    }
     const fullNav = categories.sub.map(c => {
       if (c.sub.length > 0) {
-        const sub = c.sub.map(p =>
-          <li key={p.id} data-toggle="collapse" data-target="#navbar-collapse"><a><Link
-            to={`produkter/${c.id}/${p.id}`}>{p.title}</Link></a></li>
+        const subProducts = c.sub.map(p =>
+          <li style={style.li} key={p.id} data-toggle="collapse" data-target="#navbar-collapse">
+            <a style={style.a}><Link to={`produkter/${c.id}/${p.id}`}>{p.title}</Link></a>
+          </li>
         )
         return (
-          <li key={c.id} data-toggle="collapse" data-target="#navbar-collapse"><a><Link to={`produkter/${c.id}`}>{c.title}</Link></a>
-            <ul>
-              {sub}
+          <li style={style.li} key={c.id} data-toggle="collapse" data-target="#navbar-collapse">
+            <a style={style.a}><Link to={`produkter/${c.id}`}>{c.title}</Link></a>
+            <ul style={style.ul}>
+              {subProducts}
             </ul>
           </li>
         )
       } else {
-        return <li key={c.id} data-toggle="collapse" data-target="#navbar-collapse"><a><Link to={c.id}>{c.title}</Link></a></li>
+        return (
+          <li style={style.li} key={c.id} data-toggle="collapse" data-target="#navbar-collapse">
+            <a style={style.a}><Link to={c.id}>{c.title}</Link></a>
+          </li>
+        )
       }
     })
     return (
@@ -44,9 +68,11 @@ class Header extends Component {
                 <span className="icon-bar"></span>
                 <span className="icon-bar"></span>
               </button>
-              <a><Link to="/">
-                <div className="navbar-brand logo"/>
-              </Link></a>
+              <a>
+                <Link to="/">
+                  <div className="navbar-brand logo"/>
+                </Link>
+              </a>
             </div>
 
             <div className="collapse navbar-collapse" id="navbar-collapse">
@@ -56,8 +82,9 @@ class Header extends Component {
                   <li data-toggle="collapse" data-target="#navbar-collapse"><a><Link to="/referanser">Referanser</Link></a></li>
                   <li className="dropdown">
                     <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">Produkter <span className="caret"></span></a>
-                    <ul className="dropdown-menu">
+                       aria-expanded="false">Produkter <span className="caret"></span>
+                    </a>
+                    <ul className="dropdown-menu" style={style.ul}>
                       {fullNav}
                     </ul>
                   </li>
