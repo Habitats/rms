@@ -6,7 +6,7 @@ import org.apache.tools.ant.taskdefs.condition.Os
 
 project.ext {
     scalaBinary = project.hasProperty('scalaBinary') ? project.getProperty('scalaBinary') : '2.11'
-    scalaVersion = project.hasProperty('scalaVersion') ? project.getProperty('scalaVersion') : '2.11.6'
+    scalaVersion = project.hasProperty('scalaVersion') ? project.getProperty('scalaVersion') : '2.11.7'
     scalatraVersion = '2.3.1'
     javaVersion = scalaBinary == '2.11' ? '1.8' : '1.7'
     if (Os.isFamily(Os.FAMILY_WINDOWS)) {
