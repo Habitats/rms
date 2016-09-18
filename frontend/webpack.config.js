@@ -3,7 +3,6 @@ const util = require('util')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const webpack = require('webpack')
 const pkg = require('./package.json')
-const BomPlugin = require('webpack-utf8-bom')
 
 const DEBUG = process.env.NODE_ENV === 'development'
 
@@ -18,10 +17,9 @@ const plugins = [
   new webpack.optimize.OccurenceOrderPlugin(),
   cssExtractTextPlugin,
   new webpack.ProvidePlugin({
-    $: "jquery",
-    jQuery: "jquery"
-  }),
-  //new BomPlugin(!DEBUG)
+    $: 'jquery',
+    jQuery: 'jquery'
+  })
 ]
 
 if (DEBUG) {
@@ -125,8 +123,8 @@ const config = {
   entry: entry,
   output: {
     path: path.resolve(pkg.config.buildDir),
-    publicPath: '/' + contextPath,
-    filename: 'js/rms.js',
+    publicPath: 'http://localhost:3000/' + contextPath,
+    filename: 'bundle.js',
     pathinfo: false
   },
   module: {
@@ -138,13 +136,16 @@ const config = {
   plugins: plugins,
   resolve: {
     extensions: ['', '.js', '.json', '.jsx', '.scss']
-  },
+},
   devServer: {
     contentBase: path.resolve(pkg.config.buildDir),
     hot: true,
     noInfo: false,
     inline: true,
-    stats: {colors: true}
+    stats: {
+      colors: true,
+      chunks: false
+    }
   }
 }
 

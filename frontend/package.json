@@ -8,7 +8,6 @@
     "devHost": "localhost"
   },
   "scripts": {
-    "clean": "rimraf $npm_package_config_buildDir && mkdir $npm_package_config_buildDir",
     "start": "SET NODE_ENV=development&&node dev-server --hot --progress --colors",
     "prod": "SET NODE_ENV=production&&node dev-server",
     "build": "SET NODE_ENV=production&&webpack --colors --progress --config ./webpack.config.js",

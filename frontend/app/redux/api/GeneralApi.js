@@ -1,23 +1,23 @@
 const baseUrl = '/'
 
 export function getProjects() {
-  return retrieve('projects')
+  return retrieve('api/projects')
 }
 
 export function getProject(id) {
-  return retrieve(`project/${id}`)
+  return retrieve(`api/project/${id}`)
 }
 
 export function getImages() {
-  return retrieve('images')
+  return retrieve('api/images')
 }
 
 export function getPrivates() {
-  return retrieve('privates')
+  return retrieve('api/privates')
 }
 
 export function getProducts() {
-  return retrieve('products')
+  return retrieve('api/products')
 }
 
 export function saveProject(project) {
@@ -37,7 +37,7 @@ export function saveProduct(product) {
 }
 
 export function sendMail(email) {
-  return post(email, 'mail')
+  return post(email, 'api/mail')
 }
 
 export function retrieve(path) {

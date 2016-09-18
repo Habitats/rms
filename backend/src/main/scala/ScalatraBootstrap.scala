@@ -4,7 +4,7 @@ import javax.servlet.ServletContext
 import com.mchange.v2.c3p0.ComboPooledDataSource
 import no.rms.Logger
 import no.rms.db.RmsDb
-import no.rms.servlets.{PublicServlet, SecretServlet, SessionServlet}
+import no.rms.servlets._
 import org.scalatra._
 import slick.driver.H2Driver.api._
 
@@ -16,9 +16,11 @@ class ScalatraBootstrap extends LifeCycle {
     //    if (Config.DEBUG) Config.DB_FILE.delete
     val db = Database.forDataSource(cpds)
     RmsDb.init(db)
+    context.mount(new IndexServlet, "/*")
     context.mount(new SecretServlet(db), "/secret/*")
     context.mount(new SessionServlet, "/session/*")
-    context.mount(new PublicServlet(db), "/*")
+    context.mount(new PublicServlet(db), "/api/*")
+    context.mount(new ImageServlet, "/image/*")
   }
 
   private def closeDbConnection(): Unit = {

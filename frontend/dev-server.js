@@ -1,4 +1,5 @@
 const util = require('util')
+const path = require('path')
 const webpack = require('webpack')
 const WebpackDevServer = require('webpack-dev-server')
 const config = require('./webpack.config')
@@ -19,7 +20,11 @@ server.listen(port, host, function (err) {
   console.log('Listening at %s', url)
 })
 
-server.use('/*', proxy({
+server.use('/api|/secret|/image|/session', proxy({
   target: 'http://localhost:8080',
   changeOrigin: true
 }))
+
+server.use('*', (req, res) => res.sendFile(path.join(__dirname, 'app', 'index.html')))
+
+

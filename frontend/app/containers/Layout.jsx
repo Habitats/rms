@@ -2,9 +2,17 @@ import React, {Component, PropTypes} from 'react'
 import Footer from './../components/Footer.jsx'
 import Header from './../components/Header.jsx'
 import Radium from 'radium'
+import {connect} from 'react-redux'
+import * as SessionActionCreators from '../redux/actions/sessionActions'
 import * as V from '../vars'
 
 class Layout extends Component {
+
+  constructor(props) {
+    super(props)
+    this.props.dispatch(SessionActionCreators.session())
+  }
+
 
   render() {
     const style = {
@@ -31,8 +39,16 @@ class Layout extends Component {
   }
 }
 
+
 Layout.propTypes = {
-  children: PropTypes.element.isRequired
+  session: PropTypes.shape({
+    admin: PropTypes.bool.isRequired,
+    username: PropTypes.string
+  }),
+  children: PropTypes.element.isRequired,
+  dispatch: PropTypes.func.isRequired
 }
 
-export default Radium(Layout)
+export default connect(state => ({
+  session: state.session
+}))(Radium(Layout))

@@ -3,16 +3,13 @@ import 'whatwg-fetch'
 import './index.html'
 import './scss/base.scss'
 import React, {Component, PropTypes} from 'react'
-import {render} from 'react-dom'
-import {Provider} from 'react-redux'
+import ReactDOM from 'react-dom'
 import configureStore from './redux/store/configureStore'
-import App from './containers/root/Root'
+import Root from './containers/root/Root'
 
 const store = configureStore()
 
-render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+ReactDOM.render(
+  <Root store={store}/>,
   document.getElementById('root')
 )

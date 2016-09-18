@@ -5,17 +5,14 @@ import java.time.LocalDateTime
 
 import no.rms._
 import no.rms.auth.AuthenticationSupport
-import no.rms.db.RmsDb
-import no.rms.models.{Email, Product}
 import org.json4s.JsonAST.JString
 import org.json4s.{CustomSerializer, DefaultFormats, Formats}
 import org.scalatra.json.JacksonJsonSupport
 import org.scalatra.{CorsSupport, FutureSupport}
-import slick.driver.H2Driver.api._
 
 import scala.concurrent.{ExecutionContext, Future}
 
-class PublicServlet(val db: Database) extends BackendStack with FutureSupport with JacksonJsonSupport with CorsSupport with RmsMailer with AuthenticationSupport {
+class ImageServlet extends BackendStack with FutureSupport with JacksonJsonSupport with CorsSupport with RmsMailer with AuthenticationSupport {
   protected implicit def executor = ExecutionContext.Implicits.global
 
   protected implicit val jsonFormats: Formats = {
@@ -41,39 +38,24 @@ class PublicServlet(val db: Database) extends BackendStack with FutureSupport wi
   get("/health/?") {
     contentType = formats("txt")
     Logger.info("hello!")
-    "API OK"
+    "IMAGE OK"
   }
 
-  get("/projects/?") {
-    Logger.info("GET: projects")
-    RmsDb.allProjects(db)
-  }
-
-  get("/project/:id/?") {
-    val id = params.get("id").get
-    Logger.info("GET: project/" + id)
-    RmsDb.fetchProject(id, db)
-  }
-
-  get("/products/?") {
-    Logger.info("GET: products")
-    val products: Future[Product] = RmsDb.allProducts(db)
-    products
-  }
-
-  post("/mail/?") {
-    Logger.info("POST: mail")
-    val email = parsedBody.extract[Email]
-    contentType = "text"
-    send(email)
-    "delivered message"
-  }
-
-  get("/images/?") {
-    Logger.info("GET: images/")
+  get("/:id/:size/?") {
+    val size = params.get("size").get
+    val path = params.get("id").get
+    Logger.info("GET: image/" + path + "/" + size)
+    contentType = "image"
     Future {
-      ImageUtils.fetchUrls("referanser")
+      ImageUtils.fetchPath(path, size).getOrElse(ImageUtils.notFound())
     }
+  }
+
+  get("/:id/?") {
+    val id = params.get("id").get
+    Logger.info("GET: image/" + id)
+    contentType = "image"
+    ImageUtils.fetchPath(id).getOrElse(ImageUtils.notFound())
   }
 }
 
