@@ -1,4 +1,5 @@
 import React, {PropTypes, Component} from 'react'
+import ReactDOM from 'react-dom'
 
 export default class EditableDiv extends Component {
 
@@ -8,7 +9,7 @@ export default class EditableDiv extends Component {
   }
 
   componentDidMount() {
-    const editor = this.refs.editor.getDOMNode()
+    const editor = ReactDOM.findDOMNode(this.refs.editor)
     editor.addEventListener('paste', this.handlePaste.bind(this), false)
   }
 
@@ -16,18 +17,18 @@ export default class EditableDiv extends Component {
     // cancel paste
     e.preventDefault()
     // get text representation of clipboard
-    const text = (event.originalEvent || event).clipboardData.getData('text/plain')
+    let text = text = (event.originalEvent || event).clipboardData.getData('text/plain')
     // insert text manually
     document.execCommand('insertHTML', false, text)
   }
 
   componentWillUnmount() {
-    const editor = this.refs.editor.getDOMNode()
-    editor.removeEventListener('paste')
+    const editor = ReactDOM.findDOMNode(this.refs.editor)
+    editor.removeEventListener('paste', this.handlePaste.bind(this), false)
   }
 
   emitChange() {
-    const editor = this.refs.editor.getDOMNode()
+    const editor = ReactDOM.findDOMNode(this.refs.editor)
     const newHtml = editor.innerHTML
 
     this.setState({html: newHtml}, (() => {

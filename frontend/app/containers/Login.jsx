@@ -12,20 +12,18 @@ class Login extends Component {
       password: '',
       rememberMe: this.props.session.rememberMe
     }
-  }
 
-  handleUsernameChange(event) {
-    this.setState({username: event.target.value})
-  }
-
-  handlePasswordChange(event) {
-    this.setState({password: event.target.value})
-  }
-
-  handleRememberMeChange(event) {
-    const rememberMe = event.target.checked
-    this.setState({rememberMe})
-    this.props.dispatch(sessionActionCreators.session({... this.props.session, rememberMe}))
+    this.handleUsernameChange = (event) => {
+      this.setState({username: event.target.value})
+    }
+    this.handlePasswordChange = (event) => {
+      this.setState({password: event.target.value})
+    }
+    this.handleRememberMeChange = (event) => {
+      const rememberMe = event.target.checked
+      this.setState({rememberMe})
+      this.props.dispatch(sessionActionCreators.session({... this.props.session, rememberMe}))
+    }
   }
 
   onLogin(e) {
@@ -44,23 +42,19 @@ class Login extends Component {
       <div>
         <div className="form-group">
           <label>Brukernavn</label>
-          <input className="form-control" onChange={this.handleUsernameChange.bind(this)} placeholder="Brukernavn" type="text"/>
+          <input className="form-control" onChange={(e) => this.handleUsernameChange(e)} placeholder="Brukernavn" type="text"/>
         </div>
         <div className="form-group">
           <label>Passord</label>
-          <input className="form-control" onChange={this.handlePasswordChange.bind(this)} placeholder="Passord" type="password"/>
+          <input className="form-control" onChange={(e) => this.handlePasswordChange(e)} placeholder="Passord" type="password"/>
         </div>
         <div className="checkbox">
           <label>
-            <input type="checkbox" checked={this.state.rememberMe} onChange={this.handleRememberMeChange.bind(this)}>
-              Husk meg
-            </input>
+            <input type="checkbox" checked={this.state.rememberMe} onChange={(e) => this.handleRememberMeChange(e)}/>Husk meg
           </label>
         </div>
         <div className="form-group">
-          <button className="btn btn-primary btn-block" onClick={this.onLogin.bind(this)} type="submit">
-            Logg inn
-          </button>
+          <button className="btn btn-primary btn-block" onClick={this.onLogin.bind(this)} type="submit">Logg inn</button>
         </div>
         {loginError}
       </div>
