@@ -49,7 +49,7 @@ class Product extends Component {
     )
     const subCategories = sub && sub.length > 0 ? (
       <div className="row">
-        <ProductItems products={product.sub} parentRoute={`${linkTo}`}/>
+        <ProductItems products={product.sub} parentRoute={`/${linkTo}`}/>
       </div>
     ) : null
 
