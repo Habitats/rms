@@ -15,7 +15,7 @@ import slick.driver.H2Driver.api._
 
 import scala.concurrent.{ExecutionContext, Future}
 
-class PublicServlet(val db: Database) extends BackendStack with FutureSupport with JacksonJsonSupport with CorsSupport with RmsMailer with AuthenticationSupport {
+class PublicServlet extends BackendStack with FutureSupport with JacksonJsonSupport with CorsSupport with RmsMailer with AuthenticationSupport {
   protected implicit def executor = ExecutionContext.Implicits.global
 
   protected implicit val jsonFormats: Formats = {
@@ -46,18 +46,18 @@ class PublicServlet(val db: Database) extends BackendStack with FutureSupport wi
 
   get("/projects/?") {
     Logger.info("GET: projects")
-    RmsDb.allProjects(db)
+    RmsDb.allProjects
   }
 
   get("/project/:id/?") {
     val id = params.get("id").get
     Logger.info("GET: project/" + id)
-    RmsDb.fetchProject(id, db)
+    RmsDb.fetchProject(id)
   }
 
   get("/products/?") {
     Logger.info("GET: products")
-    val products: Future[Product] = RmsDb.allProducts(db)
+    val products: Future[Product] = RmsDb.allProducts
     products
   }
 

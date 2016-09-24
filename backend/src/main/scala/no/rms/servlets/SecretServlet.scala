@@ -15,7 +15,7 @@ import slick.driver.H2Driver.api._
 import scala.concurrent.ExecutionContext
 import scala.util.{Failure, Success, Try}
 
-class SecretServlet(val db: Database) extends BackendStack with FutureSupport with JacksonJsonSupport with CorsSupport with RmsMailer with AuthenticationSupport {
+class SecretServlet extends BackendStack with FutureSupport with JacksonJsonSupport with CorsSupport with RmsMailer with AuthenticationSupport {
   protected implicit def executor = ExecutionContext.Implicits.global
 
   protected implicit val jsonFormats: Formats = {
@@ -54,7 +54,7 @@ class SecretServlet(val db: Database) extends BackendStack with FutureSupport wi
   post("/project/?") {
     Logger.info("POST: project")
     Try(parsedBody.extract[Project]) match {
-      case Success(p) => RmsDb.storeProject(p, db)
+      case Success(p) => RmsDb.storeProject(p)
       case Failure(ex) => Logger.info(ex.getMessage)
     }
   }
@@ -62,7 +62,7 @@ class SecretServlet(val db: Database) extends BackendStack with FutureSupport wi
   delete("/project/?") {
     Logger.info("DELETE: project")
     Try(parsedBody.extract[String]) match {
-      case Success(p) => RmsDb.removeProject(p, db).transform(s => RmsDb.allProjects(db), f => f)
+      case Success(p) => RmsDb.removeProject(p).transform(s => RmsDb.allProjects(), f => f)
       case Failure(ex) => Logger.info(ex.getMessage)
     }
   }
@@ -70,7 +70,7 @@ class SecretServlet(val db: Database) extends BackendStack with FutureSupport wi
   post("/product/?") {
     Logger.info("POST: product")
     Try(parsedBody.extract[Product]) match {
-      case Success(p) => if (p.id == "-1") RmsDb.newProduct(p, db) else RmsDb.storeProduct(p, db)
+      case Success(p) => if (p.id == "-1") RmsDb.newProduct(p) else RmsDb.storeProduct(p)
       case Failure(ex) => Logger.info(ex.getMessage)
     }
   }
@@ -78,7 +78,7 @@ class SecretServlet(val db: Database) extends BackendStack with FutureSupport wi
   delete("/product/?") {
     Logger.info("DELETE: product")
     Try(parsedBody.extract[String]) match {
-      case Success(p) => RmsDb.removeProduct(p, db).transform(s => RmsDb.allProducts(db), f => f)
+      case Success(p) => RmsDb.removeProduct(p).transform(s => RmsDb.allProducts(), f => f)
       case Failure(ex) => Logger.info(ex.getMessage)
     }
   }
