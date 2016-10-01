@@ -1,26 +1,19 @@
-apply plugin: 'scala'
-apply plugin: 'application'
-apply plugin: 'war'
-
-import org.apache.tools.ant.taskdefs.condition.Os
+apply plugin: "scala"
+apply plugin: "application"
+apply plugin: "war"
 
 project.ext {
-    scalaBinary = project.hasProperty('scalaBinary') ? project.getProperty('scalaBinary') : '2.11'
-    scalaVersion = project.hasProperty('scalaVersion') ? project.getProperty('scalaVersion') : '2.11.7'
-    scalatraVersion = '2.3.1'
-    javaVersion = scalaBinary == '2.11' ? '1.8' : '1.7'
-    if (Os.isFamily(Os.FAMILY_WINDOWS)) {
-        os = 'windows-x86_64'
-    } else {
-        os = 'linux-x86_64'
-    }
-    println('Scala Binary: ' + scalaBinary + ' - Scala Version: ' + scalaVersion + ' - Java: ' + javaVersion)
+    scalaBinary = project.hasProperty("scalaBinary") ? project.getProperty("scalaBinary") : "2.11"
+    scalaVersion = project.hasProperty("scalaVersion") ? project.getProperty("scalaVersion") : "2.11.7"
+    scalatraVersion = "2.3.1"
+    javaVersion = scalaBinary == "2.11" ? "1.8" : "1.7"
+    println("Scala Binary: " + scalaBinary + " - Scala Version: " + scalaVersion + " - Java: " + javaVersion)
 }
 
 configurations.all {
     resolutionStrategy {
         // See reason: http://stackoverflow.com/a/23870656/992426
-        force 'xml-apis:xml-apis:1.4.01'
+        force "xml-apis:xml-apis:1.4.01"
     }
 }
 
@@ -29,62 +22,54 @@ repositories {
     mavenCentral()
 }
 
-compileScala {
-    scalaCompileOptions.useCompileDaemon = true
-}
-
-
 war {
-    dependsOn ':frontend:bundle'
-    from(project.rootDir.absolutePath + '/backend/db') {
-        include 'rms.mv.db'
-        into('db')
+    dependsOn ":frontend:bundle"
+    from(project.rootDir.absolutePath + "/backend/db") {
+        include "rms.mv.db"
+        into("db")
     }
 }
 
 tasks.withType(ScalaCompile) {
-    scalaCompileOptions.useAnt = false
     sourceCompatibility = project.javaVersion
     targetCompatibility = project.javaVersion
 }
 
-mainClassName = 'JettyLauncher'
+mainClassName = "JettyLauncher"
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.11'
-    testCompile 'org.scalatest:scalatest_' + project.scalaBinary + ':3.0.0-M7'
-    compile(group: 'org.scala-lang', name: 'scala-library', version: project.scalaVersion) { force = true }
-    compile(group: 'org.scala-lang', name: 'scala-compiler', version: project.scalaVersion) { force = true }
-    compile(group: 'org.scala-lang', name: 'scala-reflect', version: project.scalaVersion) { force = true }
-    compile('org.scala-lang:scalap:' + project.scalaVersion)
-    compile('org.scala-lang.modules:scala-parser-combinators_2.11:1.0.4')
+    testCompile "junit:junit:4.12"
+    testCompile "org.scalatest:scalatest_$project.scalaBinary:3.0.0"
+    compile "org.scala-lang:scala-library:$project.scalaVersion"
+    compile "org.scala-lang:scala-compiler:$project.scalaVersion"
+    compile "org.scala-lang:scala-reflect:$project.scalaVersion"
+    compile "org.scala-lang:scalap:$project.scalaVersion"
+    compile "org.scala-lang.modules:scala-parser-combinators_$project.scalaBinary:1.0.4"
 
     // Web server
-    compile('org.scalatra:scalatra_2.11:' + project.scalatraVersion)
-    compile('org.scalatra:scalatra-scalate_2.11:' + project.scalatraVersion)
-    compile('org.scalatra.scalate:scalate-core_2.11:1.7.0')
-    compile('org.scalatra:scalatra-json_2.11:' + project.scalatraVersion)
-    compile('org.scalatra:scalatra-auth_2.11:' + project.scalatraVersion)
+    compile "org.scalatra:scalatra_$project.scalaBinary:$project.scalatraVersion"
+    compile "org.scalatra:scalatra-scalate_$project.scalaBinary:$project.scalatraVersion"
+    compile "org.scalatra.scalate:scalate-core_$project.scalaBinary:1.7.0"
+    compile "org.scalatra:scalatra-json_$project.scalaBinary:$project.scalatraVersion"
+    compile "org.scalatra:scalatra-auth_$project.scalaBinary:$project.scalatraVersion"
 
-    compile(group: 'javax.servlet', name: 'javax.servlet-api', version: '3.1.0') { force = true }
-    compile(group: 'org.eclipse.jetty', name: 'jetty-webapp', version: '9.3.11.v20160721')
+    compile(group: "javax.servlet", name: "javax.servlet-api", version: "3.1.0") { force = true }
+    compileg "org.eclipse.jetty:jetty-webapp:9.3.11.v20160721"
 
-
-    compile('ch.qos.logback:logback-classic:1.1.2')
-    compile('com.typesafe.slick:slick_2.11:3.1.1')
-    compile('com.typesafe:config:1.3.0')
-    compile('com.h2database:h2:1.4.190')
-    compile('org.json4s:json4s-jackson_2.11:3.3.0.RC3')
-    compile('org.json4s:json4s-native_2.11:3.3.0.RC3')
-    compile('com.mchange:c3p0:0.9.5.1')
+    compile "ch.qos.logback:logback-classic:1.1.2"
+    compile "com.typesafe.slick:slick_$project.scalaBinary:3.1.1"
+    compile "com.typesafe:config:1.3.0"
+    compile "com.h2database:h2:1.4.190"
+    compile "org.json4s:json4s-jackson_$project.scalaBinary:3.3.0.RC3"
+    compile "org.json4s:json4s-native_$project.scalaBinary:3.3.0.RC3"
+    compile "com.mchange:c3p0:0.9.5.1"
 
     // Image processing
-    compile('com.sksamuel.scrimage:scrimage-core_2.11:2.0.1')
-    compile('com.sksamuel.scrimage:scrimage-io_2.11:2.0.1')
-    compile('com.sksamuel.scrimage:scrimage-filters_2.11:2.0.1')
+    compile "com.sksamuel.scrimage:scrimage-core_$project.scalaBinary:2.0.1"
+    compile "com.sksamuel.scrimage:scrimage-io_$project.scalaBinary:2.0.1"
+    compile "com.sksamuel.scrimage:scrimage-filters_$project.scalaBinary:2.0.1"
 
-    compile('org.apache.xmlgraphics:batik-codec:1.7')
-    compile('me.lessis:courier_2.11:0.1.3')
-    compile('com.dropbox.core:dropbox-core-sdk:1.7.7')
-    compile('org.scalatest:scalatest_2.11:3.0.0-M7')
+    compile "org.apache.xmlgraphics:batik-codec:1.7"
+    compile "me.lessis:courier_$project.scalaBinary:0.1.3"
+    compile "com.dropbox.core:dropbox-core-sdk:1.7.7"
 }
