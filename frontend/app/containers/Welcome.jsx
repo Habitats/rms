@@ -50,7 +50,10 @@ class Welcome extends Component {
       {src: 'image/carousel,c1.jpg'},
       {src: 'image/carousel,c2.jpg'},
       {src: 'image/carousel,c3.jpg'},
-      {src: 'image/carousel,c4.jpg'}
+      {src: 'image/carousel,c4.jpg'},
+      {src: 'image/carousel,c5.jpg'},
+      {src: 'image/carousel,c6.jpg'},
+      {src: 'image/carousel,c7.jpg'}
     ]
 
     const ready = this.props.categories.hasOwnProperty('sub')
