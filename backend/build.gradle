@@ -3,11 +3,11 @@ apply plugin: "application"
 apply plugin: "war"
 
 project.ext {
-    scalaBinary = project.hasProperty("scalaBinary") ? project.getProperty("scalaBinary") : "2.11"
-    scalaVersion = project.hasProperty("scalaVersion") ? project.getProperty("scalaVersion") : "2.11.7"
+    scalaBinary = "2.11"
+    scalaVersion = "2.11.8"
     scalatraVersion = "2.3.1"
-    javaVersion = scalaBinary == "2.11" ? "1.8" : "1.7"
-    println("Scala Binary: " + scalaBinary + " - Scala Version: " + scalaVersion + " - Java: " + javaVersion)
+    javaVersion = "1.8"
+    println("Common: Scala Binary: " + scalaBinary + " - Scala Version: " + scalaVersion + " - Java: " + javaVersion)
 }
 
 configurations.all {
@@ -54,7 +54,7 @@ dependencies {
     compile "org.scalatra:scalatra-auth_$project.scalaBinary:$project.scalatraVersion"
 
     compile(group: "javax.servlet", name: "javax.servlet-api", version: "3.1.0") { force = true }
-    compileg "org.eclipse.jetty:jetty-webapp:9.3.11.v20160721"
+    compile "org.eclipse.jetty:jetty-webapp:9.3.11.v20160721"
 
     compile "ch.qos.logback:logback-classic:1.1.2"
     compile "com.typesafe.slick:slick_$project.scalaBinary:3.1.1"
