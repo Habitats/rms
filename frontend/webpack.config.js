@@ -43,11 +43,6 @@ const loaders = [
   {
     test: /\.jsx?|\.js?$/,
     exclude: /node_modules/,
-    loader: 'react-hot'
-  },
-  {
-    test: /\.jsx?|\.js?$/,
-    exclude: /node_modules/,
     loader: 'babel'
   },
   {
