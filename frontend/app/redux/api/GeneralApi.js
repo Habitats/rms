@@ -12,6 +12,10 @@ export function getImages() {
   return retrieve('api/images')
 }
 
+export function invalidateImageCache() {
+  return retrieve('secret/invalidate')
+}
+
 export function getPrivates() {
   return retrieve('api/privates')
 }

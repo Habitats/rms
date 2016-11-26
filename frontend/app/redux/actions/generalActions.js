@@ -64,4 +64,12 @@ export function sendMail(email) {
   }
 }
 
-
+export function invalidateImageCache() {
+  return dispatch => {
+    dispatch({type: C.CACHE_INVALIDATE})
+    GeneralApi.invalidateImageCache().then(
+      res => dispatch({type: C.CACHE_INVALIDATED}),
+      error => dispatch({type: C.CACHE_INVALIDATE_FAIL})
+    )
+  }
+}

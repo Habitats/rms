@@ -21,6 +21,10 @@ export const RECEIVE_PRIVATES_FAIL = 'RECEIVE_PRIVATE_FAIL'
 export const SEND_EMAIL = 'SEND_EMAIL'
 export const SEND_EMAIL_FAILED = 'SEND_EMAIL_FAILED'
 
-export const SAVE_PROJECTS_INIT = 'save_projects_init'
-export const SAVE_PROJECTS_SUCCESS = 'save_projects_success'
-export const SAVE_PROJECTS_FAIL = 'save_projects_fail'
+export const SAVE_PROJECTS_INIT = 'SAVE_PROJECTS'
+export const SAVE_PROJECTS_SUCCESS = 'SAVE_PROJECTS_SUCCESS'
+export const SAVE_PROJECTS_FAIL = 'SAVE_PROJECTS_FAIL'
+
+export const CACHE_INVALIDATED = 'CACHE_INVALIDATED'
+export const CACHE_INVALIDATE = 'CACHE_INVALIDATE'
+export const CACHE_INVALIDATE_FAIL = 'CACHE_INVALIDATE_FAIL'

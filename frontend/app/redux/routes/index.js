@@ -7,6 +7,7 @@ import Welcome from '../../containers/Welcome.jsx'
 import Contact from '../../containers/Contact.jsx'
 import About from '../../containers/About.jsx'
 import References from '../../containers/ProjectsContainer.jsx'
+import Admin from '../../containers/AdminContainer.jsx'
 import ProjectContainer from '../../containers/ProjectContainer.jsx'
 import ProductsContainer from '../../containers/ProductsContainer.jsx'
 import ProductContainer from '../../containers/ProductContainer.jsx'
@@ -31,6 +32,7 @@ export default () => {
         <Route component={References} path="referanser"/>
         <Route component={ProjectAdd} onEnter={requireLogin.bind(this)} path="referanser/ny"/>
         <Route component={ProjectAdd} onEnter={requireLogin.bind(this)} path="referanser/endre/:id"/>
+        <Route component={Admin} path="admin"/>
         <Route component={ProjectContainer} path="referanser/:id"/>
         <Route component={ProductAdd} path="produkter/ny"/>
         <Route component={ProductAdd} path="produkter/endre/:productId"/>
