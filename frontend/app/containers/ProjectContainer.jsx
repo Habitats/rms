@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
 import Project from './../components/projects/Project.jsx'
-import * as generalActionCreators from '../redux/actions/generalActions'
+import * as generalActionCreators from '../redux/actions/GeneralActions'
 import NotFound from './NotFound.jsx'
 
 class ProjectContainer extends Component {

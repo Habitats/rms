@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
 import Category from './../components/product/Category.jsx'
 import BigHeadline from './../components/text/BigHeadline.jsx'
-import * as ProductActionCreators from './../redux/actions/productActions'
+import * as ProductActionCreators from '../redux/actions/ProductActions'
 import Box from './../components/Box.jsx'
 import NotFound from './NotFound.jsx'
 

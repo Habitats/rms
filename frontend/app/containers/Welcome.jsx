@@ -5,7 +5,7 @@ import BigHeadline from './../components/text/BigHeadline.jsx'
 import Features from './../components/feature/Features.jsx'
 import Box from './../components/Box.jsx'
 import ProductItems from './../components/product/ProductItems.jsx'
-import * as productActionCreators from './../redux/actions/productActions'
+import * as ProductActionCreators from '../redux/actions/ProductActions'
 import Radium from 'radium'
 
 class Welcome extends Component {
@@ -29,7 +29,7 @@ class Welcome extends Component {
 
   componentWillMount() {
     if (Object.keys(this.props.categories).length === 0) {
-      this.props.dispatch(productActionCreators.fetchProducts())
+      this.props.dispatch(ProductActionCreators.fetchProducts())
     }
     this.mounted = true
     this.state.mql.addListener(this.handleMediaChange)

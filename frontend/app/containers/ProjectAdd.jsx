@@ -7,7 +7,7 @@ import Left from './../components/Left.jsx'
 import Right from './../components/Right.jsx'
 import Box from './../components/Box.jsx'
 import SimpleLabel from './../components/text/SimpleLabel.jsx'
-import * as generalActions from '../redux/actions/generalActions'
+import * as generalActions from '../redux/actions/GeneralActions'
 
 class ProjectAdd extends Component {
 
@@ -96,7 +96,9 @@ class ProjectAdd extends Component {
 
     const chosenLabels = Array.from(chosenImages.values()).map(i => <SimpleLabel key={i.src} text={i.title}/>)
 
-    const usedImages = projects.length > 0 ? [... new Set(projects.filter(p => p.id !== id).map(p => p.images).reduce((a, b) => a.concat(b)).map(i => i.src))] : []
+    const usedImages = projects.length > 0 ? [... new Set(projects.filter(p => p.id
+                                                                               !== id).map(p => p.images).reduce((a, b) => a.concat(b)).map(i => i.src))]
+      : []
     const filteredImages = images.length > 0 ? [... new Set(images.filter(i => !usedImages.includes(i.src)))] : []
     const photos = filteredImages.map(i => (
       <div key={i.src} className="col-sm-3 col-xs-6" style={{padding: 0, margin: 0}}>

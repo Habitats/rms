@@ -123,7 +123,8 @@ class MenuItem extends Component {
     }
     const subItems = sub
       .filter(c => filterEnabled ? matching.has(c.id) : true)
-      .map(p => <MenuItem key={p.id} product={p} matching={matching} active={active} linkTo={`${linkTo}/${p.id}`} parentExpanded={expanded} filter={filter}
+      .map(p => <MenuItem key={p.id} product={p} matching={matching} active={active} linkTo={`${linkTo}/${p.id}`} parentExpanded={expanded}
+                          filter={filter}
                           onChildMatch={this.onChildMatch}/>)
 
     const s = isMatch ? this.substringIndex(title.toLowerCase(), filter.toLowerCase())[0] : null

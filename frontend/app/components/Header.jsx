@@ -1,14 +1,14 @@
 import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
 import Link from './Link.jsx'
-import * as productActions from './../redux/actions/productActions'
+import * as ProductActions from '../redux/actions/ProductActions'
 import * as C from '../colors'
 
 class Header extends Component {
 
   componentWillMount() {
     if (Object.keys(this.props.categories).length === 0) {
-      this.props.dispatch(productActions.fetchProducts())
+      this.props.dispatch(ProductActions.fetchProducts())
     }
   }
 

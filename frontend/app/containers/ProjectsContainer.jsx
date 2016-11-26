@@ -4,7 +4,7 @@ import Link from './../components/Link.jsx'
 import Projects from './../components/projects/Projects.jsx'
 import BigHeadline from './../components/text/BigHeadline.jsx'
 import Box from './../components/Box.jsx'
-import * as generalActionCreators from './../redux/actions/generalActions'
+import * as generalActionCreators from '../redux/actions/GeneralActions'
 
 class ProjectsContainer extends Component {
 

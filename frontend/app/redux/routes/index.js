@@ -16,8 +16,6 @@ import ProjectAdd from '../../containers/ProjectAdd.jsx'
 import ProductAdd from '../../components/product/ProductAdd.jsx'
 import Login from '../../containers/Login.jsx'
 
-
-
 function requireLogin() {
   // if (!this.props.session.admin) {
   //  this.props.dispatch(browserHistory.push('login'))

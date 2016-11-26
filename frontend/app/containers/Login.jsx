@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
 import Box from './../components/Box.jsx'
-import * as sessionActionCreators from '../redux/actions/sessionActions'
+import * as sessionActionCreators from '../redux/actions/SessionActions'
 
 class Login extends Component {
 

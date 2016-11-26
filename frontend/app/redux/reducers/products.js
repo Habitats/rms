@@ -1,4 +1,4 @@
-import * as C from '../constants/productConstants'
+import * as C from '../constants/ProductConstants'
 
 export default function product(state = {}, action) {
   switch (action.type) {

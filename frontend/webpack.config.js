@@ -1,3 +1,10 @@
+// Hack for Ubuntu on Windows: interface enumeration fails with EINVAL, so return empty.
+try {
+  require('os').networkInterfaces();
+} catch (e) {
+  require('os').networkInterfaces = () => ({});
+}
+
 const path = require('path')
 const util = require('util')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
@@ -131,7 +138,7 @@ const config = {
   plugins: plugins,
   resolve: {
     extensions: ['', '.js', '.json', '.jsx', '.scss']
-},
+  },
   devServer: {
     contentBase: path.resolve(pkg.config.buildDir),
     hot: true,

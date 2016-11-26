@@ -5,7 +5,7 @@ import {browserHistory} from 'react-router'
 import MediumHeadline from './../text/MediumHeadline.jsx'
 import Wysiwyg from './../text/Wysiwyg.jsx'
 import Box from './../Box.jsx'
-import * as productActions from '../../redux/actions/productActions'
+import * as ProductActions from '../../redux/actions/ProductActions'
 import ProductItems from './ProductItems.jsx'
 import ContactForm from '../contact/ContactForm.jsx'
 import {CONTENT_MAX_WIDTH} from '../../vars'
@@ -39,13 +39,15 @@ class Product extends Component {
     const desc = (
       <div style={style.desc}>
         {admin ?
-         <Wysiwyg content={description} onSave={(p) => dispatch(productActions.save({... product, description: p}))}/>
+         <Wysiwyg content={description} onSave={(p) => dispatch(ProductActions.save({... product, description: p}))}/>
           :
          <div dangerouslySetInnerHTML={{__html: description}}/>}
         {admin ? <button style={{marginTop: 5}} className="btn btn-default btn-block" type="submit"
                          onClick={() => browserHistory.push(`produkter/endre/${id}`)}>
           Admin </button> : null}
-        <button style={{marginTop: 5}} className="btn btn-default btn-block" type="submit" onClick={() => browserHistory.push(linkToParent)}>Tilbake</button>
+        <button style={{marginTop: 5}} className="btn btn-default btn-block" type="submit"
+                onClick={() => browserHistory.push(linkToParent)}>Tilbake
+        </button>
       </div>
     )
     const subCategories = sub && sub.length > 0 ? (

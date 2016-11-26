@@ -1,4 +1,4 @@
-import * as C from './../constants/productConstants'
+import * as C from '../constants/ProductConstants'
 import {browserHistory} from 'react-router'
 import * as GeneralApi from '../api/GeneralApi'
 

@@ -20,9 +20,12 @@ class Project extends Component {
           <div className="col-xs-12">
             <MiniGallery images={project.images} orientation={'horizontal'} height={400} thumbHeight={100}/>
             {admin ?
-             <button style={{marginTop: 5}} className="btn btn-default btn-block" type="submit" onClick={() => browserHistory.push(`referanser/endre/${project.id}`)}>Endre</button>
+             <button style={{marginTop: 5}} className="btn btn-default btn-block" type="submit"
+                     onClick={() => browserHistory.push(`referanser/endre/${project.id}`)}>Endre</button>
               : null}
-            <button style={{marginTop: 5}} className="btn btn-default btn-block" type="submit" onClick={() => browserHistory.push("/referanser")}>Tilbake</button>
+            <button style={{marginTop: 5}} className="btn btn-default btn-block" type="submit"
+                    onClick={() => browserHistory.push("/referanser")}>Tilbake
+            </button>
           </div>
         </div>
       </Box>

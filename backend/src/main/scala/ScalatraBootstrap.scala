@@ -15,7 +15,7 @@ class ScalatraBootstrap extends LifeCycle {
     context.mount(new PublicServlet, "/api/*")
     context.mount(new ImageServlet, "/image/*")
   }
-  
+
   override def destroy(context: ServletContext): Unit = {
     super.destroy(context)
     RmsDb.closeDbConnection()

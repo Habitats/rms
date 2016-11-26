@@ -1,4 +1,4 @@
-import * as C from '../constants/sessionConstants'
+import * as C from '../constants/SessionConstants'
 import {UPDATE_PATH} from 'react-router-redux'
 
 const initialState = {

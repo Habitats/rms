@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
-import * as GeneralActionCreators from '../../redux/actions/generalActions'
+import * as GeneralActionCreators from '../../redux/actions/GeneralActions'
 import Radium from 'radium'
 
 class ContactForm extends Component {

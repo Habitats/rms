@@ -16,7 +16,8 @@ class ProductContainer extends Component {
       const subSubProduct = subProduct.sub ? subProduct.sub.find(p => p.id === params.subSubId) : null
       if (subSubProduct) {
         return (
-          <Product product={subSubProduct} category={subProduct.title} linkTo={`produkter/${category.id}/${product.id}/${subProduct.id}/${subSubProduct.id}`}
+          <Product product={subSubProduct} category={subProduct.title}
+                   linkTo={`produkter/${category.id}/${product.id}/${subProduct.id}/${subSubProduct.id}`}
                    selected={params.selected}/>
         )
       }

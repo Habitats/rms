@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {browserHistory} from 'react-router'
 import MediumHeadline from './../text/MediumHeadline.jsx'
 import Box from './../Box.jsx'
-import * as productActions from '../../redux/actions/productActions'
+import * as ProductActions from '../../redux/actions/ProductActions'
 import Select from 'react-select'
 import {CONTENT_MAX_WIDTH} from '../../vars'
 
@@ -31,14 +31,14 @@ class ProductAdd extends Component {
           src: this.state.src || 'main.jpg',
           index: props.products.sub.flatMap(c => c.sub).length + 1
         }
-        productActions.save(product)
+        ProductActions.save(product)
         browserHistory.goBack
       } else {
         this.setState({error: 'Velg tittel og kategori!'})
       }
     }
     this.onRemove = () => {
-      this.props.dispatch(productActions.removeProduct(this.state.id))
+      this.props.dispatch(ProductActions.removeProduct(this.state.id))
       browserHistory.push('/produkter')
     }
     this.handleSelect = (category) => {
@@ -47,7 +47,7 @@ class ProductAdd extends Component {
   }
 
   componentWillMount() {
-    this.props.dispatch(productActions.fetchProducts())
+    this.props.dispatch(ProductActions.fetchProducts())
   }
 
   componentWillReceiveProps(nextProps) {

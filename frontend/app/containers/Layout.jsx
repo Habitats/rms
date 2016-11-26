@@ -3,7 +3,7 @@ import Footer from './../components/Footer.jsx'
 import Header from './../components/Header.jsx'
 import Radium from 'radium'
 import {connect} from 'react-redux'
-import * as SessionActionCreators from '../redux/actions/sessionActions'
+import * as SessionActionCreators from '../redux/actions/SessionActions'
 import * as V from '../vars'
 
 class Layout extends Component {
@@ -12,7 +12,6 @@ class Layout extends Component {
     super(props)
     this.props.dispatch(SessionActionCreators.session())
   }
-
 
   render() {
     const style = {
@@ -38,7 +37,6 @@ class Layout extends Component {
     )
   }
 }
-
 
 Layout.propTypes = {
   session: PropTypes.shape({

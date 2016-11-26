@@ -7,7 +7,7 @@ import ProductItems from '../components/product/ProductItems.jsx'
 import Left from './../components/Left.jsx'
 import Right from './../components/Right.jsx'
 import Box from './../components/Box.jsx'
-import * as productActionCreators from './../redux/actions/productActions'
+import * as ProductActionCreators from '../redux/actions/ProductActions'
 import NotFound from './NotFound.jsx'
 import Link from '../components/Link.jsx'
 
@@ -28,7 +28,7 @@ class ProductsContainer extends Component {
   }
 
   componentWillMount() {
-    this.props.dispatch(productActionCreators.fetchProducts())
+    this.props.dispatch(ProductActionCreators.fetchProducts())
   }
 
   componentWillMount() {
@@ -36,7 +36,7 @@ class ProductsContainer extends Component {
     this.state.mql.addListener(this.handleMediaChange)
     this.state.mqlm.addListener(this.handleMediaChange)
     if (Object.keys(this.props.categories).length === 0) {
-      this.props.dispatch(productActionCreators.fetchProducts())
+      this.props.dispatch(ProductActionCreators.fetchProducts())
     }
   }
 

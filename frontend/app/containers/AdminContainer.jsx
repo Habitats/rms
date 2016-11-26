@@ -1,9 +1,8 @@
 import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
-import {browserHistory} from 'react-router'
 import MediumHeadline from './../components/text/MediumHeadline.jsx'
 import Box from './../components/Box.jsx'
-import * as generalActions from '../redux/actions/generalActions'
+import * as generalActions from '../redux/actions/GeneralActions'
 
 class AdminContainer extends Component {
 
@@ -29,5 +28,4 @@ class AdminContainer extends Component {
   }
 }
 
-export default connect(state => ({
-}))(AdminContainer)
+export default connect(state => ({}))(AdminContainer)

@@ -15,7 +15,9 @@ const server = new WebpackDevServer(
 )
 
 server.listen(port, host, function (err) {
-  if (err) { console.log(err) }
+  if (err) {
+    console.log(err)
+  }
   const url = util.format('http://%s:%d', host, port)
   console.log('Listening at %s', url)
 })

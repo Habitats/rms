@@ -1,7 +1,6 @@
 import React, {Component, PropTypes} from 'react'
-import {Router, Route, IndexRoute, browserHistory} from 'react-router'
 import {connect} from 'react-redux'
-import * as SessionActionCreators from './redux/actions/sessionActions'
+import * as SessionActionCreators from './redux/actions/SessionActions'
 import Routes from 'redux/routes'
 
 class App extends Component {

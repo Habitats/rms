@@ -19,7 +19,7 @@ idea {
     }
 }
 
-task clean (type: Delete) {
+task clean(type: Delete) {
     delete 'backend/build'
     delete 'build'
 }

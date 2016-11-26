@@ -18,7 +18,12 @@
       2,
       "single"
     ],
-    "no-trailing-spaces": [2, { "skipBlankLines": true }],
+    "no-trailing-spaces": [
+      2,
+      {
+        "skipBlankLines": true
+      }
+    ],
     "react/display-name": 0,
     "react/jsx-quotes": 1,
     "react/jsx-no-undef": 1,
