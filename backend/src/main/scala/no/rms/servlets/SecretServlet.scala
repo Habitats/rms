@@ -82,5 +82,10 @@ class SecretServlet extends BackendStack with FutureSupport with JacksonJsonSupp
       case Failure(ex) => Logger.info(ex.getMessage)
     }
   }
+
+  get("/invalidate/?") {
+    ImageUtils.invalidateCache()
+    "Cache invalidated"
+  }
 }
 

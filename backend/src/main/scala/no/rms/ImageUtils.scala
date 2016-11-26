@@ -6,6 +6,7 @@ import java.nio.file.{Files, Paths}
 import com.sksamuel.scrimage.Image
 import com.sksamuel.scrimage.nio.JpegWriter
 import no.rms.models.ImageWrapper
+import org.apache.commons.io.FileUtils
 
 import scala.util.Random
 
@@ -16,6 +17,12 @@ object ImageUtils {
   val delim   = ","
 
   def notFound(): File = Random.shuffle(Paths.get(rootDir, "not_found").toFile.listFiles.toList).head
+
+  def invalidateCache(): Unit = {
+    val thumbs: Set[File] = Paths.get(rootDir).toFile.listFiles.filter(_.getName.startsWith("thumbs_")).toSet
+    Logger.info("Invalidating image cache ... Removing " + thumbs.map(_.getAbsolutePath).mkString(", "))
+    thumbs.foreach(FileUtils.deleteDirectory)
+  }
 
   def rename(f: File): File = {
     val renamed = Paths.get(f.getParent, f.getName.toLowerCase.replaceAll("\\s+|,|[øæå]", "_")).toFile
