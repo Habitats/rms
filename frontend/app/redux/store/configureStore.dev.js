@@ -3,13 +3,13 @@ import {persistState} from 'redux-devtools'
 import rootReducer from '../reducers/rootReducer'
 import DevTools from '../../containers/Devtools'
 import thunkMiddleware from 'redux-thunk'
+import {composeWithDevTools} from 'redux-devtools-extension'
 
 // Sync dispatched route actions to the history
-const finalCreateStore = compose(
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const finalCreateStore = composeEnhancers(
   // Middleware you want to use in development:
   applyMiddleware(thunkMiddleware),
-  // Required! Enable Redux DevTools with the monitors you chose
-  DevTools.instrument(),
   // Optional. Lets you write ?debug_session=<key> in address bar to persist debug sessions
   persistState(getDebugSessionKey())
 )(createStore)
