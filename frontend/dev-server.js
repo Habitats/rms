@@ -21,7 +21,7 @@ server.listen(port, host, function (err) {
 })
 
 server.use('/api|/secret|/image|/session', proxy({
-  target: 'http://localhost:8080',
+  target: 'http://localhost:8081',
   changeOrigin: true
 }))
 
