@@ -29,7 +29,7 @@ class Photo extends Component {
     const {hover} = this.state
 
     // if onClick is defined, use the defined callback
-    const photoClick = linkTo ? () => dispatch(browserHistory.push(linkTo)) :
+    const photoClick = linkTo ? () => browserHistory.push(linkTo) :
                        onClick ? onClick :
                        clickable ? this.toggle.bind(this) : null
 

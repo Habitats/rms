@@ -1,14 +1,12 @@
 import {createStore, applyMiddleware, compose} from 'redux'
 import rootReducer from '../reducers/rootReducer'
-import thunkMiddleware from 'redux-thunk'
+import thunk from 'redux-thunk'
 
-// Sync dispatched route actions to the history
 const finalCreateStore = compose(
-  // Middleware you want to use in production:
-  applyMiddleware(thunkMiddleware)
-  // Other store enhancers if you use any
+  applyMiddleware(thunk)
 )(createStore)
 
-export default function configureStore(initialState) {
-  return finalCreateStore(rootReducer, initialState)
+module.exports = function configureStore(initialState) {
+  const store = finalCreateStore(rootReducer, initialState)
+  return store
 }

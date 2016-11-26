@@ -1,32 +1,32 @@
 import {createStore, applyMiddleware, compose} from 'redux'
-import {persistState} from 'redux-devtools'
 import rootReducer from '../reducers/rootReducer'
-import DevTools from '../../containers/Devtools'
-import thunkMiddleware from 'redux-thunk'
+import createLogger from 'redux-logger'
+import thunk from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
+// The reduxRouterMiddleware will look for route actions created by push, replace, etc.
+// and applies them to the history.
 
-// Sync dispatched route actions to the history
+/**
+ * Entirely optional, this tiny library adds some functionality to
+ * your DevTools, by logging actions/state to your console. Used in
+ * conjunction with your standard DevTools monitor gives you great
+ * flexibility!
+ */
+const logger = createLogger()
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const finalCreateStore = composeEnhancers(
-  // Middleware you want to use in development:
-  applyMiddleware(thunkMiddleware),
-  // Optional. Lets you write ?debug_session=<key> in address bar to persist debug sessions
-  persistState(getDebugSessionKey())
+  applyMiddleware(thunk, logger)
 )(createStore)
 
-function getDebugSessionKey() {
-  // You can write custom logic here!
-  // By default we try to read the key from ?debug_session=<key> in the address bar
-  const matches = window.location.href.match(/[?&]debug_session=([^&]+)\b/)
-  return (matches && matches.length > 0) ? matches[1] : null
-}
-
-export default function configureStore(initialState) {
+module.exports = function configureStore(initialState) {
   const store = finalCreateStore(rootReducer, initialState)
 
   // Hot reload reducers (requires Webpack or Browserify HMR to be enabled)
   if (module.hot) {
-    module.hot.accept('../reducers')
+    module.hot.accept('../reducers/rootReducer', () =>
+      store.replaceReducer(require('../reducers/rootReducer'))
+    )
   }
 
   return store

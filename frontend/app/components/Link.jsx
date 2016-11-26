@@ -7,11 +7,10 @@ class Link extends Component {
 
   constructor(props) {
     super(props)
-    this.onClick = () => props.dispatch(browserHistory.push(props.to))
   }
 
   render() {
-    const {children, style} = this.props
+    const {children, style, to} = this.props
     const linkStyle = {
       ...style,
       ':hover': {
@@ -20,7 +19,7 @@ class Link extends Component {
       },
     }
     return (
-      <span style={linkStyle} onClick={this.onClick}>
+      <span style={linkStyle} onClick={() => browserHistory.push(to)}>
         {children}
       </span>
     )

@@ -31,15 +31,15 @@ class ProductAdd extends Component {
           src: this.state.src || 'main.jpg',
           index: props.products.sub.flatMap(c => c.sub).length + 1
         }
-        this.props.dispatch(productActions.save(product))
-        this.props.dispatch(browserHistory.goBack())
+        productActions.save(product)
+        browserHistory.goBack
       } else {
         this.setState({error: 'Velg tittel og kategori!'})
       }
     }
     this.onRemove = () => {
       this.props.dispatch(productActions.removeProduct(this.state.id))
-      this.props.dispatch(browserHistory.push('/produkter'))
+      browserHistory.push('/produkter')
     }
     this.handleSelect = (category) => {
       this.setState({category: category.value})

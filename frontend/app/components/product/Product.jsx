@@ -33,8 +33,8 @@ class Product extends Component {
         paddingRight: 15
       }
     }
-
-    const headline = <MediumHeadline big={title} small={category} to={linkTo.split('/').reverse().splice(1).reverse().join('/')}/>
+    const linkToParent = linkTo.split('/').reverse().splice(1).reverse().join('/')
+    const headline = <MediumHeadline big={title} small={category} to={linkToParent}/>
     const gal = <div style={style.gallery}><MiniGallery images={images} orientation={'vertical'} height={350} style={style.gallery}/></div>
     const desc = (
       <div style={style.desc}>
@@ -43,8 +43,9 @@ class Product extends Component {
           :
          <div dangerouslySetInnerHTML={{__html: description}}/>}
         {admin ? <button style={{marginTop: 5}} className="btn btn-default btn-block" type="submit"
-                         onClick={() => dispatch(browserHistory.push(`produkter/endre/${id}`))}>
+                         onClick={() => browserHistory.push(`produkter/endre/${id}`)}>
           Admin </button> : null}
+        <button style={{marginTop: 5}} className="btn btn-default btn-block" type="submit" onClick={() => browserHistory.push(linkToParent)}>Tilbake</button>
       </div>
     )
     const subCategories = sub && sub.length > 0 ? (

@@ -79,7 +79,7 @@ class ProjectAdd extends Component {
         description: this.state.description,
         images: this.state.chosenImages
       }))
-      this.props.dispatch(browserHistory.push('/referanser'))
+      browserHistory.push('/referanser')
     } else {
       this.setState({error: 'Fyll ut alle felt og velg noen bilder!'})
     }
@@ -87,7 +87,7 @@ class ProjectAdd extends Component {
 
   onRemove() {
     this.props.dispatch(generalActions.removeProject(this.state.id))
-    this.props.dispatch(browserHistory.push('/referanser'))
+    browserHistory.push('/referanser')
   }
 
   render() {

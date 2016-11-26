@@ -6,7 +6,7 @@ import Photo from './Photo.jsx'
 export default class PhotoLine extends Component {
 
   onSelect(path) {
-    this.props.dispatch(browserHistory.push(path))
+    browserHistory.push(path)
   }
 
   render() {

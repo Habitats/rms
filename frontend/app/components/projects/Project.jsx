@@ -7,17 +7,22 @@ import Box from './../Box.jsx'
 
 class Project extends Component {
 
+  constructor(props, context) {
+    super(props, context)
+  }
+
   render() {
-    const {project, session: {admin}, dispatch} = this.props
+    const {project, session: {admin}} = this.props
     return (
       <Box>
         <BigHeadline big={project.title} small="Prosjekt"/>
         <div className="row">
           <div className="col-xs-12">
             <MiniGallery images={project.images} orientation={'horizontal'} height={400} thumbHeight={100}/>
-            {admin ? <button style={{marginTop: 5}} className="btn btn-default btn-block" type="submit"
-                             onClick={() => dispatch(browserHistory.push(`referanser/endre/${project.id}`))}>
-              Endre </button> : null}
+            {admin ?
+             <button style={{marginTop: 5}} className="btn btn-default btn-block" type="submit" onClick={() => browserHistory.push(`referanser/endre/${project.id}`)}>Endre</button>
+              : null}
+            <button style={{marginTop: 5}} className="btn btn-default btn-block" type="submit" onClick={() => browserHistory.push("/referanser")}>Tilbake</button>
           </div>
         </div>
       </Box>
