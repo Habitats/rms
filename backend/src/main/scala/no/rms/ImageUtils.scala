@@ -12,14 +12,13 @@ import scala.util.Random
 
 object ImageUtils {
   implicit val writer = JpegWriter().withCompression(80).withProgressive(true)
-
-  val rootDir = "img"
+  
   val delim   = ","
 
-  def notFound(): File = Random.shuffle(Paths.get(rootDir, "not_found").toFile.listFiles.toList).head
+  def notFound(): File = Random.shuffle(Paths.get(Config.imageRoot, "not_found").toFile.listFiles.toList).head
 
   def invalidateCache(): Unit = {
-    val thumbs: Set[File] = Paths.get(rootDir).toFile.listFiles.filter(_.getName.startsWith("thumbs_")).toSet
+    val thumbs: Set[File] = Paths.get(Config.imageRoot).toFile.listFiles.filter(_.getName.startsWith("thumbs_")).toSet
     Logger.info("Invalidating image cache ... Removing " + thumbs.map(_.getAbsolutePath).mkString(", "))
     thumbs.foreach(FileUtils.deleteDirectory)
   }
@@ -53,7 +52,7 @@ object ImageUtils {
   }
 
   private def fetch(id: String, path: String = ""): Option[File] = {
-    val imgDir = if (path != "") new File(s"$rootDir/raw/$path") else new File(rootDir + "/raw")
+    val imgDir = if (path != "") new File(s"${Config.imageRoot}/raw/$path") else new File(Config.imageRoot + "/raw")
     val image = new File(imgDir.toString, id)
     if (image.exists) Some(image) else None
   }
@@ -62,7 +61,7 @@ object ImageUtils {
     fetch(id, path).map(image => {
       size match {
         case "med" | "low" =>
-          val thumbsRoot = Paths.get(rootDir, "thumbs_" + size).toString
+          val thumbsRoot = Paths.get(Config.imageRoot, "thumbs_" + size).toString
           val dest = new File(if (path != "") Paths.get(thumbsRoot, path).toString else thumbsRoot)
           dest.mkdirs
           val out = new File(dest.getAbsolutePath, id)
