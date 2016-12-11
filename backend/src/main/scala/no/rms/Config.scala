@@ -13,11 +13,15 @@ object Config {
 
   def username = conf.getProperty("username")
   def password = conf.getProperty("password")
-  def token = new File(getClass.getResource("/dropbox_token").getFile)
-  def dropboxAppKey = conf.getProperty("dropbox_app_key")
-  def dropboxAppSecret = conf.getProperty("dropbox_app_secret")
   def test = conf.getProperty("test").toBoolean
-  def imageRoot = conf.getProperty("images_dir")
+  def imageRoot = formatPath(conf.getProperty("images_dir"))
+
+  def formatPath(path: String): String = {
+    path
+      .replace("%DROPBOX_HOME%", sys.env("DROPBOX_HOME"))
+      .replace("~", System.getProperty("user.home"))
+      .replace("\\", "/")
+  }
 
   val COOKIE_ID     = "YOLO"
   val ONE_WEEK      = 7 * 24 * 3600
