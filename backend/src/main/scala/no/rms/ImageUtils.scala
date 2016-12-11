@@ -15,7 +15,7 @@ object ImageUtils {
   
   val delim   = ","
 
-  def notFound(): File = Random.shuffle(new File(Config.imageRoot + "not_found").listFiles.toList).head
+  def notFound(): File = Random.shuffle(new File(Config.imageRoot + "raw/not_found").listFiles.toList).head
 
   def invalidateCache(): Unit = {
     val thumbs: Set[File] = Paths.get(Config.imageRoot).toFile.listFiles.filter(_.getName.startsWith("thumbs_")).toSet
