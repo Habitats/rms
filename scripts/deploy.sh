@@ -12,5 +12,5 @@ if [[ $branch == "demo" ]]; then
   mv /home/habitats/rms/rms_*war /home/habitats/rms/rms-demo.war
   cp -f /home/habitats/rms/rms-demo.war /opt/tomcat/demo/ROOT.war
 else
-  cp -f /home/habitats/rms/rms_*war /opt/tomact/prod/ROOT.war
+  cp -f /home/habitats/rms/rms_*war /opt/tomcat/prod/ROOT.war
 fi
