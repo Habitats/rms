@@ -11,7 +11,7 @@ object Product {
     new Product(if (id == null) genId(title) else id, title = title, description = description, sub = sub, category = "", images = Nil, src = "image/" + ImageUtils.notFound().getName, index = index)
   }
 
-  def genId(title: String) = title.toLowerCase
+  def genId(title: String): String = title.toLowerCase
     .replaceAll(" ", "_")
     .replaceAll(",", "_")
     .replaceAll("å", "a")
@@ -36,7 +36,7 @@ case class Product(id: String, title: String, description: String, sub: Seq[Prod
     f"\n$title > $description > $category > ${sub.mkString(", ")}"
   }
 
-  val sortKey = if (sub.nonEmpty) index - 1000 else index
+  val sortKey: Int = if (sub.nonEmpty) index - 1000 else index
 }
 
 case class ProductWrapper(id: String, title: String, description: String, sub: String, images: String, src: String, category: String, index: Int)

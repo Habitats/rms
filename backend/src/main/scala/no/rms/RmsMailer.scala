@@ -7,7 +7,7 @@ import courier._
 import no.rms.models.Email
 
 trait RmsMailer {
-  def send(email: Email) = {
+  def send(email: Email): Unit = {
     val mailer = Mailer("utpost.sysedata.no", 587)
       .auth(true)
       .as("kontaktskjema@romerike-markiseservice.no", "mutte123")

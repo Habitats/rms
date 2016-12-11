@@ -7,11 +7,11 @@ import org.json4s.{DefaultFormats, Formats}
 import org.scalatra.json.JacksonJsonSupport
 import org.scalatra.{CorsSupport, FutureSupport}
 
-import scala.concurrent.ExecutionContext
+import scala.concurrent.{ExecutionContext, ExecutionContextExecutor}
 import scala.util.{Failure, Success, Try}
 
 class SessionServlet extends BackendStack with FutureSupport with JacksonJsonSupport with CorsSupport with AuthenticationSupport {
-  protected implicit def executor = ExecutionContext.Implicits.global
+  protected implicit def executor: ExecutionContextExecutor = ExecutionContext.Implicits.global
 
   protected implicit val jsonFormats: Formats = DefaultFormats
 

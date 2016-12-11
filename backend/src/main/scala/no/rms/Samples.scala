@@ -5,7 +5,7 @@ import java.time.LocalDateTime
 import no.rms.models.{ImageWrapper, Product, Project}
 
 object Samples {
-  def products = {
+  def products: Product = {
     Product("Produkter", "", Seq(
       Product("Eksteriør", "", Seq(
         Product("Markiser", "Markiser kommer i mange former og fasonger. Vi fører alt fra større terrassemarkiser, til enkle vindusmarkiser.", Seq(
@@ -89,7 +89,7 @@ object Samples {
     )).attachCategory()
   }
 
-  def projects = {
+  def projects: Seq[Project] = {
     val vgsImgs = Seq(
       ImageWrapper("1", "referanser/ref_nannestad.vgs_1.jpg"),
       ImageWrapper("2", "referanser/ref_nannestad.vgs_2.jpg"),

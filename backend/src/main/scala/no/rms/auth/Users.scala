@@ -2,9 +2,11 @@ package no.rms.auth
 
 import no.rms.{Config, Logger}
 
+import scala.collection.mutable
+
 object Users {
 
-  val active = scala.collection.mutable.Map[String, User]()
+  val active: mutable.Map[String, User] = scala.collection.mutable.Map[String, User]()
 
   private def add(user: User): User = {
     Logger.info("User > Add: " + user)

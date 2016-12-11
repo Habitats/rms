@@ -7,32 +7,32 @@ import org.scalatra.auth.{ScentryConfig, ScentrySupport}
 trait AuthenticationSupport extends ScalatraBase with ScentrySupport[User] {
   self: ScalatraBase =>
 
-  protected def fromSession = {
+  protected def fromSession: PartialFunction[String, User] = {
     case id: String => Users.active(id)
   }
 
-  protected def toSession = {
+  protected def toSession: PartialFunction[User, String] = {
     case user: User => user.id
   }
 
-  protected val scentryConfig = (new ScentryConfig {
+  protected val scentryConfig: ScentryConfiguration = new ScentryConfig {
     override val login = "/"
-  }).asInstanceOf[ScentryConfiguration]
+  }.asInstanceOf[ScentryConfiguration]
 
-  protected def requireLogin() = {
+  protected def requireLogin(): Any = {
     if (!isAuthenticated) {
       scentry.authenticate("Admin")
     }
   }
 
   // if unauthorized access to route protected by scentry, run unauthorized for that strategy
-  override protected def configureScentry = {
+  override protected def configureScentry: Unit = {
     scentry.unauthenticated {
       scentry.strategies("Admin").unauthenticated()
     }
   }
 
-  override protected def registerAuthStrategies = {
+  override protected def registerAuthStrategies: Unit = {
     scentry.register("RememberMe", app => new RememberMeStrategy(app))
     scentry.register("Admin", app => new AdminStrategy(app))
   }

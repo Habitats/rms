@@ -10,10 +10,10 @@ import org.json4s.{CustomSerializer, DefaultFormats, Formats}
 import org.scalatra.json.JacksonJsonSupport
 import org.scalatra.{CorsSupport, FutureSupport}
 
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.{ExecutionContext, ExecutionContextExecutor, Future}
 
 class ImageServlet extends BackendStack with FutureSupport with JacksonJsonSupport with CorsSupport with RmsMailer with AuthenticationSupport {
-  protected implicit def executor = ExecutionContext.Implicits.global
+  protected implicit def executor: ExecutionContextExecutor = ExecutionContext.Implicits.global
 
   protected implicit val jsonFormats: Formats = {
     DefaultFormats + new LocalDateTimeSerializer

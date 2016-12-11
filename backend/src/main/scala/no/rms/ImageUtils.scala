@@ -11,9 +11,9 @@ import org.apache.commons.io.FileUtils
 import scala.util.Random
 
 object ImageUtils {
-  implicit val writer = JpegWriter().withCompression(80).withProgressive(true)
-  
-  val delim   = ","
+  implicit val writer: JpegWriter = JpegWriter().withCompression(80).withProgressive(true)
+
+  val delim = ","
 
   def notFound(): File = {
     val file = new File(Config.imageRoot + "raw/not_found")
@@ -43,7 +43,7 @@ object ImageUtils {
       f.listFiles
         .map(rename)
         .map(_.getName.toLowerCase).filter(f => f.endsWith(".jpg") || f.endsWith(".png"))
-        .map(f => ImageWrapper(f, (if (path.length > 0) (path + "/") else "") + f))
+        .map(f => ImageWrapper(f, (if (path.length > 0) path + "/" else "") + f))
     } else Nil
   }
 

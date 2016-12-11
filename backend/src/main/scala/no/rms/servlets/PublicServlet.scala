@@ -13,10 +13,10 @@ import org.scalatra.json.JacksonJsonSupport
 import org.scalatra.{CorsSupport, FutureSupport}
 import slick.driver.H2Driver.api._
 
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.{ExecutionContext, ExecutionContextExecutor, Future}
 
 class PublicServlet extends BackendStack with FutureSupport with JacksonJsonSupport with CorsSupport with RmsMailer with AuthenticationSupport {
-  protected implicit def executor = ExecutionContext.Implicits.global
+  protected implicit def executor: ExecutionContextExecutor = ExecutionContext.Implicits.global
 
   protected implicit val jsonFormats: Formats = {
     DefaultFormats + new LocalDateTimeSerializer
@@ -46,7 +46,7 @@ class PublicServlet extends BackendStack with FutureSupport with JacksonJsonSupp
 
   get("/projects/?") {
     Logger.info("GET: projects")
-    RmsDb.allProjects
+    RmsDb.allProjects()
   }
 
   get("/project/:id/?") {
@@ -57,7 +57,7 @@ class PublicServlet extends BackendStack with FutureSupport with JacksonJsonSupp
 
   get("/products/?") {
     Logger.info("GET: products")
-    val products: Future[Product] = RmsDb.allProducts
+    val products: Future[Product] = RmsDb.allProducts()
     products
   }
 

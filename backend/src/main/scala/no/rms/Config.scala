@@ -11,15 +11,15 @@ object Config {
   val conf = new Properties
   conf.load(new FileReader(getClass.getResource("/conf.properties").getFile))
 
-  def username = conf.getProperty("username")
-  def password = conf.getProperty("password")
-  def test = conf.getProperty("test").toBoolean
-  def imageRoot = conf.getProperty("images_dir")
+  def username: String = conf.getProperty("username")
+  def password: String = conf.getProperty("password")
+  def test: Boolean = conf.getProperty("test").toBoolean
+  def imageRoot: String = conf.getProperty("images_dir")
 
-  val COOKIE_ID     = "YOLO"
-  val ONE_WEEK      = 7 * 24 * 3600
-  val DEBUG         = true
-  val DB_FILE: File = {
+  val COOKIE_ID      = "YOLO"
+  val ONE_WEEK: Int  = 7 * 24 * 3600
+  val DEBUG          = true
+  val DB_FILE : File = {
     val f = new File("db/rms.mv.db")
     f
   }

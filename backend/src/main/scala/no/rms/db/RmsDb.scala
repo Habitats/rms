@@ -5,7 +5,10 @@ import java.time.LocalDateTime
 import com.mchange.v2.c3p0.ComboPooledDataSource
 import no.rms.models.{Product, ProductWrapper, Project}
 import no.rms.{Config, Logger, Samples}
+import slick.dbio.Effect.Schema
 import slick.driver.H2Driver.api._
+import slick.lifted.{ProvenShape, TableQuery}
+import slick.profile.FixedSqlAction
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.{Future, Promise}
@@ -14,40 +17,40 @@ object RmsDb {
   lazy val cpds = new ComboPooledDataSource
   Logger.info("Created c3po connection pool")
 
-  val db = {
+  val db: _root_.slick.driver.H2Driver.backend.DatabaseDef = {
     val db = Database.forDataSource(cpds)
     RmsDb.init(db)
     db
   }
 
   class Projects(tag: Tag) extends Table[(String, String, String, String, String)](tag, "PROJECTS") {
-    def id = column[String]("ID", O.PrimaryKey)
-    def title = column[String]("TITLE")
-    def description = column[String]("DESCRIPTION", O.Length(1000000))
-    def images = column[String]("IMAGES", O.Length(10000))
-    def modified = column[String]("MODIFIED")
+    def id: Rep[String] = column[String]("ID", O.PrimaryKey)
+    def title: Rep[String] = column[String]("TITLE")
+    def description: Rep[String] = column[String]("DESCRIPTION", O.Length(1000000))
+    def images: Rep[String] = column[String]("IMAGES", O.Length(10000))
+    def modified: Rep[String] = column[String]("MODIFIED")
 
-    def * = (id, title, description, images, modified)
+    def * : ProvenShape[(String, String, String, String, String)] = (id, title, description, images, modified)
   }
 
   class Products(tag: Tag) extends Table[(String, String, String, String, String, String, String, Int)](tag, "PRODUCTS") {
-    def id = column[String]("ID", O.PrimaryKey)
-    def title = column[String]("TITLE")
-    def description = column[String]("DESCRIPTION", O.Length(1000000))
-    def sub = column[String]("SUB_PRODUCTS", O.Length(10000))
-    def images = column[String]("IMAGES", O.Length(20000))
-    def src = column[String]("SRC")
-    def category = column[String]("CATEGORY")
-    def index = column[Int]("INDEX")
+    def id: Rep[String] = column[String]("ID", O.PrimaryKey)
+    def title: Rep[String] = column[String]("TITLE")
+    def description: Rep[String] = column[String]("DESCRIPTION", O.Length(1000000))
+    def sub: Rep[String] = column[String]("SUB_PRODUCTS", O.Length(10000))
+    def images: Rep[String] = column[String]("IMAGES", O.Length(20000))
+    def src: Rep[String] = column[String]("SRC")
+    def category: Rep[String] = column[String]("CATEGORY")
+    def index: Rep[Int] = column[Int]("INDEX")
 
-    def * = (id, title, description, sub, images, src, category, index)
+    def * : ProvenShape[(String, String, String, String, String, String, String, Int)] = (id, title, description, sub, images, src, category, index)
   }
 
-  lazy val projects = TableQuery[Projects]
-  lazy val products = TableQuery[Products]
+  lazy val projects: TableQuery[Projects] = TableQuery[Projects]
+  lazy val products: TableQuery[Products] = TableQuery[Products]
 
-  lazy val createSchemaAction = (products.schema ++ projects.schema).create
-  lazy val dropSchemaAction   = (products.schema ++ projects.schema).drop
+  lazy val createSchemaAction: FixedSqlAction[Unit, NoStream, Schema] = (products.schema ++ projects.schema).create
+  lazy val dropSchemaAction  : FixedSqlAction[Unit, NoStream, Schema] = (products.schema ++ projects.schema).drop
   val delim = "___"
 
   private def init(db: Database): Future[Boolean] = {
