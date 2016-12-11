@@ -9,8 +9,8 @@
   },
   "scripts": {
     "start": "NODE_ENV=development&&node dev-server --hot --progress --colors",
-    "prod": "SET NODE_ENV=production&&node dev-server",
-    "build": "SET NODE_ENV=production&&webpack --colors --progress --config ./webpack.config.js",
+    "prod": "NODE_ENV=production&&node dev-server",
+    "build": "NODE_ENV=production&&webpack --colors --progress --config ./webpack.config.js",
     "lint": "eslint --ext .js --ext .jsx ./app && echo No linting errors."
   },
   "author": "Patrick Skjennum",
