@@ -55,8 +55,8 @@ object RmsDb {
 
   private def init(db: Database): Future[Boolean] = {
     val p = Promise[Boolean]()
-    val dbFile = Config.DB_FILE
-    if (!dbFile.exists) {
+
+    if (Config.test) {
       db.run(createSchemaAction).andThen {
         case _ =>
           Samples.projects.foreach(p => storeProject(p))
