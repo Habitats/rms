@@ -18,8 +18,7 @@
 /src/main/resources/rms.mv.db
 /db/rms.trace.db
 /db/rms.h2.db
-/db/.dropbox
-/src/main/webapp/
-!/src/main/webapp/favicon.ico
-!/src/main/webapp/index.html
-!/src/main/webapp/WEB-INF/
+
+/src/main/webapp/js/
+/src/main/webapp/assets/
+/src/main/webapp/css/
