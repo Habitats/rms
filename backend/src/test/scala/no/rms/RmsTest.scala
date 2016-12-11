@@ -13,18 +13,17 @@ class RmsTest extends FunSuite {
   //  }
 
   test("products") {
-    val root =
-      Product("a", "908", Seq(
-        Product("aa", "345", Seq(
-          Product("aaa", "123"),
-          Product("aab", "213")
-        )),
-        Product("ab", "123", Seq(
-          Product("aba", "234"),
-          Product("abb", "453")
-        )),
-        Product("ac", "345")
-      )).attachCategory()
+    val root = Product("a", "908", Seq(
+      Product("aa", "345", Seq(
+        Product("aaa", "123"),
+        Product("aab", "213")
+      )),
+      Product("ab", "123", Seq(
+        Product("aba", "234"),
+        Product("abb", "453")
+      )),
+      Product("ac", "345")
+    )).attachCategory()
 
     def flat(root: Product): Seq[Product] = root.sub.flatMap(r => flat(r)) ++ Seq(root)
 
