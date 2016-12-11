@@ -14,7 +14,7 @@ object Config {
   def username = conf.getProperty("username")
   def password = conf.getProperty("password")
   def test = conf.getProperty("test").toBoolean
-  def imageRoot = formatPath(conf.getProperty("images_dir"))
+  def imageRoot = conf.getProperty("images_dir")
 
   val COOKIE_ID     = "YOLO"
   val ONE_WEEK      = 7 * 24 * 3600
