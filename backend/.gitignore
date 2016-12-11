@@ -7,15 +7,10 @@
 /rms.trace.db
 /target
 /project/project
-/src/main/webapp/fonts
-/src/main/webapp/js
-/src/main/webapp/css
-/src/main/webapp/index.html
 /project/target
 /.idea
 /backend.iml
 /secret
-/src/main/webapp/assets
 /img/raw
 /src/main/resources/c3p0.properties
 /src/main/resources/dropbox_token
