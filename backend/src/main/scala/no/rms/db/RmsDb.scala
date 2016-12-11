@@ -19,7 +19,7 @@ object RmsDb {
 
   val db: _root_.slick.driver.H2Driver.backend.DatabaseDef = {
     val db = Database.forDataSource(cpds)
-    RmsDb.init(db)
+    if (Config.test) RmsDb.init(db)
     db
   }
 
@@ -55,7 +55,6 @@ object RmsDb {
 
   private def init(db: Database): Future[Boolean] = {
     val p = Promise[Boolean]()
-
     if (Config.test) {
       db.run(createSchemaAction).andThen {
         case _ =>

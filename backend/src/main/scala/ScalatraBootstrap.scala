@@ -8,7 +8,6 @@ import org.scalatra._
 class ScalatraBootstrap extends LifeCycle {
 
   override def init(context: ServletContext) {
-    //    if (Config.DEBUG) Config.DB_FILE.delete
     context.mount(new IndexServlet, "/*")
     context.mount(new SecretServlet, "/secret/*")
     context.mount(new SessionServlet, "/session/*")
