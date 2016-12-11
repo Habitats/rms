@@ -16,13 +16,6 @@ object Config {
   def test = conf.getProperty("test").toBoolean
   def imageRoot = formatPath(conf.getProperty("images_dir"))
 
-  def formatPath(path: String): String = {
-    path
-      .replace("%DROPBOX_HOME%", sys.env("DROPBOX_HOME"))
-      .replace("~", System.getProperty("user.home"))
-      .replace("\\", "/")
-  }
-
   val COOKIE_ID     = "YOLO"
   val ONE_WEEK      = 7 * 24 * 3600
   val DEBUG         = true

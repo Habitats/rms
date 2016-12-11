@@ -8,10 +8,6 @@ import org.scalatest.junit.JUnitRunner
 @RunWith(classOf[JUnitRunner])
 class RmsTest extends FunSuite {
 
-  //  test("that dropbox works") {
-  //    Dropbox.login
-  //  }
-
   test("products") {
     val root = Product("a", "908", Seq(
       Product("aa", "345", Seq(
