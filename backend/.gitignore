@@ -19,3 +19,7 @@
 /db/rms.trace.db
 /db/rms.h2.db
 /db/.dropbox
+/src/main/webapp/
+!/src/main/webapp/favicon.ico
+!/src/main/webapp/index.html
+!/src/main/webapp/WEB-INF/
