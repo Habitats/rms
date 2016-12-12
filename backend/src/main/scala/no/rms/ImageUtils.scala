@@ -38,7 +38,7 @@ object ImageUtils {
   }
 
   def fetchUrls(path: String = ""): Seq[ImageWrapper] = {
-    val f = new File("img/raw/" + path)
+    val f = new File(Config.imageRoot + "/raw/" + path)
     if (f.exists) {
       f.listFiles
         .map(rename)
