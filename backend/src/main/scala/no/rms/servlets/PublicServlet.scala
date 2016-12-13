@@ -13,7 +13,7 @@ import org.scalatra.{CorsSupport, FutureSupport}
 
 import scala.concurrent.{ExecutionContext, ExecutionContextExecutor, Future}
 
-class PublicServlet extends BackendStack with FutureSupport with JacksonJsonSupport with CorsSupport with RmsMailer with AuthenticationSupport {
+class PublicServlet extends BackendStack with FutureSupport with JacksonJsonSupport with CorsSupport with SendGridMailer with AuthenticationSupport {
   protected implicit def executor: ExecutionContextExecutor = ExecutionContext.Implicits.global
 
   protected implicit val jsonFormats: Formats = {

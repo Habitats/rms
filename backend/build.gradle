@@ -64,6 +64,9 @@ dependencies {
     compile "org.json4s:json4s-native_$project.scalaBinary:3.3.0.RC3"
     compile "com.mchange:c3p0:0.9.5.1"
 
+    // Mail
+    compile 'com.sendgrid:sendgrid-java:3.1.0'
+
     // Image processing
     compile "com.sksamuel.scrimage:scrimage-core_$project.scalaBinary:2.0.1"
     compile "com.sksamuel.scrimage:scrimage-io_$project.scalaBinary:2.0.1"
