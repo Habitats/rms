@@ -77,7 +77,7 @@ class ProjectAdd extends Component {
         id: this.state.id || this.props.projects.map(p => parseInt(p.id)).reduce((a, b) => Math.max(a, b)) + 1,
         title: this.state.title,
         description: this.state.description,
-        images: this.state.chosenImages
+        images: Array.from(this.state.chosenImages.values())
       }))
       browserHistory.push('/referanser')
     } else {

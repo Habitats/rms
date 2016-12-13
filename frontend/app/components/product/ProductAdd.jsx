@@ -31,14 +31,14 @@ class ProductAdd extends Component {
           src: this.state.src || 'main.jpg',
           index: props.products.sub.flatMap(c => c.sub).length + 1
         }
-        ProductActions.save(product)
+        props.dispatch(ProductActions.save(product))
         browserHistory.goBack
       } else {
         this.setState({error: 'Velg tittel og kategori!'})
       }
     }
     this.onRemove = () => {
-      this.props.dispatch(ProductActions.removeProduct(this.state.id))
+      props.dispatch(ProductActions.removeProduct(this.state.id))
       browserHistory.push('/produkter')
     }
     this.handleSelect = (category) => {
@@ -118,8 +118,8 @@ class ProductAdd extends Component {
               <button className="btn btn-primary btn-block" onClick={() => dispatch(browserHistory.goBack())}>Tilbake</button>
             </div>
             {id ? <div className={`col-xs-${id ? 4 : 6}`}>
-              <button className="btn btn-primary btn-block" onClick={this.onRemove}>Slett</button>
-            </div> : null }
+                  <button className="btn btn-primary btn-block" onClick={this.onRemove}>Slett</button>
+                </div> : null }
             <div className={`col-xs-${id ? 4 : 6}`}>
               <button className="btn btn-primary btn-block" onClick={this.onSave}>Lagre</button>
             </div>

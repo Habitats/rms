@@ -1,6 +1,6 @@
 package no.rms
 
-import java.io.{File, FileReader}
+import java.io.FileReader
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.Properties
@@ -16,9 +16,9 @@ object Config {
   def test: Boolean = conf.getProperty("test").toBoolean
   def imageRoot: String = conf.getProperty("images_dir")
 
-  val COOKIE_ID      = "YOLO"
-  val ONE_WEEK: Int  = 7 * 24 * 3600
-  val DEBUG          = true
+  val COOKIE_ID     = "YOLO"
+  val ONE_WEEK: Int = 7 * 24 * 3600
+  val DEBUG         = true
 
   def parse(date: String): LocalDateTime = LocalDateTime.parse(date)
   def format(date: LocalDateTime): String = date.format(df)
