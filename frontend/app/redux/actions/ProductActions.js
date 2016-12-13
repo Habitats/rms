@@ -4,17 +4,17 @@ import * as GeneralApi from '../api/GeneralApi'
 
 export function fetchProducts() {
   return dispatch => {
-    dispatch({type: C.REQUEST_PRODUCTS})
+    dispatch({type: C.FETCH_PRODUCTS})
     return GeneralApi.getProducts().then(
-      products => dispatch({type: C.RECEIVE_PRODUCTS, products}),
-      error => dispatch({type: C.RECEIVE_PRODUCTS_FAIL})
+      products => dispatch({type: C.FETCH_PRODUCTS_SUCCESS, products}),
+      error => dispatch({type: C.FETCH_PRODUCTS_FAIL})
     )
   }
 }
 
 export function save(data) {
   return dispatch => {
-    dispatch({type: C.SAVE_PRODUCT_INIT})
+    dispatch({type: C.SAVE_PRODUCT})
     return GeneralApi.saveProduct(data).then(
       products => dispatch({type: C.SAVE_PRODUCT_SUCCESS, products}),
       error => dispatch({type: C.SAVE_PRODUCT_FAIL})
@@ -24,7 +24,7 @@ export function save(data) {
 
 export function removeProduct(id) {
   return (dispatch) => {
-    dispatch({type: C.DELETE_PRODUCT_INIT})
+    dispatch({type: C.DELETE_PRODUCT})
     return GeneralApi.removeProduct(id).then(
       products => dispatch({type: C.DELETE_PRODUCT_SUCCESS, products}),
       error => dispatch({type: C.DELETE_PRODUCT_FAIL})

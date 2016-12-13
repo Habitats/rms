@@ -1,10 +1,17 @@
-export const UPDATE = 'UPDATE_SESSION'
-export const UPDATE_FAIL = 'UPDATE_SESSION_FAIL'
-export const NEW = 'NEW'
-export const NEW_FAIL = 'NEW_FAIL'
-export const LOGIN_SUCCESS = 'login_success'
-export const LOGIN_FAIL = 'login_fail'
-export const LOGOUT_SUCCESS = 'logout_success'
-export const LOGOUT_FAIL = 'logout_fail'
+export const UPDATE_SESSION = 'UPDATE_SESSION_SUCCESS'
+export const UPDATE_SESSION_SUCCESS = 'UPDATE_SESSION_SUCCESS'
+export const UPDATE_SESSION_FAIL = 'UPDATE_SESSION_FAIL'
+
+export const FETCH_SESSION = 'FETCH_SESSION'
+export const FETCH_SESSION_SUCCESS = 'FETCH_SESSION_SUCCESS'
+export const FETCH_SESSION_FAIL = 'FETCH_SESSION_FAIL'
+
+export const LOGIN = 'LOGIN'
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
+export const LOGIN_FAIL = 'LOGIN_FAIL'
+
+export const LOGOUT = 'LOGOUT'
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
+export const LOGOUT_FAIL = 'LOGOUT_FAIL'
 
 

@@ -10,23 +10,23 @@ const initialState = {
 
 export default function general(state = initialState, action) {
   switch (action.type) {
-    case C.RECEIVE_PROJECTS:
+    case C.FETCH_PROJECTS_SUCCESS:
       return {...state, projects: action.projects}
 
     case C.DELETE_PROJECT_SUCCESS:
       return {...state, projects: action.projects}
 
-    case C.REQUEST_PROJECT:
+    case C.FETCH_PROJECT_REQUEST:
       return {...state, project: {... action.project, fetching: true}}
-    case C.RECEIVE_PROJECT:
+    case C.FETCH_PROJECT_SUCCESS:
       return {...state, project: {... action.project, fetching: false}}
-    case C.RECEIVE_PROJECT_FAIL:
+    case C.FETCH_PROJECT_FAIL:
       return {...state, project: null, fetching: false}
 
-    case C.RECEIVE_IMAGES:
+    case C.FETCH_IMAGES_SUCCESS:
       return {...state, images: action.images}
 
-    case C.RECEIVE_PRIVATES:
+    case C.FETCH_PRIVATES_SUCCESS:
       return {...state, privates: action.privates}
 
     case C.SAVE_PROJECTS_SUCCESS:

@@ -3,7 +3,7 @@ import * as GeneralApi from '../api/GeneralApi'
 
 export function save(data) {
   return dispatch => {
-    dispatch({type: C.SAVE_PROJECTS_INIT})
+    dispatch({type: C.SAVE_PROJECTS})
     return GeneralApi.saveProject(data).then(
       project => dispatch({type: C.SAVE_PROJECTS_SUCCESS, project}),
       error => dispatch({type: C.SAVE_PROJECTS_FAIL})
@@ -13,10 +13,10 @@ export function save(data) {
 
 export function fetchProjects() {
   return dispatch => {
-    dispatch({type: C.REQUEST_PROJECTS})
+    dispatch({type: C.FETCH_PROJECTS_REQUEST})
     return GeneralApi.getProjects().then(
-      projects => dispatch({type: C.RECEIVE_PROJECTS, projects}),
-      error => dispatch({type: C.RECEIVE_PROJECTS_FAIL})
+      projects => dispatch({type: C.FETCH_PROJECTS_SUCCESS, projects}),
+      error => dispatch({type: C.FETCH_PROJECTS_FAIL})
     )
   }
 }
@@ -25,13 +25,13 @@ export function fetchProject(id) {
   return (dispatch, getState) => {
     const project = getState().general.projects.find(p => p.id === id)
     if (!project) {
-      dispatch({type: C.REQUEST_PROJECT})
+      dispatch({type: C.FETCH_PROJECT_REQUEST})
       return GeneralApi.getProject(id).then(
-        project => dispatch({type: C.RECEIVE_PROJECT, project}),
-        error => dispatch({type: C.RECEIVE_PROJECT_FAIL})
+        project => dispatch({type: C.FETCH_PROJECT_SUCCESS, project}),
+        error => dispatch({type: C.FETCH_PROJECT_FAIL})
       )
     } else {
-      return dispatch({type: C.RECEIVE_PROJECT, project})
+      return dispatch({type: C.FETCH_PROJECT_SUCCESS, project})
     }
   }
 }
@@ -48,28 +48,30 @@ export function removeProject(id) {
 
 export function fetchImages() {
   return dispatch => {
-    dispatch({type: C.REQUEST_IMAGES})
+    dispatch({type: C.FETCH_IMAGES})
     return GeneralApi.getImages().then(
-      images => dispatch({type: C.RECEIVE_IMAGES, images}),
-      error => dispatch({type: C.RECEIVE_IMAGES_FAIL})
+      images => dispatch({type: C.FETCH_IMAGES_SUCCESS, images}),
+      error => dispatch({type: C.FETCH_IMAGES_FAIL})
     )
   }
 }
 
 export function sendMail(email) {
   return dispatch => {
-    return GeneralApi.sendMail(email, () => {
-      dispatch({type: C.SEND_EMAIL})
-    })
+    dispatch({type: C.SEND_EMAIL})
+    return GeneralApi.sendMail(email).then(
+      _ => dispatch({type: C.SEND_EMAIL_SUCCESS}),
+      error => dispatch({type: C.SEND_EMAIL_FAIL})
+    )
   }
 }
 
 export function invalidateImageCache() {
   return dispatch => {
-    dispatch({type: C.CACHE_INVALIDATE})
+    dispatch({type: C.INVALIDATE_CACHE})
     GeneralApi.invalidateImageCache().then(
-      res => dispatch({type: C.CACHE_INVALIDATED}),
-      error => dispatch({type: C.CACHE_INVALIDATE_FAIL})
+      res => dispatch({type: C.INVALIDATE_CACHE_SUCCESS}),
+      error => dispatch({type: C.INVALIDATE_CACHE_FAIL})
     )
   }
 }

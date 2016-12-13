@@ -11,10 +11,10 @@ const initialState = {
 
 export default function session(state = initialState, action) {
   switch (action.type) {
-    case C.NEW:
+    case C.FETCH_SESSION_SUCCESS:
       return action.session
 
-    case C.UPDATE:
+    case C.UPDATE_SESSION_SUCCESS:
       return action.session
 
     case C.LOGIN_SUCCESS:

@@ -1,6 +1,5 @@
 package no.rms.servlets
 
-import java.io.File
 import java.time.LocalDateTime
 
 import no.rms._
@@ -11,7 +10,6 @@ import org.json4s.JsonAST.JString
 import org.json4s.{CustomSerializer, DefaultFormats, Formats}
 import org.scalatra.json.JacksonJsonSupport
 import org.scalatra.{CorsSupport, FutureSupport}
-import slick.driver.H2Driver.api._
 
 import scala.concurrent.{ExecutionContext, ExecutionContextExecutor, Future}
 
@@ -66,7 +64,7 @@ class PublicServlet extends BackendStack with FutureSupport with JacksonJsonSupp
     val email = parsedBody.extract[Email]
     contentType = "text"
     send(email)
-    "delivered message"
+    email
   }
 
   get("/images/?") {
