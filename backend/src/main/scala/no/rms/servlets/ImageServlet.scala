@@ -1,6 +1,5 @@
 package no.rms.servlets
 
-import java.io.File
 import java.time.LocalDateTime
 
 import no.rms._
@@ -12,7 +11,7 @@ import org.scalatra.{CorsSupport, FutureSupport}
 
 import scala.concurrent.{ExecutionContext, ExecutionContextExecutor, Future}
 
-class ImageServlet extends BackendStack with FutureSupport with JacksonJsonSupport with CorsSupport with RmsMailer with AuthenticationSupport {
+class ImageServlet extends BackendStack with FutureSupport with JacksonJsonSupport with CorsSupport with AuthenticationSupport {
   protected implicit def executor: ExecutionContextExecutor = ExecutionContext.Implicits.global
 
   protected implicit val jsonFormats: Formats = {
