@@ -8,9 +8,9 @@ import no.rms.models.Email
 
 trait RmsMailer {
   def send(email: Email): Unit = {
-    val mailer = Mailer("utpost.sysedata.no", 587)
+    val mailer = Mailer(Config.mailSmtp, Config.mailPort)
       .auth(true)
-      .as("kontaktskjema@romerike-markiseservice.no", "mutte123")
+      .as(Config.mailUser , Config.mailPass)
       .startTtls(true)()
 
     mailer(Envelope.from(new InternetAddress("kontaktskjema@romerike-markiseservice.no"))
