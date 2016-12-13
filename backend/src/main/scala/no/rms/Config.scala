@@ -13,12 +13,11 @@ object Config {
 
   def username: String = conf.getProperty("username")
   def password: String = conf.getProperty("password")
-  def mail: String = conf.getProperty("mail")
-  def mailPass: String = conf.getProperty("mail_pass")
-  def mailUser: String = conf.getProperty("mail_user")
-  def mailSmtp: String = conf.getProperty("mail_smtp")
+
+  def mailFrom: String = conf.getProperty("mail_from")
+  def mailTo: String = conf.getProperty("mail_to")
   def sendGridApi: String = conf.getProperty("sendgrid_api")
-  def mailPort: Int = conf.getProperty("mail_port").toInt
+
   def test: Boolean = conf.getProperty("test").toBoolean
   def imageRoot: String = conf.getProperty("images_dir")
 
