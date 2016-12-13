@@ -8,7 +8,7 @@
     "devHost": "localhost"
   },
   "scripts": {
-    "start": "NODE_ENV=development&&node dev-server --hot --progress --colors",
+    "start": "set NODE_ENV=development&&node dev-server --hot --progress --colors",
     "prod": "NODE_ENV=production&&node dev-server",
     "build": "NODE_ENV=production&&webpack --colors --progress --config ./webpack.config.js",
     "lint": "eslint --ext .js --ext .jsx ./app && echo No linting errors."
