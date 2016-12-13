@@ -5,7 +5,11 @@ if [[ $1 == "prod" ]]; then
 else
   branch="stage"
 fi
-cd /home/habitats/rms && git reset --hard HEAD && git fetch && git pull origin $branch && git checkout $branch
+cd /home/habitats/rms 
+git reset --hard HEAD 
+git fetch 
+git pull origin $branch 
+git checkout $branch
 cd /home/habitats/rms/scripts && chmod +x * && cd ..
 chmod +x gradlew && ./gradlew stage
 if [[ $branch == "stage" ]]; then
