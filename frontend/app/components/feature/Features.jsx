@@ -17,6 +17,7 @@ export default class Features extends Component {
         marginTop: 40
       }
     }
+
     return (
       <div>
         <div className="row">
@@ -27,7 +28,7 @@ export default class Features extends Component {
         </div>
         <div className="row" style={style.features}>
           <div className="col-sm-4">
-            <FeatureItem description="Med over 30 års erfaring stiller vi med kompetanse på høyeste nivå. " icon="fa-cogs"
+            <FeatureItem description="Med over 30 års erfaring stiller vi med kompetanse på høyeste nivå." icon="fa-cogs"
                          title="Lang erfaring"/>
           </div>
           <div className="col-sm-4">

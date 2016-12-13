@@ -14,7 +14,7 @@ trait RmsMailer {
       .startTtls(true)()
 
     mailer(Envelope.from(new InternetAddress("kontaktskjema@romerike-markiseservice.no"))
-      .to(new InternetAddress("mail@habitats.no"))
+      .to(new InternetAddress(Config.mail))
       .subject(email.subject)
       .content(Multipart()
         .html("<html><body><h1>Forespørsel</h1>" +

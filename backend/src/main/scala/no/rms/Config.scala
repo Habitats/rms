@@ -13,6 +13,7 @@ object Config {
 
   def username: String = conf.getProperty("username")
   def password: String = conf.getProperty("password")
+  def mail: String = conf.getProperty("mail")
   def test: Boolean = conf.getProperty("test").toBoolean
   def imageRoot: String = conf.getProperty("images_dir")
 
