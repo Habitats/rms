@@ -20,7 +20,7 @@ class ImageServlet extends BackendStack with FutureSupport with JacksonJsonSuppo
   }
 
   class LocalDateTimeSerializer extends CustomSerializer[LocalDateTime](
-    format => ( {
+    _ => ( {
       case v: JString => Config.parse(v.toString)
     }, {
       case d: LocalDateTime => JString(Config.format(d))

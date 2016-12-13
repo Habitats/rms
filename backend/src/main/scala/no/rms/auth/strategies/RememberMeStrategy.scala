@@ -14,8 +14,6 @@ class RememberMeStrategy(protected val app: ScalatraBase)(implicit request: Http
   override def name: String = "RememberMe"
 
   override def authenticate()(implicit request: HttpServletRequest, response: HttpServletResponse): Option[User] = {
-    val res = response
-    val req = request
     val authed = app.cookies.get(Config.COOKIE_ID) match {
       case Some(token: String) =>
         Logger.info(s"Attempting to use old session: $token")

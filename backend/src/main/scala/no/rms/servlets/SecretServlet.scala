@@ -23,7 +23,7 @@ class SecretServlet extends BackendStack with FutureSupport with JacksonJsonSupp
   }
 
   class LocalDateTimeSerializer extends CustomSerializer[LocalDateTime](
-    format => ( {
+    _ => ( {
       case v: JString => Config.parse(v.toString)
     }, {
       case d: LocalDateTime => JString(Config.format(d))
@@ -62,7 +62,7 @@ class SecretServlet extends BackendStack with FutureSupport with JacksonJsonSupp
   delete("/project/?") {
     Logger.info("DELETE: project")
     Try(parsedBody.extract[String]) match {
-      case Success(p) => RmsDb.removeProject(p).transform(s => RmsDb.allProjects(), f => f)
+      case Success(p) => RmsDb.removeProject(p).transform(_ => RmsDb.allProjects(), f => f)
       case Failure(ex) => Logger.info(ex.getMessage)
     }
   }
@@ -78,7 +78,7 @@ class SecretServlet extends BackendStack with FutureSupport with JacksonJsonSupp
   delete("/product/?") {
     Logger.info("DELETE: product")
     Try(parsedBody.extract[String]) match {
-      case Success(p) => RmsDb.removeProduct(p).transform(s => RmsDb.allProducts(), f => f)
+      case Success(p) => RmsDb.removeProduct(p).transform(_ => RmsDb.allProducts(), f => f)
       case Failure(ex) => Logger.info(ex.getMessage)
     }
   }

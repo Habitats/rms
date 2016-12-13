@@ -60,9 +60,9 @@ object RmsDb {
         case _ =>
           Samples.projects.foreach(p => storeProject(p))
           store(Samples.products)
-      }.onSuccess { case r => p.success(true) }
+      }.onSuccess { case _ => p.success(true) }
     } else {
-      db.run(createSchemaAction).onSuccess { case r => p.success(true) }
+      db.run(createSchemaAction).onSuccess { case _ => p.success(true) }
     }
     p.future
   }
@@ -100,19 +100,19 @@ object RmsDb {
 
   def removeProject(id: String): Future[Boolean] = {
     val data = projects.filter(_.id === id).delete
-    db.run(data).transform(s => true, f => f)
+    db.run(data).transform(_ => true, f => f)
   }
 
   def removeProduct(id: String): Future[Boolean] = {
     val data = products.filter(_.id === id).delete
-    db.run(data).transform(s => true, f => f)
+    db.run(data).transform(_ => true, f => f)
   }
 
   def storeProject(project: Project): Future[Project] = {
     val modified = LocalDateTime.now
     val data = projects.insertOrUpdate(project.id, project.title, project.description, project.images.mkString(delim), Config.format(modified))
     Logger.info("Adding project: " + project)
-    db.run(data).transform(s => project.copy(modified = modified), f => f)
+    db.run(data).transform(_ => project.copy(modified = modified), f => f)
   }
 
   def newProduct(product: Product): Future[Product] = {
@@ -129,16 +129,16 @@ object RmsDb {
   private def store(product: Product): Future[Boolean] = {
     product.sub match {
       case Nil =>
-        store(ProductWrapper.wrap(product)).transform(s => true, f => f)
+        store(ProductWrapper.wrap(product)).transform(_ => true, f => f)
       case rest =>
         val futures = Seq(store(ProductWrapper.wrap(product))) ++ rest.map(r => store(r))
-        Future.sequence(futures).transform(s => true, f => f)
+        Future.sequence(futures).transform(_ => true, f => f)
     }
   }
 
   private def store(product: ProductWrapper): Future[Boolean] = {
     val data = products.insertOrUpdate(product.id, product.title, product.description, product.sub, product.images, product.src, product.category, product.index)
-    db.run(data).transform(s => true, f => f)
+    db.run(data).transform(_ => true, f => f)
   }
 
   def closeDbConnection(): Unit = {

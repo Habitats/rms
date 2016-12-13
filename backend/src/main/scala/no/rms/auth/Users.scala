@@ -8,12 +8,6 @@ object Users {
 
   val active: mutable.Map[String, User] = scala.collection.mutable.Map[String, User]()
 
-  private def add(user: User): User = {
-    Logger.info("User > Add: " + user)
-    active += (user.id -> user)
-    user
-  }
-
   def login(user: User): Option[User] = {
     if (user.username.getOrElse("") == Config.username && user.password.getOrElse("") == Config.password) {
       Some(update(user.copy(admin = true)))
