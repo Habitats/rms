@@ -1,3 +1,4 @@
+require('babel-polyfill')
 import {combineReducers} from 'redux'
 import {routeReducer} from 'react-router-redux'
 import general from './general'
@@ -9,6 +10,7 @@ const reducers = {
   products,
   session
 }
+
 
 const rootReducer = combineReducers(Object.assign({}, reducers, {
   routing: routeReducer

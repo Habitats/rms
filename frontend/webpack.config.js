@@ -4,7 +4,6 @@ try {
 } catch (e) {
   require('os').networkInterfaces = () => ({});
 }
-
 const path = require('path')
 const util = require('util')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
@@ -25,8 +24,9 @@ const plugins = [
   cssExtractTextPlugin,
   new webpack.ProvidePlugin({
     $: 'jquery',
-    jQuery: 'jquery'
-  })
+    jQuery: 'jquery',
+    fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+  }),
 ]
 
 if (DEBUG) {
@@ -107,7 +107,7 @@ const loaders = [
 ]
 
 const entry = {
-  app: ['bootstrap-loader', './index.js']
+  app: ['babel-polyfill','bootstrap-loader', './index.js']
 }
 
 if (DEBUG) {
