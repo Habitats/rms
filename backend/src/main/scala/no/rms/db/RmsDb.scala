@@ -11,56 +11,64 @@ import slick.lifted.{ProvenShape, TableQuery}
 import slick.profile.FixedSqlAction
 
 import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.{Future, Promise}
+import scala.concurrent.{Await, Future, Promise}
+import scala.concurrent.duration._
 
 object RmsDb {
-  lazy val cpds = new ComboPooledDataSource
+
+  val cpds: ComboPooledDataSource = {
+    val conn = new ComboPooledDataSource()
+    conn.setJdbcUrl("jdbc:h2:file:" + Config.dbPath)
+    conn
+  }
   Logger.info("Created c3po connection pool")
 
   val db: _root_.slick.driver.H2Driver.backend.DatabaseDef = {
     val db = Database.forDataSource(cpds)
-    if (Config.test) RmsDb.init(db)
+    if (Config.test) Await.ready(RmsDb.init(db), Duration.Inf)
     db
   }
 
   class Projects(tag: Tag) extends Table[(String, String, String, String, String)](tag, "PROJECTS") {
-    def id: Rep[String] = column[String]("ID", O.PrimaryKey)
-    def title: Rep[String] = column[String]("TITLE")
+    def id: Rep[String]          = column[String]("ID", O.PrimaryKey)
+    def title: Rep[String]       = column[String]("TITLE")
     def description: Rep[String] = column[String]("DESCRIPTION", O.Length(1000000))
-    def images: Rep[String] = column[String]("IMAGES", O.Length(10000))
-    def modified: Rep[String] = column[String]("MODIFIED")
+    def images: Rep[String]      = column[String]("IMAGES", O.Length(10000))
+    def modified: Rep[String]    = column[String]("MODIFIED")
 
     def * : ProvenShape[(String, String, String, String, String)] = (id, title, description, images, modified)
   }
 
   class Products(tag: Tag) extends Table[(String, String, String, String, String, String, String, Int)](tag, "PRODUCTS") {
-    def id: Rep[String] = column[String]("ID", O.PrimaryKey)
-    def title: Rep[String] = column[String]("TITLE")
+    def id: Rep[String]          = column[String]("ID", O.PrimaryKey)
+    def title: Rep[String]       = column[String]("TITLE")
     def description: Rep[String] = column[String]("DESCRIPTION", O.Length(1000000))
-    def sub: Rep[String] = column[String]("SUB_PRODUCTS", O.Length(10000))
-    def images: Rep[String] = column[String]("IMAGES", O.Length(20000))
-    def src: Rep[String] = column[String]("SRC")
-    def category: Rep[String] = column[String]("CATEGORY")
-    def index: Rep[Int] = column[Int]("INDEX")
+    def sub: Rep[String]         = column[String]("SUB_PRODUCTS", O.Length(10000))
+    def images: Rep[String]      = column[String]("IMAGES", O.Length(20000))
+    def src: Rep[String]         = column[String]("SRC")
+    def category: Rep[String]    = column[String]("CATEGORY")
+    def index: Rep[Int]          = column[Int]("INDEX")
 
     def * : ProvenShape[(String, String, String, String, String, String, String, Int)] = (id, title, description, sub, images, src, category, index)
   }
 
-  lazy val projects: TableQuery[Projects] = TableQuery[Projects]
-  lazy val products: TableQuery[Products] = TableQuery[Products]
+  val projects: TableQuery[Projects] = TableQuery[Projects]
+  val products: TableQuery[Products] = TableQuery[Products]
 
-  lazy val createSchemaAction: FixedSqlAction[Unit, NoStream, Schema] = (products.schema ++ projects.schema).create
-  lazy val dropSchemaAction  : FixedSqlAction[Unit, NoStream, Schema] = (products.schema ++ projects.schema).drop
-  val delim = "___"
+  val createSchemaAction: FixedSqlAction[Unit, NoStream, Schema] = (products.schema ++ projects.schema).create
+  val dropSchemaAction: FixedSqlAction[Unit, NoStream, Schema]   = (products.schema ++ projects.schema).drop
+  val delim                                                      = "___"
 
   private def init(db: Database): Future[Boolean] = {
     val p = Promise[Boolean]()
     if (Config.test) {
-      db.run(createSchemaAction).andThen {
-        case _ =>
-          Samples.projects.foreach(p => storeProject(p))
-          store(Samples.products)
-      }.onSuccess { case _ => p.success(true) }
+      db.run(createSchemaAction)
+        .andThen {
+          case _ =>
+            Samples.projects.foreach(p => storeProject(p))
+            store(Samples.products)
+        }
+        .onSuccess { case _ => p.success(true) }
     } else {
       db.run(createSchemaAction).onSuccess { case _ => p.success(true) }
     }
@@ -68,10 +76,14 @@ object RmsDb {
   }
 
   def allProjects(): Future[Seq[Project]] = {
-    db.run(projects.result).map(res => res.map {
-      case (fields) => Project.fromFields(fields)
-      case _ => throw new IllegalArgumentException("Couldn't fetch projects")
-    })
+    db.run(projects.result)
+      .map(
+        res =>
+          res.map {
+            case (fields) => Project.fromFields(fields)
+            case _        => throw new IllegalArgumentException("Couldn't fetch projects")
+        }
+      )
   }
 
   def allProducts(): Future[Product] = {
@@ -87,14 +99,14 @@ object RmsDb {
   def fetchProject(id: String): Future[Option[Project]] = {
     db.run(projects.filter(_.id === id).result.headOption).map {
       case Some(fields) => Some(Project.fromFields(fields))
-      case _ => throw new IllegalArgumentException(s"Couldn't fetch project: $id")
+      case _            => throw new IllegalArgumentException(s"Couldn't fetch project: $id")
     }
   }
 
   def fetchProduct(id: String): Future[Option[ProductWrapper]] = {
     db.run(products.filter(_.id === id).result.headOption).map {
       case Some(fields) => Some(ProductWrapper.fromFields(fields))
-      case _ => throw new IllegalArgumentException(s"Couldn't fetch product: $id")
+      case _            => throw new IllegalArgumentException(s"Couldn't fetch product: $id")
     }
   }
 
@@ -110,7 +122,7 @@ object RmsDb {
 
   def storeProject(project: Project): Future[Project] = {
     val modified = LocalDateTime.now
-    val data = projects.insertOrUpdate(project.id, project.title, project.description, project.images.mkString(delim), Config.format(modified))
+    val data     = projects.insertOrUpdate(project.id, project.title, project.description, project.images.mkString(delim), Config.format(modified))
     Logger.info("Adding project: " + project)
     db.run(data).transform(_ => project.copy(modified = modified), f => f)
   }
@@ -122,7 +134,7 @@ object RmsDb {
   def storeProduct(product: Product): Future[Product] = {
     for {
       success <- store(product) if success
-      all <- allProducts()
+      all     <- allProducts()
     } yield all
   }
 
@@ -137,7 +149,8 @@ object RmsDb {
   }
 
   private def store(product: ProductWrapper): Future[Boolean] = {
-    val data = products.insertOrUpdate(product.id, product.title, product.description, product.sub, product.images, product.src, product.category, product.index)
+    val data =
+      products.insertOrUpdate(product.id, product.title, product.description, product.sub, product.images, product.src, product.category, product.index)
     db.run(data).transform(_ => true, f => f)
   }
 
@@ -147,4 +160,3 @@ object RmsDb {
   }
 
 }
-

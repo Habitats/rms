@@ -13,7 +13,7 @@ object Project {
 
   def fromFields(fields: (String, String, String, String, String)): Project = {
     fields match {
-      case ((id, title, description, img, modified)) =>
+      case (id, title, description, img, modified) =>
         Project(
           id = id,
           title = title,

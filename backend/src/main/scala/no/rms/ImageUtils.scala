@@ -16,7 +16,7 @@ object ImageUtils {
   val delim = ","
 
   def notFound(): File = {
-    val file = new File(Config.imageRoot + "raw/not_found")
+    val file = new File(Config.imageRoot + "not_found")
     Random.shuffle(file.listFiles.toList).head
   }
 
@@ -42,44 +42,46 @@ object ImageUtils {
     if (f.exists) {
       f.listFiles
         .map(rename)
-        .map(_.getName.toLowerCase).filter(f => f.endsWith(".jpg") || f.endsWith(".png"))
+        .map(_.getName.toLowerCase)
+        .filter(f => f.endsWith(".jpg") || f.endsWith(".png"))
         .map(f => ImageWrapper(f, (if (path.length > 0) path + "/" else "") + f))
     } else Nil
   }
 
   def fetchPath(urlPath: String, size: String = "raw"): Option[File] = {
     val args = urlPath.split(ImageUtils.delim)
-    val id = args.last
+    val id   = args.last
     val path = if (args.length > 1) args.take(args.length - 1).mkString("", "/", "/") else ""
     ImageUtils.fetchSize(id, size, path).map(rename)
   }
 
   private def fetch(id: String, path: String = ""): Option[File] = {
     val imgDir = if (path != "") new File(s"${Config.imageRoot}/raw/$path") else new File(Config.imageRoot + "/raw")
-    val image = new File(imgDir.toString, id)
+    val image  = new File(imgDir.toString, id)
     if (image.exists) Some(image) else None
   }
 
   private def fetchSize(id: String, size: String, path: String = ""): Option[File] = {
-    fetch(id, path).map(image => {
-      size match {
-        case "med" | "low" =>
-          val thumbsRoot = Paths.get(Config.imageRoot, "thumbs_" + size).toString
-          val dest = new File(if (path != "") Paths.get(thumbsRoot, path).toString else thumbsRoot)
-          dest.mkdirs
-          val out = new File(dest.getAbsolutePath, id)
-          if (out.exists) {
-            out
-          } else {
-            out.createNewFile()
-            size match {
-              case "med" => Image.fromFile(image).bound(1500, 1500).output(out)
-              case "low" => Image.fromFile(image).bound(256, 256).output(out)
+    fetch(id, path).map(
+      image => {
+        size match {
+          case "med" | "low" =>
+            val thumbsRoot = Paths.get(Config.imageRoot, "thumbs_" + size).toString
+            val dest       = new File(if (path != "") Paths.get(thumbsRoot, path).toString else thumbsRoot)
+            dest.mkdirs
+            val out = new File(dest.getAbsolutePath, id)
+            if (out.exists) {
+              out
+            } else {
+              out.createNewFile()
+              size match {
+                case "med" => Image.fromFile(image).bound(1500, 1500).output(out)
+                case "low" => Image.fromFile(image).bound(256, 256).output(out)
+              }
             }
-          }
-        case _ => image
+          case _ => image
+        }
       }
-    }
     )
   }
 }

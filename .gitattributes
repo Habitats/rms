@@ -1,3 +1,2 @@
-* text=auto
-*.sh eol=lf
+* eol=lf
 gradlew eol=lf

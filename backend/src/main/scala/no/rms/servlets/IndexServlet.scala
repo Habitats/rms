@@ -1,7 +1,5 @@
 package no.rms.servlets
 
-import java.io.File
-
 import no.rms._
 import org.scalatra.CorsSupport
 
@@ -14,8 +12,9 @@ class IndexServlet extends BackendStack with CorsSupport  {
   get("/*?") {
     Logger.info("GET: /")
     contentType = "text/html"
-    val index = new File(servletContext.getResource("/index.html").getFile)
-    index
+    val resource = Config.loadFile(System.getenv("RMS_APP_ROOT") + "/index.html")
+    println("loading resource: " + resource)
+    resource
   }
 
   get("/health/?") {
