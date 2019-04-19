@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 java \
-      -Xms1g \
-      -Xmx1g \
+      -Xms2g \
+      -Xmx2g \
       -server \
       -XX:+UseConcMarkSweepGC \
       -XX:MaxMetaspaceSize=512m \
