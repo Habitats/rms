@@ -51,7 +51,7 @@ trait SendGridMailer {
       request.endpoint = "mail/send"
       request.body = mail.build()
       val response = sg.api(request)
-      Logger.info("Email sent: " + response.statusCode)
+      Log.i("Email sent: " + response.statusCode)
     }
   }
 }

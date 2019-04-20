@@ -4,10 +4,10 @@ import java.time.LocalDateTime
 
 import org.slf4j.{Logger, LoggerFactory}
 
-object Logger {
+object Log {
   val logger: Logger = LoggerFactory.getLogger(getClass)
 
-  def info(msg: Any) {
+  def i(msg: Any) {
     //    logger.info(msg)
     println(LocalDateTime.now + " > " + msg)
   }

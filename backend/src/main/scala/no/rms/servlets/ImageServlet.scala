@@ -36,14 +36,14 @@ class ImageServlet extends BackendStack with FutureSupport with JacksonJsonSuppo
 
   get("/health/?") {
     contentType = formats("txt")
-    Logger.info("hello!")
+    Log.i("hello!")
     "IMAGE OK"
   }
 
   get("/:id/:size/?") {
     val size = params.get("size").get
     val path = params.get("id").get
-    Logger.info("GET: image/" + path + "/" + size)
+    Log.i("GET: image/" + path + "/" + size)
     contentType = "image"
     Future {
       ImageUtils.fetchPath(path, size).getOrElse(ImageUtils.notFound())
@@ -52,7 +52,7 @@ class ImageServlet extends BackendStack with FutureSupport with JacksonJsonSuppo
 
   get("/:id/?") {
     val id = params.get("id").get
-    Logger.info("GET: image/" + id)
+    Log.i("GET: image/" + id)
     contentType = "image"
     ImageUtils.fetchPath(id).getOrElse(ImageUtils.notFound())
   }

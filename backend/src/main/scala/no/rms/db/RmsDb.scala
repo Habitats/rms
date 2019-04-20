@@ -4,7 +4,7 @@ import java.time.LocalDateTime
 
 import com.mchange.v2.c3p0.ComboPooledDataSource
 import no.rms.models.{Product, ProductWrapper, Project}
-import no.rms.{Config, Logger, Samples}
+import no.rms.{Config, Log, Samples}
 import slick.dbio.Effect.Schema
 import slick.driver.H2Driver.api._
 import slick.lifted.{ProvenShape, TableQuery}
@@ -21,7 +21,7 @@ object RmsDb {
     conn.setJdbcUrl("jdbc:h2:file:" + Config.dbPath)
     conn
   }
-  Logger.info("Created c3po connection pool")
+  Log.i("Created c3po connection pool")
 
   val db: _root_.slick.driver.H2Driver.backend.DatabaseDef = {
     val db = Database.forDataSource(cpds)
@@ -123,7 +123,7 @@ object RmsDb {
   def storeProject(project: Project): Future[Project] = {
     val modified = LocalDateTime.now
     val data     = projects.insertOrUpdate(project.id, project.title, project.description, project.images.mkString(delim), Config.format(modified))
-    Logger.info("Adding project: " + project)
+    Log.i("Adding project: " + project)
     db.run(data).transform(_ => project.copy(modified = modified), f => f)
   }
 
@@ -149,13 +149,21 @@ object RmsDb {
   }
 
   private def store(product: ProductWrapper): Future[Boolean] = {
-    val data =
-      products.insertOrUpdate(product.id, product.title, product.description, product.sub, product.images, product.src, product.category, product.index)
+    val data = products.insertOrUpdate(
+      product.id,
+      product.title,
+      product.description,
+      product.sub,
+      product.images,
+      product.src,
+      product.category,
+      product.index
+    )
     db.run(data).transform(_ => true, f => f)
   }
 
   def closeDbConnection(): Unit = {
-    Logger.info("Closing c3po connection pool")
+    Log.i("Closing c3po connection pool")
     cpds.close()
   }
 

@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rms
+spec:
+  selector:
+    matchLabels:
+      app: rms
+      tier: rms
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: rms
+        tier: rms
+    spec:
+      containers:
+        - name: rms
+          image: eu.gcr.io/romerike-markiseservice-as/rms
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+          env:
+            - name: GET_HOSTS_FROM
+              value: dns
+            - name: PORT
+              value: "80"
+          ports:
+            - containerPort: 80

@@ -14,3 +14,17 @@ React-based frontend
 * Redux for data-flow through the app
 * Babel 6 for transpiling fancy ES2015 code into boring old javascript
 * Webpack for building and bundling 
+
+#### Build and Deploy
+
+Use utilities for building 
+
+```
+./build.sh
+```
+and deploying
+```
+./start.sh
+```
+
+Make sure Dropbox is running on the server machine with `dropbox start` or `dropbox status`

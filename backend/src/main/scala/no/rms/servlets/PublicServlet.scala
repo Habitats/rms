@@ -38,29 +38,29 @@ class PublicServlet extends BackendStack with FutureSupport with JacksonJsonSupp
 
   get("/health/?") {
     contentType = formats("txt")
-    Logger.info("hello!")
+    Log.i("hello!")
     "API OK"
   }
 
   get("/projects/?") {
-    Logger.info("GET: projects")
+    Log.i("GET: projects")
     RmsDb.allProjects()
   }
 
   get("/project/:id/?") {
     val id = params.get("id").get
-    Logger.info("GET: project/" + id)
+    Log.i("GET: project/" + id)
     RmsDb.fetchProject(id)
   }
 
   get("/products/?") {
-    Logger.info("GET: products")
+    Log.i("GET: products")
     val products: Future[Product] = RmsDb.allProducts()
     products
   }
 
   post("/mail/?") {
-    Logger.info("POST: mail")
+    Log.i("POST: mail")
     val email = parsedBody.extract[Email]
     contentType = "text"
     send(email)
@@ -68,7 +68,7 @@ class PublicServlet extends BackendStack with FutureSupport with JacksonJsonSupp
   }
 
   get("/images/?") {
-    Logger.info("GET: images/")
+    Log.i("GET: images/")
     Future {
       ImageUtils.fetchUrls("referanser")
     }

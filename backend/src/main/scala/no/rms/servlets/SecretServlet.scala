@@ -40,45 +40,45 @@ class SecretServlet extends BackendStack with FutureSupport with JacksonJsonSupp
 
   get("/health/?") {
     contentType = formats("txt")
-    Logger.info("hello!")
+    Log.i("hello!")
     "SECRET OK"
   }
 
   get("/?") {
-    Logger.info("GET: secret")
+    Log.i("GET: secret")
     contentType = "text"
     "Autorisert!"
   }
 
   post("/project/?") {
-    Logger.info("POST: project")
+    Log.i("POST: project")
     Try(parsedBody.extract[Project]) match {
       case Success(p) => RmsDb.storeProject(p)
-      case Failure(ex) => Logger.info(ex.getMessage)
+      case Failure(ex) => Log.i(ex.getMessage)
     }
   }
 
   delete("/project/?") {
-    Logger.info("DELETE: project")
+    Log.i("DELETE: project")
     Try(parsedBody.extract[String]) match {
       case Success(p) => RmsDb.removeProject(p).transform(_ => RmsDb.allProjects(), f => f)
-      case Failure(ex) => Logger.info(ex.getMessage)
+      case Failure(ex) => Log.i(ex.getMessage)
     }
   }
 
   post("/product/?") {
-    Logger.info("POST: product")
+    Log.i("POST: product")
     Try(parsedBody.extract[Product]) match {
       case Success(p) => if (p.id == "-1") RmsDb.newProduct(p) else RmsDb.storeProduct(p)
-      case Failure(ex) => Logger.info(ex.getMessage)
+      case Failure(ex) => Log.i(ex.getMessage)
     }
   }
 
   delete("/product/?") {
-    Logger.info("DELETE: product")
+    Log.i("DELETE: product")
     Try(parsedBody.extract[String]) match {
       case Success(p) => RmsDb.removeProduct(p).transform(_ => RmsDb.allProducts(), f => f)
-      case Failure(ex) => Logger.info(ex.getMessage)
+      case Failure(ex) => Log.i(ex.getMessage)
     }
   }
 

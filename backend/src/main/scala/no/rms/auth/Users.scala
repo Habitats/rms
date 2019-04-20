@@ -1,6 +1,6 @@
 package no.rms.auth
 
-import no.rms.{Config, Logger}
+import no.rms.{Config, Log}
 
 import scala.collection.mutable
 
@@ -17,7 +17,7 @@ object Users {
   }
 
   def update(updated: User): User = {
-    Logger.info("User > Update: " + updated)
+    Log.i("User > Update: " + updated)
     active += (updated.id -> updated)
     updated
   }

@@ -3,7 +3,7 @@ package no.rms.auth.strategies
 import javax.servlet.http.{HttpServletRequest, HttpServletResponse}
 
 import no.rms.auth.{User, Users}
-import no.rms.{Config, Logger}
+import no.rms.{Config, Log}
 import org.scalatra.{CookieOptions, ScalatraBase}
 import org.scalatra.auth.ScentryStrategy
 
@@ -16,16 +16,16 @@ class RememberMeStrategy(protected val app: ScalatraBase)(implicit request: Http
   override def authenticate()(implicit request: HttpServletRequest, response: HttpServletResponse): Option[User] = {
     val authed = app.cookies.get(Config.COOKIE_ID) match {
       case Some(token: String) =>
-        Logger.info(s"Attempting to use old session: $token")
+        Log.i(s"Attempting to use old session: $token")
         Users.active.getOrElseUpdate(token, User(token))
       case None =>
-        Logger.info("New session ...")
+        Log.i("New session ...")
         val token = Random.nextLong.toString
         app.cookies.set(Config.COOKIE_ID, token)(CookieOptions(maxAge = Config.ONE_WEEK, path = "/"))
         Users.active.getOrElseUpdate(token, User(token))
     }
 
-    Logger.info(s"Returning user: $authed")
+    Log.i(s"Returning user: $authed")
     Some(authed)
   }
 }

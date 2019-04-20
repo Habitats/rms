@@ -22,7 +22,7 @@ object ImageUtils {
 
   def invalidateCache(): Unit = {
     val thumbs: Set[File] = Paths.get(Config.imageRoot).toFile.listFiles.filter(_.getName.startsWith("thumbs_")).toSet
-    Logger.info("Invalidating image cache ... Removing " + thumbs.map(_.getAbsolutePath).mkString(", "))
+    Log.i("Invalidating image cache ... Removing " + thumbs.map(_.getAbsolutePath).mkString(", "))
     thumbs.foreach(FileUtils.deleteDirectory)
   }
 
@@ -31,7 +31,7 @@ object ImageUtils {
     if (renamed.getName != f.getName) {
       if (!renamed.exists) {
         Files.move(f.toPath, renamed.toPath)
-        Logger.info("Renaming: " + f.getName + " > " + renamed.getName)
+        Log.i("Renaming: " + f.getName + " > " + renamed.getName)
       }
       renamed
     } else f

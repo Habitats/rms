@@ -10,16 +10,16 @@ class IndexServlet extends BackendStack with CorsSupport  {
   }
 
   get("/*?") {
-    Logger.info("GET: /")
+    Log.i("GET: /")
     contentType = "text/html"
-    val resource = Config.loadFile(System.getenv("RMS_APP_ROOT") + "/index.html")
-    println("loading resource: " + resource)
+    val resource = Config.loadFile(Config.appRoot + "/index.html")
+    Log.i("loading resource: " + resource)
     resource
   }
 
   get("/health/?") {
     contentType = "text/html"
-    Logger.info("hello!")
+    Log.i("hello!")
     "INDEX OK"
   }
 }

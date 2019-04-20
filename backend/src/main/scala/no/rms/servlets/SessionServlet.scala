@@ -1,7 +1,7 @@
 package no.rms.servlets
 
 import no.rms.auth.{AuthenticationSupport, SafeUser, User, Users}
-import no.rms.{BackendStack, Logger}
+import no.rms.{BackendStack, Log}
 import org.eclipse.jetty.http.HttpStatus
 import org.json4s.{DefaultFormats, Formats}
 import org.scalatra.json.JacksonJsonSupport
@@ -30,7 +30,7 @@ class SessionServlet extends BackendStack with FutureSupport with JacksonJsonSup
 
   get("/health/?") {
     contentType = formats("txt")
-    Logger.info("hello!")
+    Log.i("hello!")
     "SESSION OK"
   }
 
@@ -42,10 +42,10 @@ class SessionServlet extends BackendStack with FutureSupport with JacksonJsonSup
     if (!isAuthenticated) {
       halt(HttpStatus.UNAUTHORIZED_401)
     } else {
-      Logger.info(user)
+      Log.i(user)
       Try(parsedBody.extract[SafeUser]) match {
         case Success(u) => Users.update(user.update(u)); u
-        case Failure(ex) => Logger.info(ex.getMessage)
+        case Failure(ex) => Log.i(ex.getMessage)
       }
     }
   }
@@ -60,7 +60,7 @@ class SessionServlet extends BackendStack with FutureSupport with JacksonJsonSup
     // add user to "users", session will fetch it from there and euthenticate
     Try(parsedBody.extract[User]) match {
       case Success(u) => Users.login(u.copy(id = user.id))
-      case Failure(ex) => Logger.info(ex.getMessage)
+      case Failure(ex) => Log.i(ex.getMessage)
     }
 
     scentry.authenticate("Admin").map(u => new SafeUser(u))
