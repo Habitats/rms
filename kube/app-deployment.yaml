@@ -1,47 +1,59 @@
-#apiVersion: apps/v1
-#kind: Deployment
-#metadata:
-#  name: rms-app
-#spec:
-#  selector:
-#    matchLabels:
-#      app: rms-app
-##  serviceName: "rms-app"
-#  replicas: 1
-#  template:
-#    metadata:
-#      labels:
-#        app: rms-app
-#    spec:
-#      containers:
-#        - name: rms-app
-#          image: eu.gcr.io/romerike-markiseservice-as/rms-app
-#          resources:
-#            requests:
-#              cpu: 100m
-#              memory: 100Mi
-#          env:
-#            - name: GET_HOSTS_FROM
-#              value: dns
-#            - name: PORT
-#              value: "8080"
-#            - name: RMS_APP_ROOT
-#              value: "/opt/rms/backend/src/main/webapp"
-#            - name: RMS_IMAGE_ROOT
-#              value: "/root/Dropbox/img/"
-#            - name: RMS_DB_PATH
-#              value: "/root/Dropbox/db/rms"
-#          ports:
-#            - containerPort: 80
-#          volumeMounts:
-#            - name: dropbox
-#              mountPath: /root/Dropbox
-#            - name: dropbox-cfg
-#              mountPath: /root/.dropbox
-#      volumes:
-#        - name: dropbox
-#          persistentVolumeClaim:
-#            claimName: dropbox-store-pvc
-#        - name: dropbox-cfg
-#          persistentVolumeClaim:
-#            claimName: dropbox-cfg-pvc
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: rms-app
+spec:
+  selector:
+    matchLabels:
+      app: rms-app
+  serviceName: "rms-app"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: rms-app
+    spec:
+      containers:
+        - name: rms-app
+          image: eu.gcr.io/romerike-markiseservice-as/rms-app
+          resources:
+            requests:
+              cpu: 900m
+              memory: 1000Mi
+          env:
+            - name: GET_HOSTS_FROM
+              value: dns
+            - name: PORT
+              value: "8080"
+            - name: RMS_APP_ROOT
+              value: "/opt/rms/backend/src/main/webapp"
+            - name: RMS_IMAGE_ROOT
+              value: "/root/Dropbox/rms/img/"
+            - name: RMS_DB_PATH
+              value: "/root/Dropbox/rms/db/rms"
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: dropbox
+              mountPath: /root/Dropbox
+        - name: rms-db
+          image: eu.gcr.io/romerike-markiseservice-as/rms-db
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+          ports:
+            - containerPort: 80
+              name: rms-db
+          volumeMounts:
+            - name: dropbox
+              mountPath: /root/Dropbox
+            - name: dropbox-cfg
+              mountPath: /root/.dropbox
+      volumes:
+        - name: dropbox
+          persistentVolumeClaim:
+            claimName: dropbox-store-pvc
+        - name: dropbox-cfg
+          persistentVolumeClaim:
+            claimName: dropbox-cfg-pvc

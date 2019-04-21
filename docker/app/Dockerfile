@@ -71,5 +71,5 @@ ENV RMS_IMAGE_ROOT='/opt/rms/img/' \
 
 RUN mkdir -p $RMS_IMAGE_ROOT
 
-RUN chmod +x scripts/*
-CMD ./scripts/run.sh
+RUN chmod +x docker/app/run.sh
+CMD ./docker/app/run.sh
