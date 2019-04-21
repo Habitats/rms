@@ -1,43 +1,16 @@
 *.docx
-/npm-debug.log
-### JetBrains template
 *.iml
-
-## Directory-based project format:
 .idea/
-
-## File-based project format:
-*.ipr
-*.iws
-
-## Plugin-specific files:
-
-# IntelliJ
-/out/
-*.war
-
-# mpeltonen/sbt-idea plugin
-.idea_modules/
-
-### Windows template
-# Windows image file caches
-Thumbs.db
-ehthumbs.db
-
-# Folder config file
-Desktop.ini
-
-# Windows shortcuts
-*.lnk
-### Gradle template
 .gradle
+.git
 gradle
 build/
-
-# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
-!gradle-wrapper.jar
-
-*.idlk
 backend/img/cover.indd
 rms.mv.tmp/
 src/test/resources/
+backend/img/raw/*
+backend/img/thumbs*
+backend/out
+backend/build
+frontend/node_modules/
+frontend/.gradle

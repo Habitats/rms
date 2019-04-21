@@ -1,15 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: rms
-  labels:
-    app: rms
-    tier: rms
+  name: rms-app-service
 spec:
   type: LoadBalancer
   ports:
     - port: 80
-      targetPort: 80
+      targetPort: 8080
   selector:
-    app: rms
-    tier: rms
+    app: rms-app

@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: rms-db
+spec:
+  selector:
+    matchLabels:
+      app: rms-db
+  serviceName: "rms-dropbox"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: rms-db
+    spec:
+      containers:
+        - name: rms-db
+          image: eu.gcr.io/romerike-markiseservice-as/rms-db
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+          ports:
+            - containerPort: 80
+              name: rms-db
+          # These volume mounts are persistent. Each pod in the StatefulSet
+          # gets a volume mounted based on this field.
+          volumeMounts:
+            - name: dropbox
+              mountPath: /root/Dropbox
+  # These are converted to volume claims by the controller
+  # and mounted at the paths mentioned above.
+  volumeClaimTemplates:
+    - metadata:
+        name: dropbox
+      spec:
+        volumeName: rms-pv
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 10Gi
