@@ -117,11 +117,6 @@ export default class Contact extends Component {
                         phone="+47 90 73 18 80"
                         photo="image/p_roar.jpg"
                         title="Salgskonsulent, privat"/>
-                <Person mail="zenit-prosjekt@live.no"
-                        name="Knut M. Sørensen"
-                        phone="+47 47 39 24 36"
-                        photo="image/p_knut.jpg"
-                        title="Montør"/>
                 <Person mail="mail@habitats.no"
                         name="Patrick Skjennum"
                         photo="image/p_patrick.jpg"
