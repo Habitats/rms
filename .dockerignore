@@ -15,6 +15,5 @@ backend/build
 frontend/node_modules/
 frontend/.gradle
 
-**/bin/** */
+**/bin/**
 .metals/
-build/

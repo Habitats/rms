@@ -11,5 +11,5 @@ java \
       -XX:CMSInitiatingOccupancyFraction=70 \
       -XX:+ScavengeBeforeFullGC \
       -XX:+CMSScavengeBeforeRemark \
-      -jar backend/build/libs/backend-all.jar
+      -jar backend/build/libs/backend.jar
 

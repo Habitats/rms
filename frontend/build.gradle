@@ -3,4 +3,4 @@ plugins {
 }
 
 // Simple task to run npm build
-task bundle(dependsOn: yarn_build)
+task bundle(dependsOn: npm_run_build)
