@@ -1,7 +1,7 @@
-group 'rms'
-version '1.0-SNAPSHOT'
+plugins {
+  id "idea"
+}
 
-apply plugin: 'idea'
 
 idea {
     module {

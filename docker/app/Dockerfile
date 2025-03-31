@@ -1,65 +1,44 @@
-FROM alpine:3.8
-ARG GRADLE_VERSION=5.4
+# Eclipse Temurin provides a well-maintained, fully featured OpenJDK environment
+FROM --platform=linux/amd64 eclipse-temurin:8-jdk-focal
 
-ENV JAVA_VERSION=8 \
-    JAVA_UPDATE=131 \
-    JAVA_BUILD=11 \
-    JAVA_PATH=d54c1d3a095b4ff2b6607d096fa80163 \
-    JAVA_HOME="/usr/lib/jvm/default-jvm" \
-    RMI_SERVER_HOSTNAME='localhost' \
-    JMX_REMOTE_PORT='9178' \
-    GLIBC_VERSION=2.25-r0 \
-    LANG=en_US.UTF-8 \
-    LOCALE=en_US.UTF-8 \
-    LANGUAGE=en_US:en \
-    LC_ALL=en_US.UTF-8
+# Set environment variables
+ENV RMI_SERVER_HOSTNAME='localhost' \
+    JMX_REMOTE_PORT='9178'
 
-RUN env
-
-RUN apk add --no-cache --virtual=build-dependencies wget ca-certificates unzip \
-&& apk add --no-cache python bash libstdc++ coreutils nodejs-current npm yarn make gcc g++ libpng-dev htop \
-&& cd "/tmp" \
-&& wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub \
-&& wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-${GLIBC_VERSION}.apk \
-&& wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-bin-${GLIBC_VERSION}.apk \
-&& wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-i18n-${GLIBC_VERSION}.apk \
-&& apk add glibc-${GLIBC_VERSION}.apk glibc-i18n-${GLIBC_VERSION}.apk glibc-bin-${GLIBC_VERSION}.apk \
-&& /usr/glibc-compat/bin/localedef -i en_US -f UTF-8 en_US.UTF-8 \
-&& wget --header "Cookie: oraclelicense=accept-securebackup-cookie;" \
-    "http://download.oracle.com/otn-pub/java/jdk/${JAVA_VERSION}u${JAVA_UPDATE}-b${JAVA_BUILD}/${JAVA_PATH}/jdk-${JAVA_VERSION}u${JAVA_UPDATE}-linux-x64.tar.gz" \
-&& tar -xzf "jdk-${JAVA_VERSION}u${JAVA_UPDATE}-linux-x64.tar.gz" \
-&& mkdir -p "/usr/lib/jvm" \
-&& mv "/tmp/jdk1.${JAVA_VERSION}.0_${JAVA_UPDATE}" "/usr/lib/jvm/java-${JAVA_VERSION}-oracle" \
-&& ln -s "java-${JAVA_VERSION}-oracle" "$JAVA_HOME" \
-&& ln -s "$JAVA_HOME/bin/"* "/usr/bin/" \
-&& rm -rf "$JAVA_HOME/"*src.zip \
-&& wget --header "Cookie: oraclelicense=accept-securebackup-cookie;" \ 
-    "http://download.oracle.com/otn-pub/java/jce/${JAVA_VERSION}/jce_policy-${JAVA_VERSION}.zip" \
-&& unzip -jo -d "${JAVA_HOME}/jre/lib/security" "jce_policy-${JAVA_VERSION}.zip" \
-&& rm "${JAVA_HOME}/jre/lib/security/README.txt" \
-&& java -version
-
-# Cleanup deps
-RUN apk del build-dependencies \
-&& rm -r "/tmp/"*
+# Install required system packages
+RUN apt-get update && apt-get install -y \
+    nodejs \
+    npm \
+    python3 \
+    make \
+    gcc \
+    g++ \
+    libpng-dev \
+    htop \
+    curl \
+    unzip \
+    && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+    && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
+    && apt-get update \
+    && apt-get install -y yarn \
+    && rm -rf /var/lib/apt/lists/*
 
 # Add user
-RUN adduser -D -g "" rms \
-&& mkdir -p /opt/rms
+RUN useradd -m -s /bin/bash rms \
+    && mkdir -p /opt/rms
 
-# Gradle
+# Install Gradle
+ARG GRADLE_VERSION=8.13
 RUN wget -O gradle.zip https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip \
-&& mkdir -p /opt/gradle \
-&& unzip -d /opt/gradle gradle.zip \
-&& rm gradle.zip \
-&& ln -s /opt/gradle/gradle-${GRADLE_VERSION}/bin/gradle /usr/bin/gradle \
-&& chmod 755 /usr/bin/gradle \
-&& gradle -v
+    && mkdir -p /opt/gradle \
+    && unzip -d /opt/gradle gradle.zip \
+    && rm gradle.zip \
+    && ln -s /opt/gradle/gradle-${GRADLE_VERSION}/bin/gradle /usr/bin/gradle \
+    && chmod 755 /usr/bin/gradle
 
 WORKDIR /opt/rms
 
 # Add app
-
 ADD . .
 
 RUN gradle shadowJar
@@ -72,4 +51,5 @@ ENV RMS_IMAGE_ROOT='/opt/rms/img/' \
 RUN mkdir -p $RMS_IMAGE_ROOT
 
 RUN chmod +x docker/app/run.sh
-CMD ./docker/app/run.sh
+ENTRYPOINT ["/bin/bash", "-c"]
+CMD ["./docker/app/run.sh"]

@@ -41,3 +41,13 @@ backend/img/cover.indd
 backend/out
 rms.mv.tmp/
 src/test/resources/
+
+**/bin/** 
+.metals/
+build/
+.DS_Store
+backend/build
+backend/secret/conf.properties
+node_modules
+build
+.metals

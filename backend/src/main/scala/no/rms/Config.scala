@@ -41,7 +41,7 @@ object Config {
   val test: Boolean     = prop("test", "RMS_TEST").toBoolean
   val imageRoot: String = prop("images_dir", "RMS_IMAGE_ROOT")
   val appRoot: String   = prop("app_dir", "RMS_APP_ROOT")
-  val dbPath: String    = Option(System.getenv("RMS_DB_PATH")).getOrElse(throw new IllegalArgumentException("Missing RMS_DB_PATH"))
+  val dbPath: String    = prop("db_path", "RMS_DB_PATH")
 
   val COOKIE_ID     = "YOLO"
   val ONE_WEEK: Int = 7 * 24 * 3600

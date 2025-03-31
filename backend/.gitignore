@@ -10,7 +10,7 @@
 /project/target
 /.idea
 /backend.iml
-/secret
+**/secret
 /img/raw
 /src/main/resources/c3p0.properties
 /src/main/resources/dropbox_token
@@ -25,3 +25,4 @@
 
 desktop.ini
 .dropbox
+
