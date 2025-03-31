@@ -17,14 +17,42 @@ React-based frontend
 
 #### Build and Deploy
 
-Use utilities for building 
+The project uses Docker and Kubernetes for building and deployment.
 
-```
-./build.sh
-```
-and deploying
-```
-./start.sh
+##### Build and Deploy New Version
+```bash
+./ci.sh
 ```
 
-Make sure Dropbox is running on the server machine with `dropbox start` or `dropbox status`
+##### Deploy Specific Version
+```bash
+# Deploy specific app version
+./ci.sh --tag-app=<app-image-tag>
+
+# Deploy specific db version
+./ci.sh --tag-db=<db-image-tag>
+
+# Deploy both specific versions
+./ci.sh --tag-app=<app-image-tag> --tag-db=<db-image-tag>
+```
+
+##### Browse Container
+To inspect a running container:
+```bash
+# Browse the most recent version
+./browse-container.sh
+
+# Browse a specific version
+./browse-container.sh --tag=<image-tag>
+```
+
+#### Requirements
+- Docker with BuildKit enabled
+- Google Cloud SDK (`gcloud`)
+- Kubernetes CLI (`kubectl`)
+- Access to the Google Container Registry (GCR)
+
+Make sure you're authenticated with Google Cloud:
+```bash
+gcloud auth login
+```
