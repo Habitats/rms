@@ -1,4 +1,5 @@
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import MenuItem from './MenuItem.jsx'
 import Box from './../Box.jsx'
 import Radium from 'radium'

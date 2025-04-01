@@ -1,7 +1,8 @@
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import Product from './../components/product/Product.jsx'
 import {connect} from 'react-redux'
-import NotFound from './NotFound.jsx'
+import NotFound from '../components/NotFound.jsx'
 
 class ProductContainer extends Component {
 

@@ -1,4 +1,5 @@
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import Photo from './../photo/Photo.jsx'
 import HeadlineOverlay from './../text/HeadlineOverlay.jsx'
 import Radium from 'radium'

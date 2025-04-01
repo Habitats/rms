@@ -1,4 +1,5 @@
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import EditableDiv from './EditableDiv.jsx'
 
 export default class Wysiwyg extends Component {

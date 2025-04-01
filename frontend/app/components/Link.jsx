@@ -1,40 +1,32 @@
-import React, {Component, PropTypes} from 'react'
-import {browserHistory} from 'react-router'
-import {connect} from 'react-redux'
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import { connect } from 'react-redux'
 import Radium from 'radium'
+import PropTypes from 'prop-types'
 
-class Link extends Component {
+const Link = ({ to, children, className, onClick }) => {
+  const navigate = useNavigate()
 
-  constructor(props) {
-    super(props)
-  }
-
-  render() {
-    const {children, style, to} = this.props
-    const linkStyle = {
-      ...style,
-      ':hover': {
-        ...style[':hover'],
-        cursor: 'pointer'
-      },
+  const handleClick = (e) => {
+    e.preventDefault()
+    if (onClick) {
+      onClick(e)
     }
-    return (
-      <span style={linkStyle} onClick={() => browserHistory.push(to)}>
-        {children}
-      </span>
-    )
+    navigate(to)
   }
-}
-Link.defaultProps = {
-  style: {}
+
+  return (
+    <a href={to} onClick={handleClick} className={className}>
+      {children}
+    </a>
+  )
 }
 
 Link.propTypes = {
   to: PropTypes.string.isRequired,
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ])
+  children: PropTypes.node.isRequired,
+  className: PropTypes.string,
+  onClick: PropTypes.func
 }
 
 export default connect()(Radium(Link))

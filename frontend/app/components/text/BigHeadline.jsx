@@ -1,4 +1,5 @@
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import Link from '../Link.jsx'
 import Radium from 'radium'
 import {HEADING_SMALL, HEADING_BIG} from '../../colors'

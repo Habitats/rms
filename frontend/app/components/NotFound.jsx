@@ -1,6 +1,7 @@
-import React, {Component, PropTypes} from 'react'
-import BigHeadline from './../components/text/BigHeadline.jsx'
-import Box from './../components/Box.jsx'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
+import BigHeadline from './text/BigHeadline.jsx'
+import Box from './Box.jsx'
 
 export default class NotFound extends Component {
 

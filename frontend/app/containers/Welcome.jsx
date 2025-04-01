@@ -1,4 +1,5 @@
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import Carousel from './../components/photo/Carousel.jsx'
 import BigHeadline from './../components/text/BigHeadline.jsx'
