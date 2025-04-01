@@ -51,3 +51,5 @@ backend/secret/conf.properties
 node_modules
 build
 .metals
+
+.bloop
