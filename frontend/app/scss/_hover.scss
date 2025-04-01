@@ -1,0 +1,22 @@
+// Hover styles for components
+.menu-item {
+  &:hover {
+    color: #007bff;
+    text-decoration: none;
+    background-color: rgba(0, 123, 255, 0.1);
+  }
+}
+
+.custom-link {
+  &:hover {
+    color: #007bff;
+    text-decoration: none;
+  }
+}
+
+.product-item {
+  transition: transform 0.2s ease-in-out;
+  &:hover {
+    transform: scale(1.02);
+  }
+} 

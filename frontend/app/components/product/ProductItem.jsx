@@ -2,25 +2,17 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Photo from './../photo/Photo.jsx'
 import HeadlineOverlay from './../text/HeadlineOverlay.jsx'
-import Radium from 'radium'
+import useMediaQuery from '../../hooks/useMediaQuery'
 
 const ProductItem = ({ product: { title, src }, linkTo, height, className }) => {
+  const isSmall = useMediaQuery('only screen and (max-width: 767px)');
+  const isMedium = useMediaQuery('only screen and (max-width: 991px)');
+
   const style = {
     box: {
-      paddingLeft: 0,
-      '@media only screen and (max-width: 767px)': {
-        marginBottom: 15,
-        height: height * 0.8
-      },
-      '@media only screen and (min-width: 768px)': {
-        marginBottom: 15,
-        height: height * 0.7
-      },
-      '@media only screen and (min-width: 992px)': {
-        marginBottom: 30,
-        paddingLeft: 15,
-        height: height
-      }
+      paddingLeft: isSmall ? 0 : isMedium ? 0 : 15,
+      marginBottom: isSmall ? 15 : isMedium ? 15 : 30,
+      height: isSmall ? height * 0.8 : isMedium ? height * 0.7 : height
     }
   }
 
@@ -41,11 +33,12 @@ ProductItem.defaultProps = {
 ProductItem.propTypes = {
   product: PropTypes.shape({
     title: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired
-  }),
+    id: PropTypes.string.isRequired,
+    src: PropTypes.string.isRequired
+  }).isRequired,
   linkTo: PropTypes.string.isRequired,
   className: PropTypes.string,
   height: PropTypes.number
 }
 
-export default Radium(ProductItem)
+export default ProductItem

@@ -22,7 +22,6 @@
     ["@babel/plugin-transform-private-property-in-object", {
       "loose": true
     }],
-    "@babel/plugin-transform-runtime",
-    "react-hot-loader/babel"
+    "@babel/plugin-transform-runtime"
   ]
 }

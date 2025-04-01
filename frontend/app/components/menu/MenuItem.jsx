@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import Link from './../Link.jsx'
-import Radium from 'radium'
+import useMediaQuery from '../../hooks/useMediaQuery'
 import {TEXT, HOVER, FILTER} from '../../colors'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronRight, faChevronDown } from '@fortawesome/free-solid-svg-icons'
 
 const MenuItem = ({ product, active, filter, isRoot }) => {
   const [hover, setHover] = useState(false)
@@ -50,15 +52,38 @@ const MenuItem = ({ product, active, filter, isRoot }) => {
     return indexes
   }, [])
 
+  const isSmall = useMediaQuery('only screen and (max-width: 767px)');
+  const isMedium = useMediaQuery('only screen and (max-width: 991px)');
+
   const style = {
-    link: {
-      color: TEXT,
-      ':hover': {
-        color: HOVER
-      }
+    padding: isSmall ? '8px 12px' : isMedium ? '10px 15px' : '12px 20px',
+    display: 'block',
+    color: active ? '#007bff' : 'inherit',
+    backgroundColor: active ? 'rgba(0, 123, 255, 0.1)' : 'transparent',
+    transition: 'all 0.2s ease-in-out',
+    item: {
+      padding: isSmall ? '8px 15px' : isMedium ? '10px 20px' : '12px 25px',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      textDecoration: 'none',
+      cursor: 'pointer'
     },
-    filter: {
-      color: FILTER
+    subItems: {
+      paddingLeft: isSmall ? 15 : isMedium ? 20 : 25,
+      display: expanded ? 'block' : 'none'
+    },
+    subItem: {
+      padding: isSmall ? '6px 12px' : isMedium ? '8px 16px' : '10px 20px',
+      display: 'block',
+      color: '#666',
+      textDecoration: 'none',
+      transition: 'background-color 0.3s ease'
+    },
+    icon: {
+      width: 16,
+      marginLeft: 10,
+      transition: 'transform 0.3s ease'
     }
   }
 
@@ -103,24 +128,30 @@ const MenuItem = ({ product, active, filter, isRoot }) => {
 
   return (
     <div>
-      <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
-        <Link
-          to={`/produkter/${id}`}
-          style={style.link}
-          onMouseEnter={() => setHover(true)}
-          onMouseLeave={() => setHover(false)}
-        >
-          {titleElement}
-        </Link>
+      <Link 
+        to={`/produkter/${id}`} 
+        style={style.item}
+        className="menu-item"
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
+        onClick={onExpand}
+      >
+        {titleElement}
         {sub.length > 0 && !isRoot && (
-          <i
-            className={`fa fa-chevron-${expanded ? 'down' : 'right'}`}
-            style={{marginLeft: 10, cursor: 'pointer'}}
-            onClick={onExpand}
+          <FontAwesomeIcon
+            icon={expanded ? faChevronDown : faChevronRight}
+            style={{
+              ...style.icon,
+              transform: expanded ? 'rotate(0deg)' : 'rotate(0deg)'
+            }}
           />
         )}
-      </div>
-      {expanded && subItems}
+      </Link>
+      {expanded && (
+        <div style={style.subItems}>
+          {subItems}
+        </div>
+      )}
     </div>
   )
 }
@@ -140,4 +171,4 @@ MenuItem.defaultProps = {
   active: null
 }
 
-export default Radium(MenuItem)
+export default MenuItem

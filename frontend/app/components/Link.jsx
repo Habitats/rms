@@ -1,21 +1,26 @@
 import React from 'react'
-import { Link as RouterLink } from 'react-router-dom'
-import Radium from 'radium'
 import PropTypes from 'prop-types'
+import { Link as RouterLink } from 'react-router-dom'
+import useMediaQuery from '../hooks/useMediaQuery'
 
-const Link = ({ to, children, className, onClick, style }) => {
-  const handleClick = (e) => {
-    if (onClick) {
-      onClick(e)
-    }
+const Link = ({ to, children, style = {}, className = '', ...props }) => {
+  const isSmall = useMediaQuery('only screen and (max-width: 767px)');
+  const isMedium = useMediaQuery('only screen and (max-width: 991px)');
+
+  const defaultStyle = {
+    textDecoration: 'none',
+    color: 'inherit',
+    fontSize: isSmall ? '14px' : isMedium ? '16px' : '16px',
+    fontWeight: 400,
+    transition: 'color 0.2s ease-in-out'
   }
 
   return (
-    <RouterLink
-      to={to}
-      onClick={handleClick}
-      className={className}
-      style={style}
+    <RouterLink 
+      to={to} 
+      style={{ ...defaultStyle, ...style }}
+      className={`custom-link ${className}`.trim()}
+      {...props}
     >
       {children}
     </RouterLink>
@@ -25,9 +30,8 @@ const Link = ({ to, children, className, onClick, style }) => {
 Link.propTypes = {
   to: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
-  className: PropTypes.string,
-  onClick: PropTypes.func,
-  style: PropTypes.object
+  style: PropTypes.object,
+  className: PropTypes.string
 }
 
-export default Radium(Link)
+export default Link

@@ -1,32 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Link from '../Link.jsx'
-import Radium from 'radium'
 import {HEADING_SMALL, HEADING_BIG} from '../../colors'
+import useMediaQuery from '../../hooks/useMediaQuery'
 
 const BigHeadline = ({ small, big, to }) => {
+  const isSmall = useMediaQuery('only screen and (max-width: 767px)');
+  const isMedium = useMediaQuery('only screen and (max-width: 991px)');
+
   const style = {
     box: {
-      '@media only screen and (max-width: 767px)': {
-        marginTop: 20
-      },
-      '@media only screen and (min-width: 768px)': {
-        marginTop: 50
-      }
+      marginTop: isSmall ? 20 : isMedium ? 50 : 50
     },
     divider: {
-      '@media only screen and (max-width: 767px)': {
-        marginBottom: 30,
-        marginTop: 20
-      },
-      '@media only screen and (min-width: 768px)': {
-        marginBottom: 50,
-        marginTop: 50
-      },
-      '@media only screen and (min-width: 992px)': {
-        marginBottom: 70,
-        marginTop: 70
-      }
+      marginBottom: isSmall ? 30 : isMedium ? 50 : 70,
+      marginTop: isSmall ? 20 : isMedium ? 50 : 70
     },
     big: {
       paddingBottom: 0,
@@ -34,7 +22,7 @@ const BigHeadline = ({ small, big, to }) => {
       color: HEADING_BIG
     },
     small: {
-      color: HEADING_SMALL,
+      color: HEADING_SMALL
     }
   }
 
@@ -62,7 +50,4 @@ BigHeadline.defaultProps = {
   to: null
 }
 
-// Apply Radium styles
-const StyledBigHeadline = Radium(BigHeadline)
-
-export default StyledBigHeadline
+export default BigHeadline

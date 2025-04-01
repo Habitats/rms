@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { useParams, useOutletContext, useLoaderData } from 'react-router-dom'
 import BigHeadline from './../components/text/BigHeadline.jsx'
@@ -9,32 +9,15 @@ import Right from './../components/Right.jsx'
 import Box from './../components/Box.jsx'
 import NotFound from '../components/NotFound.jsx'
 import Link from '../components/Link.jsx'
+import useMediaQuery from '../hooks/useMediaQuery'
 
 const ProductsContainer = () => {
   const { categories, isAdmin } = useLoaderData()
   const { categoryId, productId } = useParams()
   const children = useOutletContext()
   
-  const [isSmall, setIsSmall] = useState(false)
-  const [isMedium, setIsMedium] = useState(false)
-  const [mql] = useState(() => window.matchMedia('only screen and (max-width: 767px)'))
-  const [mqlm] = useState(() => window.matchMedia('only screen and (max-width: 991px)'))
-
-  useEffect(() => {
-    const handleMediaChange = () => {
-      setIsSmall(mql.matches)
-      setIsMedium(mqlm.matches)
-    }
-    
-    mql.addListener(handleMediaChange)
-    mqlm.addListener(handleMediaChange)
-    handleMediaChange()
-
-    return () => {
-      mql.removeListener(handleMediaChange)
-      mqlm.removeListener(handleMediaChange)
-    }
-  }, [mql, mqlm])
+  const isSmall = useMediaQuery('only screen and (max-width: 767px)')
+  const isMedium = useMediaQuery('only screen and (max-width: 991px)')
 
   if (!categories || !categories.hasOwnProperty('sub')) {
     return (
@@ -54,60 +37,44 @@ const ProductsContainer = () => {
     </div>
   ) : null
 
-  const catBig = (
-    <ProductItems 
-      products={categories.sub.slice(0, isMedium ? 1 : 2)} 
-      height={isSmall ? 200 : isMedium ? 320 : 270}
-      className="col-md-6 col-sm-12 col-xs-12" 
-      parentRoute="/produkter"
-    />
-  )
-
-  const catSmall = (
-    <ProductItems 
-      products={categories.sub.slice(isMedium ? 1 : 2, 5)} 
-      height={isSmall ? 200 : isMedium ? 230 : 170}
-      className="col-md-4 col-sm-6 col-xs-12" 
-      parentRoute="/produkter"
-    />
-  )
-
-  const content = (!categoryId && !productId) ? (
-    <Box>
-      <BigHeadline big={categories.title}/>
-      <div className="row">
-        {catBig}
-        {catSmall}
-      </div>
+  const menu = (
+    <div className="col-sm-3">
+      <Menu />
       {addProduct}
-    </Box>
-  ) : children
+    </div>
+  )
 
-  if (content) {
-    return (
-      <div>
-        <div className="hidden-xs">
-          <Left>
-            <Menu 
-              categories={categories} 
-              active={categoryId || productId} 
-              linkTo="/produkter"
-            />
-          </Left>
-          <Right>
+  const content = (
+    <div className="col-sm-9">
+      {children}
+    </div>
+  )
+
+  return (
+    <div>
+      <Box>
+        <BigHeadline big="Våre produkter og tjenester" small="Velg en kategori"/>
+      </Box>
+
+      <div className="row">
+        {isSmall ? (
+          <div className="col-xs-12">
+            {menu}
             {content}
-          </Right>
-        </div>
-        <div className="visible-xs">
-          {content}
-        </div>
+          </div>
+        ) : (
+          <>
+            <Left>{menu}</Left>
+            <Right>{content}</Right>
+          </>
+        )}
       </div>
-    )
-  }
-
-  return <NotFound />
+    </div>
+  )
 }
 
-ProductsContainer.propTypes = {}
+ProductsContainer.propTypes = {
+  // Props are now handled through route params and loader data
+}
 
 export default ProductsContainer

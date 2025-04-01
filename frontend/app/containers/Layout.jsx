@@ -3,16 +3,18 @@ import { Outlet, useLoaderData } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import Footer from './../components/Footer.jsx'
 import Header from './../components/Header.jsx'
-import Radium from 'radium'
+import useMediaQuery from '../hooks/useMediaQuery'
 import * as V from '../vars'
 
 const Layout = () => {
   const { session = { admin: false, username: null } } = useLoaderData() || {}
+  const isSmall = useMediaQuery('only screen and (max-width: 767px)');
+  const isMedium = useMediaQuery('only screen and (max-width: 991px)');
 
   const containerStyle = {
     maxWidth: V.CONTENT_MAX_WIDTH,
     margin: '0 auto',
-    padding: '0 15px'
+    padding: isSmall ? '0 10px' : isMedium ? '0 15px' : '0 20px'
   }
 
   return (
@@ -42,7 +44,4 @@ Layout.defaultProps = {
   }
 }
 
-// Apply Radium styles
-const StyledLayout = Radium(Layout)
-
-export default StyledLayout
+export default Layout

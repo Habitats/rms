@@ -1,58 +1,63 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import Radium from 'radium'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import Photo from './Photo.jsx'
+import useMediaQuery from '../../hooks/useMediaQuery'
 
-const CoverPhoto = ({ src, onRightSelect, onLeftSelect }) => {
-  const [state, setState] = useState({
-    toggled: false,
-    hover: false,
-  })
-
-  const onMouseEnter = () => setState(prev => ({ ...prev, hover: true }))
-  const onMouseLeave = () => setState(prev => ({ ...prev, hover: false }))
+const CoverPhoto = ({ images, currentIndex, onPrevious, onNext }) => {
+  const isSmall = useMediaQuery('only screen and (max-width: 767px)')
+  const isMedium = useMediaQuery('only screen and (min-width: 768px) and (max-width: 991px)')
 
   const style = {
-    icon: {
-      cursor: 'pointer',
+    container: {
+      position: 'relative',
+      width: '100%',
+      height: isSmall ? 300 : isMedium ? 400 : 500,
+      overflow: 'hidden'
+    },
+    left: {
       position: 'absolute',
+      left: 20,
       top: '50%',
-      height: 'auto',
-      color: 'lightGray',
-      paddingLeft: 10,
-      textShadow: '5px 2px 3px rgba(0,0,0,0.5)',
-      ':hover': {
-        color: 'white'
-      }
+      transform: 'translateY(-50%)',
+      cursor: 'pointer',
+      color: 'white',
+      textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
+      zIndex: 2
+    },
+    right: {
+      position: 'absolute',
+      right: 20,
+      top: '50%',
+      transform: 'translateY(-50%)',
+      cursor: 'pointer',
+      color: 'white',
+      textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
+      zIndex: 2
     }
   }
 
-  const rightHover = state.hover ? (
-    <div style={{height: '100%', width: 55, float: 'right'}} onClick={onRightSelect}>
-      <span key={0} style={style.icon} className="fa fa-chevron-right fa-3x"/>
-    </div>
-  ) : null
-
-  const leftHover = state.hover ? (
-    <div style={{height: '100%', width: 55, float: 'left'}} onClick={onLeftSelect}>
-      <span key={1} style={style.icon} className="fa fa-chevron-left fa-3x"/>
-    </div>
-  ) : null
-
   return (
-    <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} style={{height: '100%'}}>
-      <Photo src={src}>
-        {rightHover}
-        {leftHover}
-      </Photo>
+    <div style={style.container}>
+      <Photo src={images[currentIndex].src} />
+      <div style={style.left} onClick={onPrevious}>
+        <FontAwesomeIcon icon={faChevronLeft} size="2x" />
+      </div>
+      <div style={style.right} onClick={onNext}>
+        <FontAwesomeIcon icon={faChevronRight} size="2x" />
+      </div>
     </div>
   )
 }
 
 CoverPhoto.propTypes = {
-  src: PropTypes.string.isRequired,
-  onRightSelect: PropTypes.func.isRequired,
-  onLeftSelect: PropTypes.func.isRequired
+  images: PropTypes.arrayOf(PropTypes.shape({
+    src: PropTypes.string.isRequired
+  })).isRequired,
+  currentIndex: PropTypes.number.isRequired,
+  onPrevious: PropTypes.func.isRequired,
+  onNext: PropTypes.func.isRequired
 }
 
-export default Radium(CoverPhoto)
+export default CoverPhoto

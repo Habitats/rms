@@ -1,65 +1,43 @@
-import React, {Component} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import Radium from 'radium'
 import {HEADING_SMALL, HEADING_BIG} from '../../colors'
 import Link from '../Link.jsx'
+import useMediaQuery from '../../hooks/useMediaQuery'
 
-class MediumHeadline extends Component {
+const MediumHeadline = ({ small, big, to }) => {
+  const isSmall = useMediaQuery('only screen and (max-width: 767px)');
+  const isMedium = useMediaQuery('only screen and (max-width: 991px)');
 
-  render() {
-    const {small, big, to} = this.props
-    const style = {
-      box: {
-        '@media only screen and (max-width: 767px)': {
-          marginTop: 10
-        },
-        '@media only screen and (min-width: 768px)': {
-          marginTop: 30
-        }
-      },
-      divider: {
-        '@media only screen and (max-width: 767px)': {
-          marginBottom: 20,
-          marginTop: 15
-        },
-        '@media only screen and (min-width: 768px)': {
-          marginBottom: 40,
-          marginTop: 30
-        }
-      },
-      big: {
-        '@media only screen and (max-width: 767px)': {
-          paddingTop: 0
-        },
-        '@media only screen and (min-width: 768px)': {
-          paddingTop: 20
-        },
-        paddingBottom: 0,
-        paddingTop: 20,
-        color: HEADING_BIG
-      },
-      small: {
-        '@media only screen and (max-width: 767px)': {
-          marginBottom: -10,
-        },
-        '@media only screen and (min-width: 768px)': {
-          marginBottom: -20,
-        },
-        color: HEADING_SMALL
-      }
+  const style = {
+    box: {
+      marginTop: isSmall ? 10 : 30
+    },
+    divider: {
+      marginBottom: isSmall ? 20 : 40,
+      marginTop: isSmall ? 15 : 30
+    },
+    big: {
+      paddingTop: isSmall ? 0 : 20,
+      paddingBottom: 0,
+      color: HEADING_BIG
+    },
+    small: {
+      marginBottom: isSmall ? -10 : -20,
+      color: HEADING_SMALL
     }
-    return (
-      <div className="row">
-        <div className="col-lg-12 text-center" style={style.box}>
-          <h5 style={style.small}>
-            {to ? <Link to={to}>{small}</Link> : small}
-          </h5>
-          <h2 style={style.big}>{big}</h2>
-          <hr style={style.divider}/>
-        </div>
-      </div>
-    )
   }
+
+  return (
+    <div className="row">
+      <div className="col-lg-12 text-center" style={style.box}>
+        <h5 style={style.small}>
+          {to ? <Link to={to}>{small}</Link> : small}
+        </h5>
+        <h2 style={style.big}>{big}</h2>
+        <hr style={style.divider}/>
+      </div>
+    </div>
+  )
 }
 
 MediumHeadline.defaultProps = {
@@ -74,4 +52,4 @@ MediumHeadline.propTypes = {
   to: PropTypes.string
 }
 
-export default Radium(MediumHeadline)
+export default MediumHeadline

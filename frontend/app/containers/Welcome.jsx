@@ -1,31 +1,24 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { useLoaderData } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import Carousel from './../components/photo/Carousel.jsx'
 import BigHeadline from './../components/text/BigHeadline.jsx'
 import Features from './../components/feature/Features.jsx'
 import Box from './../components/Box.jsx'
 import ProductItems from './../components/product/ProductItems.jsx'
-import Radium from 'radium'
+import useMediaQuery from '../hooks/useMediaQuery'
 
 const Welcome = () => {
   const { categories, loading, error } = useLoaderData()
-  const [isSmall, setIsSmall] = useState(false)
-  const [mql] = useState(() => window.matchMedia('only screen and (max-width: 767px)'))
-
-  useEffect(() => {
-    const handleMediaChange = () => setIsSmall(mql.matches)
-    mql.addListener(handleMediaChange)
-    handleMediaChange()
-
-    return () => mql.removeListener(handleMediaChange)
-  }, [mql])
+  const isSmall = useMediaQuery('only screen and (max-width: 767px)');
 
   if (loading) {
     return (
       <Box>
         <div className="text-center">
-          <i className="fa fa-spinner fa-spin fa-3x"></i>
+          <FontAwesomeIcon icon={faSpinner} spin size="3x" />
         </div>
       </Box>
     )
@@ -55,34 +48,25 @@ const Welcome = () => {
   const ready = categories && categories.hasOwnProperty('sub')
   const catBig = ready ? (
     <ProductItems 
-      products={categories.sub.slice(0, 2)} 
+      items={categories.sub.slice(0, 2)}
       height={isSmall ? 200 : 270}
       className="col-sm-6 col-xs-12" 
       parentRoute="/produkter"
     />
   ) : null
 
-  const catSmall = ready ? (
-    <ProductItems 
-      products={categories.sub.slice(2, 5)} 
-      height={isSmall ? 200 : 170}
-      className="col-sm-4 col-xs-12" 
-      parentRoute="/produkter"
-    />
-  ) : null
-
   return (
     <div>
+      <Carousel images={images} />
       <Box>
-        <Carousel images={images}/>
-        <Features />
-      </Box>
-
-      <Box>
-        <BigHeadline big="Våre tjenester"/>
+        <BigHeadline big="Velkommen til Romerike Markiseservice" small="Din lokale markiseleverandør"/>
         <div className="row">
+          <div className="col-sm-6">
           {catBig}
-          {catSmall}
+          </div>
+          <div className="col-sm-6">
+            <Features />
+          </div>
         </div>
       </Box>
     </div>
@@ -99,7 +83,4 @@ Welcome.defaultProps = {
   error: null
 }
 
-// Apply Radium styles
-const StyledWelcome = Radium(Welcome)
-
-export default StyledWelcome
+export default Welcome

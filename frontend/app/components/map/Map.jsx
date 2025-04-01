@@ -1,10 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react'
 import PropTypes from 'prop-types'
-import Radium from 'radium'
+import useMediaQuery from '../../hooks/useMediaQuery'
 
 const Map = ({ zoom, height, style: customStyle, isScriptLoaded, isScriptLoadSucceed }) => {
   const [mapInitialized, setMapInitialized] = useState(false)
   const mapRef = useRef(null)
+  const isSmall = useMediaQuery('only screen and (max-width: 767px)');
+  const isMedium = useMediaQuery('only screen and (max-width: 991px)');
 
   useEffect(() => {
     if (isScriptLoaded && isScriptLoadSucceed && window.google && !mapInitialized && mapRef.current) {
@@ -44,7 +46,7 @@ const Map = ({ zoom, height, style: customStyle, isScriptLoaded, isScriptLoadSuc
 
   const mapStyle = {
     ...customStyle,
-    height: height || 450,
+    height: isSmall ? '300px' : isMedium ? '400px' : height || 500,
     width: '100%',
     color: '#e9e9e9'
   }
@@ -71,8 +73,8 @@ Map.propTypes = {
 
 Map.defaultProps = {
   zoom: 10,
-  height: 450,
+  height: 500,
   style: {}
 }
 
-export default Radium(Map)
+export default Map

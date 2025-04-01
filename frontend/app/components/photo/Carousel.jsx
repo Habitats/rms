@@ -2,22 +2,17 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Photo from './Photo.jsx'
 import Slider from 'react-slick'
-import Radium from 'radium'
 import {SM, XS, COVER_HEIGHT} from '../../vars'
+import useMediaQuery from '../../hooks/useMediaQuery'
 
 const Carousel = ({ images }) => {
   const height = COVER_HEIGHT
+  const isSmall = useMediaQuery('only screen and (max-width: 767px)');
+  const isMedium = useMediaQuery('only screen and (max-width: 991px)');
+
   const style = {
     carousel: {
-      '@media only screen and (max-width: 767px)': {
-        height: height * XS
-      },
-      '@media only screen and (min-width: 768px)': {
-        height: height * SM
-      },
-      '@media only screen and (min-width: 992px)': {
-        height: height
-      }
+      height: isSmall ? height * XS : isMedium ? height * SM : height
     }
   }
 
@@ -48,10 +43,9 @@ const Carousel = ({ images }) => {
 }
 
 Carousel.propTypes = {
-  images: PropTypes.array.isRequired,
+  images: PropTypes.arrayOf(PropTypes.shape({
+    src: PropTypes.string.isRequired
+  })).isRequired
 }
 
-// Apply Radium styles
-const StyledCarousel = Radium(Carousel)
-
-export default StyledCarousel
+export default Carousel

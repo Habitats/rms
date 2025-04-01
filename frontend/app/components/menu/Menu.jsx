@@ -3,12 +3,14 @@ import PropTypes from 'prop-types'
 import { useLoaderData } from 'react-router-dom'
 import MenuItem from './MenuItem.jsx'
 import Box from './../Box.jsx'
-import Radium from 'radium'
+import useMediaQuery from '../../hooks/useMediaQuery'
 import * as V from '../../vars'
 
 const Menu = () => {
   const [filter, setFilter] = useState('')
   const { categories, loading } = useLoaderData()
+  const isSmall = useMediaQuery('only screen and (max-width: 767px)');
+  const isMedium = useMediaQuery('only screen and (max-width: 991px)');
 
   const handleSearch = useCallback((e) => {
     setFilter(e.target.value.toLowerCase())
@@ -49,9 +51,14 @@ const Menu = () => {
       )
     }
 
+    const searchStyle = {
+      marginBottom: isSmall ? '10px' : isMedium ? '15px' : '20px',
+      width: '100%'
+    }
+
     return (
       <>
-        <div className="form-group">
+        <div className="form-group" style={searchStyle}>
           <input
             className="form-control"
             onChange={handleSearch}
@@ -68,11 +75,11 @@ const Menu = () => {
         />
       </>
     )
-  }, [categories, filter, handleSearch, loading])
+  }, [categories, filter, handleSearch, loading, isSmall, isMedium])
 
   return <Box>{menuContent}</Box>
 }
 
 Menu.propTypes = {}
 
-export default Radium(Menu)
+export default Menu

@@ -2,9 +2,9 @@ import React from 'react'
 import { createRoot } from 'react-dom/client'
 import { Provider } from 'react-redux'
 import { RouterProvider } from 'react-router-dom'
-import { StyleRoot } from 'radium'
 import { configureStore } from './redux/store/configureStore'
 import { router } from './redux/routes'
+import './config/fontawesome'
 import './scss/base.scss'
 
 console.log('App: Starting initialization')
@@ -51,11 +51,9 @@ const root = createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
     <ErrorBoundary>
-      <StyleRoot>
-        <Provider store={store}>
-          <RouterProvider router={router} />
-        </Provider>
-      </StyleRoot>
+      <Provider store={store}>
+        <RouterProvider router={router} />
+      </Provider>
     </ErrorBoundary>
   </React.StrictMode>
 )

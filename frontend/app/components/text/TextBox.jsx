@@ -1,36 +1,28 @@
-import React, {Component} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import Radium from 'radium'
 import {CONTENT_MAX_WIDTH} from '../../vars'
+import useMediaQuery from '../../hooks/useMediaQuery'
 
-class TextBox extends Component {
+const TextBox = ({ children }) => {
+  const isSmall = useMediaQuery('only screen and (max-width: 767px)');
+  const isMedium = useMediaQuery('only screen and (max-width: 991px)');
 
-  render() {
-    const {children} = this.props
-    const style = {
-      paddingBottom: 40,
-      textAlign: 'justify',
-      '@media only screen and (max-width: 767px)': {
-        maxWidth: 435
-      },
-      '@media only screen and (min-width: 768px)': {
-        maxWidth: CONTENT_MAX_WIDTH
-      },
-      '@media only screen and (min-width: 992px)': {
-        maxWidth: CONTENT_MAX_WIDTH + 50
-      },
-      margin: '0 auto'
-    }
-    return (
-      <div className="row">
-        <div className="col-xs-12">
-          <div style={style}>
-            {children}
-          </div>
+  const style = {
+    paddingBottom: 40,
+    textAlign: 'justify',
+    maxWidth: isSmall ? 435 : isMedium ? CONTENT_MAX_WIDTH : CONTENT_MAX_WIDTH + 50,
+    margin: '0 auto'
+  }
+
+  return (
+    <div className="row">
+      <div className="col-xs-12">
+        <div style={style}>
+          {children}
         </div>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 TextBox.propTypes = {
@@ -40,4 +32,4 @@ TextBox.propTypes = {
   ])
 }
 
-export default Radium(TextBox)
+export default TextBox

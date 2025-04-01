@@ -55,8 +55,7 @@ const rules = [
     use: {
       loader: 'babel-loader',
       options: {
-        presets: ['@babel/preset-env', '@babel/preset-react'],
-        plugins: ['react-hot-loader/babel']
+        presets: ['@babel/preset-env', '@babel/preset-react']
       }
     }
   },
@@ -98,11 +97,9 @@ const rules = [
         loader: 'file-loader',
         options: {
           name: '[name].[ext]',
-          outputPath: 'images/',
-          publicPath: '/images/'
+          outputPath: 'images/'
         }
-      },
-      'image-webpack-loader'
+      }
     ]
   },
   
