@@ -21,7 +21,8 @@ const FeatureItem = ({ icon, title, description }) => {
       backgroundColor: '#fff',
       borderRadius: 8,
       boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-      transition: 'transform 0.3s ease'
+      transition: 'transform 0.3s ease',
+      height: '100%'
     },
     icon: {
       fontSize: isSmall ? '2em' : isMedium ? '2.5em' : '3em',
@@ -42,10 +43,12 @@ const FeatureItem = ({ icon, title, description }) => {
   }
 
   return (
-    <div style={style.container}>
-      <FontAwesomeIcon icon={iconMap[icon]} style={style.icon} />
-      <h3 style={style.title}>{title}</h3>
-      <p style={style.description}>{description}</p>
+    <div className="col-xs-12 col-sm-6 col-md-4">
+      <div className="feature-item" style={style.container}>
+        <FontAwesomeIcon icon={iconMap[icon]} style={style.icon} />
+        <h3 style={style.title}>{title}</h3>
+        <p style={style.description}>{description}</p>
+      </div>
     </div>
   )
 }

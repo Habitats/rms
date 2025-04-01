@@ -11,20 +11,27 @@ const Layout = () => {
   const isSmall = useMediaQuery('only screen and (max-width: 767px)');
   const isMedium = useMediaQuery('only screen and (max-width: 991px)');
 
-  const containerStyle = {
-    maxWidth: V.CONTENT_MAX_WIDTH,
+  const style = {
+    maxWidth: 1000,
     margin: '0 auto',
-    padding: isSmall ? '0 10px' : isMedium ? '0 15px' : '0 20px'
+    '@media only screen and (max-width: 767px)': {
+      marginTop: V.HEADER_HEIGHT_XS,
+      marginBottom: V.FOOTER_HEIGHT_XS,
+      padding: 0
+    },
+    '@media only screen and (min-width: 768px)': {
+      marginTop: V.HEADER_HEIGHT_SM + 20,
+      marginBottom: V.FOOTER_HEIGHT_SM + 10,
+      padding: '0 15px'
+    }
   }
 
   return (
     <div>
-      <Header />
-      <main>
-        <div style={containerStyle}>
-          <Outlet />
-        </div>
-      </main>
+      <div style={style} className="container" id="root">
+        <Header />
+        <Outlet />
+      </div>
       <Footer />
     </div>
   )

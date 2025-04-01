@@ -1,13 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { useLoaderData } from 'react-router-dom'
+import { useLoaderData, useParams } from 'react-router-dom'
 import Category from './../components/product/Category.jsx'
 import BigHeadline from './../components/text/BigHeadline.jsx'
 import Box from './../components/Box.jsx'
 import NotFound from '../components/NotFound.jsx'
 
 const CategoryContainer = () => {
-  const category = useLoaderData()
+  const { products } = useLoaderData()
+  const { categoryId } = useParams()
+  
+  // Find the category in the products.sub array
+  const category = products.sub.find(c => c.id === categoryId)
   
   if (!category) {
     return <NotFound />
@@ -23,6 +27,8 @@ const CategoryContainer = () => {
   )
 }
 
-CategoryContainer.propTypes = {}
+CategoryContainer.propTypes = {
+  // Props are now handled through route params and loader data
+}
 
 export default CategoryContainer

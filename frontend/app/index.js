@@ -1,61 +1,30 @@
 import React from 'react'
-import { createRoot } from 'react-dom/client'
-import { Provider } from 'react-redux'
+import ReactDOM from 'react-dom/client'
 import { RouterProvider } from 'react-router-dom'
-import { configureStore } from './redux/store/configureStore'
-import { router } from './redux/routes'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { router } from './routes'
 import './config/fontawesome'
 import './scss/base.scss'
 
-console.log('App: Starting initialization')
+// Create a client
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 5 * 60 * 1000, // 5 minutes
+      retry: 1,
+      refetchOnWindowFocus: false,
+    },
+  },
+})
 
-/**
- * Import the stylesheet you want used! Here we just reference
- * the main SCSS file we have in the styles directory.
- */
-
-/**
- * Both configureStore and Root are required conditionally.
- * See configureStore.js and Root.js for more details.
- */
-
-const store = configureStore()
-console.log('App: Store configured')
-
-// Error boundary component
-class ErrorBoundary extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = { hasError: false }
-  }
-
-  static getDerivedStateFromError(error) {
-    return { hasError: true }
-  }
-
-  componentDidCatch(error, errorInfo) {
-    console.error('App Error:', error, errorInfo)
-  }
-
-  render() {
-    if (this.state.hasError) {
-      return <div>Something went wrong. Please refresh the page.</div>
-    }
-
-    return this.props.children
-  }
-}
-
-const root = createRoot(document.getElementById('root'))
-
+// Render the app
+const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
-    <ErrorBoundary>
-      <Provider store={store}>
-        <RouterProvider router={router} />
-      </Provider>
-    </ErrorBoundary>
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   </React.StrictMode>
 )
-
-console.log('App: Initial render complete')

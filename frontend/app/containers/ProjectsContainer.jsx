@@ -7,7 +7,19 @@ import BigHeadline from './../components/text/BigHeadline.jsx'
 import Box from './../components/Box.jsx'
 
 const ProjectsContainer = () => {
-  const { projects, isAdmin } = useLoaderData()
+  const data = useLoaderData()
+  const projects = data?.projects || []
+  const isAdmin = data?.isAdmin || false
+
+  if (!projects || projects.length === 0) {
+    return (
+      <Box>
+        <div className="text-center">
+          <i className="fa fa-spinner fa-spin fa-3x"></i>
+        </div>
+      </Box>
+    )
+  }
 
   const newButton = isAdmin ? (
     <div className="form-group">

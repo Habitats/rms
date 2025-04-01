@@ -1,18 +1,26 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Photo from './../photo/Photo.jsx'
-import HeadlineOverlay from './../text/HeadlineOverlay.jsx'
+import Photo from '../photo/Photo.jsx'
+import HeadlineOverlay from '../text/HeadlineOverlay.jsx'
 import useMediaQuery from '../../hooks/useMediaQuery'
 
-const ProductItem = ({ product: { title, src }, linkTo, height, className }) => {
-  const isSmall = useMediaQuery('only screen and (max-width: 767px)');
-  const isMedium = useMediaQuery('only screen and (max-width: 991px)');
+const ProductItem = ({ product: { title, src }, linkTo, height = 250, className = 'col-md-6 col-sm-12 col-xs-6 col-md-offset-0' }) => {
+  const isSmall = useMediaQuery('only screen and (max-width: 767px)')
+  const isMedium = useMediaQuery('only screen and (min-width: 768px)')
+  const isLarge = useMediaQuery('only screen and (min-width: 992px)')
+
+  // Calculate height based on screen size
+  const calculatedHeight = isSmall 
+    ? height * 0.8 
+    : isMedium 
+      ? height * 0.7 
+      : height
 
   const style = {
     box: {
-      paddingLeft: isSmall ? 0 : isMedium ? 0 : 15,
-      marginBottom: isSmall ? 15 : isMedium ? 15 : 30,
-      height: isSmall ? height * 0.8 : isMedium ? height * 0.7 : height
+      paddingLeft: isLarge ? 15 : 0,
+      marginBottom: isLarge ? 30 : 15,
+      height: calculatedHeight
     }
   }
 
@@ -25,17 +33,12 @@ const ProductItem = ({ product: { title, src }, linkTo, height, className }) => 
   )
 }
 
-ProductItem.defaultProps = {
-  height: 250,
-  className: 'col-md-6 col-sm-12 col-xs-6 col-md-offset-0'
-}
-
 ProductItem.propTypes = {
   product: PropTypes.shape({
     title: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
     src: PropTypes.string.isRequired
-  }).isRequired,
+  }),
   linkTo: PropTypes.string.isRequired,
   className: PropTypes.string,
   height: PropTypes.number

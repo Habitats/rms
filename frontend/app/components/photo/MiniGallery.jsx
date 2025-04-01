@@ -1,120 +1,250 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
+import Draggable from 'react-draggable'
 import Photo from './Photo.jsx'
 import CoverPhoto from './CoverPhoto.jsx'
-import Draggable, {DraggableCore} from 'react-draggable'
-import {SM, XS} from '../../vars'
 import useMediaQuery from '../../hooks/useMediaQuery'
+import { SM, XS } from '../../vars'
 
-const MiniGallery = (props) => {
-  const [selected, setSelected] = useState(null);
-  const [startX, setStartX] = useState(0);
-  const isSmall = useMediaQuery('only screen and (max-width: 767px)');
-  const isMedium = useMediaQuery('only screen and (max-width: 991px)');
+const MiniGallery = ({ images, height = 350, orientation = 'horizontal' }) => {
+  const [selected, setSelected] = useState(null)
+  const [startX, setStartX] = useState(0)
+  const [deltaX, setDeltaX] = useState(0)
+  const [small, setSmall] = useState(false)
+  const mql = window.matchMedia('only screen and (max-width: 991px)')
 
   useEffect(() => {
-    setSelected(null);
-  }, [props.images]);
-
-  const onSelect = useCallback((newSelected) => {
-    setSelected(newSelected);
-  }, []);
-
-  const onRightSelect = useCallback((images, currentSelected) => {
-    const selectedIndex = images.indexOf(currentSelected);
-    const newSelectedIndex = (selectedIndex + 1) % images.length;
-    const newStartX = newSelectedIndex <= 3 ? 0 : 
-                     (images.length - newSelectedIndex) <= 3 ? startX : 
-                     (-(newSelectedIndex - 3) * 103);
-    
-    setSelected(images[newSelectedIndex]);
-    setStartX(newStartX);
-  }, [startX]);
-
-  const onLeftSelect = useCallback((images, currentSelected) => {
-    const selectedIndex = images.indexOf(currentSelected);
-    const newSelectedIndex = selectedIndex === 0 ? images.length - 1 : selectedIndex - 1;
-    const newStartX = newSelectedIndex <= 3 ? 0 : 
-                     (images.length - newSelectedIndex) <= 3 ? startX : 
-                     (-(newSelectedIndex - 3) * 103);
-    
-    setSelected(images[newSelectedIndex]);
-    setStartX(newStartX);
-  }, [startX]);
-
-  const onDragStop = useCallback((e, data) => {
-    setStartX(data.x);
-  }, []);
-
-  const { images, orientation, height, thumbHeight } = props;
-  const DraggableComponent = isSmall ? DraggableCore : Draggable;
-
-  const style = {
-    container: {
-      height: isSmall ? height * XS : isMedium ? height * SM : height
-    },
-    thumbnails: {
-      height: isSmall ? thumbHeight * XS : isMedium ? thumbHeight * SM : thumbHeight
+    const handleMediaChange = () => {
+      if (mql.matches) {
+        setSmall(true)
+      } else {
+        setSmall(false)
+      }
     }
-  };
+
+    handleMediaChange()
+    mql.addListener(handleMediaChange)
+
+    return () => {
+      mql.removeListener(handleMediaChange)
+    }
+  }, [mql])
+
+  const onSelect = (selected) => {
+    setSelected(selected)
+  }
+
+  const onRightSelect = (images, selected) => {
+    const selectedIndex = images.indexOf(selected)
+    const newSelectedIndex = (selectedIndex + 1) % images.length
+    const startX = newSelectedIndex <= 3 ? 0 : (images.length - newSelectedIndex) <= 3 ? startX : (-(newSelectedIndex - 3) * 103)
+    setSelected(images[newSelectedIndex])
+    setStartX(startX)
+  }
+
+  const onLeftSelect = (images, selected) => {
+    const selectedIndex = images.indexOf(selected)
+    const newSelectedIndex = ((selectedIndex - 1) + images.length) % images.length
+    const startX = newSelectedIndex <= 3 ? 0 : (images.length - newSelectedIndex) <= 3 ? startX : (-(newSelectedIndex - 3) * 103)
+    setSelected(images[newSelectedIndex])
+    setStartX(startX)
+  }
+
+  const handleDrag = (e, ui) => {
+    setDeltaX(prevDeltaX => prevDeltaX + ui.deltaX)
+  }
+
+  const horizontal = (images, cover, height, startX) => {
+    const style = {
+      cover: {
+        paddingRight: 15,
+        '@media only screen and (max-width: 767px)': {
+          height: height * XS
+        },
+        '@media only screen and (min-width: 768px)': {
+          height: height * SM
+        },
+        '@media only screen and (min-width: 992px)': {
+          height: height
+        }
+      },
+      thumbs: {
+        maxHeight: 200,
+        zIndex: 200,
+        overflow: 'hidden',
+        width: '100%'
+      },
+      scroller: {
+        marginTop: 15,
+        height: 80,
+        left: startX,
+        position: 'relative',
+        width: images.length * 115 - 15,
+      },
+      photo: {
+        paddingBottom: 0,
+        paddingLeft: 0,
+        paddingTop: 0,
+        paddingRight: 15,
+        float: 'none',
+        display: 'inline-block',
+        '@media only screen and (max-width: 767px)': {
+          height: 60,
+          width: 80,
+        },
+        '@media only screen and (min-width: 768px)': {
+          height: 90,
+          width: 103
+        },
+      }
+    }
+
+    const classes = {
+      cover: 'col-xs-12',
+      thumbs: 'col-xs-3',
+      thumbWrapper: 'col-xs-12'
+    }
+
+    const bound = images.length <= 7 ? 0 : -((images.length - 7) * 103)
+    return (
+      <div className="row mini-gallery">
+        <div className={classes.cover} style={style.cover}>
+          <CoverPhoto 
+            src={cover.src} 
+            onRightSelect={() => onRightSelect(images, cover)}
+            onLeftSelect={() => onLeftSelect(images, cover)}
+          />
+        </div>
+        {images.length > 1 && (
+          <div className={classes.thumbWrapper}>
+            <div style={style.thumbs}>
+              <Draggable 
+                axis="x" 
+                zIndex={100} 
+                onDrag={handleDrag} 
+                bounds={{top: 0, left: bound, right: 0, bottom: 0}}
+              >
+                <div style={style.scroller}>
+                  {images.map(image => (
+                    <div key={image.src} style={style.photo}>
+                      <Photo 
+                        className={classes.thumbs} 
+                        src={image.src} 
+                        size={'low'}
+                        onClick={() => onSelect(image)} 
+                        selected={cover === image}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </Draggable>
+            </div>
+          </div>
+        )}
+      </div>
+    )
+  }
+
+  const vertical = (images, cover, height) => {
+    const style = {
+      cover: {
+        paddingRight: images.length > 1 ? 0 : null,
+        height: height
+      },
+      thumbs: {
+        padding: 0,
+        marginLeft: -15
+      },
+      scroller: {
+        height: height,
+        overflowY: 'auto',
+        padding: 0,
+        overflowX: 'hidden'
+      },
+      photo: {
+        paddingBottom: 15,
+        paddingLeft: 15,
+        paddingTop: 0,
+        paddingRight: 0,
+        '@media only screen and (max-width: 767px)': {
+          height: 60,
+        },
+        '@media only screen and (min-width: 768px)': {
+          height: 90,
+        },
+      }
+    }
+
+    const classes = {
+      cover: images.length === 1 ? 'col-xs-12' : images.length > 10 ? 'col-xs-8' : 'col-xs-9',
+      thumbs: images.length > 10 ? 'col-md-6 col-xs-12' : 'col-xs-12',
+      thumbWrapper: images.length > 10 ? 'col-xs-4' : 'col-xs-3'
+    }
+
+    return (
+      <div className="row mini-gallery">
+        <div className={classes.cover} style={style.cover}>
+          <CoverPhoto 
+            src={cover.src} 
+            onRightSelect={() => onRightSelect(images, cover)}
+            onLeftSelect={() => onLeftSelect(images, cover)}
+          />
+        </div>
+        {images.length > 1 && (
+          <div className={classes.thumbWrapper}>
+            <div style={style.thumbs}>
+              <div style={style.scroller}>
+                {images.map(image => (
+                  <div style={style.photo} className={classes.thumbs} key={image.src}>
+                    <Photo 
+                      onClick={() => onSelect(image)} 
+                      src={image.src} 
+                      size={'low'} 
+                      selected={cover === image}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    )
+  }
+
+  const main = () => images.find(i => i.src.includes('main.jpg'))
+  const cover = selected || (main() || (images.length > 0 ? images[0] : null))
+  
+  if (!cover) {
+    return null
+  }
+
+  const galleryHeight = images.length > 1 ? height : height * 0.75
 
   return (
     <div>
-      <div style={style.container}>
-        <CoverPhoto
-          src={selected ? selected.src : images[0].src}
-          onRightSelect={() => onRightSelect(images, selected || images[0])}
-          onLeftSelect={() => onLeftSelect(images, selected || images[0])}
-        />
-      </div>
-      <div style={style.thumbnails}>
-        <DraggableComponent
-          axis="x"
-          bounds={{ left: -(images.length - 4) * 103, right: 0 }}
-          onStop={onDragStop}
-          position={{ x: startX, y: 0 }}
-        >
-          <div style={{ position: 'relative', width: images.length * 103 }}>
-            {images.map((image, index) => (
-              <div
-                key={image.src}
-                style={{
-                  display: 'inline-block',
-                  width: 103,
-                  height: '100%',
-                  padding: 5,
-                  cursor: 'pointer'
-                }}
-                onClick={() => onSelect(image)}
-              >
-                <Photo
-                  src={image.src}
-                  height="100%"
-                  selected={selected === image}
-                  size="low"
-                />
-              </div>
-            ))}
-          </div>
-        </DraggableComponent>
-      </div>
+      {images.length === 1 ? (
+        <div style={{height: galleryHeight}}>
+          <Photo src={cover.src}/>
+        </div>
+      ) : (
+        <div>
+          {small ? 
+            horizontal(images, cover, galleryHeight, startX) :
+            orientation === 'horizontal' ? 
+              horizontal(images, cover, galleryHeight) : 
+              vertical(images, cover, galleryHeight)
+          }
+        </div>
+      )}
     </div>
-  );
-};
+  )
+}
 
 MiniGallery.propTypes = {
-  images: PropTypes.arrayOf(PropTypes.shape({
-    src: PropTypes.string.isRequired
-  })).isRequired,
-  orientation: PropTypes.oneOf(['horizontal', 'vertical']),
-  height: PropTypes.number,
-  thumbHeight: PropTypes.number
-};
+  images: PropTypes.array.isRequired,
+  orientation: PropTypes.string,
+  height: PropTypes.number
+}
 
-MiniGallery.defaultProps = {
-  orientation: 'horizontal',
-  height: 400,
-  thumbHeight: 100
-};
-
-export default MiniGallery;
+export default MiniGallery

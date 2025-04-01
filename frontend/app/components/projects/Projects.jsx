@@ -20,5 +20,18 @@ export default class Projects extends Component {
 }
 
 Projects.propTypes = {
-  projects: PropTypes.array.isRequired
+  projects: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      modified: PropTypes.string.isRequired,
+      images: PropTypes.arrayOf(
+        PropTypes.shape({
+          src: PropTypes.string.isRequired,
+          title: PropTypes.string.isRequired
+        })
+      ).isRequired
+    })
+  ).isRequired
 }

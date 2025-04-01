@@ -13,8 +13,15 @@ const Box = ({ children, style: propStyle }) => {
     position: 'relative',
     width: '100%',
     boxShadow: '0 0 35px 3px rgba(0, 0, 0, 0.16)',
-    padding: isSmall ? V.MARGIN_XS : V.MARGIN_SM,
-    marginBottom: isSmall ? 0 : 20,
+    '@media only screen and (max-width: 767px)': {
+      padding: V.MARGIN_XS,
+      width: '100%',
+      marginBottom: 0
+    },
+    '@media only screen and (min-width: 768px)': {
+      padding: V.MARGIN_SM,
+      marginBottom: 20
+    },
     ...propStyle
   }
 

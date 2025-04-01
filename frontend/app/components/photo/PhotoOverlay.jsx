@@ -2,37 +2,33 @@ import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 
 const PhotoOverlay = ({ toggled: initialToggled, src }) => {
-  const [state, setState] = useState({
-    toggled: initialToggled
-  });
+  const [toggled, setToggled] = useState(initialToggled)
 
   useEffect(() => {
-    if (initialToggled) {
-      setState(prev => ({ ...prev, toggled: initialToggled }));
-    }
-  }, [initialToggled]);
-
-  useEffect(() => {
-    const handleEscapeKeyDown = (e) => {
-      if ((e.key === 'Escape' || e.keyCode === 27) && state.toggled) {
-        e.stopPropagation();
-        e.preventDefault();
-        toggle();
-      }
-    };
-
-    if (state.toggled) {
-      window.addEventListener('keydown', handleEscapeKeyDown);
-    }
-
-    return () => {
-      window.removeEventListener('keydown', handleEscapeKeyDown);
-    };
-  }, [state.toggled]);
+    setToggled(initialToggled)
+  }, [initialToggled])
 
   const toggle = () => {
-    setState(prev => ({ ...prev, toggled: !prev.toggled }));
-  };
+    setToggled(!toggled)
+    removeListener()
+  }
+
+  const handleEscapeKeyDown = (e) => {
+    if ((e.key === 'Escape' || e.keyCode === 27) && toggled) {
+      e.stopPropagation()
+      e.preventDefault()
+      toggle()
+    }
+  }
+
+  useEffect(() => {
+    if (toggled) {
+      window.addEventListener('keydown', handleEscapeKeyDown)
+    }
+    return () => {
+      window.removeEventListener('keydown', handleEscapeKeyDown)
+    }
+  }, [toggled])
 
   const overlayStyle = {
     position: 'fixed',
@@ -45,7 +41,7 @@ const PhotoOverlay = ({ toggled: initialToggled, src }) => {
     top: 0,
     left: 0,
     zIndex: 1000
-  };
+  }
 
   const overlayPhotoStyle = {
     position: 'fixed',
@@ -56,39 +52,36 @@ const PhotoOverlay = ({ toggled: initialToggled, src }) => {
     top: 0,
     left: 0,
     zIndex: 1000
-  };
+  }
 
   const wrapperStyle = {
     margin: 'auto 0',
     width: '100%',
     position: 'relative'
-  };
-
-  if (state.toggled) {
-    return (
-      <div style={overlayStyle} onClick={toggle}>
-        <div style={overlayPhotoStyle}>
-          <div style={wrapperStyle}>
-            <img src={src} alt="Overlay" style={{ maxHeight: '100vh', maxWidth: '100vw' }} />
-          </div>
-        </div>
-      </div>
-    );
   }
 
-  return null;
-};
+  return (
+    <div>
+      {toggled && (
+        <div>
+          <div style={overlayStyle} onClick={toggle}></div>
+          <div style={overlayPhotoStyle} onClick={toggle}>
+            <div style={wrapperStyle}>
+              <img src={src + '/raw'} style={{maxWidth: '70%', maxHeight: '70%', marginTop: 50}}/>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
 
 PhotoOverlay.propTypes = {
-  toggled: PropTypes.bool,
+  toggled: PropTypes.bool.isRequired,
   src: PropTypes.string.isRequired
-};
+}
 
-PhotoOverlay.defaultProps = {
-  toggled: false
-};
-
-export default PhotoOverlay;
+export default PhotoOverlay
 
 
 

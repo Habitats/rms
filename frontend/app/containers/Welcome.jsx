@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { useLoaderData } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import Carousel from './../components/photo/Carousel.jsx'
@@ -9,9 +8,11 @@ import Features from './../components/feature/Features.jsx'
 import Box from './../components/Box.jsx'
 import ProductItems from './../components/product/ProductItems.jsx'
 import useMediaQuery from '../hooks/useMediaQuery'
+import { useProducts } from '../hooks/useProducts'
+import { ProductProvider } from '../contexts/ProductContext'
 
 const Welcome = () => {
-  const { categories, loading, error } = useLoaderData()
+  const { data: categories, isLoading: loading, error } = useProducts()
   const isSmall = useMediaQuery('only screen and (max-width: 767px)');
 
   if (loading) {
@@ -29,7 +30,7 @@ const Welcome = () => {
       <Box>
         <div className="text-center text-danger">
           <h3>Error loading products</h3>
-          <p>{error}</p>
+          <p>{error.message}</p>
         </div>
       </Box>
     )
@@ -48,28 +49,38 @@ const Welcome = () => {
   const ready = categories && categories.hasOwnProperty('sub')
   const catBig = ready ? (
     <ProductItems 
-      items={categories.sub.slice(0, 2)}
+      products={categories.sub.slice(0, 2)}
       height={isSmall ? 200 : 270}
       className="col-sm-6 col-xs-12" 
       parentRoute="/produkter"
     />
   ) : null
 
+  const catSmall = ready ? (
+    <ProductItems 
+      products={categories.sub.slice(2, 5)}
+      height={isSmall ? 200 : 170}
+      className="col-sm-4 col-xs-12" 
+      parentRoute="/produkter"
+    />
+  ) : null
+
   return (
-    <div>
-      <Carousel images={images} />
-      <Box>
-        <BigHeadline big="Velkommen til Romerike Markiseservice" small="Din lokale markiseleverandør"/>
-        <div className="row">
-          <div className="col-sm-6">
-          {catBig}
+    <ProductProvider>
+      <div>
+        <Box>
+          <Carousel images={images} />
+          <Features />
+        </Box>
+        <Box>
+          <BigHeadline big="Våre tjenester" />
+          <div className="row">
+            {catBig}
+            {catSmall}
           </div>
-          <div className="col-sm-6">
-            <Features />
-          </div>
-        </div>
-      </Box>
-    </div>
+        </Box>
+      </div>
+    </ProductProvider>
   )
 }
 

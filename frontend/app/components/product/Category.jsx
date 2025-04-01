@@ -1,10 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { useLoaderData } from 'react-router-dom'
 import ProductItems from './ProductItems.jsx'
 
-const Category = () => {
-  const { category } = useLoaderData()
+const Category = ({ category }) => {
   const { title, id, sub } = category
 
   return (

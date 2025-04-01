@@ -132,105 +132,82 @@ const ContactForm = ({ subject: initialSubject }) => {
   }
 
   return (
-    <div style={style.container}>
-      <form onSubmit={handleSubmit} style={style.form}>
-        <div className="form-group">
-          <label htmlFor="subject">Emne</label>
-          <input
-            type="text"
-            className="form-control"
-            id="subject"
-            name="subject"
-            value={formData.subject}
-            onChange={handleChange}
-            placeholder="Emne"
-            style={style.input}
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="name">Navn</label>
-          <input
-            type="text"
-            className="form-control"
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            placeholder="Navn"
-            style={style.input}
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="contactPhone">Telefon</label>
-          <input
-            type="tel"
-            className="form-control"
-            id="contactPhone"
-            name="contactPhone"
-            value={formData.contactPhone}
-            onChange={handleChange}
-            placeholder="Telefon"
-            style={style.input}
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="contactEmail">E-post</label>
-          <input
-            type="email"
-            className="form-control"
-            id="contactEmail"
-            name="contactEmail"
-            value={formData.contactEmail}
-            onChange={handleChange}
-            placeholder="E-post"
-            style={style.input}
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="message">Melding</label>
-          <textarea
-            className="form-control"
-            id="message"
-            name="message"
-            value={formData.message}
-            onChange={handleChange}
-            rows="3"
-            placeholder="Melding"
-            style={style.textarea}
-          />
-        </div>
-
-        <button
-          type="submit"
-          disabled={!isValid() || isSubmitting}
-          style={{
-            ...style.button,
-            ...(isSubmitting ? style.buttonDisabled : {})
-          }}
-        >
-          {isSubmitting ? (
-            <div style={style.loading}>
-              <FontAwesomeIcon icon={faSpinner} spin /> Sender...
+    <div className="row">
+      <div className="col-xs-12" style={style.container}>
+        <form onSubmit={handleSubmit} style={style.form}>
+          <div className="form-group">
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              className="form-control"
+              placeholder="Navn"
+              required
+              style={style.input}
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              className="form-control"
+              placeholder="E-post"
+              required
+              style={style.input}
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="tel"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              className="form-control"
+              placeholder="Telefon"
+              style={style.input}
+            />
+          </div>
+          <div className="form-group">
+            <textarea
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
+              className="form-control"
+              placeholder="Melding"
+              required
+              style={style.textarea}
+            />
+          </div>
+          <button
+            type="submit"
+            className="btn btn-primary"
+            disabled={isSubmitting}
+            style={{...style.button, ...(isSubmitting ? style.buttonDisabled : {})}}
+          >
+            {isSubmitting ? (
+              <div style={style.loading}>
+                <FontAwesomeIcon icon={faSpinner} spin />
+                <span>Sender...</span>
+              </div>
+            ) : (
+              'Send'
+            )}
+          </button>
+          {submitStatus === 'success' && (
+            <div style={{ ...style.status, ...style.success }}>
+              Meldingen din er sendt! Vi vil kontakte deg snart.
             </div>
-          ) : (
-            'Send'
           )}
-        </button>
-      </form>
-      {submitStatus === 'success' && (
-        <div style={{ ...style.status, ...style.success }}>
-          Meldingen din er sendt! Vi vil kontakte deg snart.
-        </div>
-      )}
-      {submitStatus === 'error' && (
-        <div style={{ ...style.status, ...style.error }}>
-          Det oppstod en feil. Vennligst prøv igjen senere.
-        </div>
-      )}
+          {submitStatus === 'error' && (
+            <div style={{ ...style.status, ...style.error }}>
+              Det oppstod en feil. Vennligst prøv igjen senere.
+            </div>
+          )}
+        </form>
+      </div>
     </div>
   )
 }

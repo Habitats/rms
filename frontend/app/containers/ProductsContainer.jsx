@@ -12,14 +12,14 @@ import Link from '../components/Link.jsx'
 import useMediaQuery from '../hooks/useMediaQuery'
 
 const ProductsContainer = () => {
-  const { categories, isAdmin } = useLoaderData()
+  const { products, isAdmin } = useLoaderData()
   const { categoryId, productId } = useParams()
   const children = useOutletContext()
   
   const isSmall = useMediaQuery('only screen and (max-width: 767px)')
   const isMedium = useMediaQuery('only screen and (max-width: 991px)')
 
-  if (!categories || !categories.hasOwnProperty('sub')) {
+  if (!products || !products.sub || products.sub.length === 0) {
     return (
       <Box>
         <div className="text-center">
@@ -46,7 +46,11 @@ const ProductsContainer = () => {
 
   const content = (
     <div className="col-sm-9">
-      {children}
+      {children || (
+        <Box>
+          <ProductItems products={products.sub} />
+        </Box>
+      )}
     </div>
   )
 
