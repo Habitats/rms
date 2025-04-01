@@ -48,7 +48,13 @@ const ProductsContainer = () => {
   }, [categories, dispatch, mql, mqlm])
 
   if (!categories || !categories.hasOwnProperty('sub')) {
-    return null
+    return (
+      <Box>
+        <div className="text-center">
+          <i className="fa fa-spinner fa-spin fa-3x"></i>
+        </div>
+      </Box>
+    )
   }
 
   const addProduct = session.admin ? (
@@ -114,8 +120,10 @@ const ProductsContainer = () => {
 }
 
 ProductsContainer.propTypes = {
-  children: PropTypes.element,
-  categories: PropTypes.object.isRequired
+  session: PropTypes.shape({
+    admin: PropTypes.bool.isRequired,
+    username: PropTypes.string
+  })
 }
 
 export default ProductsContainer

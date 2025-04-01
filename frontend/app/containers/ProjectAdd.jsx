@@ -1,7 +1,7 @@
-import React, {Component} from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
-import {useNavigate} from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
 import MediumHeadline from './../components/text/MediumHeadline.jsx'
 import Photo from './../components/photo/Photo.jsx'
 import Left from './../components/Left.jsx'
@@ -10,179 +10,180 @@ import Box from './../components/Box.jsx'
 import SimpleLabel from './../components/text/SimpleLabel.jsx'
 import * as generalActions from '../redux/actions/GeneralActions'
 
-function ProjectAddWrapper(props) {
-  const navigate = useNavigate();
-  return <ProjectAdd {...props} navigate={navigate} />;
-}
+const ProjectAdd = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const { id } = useParams()
+  
+  const { images, projects } = useSelector(state => ({
+    images: state.general.images,
+    projects: state.general.projects
+  }))
 
-class ProjectAdd extends Component {
+  const [state, setState] = useState({
+    chosenImages: new Map(),
+    description: '',
+    title: '',
+    id: null,
+    error: ''
+  })
 
-  constructor(props) {
-    super(props)
-    this.state = ({
-      chosenImages: new Map(),
-      description: '',
-      title: '',
-      id: null,
-      error: ''
-    })
-    this.setProject(this.props.params.id)
-  }
+  useEffect(() => {
+    dispatch(generalActions.fetchProjects())
+    dispatch(generalActions.fetchImages())
+  }, [dispatch])
 
-  setProject(id) {
-    if (this.props.projects.find(p => p.id === id)) {
-      const project = this.props.projects.find(p => p.id === id)
-      this.setState({
+  useEffect(() => {
+    if (id && projects.find(p => p.id === id)) {
+      const project = projects.find(p => p.id === id)
+      setState(prev => ({
+        ...prev,
         description: project.description,
         title: project.title,
         id: project.id,
         chosenImages: new Map(project.images.map(i => [i.src, i]))
-      })
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setProject(nextProps.params.id)
-  }
-
-  componentWillMount() {
-    this.props.dispatch(generalActions.fetchProjects())
-    this.props.dispatch(generalActions.fetchImages())
-  }
-
-  handleTitleChange(event) {
-    this.setState({title: event.target.value})
-  }
-
-  handleDescriptionChange(event) {
-    this.setState({description: event.target.value})
-  }
-
-  handleImagesChange(event) {
-    this.setState({images: event.target.value.split(',')})
-  }
-
-  onSelect(src) {
-    const chosenImages = this.state.chosenImages
-    if (chosenImages.has(src)) {
-      chosenImages.delete(src)
-    } else {
-      const image = this.props.images.find(i => i.src === src)
-      chosenImages.set(src, image)
-    }
-    this.setState({chosenImages: chosenImages})
-  }
-
-  isValid() {
-    return this.state.chosenImages.size > 0 && this.state.title.length > 0 && this.state.description.length > 0
-  }
-
-  onSave() {
-    if (this.isValid()) {
-      this.props.dispatch(generalActions.save({
-        id: this.state.id || this.props.projects.map(p => parseInt(p.id)).reduce((a, b) => Math.max(a, b)) + 1,
-        title: this.state.title,
-        description: this.state.description,
-        images: Array.from(this.state.chosenImages.values())
       }))
-      this.props.navigate('/referanser')
+    }
+  }, [id, projects])
+
+  const handleTitleChange = (event) => {
+    setState(prev => ({ ...prev, title: event.target.value }))
+  }
+
+  const handleDescriptionChange = (event) => {
+    setState(prev => ({ ...prev, description: event.target.value }))
+  }
+
+  const onSelect = (src) => {
+    setState(prev => {
+      const chosenImages = new Map(prev.chosenImages)
+      if (chosenImages.has(src)) {
+        chosenImages.delete(src)
+      } else {
+        const image = images.find(i => i.src === src)
+        chosenImages.set(src, image)
+      }
+      return { ...prev, chosenImages }
+    })
+  }
+
+  const isValid = () => {
+    return state.chosenImages.size > 0 && state.title.length > 0 && state.description.length > 0
+  }
+
+  const onSave = () => {
+    if (isValid()) {
+      dispatch(generalActions.save({
+        id: state.id || projects.map(p => parseInt(p.id)).reduce((a, b) => Math.max(a, b)) + 1,
+        title: state.title,
+        description: state.description,
+        images: Array.from(state.chosenImages.values())
+      }))
+      navigate('/referanser')
     } else {
-      this.setState({error: 'Fyll ut alle felt og velg noen bilder!'})
+      setState(prev => ({ ...prev, error: 'Fyll ut alle felt og velg noen bilder!' }))
     }
   }
 
-  onRemove() {
-    this.props.dispatch(generalActions.removeProject(this.state.id))
-    this.props.navigate('/referanser')
+  const onRemove = () => {
+    dispatch(generalActions.removeProject(state.id))
+    navigate('/referanser')
   }
 
-  render() {
-    const {projects, images, dispatch, navigate} = this.props
-    const {chosenImages, error, title, description, id} = this.state
+  const { chosenImages, error, title, description, id: stateId } = state
 
-    const chosenLabels = Array.from(chosenImages.values()).map(i => <SimpleLabel key={i.src} text={i.title}/>)
+  const chosenLabels = Array.from(chosenImages.values()).map(i => (
+    <SimpleLabel key={i.src} text={i.title}/>
+  ))
 
-    const usedImages = projects.length > 0 ? [... new Set(projects.filter(p => p.id
-                                                                               !== id).map(p => p.images).reduce((a, b) => a.concat(b)).map(i => i.src))]
-      : []
-    const filteredImages = images.length > 0 ? [... new Set(images.filter(i => !usedImages.includes(i.src)))] : []
-    const photos = filteredImages.map(i => (
-      <div key={i.src} className="col-sm-3 col-xs-6" style={{padding: 0, margin: 0}}>
-        <div className={'photo'} style={{marginBottom: 15, marginLeft: 15}}>
-          <Photo size={'low'}
-                 height={100}
-                 onClick={() => this.onSelect(i.src)}
-                 selected={chosenImages.has(i.src)}
-                 src={i.src}
-          />
-        </div>
+  const usedImages = projects.length > 0 
+    ? [...new Set(projects
+        .filter(p => p.id !== stateId)
+        .map(p => p.images)
+        .reduce((a, b) => a.concat(b))
+        .map(i => i.src))]
+    : []
+
+  const filteredImages = images.length > 0 
+    ? [...new Set(images.filter(i => !usedImages.includes(i.src)))] 
+    : []
+
+  const photos = filteredImages.map(i => (
+    <div key={i.src} className="col-sm-3 col-xs-6" style={{padding: 0, margin: 0}}>
+      <div className={'photo'} style={{marginBottom: 15, marginLeft: 15}}>
+        <Photo 
+          size={'low'}
+          height={100}
+          onClick={() => onSelect(i.src)}
+          selected={chosenImages.has(i.src)}
+          src={i.src}
+        />
       </div>
-    ))
+    </div>
+  ))
 
-    return (
-      <div>
-        <Left>
-          <Box>
-            <form className="form">
-              <div className="form-group">
-                <label>Valgte bilder</label>
-                {chosenLabels}
-              </div>
-            </form>
-          </Box>
-        </Left>
-        <Right>
-          <Box>
-            <MediumHeadline big={id ? 'Endre referanse' : 'Ny referanse'}/>
-
-            <form className="form">
-              <div className="form-group">
-                <label>Tittel</label>
-                <input className="form-control" onChange={this.handleTitleChange.bind(this)} placeholder="Prosjekttittel" type="text"
-                       value={title}/>
-              </div>
-              <div className="form-group">
-                <label>Beskrivelse</label>
-                <textarea className="form-control" onChange={this.handleDescriptionChange.bind(this)}
-                          placeholder="Skriv en prosjektbeskrivelse her." rows="5" value={description}/>
-              </div>
-            </form>
-            <div>{error}</div>
-            <MediumHeadline big="Velg bilder"/>
-            <div className="row" style={{marginRight: 0}}>
-              {photos}
+  return (
+    <div>
+      <Left>
+        <Box>
+          <form className="form">
+            <div className="form-group">
+              <label>Valgte bilder</label>
+              {chosenLabels}
             </div>
-            <div className="row">
-              <div className={`col-xs-${id ? 4 : 6}`}>
-                <button className="btn btn-primary btn-block" onClick={() => navigate(-1)}>Tilbake</button>
-              </div>
-              {id ? <div className={`col-xs-${id ? 4 : 6}`}>
-                <button className="btn btn-primary btn-block" onClick={this.onRemove.bind(this)}>Slett</button>
-              </div> : null }
-              <div className={`col-xs-${id ? 4 : 6}`}>
-                <button className="btn btn-primary btn-block" onClick={this.onSave.bind(this)}>Lagre</button>
-              </div>
+          </form>
+        </Box>
+      </Left>
+      <Right>
+        <Box>
+          <MediumHeadline big={stateId ? 'Endre referanse' : 'Ny referanse'}/>
+
+          <form className="form">
+            <div className="form-group">
+              <label>Tittel</label>
+              <input 
+                className="form-control" 
+                onChange={handleTitleChange} 
+                placeholder="Prosjekttittel" 
+                type="text"
+                value={title}
+              />
             </div>
-          </Box>
-        </Right>
-      </div>
-    )
-  }
+            <div className="form-group">
+              <label>Beskrivelse</label>
+              <textarea 
+                className="form-control" 
+                onChange={handleDescriptionChange}
+                placeholder="Skriv en prosjektbeskrivelse her." 
+                rows="5" 
+                value={description}
+              />
+            </div>
+          </form>
+          <div>{error}</div>
+          <MediumHeadline big="Velg bilder"/>
+          <div className="row" style={{marginRight: 0}}>
+            {photos}
+          </div>
+          <div className="row">
+            <div className={`col-xs-${stateId ? 4 : 6}`}>
+              <button className="btn btn-primary btn-block" onClick={() => navigate(-1)}>Tilbake</button>
+            </div>
+            {stateId ? (
+              <div className={`col-xs-${stateId ? 4 : 6}`}>
+                <button className="btn btn-primary btn-block" onClick={onRemove}>Slett</button>
+              </div>
+            ) : null}
+            <div className={`col-xs-${stateId ? 4 : 6}`}>
+              <button className="btn btn-primary btn-block" onClick={onSave}>Lagre</button>
+            </div>
+          </div>
+        </Box>
+      </Right>
+    </div>
+  )
 }
 
-ProjectAdd.defaultProps = {
-  params: {id: null}
-}
+ProjectAdd.propTypes = {}
 
-ProjectAdd.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  images: PropTypes.array,
-  projects: PropTypes.array,
-  params: PropTypes.shape({id: PropTypes.string}),
-  navigate: PropTypes.func.isRequired
-}
-
-export default connect(state => ({
-  images: state.general.images,
-  projects: state.general.projects
-}))(ProjectAddWrapper)
+export default ProjectAdd

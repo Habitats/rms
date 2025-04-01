@@ -1,112 +1,21 @@
-import React, {Component} from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import Link from './Link.jsx'
 import * as ProductActions from '../redux/actions/ProductActions'
 import * as C from '../colors'
 
-class Header extends Component {
-  componentDidMount() {
-    console.log('Header: componentDidMount called')
-    if (!this.props.categories || Object.keys(this.props.categories).length === 0) {
-      console.log('Header: No categories found, dispatching fetchProducts')
-      this.props.dispatch(ProductActions.fetchProducts())
+const Header = () => {
+  const dispatch = useDispatch()
+  const categories = useSelector(state => state.products)
+
+  useEffect(() => {
+    if (!categories || Object.keys(categories).length === 0) {
+      dispatch(ProductActions.fetchProducts())
     }
-  }
+  }, [categories, dispatch])
 
-  render() {
-    console.log('Header: render called')
-    const {categories} = this.props
-    console.log('Header: categories:', categories)
-
-    if (!categories || !categories.hasOwnProperty('sub')) {
-      console.log('Header: No sub categories found, rendering basic navigation')
-      return (
-        <div>
-          <nav className="navbar navbar-default navbar-fixed-top">
-            <div className="container" style={{maxWidth: 1000}}>
-              <div className="navbar-header">
-                <button className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
-                  <span className="sr-only">Navigasjon</span>
-                  <span className="icon-bar"></span>
-                  <span className="icon-bar"></span>
-                  <span className="icon-bar"></span>
-                </button>
-                <a>
-                  <Link to="/">
-                    <div className="navbar-brand logo"/>
-                  </Link>
-                </a>
-              </div>
-
-              <div className="collapse navbar-collapse" id="navbar-collapse">
-                <div className="visible-xs" style={{marginLeft: 15}}>
-                  <ul className="nav navbar-nav navbar-right">
-                    <li data-toggle="collapse" data-target="#navbar-collapse"><a><Link to="/">Hjem</Link></a></li>
-                    <li data-toggle="collapse" data-target="#navbar-collapse"><a><Link to="/referanser">Referanser</Link></a></li>
-                    <li data-toggle="collapse" data-target="#navbar-collapse"><a><Link to="/produkter">Produkter</Link></a></li>
-                    <li data-toggle="collapse" data-target="#navbar-collapse"><a><Link to="/om">Om</Link></a></li>
-                    <li data-toggle="collapse" data-target="#navbar-collapse"><a><Link to="/kontakt">Kontakt</Link></a></li>
-                  </ul>
-                </div>
-                <div className="hidden-xs">
-                  <ul className="nav pull-right navbar-nav">
-                    <li><a><Link to="/">Hjem</Link></a></li>
-                    <li><a><Link to="/referanser">Referanser</Link></a></li>
-                    <li><a><Link to="/produkter">Produkter</Link></a></li>
-                    <li><a><Link to="/om">Om</Link></a></li>
-                    <li><a><Link to="/kontakt">Kontakt</Link></a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </nav>
-        </div>
-      )
-    }
-
-    const style = {
-      ul: {
-        listStyleType: 'none',
-        paddingLeft: 20,
-        paddingTop: 0,
-        paddingBottom: 0
-      },
-      li: {
-        paddingTop: 10,
-        paddingBottom: 10
-      },
-      a: {
-        color: C.TEXT,
-        fontSize: 12,
-        padding: 0
-      }
-    }
-
-    const fullNav = categories.sub.map(c => {
-      if (c.sub && c.sub.length > 0) {
-        const subProducts = c.sub.map(p =>
-          <li style={style.li} key={p.id} data-toggle="collapse" data-target="#navbar-collapse">
-            <a style={style.a}><Link to={`produkter/${c.id}/${p.id}`}>{p.title}</Link></a>
-          </li>
-        )
-        return (
-          <li style={style.li} key={c.id} data-toggle="collapse" data-target="#navbar-collapse">
-            <a style={style.a}><Link to={`produkter/${c.id}`}>{c.title}</Link></a>
-            <ul style={style.ul}>
-              {subProducts}
-            </ul>
-          </li>
-        )
-      } else {
-        return (
-          <li style={style.li} key={c.id} data-toggle="collapse" data-target="#navbar-collapse">
-            <a style={style.a}><Link to={c.id}>{c.title}</Link></a>
-          </li>
-        )
-      }
-    })
-
+  if (!categories || !categories.hasOwnProperty('sub')) {
     return (
       <div>
         <nav className="navbar navbar-default navbar-fixed-top">
@@ -118,56 +27,89 @@ class Header extends Component {
                 <span className="icon-bar"></span>
                 <span className="icon-bar"></span>
               </button>
-              <a>
-                <Link to="/">
-                  <div className="navbar-brand logo"/>
-                </Link>
-              </a>
+              <Link to="/" className="navbar-brand">
+                <div className="logo"/>
+              </Link>
             </div>
 
             <div className="collapse navbar-collapse" id="navbar-collapse">
               <div className="visible-xs" style={{marginLeft: 15}}>
                 <ul className="nav navbar-nav navbar-right">
-                  <li data-toggle="collapse" data-target="#navbar-collapse"><a><Link to="/">Hjem</Link></a></li>
-                  <li data-toggle="collapse" data-target="#navbar-collapse"><a><Link to="/referanser">Referanser</Link></a></li>
-                  <li className="dropdown">
-                    <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">Produkter <span className="caret"></span>
-                    </a>
-                    <ul className="dropdown-menu" style={style.ul}>
-                      {fullNav}
-                    </ul>
+                  <li data-toggle="collapse" data-target="#navbar-collapse">
+                    <Link to="/">Hjem</Link>
                   </li>
-                  <li data-toggle="collapse" data-target="#navbar-collapse"><a><Link to="/om">Om</Link></a></li>
-                  <li data-toggle="collapse" data-target="#navbar-collapse"><a><Link to="/kontakt">Kontakt</Link></a></li>
+                  <li data-toggle="collapse" data-target="#navbar-collapse">
+                    <Link to="/referanser">Referanser</Link>
+                  </li>
+                  <li data-toggle="collapse" data-target="#navbar-collapse">
+                    <Link to="/produkter">Produkter</Link>
+                  </li>
+                  <li data-toggle="collapse" data-target="#navbar-collapse">
+                    <Link to="/om-oss">Om</Link>
+                  </li>
+                  <li data-toggle="collapse" data-target="#navbar-collapse">
+                    <Link to="/kontakt">Kontakt</Link>
+                  </li>
                 </ul>
               </div>
-              <div className="hidden-xs">
-                <ul className="nav pull-right navbar-nav">
-                  <li><a><Link to="/">Hjem</Link></a></li>
-                  <li><a><Link to="/referanser">Referanser</Link></a></li>
-                  <li><a><Link to="/produkter">Produkter</Link></a></li>
-                  <li><a><Link to="/om">Om</Link></a></li>
-                  <li><a><Link to="/kontakt">Kontakt</Link></a></li>
-                </ul>
-              </div>
+
+              <ul className="nav navbar-nav navbar-right hidden-xs">
+                <li><Link to="/">Hjem</Link></li>
+                <li><Link to="/referanser">Referanser</Link></li>
+                <li><Link to="/produkter">Produkter</Link></li>
+                <li><Link to="/om-oss">Om</Link></li>
+                <li><Link to="/kontakt">Kontakt</Link></li>
+              </ul>
             </div>
           </div>
         </nav>
       </div>
     )
   }
+
+  return (
+    <div>
+      <nav className="navbar navbar-default navbar-fixed-top">
+        <div className="container" style={{maxWidth: 1000}}>
+          <div className="navbar-header">
+            <button className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+              <span className="sr-only">Navigasjon</span>
+              <span className="icon-bar"></span>
+              <span className="icon-bar"></span>
+              <span className="icon-bar"></span>
+            </button>
+            <Link to="/" className="navbar-brand">
+              <div className="logo"/>
+            </Link>
+          </div>
+
+          <div className="collapse navbar-collapse" id="navbar-collapse">
+            <div className="visible-xs" style={{marginLeft: 15}}>
+              <ul className="nav navbar-nav navbar-right">
+                {categories.sub.map(category => (
+                  <li key={category.id} data-toggle="collapse" data-target="#navbar-collapse">
+                    <Link to={`/produkter/${category.id}`}>{category.name}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <ul className="nav navbar-nav navbar-right hidden-xs">
+              {categories.sub.map(category => (
+                <li key={category.id}>
+                  <Link to={`/produkter/${category.id}`}>{category.name}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  )
 }
 
 Header.propTypes = {
-  categories: PropTypes.object,
-  dispatch: PropTypes.func.isRequired,
+  categories: PropTypes.object
 }
 
-Header.defaultProps = {
-  categories: {}
-}
-
-export default connect(state => ({
-  categories: state.products
-}))(Header)
+export default Header

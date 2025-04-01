@@ -1,20 +1,21 @@
-import React, {Component} from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import MenuItem from './MenuItem.jsx'
 import Box from './../Box.jsx'
 import Radium from 'radium'
 import * as V from '../../vars'
 
-class Menu extends Component {
+const Menu = () => {
+  const [state, setState] = useState({
+    transform: 0,
+    menuHeight: 0,
+    expanded: false,
+    filter: ''
+  })
 
-  constructor(props) {
-    super(props)
-    this.state = {transform: 0, menuHeight: 0, expanded: false, filter: ''}
-    this.mounted = false
-    this.handleSearch = (e) => this.setState({filter: e.target.value.toLowerCase()})
-  }
+  const handleSearch = (e) => setState(prev => ({ ...prev, filter: e.target.value.toLowerCase() }))
 
-  matches(categories, filter) {
+  const matches = (categories, filter) => {
     const flat = (p) => p.sub.length === 0 ? [p] : [p].concat(p.sub.flatMap(s => flat(s)))
     const all = flat(categories)
     const matching = all.filter(p => p.title.toLowerCase().includes(filter.toLowerCase()))
@@ -28,50 +29,36 @@ class Menu extends Component {
         }
       }
       matching = new Set(matching)
-      const allMatches = new Set([... newMatches, ...matching])
-      //allMatches.forEach(c => console.log(c.title))
+      const allMatches = new Set([...newMatches, ...matching])
       if (allMatches.size > matching.size) {
         return pushParent(allMatches)
       } else {
         return allMatches
       }
     }
-    return new Set([... pushParent(matching)].map(c => c.id))
+    return new Set([...pushParent(matching)].map(c => c.id))
   }
 
-  render() {
-    const {categories, active, linkTo} = this.props
-    const {filter} = this.state
-    const style = {
-      menu: {
-        transform: `translateY(${this.state.transform}px)`
-      },
-      menuContent: {marginRight: -V.MARGIN_SM, marginLeft: -V.MARGIN_SM + 5},
-      input: {marginRight: -9, marginLeft: -9}
-    }
-    const allMatches = this.matches(categories, filter)
-
-    const cats = categories.sub.map(c =>
-      <MenuItem key={c.id} linkTo={`${linkTo}/${c.id}`} matching={allMatches} product={c} active={active} isRoot={true} style={style}
-                filter={filter}/>
-    )
-    return (
-      <div style={style.menu}>
-        <Box className="rms-menu" shouldPad={false}>
-          <div style={style.input}>
-            <input className="form-control" onChange={this.handleSearch} placeholder="Søk" type="text"/>
-          </div>
-          <div style={style.menuContent}>
-            {cats}
-          </div>
-        </Box>
+  return (
+    <Box>
+      <div className="form-group">
+        <input
+          className="form-control"
+          onChange={handleSearch}
+          placeholder="Søk i produkter"
+          type="text"
+          value={state.filter}
+        />
       </div>
-    )
-  }
-}
-
-Menu.defaultProps = {
-  active: ''
+      <MenuItem
+        active={state.active}
+        filter={state.filter}
+        isRoot={true}
+        matches={matches}
+        product={state.products}
+      />
+    </Box>
+  )
 }
 
 Menu.propTypes = {

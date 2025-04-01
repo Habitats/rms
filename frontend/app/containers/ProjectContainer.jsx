@@ -1,39 +1,30 @@
-import React, {Component} from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { useParams } from 'react-router-dom'
 import Project from './../components/projects/Project.jsx'
 import * as generalActionCreators from '../redux/actions/GeneralActions'
 import NotFound from '../components/NotFound.jsx'
 
-class ProjectContainer extends Component {
+const ProjectContainer = () => {
+  const dispatch = useDispatch()
+  const { id, selected } = useParams()
+  const project = useSelector(state => state.general.project)
 
-  componentWillMount() {
-    this.props.dispatch(generalActionCreators.fetchProject(this.props.params.id))
-  }
+  useEffect(() => {
+    dispatch(generalActionCreators.fetchProject(id))
+  }, [dispatch, id])
 
-  render() {
-    const {project, params} = this.props
-    const selected = parseInt(params.selected)
-    if (!project) {
-      return <NotFound />
-    } else if (project.fetching) {
-      // not ready yet
-      return null
-    } else {
-      return <Project project={project} selected={selected || 0}/>
-    }
+  if (!project) {
+    return <NotFound />
+  } else if (project.fetching) {
+    // not ready yet
+    return null
+  } else {
+    return <Project project={project} selected={parseInt(selected) || 0}/>
   }
 }
 
-ProjectContainer.propTypes = {
-  project: PropTypes.object,
-  dispatch: PropTypes.func.isRequired,
-  params: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    selected: PropTypes.string
-  })
-}
+ProjectContainer.propTypes = {}
 
-export default connect(state => ({
-  project: state.general.project
-}))(ProjectContainer)
+export default ProjectContainer

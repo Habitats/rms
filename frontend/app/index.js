@@ -1,5 +1,5 @@
 import React from 'react'
-import { render } from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import { Provider } from 'react-redux'
 import { RouterProvider } from 'react-router-dom'
 import { StyleRoot } from 'radium'
@@ -46,7 +46,9 @@ class ErrorBoundary extends React.Component {
   }
 }
 
-render(
+const root = createRoot(document.getElementById('root'))
+
+root.render(
   <React.StrictMode>
     <ErrorBoundary>
       <StyleRoot>
@@ -55,8 +57,7 @@ render(
         </Provider>
       </StyleRoot>
     </ErrorBoundary>
-  </React.StrictMode>,
-  document.getElementById('root')
+  </React.StrictMode>
 )
 
 console.log('App: Initial render complete')

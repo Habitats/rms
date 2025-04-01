@@ -1,46 +1,43 @@
-import React, {Component} from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import Link from './../components/Link.jsx'
 import Projects from './../components/projects/Projects.jsx'
 import BigHeadline from './../components/text/BigHeadline.jsx'
 import Box from './../components/Box.jsx'
 import * as generalActionCreators from '../redux/actions/GeneralActions'
 
-class ProjectsContainer extends Component {
+const ProjectsContainer = () => {
+  const dispatch = useDispatch()
+  const { projects, session } = useSelector(state => ({
+    projects: state.general.projects,
+    session: state.session
+  }))
 
-  componentWillMount() {
-    if (this.props.projects.length === 0) {
-      this.props.dispatch(generalActionCreators.fetchProjects())
+  useEffect(() => {
+    if (projects.length === 0) {
+      dispatch(generalActionCreators.fetchProjects())
     }
-  }
+  }, [dispatch, projects.length])
 
-  render() {
-    const {session: {admin}, projects} = this.props
-    const newButton = admin ?
-                      <div className="form-group">
-                        <Link to="/referanser/ny">
-                          <button className="btn btn-default btn-block" type="submit">Legg til nytt prosjekt</button>
-                        </Link>
-                      </div> : null
-    return (
-      <Box>
-        <BigHeadline big="Referanser"/>
-        <Projects projects={projects}/>
-        {newButton}
-      </Box>
-    )
-  }
+  const newButton = session.admin ? (
+    <div className="form-group">
+      <Link to="/referanser/ny">
+        <button className="btn btn-default btn-block" type="submit">Legg til nytt prosjekt</button>
+      </Link>
+    </div>
+  ) : null
+
+  return (
+    <Box>
+      <BigHeadline big="Referanser"/>
+      <Projects projects={projects}/>
+      {newButton}
+    </Box>
+  )
 }
 
-ProjectsContainer.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  projects: PropTypes.array.isRequired,
-  session: PropTypes.object.isRequired
-}
+ProjectsContainer.propTypes = {}
 
-export default connect(state => ({
-  session: state.session,
-  projects: state.general.projects
-}))(ProjectsContainer)
+export default ProjectsContainer
 

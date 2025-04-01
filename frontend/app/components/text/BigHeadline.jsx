@@ -1,69 +1,68 @@
-import React, {Component} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import Link from '../Link.jsx'
 import Radium from 'radium'
 import {HEADING_SMALL, HEADING_BIG} from '../../colors'
 
-class BigHeadline extends Component {
-
-  render() {
-    const {small, big, to} = this.props
-    const style = {
-      box: {
-        '@media only screen and (max-width: 767px)': {
-          marginTop: 20
-        },
-        '@media only screen and (min-width: 768px)': {
-          marginTop: 50
-        }
+const BigHeadline = ({ small, big, to }) => {
+  const style = {
+    box: {
+      '@media only screen and (max-width: 767px)': {
+        marginTop: 20
       },
-      divider: {
-        '@media only screen and (max-width: 767px)': {
-          marginBottom: 30,
-          marginTop: 20
-        },
-        '@media only screen and (min-width: 768px)': {
-          marginBottom: 50,
-          marginTop: 50
-        },
-        '@media only screen and (min-width: 992px)': {
-          marginBottom: 70,
-          marginTop: 70
-        }
-      },
-      big: {
-        paddingBottom: 0,
-        paddingTop: 10,
-        color: HEADING_BIG
-      },
-      small: {
-        color: HEADING_SMALL,
+      '@media only screen and (min-width: 768px)': {
+        marginTop: 50
       }
+    },
+    divider: {
+      '@media only screen and (max-width: 767px)': {
+        marginBottom: 30,
+        marginTop: 20
+      },
+      '@media only screen and (min-width: 768px)': {
+        marginBottom: 50,
+        marginTop: 50
+      },
+      '@media only screen and (min-width: 992px)': {
+        marginBottom: 70,
+        marginTop: 70
+      }
+    },
+    big: {
+      paddingBottom: 0,
+      paddingTop: 10,
+      color: HEADING_BIG
+    },
+    small: {
+      color: HEADING_SMALL,
     }
-    return (
-      <div className="row">
-        <div className="col-lg-12 text-center" style={style.box}>
-          <h5 style={style.small}>
-            {to ? <Link to={to}>{small}</Link> : small}
-          </h5>
-          <h1 style={style.big}>{big}</h1>
-          <hr style={style.divider}/>
-        </div>
-      </div>
-    )
   }
-}
 
-BigHeadline.defaultProps = {
-  small: '',
-  big: '',
-  to: null
+  return (
+    <div className="row">
+      <div className="col-lg-12 text-center" style={style.box}>
+        <h5 style={style.small}>
+          {to ? <Link to={to}>{small}</Link> : small}
+        </h5>
+        <h1 style={style.big}>{big}</h1>
+        <hr style={style.divider}/>
+      </div>
+    </div>
+  )
 }
 
 BigHeadline.propTypes = {
   small: PropTypes.string,
-  big: PropTypes.string,
+  big: PropTypes.string.isRequired,
   to: PropTypes.string
 }
 
-export default Radium(BigHeadline)
+BigHeadline.defaultProps = {
+  small: '',
+  to: null
+}
+
+// Apply Radium styles
+const StyledBigHeadline = Radium(BigHeadline)
+
+export default StyledBigHeadline

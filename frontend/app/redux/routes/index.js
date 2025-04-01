@@ -53,11 +53,6 @@ export const router = createBrowserRouter([
         errorElement: <NotFound />
       },
       {
-        path: "admin",
-        element: <Admin />,
-        errorElement: <NotFound />
-      },
-      {
         path: "referanser/:id",
         element: <ProjectContainer />,
         errorElement: <NotFound />
@@ -65,48 +60,38 @@ export const router = createBrowserRouter([
       {
         path: "produkter",
         element: <ProductsContainer />,
-        errorElement: <NotFound />,
-        children: [
-          {
-            path: ":categoryId",
-            element: <CategoryContainer />,
-            errorElement: <NotFound />
-          },
-          {
-            path: ":categoryId/:productId",
-            element: <ProductContainer />,
-            errorElement: <NotFound />
-          },
-          {
-            path: ":categoryId/:productId/:subId",
-            element: <ProductContainer />,
-            errorElement: <NotFound />
-          },
-          {
-            path: ":categoryId/:productId/:subId/:subSubId",
-            element: <ProductContainer />,
-            errorElement: <NotFound />
-          }
-        ]
+        errorElement: <NotFound />
       },
       {
         path: "produkter/ny",
         element: <ProductAdd />,
+        loader: requireLogin,
         errorElement: <NotFound />
       },
       {
-        path: "produkter/endre/:productId",
-        element: <ProductAdd />,
+        path: "produkter/:categoryId",
+        element: <CategoryContainer />,
         errorElement: <NotFound />
       },
       {
-        path: "om",
+        path: "produkter/:categoryId/:productId",
+        element: <ProductContainer />,
+        errorElement: <NotFound />
+      },
+      {
+        path: "om-oss",
         element: <About />,
         errorElement: <NotFound />
       },
       {
         path: "kontakt",
         element: <Contact />,
+        errorElement: <NotFound />
+      },
+      {
+        path: "admin",
+        element: <Admin />,
+        loader: requireLogin,
         errorElement: <NotFound />
       },
       {

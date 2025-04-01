@@ -9,21 +9,12 @@ import ProductItems from './../components/product/ProductItems.jsx'
 import * as ProductActionCreators from '../redux/actions/ProductActions'
 import Radium from 'radium'
 
-// Component verification wrapper
-const withComponentVerification = (WrappedComponent) => {
-  return function ComponentVerificationWrapper(props) {
-    console.log('Welcome: Component verification wrapper mounted')
-    return <WrappedComponent {...props} />
-  }
-}
-
 const Welcome = () => {
   const dispatch = useDispatch()
   const { categories, loading, error } = useSelector(state => ({
     categories: state.products,
     loading: state.products.loading,
-    error: state.products.error,
-    images: state.images
+    error: state.products.error
   }))
 
   const [isSmall, setIsSmall] = useState(false)
@@ -110,13 +101,11 @@ const Welcome = () => {
 }
 
 Welcome.propTypes = {
-  categories: PropTypes.object,
   loading: PropTypes.bool,
   error: PropTypes.string
 }
 
 Welcome.defaultProps = {
-  categories: {},
   loading: false,
   error: null
 }
@@ -124,7 +113,4 @@ Welcome.defaultProps = {
 // Apply Radium styles
 const StyledWelcome = Radium(Welcome)
 
-// Compose the HOCs in the correct order
-const ComposedWelcome = withComponentVerification(StyledWelcome)
-
-export default ComposedWelcome
+export default StyledWelcome

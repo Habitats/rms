@@ -1,59 +1,59 @@
-import React, {Component} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import Product from './../components/product/Product.jsx'
-import {connect} from 'react-redux'
+import { useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
 import NotFound from '../components/NotFound.jsx'
 
-class ProductContainer extends Component {
+const ProductContainer = () => {
+  const categories = useSelector(state => state.products)
+  const { categoryId, productId, subId, subSubId, selected } = useParams()
 
-  render() {
-    const {categories, params} = this.props
-    const category = categories.sub.find(c => c.id === params.categoryId)
-    const product = category.sub.find(p => p.id === params.productId)
+  const category = categories.sub.find(c => c.id === categoryId)
+  const product = category.sub.find(p => p.id === productId)
 
-    // targets sub sub product
-    if (params.subSubId) {
-      const subProduct = product.sub ? product.sub.find(p => p.id === params.subId) : null
-      const subSubProduct = subProduct.sub ? subProduct.sub.find(p => p.id === params.subSubId) : null
-      if (subSubProduct) {
-        return (
-          <Product product={subSubProduct} category={subProduct.title}
-                   linkTo={`produkter/${category.id}/${product.id}/${subProduct.id}/${subSubProduct.id}`}
-                   selected={params.selected}/>
-        )
-      }
-    }
-    // targets sub product
-    else if (params.subId) {
-      const subProduct = product.sub ? product.sub.find(p => p.id === params.subId) : null
-      if (subProduct) {
-        return (
-          <Product product={subProduct} category={product.title} linkTo={`produkter/${category.id}/${product.id}/${subProduct.id}`}
-                   selected={params.selected}/>
-        )
-      }
-    } else if (product) {
+  // targets sub sub product
+  if (subSubId) {
+    const subProduct = product.sub ? product.sub.find(p => p.id === subId) : null
+    const subSubProduct = subProduct.sub ? subProduct.sub.find(p => p.id === subSubId) : null
+    if (subSubProduct) {
       return (
-        <Product product={product} category={category.title} linkTo={`produkter/${category.id}/${product.id}`}
-                 selected={params.selected}/>
+        <Product 
+          product={subSubProduct} 
+          category={subProduct.title}
+          linkTo={`produkter/${categoryId}/${productId}/${subId}/${subSubId}`}
+          selected={selected}
+        />
       )
-    } else {
-      return <NotFound />
     }
+  }
+  // targets sub product
+  else if (subId) {
+    const subProduct = product.sub ? product.sub.find(p => p.id === subId) : null
+    if (subProduct) {
+      return (
+        <Product 
+          product={subProduct} 
+          category={product.title} 
+          linkTo={`produkter/${categoryId}/${productId}/${subId}`}
+          selected={selected}
+        />
+      )
+    }
+  } else if (product) {
+    return (
+      <Product 
+        product={product} 
+        category={category.title} 
+        linkTo={`produkter/${categoryId}/${productId}`}
+        selected={selected}
+      />
+    )
+  } else {
+    return <NotFound />
   }
 }
 
-ProductContainer.propTypes = {
-  categories: PropTypes.object.isRequired,
-  params: PropTypes.shape({
-    categoryId: PropTypes.string.isRequired,
-    productId: PropTypes.string.isRequired,
-    subId: PropTypes.string,
-    subSubId: PropTypes.string,
-    selected: PropTypes.number
-  })
-}
+ProductContainer.propTypes = {}
 
-export default connect(state => ({
-  categories: state.products
-}))(ProductContainer)
+export default ProductContainer

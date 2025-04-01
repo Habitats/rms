@@ -1,20 +1,16 @@
-import React, {Component} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import Photo from './Photo.jsx'
 import HeadlineOverlay from './../text/HeadlineOverlay.jsx'
 import TextOverlay from './../text/TextOverlay.jsx'
 
-export default class PhotoBig extends Component {
-
-  render() {
-    const {height, width, src, description, title} = this.props
-    return (
-      <Photo crop={true} height={height} width={width} src={src} clickable={true} size={'med'} margin={0}>
-        {title ? <HeadlineOverlay text={title}/> : null}
-        {description ? <TextOverlay text={description}/> : null}
-      </Photo>
-    )
-  }
+const PhotoBig = ({ height, width, src, description, title, onClick }) => {
+  return (
+    <Photo crop={true} height={height} width={width} src={src} clickable={true} size={'med'} margin={0}>
+      {title ? <HeadlineOverlay text={title}/> : null}
+      {description ? <TextOverlay text={description}/> : null}
+    </Photo>
+  )
 }
 
 PhotoBig.propTypes = {
@@ -32,3 +28,5 @@ PhotoBig.defaultProps = {
   width: undefined,
   height: 500
 }
+
+export default PhotoBig

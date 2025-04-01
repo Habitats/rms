@@ -1,87 +1,79 @@
-import React, {Component} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import Photo from './../photo/Photo.jsx'
 import Radium from 'radium'
 
-class Person extends Component {
-
-  render() {
-    const title = this.props.title ? <p><i className="fa fa-user"/>{this.props.title}</p> : ''
-    const phone = this.props.phone ? <p><i className="fa fa-phone"/>{this.props.phone}</p> : ''
-    const {photo, name} = this.props
-    const mailTo = 'mailto:' + this.props.mail
-    const mail = this.props.mail ? <p><i className="fa fa-envelope"/><a href={mailTo}>{this.props.mail}</a></p> : ''
-    const style = {
-      box: {
-        margin: '0 auto',
-        '@media only screen and (max-width: 767px)': {
-          height: 150,
-          maxWidth: 320
-        },
-        '@media only screen and (min-width: 768px)': {
-          height: 170,
-          paddingLeft: 30,
-          maxWidth: 350,
-        },
-        '@media only screen and (min-width: 992px)': {
-          height: 170,
-          paddingLeft: 50,
-          maxWidth: 410,
-        }
+const Person = ({ title, phone, photo, name, mail }) => {
+  const mailTo = 'mailto:' + mail
+  const style = {
+    box: {
+      margin: '0 auto',
+      '@media only screen and (max-width: 767px)': {
+        height: 150,
+        maxWidth: 320
       },
-      photo: {
-        '@media only screen and (max-width: 767px)': {
-          height: 90,
-          width: 90
-        },
-        '@media only screen and (min-width: 768px)': {
-          height: 90,
-          width: 90
-        },
-        '@media only screen and (min-width: 992px)': {
-          height: 110,
-          width: 110,
-        },
-        marginTop: 23,
-        float: 'left',
-        marginRight: 15,
+      '@media only screen and (min-width: 768px)': {
+        height: 170,
+        paddingLeft: 30,
+        maxWidth: 350,
       },
-      text: {
-        '@media only screen and (max-width: 767px)': {
-          maxWidth: 210,
-        },
-        '@media only screen and (min-width: 768px)': {
-          maxWidth: 210,
-        },
-        '@media only screen and (min-width: 992px)': {
-          maxWidth: 240,
-        },
-        float: 'left',
-        margin: '0 auto'
+      '@media only screen and (min-width: 992px)': {
+        height: 170,
+        paddingLeft: 50,
+        maxWidth: 410,
       }
+    },
+    photo: {
+      '@media only screen and (max-width: 767px)': {
+        height: 90,
+        width: 90
+      },
+      '@media only screen and (min-width: 768px)': {
+        height: 90,
+        width: 90
+      },
+      '@media only screen and (min-width: 992px)': {
+        height: 110,
+        width: 110,
+      },
+      marginTop: 23,
+      float: 'left',
+      marginRight: 15,
+    },
+    text: {
+      '@media only screen and (max-width: 767px)': {
+        maxWidth: 210,
+      },
+      '@media only screen and (min-width: 768px)': {
+        maxWidth: 210,
+      },
+      '@media only screen and (min-width: 992px)': {
+        maxWidth: 240,
+      },
+      float: 'left',
+      margin: '0 auto'
     }
-    return (
-      <div className="row" style={style.box}>
-        <div style={style.photo}>
-          <Photo clickable={false} src={photo}/>
-        </div>
-        <div style={style.text}>
-          <h3>{name}</h3>
-          {title}
-          {mail}
-          {phone}
-        </div>
-      </div>
-    )
   }
+
+  return (
+    <div style={style.box}>
+      <Photo src={photo} style={style.photo}/>
+      <div style={style.text}>
+        <h3>{name}</h3>
+        {title ? <p><i className="fa fa-user"/>{title}</p> : null}
+        {phone ? <p><i className="fa fa-phone"/>{phone}</p> : null}
+        {mail ? <p><i className="fa fa-envelope"/><a href={mailTo}>{mail}</a></p> : null}
+      </div>
+    </div>
+  )
 }
 
 Person.propTypes = {
-  mail: PropTypes.string,
   title: PropTypes.string,
   phone: PropTypes.string,
-  name: PropTypes.string,
-  photo: PropTypes.string
+  photo: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  mail: PropTypes.string
 }
 
 export default Radium(Person)

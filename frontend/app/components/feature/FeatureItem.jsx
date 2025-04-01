@@ -1,22 +1,20 @@
-import React, {Component} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
-export default class FeatureItem extends Component {
+const FeatureItem = ({ icon, title, description }) => {
+  const classes = 'fa fa-4x ' + icon
 
-  render() {
-    const classes = 'fa fa-4x ' + this.props.icon
-    return (
-      <div className="text-center" style={{maxWidth: 250, margin: '0 auto'}}>
-        <i className={classes}/>
+  return (
+    <div className="text-center" style={{maxWidth: 250, margin: '0 auto'}}>
+      <i className={classes}/>
 
-        <h3>{this.props.title}</h3>
+      <h3>{title}</h3>
 
-        <div>
-          <p className="text-center">{this.props.description}</p>
-        </div>
+      <div>
+        <p className="text-center">{description}</p>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 FeatureItem.propTypes = {
@@ -24,3 +22,5 @@ FeatureItem.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired
 }
+
+export default FeatureItem
