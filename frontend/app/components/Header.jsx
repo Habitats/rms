@@ -6,18 +6,65 @@ import * as ProductActions from '../redux/actions/ProductActions'
 import * as C from '../colors'
 
 class Header extends Component {
-
-  componentWillMount() {
-    if (Object.keys(this.props.categories).length === 0) {
+  componentDidMount() {
+    console.log('Header: componentDidMount called')
+    if (!this.props.categories || Object.keys(this.props.categories).length === 0) {
+      console.log('Header: No categories found, dispatching fetchProducts')
       this.props.dispatch(ProductActions.fetchProducts())
     }
   }
 
   render() {
+    console.log('Header: render called')
     const {categories} = this.props
-    if (!categories.hasOwnProperty('sub')) {
-      return null
+    console.log('Header: categories:', categories)
+
+    if (!categories || !categories.hasOwnProperty('sub')) {
+      console.log('Header: No sub categories found, rendering basic navigation')
+      return (
+        <div>
+          <nav className="navbar navbar-default navbar-fixed-top">
+            <div className="container" style={{maxWidth: 1000}}>
+              <div className="navbar-header">
+                <button className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+                  <span className="sr-only">Navigasjon</span>
+                  <span className="icon-bar"></span>
+                  <span className="icon-bar"></span>
+                  <span className="icon-bar"></span>
+                </button>
+                <a>
+                  <Link to="/">
+                    <div className="navbar-brand logo"/>
+                  </Link>
+                </a>
+              </div>
+
+              <div className="collapse navbar-collapse" id="navbar-collapse">
+                <div className="visible-xs" style={{marginLeft: 15}}>
+                  <ul className="nav navbar-nav navbar-right">
+                    <li data-toggle="collapse" data-target="#navbar-collapse"><a><Link to="/">Hjem</Link></a></li>
+                    <li data-toggle="collapse" data-target="#navbar-collapse"><a><Link to="/referanser">Referanser</Link></a></li>
+                    <li data-toggle="collapse" data-target="#navbar-collapse"><a><Link to="/produkter">Produkter</Link></a></li>
+                    <li data-toggle="collapse" data-target="#navbar-collapse"><a><Link to="/om">Om</Link></a></li>
+                    <li data-toggle="collapse" data-target="#navbar-collapse"><a><Link to="/kontakt">Kontakt</Link></a></li>
+                  </ul>
+                </div>
+                <div className="hidden-xs">
+                  <ul className="nav pull-right navbar-nav">
+                    <li><a><Link to="/">Hjem</Link></a></li>
+                    <li><a><Link to="/referanser">Referanser</Link></a></li>
+                    <li><a><Link to="/produkter">Produkter</Link></a></li>
+                    <li><a><Link to="/om">Om</Link></a></li>
+                    <li><a><Link to="/kontakt">Kontakt</Link></a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </nav>
+        </div>
+      )
     }
+
     const style = {
       ul: {
         listStyleType: 'none',
@@ -35,8 +82,9 @@ class Header extends Component {
         padding: 0
       }
     }
+
     const fullNav = categories.sub.map(c => {
-      if (c.sub.length > 0) {
+      if (c.sub && c.sub.length > 0) {
         const subProducts = c.sub.map(p =>
           <li style={style.li} key={p.id} data-toggle="collapse" data-target="#navbar-collapse">
             <a style={style.a}><Link to={`produkter/${c.id}/${p.id}`}>{p.title}</Link></a>
@@ -58,6 +106,7 @@ class Header extends Component {
         )
       }
     })
+
     return (
       <div>
         <nav className="navbar navbar-default navbar-fixed-top">
@@ -113,6 +162,10 @@ class Header extends Component {
 Header.propTypes = {
   categories: PropTypes.object,
   dispatch: PropTypes.func.isRequired,
+}
+
+Header.defaultProps = {
+  categories: {}
 }
 
 export default connect(state => ({

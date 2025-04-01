@@ -28,75 +28,91 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
-    errorElement: <NotFound />, // Global error boundary
+    errorElement: <NotFound />,
     children: [
       {
         index: true,
-        element: <Welcome />
+        element: <Welcome />,
+        errorElement: <NotFound />
       },
       {
         path: "referanser",
         element: <References />,
+        errorElement: <NotFound />
       },
       {
         path: "referanser/ny",
         element: <ProjectAdd />,
         loader: requireLogin,
+        errorElement: <NotFound />
       },
       {
         path: "referanser/endre/:id",
         element: <ProjectAdd />,
-        loader: requireLogin
+        loader: requireLogin,
+        errorElement: <NotFound />
       },
       {
         path: "admin",
-        element: <Admin />
+        element: <Admin />,
+        errorElement: <NotFound />
       },
       {
         path: "referanser/:id",
-        element: <ProjectContainer />
+        element: <ProjectContainer />,
+        errorElement: <NotFound />
       },
       {
         path: "produkter",
         element: <ProductsContainer />,
+        errorElement: <NotFound />,
         children: [
           {
             path: ":categoryId",
-            element: <CategoryContainer />
+            element: <CategoryContainer />,
+            errorElement: <NotFound />
           },
           {
             path: ":categoryId/:productId",
-            element: <ProductContainer />
+            element: <ProductContainer />,
+            errorElement: <NotFound />
           },
           {
             path: ":categoryId/:productId/:subId",
-            element: <ProductContainer />
+            element: <ProductContainer />,
+            errorElement: <NotFound />
           },
           {
             path: ":categoryId/:productId/:subId/:subSubId",
-            element: <ProductContainer />
+            element: <ProductContainer />,
+            errorElement: <NotFound />
           }
         ]
       },
       {
         path: "produkter/ny",
-        element: <ProductAdd />
+        element: <ProductAdd />,
+        errorElement: <NotFound />
       },
       {
         path: "produkter/endre/:productId",
-        element: <ProductAdd />
+        element: <ProductAdd />,
+        errorElement: <NotFound />
       },
       {
         path: "om",
-        element: <About />
+        element: <About />,
+        errorElement: <NotFound />
       },
       {
         path: "kontakt",
-        element: <Contact />
+        element: <Contact />,
+        errorElement: <NotFound />
       },
       {
         path: "login",
-        element: <Login />
+        element: <Login />,
+        errorElement: <NotFound />
       },
       {
         path: "*",

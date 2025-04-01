@@ -14,6 +14,6 @@ export const LOGOUT = 'LOGOUT'
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
 export const LOGOUT_FAIL = 'LOGOUT_FAIL'
 
-export const UPDATE_PATH = '@@router/UPDATE_PATH'
+export const NAVIGATE = '@@router/NAVIGATE'
 
 

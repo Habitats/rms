@@ -1,40 +1,57 @@
-import React from 'react'
-import { Outlet, useNavigate } from 'react-router-dom'
+import React, { Component } from 'react'
+import { Outlet } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import Footer from './../components/Footer.jsx'
 import Header from './../components/Header.jsx'
 import Radium from 'radium'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import * as SessionActionCreators from '../redux/actions/SessionActions'
 import * as V from '../vars'
 
-function Layout({ session, dispatch }) {
-  const navigate = useNavigate() // Replace history.push with navigate
-
-  // Example of how to handle navigation in modern React Router:
-  const handleNavigation = (path) => {
-    navigate(path)
+@Radium
+@connect(state => ({
+  session: state.session
+}))
+class Layout extends Component {
+  static propTypes = {
+    session: PropTypes.shape({
+      admin: PropTypes.bool.isRequired,
+      username: PropTypes.string
+    }),
+    dispatch: PropTypes.func.isRequired
   }
 
-  return (
-    <div>
-      <Header />
-      <main>
-        <Outlet />
-      </main>
-      <Footer />
-    </div>
-  )
+  static defaultProps = {
+    session: {
+      admin: false,
+      username: null
+    }
+  }
+
+  constructor(props) {
+    console.log('Layout: constructor called')
+    super(props)
+  }
+
+  componentDidMount() {
+    console.log('Layout: componentDidMount called')
+  }
+
+  render() {
+    console.log('Layout: render called')
+    const { session, dispatch } = this.props
+    return (
+      <div>
+        <Header />
+        <main>
+          <div className="container">
+            <Outlet />
+          </div>
+        </main>
+        <Footer />
+      </div>
+    )
+  }
 }
 
-Layout.propTypes = {
-  session: PropTypes.shape({
-    admin: PropTypes.bool.isRequired,
-    username: PropTypes.string
-  }),
-  dispatch: PropTypes.func.isRequired
-}
-
-export default connect(state => ({
-  session: state.session
-}))(Radium(Layout))
+export default Layout

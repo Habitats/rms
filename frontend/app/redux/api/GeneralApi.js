@@ -21,7 +21,16 @@ export function getPrivates() {
 }
 
 export function getProducts() {
+  console.log('API: Fetching products')
   return retrieve('api/products')
+    .then(data => {
+      console.log('API: Products fetched successfully:', data)
+      return data
+    })
+    .catch(error => {
+      console.error('API: Error fetching products:', error)
+      throw error
+    })
 }
 
 export function saveProject(project) {
@@ -45,10 +54,14 @@ export function sendMail(email) {
 }
 
 export function retrieve(path) {
+  console.log('API: Making request to:', path)
   return fetch(`${baseUrl}${path}`, {
     method: 'GET',
     credentials: 'include'
-  }).then(parseJson)
+  }).then(response => {
+    console.log('API: Response status:', response.status)
+    return parseJson(response)
+  })
 }
 
 function post(body, path) {
@@ -79,5 +92,6 @@ function parseJson(res) {
   if (res.status === 200) {
     return res.json()
   }
-  throw new Error(res.info)
+  console.error('API: Error response:', res)
+  throw new Error(`API Error: ${res.status} ${res.statusText}`)
 }

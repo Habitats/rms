@@ -1,6 +1,6 @@
-import React, {Component} from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import Carousel from './../components/photo/Carousel.jsx'
 import BigHeadline from './../components/text/BigHeadline.jsx'
 import Features from './../components/feature/Features.jsx'
@@ -9,84 +9,122 @@ import ProductItems from './../components/product/ProductItems.jsx'
 import * as ProductActionCreators from '../redux/actions/ProductActions'
 import Radium from 'radium'
 
-class Welcome extends Component {
+// Component verification wrapper
+const withComponentVerification = (WrappedComponent) => {
+  return function ComponentVerificationWrapper(props) {
+    console.log('Welcome: Component verification wrapper mounted')
+    return <WrappedComponent {...props} />
+  }
+}
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      mql: window.matchMedia('only screen and (max-width: 767px)')
+const Welcome = () => {
+  const dispatch = useDispatch()
+  const { categories, loading, error } = useSelector(state => ({
+    categories: state.products,
+    loading: state.products.loading,
+    error: state.products.error,
+    images: state.images
+  }))
+
+  const [isSmall, setIsSmall] = useState(false)
+  const [mql] = useState(() => window.matchMedia('only screen and (max-width: 767px)'))
+
+  useEffect(() => {
+    if (!categories || Object.keys(categories).length === 0) {
+      dispatch(ProductActionCreators.fetchProducts())
     }
-    this.mounted = false
-    this.handleMediaChange = () => {
-      if (this.mounted) {
-        if (this.state.mql.matches) {
-          this.setState({small: true})
-        } else {
-          this.setState({small: false})
-        }
-      }
-    }
-  }
 
-  componentWillMount() {
-    if (Object.keys(this.props.categories).length === 0) {
-      this.props.dispatch(ProductActionCreators.fetchProducts())
-    }
-    this.mounted = true
-    this.state.mql.addListener(this.handleMediaChange)
-  }
+    const handleMediaChange = () => setIsSmall(mql.matches)
+    mql.addListener(handleMediaChange)
+    handleMediaChange()
 
-  componentDidMount() {
-    this.handleMediaChange()
-  }
+    return () => mql.removeListener(handleMediaChange)
+  }, [categories, dispatch, mql])
 
-  componentWillUnmount() {
-    this.mounted = false
-    this.state.mql.removeListener(this.handleMediaChange)
-  }
-
-  render() {
-    const {small} = this.state
-    const images = [
-      {src: 'image/carousel,c1.jpg'},
-      {src: 'image/carousel,c2.jpg'},
-      {src: 'image/carousel,c3.jpg'},
-      {src: 'image/carousel,c4.jpg'},
-      {src: 'image/carousel,c5.jpg'},
-      {src: 'image/carousel,c6.jpg'},
-      {src: 'image/carousel,c7.jpg'}
-    ]
-
-    const ready = this.props.categories.hasOwnProperty('sub')
-    const catBig = ready ? <ProductItems products={this.props.categories.sub.slice(0, 2)} height={small ? 200 : 270}
-                                         className="col-sm-6 col-xs-12" parentRoute={`/produkter`}/> : null
-    const catSmall = ready ? <ProductItems products={this.props.categories.sub.slice(2, 5)} height={small ? 200 : 170}
-                                           className="col-sm-4 col-xs-12" parentRoute={`/produkter`}/> : null
+  if (loading) {
     return (
-      <div>
-        <Box>
-          <Carousel images={images}/>
-          <Features />
-        </Box>
-
-        <Box>
-          <BigHeadline big={'Våre tjenester'}/>
-          <div className="row">
-            {catBig}
-            {catSmall}
-          </div>
-        </Box>
-      </div>
+      <Box>
+        <div className="text-center">
+          <i className="fa fa-spinner fa-spin fa-3x"></i>
+        </div>
+      </Box>
     )
   }
+
+  if (error) {
+    return (
+      <Box>
+        <div className="text-center text-danger">
+          <h3>Error loading products</h3>
+          <p>{error}</p>
+        </div>
+      </Box>
+    )
+  }
+
+  const images = [
+    {src: 'image/carousel,c1.jpg'},
+    {src: 'image/carousel,c2.jpg'},
+    {src: 'image/carousel,c3.jpg'},
+    {src: 'image/carousel,c4.jpg'},
+    {src: 'image/carousel,c5.jpg'},
+    {src: 'image/carousel,c6.jpg'},
+    {src: 'image/carousel,c7.jpg'}
+  ]
+
+  const ready = categories && categories.hasOwnProperty('sub')
+  const catBig = ready ? (
+    <ProductItems 
+      products={categories.sub.slice(0, 2)} 
+      height={isSmall ? 200 : 270}
+      className="col-sm-6 col-xs-12" 
+      parentRoute="/produkter"
+    />
+  ) : null
+
+  const catSmall = ready ? (
+    <ProductItems 
+      products={categories.sub.slice(2, 5)} 
+      height={isSmall ? 200 : 170}
+      className="col-sm-4 col-xs-12" 
+      parentRoute="/produkter"
+    />
+  ) : null
+
+  return (
+    <div>
+      <Box>
+        <Carousel images={images}/>
+        <Features />
+      </Box>
+
+      <Box>
+        <BigHeadline big="Våre tjenester"/>
+        <div className="row">
+          {catBig}
+          {catSmall}
+        </div>
+      </Box>
+    </div>
+  )
 }
 
 Welcome.propTypes = {
-  categories: PropTypes.object.isRequired,
-  dispatch: PropTypes.func.isRequired
+  categories: PropTypes.object,
+  loading: PropTypes.bool,
+  error: PropTypes.string
 }
 
-export default connect(state => ({
-  categories: state.products,
-  images: state.images
-}))(Radium(Welcome))
+Welcome.defaultProps = {
+  categories: {},
+  loading: false,
+  error: null
+}
+
+// Apply Radium styles
+const StyledWelcome = Radium(Welcome)
+
+// Compose the HOCs in the correct order
+const ComposedWelcome = withComponentVerification(StyledWelcome)
+
+export default ComposedWelcome

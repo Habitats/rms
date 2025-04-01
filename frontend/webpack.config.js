@@ -26,7 +26,8 @@ const plugins = [
     $: 'jquery',                                // Makes jQuery available globally without import
     jQuery: 'jquery',                           // Same for jQuery (for plugins that expect global jQuery)
     // Updated fetch polyfill to use proper imports-loader syntax
-    fetch: ['whatwg-fetch', 'self.fetch']
+    fetch: ['whatwg-fetch', 'fetch'],
+    'window.fetch': ['whatwg-fetch', 'fetch']
   }),
   
   // Extracts CSS into separate files

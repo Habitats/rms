@@ -1,38 +1,37 @@
-import React, {Component} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import {browserHistory} from 'react-router'
-import {connect} from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import Photo from './Photo.jsx'
 
-export default class PhotoLine extends Component {
+const PhotoLine = ({ images, root, selected, clickable }) => {
+  const navigate = useNavigate()
+  const dispatch = useSelector(state => state.dispatch)
 
-  onSelect(path) {
-    browserHistory.push(path)
+  const onSelect = (path) => {
+    navigate(path)
   }
 
-  render() {
-    const {images, root, selected, clickable} = this.props
-    const photos = images.map(image =>
-      <div className="col-md-3 col-sm-4 col-xs-6" key={image.src}>
-        {!clickable ?
-         <div className={'photo'}>
-           <Photo onClick={this.onSelect.bind(this, '/' + root + '/' + images.indexOf(image))} height={120}
-                  src={image.src} size={'low'} selected={images[selected] === image} margin={15}/>
-         </div>
-          :
-         <div className={'photo'}>
-           <Photo height={120} src={image.src} size={'low'} margin={15}/>
-         </div>
-        }
-      </div>
-    )
+  const photos = images.map(image =>
+    <div className="col-md-3 col-sm-4 col-xs-6" key={image.src}>
+      {!clickable ?
+       <div className={'photo'}>
+         <Photo onClick={() => onSelect('/' + root + '/' + images.indexOf(image))} height={120}
+                src={image.src} size={'low'} selected={images[selected] === image} margin={15}/>
+       </div>
+        :
+       <div className={'photo'}>
+         <Photo height={120} src={image.src} size={'low'} margin={15}/>
+       </div>
+      }
+    </div>
+  )
 
-    return (
-      <div>
-        {photos}
-      </div>
-    )
-  }
+  return (
+    <div>
+      {photos}
+    </div>
+  )
 }
 
 PhotoLine.defaultProps = {
@@ -48,4 +47,6 @@ PhotoLine.propTypes = {
   selected: PropTypes.number,
   clickable: PropTypes.bool,
 }
+
+export default PhotoLine
 

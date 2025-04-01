@@ -4,9 +4,8 @@ import Radium from 'radium'
 import * as V from '../vars'
 
 class Box extends Component {
-
   render() {
-    const {children} = this.props
+    const {children, style: propStyle} = this.props
     const style = {
       background: '#fff',
       float: 'left',
@@ -21,7 +20,8 @@ class Box extends Component {
       '@media only screen and (min-width: 768px)': {
         padding: V.MARGIN_SM,
         marginBottom: 20
-      }
+      },
+      ...propStyle
     }
     return (
       <div style={style} className="box">
@@ -35,7 +35,12 @@ Box.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
-  ])
+  ]),
+  style: PropTypes.object
+}
+
+Box.defaultProps = {
+  style: {}
 }
 
 export default Radium(Box)

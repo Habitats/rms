@@ -1,6 +1,5 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { connect } from 'react-redux'
 import Radium from 'radium'
 import PropTypes from 'prop-types'
 
@@ -29,4 +28,4 @@ Link.propTypes = {
   onClick: PropTypes.func
 }
 
-export default connect()(Radium(Link))
+export default Radium(Link)

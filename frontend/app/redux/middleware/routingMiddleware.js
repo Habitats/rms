@@ -1,4 +1,4 @@
-import { UPDATE_PATH, LOCATION_CHANGE } from '../constants/RouterConstants'
+import { useNavigate } from 'react-router-dom'
 
 let navigator = null
 
@@ -7,22 +7,11 @@ export const initializeNavigator = (navigate) => {
 }
 
 export const routingMiddleware = () => next => action => {
-  // Handle old react-router-redux actions
-  if (action.type === LOCATION_CHANGE || action.type === UPDATE_PATH) {
+  // Handle navigation actions
+  if (action.type === '@@router/NAVIGATE') {
     if (navigator) {
-      const path = action.payload?.path || action.payload
-      navigator(path)
-    }
-    return next(action)
-  }
-  
-  // Handle direct history calls
-  if (action.type === '@@router/CALL_HISTORY_METHOD') {
-    if (navigator) {
-      const { method, args } = action.payload
-      if (method === 'push' || method === 'replace') {
-        navigator(args[0], { replace: method === 'replace' })
-      }
+      const { path, replace } = action.payload
+      navigator(path, { replace })
     }
     return next(action)
   }

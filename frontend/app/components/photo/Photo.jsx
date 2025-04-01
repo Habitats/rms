@@ -6,10 +6,10 @@ import Radium from 'radium'
 import {SM, XS} from '../../vars'
 
 // Create a wrapper component to handle navigation
-function withNavigation(Component) {
-  return props => {
+function withNavigation(WrappedComponent) {
+  return function WithNavigationComponent(props) {
     const navigate = useNavigate();
-    return <Component {...props} navigate={navigate} />;
+    return <WrappedComponent {...props} navigate={navigate} />;
   }
 }
 
@@ -56,7 +56,7 @@ class Photo extends Component {
 
     const style = {
       box: {
-        ... heightStyles,
+        ...heightStyles,
         width: width || '100%',
         cursor: photoClick ? 'pointer' : null,
         position: 'relative',
@@ -149,4 +149,9 @@ Photo.propTypes = {
   navigate: PropTypes.func,
 }
 
-export default connect()(withNavigation(Radium(Photo)))
+// Compose the HOCs in the correct order
+const ConnectedPhoto = connect()(Photo)
+const NavigatedPhoto = withNavigation(ConnectedPhoto)
+const StyledPhoto = Radium(NavigatedPhoto)
+
+export default StyledPhoto

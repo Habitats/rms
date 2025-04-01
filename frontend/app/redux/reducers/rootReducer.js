@@ -8,7 +8,6 @@ const reducers = {
   general,
   products,
   session
-  // Removed routing: routerReducer as it's no longer needed
 }
 
 // Use combineReducers with the plain object

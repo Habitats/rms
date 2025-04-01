@@ -7,7 +7,8 @@ const initialState = {
   loginFailed: false,
   admin: false,
   loading: false,
-  error: null
+  error: null,
+  lastPath: null
 }
 
 export default function session(state = initialState, action) {
@@ -104,10 +105,10 @@ export default function session(state = initialState, action) {
         error: action.error
       }
 
-    case C.UPDATE_PATH:
+    case C.NAVIGATE:
       return {
         ...state,
-        path: action.payload.path
+        lastPath: action.payload.path
       }
 
     default:

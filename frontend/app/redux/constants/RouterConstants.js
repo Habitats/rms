@@ -1,2 +1,2 @@
-export const UPDATE_PATH = '@@router/UPDATE_PATH'
-export const LOCATION_CHANGE = '@@router/LOCATION_CHANGE' 
+// Modern React Router v6 navigation action type
+export const NAVIGATE = '@@router/NAVIGATE' 
