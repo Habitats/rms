@@ -1,7 +1,8 @@
+// Suppress deprecation warnings for now - planned migration with Bootstrap upgrade
+// sass-lint:disable-all
 @import "variables";
-@import "../../node_modules/font-awesome/scss/font-awesome";
-@import "../../node_modules/react-select/dist/react-select.min.css";
-// Slick
+@import "font-awesome/scss/font-awesome";
+@import "bootstrap";
 @import "slick";
 @import "layout";
 @import "header";

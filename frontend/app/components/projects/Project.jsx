@@ -1,10 +1,17 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {browserHistory} from 'react-router'
+import {useNavigate} from 'react-router-dom'
 import BigHeadline from './../text/BigHeadline.jsx'
 import MiniGallery from './../photo/MiniGallery.jsx'
 import Box from './../Box.jsx'
+
+function withNavigation(Component) {
+  return props => {
+    const navigate = useNavigate();
+    return <Component {...props} navigate={navigate} />;
+  }
+}
 
 class Project extends Component {
 
@@ -13,7 +20,7 @@ class Project extends Component {
   }
 
   render() {
-    const {project, session: {admin}} = this.props
+    const {project, session: {admin}, navigate} = this.props
     return (
       <Box>
         <BigHeadline big={project.title} small="Prosjekt"/>
@@ -22,10 +29,10 @@ class Project extends Component {
             <MiniGallery images={project.images} orientation={'horizontal'} height={400} thumbHeight={100}/>
             {admin ?
              <button style={{marginTop: 5}} className="btn btn-default btn-block" type="submit"
-                     onClick={() => browserHistory.push(`referanser/endre/${project.id}`)}>Endre</button>
+                     onClick={() => navigate(`referanser/endre/${project.id}`)}>Endre</button>
               : null}
             <button style={{marginTop: 5}} className="btn btn-default btn-block" type="submit"
-                    onClick={() => browserHistory.push("/referanser")}>Tilbake
+                    onClick={() => navigate("/referanser")}>Tilbake
             </button>
           </div>
         </div>
@@ -43,9 +50,10 @@ Project.propTypes = {
   }),
   selected: PropTypes.number.isRequired,
   dispatch: PropTypes.func.isRequired,
-  session: PropTypes.shape({admin: PropTypes.bool.isRequired})
+  session: PropTypes.shape({admin: PropTypes.bool.isRequired}),
+  navigate: PropTypes.func
 }
 
 export default connect(state => ({
   session: state.session
-}))(Project)
+}))(withNavigation(Project))

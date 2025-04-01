@@ -9,7 +9,7 @@ import Left from './../components/Left.jsx'
 import Right from './../components/Right.jsx'
 import Box from './../components/Box.jsx'
 import * as ProductActionCreators from '../redux/actions/ProductActions'
-import NotFound from './NotFound.jsx'
+import NotFound from '../components/NotFound.jsx'
 import Link from '../components/Link.jsx'
 
 class ProductsContainer extends Component {

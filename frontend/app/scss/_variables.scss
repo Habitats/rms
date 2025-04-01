@@ -1,3 +1,5 @@
+@use "sass:math";
+
 $fa-font-path: "../../node_modules/font-awesome/fonts" !default;
 
 $footer-height: 250px;
@@ -17,14 +19,14 @@ $dropShadowColor: #888888;
 // Bootstrap overrides
 
 $font-size-base: 14px !default;
-$font-size-large: ceil(($font-size-base * 1.25)) !default; // ~18px
-$font-size-small: ceil(($font-size-base * 0.85)) !default; // ~12px
+$font-size-large: math.ceil($font-size-base * 1.25) !default; // ~18px
+$font-size-small: math.ceil($font-size-base * 0.85) !default; // ~12px
 
-$font-size-h1: floor(($font-size-base * 2.6)) !default; // ~36px
-$font-size-h2: floor(($font-size-base * 2.15)) !default; // ~30px
-$font-size-h3: ceil(($font-size-base * 1.7)) !default; // ~24px
-$font-size-h4: ceil(($font-size-base * 1.25)) !default; // ~18px
+$font-size-h1: math.floor($font-size-base * 2.6) !default; // ~36px
+$font-size-h2: math.floor($font-size-base * 2.15) !default; // ~30px
+$font-size-h3: math.ceil($font-size-base * 1.7) !default; // ~24px
+$font-size-h4: math.ceil($font-size-base * 1.25) !default; // ~18px
 $font-size-h5: $font-size-base !default;
-$font-size-h6: ceil(($font-size-base * 0.85)) !default; // ~12px
+$font-size-h6: math.ceil($font-size-base * 0.85) !default; // ~12px
 
-$icon-font-path: "../../node_modules/bootstrap-sass/assets/fonts/bootstrap/" !default;
+$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";

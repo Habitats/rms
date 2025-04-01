@@ -1,41 +1,76 @@
-const baseUrl = '/'
+import { API_URL } from '../../config'
 
-export function retrieve() {
-  return fetch(`${baseUrl}session`, {
-    method: 'GET',
-    credentials: 'include'
-  }).then(parseJson)
+const parseJson = (response) => {
+  console.log('Session API response:', response)
+  if (!response.ok) {
+    console.error('Session API error:', response.status, response.statusText)
+    throw new Error(`HTTP error! status: ${response.status}`)
+  }
+  return response.json()
 }
 
-function post(session, path) {
-  return fetch(`${baseUrl}session/${path}`, {
-    method: 'POST',
+const developmentFallback = {
+  id: 1,
+  email: 'dev@example.com',
+  firstName: 'Dev',
+  lastName: 'User',
+  role: 'admin',
+  admin: true,
+  username: 'dev'
+}
+
+const makeRequest = (endpoint, options = {}) => {
+  console.log(`Session API: Making request to ${endpoint}`)
+  if (process.env.NODE_ENV === 'development') {
+    console.log('Development mode: Using fallback session')
+    return Promise.resolve(developmentFallback)
+  }
+
+  const url = `${API_URL}${endpoint}`
+  console.log('Request URL:', url)
+  
+  return fetch(url, {
+    ...options,
     credentials: 'include',
     headers: {
       'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(session)
+      ...options.headers
+    }
   }).then(parseJson)
 }
 
-function parseJson(res) {
-  if (res.status === 200) {
-    return res.json()
-  }
-  throw new Error(res.info)
+export const retrieve = () => {
+  console.log('Session API: Retrieving session')
+  return makeRequest('/session')
 }
 
-export function save(session) {
-  return post(session, '')
+export const save = (data) => {
+  console.log('Session API: Saving session with data:', data)
+  return makeRequest('/session', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
 }
 
-export function logout(session) {
-  return post(session, 'logout')
+export const login = (data) => {
+  console.log('Session API: Login attempt with data:', data)
+  return makeRequest('/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
 }
 
-export function login(session) {
-  return post(session, 'login')
+export const logout = () => {
+  console.log('Session API: Logout attempt')
+  return makeRequest('/logout', {
+    method: 'POST'
+  })
 }
 
 

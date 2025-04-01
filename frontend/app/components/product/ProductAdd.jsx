@@ -1,12 +1,19 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {browserHistory} from 'react-router'
+import {useNavigate} from 'react-router-dom'
 import MediumHeadline from './../text/MediumHeadline.jsx'
 import Box from './../Box.jsx'
 import * as ProductActions from '../../redux/actions/ProductActions'
 import Select from 'react-select'
 import {CONTENT_MAX_WIDTH} from '../../vars'
+
+function withNavigation(Component) {
+  return props => {
+    const navigate = useNavigate();
+    return <Component {...props} navigate={navigate} />;
+  }
+}
 
 class ProductAdd extends Component {
 
@@ -33,14 +40,14 @@ class ProductAdd extends Component {
           index: props.products.sub.flatMap(c => c.sub).length + 1
         }
         props.dispatch(ProductActions.save(product))
-        browserHistory.goBack
+        props.navigate(-1)
       } else {
         this.setState({error: 'Velg tittel og kategori!'})
       }
     }
     this.onRemove = () => {
       props.dispatch(ProductActions.removeProduct(this.state.id))
-      browserHistory.push('/produkter')
+      props.navigate('/produkter')
     }
     this.handleSelect = (category) => {
       this.setState({category: category.value})
@@ -76,7 +83,7 @@ class ProductAdd extends Component {
   }
 
   render() {
-    const {dispatch, products} = this.props
+    const {dispatch, products, navigate} = this.props
     if (!products.hasOwnProperty('sub')) {
       return null
     }
@@ -116,7 +123,7 @@ class ProductAdd extends Component {
           <div>{error}</div>
           <div className="row">
             <div className={`col-xs-${id ? 4 : 6}`}>
-              <button className="btn btn-primary btn-block" onClick={() => dispatch(browserHistory.goBack())}>Tilbake</button>
+              <button className="btn btn-primary btn-block" onClick={() => navigate(-1)}>Tilbake</button>
             </div>
             {id ? <div className={`col-xs-${id ? 4 : 6}`}>
                   <button className="btn btn-primary btn-block" onClick={this.onRemove}>Slett</button>
@@ -143,9 +150,10 @@ ProductAdd.defaultProps = {
 ProductAdd.propTypes = {
   dispatch: PropTypes.func.isRequired,
   products: PropTypes.array,
-  params: PropTypes.shape({id: PropTypes.string})
+  params: PropTypes.shape({id: PropTypes.string}),
+  navigate: PropTypes.func
 }
 
 export default connect(state => ({
   products: state.products
-}))(ProductAdd)
+}))(withNavigation(ProductAdd))

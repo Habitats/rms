@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {browserHistory} from 'react-router'
+import {useNavigate} from 'react-router-dom'
 import MediumHeadline from './../components/text/MediumHeadline.jsx'
 import Photo from './../components/photo/Photo.jsx'
 import Left from './../components/Left.jsx'
@@ -9,6 +9,11 @@ import Right from './../components/Right.jsx'
 import Box from './../components/Box.jsx'
 import SimpleLabel from './../components/text/SimpleLabel.jsx'
 import * as generalActions from '../redux/actions/GeneralActions'
+
+function ProjectAddWrapper(props) {
+  const navigate = useNavigate();
+  return <ProjectAdd {...props} navigate={navigate} />;
+}
 
 class ProjectAdd extends Component {
 
@@ -80,7 +85,7 @@ class ProjectAdd extends Component {
         description: this.state.description,
         images: Array.from(this.state.chosenImages.values())
       }))
-      browserHistory.push('/referanser')
+      this.props.navigate('/referanser')
     } else {
       this.setState({error: 'Fyll ut alle felt og velg noen bilder!'})
     }
@@ -88,11 +93,11 @@ class ProjectAdd extends Component {
 
   onRemove() {
     this.props.dispatch(generalActions.removeProject(this.state.id))
-    browserHistory.push('/referanser')
+    this.props.navigate('/referanser')
   }
 
   render() {
-    const {projects, images, dispatch} = this.props
+    const {projects, images, dispatch, navigate} = this.props
     const {chosenImages, error, title, description, id} = this.state
 
     const chosenLabels = Array.from(chosenImages.values()).map(i => <SimpleLabel key={i.src} text={i.title}/>)
@@ -149,7 +154,7 @@ class ProjectAdd extends Component {
             </div>
             <div className="row">
               <div className={`col-xs-${id ? 4 : 6}`}>
-                <button className="btn btn-primary btn-block" onClick={() => dispatch(browserHistory.goBack())}>Tilbake</button>
+                <button className="btn btn-primary btn-block" onClick={() => navigate(-1)}>Tilbake</button>
               </div>
               {id ? <div className={`col-xs-${id ? 4 : 6}`}>
                 <button className="btn btn-primary btn-block" onClick={this.onRemove.bind(this)}>Slett</button>
@@ -173,10 +178,11 @@ ProjectAdd.propTypes = {
   dispatch: PropTypes.func.isRequired,
   images: PropTypes.array,
   projects: PropTypes.array,
-  params: PropTypes.shape({id: PropTypes.string})
+  params: PropTypes.shape({id: PropTypes.string}),
+  navigate: PropTypes.func.isRequired
 }
 
 export default connect(state => ({
   images: state.general.images,
   projects: state.general.projects
-}))(ProjectAdd)
+}))(ProjectAddWrapper)

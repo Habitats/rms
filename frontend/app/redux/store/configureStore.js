@@ -12,4 +12,5 @@ if (process.env.NODE_ENV === 'production') {
   loadedStore = require('./configureStore.dev')
 }
 
-export const configureStore = loadedStore
+// Change this line
+export const configureStore = loadedStore.configureStore

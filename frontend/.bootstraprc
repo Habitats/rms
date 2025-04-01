@@ -1,49 +1,39 @@
 ---
 # Output debugging info
-# loglevel: debug
+loglevel: debug
 
-# Major version of Bootstrap: 3 or 4
+# Major version of Bootstrap: 3
 bootstrapVersion: 3
 
 # Webpack loaders, order matters
 styleLoaders:
-  - style
-  - css
-  - sass
+  - style-loader
+  - css-loader
+  - postcss-loader
+  - sass-loader
 
 # Extract styles to stand-alone css file
 # Different settings for different environments can be used,
 # It depends on value of NODE_ENV environment variable
 # This param can also be set in webpack config:
 #   entry: 'bootstrap-loader/extractStyles'
-#extractStyles: false
-# env:
-#   development:
-#     extractStyles: false
-#   production:
-#     extractStyles: true
+extractStyles: true
+# Set this to false when using mini-css-extract-plugin
+useExtractText: false
+env:
+  development:
+    extractStyles: false
+  production:
+    extractStyles: true
 
-
-# Customize Bootstrap variables that get imported before the original Bootstrap variables.
-# Thus, derived Bootstrap variables can depend on values from here.
-# See the Bootstrap _variables.scss file for examples of derived Bootstrap variables.
-#
+# Bootstrap configuration
 preBootstrapCustomizations: ./app/scss/_variables.scss
-
-
-# This gets loaded after bootstrap/variables is loaded
-# Thus, you may customize Bootstrap variables
-# based on the values established in the Bootstrap _variables.scss file
-#
-# bootstrapCustomizations: ./path/to/bootstrap/customizations.scss
-
-
-# Import your custom styles here
-# Usually this endpoint-file contains list of @imports of your application styles
-#
 appStyles: ./app/scss/base.scss
 
-### Bootstrap styles
+# Important for resolving font paths correctly
+bootstrapPath: ./node_modules/bootstrap-sass
+
+# Add all styles you need
 styles:
 
   # Mixins

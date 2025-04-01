@@ -49,4 +49,3 @@ PhotoLine.propTypes = {
   clickable: PropTypes.bool,
 }
 
-export default connect()(PhotoLine)

@@ -5,7 +5,7 @@ import Category from './../components/product/Category.jsx'
 import BigHeadline from './../components/text/BigHeadline.jsx'
 import * as ProductActionCreators from '../redux/actions/ProductActions'
 import Box from './../components/Box.jsx'
-import NotFound from './NotFound.jsx'
+import NotFound from '../components/NotFound.jsx'
 
 class CategoryContainer extends Component {
 

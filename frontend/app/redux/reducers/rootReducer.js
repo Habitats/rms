@@ -1,19 +1,17 @@
-require('babel-polyfill')
 import {combineReducers} from 'redux'
-import {routeReducer} from 'react-router-redux'
 import general from './general'
 import session from './session'
 import products from './products'
 
+// Create a plain object for reducers
 const reducers = {
   general,
   products,
   session
+  // Removed routing: routerReducer as it's no longer needed
 }
 
-
-const rootReducer = combineReducers(Object.assign({}, reducers, {
-  routing: routeReducer
-}))
+// Use combineReducers with the plain object
+const rootReducer = combineReducers(reducers)
 
 export default rootReducer

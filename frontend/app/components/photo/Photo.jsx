@@ -1,9 +1,17 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import {browserHistory} from 'react-router'
+import {useNavigate} from 'react-router-dom'
 import {connect} from 'react-redux'
 import Radium from 'radium'
 import {SM, XS} from '../../vars'
+
+// Create a wrapper component to handle navigation
+function withNavigation(Component) {
+  return props => {
+    const navigate = useNavigate();
+    return <Component {...props} navigate={navigate} />;
+  }
+}
 
 class Photo extends Component {
 
@@ -26,11 +34,11 @@ class Photo extends Component {
   }
 
   render() {
-    const {src, height, width, margin, crop, selected, children, clickable, size, linkTo, dispatch, className, onClick} = this.props
+    const {src, height, width, margin, crop, selected, children, clickable, size, linkTo, dispatch, className, onClick, navigate} = this.props
     const {hover} = this.state
 
-    // if onClick is defined, use the defined callback
-    const photoClick = linkTo ? () => browserHistory.push(linkTo) :
+    // Update the navigation logic
+    const photoClick = linkTo ? () => navigate(linkTo) :
                        onClick ? onClick :
                        clickable ? this.toggle.bind(this) : null
 
@@ -107,6 +115,7 @@ class Photo extends Component {
       </div>
     )
   }
+
 }
 
 Photo.defaultProps = {
@@ -137,6 +146,7 @@ Photo.propTypes = {
   onClick: PropTypes.func,
   size: PropTypes.string,
   crop: PropTypes.bool,
+  navigate: PropTypes.func,
 }
 
-export default connect()(Radium(Photo))
+export default connect()(withNavigation(Radium(Photo)))

@@ -1,21 +1,31 @@
 import {createStore, applyMiddleware, compose} from 'redux'
-import rootReducer from '../reducers/rootReducer'
 import thunk from 'redux-thunk'
-import {composeWithDevTools} from 'redux-devtools-extension'
+import {routingMiddleware} from '../middleware/routingMiddleware'
+import rootReducer from '../reducers/rootReducer'
+import {syncHistoryWithStore} from 'react-router-redux'
+import history from '../../history'
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const finalCreateStore = composeEnhancers(
-  applyMiddleware(thunk)
-)(createStore)
+export function configureStore(initialState) {
+  const middleware = [thunk, routingMiddleware]
+  
+  const store = createStore(
+    rootReducer,
+    initialState,
+    compose(
+      applyMiddleware(...middleware),
+      window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f
+    )
+  )
 
-module.exports = function configureStore(initialState) {
-  const store = finalCreateStore(rootReducer, initialState)
+  // Sync history with store
+  const syncedHistory = syncHistoryWithStore(history, store)
 
   // Hot reload reducers (requires Webpack or Browserify HMR to be enabled)
   if (module.hot) {
-    module.hot.accept('../reducers/rootReducer', () =>
-      store.replaceReducer(require('../reducers/rootReducer'))
-    )
+    module.hot.accept('../reducers/rootReducer', () => {
+      const nextRootReducer = require('../reducers/rootReducer').default
+      store.replaceReducer(nextRootReducer)
+    })
   }
 
   return store

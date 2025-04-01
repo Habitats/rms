@@ -1,5 +1,5 @@
 import React from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import Footer from './../components/Footer.jsx'
 import Header from './../components/Header.jsx'
@@ -8,7 +8,14 @@ import {connect} from 'react-redux'
 import * as SessionActionCreators from '../redux/actions/SessionActions'
 import * as V from '../vars'
 
-const Layout = () => {
+function Layout({ session, dispatch }) {
+  const navigate = useNavigate() // Replace history.push with navigate
+
+  // Example of how to handle navigation in modern React Router:
+  const handleNavigation = (path) => {
+    navigate(path)
+  }
+
   return (
     <div>
       <Header />
@@ -25,13 +32,9 @@ Layout.propTypes = {
     admin: PropTypes.bool.isRequired,
     username: PropTypes.string
   }),
-  children: PropTypes.element.isRequired,
   dispatch: PropTypes.func.isRequired
 }
 
-export default connect(state => {
-  console.log('Layout mapStateToProps called with state:', state)
-  return {
-    session: state.session
-  }
-})(Radium(Layout))
+export default connect(state => ({
+  session: state.session
+}))(Radium(Layout))

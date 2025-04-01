@@ -1,154 +1,277 @@
 // Hack for Ubuntu on Windows: interface enumeration fails with EINVAL, so return empty.
+// This prevents crashes when running on Windows Subsystem for Linux
 try {
   require('os').networkInterfaces();
 } catch (e) {
   require('os').networkInterfaces = () => ({});
 }
-const path = require('path')
-const util = require('util')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const webpack = require('webpack')
-const pkg = require('./package.json')
 
+// Required dependencies
+const path = require('path')         // Node.js path module for handling file paths
+const util = require('util')         // Node.js utility functions
+const webpack = require('webpack')   // Core webpack module
+const pkg = require('./package.json')  // Application package.json for config values
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')  // Plugin to extract CSS into separate files
+
+// Environment configuration
+// Sets DEBUG to true when in development mode (affects source maps, minification, etc.)
 const DEBUG = process.env.NODE_ENV === 'development'
+const contextPath = ''  // Base path for application, used in URLs
 
-const contextPath = ''
-
-// https://github.com/webpack/extract-text-webpack-plugin
-const cssExtractTextPlugin = new ExtractTextPlugin('css/rms.css', {
-  allChunks: true
-})
-
+// ===== PLUGINS CONFIGURATION =====
+// Plugins modify the build process and add functionality to webpack
 const plugins = [
-  new webpack.optimize.OccurenceOrderPlugin(),
-  cssExtractTextPlugin,
+  // Updated ProvidePlugin with webpack 4 syntax
   new webpack.ProvidePlugin({
-    $: 'jquery',
-    jQuery: 'jquery',
-    fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+    $: 'jquery',                                // Makes jQuery available globally without import
+    jQuery: 'jquery',                           // Same for jQuery (for plugins that expect global jQuery)
+    // Updated fetch polyfill to use proper imports-loader syntax
+    fetch: ['whatwg-fetch', 'self.fetch']
   }),
+  
+  // Extracts CSS into separate files
+  new MiniCssExtractPlugin({
+    filename: 'css/[name].css',
+    chunkFilename: 'css/[id].css'
+  }),
+  
+  // Add environment-specific plugins
+  new webpack.DefinePlugin({
+    'process.env': {
+      NODE_ENV: JSON.stringify(process.env.NODE_ENV)
+    }
+  })
 ]
 
-if (DEBUG) {
-  plugins.push(
-    new webpack.HotModuleReplacementPlugin()
-  )
-} else {
-  plugins.push(
-    new webpack.optimize.UglifyJsPlugin(),
-    new webpack.optimize.DedupePlugin(),
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production')
-      }
-    }),
-    new webpack.NoErrorsPlugin()
-  )
-}
-
-const loaders = [
+// ===== LOADERS/RULES CONFIGURATION =====
+// Loaders/rules process different file types and transform them for the bundle
+// MIGRATION NOTE: In webpack 4, 'loaders' is renamed to 'rules'
+const rules = [
+  // Process JS and JSX files with Babel
   {
-    test: /\.jsx?|\.js?$/,
-    exclude: /node_modules/,
-    loader: 'babel'
+    test: /\.jsx?|\.js?$/,           // Matches both .js and .jsx files
+    exclude: /node_modules/,         // Don't process node_modules files
+    use: {
+      loader: 'babel-loader',
+      options: {
+        presets: ['@babel/preset-env', '@babel/preset-react'],
+        plugins: ['react-hot-loader/babel']
+      }
+    }
   },
+  
+  // Process CSS files
   {
     test: /\.css$/,
-    loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader')
-  },
-  {
-    test: /\.json$/,
-    loader: 'json-loader'
-  },
-  {
-    test: /\.(jpe?g|png|gif)(?:\?.*|)$/i,
-    loaders: [
-      'file?hash=sha512&digest=hex&name=assets/[name].[ext]',
-      'image-webpack'
+    use: [
+      {
+        loader: MiniCssExtractPlugin.loader,
+        options: {
+          publicPath: '/'
+        }
+      },
+      {
+        loader: 'css-loader',
+        options: {
+          modules: false,
+          importLoaders: 1
+        }
+      },
+      'postcss-loader'
     ]
   },
+  
+  // Process JSON files - removed json-loader as it's built into webpack 4
+  {
+    test: /\.json$/,
+    type: 'javascript/auto',         // Required for webpack 4
+    use: 'json-loader'               // Loads JSON files
+    // MIGRATION NOTE: json-loader is unnecessary in webpack 4+ (built-in)
+  },
+  
+  // Process image files
+  {
+    test: /\.(jpe?g|png|gif)(?:\?.*|)$/i,
+    use: [
+      {
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]',
+          outputPath: 'images/',
+          publicPath: '/images/'
+        }
+      },
+      'image-webpack-loader'
+    ]
+  },
+  
+  // Process icon and font files
   {
     test: /\.(ico|woff|ttf|eot)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-    loader: 'file-loader?name=assets/[name].[ext]'
+    use: {
+      loader: 'file-loader',
+      options: {
+        name: 'assets/[name].[ext]',
+        esModule: false
+      }
+    }
   },
+  
+  // Process web fonts
   {
-    test: /\.(woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/, // handle font-awesome versions
-    loader: 'url-loader?limit=10000&minetype=application/font-woff&name=assets/[name].[ext]'
+    test: /\.(woff|woff2|ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+    use: {
+      loader: 'file-loader',
+      options: {
+        name: 'fonts/[name].[ext]',
+        esModule: false
+      }
+    }
   },
-  {
-    test: /\.svg/,
-    loader: 'svg-url-loader?name=assets/[name].[ext]'
-  },
+  
+  // Process HTML files - updated for webpack 4
   {
     test: /\.html$/,
-    loader: [
-      'file-loader?name=[path][name].[ext]',
-      'template-html-loader?' + [
-        'raw=true',
-        'engine=lodash',
-        'contextPath=' + contextPath
-      ].join('&')
-    ].join('!')
+    use: [
+      {
+        loader: 'file-loader',
+        options: {
+          name: '[path][name].[ext]',
+          esModule: false
+        }
+      },
+      {
+        loader: 'template-html-loader',  // Process HTML as templates
+        options: {
+          raw: true,
+          engine: 'lodash',           // Use lodash for templating
+          contextPath: contextPath
+        }
+      }
+    ]
+    // MIGRATION NOTE: In webpack 4, you might use html-loader instead
   },
+  
+  // Process SCSS files
   {
     test: /\.scss$/,
-    loader: cssExtractTextPlugin.extract('style', [
-      'css?sourceMap',
-      'postcss',
-      'sass?' + [
-        'sourceMap',
-        'sourceMapContents=true',
-        'outputStyle=expanded',
-        'includePaths[]=' + path.resolve(__dirname, './app/scss'),
-        'includePaths[]=' + path.resolve(__dirname, './node_modules')
-      ].join('&')
-    ].join('!'))
+    use: [
+      {
+        loader: MiniCssExtractPlugin.loader,
+        options: {
+          publicPath: '/'
+        }
+      },
+      {
+        loader: 'css-loader',
+        options: {
+          modules: false,
+          importLoaders: 2,
+          url: {
+            filter: (url) => {
+              return !url.endsWith('/raw');
+            },
+          }
+        }
+      },
+      'postcss-loader',
+      {
+        loader: 'sass-loader',
+        options: {
+          sassOptions: {
+            includePaths: [
+              path.resolve(__dirname, 'node_modules'),
+              path.resolve(__dirname, 'app/scss')
+            ],
+            silenceDeprecations: ['import', 'global-builtin'],
+            quietDeps: true
+          }
+        }
+      }
+    ]
   }
 ]
 
+// ===== ENTRY CONFIGURATION =====
+// Entry points tell webpack what files to start processing from
 const entry = {
-  app: ['babel-polyfill','bootstrap-loader', './index.js']
+  app: [
+    'webpack-dev-server/client?http://localhost:3000',
+    'webpack/hot/only-dev-server',
+    './index.js'
+  ]
 }
 
-if (DEBUG) {
-  const url = util.format('http://%s:%d', pkg.config.devHost, pkg.config.devPort)
-  entry.app.push('webpack-dev-server/client?' + url)
-  entry.app.push('webpack/hot/only-dev-server')
-}
-
+// ===== MAIN WEBPACK CONFIGURATION =====
 const config = {
-  context: path.join(__dirname, '/app'),
-  cache: DEBUG,
-  debug: DEBUG,
-  target: 'web',
-  devtool: DEBUG ? 'inline-source-map' : false,
-  entry: entry,
+  mode: DEBUG ? 'development' : 'production',  // New in webpack 4, replaces many plugins
+  context: path.join(__dirname, '/app'),       // Base directory for resolving entry points
+  target: 'web',                               // Build for web environment
+  devtool: DEBUG ? 'inline-source-map' : false,  // Source maps in development only
+  entry: entry,                                // Entry points (see above)
+  
+  // Output configuration
   output: {
     path: path.resolve(pkg.config.buildDir),
-    publicPath: '/' + contextPath,
-    filename: 'js/bundle.js',
-    pathinfo: false
+    publicPath: '/',
+    filename: 'js/[name].js'
   },
+  
+  // Module processing rules
   module: {
-    loaders: loaders
+    rules: rules                               // Rules defined above
+    // MIGRATION NOTE: In webpack 4, 'rules' replaces 'loaders'
   },
-  postcss: [
-    require('autoprefixer')
-  ],
+  
+  // Plugins (defined above)
   plugins: plugins,
+  
+  // Configure how modules are resolved
   resolve: {
-    extensions: ['', '.js', '.json', '.jsx', '.scss']
+    extensions: ['.js', '.json', '.jsx', '.scss', '.css'],
+    modules: [path.resolve(__dirname, 'node_modules'), 'node_modules'],
+    alias: {
+      'react': path.resolve(__dirname, 'node_modules/react'),
+      'whatwg-fetch': path.resolve(__dirname, 'node_modules/whatwg-fetch'),
+      'bootstrap-sass': path.resolve(__dirname, 'node_modules/bootstrap-sass'),
+      'react-select': path.resolve(__dirname, 'node_modules/react-select'),
+      'react-select/dist/react-select.min.css': path.resolve(__dirname, 'node_modules/react-select/dist/react-select.min.css'),
+      '~': path.resolve(__dirname, 'node_modules')
+    },
+    symlinks: true
   },
+  
+  // Development server configuration
   devServer: {
-    contentBase: path.resolve(pkg.config.buildDir),
+    static: {
+      directory: path.resolve(pkg.config.buildDir),
+      publicPath: '/'
+    },
     hot: true,
-    noInfo: false,
-    inline: true,
-    stats: {
-      colors: true,
-      chunks: false
-    }
+    port: pkg.config.devPort,
+    host: pkg.config.devHost,
+    historyApiFallback: true,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Content-Security-Policy': "default-src 'self' 'unsafe-inline' 'unsafe-eval' https: data: ws:; img-src 'self' https: data:; font-src 'self' https: data:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; connect-src 'self' https: ws:; worker-src 'self' blob:; child-src 'self' blob:;"
+    },
+    proxy: [
+      {
+        context: ['/api', '/image', '/secret', '/session'],
+        target: 'http://localhost:8081',
+        changeOrigin: true,
+        secure: false
+      }
+    ]
+  },
+  
+  // Added optimization section (webpack 4 feature)
+  optimization: {
+    minimize: !DEBUG,
+    moduleIds: 'named',
+    chunkIds: 'named'
   }
 }
 
+// Export the completed configuration
 module.exports = config

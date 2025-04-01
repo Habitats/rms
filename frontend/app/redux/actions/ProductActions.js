@@ -1,6 +1,7 @@
 import * as C from '../constants/ProductConstants'
-import {browserHistory} from 'react-router'
+import {createAction} from 'redux-actions'
 import * as GeneralApi from '../api/GeneralApi'
+import history from '../../history'
 
 export function fetchProducts() {
   return dispatch => {
@@ -34,14 +35,63 @@ export function removeProduct(id) {
 
 export function selectProduct(category, product) {
   return (dispatch) => {
-    dispatch(browserHistory.push(`${category.id}/${product.id}`))
     dispatch({type: C.SELECT_PRODUCT, category: category, product: product})
+    history.push(`${category.id}/${product.id}`)
   }
 }
 
 export function selectCategory(category) {
   return (dispatch) => {
-    dispatch(browserHistory.push(`${category.id}`))
     dispatch({type: C.SELECT_CATEGORY, category: category})
+    history.push(`${category.id}`)
   }
+}
+
+export function deleteProduct(productId) {
+  return (dispatch) => {
+    dispatch(deleteProductRequest(productId));
+    return fetch(`/api/products/${productId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => {
+      if (response.ok) {
+        dispatch(deleteProductSuccess(productId));
+        history.push('/products');
+      } else {
+        throw new Error('Failed to delete product');
+      }
+    })
+    .catch(error => {
+      dispatch(deleteProductFailure(error));
+      throw error;
+    });
+  };
+}
+
+export function updateProduct(productId, data) {
+  return (dispatch) => {
+    dispatch(updateProductRequest(productId, data));
+    return fetch(`/api/products/${productId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => {
+      if (response.ok) {
+        dispatch(updateProductSuccess(productId, data));
+        history.push(`/products/${productId}`);
+      } else {
+        throw new Error('Failed to update product');
+      }
+    })
+    .catch(error => {
+      dispatch(updateProductFailure(error));
+      throw error;
+    });
+  };
 }
