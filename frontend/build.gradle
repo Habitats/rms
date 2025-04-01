@@ -2,5 +2,7 @@ plugins {
     id "com.github.node-gradle.node" version "7.0.1"
 }
 
-// Simple task to run npm build
-task bundle(dependsOn: npm_run_build)
+// Add npm install task before bundle
+task bundle(dependsOn: ['npm_install', 'npm_run_build']) {
+    npm_run_build.mustRunAfter(npm_install)
+}

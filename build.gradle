@@ -24,11 +24,12 @@ task clean(type: Delete) {
     delete 'build'
 }
 
-task stage {
-    dependsOn clean, ':backend:test', ':backend:build', ':backend:war'
-    delete 'contextual_' + version + '.war'
-    doLast {
-        file('backend/build/libs/backend.war').renameTo('rms_' + version + '.war')
-    }
+// Add this new task that depends on both frontend and backend builds
+task buildAll {
+    dependsOn ':frontend:bundle'
+    dependsOn ':backend:shadowJar'
+    
+    // Ensure frontend bundle runs before backend shadowJar
+    tasks.getByPath(':backend:shadowJar').mustRunAfter(':frontend:bundle')
 }
 
