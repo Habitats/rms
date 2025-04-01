@@ -1,17 +1,17 @@
-import React, {Component} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
+import { useLoaderData } from 'react-router-dom'
 import ProductItems from './ProductItems.jsx'
 
-export default class Category extends Component {
+const Category = () => {
+  const { category } = useLoaderData()
+  const { title, id, sub } = category
 
-  render() {
-    const {title, id, sub} = this.props.category
-    return (
-      <div className="row">
-        <ProductItems products={sub} category={title} parentRoute={`/produkter/${id}`}/>
-      </div>
-    )
-  }
+  return (
+    <div className="row">
+      <ProductItems products={sub} category={title} parentRoute={`/produkter/${id}`}/>
+    </div>
+  )
 }
 
 Category.propTypes = {
@@ -23,3 +23,5 @@ Category.propTypes = {
     sub: PropTypes.array.isRequired
   })
 }
+
+export default Category

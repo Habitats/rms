@@ -1,25 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { useSelector, useDispatch } from 'react-redux'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useLoaderData, useActionData } from 'react-router-dom'
 import MediumHeadline from './../components/text/MediumHeadline.jsx'
 import Photo from './../components/photo/Photo.jsx'
 import Left from './../components/Left.jsx'
 import Right from './../components/Right.jsx'
 import Box from './../components/Box.jsx'
 import SimpleLabel from './../components/text/SimpleLabel.jsx'
-import * as generalActions from '../redux/actions/GeneralActions'
 
 const ProjectAdd = () => {
-  const dispatch = useDispatch()
   const navigate = useNavigate()
   const { id } = useParams()
+  const { images, projects, isAdmin } = useLoaderData()
+  const actionData = useActionData()
   
-  const { images, projects } = useSelector(state => ({
-    images: state.general.images,
-    projects: state.general.projects
-  }))
-
   const [state, setState] = useState({
     chosenImages: new Map(),
     description: '',
@@ -27,11 +21,6 @@ const ProjectAdd = () => {
     id: null,
     error: ''
   })
-
-  useEffect(() => {
-    dispatch(generalActions.fetchProjects())
-    dispatch(generalActions.fetchImages())
-  }, [dispatch])
 
   useEffect(() => {
     if (id && projects.find(p => p.id === id)) {
@@ -71,23 +60,45 @@ const ProjectAdd = () => {
     return state.chosenImages.size > 0 && state.title.length > 0 && state.description.length > 0
   }
 
-  const onSave = () => {
+  const onSave = async () => {
     if (isValid()) {
-      dispatch(generalActions.save({
-        id: state.id || projects.map(p => parseInt(p.id)).reduce((a, b) => Math.max(a, b)) + 1,
-        title: state.title,
-        description: state.description,
-        images: Array.from(state.chosenImages.values())
-      }))
-      navigate('/referanser')
+      try {
+        const project = {
+          id: state.id || projects.map(p => parseInt(p.id)).reduce((a, b) => Math.max(a, b)) + 1,
+          title: state.title,
+          description: state.description,
+          images: Array.from(state.chosenImages.values())
+        }
+
+        const response = await fetch('/api/projects', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(project),
+        })
+        
+        if (!response.ok) throw new Error('Failed to save project')
+        navigate('/referanser')
+      } catch (error) {
+        setState(prev => ({ ...prev, error: error.message }))
+      }
     } else {
       setState(prev => ({ ...prev, error: 'Fyll ut alle felt og velg noen bilder!' }))
     }
   }
 
-  const onRemove = () => {
-    dispatch(generalActions.removeProject(state.id))
-    navigate('/referanser')
+  const onRemove = async () => {
+    try {
+      const response = await fetch(`/api/projects/${state.id}`, {
+        method: 'DELETE',
+      })
+      
+      if (!response.ok) throw new Error('Failed to delete project')
+      navigate('/referanser')
+    } catch (error) {
+      setState(prev => ({ ...prev, error: error.message }))
+    }
   }
 
   const { chosenImages, error, title, description, id: stateId } = state

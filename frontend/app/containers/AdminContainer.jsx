@@ -1,32 +1,27 @@
-import React, {Component} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
+import { useSubmit } from 'react-router-dom'
 import MediumHeadline from './../components/text/MediumHeadline.jsx'
 import Box from './../components/Box.jsx'
-import * as generalActions from '../redux/actions/GeneralActions'
 
-class AdminContainer extends Component {
+const AdminContainer = () => {
+  const submit = useSubmit()
 
-  constructor(props, context) {
-    super(props, context)
-    this.invalidate = () => {
-      props.dispatch(generalActions.invalidateImageCache())
-    }
+  const invalidate = () => {
+    submit(null, { method: 'post', action: '/api/invalidate-cache' })
   }
 
-  render() {
-    return (
-      <div>
-        <Box>
-          <MediumHeadline big={"Admin"}/>
+  return (
+    <div>
+      <Box>
+        <MediumHeadline big={"Admin"}/>
 
-          <div className="col-xs-12">
-            <button className="btn btn-primary btn-block" onClick={this.invalidate}>Invalider bilde-cache</button>
-          </div>
-        </Box>
-      </div>
-    )
-  }
+        <div className="col-xs-12">
+          <button className="btn btn-primary btn-block" onClick={invalidate}>Invalider bilde-cache</button>
+        </div>
+      </Box>
+    </div>
+  )
 }
 
-export default connect(state => ({}))(AdminContainer)
+export default AdminContainer

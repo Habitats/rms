@@ -1,36 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import { useSelector, useDispatch } from 'react-redux'
+import { useLoaderData } from 'react-router-dom'
 import Carousel from './../components/photo/Carousel.jsx'
 import BigHeadline from './../components/text/BigHeadline.jsx'
 import Features from './../components/feature/Features.jsx'
 import Box from './../components/Box.jsx'
 import ProductItems from './../components/product/ProductItems.jsx'
-import * as ProductActionCreators from '../redux/actions/ProductActions'
 import Radium from 'radium'
 
 const Welcome = () => {
-  const dispatch = useDispatch()
-  const { categories, loading, error } = useSelector(state => ({
-    categories: state.products,
-    loading: state.products.loading,
-    error: state.products.error
-  }))
-
+  const { categories, loading, error } = useLoaderData()
   const [isSmall, setIsSmall] = useState(false)
   const [mql] = useState(() => window.matchMedia('only screen and (max-width: 767px)'))
 
   useEffect(() => {
-    if (!categories || Object.keys(categories).length === 0) {
-      dispatch(ProductActionCreators.fetchProducts())
-    }
-
     const handleMediaChange = () => setIsSmall(mql.matches)
     mql.addListener(handleMediaChange)
     handleMediaChange()
 
     return () => mql.removeListener(handleMediaChange)
-  }, [categories, dispatch, mql])
+  }, [mql])
 
   if (loading) {
     return (

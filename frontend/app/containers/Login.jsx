@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { useSelector, useDispatch } from 'react-redux'
+import { useLoaderData, Form, useSubmit, useActionData, useNavigate } from 'react-router-dom'
 import Box from './../components/Box.jsx'
-import * as sessionActionCreators from '../redux/actions/SessionActions'
 
 const Login = () => {
-  const dispatch = useDispatch()
-  const session = useSelector(state => state.session)
+  const navigate = useNavigate()
+  const submit = useSubmit()
+  const { session } = useLoaderData()
+  const actionData = useActionData()
   
   const [state, setState] = useState({
     username: session.username,
@@ -33,21 +34,21 @@ const Login = () => {
   const handleRememberMeChange = (event) => {
     const rememberMe = event.target.checked
     setState(prev => ({ ...prev, rememberMe }))
-    dispatch(sessionActionCreators.session({ ...session, rememberMe }))
+    submit({ rememberMe }, { method: 'post', action: '/api/session' })
   }
 
-  const onLogin = (e) => {
+  const onLogin = async (e) => {
     e.preventDefault()
-    dispatch(sessionActionCreators.login(state))
+    submit(state, { method: 'post', action: '/api/login' })
   }
 
-  const onLogout = (e) => {
+  const onLogout = async (e) => {
     e.preventDefault()
-    dispatch(sessionActionCreators.logout(state))
+    submit(null, { method: 'post', action: '/api/logout' })
   }
 
   const notLoggedIn = () => {
-    const loginError = session.loginFailed ? <div>{'Login feilet!'}</div> : ''
+    const loginError = actionData?.error ? <div>{actionData.error}</div> : ''
     return (
       <div>
         <div className="form-group">
@@ -58,6 +59,7 @@ const Login = () => {
             placeholder="Brukernavn" 
             type="text"
             value={state.username}
+            name="username"
           />
         </div>
         <div className="form-group">
@@ -68,6 +70,7 @@ const Login = () => {
             placeholder="Passord" 
             type="password"
             value={state.password}
+            name="password"
           />
         </div>
         <div className="checkbox">
@@ -76,6 +79,7 @@ const Login = () => {
               type="checkbox" 
               checked={state.rememberMe} 
               onChange={handleRememberMeChange}
+              name="rememberMe"
             />
             Husk meg
           </label>
@@ -115,9 +119,9 @@ const Login = () => {
     <Box>
       <div className="row">
         <div className="col-sm-4 col-sm-offset-4 col-xs-8 col-xs-offset-2">
-          <form className="form">
+          <Form method="post">
             {loginForm}
-          </form>
+          </Form>
         </div>
       </div>
     </Box>

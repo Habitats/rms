@@ -1,39 +1,34 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { useRouteError, useNavigate } from 'react-router-dom'
+import BigHeadline from './text/BigHeadline.jsx'
+import Box from './Box.jsx'
 
-class ErrorBoundary extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = { hasError: false, error: null }
+const ErrorBoundary = () => {
+  const error = useRouteError()
+  const navigate = useNavigate()
+
+  const handleReload = () => {
+    navigate('/')
   }
 
-  static getDerivedStateFromError(error) {
-    return { hasError: true, error }
-  }
-
-  componentDidCatch(error, errorInfo) {
-    console.error('Error caught by boundary:', error, errorInfo)
-  }
-
-  render() {
-    if (this.state.hasError) {
-      return (
-        <div style={{ padding: '20px', textAlign: 'center' }}>
-          <h1>Something went wrong.</h1>
-          <p>{this.state.error?.message}</p>
-          <button onClick={() => window.location.reload()}>
-            Reload Page
-          </button>
-        </div>
-      )
-    }
-
-    return this.props.children
-  }
-}
-
-ErrorBoundary.propTypes = {
-  children: PropTypes.node.isRequired
+  return (
+    <Box>
+      <div style={{ padding: '20px', textAlign: 'center' }}>
+        <BigHeadline 
+          big={error?.statusText || error?.message || 'Something went wrong'} 
+          small={error?.status || '500'}
+        />
+        <button 
+          className="btn btn-default" 
+          onClick={handleReload}
+          style={{ marginTop: '20px' }}
+        >
+          Go to Home Page
+        </button>
+      </div>
+    </Box>
+  )
 }
 
 export default ErrorBoundary 

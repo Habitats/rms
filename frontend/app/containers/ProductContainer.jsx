@@ -1,59 +1,63 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Product from './../components/product/Product.jsx'
-import { useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useParams, useLoaderData } from 'react-router-dom'
 import NotFound from '../components/NotFound.jsx'
 
 const ProductContainer = () => {
-  const categories = useSelector(state => state.products)
   const { categoryId, productId, subId, subSubId, selected } = useParams()
+  const productData = useLoaderData()
 
-  const category = categories.sub.find(c => c.id === categoryId)
-  const product = category.sub.find(p => p.id === productId)
+  if (!productData) {
+    return <NotFound />
+  }
 
-  // targets sub sub product
-  if (subSubId) {
-    const subProduct = product.sub ? product.sub.find(p => p.id === subId) : null
-    const subSubProduct = subProduct.sub ? subProduct.sub.find(p => p.id === subSubId) : null
-    if (subSubProduct) {
-      return (
-        <Product 
-          product={subSubProduct} 
-          category={subProduct.title}
-          linkTo={`produkter/${categoryId}/${productId}/${subId}/${subSubId}`}
-          selected={selected}
-        />
-      )
+  // Handle sub-sub product
+  if (subSubId && productData.sub) {
+    const subProduct = productData.sub.find(p => p.id === subId)
+    if (subProduct?.sub) {
+      const subSubProduct = subProduct.sub.find(p => p.id === subSubId)
+      if (subSubProduct) {
+        return (
+          <Product 
+            product={subSubProduct} 
+            category={subProduct.title}
+            linkTo={`produkter/${categoryId}/${productId}/${subId}/${subSubId}`}
+            selected={parseInt(selected) || 0}
+          />
+        )
+      }
     }
   }
-  // targets sub product
-  else if (subId) {
-    const subProduct = product.sub ? product.sub.find(p => p.id === subId) : null
+
+  // Handle sub product
+  if (subId && productData.sub) {
+    const subProduct = productData.sub.find(p => p.id === subId)
     if (subProduct) {
       return (
         <Product 
           product={subProduct} 
-          category={product.title} 
+          category={productData.title} 
           linkTo={`produkter/${categoryId}/${productId}/${subId}`}
-          selected={selected}
+          selected={parseInt(selected) || 0}
         />
       )
     }
-  } else if (product) {
-    return (
-      <Product 
-        product={product} 
-        category={category.title} 
-        linkTo={`produkter/${categoryId}/${productId}`}
-        selected={selected}
-      />
-    )
-  } else {
-    return <NotFound />
   }
+
+  // Handle main product
+  return (
+    <Product 
+      product={productData} 
+      category={productData.category} 
+      linkTo={`produkter/${categoryId}/${productId}`}
+      selected={parseInt(selected) || 0}
+    />
+  )
 }
 
-ProductContainer.propTypes = {}
+ProductContainer.propTypes = {
+  // Props are now handled through route params and loader data
+}
 
 export default ProductContainer

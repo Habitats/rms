@@ -1,21 +1,13 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import { useSelector, useDispatch } from 'react-redux'
+import { useLoaderData } from 'react-router-dom'
 import Link from './Link.jsx'
-import * as ProductActions from '../redux/actions/ProductActions'
 import * as C from '../colors'
 
 const Header = () => {
-  const dispatch = useDispatch()
-  const categories = useSelector(state => state.products)
+  const { categories, loading } = useLoaderData()
 
-  useEffect(() => {
-    if (!categories || Object.keys(categories).length === 0) {
-      dispatch(ProductActions.fetchProducts())
-    }
-  }, [categories, dispatch])
-
-  if (!categories || !categories.hasOwnProperty('sub')) {
+  if (loading || !categories || !categories.hasOwnProperty('sub')) {
     return (
       <div>
         <nav className="navbar navbar-default navbar-fixed-top">

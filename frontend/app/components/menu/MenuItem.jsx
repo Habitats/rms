@@ -1,41 +1,36 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import Link from './../Link.jsx'
 import Radium from 'radium'
 import {TEXT, HOVER, FILTER} from '../../colors'
 
 const MenuItem = ({ product, active, filter, isRoot }) => {
-  const [state, setState] = useState({
-    hover: false,
-    expanded: shouldExpand(product, active)
-  })
+  const [hover, setHover] = useState(false)
+  const [expanded, setExpanded] = useState(false)
 
-  const shouldExpand = (node, id, callback = (n) => n.id === id, root = node) => {
-    return root.sub.length === 0 ? false : callback(node) ||
-      node.sub.map(n => shouldExpand(n, id, callback, root)).reduce((a, b) => a || b, false)
-  }
+  const shouldExpand = useMemo(() => {
+    const checkExpand = (node, id, callback = (n) => n.id === id, root = node) => {
+      return root.sub.length === 0 ? false : callback(node) ||
+        node.sub.map(n => checkExpand(n, id, callback, root)).reduce((a, b) => a || b, false)
+    }
+    return checkExpand(product, active)
+  }, [product, active])
 
   useEffect(() => {
     if (filter.length === 0) {
-      setState(prev => ({
-        ...prev,
-        expanded: shouldExpand(product, active)
-      }))
+      setExpanded(shouldExpand)
     } else {
-      setState(prev => ({
-        ...prev,
-        expanded: prev.expanded ? true : shouldExpand(product, active)
-      }))
+      setExpanded(prev => prev ? true : shouldExpand)
     }
-  }, [filter, active, product])
+  }, [filter, shouldExpand])
 
-  const onExpand = () => {
+  const onExpand = useCallback(() => {
     if (!isRoot) {
-      setState(prev => ({ ...prev, expanded: !prev.expanded }))
+      setExpanded(prev => !prev)
     }
-  }
+  }, [isRoot])
 
-  const substringIndex = (seq, subseq) => {
+  const substringIndex = useCallback((seq, subseq) => {
     const subseqLen = subseq.length
     let i = -1
     const indexes = []
@@ -53,7 +48,7 @@ const MenuItem = ({ product, active, filter, isRoot }) => {
       }
     }
     return indexes
-  }
+  }, [])
 
   const style = {
     link: {
@@ -78,34 +73,54 @@ const MenuItem = ({ product, active, filter, isRoot }) => {
     />
   ))
 
-  const filterLower = filter.toLowerCase()
-  const titleLower = title.toLowerCase()
-  const indexes = substringIndex(titleLower, filterLower)
-  const parts = []
-  let lastIndex = 0
+  const titleElement = useMemo(() => {
+    if (filter.length === 0) return title
 
-  indexes.forEach(i => {
-    if (i > lastIndex) {
-      parts.push(<span key={lastIndex}>{title.substring(lastIndex, i)}</span>)
+    const filterLower = filter.toLowerCase()
+    const titleLower = title.toLowerCase()
+    const indexes = substringIndex(titleLower, filterLower)
+    const parts = []
+    let lastIndex = 0
+
+    indexes.forEach(index => {
+      if (index > lastIndex) {
+        parts.push(<span key={`text-${lastIndex}`}>{title.slice(lastIndex, index)}</span>)
+      }
+      parts.push(
+        <span key={`filter-${index}`} style={style.filter}>
+          {title.slice(index, index + filter.length)}
+        </span>
+      )
+      lastIndex = index + filter.length
+    })
+
+    if (lastIndex < title.length) {
+      parts.push(<span key={`text-${lastIndex}`}>{title.slice(lastIndex)}</span>)
     }
-    parts.push(
-      <span key={i} style={style.filter}>
-        {title.substr(i, filterLower.length)}
-      </span>
-    )
-    lastIndex = i + filterLower.length
-  })
 
-  if (lastIndex < title.length) {
-    parts.push(<span key={lastIndex}>{title.substring(lastIndex)}</span>)
-  }
+    return parts
+  }, [filter, title, substringIndex, style.filter])
 
   return (
     <div>
-      <Link style={style.link} to={`/produkter/${id}`}>
-        {filter ? parts : title}
-      </Link>
-      {state.expanded && subItems}
+      <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+        <Link
+          to={`/produkter/${id}`}
+          style={style.link}
+          onMouseEnter={() => setHover(true)}
+          onMouseLeave={() => setHover(false)}
+        >
+          {titleElement}
+        </Link>
+        {sub.length > 0 && !isRoot && (
+          <i
+            className={`fa fa-chevron-${expanded ? 'down' : 'right'}`}
+            style={{marginLeft: 10, cursor: 'pointer'}}
+            onClick={onExpand}
+          />
+        )}
+      </div>
+      {expanded && subItems}
     </div>
   )
 }
@@ -117,8 +132,12 @@ MenuItem.propTypes = {
     sub: PropTypes.array.isRequired
   }).isRequired,
   active: PropTypes.string,
-  filter: PropTypes.string,
-  isRoot: PropTypes.bool
+  filter: PropTypes.string.isRequired,
+  isRoot: PropTypes.bool.isRequired
+}
+
+MenuItem.defaultProps = {
+  active: null
 }
 
 export default Radium(MenuItem)

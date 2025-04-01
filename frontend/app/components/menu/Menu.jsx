@@ -1,21 +1,22 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useCallback, useMemo } from 'react'
 import PropTypes from 'prop-types'
+import { useLoaderData } from 'react-router-dom'
 import MenuItem from './MenuItem.jsx'
 import Box from './../Box.jsx'
 import Radium from 'radium'
 import * as V from '../../vars'
 
 const Menu = () => {
-  const [state, setState] = useState({
-    transform: 0,
-    menuHeight: 0,
-    expanded: false,
-    filter: ''
-  })
+  const [filter, setFilter] = useState('')
+  const { categories, loading } = useLoaderData()
 
-  const handleSearch = (e) => setState(prev => ({ ...prev, filter: e.target.value.toLowerCase() }))
+  const handleSearch = useCallback((e) => {
+    setFilter(e.target.value.toLowerCase())
+  }, [])
 
-  const matches = (categories, filter) => {
+  const matches = useCallback((categories, filter) => {
+    if (!categories || !categories.sub) return new Set()
+
     const flat = (p) => p.sub.length === 0 ? [p] : [p].concat(p.sub.flatMap(s => flat(s)))
     const all = flat(categories)
     const matching = all.filter(p => p.title.toLowerCase().includes(filter.toLowerCase()))
@@ -37,34 +38,41 @@ const Menu = () => {
       }
     }
     return new Set([...pushParent(matching)].map(c => c.id))
-  }
+  }, [])
 
-  return (
-    <Box>
-      <div className="form-group">
-        <input
-          className="form-control"
-          onChange={handleSearch}
-          placeholder="Søk i produkter"
-          type="text"
-          value={state.filter}
+  const menuContent = useMemo(() => {
+    if (loading || !categories?.sub) {
+      return (
+        <div className="text-center">
+          <i className="fa fa-spinner fa-spin fa-2x"></i>
+        </div>
+      )
+    }
+
+    return (
+      <>
+        <div className="form-group">
+          <input
+            className="form-control"
+            onChange={handleSearch}
+            placeholder="Søk i produkter"
+            type="text"
+            value={filter}
+          />
+        </div>
+        <MenuItem
+          active={null}
+          filter={filter}
+          isRoot={true}
+          product={categories}
         />
-      </div>
-      <MenuItem
-        active={state.active}
-        filter={state.filter}
-        isRoot={true}
-        matches={matches}
-        product={state.products}
-      />
-    </Box>
-  )
+      </>
+    )
+  }, [categories, filter, handleSearch, loading])
+
+  return <Box>{menuContent}</Box>
 }
 
-Menu.propTypes = {
-  categories: PropTypes.object.isRequired,
-  linkTo: PropTypes.string.isRequired,
-  active: PropTypes.string
-}
+Menu.propTypes = {}
 
 export default Radium(Menu)

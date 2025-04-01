@@ -1,12 +1,10 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
 import Radium from 'radium'
 import { SM, XS } from '../../vars'
 
 const Photo = ({ src, height, width, margin, crop, selected, children, clickable, size, linkTo, className, onClick }) => {
-  const dispatch = useDispatch()
   const navigate = useNavigate()
   const [hover, setHover] = useState(false)
 

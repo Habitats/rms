@@ -1,24 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { useSelector, useDispatch } from 'react-redux'
-import { useParams, useOutletContext } from 'react-router-dom'
+import { useParams, useOutletContext, useLoaderData } from 'react-router-dom'
 import BigHeadline from './../components/text/BigHeadline.jsx'
 import Menu from './../components/menu/Menu.jsx'
 import ProductItems from '../components/product/ProductItems.jsx'
 import Left from './../components/Left.jsx'
 import Right from './../components/Right.jsx'
 import Box from './../components/Box.jsx'
-import * as ProductActionCreators from '../redux/actions/ProductActions'
 import NotFound from '../components/NotFound.jsx'
 import Link from '../components/Link.jsx'
 
 const ProductsContainer = () => {
-  const dispatch = useDispatch()
-  const { categories, session } = useSelector(state => ({
-    categories: state.products,
-    session: state.session
-  }))
-  
+  const { categories, isAdmin } = useLoaderData()
   const { categoryId, productId } = useParams()
   const children = useOutletContext()
   
@@ -28,10 +21,6 @@ const ProductsContainer = () => {
   const [mqlm] = useState(() => window.matchMedia('only screen and (max-width: 991px)'))
 
   useEffect(() => {
-    if (!categories || Object.keys(categories).length === 0) {
-      dispatch(ProductActionCreators.fetchProducts())
-    }
-
     const handleMediaChange = () => {
       setIsSmall(mql.matches)
       setIsMedium(mqlm.matches)
@@ -45,7 +34,7 @@ const ProductsContainer = () => {
       mql.removeListener(handleMediaChange)
       mqlm.removeListener(handleMediaChange)
     }
-  }, [categories, dispatch, mql, mqlm])
+  }, [mql, mqlm])
 
   if (!categories || !categories.hasOwnProperty('sub')) {
     return (
@@ -57,7 +46,7 @@ const ProductsContainer = () => {
     )
   }
 
-  const addProduct = session.admin ? (
+  const addProduct = isAdmin ? (
     <div className="form-group">
       <Link to="/produkter/ny">
         <button className="btn btn-default btn-block" type="submit">Legg til nytt produkt</button>
@@ -119,11 +108,6 @@ const ProductsContainer = () => {
   return <NotFound />
 }
 
-ProductsContainer.propTypes = {
-  session: PropTypes.shape({
-    admin: PropTypes.bool.isRequired,
-    username: PropTypes.string
-  })
-}
+ProductsContainer.propTypes = {}
 
 export default ProductsContainer

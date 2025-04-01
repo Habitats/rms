@@ -1,18 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { useSelector, useDispatch } from 'react-redux'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useLoaderData, useActionData } from 'react-router-dom'
 import MediumHeadline from './../text/MediumHeadline.jsx'
 import Box from './../Box.jsx'
-import * as ProductActions from '../../redux/actions/ProductActions'
 import Select from 'react-select'
 import { CONTENT_MAX_WIDTH } from '../../vars'
 
 const ProductAdd = () => {
-  const dispatch = useDispatch()
   const navigate = useNavigate()
   const { productId } = useParams()
-  const products = useSelector(state => state.products)
+  const { products, isAdmin } = useLoaderData()
+  const actionData = useActionData()
 
   const [state, setState] = useState({
     description: '',
@@ -22,10 +20,6 @@ const ProductAdd = () => {
     edit: false,
     category: null
   })
-
-  useEffect(() => {
-    dispatch(ProductActions.fetchProducts())
-  }, [dispatch])
 
   useEffect(() => {
     if (products && products.hasOwnProperty('sub')) {
@@ -59,7 +53,7 @@ const ProductAdd = () => {
     return uniqueId && state.title.length > 0
   }
 
-  const onSave = () => {
+  const onSave = async () => {
     if (isValid()) {
       const product = {
         id: state.edit ? state.id : -1,
@@ -69,16 +63,37 @@ const ProductAdd = () => {
         src: state.src || 'main.jpg',
         index: products.sub.flatMap(c => c.sub).length + 1
       }
-      dispatch(ProductActions.save(product))
-      navigate(-1)
+      
+      try {
+        const response = await fetch('/api/products', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(product),
+        })
+        
+        if (!response.ok) throw new Error('Failed to save product')
+        navigate(-1)
+      } catch (error) {
+        setState(prev => ({ ...prev, error: error.message }))
+      }
     } else {
       setState(prev => ({ ...prev, error: 'Velg tittel og kategori!' }))
     }
   }
 
-  const onRemove = () => {
-    dispatch(ProductActions.removeProduct(state.id))
-    navigate('/produkter')
+  const onRemove = async () => {
+    try {
+      const response = await fetch(`/api/products/${state.id}`, {
+        method: 'DELETE',
+      })
+      
+      if (!response.ok) throw new Error('Failed to delete product')
+      navigate('/produkter')
+    } catch (error) {
+      setState(prev => ({ ...prev, error: error.message }))
+    }
   }
 
   const handleSelect = (category) => {

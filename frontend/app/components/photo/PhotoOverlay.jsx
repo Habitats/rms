@@ -1,46 +1,38 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import EventListener from '../../util/EventListener.js'
 
 const PhotoOverlay = ({ toggled: initialToggled, src }) => {
   const [state, setState] = useState({
     toggled: initialToggled
-  })
-
-  const handleEscapeKeyDown = (e) => {
-    if ((e.key === 'Escape' || e.keyCode === 27) && state.toggled) {
-      e.stopPropagation()
-      e.preventDefault()
-      toggle()
-    }
-  }
-
-  const toggle = () => {
-    setState(prev => ({ ...prev, toggled: !prev.toggled }))
-    removeListener()
-  }
-
-  const removeListener = () => {
-    if (window.onWindowKeyDownListener) {
-      window.onWindowKeyDownListener.remove()
-    }
-  }
-
-  const addKeyListener = () => {
-    window.onWindowKeyDownListener = EventListener.listen(window, 'keydown', handleEscapeKeyDown)
-  }
+  });
 
   useEffect(() => {
     if (initialToggled) {
-      setState(prev => ({ ...prev, toggled: initialToggled }))
+      setState(prev => ({ ...prev, toggled: initialToggled }));
     }
-  }, [initialToggled])
+  }, [initialToggled]);
 
   useEffect(() => {
-    return () => {
-      removeListener()
+    const handleEscapeKeyDown = (e) => {
+      if ((e.key === 'Escape' || e.keyCode === 27) && state.toggled) {
+        e.stopPropagation();
+        e.preventDefault();
+        toggle();
+      }
+    };
+
+    if (state.toggled) {
+      window.addEventListener('keydown', handleEscapeKeyDown);
     }
-  }, [])
+
+    return () => {
+      window.removeEventListener('keydown', handleEscapeKeyDown);
+    };
+  }, [state.toggled]);
+
+  const toggle = () => {
+    setState(prev => ({ ...prev, toggled: !prev.toggled }));
+  };
 
   const overlayStyle = {
     position: 'fixed',
@@ -53,7 +45,7 @@ const PhotoOverlay = ({ toggled: initialToggled, src }) => {
     top: 0,
     left: 0,
     zIndex: 1000
-  }
+  };
 
   const overlayPhotoStyle = {
     position: 'fixed',
@@ -64,40 +56,39 @@ const PhotoOverlay = ({ toggled: initialToggled, src }) => {
     top: 0,
     left: 0,
     zIndex: 1000
-  }
+  };
 
   const wrapperStyle = {
     margin: 'auto 0',
     width: '100%',
     position: 'relative'
-  }
+  };
 
   if (state.toggled) {
-    addKeyListener()
-  }
-
-  return (
-    <div>
-      {state.toggled ? (
-        <div>
-          <div style={overlayStyle} onClick={toggle}></div>
-          <div style={overlayPhotoStyle} onClick={toggle}>
-            <div style={wrapperStyle}>
-              <img src={src + '/raw'} style={{maxWidth: '70%', maxHeight: '70%', marginTop: 50}}/>
-            </div>
+    return (
+      <div style={overlayStyle} onClick={toggle}>
+        <div style={overlayPhotoStyle}>
+          <div style={wrapperStyle}>
+            <img src={src} alt="Overlay" style={{ maxHeight: '100vh', maxWidth: '100vw' }} />
           </div>
         </div>
-      ) : null}
-    </div>
-  )
-}
+      </div>
+    );
+  }
+
+  return null;
+};
 
 PhotoOverlay.propTypes = {
-  toggled: PropTypes.bool.isRequired,
+  toggled: PropTypes.bool,
   src: PropTypes.string.isRequired
-}
+};
 
-export default PhotoOverlay
+PhotoOverlay.defaultProps = {
+  toggled: false
+};
+
+export default PhotoOverlay;
 
 
 

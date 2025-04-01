@@ -1,23 +1,24 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link as RouterLink } from 'react-router-dom'
 import Radium from 'radium'
 import PropTypes from 'prop-types'
 
-const Link = ({ to, children, className, onClick }) => {
-  const navigate = useNavigate()
-
+const Link = ({ to, children, className, onClick, style }) => {
   const handleClick = (e) => {
-    e.preventDefault()
     if (onClick) {
       onClick(e)
     }
-    navigate(to)
   }
 
   return (
-    <a href={to} onClick={handleClick} className={className}>
+    <RouterLink
+      to={to}
+      onClick={handleClick}
+      className={className}
+      style={style}
+    >
       {children}
-    </a>
+    </RouterLink>
   )
 }
 
@@ -25,7 +26,8 @@ Link.propTypes = {
   to: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  style: PropTypes.object
 }
 
 export default Radium(Link)
