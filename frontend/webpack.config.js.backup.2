@@ -105,13 +105,26 @@ const rules = [
     }
   },
   
-  // Process HTML files using asset modules
+  // Process HTML files
   {
     test: /\.html$/,
-    type: 'asset/source',
-    generator: {
-      filename: '[path][name][ext]'
-    }
+    use: [
+      {
+        loader: 'file-loader',
+        options: {
+          name: '[path][name].[ext]',
+          esModule: false
+        }
+      },
+      {
+        loader: 'template-html-loader',
+        options: {
+          raw: true,
+          engine: 'lodash',
+          contextPath: contextPath
+        }
+      }
+    ]
   },
   
   // Process SCSS files
