@@ -1,10 +1,27 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { useNavigate, useParams } from 'react-router-dom'
+import styled from 'styled-components'
 import MediumHeadline from '../text/MediumHeadline.jsx'
 import Box from '../Box.jsx'
 import Select from 'react-select'
 import { CONTENT_MAX_WIDTH } from '../../vars'
+
+const FormContainer = styled.div`
+  padding-bottom: 50px;
+  text-align: justify;
+  max-width: ${CONTENT_MAX_WIDTH}px;
+  margin: 0 auto;
+`
+
+const StyledSelect = styled(Select)`
+  margin-bottom: 15px;
+`
+
+const DebugInfo = styled.pre`
+  max-width: 700px;
+  margin: 0 auto;
+`
 
 const ProductAdd = ({ products, onSave, onRemove }) => {
   const navigate = useNavigate()
@@ -85,19 +102,11 @@ const ProductAdd = ({ products, onSave, onRemove }) => {
   const { error, title, description, id, category, edit } = state
   const flatProducts = flatten(products)
   const options = flatProducts.map(p => ({value: p.id, label: p.title}))
-  const style = {
-    box: {
-      paddingBottom: 50,
-      textAlign: 'justify',
-      maxWidth: CONTENT_MAX_WIDTH,
-      margin: '0 auto'
-    }
-  }
 
   return (
     <Box>
       <MediumHeadline big={edit ? 'Endre produkt' : 'Nytt produkt'}/>
-      <div style={style.box}>
+      <FormContainer>
         <form className="form">
           <div className="form-group">
             <label>Tittel</label>
@@ -120,8 +129,7 @@ const ProductAdd = ({ products, onSave, onRemove }) => {
             />
           </div>
         </form>
-        <Select 
-          style={{marginBottom: 15}}
+        <StyledSelect 
           value={category}
           options={options}
           onChange={handleSelect}
@@ -140,8 +148,8 @@ const ProductAdd = ({ products, onSave, onRemove }) => {
             <button className="btn btn-primary btn-block" onClick={handleSave}>Lagre</button>
           </div>
         </div>
-      </div>
-      <pre style={{maxWidth: 700, margin: '0 auto'}}> {JSON.stringify(state, undefined, 1)} </pre>
+      </FormContainer>
+      <DebugInfo>{JSON.stringify(state, undefined, 1)}</DebugInfo>
     </Box>
   )
 }

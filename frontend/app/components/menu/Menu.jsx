@@ -1,16 +1,46 @@
 import React, { useState, useCallback, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { useLoaderData } from 'react-router-dom'
+import styled, { useTheme } from 'styled-components'
 import MenuItem from './MenuItem.jsx'
 import Box from './../Box.jsx'
 import useMediaQuery from '../../hooks/useMediaQuery'
 import * as V from '../../vars'
 
+const LoadingContainer = styled.div`
+  text-align: center;
+`
+
+const SearchInput = styled.input`
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  
+  &:focus {
+    outline: none;
+    border-color: ${props => props.theme.colors.PRIMARY || '#007bff'};
+  }
+`
+
+const SearchFormGroup = styled.div`
+  margin-bottom: ${props => 
+    props.isSmall 
+      ? '10px' 
+      : props.isMedium 
+        ? '15px' 
+        : '20px'
+  };
+  width: 100%;
+`
+
 const Menu = () => {
   const [filter, setFilter] = useState('')
   const { categories, loading } = useLoaderData()
-  const isSmall = useMediaQuery('only screen and (max-width: 767px)');
-  const isMedium = useMediaQuery('only screen and (max-width: 991px)');
+  const theme = useTheme();
+  const isSmall = useMediaQuery(`only screen and (max-width: ${theme.breakpoints.xs})`);
+  const isMedium = useMediaQuery(`only screen and (max-width: ${theme.breakpoints.md})`);
 
   const handleSearch = useCallback((e) => {
     setFilter(e.target.value.toLowerCase())
@@ -45,28 +75,23 @@ const Menu = () => {
   const menuContent = useMemo(() => {
     if (loading || !categories?.sub) {
       return (
-        <div className="text-center">
+        <LoadingContainer>
           <i className="fa fa-spinner fa-spin fa-2x"></i>
-        </div>
+        </LoadingContainer>
       )
-    }
-
-    const searchStyle = {
-      marginBottom: isSmall ? '10px' : isMedium ? '15px' : '20px',
-      width: '100%'
     }
 
     return (
       <>
-        <div className="form-group" style={searchStyle}>
-          <input
+        <SearchFormGroup isSmall={isSmall} isMedium={isMedium}>
+          <SearchInput
             className="form-control"
             onChange={handleSearch}
             placeholder="Søk i produkter"
             type="text"
             value={filter}
           />
-        </div>
+        </SearchFormGroup>
         <MenuItem
           active={null}
           filter={filter}

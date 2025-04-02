@@ -1,9 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { useLoaderData, useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
 import BigHeadline from './../text/BigHeadline.jsx'
 import MiniGallery from './../photo/MiniGallery.jsx'
 import Box from './../Box.jsx'
+
+const Button = styled.button`
+  margin-top: 5px;
+`
 
 const Project = ({ selected }) => {
   const navigate = useNavigate()
@@ -15,24 +20,22 @@ const Project = ({ selected }) => {
       <div className="row">
         <div className="col-xs-12">
           <MiniGallery images={project.images} orientation={'horizontal'} height={400} thumbHeight={100}/>
-          {isAdmin ? (
-            <button 
-              style={{marginTop: 5}} 
+          {isAdmin && (
+            <Button 
               className="btn btn-default btn-block" 
               type="submit"
               onClick={() => navigate(`referanser/endre/${project.id}`)}
             >
               Endre
-            </button>
-          ) : null}
-          <button 
-            style={{marginTop: 5}} 
+            </Button>
+          )}
+          <Button 
             className="btn btn-default btn-block" 
             type="submit"
             onClick={() => navigate("/referanser")}
           >
             Tilbake
-          </button>
+          </Button>
         </div>
       </div>
     </Box>

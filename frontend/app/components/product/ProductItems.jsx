@@ -1,21 +1,21 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import styled, { useTheme } from 'styled-components'
 import ProductItem from './ProductItem.jsx'
 import useMediaQuery from '../../hooks/useMediaQuery'
 import * as V from '../../vars'
 
-const ProductItems = ({ products, parentRoute, className = 'col-sm-6 col-xs-12', height = 230 }) => {
-  const isSmall = useMediaQuery('only screen and (max-width: 767px)')
-  const isMedium = useMediaQuery('only screen and (min-width: 768px)')
-  const isLarge = useMediaQuery('only screen and (min-width: 992px)')
+const ProductsContainer = styled.div`
+  padding-left: ${props => props.isLarge ? '0' : `${V.MARGIN_XS}px`};
+  padding-right: ${props => props.isLarge ? '0' : `${V.MARGIN_XS}px`};
+  min-height: 100%;
+`
 
-  const style = {
-    container: {
-      paddingLeft: isLarge ? 0 : V.MARGIN_XS,
-      paddingRight: isLarge ? 0 : V.MARGIN_XS,
-      minHeight: '100%'
-    }
-  }
+const ProductItems = ({ products, parentRoute, className = 'col-sm-6 col-xs-12', height = 230 }) => {
+  const theme = useTheme();
+  const isSmall = useMediaQuery(`only screen and (max-width: ${theme.breakpoints.xs})`);
+  const isMedium = useMediaQuery(`only screen and (min-width: ${theme.breakpoints.sm})`);
+  const isLarge = useMediaQuery(`only screen and (min-width: ${theme.breakpoints.md})`);
 
   const rootCategories = products.map(c => (
     <ProductItem 
@@ -28,9 +28,9 @@ const ProductItems = ({ products, parentRoute, className = 'col-sm-6 col-xs-12',
   ))
 
   return (
-    <div style={style.container}>
+    <ProductsContainer isLarge={isLarge}>
       {rootCategories}
-    </div>
+    </ProductsContainer>
   )
 }
 

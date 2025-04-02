@@ -1,17 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 import {MENU_WIDTH} from '../vars'
 
-const Left = ({ children }) => {
-  const style = {
-    width: MENU_WIDTH,
-    paddingRight: 0,
-  }
+const LeftContainer = styled.div`
+  width: ${MENU_WIDTH}px;
+  padding-right: 0;
+`
 
+const Left = ({ children }) => {
   return (
-    <div className="" style={style}>
+    <LeftContainer>
       {children}
-    </div>
+    </LeftContainer>
   )
 }
 

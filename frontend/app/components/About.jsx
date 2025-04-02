@@ -1,9 +1,24 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 import Photo from './photo/Photo.jsx'
 import BigHeadline from './text/BigHeadline.jsx'
 import TextBox from './text/TextBox.jsx'
 import Box from './Box.jsx'
+
+const PartnersSection = styled.div`
+  padding-bottom: 60px;
+`
+
+const LargeColumn = styled.div`
+  padding-right: 0;
+`
+
+const MemberText = styled.div`
+  padding-top: 10px;
+  max-width: 215px;
+  display: inline-block;
+`
 
 const About = () => {
   const margin = 40
@@ -13,18 +28,18 @@ const About = () => {
     <div>
       <Box>
         <div className="row visible-md visible-lg">
-          <div className="col-md-8" style={{paddingRight: 0}}>
+          <LargeColumn className="col-md-8">
             <Photo clickable={false} height={415} src="image/butikken_.jpg"/>
-          </div>
+          </LargeColumn>
           <div className="col-md-4">
             <Photo clickable={false} height={200} src="image/butikken_inne_1.jpg"/>
             <Photo clickable={false} height={200} src="image/butikken_inne_2.jpg" margin={15}/>
           </div>
         </div>
         <div className="row visible-sm">
-          <div className="col-sm-8" style={{paddingRight: 0}}>
+          <LargeColumn className="col-sm-8">
             <Photo clickable={false} height={320} src="image/butikken_.jpg"/>
-          </div>
+          </LargeColumn>
           <div className="col-sm-4">
             <Photo clickable={false} height={150} src="image/butikken_inne_1.jpg"/>
             <Photo clickable={false} height={150} src="image/butikken_inne_2.jpg" margin={15}/>
@@ -58,7 +73,7 @@ const About = () => {
       </Box>
 
       <Box>
-        <div style={{paddingBottom: 60}}>
+        <PartnersSection>
           <BigHeadline big="Partnere" small="Leverandører og forhandlere"/>
           <div className="row">
             <div className="col-sm-10 col-sm-offset-1">
@@ -91,14 +106,14 @@ const About = () => {
                   <a href="http://www.solskjerming.no/" target="_blank" rel="noopener noreferrer">
                     <Photo clickable={false} crop={false} height={iconHeight + 20} src="image/medlem_logo.png"/>
                   </a>
-                  <div style={{paddingTop: 10, maxWidth: 215, display: 'inline-block'}}>
+                  <MemberText>
                     <i>Romerike Markiseservice er medlem av Norges Solskjermingsforbund</i>
-                  </div>
+                  </MemberText>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </PartnersSection>
       </Box>
     </div>
   )

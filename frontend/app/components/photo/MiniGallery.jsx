@@ -1,10 +1,102 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import Draggable from 'react-draggable'
+import styled, { css } from 'styled-components'
 import Photo from './Photo.jsx'
 import CoverPhoto from './CoverPhoto.jsx'
 import useMediaQuery from '../../hooks/useMediaQuery'
 import { SM, XS } from '../../vars'
+
+const GalleryContainer = styled.div`
+  height: ${props => props.height}px;
+`
+
+const GalleryRow = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`
+
+const CoverContainer = styled.div`
+  padding-right: ${props => props.hasMultipleImages ? '15px' : '0'};
+  height: ${props => props.calculatedHeight}px;
+  
+  @media only screen and (max-width: 767px) {
+    height: ${props => props.height * XS}px;
+  }
+  
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+    height: ${props => props.height * SM}px;
+  }
+  
+  @media only screen and (min-width: 992px) {
+    height: ${props => props.height}px;
+  }
+`
+
+const ThumbsWrapper = styled.div`
+  width: 100%;
+`
+
+const ThumbsContainer = styled.div`
+  max-height: 200px;
+  z-index: 200;
+  overflow: hidden;
+  width: 100%;
+`
+
+const ScrollerContainer = styled.div`
+  margin-top: 15px;
+  height: 80px;
+  left: ${props => props.startX || 0}px;
+  position: relative;
+  width: ${props => props.imagesCount * 115 - 15}px;
+`
+
+const ThumbItem = styled.div`
+  padding: 0 15px 0 0;
+  float: none;
+  display: inline-block;
+  
+  @media only screen and (max-width: 767px) {
+    height: 60px;
+    width: 80px;
+  }
+  
+  @media only screen and (min-width: 768px) {
+    height: 90px;
+    width: 103px;
+  }
+`
+
+// Vertical gallery styled components
+const VerticalCoverContainer = styled.div`
+  padding-right: ${props => props.hasMultipleImages ? '0' : 'inherit'};
+  height: ${props => props.height}px;
+`
+
+const VerticalThumbsContainer = styled.div`
+  padding: 0;
+  margin-left: -15px;
+`
+
+const VerticalScrollerContainer = styled.div`
+  height: ${props => props.height}px;
+  overflow-y: auto;
+  padding: 0;
+  overflow-x: hidden;
+`
+
+const VerticalThumbItem = styled.div`
+  padding: 0 0 15px 15px;
+  
+  @media only screen and (max-width: 767px) {
+    height: 60px;
+  }
+  
+  @media only screen and (min-width: 768px) {
+    height: 90px;
+  }
+`
 
 const MiniGallery = ({ images, height = 350, orientation = 'horizontal' }) => {
   const [selected, setSelected] = useState(null)
@@ -55,50 +147,6 @@ const MiniGallery = ({ images, height = 350, orientation = 'horizontal' }) => {
   }
 
   const horizontal = (images, cover, height, startX) => {
-    const style = {
-      cover: {
-        paddingRight: 15,
-        '@media only screen and (max-width: 767px)': {
-          height: height * XS
-        },
-        '@media only screen and (min-width: 768px)': {
-          height: height * SM
-        },
-        '@media only screen and (min-width: 992px)': {
-          height: height
-        }
-      },
-      thumbs: {
-        maxHeight: 200,
-        zIndex: 200,
-        overflow: 'hidden',
-        width: '100%'
-      },
-      scroller: {
-        marginTop: 15,
-        height: 80,
-        left: startX,
-        position: 'relative',
-        width: images.length * 115 - 15,
-      },
-      photo: {
-        paddingBottom: 0,
-        paddingLeft: 0,
-        paddingTop: 0,
-        paddingRight: 15,
-        float: 'none',
-        display: 'inline-block',
-        '@media only screen and (max-width: 767px)': {
-          height: 60,
-          width: 80,
-        },
-        '@media only screen and (min-width: 768px)': {
-          height: 90,
-          width: 103
-        },
-      }
-    }
-
     const classes = {
       cover: 'col-xs-12',
       thumbs: 'col-xs-3',
@@ -106,27 +154,33 @@ const MiniGallery = ({ images, height = 350, orientation = 'horizontal' }) => {
     }
 
     const bound = images.length <= 7 ? 0 : -((images.length - 7) * 103)
+    
     return (
-      <div className="row mini-gallery">
-        <div className={classes.cover} style={style.cover}>
+      <GalleryRow className="mini-gallery">
+        <CoverContainer 
+          className={classes.cover} 
+          height={height}
+          calculatedHeight={height}
+          hasMultipleImages={images.length > 1}
+        >
           <CoverPhoto 
             src={cover.src} 
             onRightSelect={() => onRightSelect(images, cover)}
             onLeftSelect={() => onLeftSelect(images, cover)}
           />
-        </div>
+        </CoverContainer>
         {images.length > 1 && (
-          <div className={classes.thumbWrapper}>
-            <div style={style.thumbs}>
+          <ThumbsWrapper className={classes.thumbWrapper}>
+            <ThumbsContainer>
               <Draggable 
                 axis="x" 
                 zIndex={100} 
                 onDrag={handleDrag} 
                 bounds={{top: 0, left: bound, right: 0, bottom: 0}}
               >
-                <div style={style.scroller}>
+                <ScrollerContainer startX={startX} imagesCount={images.length}>
                   {images.map(image => (
-                    <div key={image.src} style={style.photo}>
+                    <ThumbItem key={image.src}>
                       <Photo 
                         className={classes.thumbs} 
                         src={image.src} 
@@ -134,47 +188,18 @@ const MiniGallery = ({ images, height = 350, orientation = 'horizontal' }) => {
                         onClick={() => onSelect(image)} 
                         selected={cover === image}
                       />
-                    </div>
+                    </ThumbItem>
                   ))}
-                </div>
+                </ScrollerContainer>
               </Draggable>
-            </div>
-          </div>
+            </ThumbsContainer>
+          </ThumbsWrapper>
         )}
-      </div>
+      </GalleryRow>
     )
   }
 
   const vertical = (images, cover, height) => {
-    const style = {
-      cover: {
-        paddingRight: images.length > 1 ? 0 : null,
-        height: height
-      },
-      thumbs: {
-        padding: 0,
-        marginLeft: -15
-      },
-      scroller: {
-        height: height,
-        overflowY: 'auto',
-        padding: 0,
-        overflowX: 'hidden'
-      },
-      photo: {
-        paddingBottom: 15,
-        paddingLeft: 15,
-        paddingTop: 0,
-        paddingRight: 0,
-        '@media only screen and (max-width: 767px)': {
-          height: 60,
-        },
-        '@media only screen and (min-width: 768px)': {
-          height: 90,
-        },
-      }
-    }
-
     const classes = {
       cover: images.length === 1 ? 'col-xs-12' : images.length > 10 ? 'col-xs-8' : 'col-xs-9',
       thumbs: images.length > 10 ? 'col-md-6 col-xs-12' : 'col-xs-12',
@@ -182,33 +207,37 @@ const MiniGallery = ({ images, height = 350, orientation = 'horizontal' }) => {
     }
 
     return (
-      <div className="row mini-gallery">
-        <div className={classes.cover} style={style.cover}>
+      <GalleryRow className="mini-gallery">
+        <VerticalCoverContainer 
+          className={classes.cover}
+          height={height} 
+          hasMultipleImages={images.length > 1}
+        >
           <CoverPhoto 
             src={cover.src} 
             onRightSelect={() => onRightSelect(images, cover)}
             onLeftSelect={() => onLeftSelect(images, cover)}
           />
-        </div>
+        </VerticalCoverContainer>
         {images.length > 1 && (
           <div className={classes.thumbWrapper}>
-            <div style={style.thumbs}>
-              <div style={style.scroller}>
+            <VerticalThumbsContainer>
+              <VerticalScrollerContainer height={height}>
                 {images.map(image => (
-                  <div style={style.photo} className={classes.thumbs} key={image.src}>
+                  <VerticalThumbItem className={classes.thumbs} key={image.src}>
                     <Photo 
                       onClick={() => onSelect(image)} 
                       src={image.src} 
                       size={'low'} 
                       selected={cover === image}
                     />
-                  </div>
+                  </VerticalThumbItem>
                 ))}
-              </div>
-            </div>
+              </VerticalScrollerContainer>
+            </VerticalThumbsContainer>
           </div>
         )}
-      </div>
+      </GalleryRow>
     )
   }
 
@@ -224,9 +253,9 @@ const MiniGallery = ({ images, height = 350, orientation = 'horizontal' }) => {
   return (
     <div>
       {images.length === 1 ? (
-        <div style={{height: galleryHeight}}>
+        <GalleryContainer height={galleryHeight}>
           <Photo src={cover.src}/>
-        </div>
+        </GalleryContainer>
       ) : (
         <div>
           {small ? 

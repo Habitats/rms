@@ -1,5 +1,42 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
+
+const Overlay = styled.div`
+  position: fixed;
+  display: inline-flex;
+  width: 100%;
+  height: 100%;
+  background: black;
+  opacity: 0.8;
+  text-align: center;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+`
+
+const OverlayPhoto = styled.div`
+  position: fixed;
+  display: inline-flex;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+`
+
+const PhotoWrapper = styled.div`
+  margin: auto 0;
+  width: 100%;
+  position: relative;
+`
+
+const Image = styled.img`
+  max-width: 70%;
+  max-height: 70%;
+  margin-top: 50px;
+`
 
 const PhotoOverlay = ({ toggled: initialToggled, src }) => {
   const [toggled, setToggled] = useState(initialToggled)
@@ -10,7 +47,6 @@ const PhotoOverlay = ({ toggled: initialToggled, src }) => {
 
   const toggle = () => {
     setToggled(!toggled)
-    removeListener()
   }
 
   const handleEscapeKeyDown = (e) => {
@@ -30,46 +66,16 @@ const PhotoOverlay = ({ toggled: initialToggled, src }) => {
     }
   }, [toggled])
 
-  const overlayStyle = {
-    position: 'fixed',
-    display: 'inline-flex',
-    width: '100%',
-    height: '100%',
-    background: 'black',
-    opacity: 0.8,
-    textAlign: 'center',
-    top: 0,
-    left: 0,
-    zIndex: 1000
-  }
-
-  const overlayPhotoStyle = {
-    position: 'fixed',
-    display: 'inline-flex',
-    width: '100%',
-    height: '100%',
-    textAlign: 'center',
-    top: 0,
-    left: 0,
-    zIndex: 1000
-  }
-
-  const wrapperStyle = {
-    margin: 'auto 0',
-    width: '100%',
-    position: 'relative'
-  }
-
   return (
     <div>
       {toggled && (
         <div>
-          <div style={overlayStyle} onClick={toggle}></div>
-          <div style={overlayPhotoStyle} onClick={toggle}>
-            <div style={wrapperStyle}>
-              <img src={src + '/raw'} style={{maxWidth: '70%', maxHeight: '70%', marginTop: 50}}/>
-            </div>
-          </div>
+          <Overlay onClick={toggle} />
+          <OverlayPhoto onClick={toggle}>
+            <PhotoWrapper>
+              <Image src={src + '/raw'} />
+            </PhotoWrapper>
+          </OverlayPhoto>
         </div>
       )}
     </div>

@@ -1,17 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
+
+const LabelContainer = styled.div`
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+`
 
 const SimpleLabel = ({ text }) => {
-  const style = {
-    overflow: 'hidden',
-    whiteSpace: 'nowrap',
-    textOverflow: 'ellipsis'
-  }
-
   return (
-    <div style={style}>
+    <LabelContainer>
       {text}
-    </div>
+    </LabelContainer>
   )
 }
 

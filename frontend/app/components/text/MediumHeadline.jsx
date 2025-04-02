@@ -1,42 +1,51 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {HEADING_SMALL, HEADING_BIG} from '../../colors'
+import styled, { useTheme } from 'styled-components'
 import Link from '../Link.jsx'
 import useMediaQuery from '../../hooks/useMediaQuery'
 
-const MediumHeadline = ({ small, big, to }) => {
-  const isSmall = useMediaQuery('only screen and (max-width: 767px)');
-  const isMedium = useMediaQuery('only screen and (max-width: 991px)');
+const HeadlineRow = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
 
-  const style = {
-    box: {
-      marginTop: isSmall ? 10 : 30
-    },
-    divider: {
-      marginBottom: isSmall ? 20 : 40,
-      marginTop: isSmall ? 15 : 30
-    },
-    big: {
-      paddingTop: isSmall ? 0 : 20,
-      paddingBottom: 0,
-      color: HEADING_BIG
-    },
-    small: {
-      marginBottom: isSmall ? -10 : -20,
-      color: HEADING_SMALL
-    }
-  }
+const HeadlineBox = styled.div`
+  margin-top: ${props => props.isSmall ? '10px' : '30px'};
+  text-align: center;
+  width: 100%;
+`
+
+const SmallHeadline = styled.h5`
+  margin-bottom: ${props => props.isSmall ? '-10px' : '-20px'};
+  color: ${props => props.theme.colors.HEADING_SMALL};
+`
+
+const BigHeadline = styled.h2`
+  padding-top: ${props => props.isSmall ? '0' : '20px'};
+  padding-bottom: 0;
+  color: ${props => props.theme.colors.HEADING_BIG};
+`
+
+const Divider = styled.hr`
+  margin-bottom: ${props => props.isSmall ? '20px' : '40px'};
+  margin-top: ${props => props.isSmall ? '15px' : '30px'};
+`
+
+const MediumHeadline = ({ small, big, to }) => {
+  const theme = useTheme();
+  const isSmall = useMediaQuery(`only screen and (max-width: ${theme.breakpoints.xs})`);
 
   return (
-    <div className="row">
-      <div className="col-lg-12 text-center" style={style.box}>
-        <h5 style={style.small}>
+    <HeadlineRow className="row">
+      <HeadlineBox className="col-lg-12" isSmall={isSmall}>
+        <SmallHeadline isSmall={isSmall}>
           {to ? <Link to={to}>{small}</Link> : small}
-        </h5>
-        <h2 style={style.big}>{big}</h2>
-        <hr style={style.divider}/>
-      </div>
-    </div>
+        </SmallHeadline>
+        <BigHeadline isSmall={isSmall}>{big}</BigHeadline>
+        <Divider isSmall={isSmall} />
+      </HeadlineBox>
+    </HeadlineRow>
   )
 }
 

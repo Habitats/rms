@@ -10,13 +10,13 @@ const StyledBox = styled.div`
   width: 100%;
   box-shadow: 0 0 35px 3px rgba(0, 0, 0, 0.16);
 
-  @media only screen and (max-width: 767px) {
+  @media only screen and (max-width: ${props => props.theme.breakpoints.xs}) {
     padding: ${V.MARGIN_XS};
     width: 100%;
     margin-bottom: 0;
   }
 
-  @media only screen and (min-width: 768px) {
+  @media only screen and (min-width: ${props => props.theme.breakpoints.sm}) {
     padding: ${V.MARGIN_SM};
     margin-bottom: 20px;
   }

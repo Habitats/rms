@@ -1,29 +1,43 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link as RouterLink } from 'react-router-dom'
+import styled, { useTheme } from 'styled-components'
 import useMediaQuery from '../hooks/useMediaQuery'
 
-const Link = ({ to, children, style = {}, className = '', ...props }) => {
-  const isSmall = useMediaQuery('only screen and (max-width: 767px)');
-  const isMedium = useMediaQuery('only screen and (max-width: 991px)');
-
-  const defaultStyle = {
-    textDecoration: 'none',
-    color: 'inherit',
-    fontSize: isSmall ? '14px' : isMedium ? '16px' : '16px',
-    fontWeight: 400,
-    transition: 'color 0.2s ease-in-out'
+const StyledLink = styled(RouterLink)`
+  text-decoration: none;
+  color: inherit;
+  font-size: ${props => 
+    props.isSmall 
+      ? '14px' 
+      : props.isMedium 
+        ? '16px' 
+        : '16px'
+  };
+  font-weight: 400;
+  transition: color 0.2s ease-in-out;
+  
+  &:hover {
+    color: ${props => props.theme.colors.PRIMARY || 'inherit'};
   }
+`
+
+const Link = ({ to, children, style = {}, className = '', ...props }) => {
+  const theme = useTheme();
+  const isSmall = useMediaQuery(`only screen and (max-width: ${theme.breakpoints.xs})`);
+  const isMedium = useMediaQuery(`only screen and (max-width: ${theme.breakpoints.md})`);
 
   return (
-    <RouterLink 
+    <StyledLink 
       to={to} 
-      style={{ ...defaultStyle, ...style }}
+      style={style}
       className={`custom-link ${className}`.trim()}
+      isSmall={isSmall}
+      isMedium={isMedium}
       {...props}
     >
       {children}
-    </RouterLink>
+    </StyledLink>
   )
 }
 

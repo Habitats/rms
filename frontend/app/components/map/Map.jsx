@@ -1,12 +1,32 @@
 import React, { useEffect, useState, useRef } from 'react'
 import PropTypes from 'prop-types'
+import styled, { useTheme } from 'styled-components'
 import useMediaQuery from '../../hooks/useMediaQuery'
+
+const MapContainer = styled.div`
+  height: ${props => 
+    props.isSmall 
+      ? '300px' 
+      : props.isMedium 
+        ? '400px' 
+        : `${props.height || 500}px`
+  };
+  width: 100%;
+  color: #e9e9e9;
+  ${props => props.customStyle && Object.entries(props.customStyle).map(([key, value]) => `${key}: ${value};`).join('')}
+`
+
+const LoadingMessage = styled.div`
+  text-align: center;
+  padding-top: 20%;
+`
 
 const Map = ({ zoom, height, style: customStyle, isScriptLoaded, isScriptLoadSucceed }) => {
   const [mapInitialized, setMapInitialized] = useState(false)
   const mapRef = useRef(null)
-  const isSmall = useMediaQuery('only screen and (max-width: 767px)');
-  const isMedium = useMediaQuery('only screen and (max-width: 991px)');
+  const theme = useTheme();
+  const isSmall = useMediaQuery(`only screen and (max-width: ${theme.breakpoints.xs})`);
+  const isMedium = useMediaQuery(`only screen and (max-width: ${theme.breakpoints.sm})`);
 
   useEffect(() => {
     if (isScriptLoaded && isScriptLoadSucceed && window.google && !mapInitialized && mapRef.current) {
@@ -44,22 +64,21 @@ const Map = ({ zoom, height, style: customStyle, isScriptLoaded, isScriptLoadSuc
     }
   }
 
-  const mapStyle = {
-    ...customStyle,
-    height: isSmall ? '300px' : isMedium ? '400px' : height || 500,
-    width: '100%',
-    color: '#e9e9e9'
-  }
-
   return (
-    <div ref={mapRef} style={mapStyle}>
+    <MapContainer 
+      ref={mapRef} 
+      customStyle={customStyle}
+      isSmall={isSmall}
+      isMedium={isMedium}
+      height={height}
+    >
       {!isScriptLoaded && (
-        <div style={{ textAlign: 'center', paddingTop: '20%' }}>Loading map...</div>
+        <LoadingMessage>Loading map...</LoadingMessage>
       )}
       {!isScriptLoadSucceed && (
-        <div style={{ textAlign: 'center', paddingTop: '20%' }}>Error loading map</div>
+        <LoadingMessage>Error loading map</LoadingMessage>
       )}
-    </div>
+    </MapContainer>
   )
 }
 

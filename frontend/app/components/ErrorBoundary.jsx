@@ -1,8 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { useRouteError, useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
 import BigHeadline from './text/BigHeadline.jsx'
 import Box from './Box.jsx'
+
+const ErrorContainer = styled.div`
+  padding: 20px;
+  text-align: center;
+`
+
+const HomeButton = styled.button`
+  margin-top: 20px;
+`
 
 const ErrorBoundary = () => {
   const error = useRouteError()
@@ -14,19 +24,18 @@ const ErrorBoundary = () => {
 
   return (
     <Box>
-      <div style={{ padding: '20px', textAlign: 'center' }}>
+      <ErrorContainer>
         <BigHeadline 
           big={error?.statusText || error?.message || 'Something went wrong'} 
           small={error?.status || '500'}
         />
-        <button 
+        <HomeButton 
           className="btn btn-default" 
           onClick={handleReload}
-          style={{ marginTop: '20px' }}
         >
           Go to Home Page
-        </button>
-      </div>
+        </HomeButton>
+      </ErrorContainer>
     </Box>
   )
 }

@@ -1,12 +1,127 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { useNavigate, useParams, useLoaderData, useActionData } from 'react-router-dom'
+import styled from 'styled-components'
 import MediumHeadline from './../components/text/MediumHeadline.jsx'
 import Photo from './../components/photo/Photo.jsx'
 import Left from './../components/Left.jsx'
 import Right from './../components/Right.jsx'
 import Box from './../components/Box.jsx'
 import SimpleLabel from './../components/text/SimpleLabel.jsx'
+
+const PhotosRow = styled.div`
+  margin-right: 0;
+`
+
+const PhotoItem = styled.div`
+  padding: 0;
+  margin: 0;
+`
+
+const PhotoWrapper = styled.div`
+  margin-bottom: 15px;
+  margin-left: 15px;
+`
+
+const StyledForm = styled.form`
+  margin-bottom: 20px;
+`
+
+const FormGroup = styled.div`
+  margin-bottom: 15px;
+`
+
+const FormLabel = styled.label`
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+`
+
+const FormInput = styled.input`
+  display: block;
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  
+  &:focus {
+    border-color: #66afe9;
+    outline: 0;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+  }
+`
+
+const FormTextArea = styled.textarea`
+  display: block;
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  
+  &:focus {
+    border-color: #66afe9;
+    outline: 0;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+  }
+`
+
+const ErrorText = styled.div`
+  color: #dc3545;
+  margin-bottom: 15px;
+`
+
+const ButtonRow = styled.div`
+  display: flex;
+  gap: 10px;
+`
+
+const ButtonContainer = styled.div`
+  flex: ${props => props.flex || 1};
+`
+
+const Button = styled.button`
+  display: block;
+  width: 100%;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: #fff;
+  background-color: #337ab7;
+  border-color: #2e6da4;
+  
+  &:hover {
+    background-color: #286090;
+    border-color: #204d74;
+  }
+`
+
+const DeleteButton = styled(Button)`
+  background-color: #d9534f;
+  border-color: #d43f3a;
+  
+  &:hover {
+    background-color: #c9302c;
+    border-color: #ac2925;
+  }
+`
 
 const ProjectAdd = () => {
   const navigate = useNavigate()
@@ -120,8 +235,8 @@ const ProjectAdd = () => {
     : []
 
   const photos = filteredImages.map(i => (
-    <div key={i.src} className="col-sm-3 col-xs-6" style={{padding: 0, margin: 0}}>
-      <div className={'photo'} style={{marginBottom: 15, marginLeft: 15}}>
+    <PhotoItem key={i.src} className="col-sm-3 col-xs-6">
+      <PhotoWrapper>
         <Photo 
           size={'low'}
           height={100}
@@ -129,66 +244,64 @@ const ProjectAdd = () => {
           selected={chosenImages.has(i.src)}
           src={i.src}
         />
-      </div>
-    </div>
+      </PhotoWrapper>
+    </PhotoItem>
   ))
 
   return (
     <div>
       <Left>
         <Box>
-          <form className="form">
-            <div className="form-group">
-              <label>Valgte bilder</label>
+          <StyledForm>
+            <FormGroup>
+              <FormLabel>Valgte bilder</FormLabel>
               {chosenLabels}
-            </div>
-          </form>
+            </FormGroup>
+          </StyledForm>
         </Box>
       </Left>
       <Right>
         <Box>
           <MediumHeadline big={stateId ? 'Endre referanse' : 'Ny referanse'}/>
 
-          <form className="form">
-            <div className="form-group">
-              <label>Tittel</label>
-              <input 
-                className="form-control" 
+          <StyledForm>
+            <FormGroup>
+              <FormLabel>Tittel</FormLabel>
+              <FormInput 
                 onChange={handleTitleChange} 
                 placeholder="Prosjekttittel" 
                 type="text"
                 value={title}
               />
-            </div>
-            <div className="form-group">
-              <label>Beskrivelse</label>
-              <textarea 
-                className="form-control" 
+            </FormGroup>
+            <FormGroup>
+              <FormLabel>Beskrivelse</FormLabel>
+              <FormTextArea 
                 onChange={handleDescriptionChange}
                 placeholder="Skriv en prosjektbeskrivelse her." 
                 rows="5" 
                 value={description}
               />
-            </div>
-          </form>
-          <div>{error}</div>
+            </FormGroup>
+          </StyledForm>
+          {error && <ErrorText>{error}</ErrorText>}
           <MediumHeadline big="Velg bilder"/>
-          <div className="row" style={{marginRight: 0}}>
+          <PhotosRow className="row">
             {photos}
-          </div>
-          <div className="row">
-            <div className={`col-xs-${stateId ? 4 : 6}`}>
-              <button className="btn btn-primary btn-block" onClick={() => navigate(-1)}>Tilbake</button>
-            </div>
-            {stateId ? (
-              <div className={`col-xs-${stateId ? 4 : 6}`}>
-                <button className="btn btn-primary btn-block" onClick={onRemove}>Slett</button>
-              </div>
-            ) : null}
-            <div className={`col-xs-${stateId ? 4 : 6}`}>
-              <button className="btn btn-primary btn-block" onClick={onSave}>Lagre</button>
-            </div>
-          </div>
+          </PhotosRow>
+          <ButtonRow>
+            <ButtonContainer flex={stateId ? 1 : 2}>
+              <Button onClick={() => navigate(-1)}>Tilbake</Button>
+            </ButtonContainer>
+            {stateId && (
+              <ButtonContainer flex={1}>
+                <DeleteButton onClick={onRemove}>Slett</DeleteButton>
+              </ButtonContainer>
+            )}
+            <ButtonContainer flex={stateId ? 1 : 2}>
+              <Button onClick={onSave}>Lagre</Button>
+            </ButtonContainer>
+          </ButtonRow>
         </Box>
       </Right>
     </div>

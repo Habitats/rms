@@ -6,7 +6,7 @@ import * as V from '../vars'
 import useMediaQuery from '../hooks/useMediaQuery'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPhone, faEnvelope } from '@fortawesome/free-solid-svg-icons'
-import styled from 'styled-components'
+import styled, { useTheme } from 'styled-components'
 
 const FooterContainer = styled.footer`
   position: absolute;
@@ -14,20 +14,20 @@ const FooterContainer = styled.footer`
   padding: 30px 0;
   width: 100%;
   
-  @media only screen and (max-width: 767px) {
-    height: ${V.FOOTER_HEIGHT_XS}px;
-    box-shadow: 0 0 35px 3px rgba(0, 0, 0, 0.16);
+  @media only screen and (max-width: ${props => props.theme.breakpoints.xs}) {
+    height: ${props => props.theme.layout.footerHeightXs};
+    box-shadow: ${props => props.theme.shadows.light};
     background: white;
   }
   
-  @media only screen and (min-width: 768px) {
-    height: ${V.FOOTER_HEIGHT_SM}px;
+  @media only screen and (min-width: ${props => props.theme.breakpoints.sm}) {
+    height: ${props => props.theme.layout.footerHeightSm};
     background-color: white;
   }
 `
 
 const Container = styled.div`
-  max-width: 1000px;
+  max-width: ${props => props.theme.layout.maxWidth};
   margin: 0 auto;
 `
 
@@ -36,7 +36,7 @@ const Row = styled.div`
   flex-wrap: wrap;
   margin: 0 -15px;
   
-  @media only screen and (max-width: 767px) {
+  @media only screen and (max-width: ${props => props.theme.breakpoints.xs}) {
     text-align: center;
   }
 `
@@ -44,15 +44,15 @@ const Row = styled.div`
 const Column = styled.div`
   padding: 0 15px;
   
-  @media only screen and (max-width: 767px) {
+  @media only screen and (max-width: ${props => props.theme.breakpoints.xs}) {
     width: 100%;
   }
   
-  @media only screen and (min-width: 768px) {
+  @media only screen and (min-width: ${props => props.theme.breakpoints.sm}) {
     width: 25%;
   }
   
-  @media only screen and (min-width: 992px) {
+  @media only screen and (min-width: ${props => props.theme.breakpoints.md}) {
     width: ${props => props.large ? '50%' : '25%'};
   }
 `
@@ -60,11 +60,11 @@ const Column = styled.div`
 const MapContainer = styled.div`
   margin-top: 20px;
   
-  @media only screen and (max-width: 767px) {
+  @media only screen and (max-width: ${props => props.theme.breakpoints.xs}) {
     text-align: center;
   }
   
-  @media only screen and (min-width: 768px) {
+  @media only screen and (min-width: ${props => props.theme.breakpoints.sm}) {
     text-align: right;
   }
 `
@@ -75,8 +75,13 @@ const EmailLink = styled.a`
   }
 `
 
+const ContactInfo = styled.p`
+  padding-top: 4px;
+`
+
 const Footer = () => {
-  const isSmall = useMediaQuery('only screen and (max-width: 767px)')
+  const theme = useTheme();
+  const isSmall = useMediaQuery(`only screen and (max-width: ${theme.breakpoints.xs})`);
   
   const info = {
     address: (
@@ -86,11 +91,11 @@ const Footer = () => {
           Nannestadvegen 510<br />
           2032 MAURA
         </p>
-        <p style={{paddingTop: 4}}>
+        <ContactInfo>
           <FontAwesomeIcon icon={faPhone} /> +47 63 99 95 32 <br/>
           <FontAwesomeIcon icon={faEnvelope} /> 
           <EmailLink href="mailto:post@romerike-markise.no">post@romerike-markise.no</EmailLink>
-        </p>
+        </ContactInfo>
       </div>
     ),
     phone: (

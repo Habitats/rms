@@ -1,23 +1,28 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
+
+const OverlayContainer = styled.div`
+  background: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  padding: 20px;
+  width: 100%;
+  height: auto;
+  bottom: 0;
+  color: #fff;
+`
+
+const Heading = styled.h4`
+  margin: 0;
+`
 
 const TextOverlay = ({ text }) => {
-  const style = {
-    background: 'rgba(0, 0, 0, 0.6)',
-    position: 'absolute',
-    padding: 20,
-    width: '100%',
-    height: 'auto',
-    bottom: 0,
-    color: '#fff'
-  }
-
   return (
-    <h4>
-      <div style={style}>
+    <Heading>
+      <OverlayContainer>
         {text}
-      </div>
-    </h4>
+      </OverlayContainer>
+    </Heading>
   )
 }
 

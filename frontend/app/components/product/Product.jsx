@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
 import MiniGallery from '../photo/MiniGallery.jsx'
 import MediumHeadline from '../text/MediumHeadline.jsx'
 import Wysiwyg from '../text/Wysiwyg.jsx'
@@ -9,35 +10,43 @@ import ProductItems from './ProductItems.jsx'
 import ContactForm from '../contact/ContactForm.jsx'
 import { CONTENT_MAX_WIDTH } from '../../vars'
 
+const DescriptionContainer = styled.div`
+  padding-bottom: 50px;
+  text-align: justify;
+  max-width: ${CONTENT_MAX_WIDTH}px;
+  margin: 0 auto;
+`
+
+const GalleryWrapper = styled.div`
+  padding-bottom: 30px;
+`
+
+const ContactContainer = styled.div`
+  max-width: ${CONTENT_MAX_WIDTH}px;
+  margin: 0 auto;
+  padding-bottom: 30px;
+  padding-left: 15px;
+  padding-right: 15px;
+`
+
+const Button = styled.button`
+  margin-top: 5px;
+`
+
 const Product = ({ product, category, linkTo, isAdmin = false }) => {
   const navigate = useNavigate()
   const { title, description, images, sub, id } = product
 
-  const style = {
-    desc: {
-      paddingBottom: 50,
-      textAlign: 'justify',
-      maxWidth: CONTENT_MAX_WIDTH,
-      margin: '0 auto'
-    },
-    gallery: {
-      paddingBottom: 30,
-    },
-    contact: {
-      maxWidth: CONTENT_MAX_WIDTH,
-      margin: '0 auto',
-      paddingBottom: 30,
-      paddingLeft: 15,
-      paddingRight: 15
-    }
-  }
-
   const linkToParent = linkTo.split('/').reverse().splice(1).reverse().join('/')
   const headline = <MediumHeadline big={title} small={category} to={linkToParent}/>
-  const gal = <div style={style.gallery}><MiniGallery images={images} orientation={'vertical'} height={350} style={style.gallery}/></div>
+  const gal = (
+    <GalleryWrapper>
+      <MiniGallery images={images} orientation={'vertical'} height={350} />
+    </GalleryWrapper>
+  )
   
   const desc = (
-    <div style={style.desc}>
+    <DescriptionContainer>
       {isAdmin ? (
         <Wysiwyg 
           content={description} 
@@ -50,24 +59,22 @@ const Product = ({ product, category, linkTo, isAdmin = false }) => {
         <div dangerouslySetInnerHTML={{__html: description}}/>
       )}
       {isAdmin && (
-        <button 
-          style={{marginTop: 5}} 
+        <Button 
           className="btn btn-default btn-block" 
           type="submit"
           onClick={() => navigate(`produkter/endre/${id}`)}
         >
           Admin
-        </button>
+        </Button>
       )}
-      <button 
-        style={{marginTop: 5}} 
+      <Button 
         className="btn btn-default btn-block" 
         type="submit"
         onClick={() => navigate(linkToParent)}
       >
         Tilbake
-      </button>
-    </div>
+      </Button>
+    </DescriptionContainer>
   )
 
   const subCategories = sub && sub.length > 0 ? (
@@ -81,9 +88,9 @@ const Product = ({ product, category, linkTo, isAdmin = false }) => {
       <MediumHeadline big={'Interessert?'}/>
       <div className="col-xs-12">
         <div className="row">
-          <div style={style.contact}>
+          <ContactContainer>
             <ContactForm subject={title}/>
-          </div>
+          </ContactContainer>
         </div>
       </div>
     </Box>

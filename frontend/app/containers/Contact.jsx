@@ -1,83 +1,110 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import styled, { useTheme } from 'styled-components'
 import ContactForm from './../components/contact/ContactForm.jsx'
 import BigHeadline from './../components/text/BigHeadline.jsx'
 import MapWrapper from './../components/map/MapWrapper.jsx'
 import Box from './../components/Box.jsx'
 import Person from './../components/contact/Person.jsx'
+import { Row, Column, Container, Padding } from '../components/styled/Common'
 import {SM, XS, COVER_HEIGHT, CONTENT_MAX_WIDTH} from '../vars'
 import useMediaQuery from '../hooks/useMediaQuery'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPhone, faEnvelope } from '@fortawesome/free-solid-svg-icons'
 
-const Contact = () => {
-  const isXs = useMediaQuery('only screen and (max-width: 767px)')
-  const isSm = useMediaQuery('only screen and (min-width: 768px) and (max-width: 991px)')
-  const isMd = useMediaQuery('only screen and (min-width: 992px)')
-  
-  const height = COVER_HEIGHT
-  const style = {
-    contact: {
-      maxWidth: 180,
-      margin: '0 auto',
-    },
-    contactWrapper: {
-      paddingBottom: isXs ? 20 : isSm ? 40 : 50,
-      paddingLeft: !isXs ? 40 : undefined,
-    },
-    form: {
-      maxWidth: CONTENT_MAX_WIDTH,
-      margin: '0 auto',
-      paddingBottom: isXs ? 20 : isSm ? 40 : 50,
-    },
-    map: {
-      height: isXs ? height * XS : isSm ? height * SM : height,
-      width: '100%',
-      color: '#e9e9e9'
-    }
+const MapContainer = styled.div`
+  height: ${props => 
+    props.isXs 
+      ? props.height * XS + 'px'
+      : props.isSm 
+        ? props.height * SM + 'px'
+        : props.height + 'px'
+  };
+  width: 100%;
+  color: #e9e9e9;
+`
+
+const ContactWrapper = styled.div`
+  padding-bottom: ${props => 
+    props.isXs ? '20px' : props.isSm ? '40px' : '50px'
+  };
+  padding-left: ${props => !props.isXs ? '40px' : '0'};
+`
+
+const ContactInfo = styled.div`
+  max-width: 180px;
+  margin: 0 auto;
+`
+
+const FormContainer = styled.div`
+  max-width: ${CONTENT_MAX_WIDTH}px;
+  margin: 0 auto;
+  padding-bottom: ${props => 
+    props.isXs ? '20px' : props.isSm ? '40px' : '50px'
+  };
+`
+
+const ContactParagraph = styled.p`
+  padding-top: 4px;
+`
+
+const EmailLink = styled.a`
+  &:hover {
+    text-decoration: underline;
   }
+`
+
+const Contact = () => {
+  const theme = useTheme();
+  const isXs = useMediaQuery(`only screen and (max-width: ${theme.breakpoints.xs})`)
+  const isSm = useMediaQuery(`only screen and (min-width: ${theme.breakpoints.sm}) and (max-width: ${theme.breakpoints.md})`)
+  const isMd = useMediaQuery(`only screen and (min-width: ${theme.breakpoints.md})`)
+  
+  const height = COVER_HEIGHT;
 
   return (
     <div>
       <Box>
         <div>
-          <MapWrapper style={style.map}/>
+          <MapContainer isXs={isXs} isSm={isSm} height={height}>
+            <MapWrapper />
+          </MapContainer>
           <BigHeadline big="Hvor er vi?"/>
-          <div className="col-sm-10 col-sm-offset-1" style={style.contactWrapper}>
-            <div className="row">
-              <div className="col-sm-6">
-                <div style={style.contact}>
+          <ContactWrapper isXs={isXs} isSm={isSm} className="col-sm-10 col-sm-offset-1">
+            <Row>
+              <Column className="col-sm-6">
+                <ContactInfo>
                   <h3>Adresse</h3>
                   <p>Romerike Markiseservice AS<br />
                     Nannestadvegen 510<br />
                     2032 MAURA
                   </p>
-                  <p style={{paddingTop: 4}}>
+                  <ContactParagraph>
                     <FontAwesomeIcon icon={faPhone} /> +47 63 99 95 32 <br/>
                     <FontAwesomeIcon icon={faEnvelope} /> 
-                    <a href="mailto:post@romerike-markise.no">post@romerike-markise.no</a>
-                  </p>
-                </div>
-              </div>
-              <div className="col-sm-6">
-                <div style={style.contact}>
+                    <EmailLink href="mailto:post@romerike-markise.no">post@romerike-markise.no</EmailLink>
+                  </ContactParagraph>
+                </ContactInfo>
+              </Column>
+              <Column className="col-sm-6">
+                <ContactInfo>
                   <h3>Kontortid</h3>
                   <p>Mandag-fredag: 0900-1600</p>
                   <h3>Telefonbetjening</h3>
                   <p>Mandag-fredag: 0800-2000<br />
                     Lørdag: 1000-1400</p>
-                </div>
-              </div>
-            </div>
-          </div>
+                </ContactInfo>
+              </Column>
+            </Row>
+          </ContactWrapper>
         </div>
       </Box>
 
       <Box>
         <BigHeadline big="Hvem er vi?"/>
-        <div className="row">
-          <div className="col-sm-6 col-xs-12">
-            <div className="row">
+        <Row>
+          <Column className="col-sm-6 col-xs-12">
+            <Row>
               <Person 
                 mail="morten@romerike-markise.no"
                 name="Morten Skjennum"
@@ -98,10 +125,10 @@ const Contact = () => {
                 photo="image/p_anne.jpg"
                 title="Kontormedarbeider"
               />
-            </div>
-          </div>
-          <div className="col-sm-6 col-xs-12">
-            <div className="row">
+            </Row>
+          </Column>
+          <Column className="col-sm-6 col-xs-12">
+            <Row>
               <Person 
                 mail="roar@romerike-markise.no"
                 name="Roar Skjennum"
@@ -115,18 +142,18 @@ const Contact = () => {
                 photo="image/p_patrick.jpg"
                 title="IT-ansvarlig"
               />
-            </div>
-          </div>
-        </div>
+            </Row>
+          </Column>
+        </Row>
       </Box>
 
       <Box>
         <BigHeadline big="Spørsmål?"/>
-        <div className="col-xs-12">
-          <div style={style.form}>
+        <Column className="col-xs-12">
+          <FormContainer isXs={isXs} isSm={isSm}>
             <ContactForm />
-          </div>
-        </div>
+          </FormContainer>
+        </Column>
       </Box>
     </div>
   )

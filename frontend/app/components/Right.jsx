@@ -1,16 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 import {MENU_WIDTH, MARGIN_XS} from '../vars'
 
-const Right = ({ children }) => {
-  const style = {
-    marginLeft: MENU_WIDTH + MARGIN_XS,
-  }
+const RightContainer = styled.div`
+  margin-left: ${MENU_WIDTH + MARGIN_XS}px;
+`
 
+const Right = ({ children }) => {
   return (
-    <div style={style}>
+    <RightContainer>
       {children}
-    </div>
+    </RightContainer>
   )
 }
 

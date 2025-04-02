@@ -1,14 +1,64 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react'
 import PropTypes from 'prop-types'
+import styled, { useTheme } from 'styled-components'
 import Link from './../Link.jsx'
 import useMediaQuery from '../../hooks/useMediaQuery'
 import {TEXT, HOVER, FILTER} from '../../colors'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronRight, faChevronDown } from '@fortawesome/free-solid-svg-icons'
 
+const MenuItemLink = styled(Link)`
+  padding: ${props => 
+    props.isSmall 
+      ? '8px 15px' 
+      : props.isMedium 
+        ? '10px 20px' 
+        : '12px 25px'
+  };
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-decoration: none;
+  cursor: pointer;
+  color: ${props => props.active ? '#007bff' : 'inherit'};
+  background-color: ${props => props.active ? 'rgba(0, 123, 255, 0.1)' : 'transparent'};
+  transition: all 0.2s ease-in-out;
+  
+  &:hover {
+    background-color: rgba(0, 123, 255, 0.05);
+  }
+`
+
+const SubItems = styled.div`
+  padding-left: ${props => 
+    props.isSmall 
+      ? '15px' 
+      : props.isMedium 
+        ? '20px' 
+        : '25px'
+  };
+  display: ${props => props.expanded ? 'block' : 'none'};
+`
+
+const FilterSpan = styled.span`
+  font-weight: bold;
+  background-color: rgba(0, 123, 255, 0.1);
+  color: #007bff;
+`
+
+const MenuIcon = styled(FontAwesomeIcon)`
+  width: 16px;
+  margin-left: 10px;
+  transition: transform 0.3s ease;
+  transform: ${props => props.expanded ? 'rotate(0deg)' : 'rotate(0deg)'};
+`
+
 const MenuItem = ({ product, active, filter, isRoot }) => {
   const [hover, setHover] = useState(false)
   const [expanded, setExpanded] = useState(false)
+  const theme = useTheme();
+  const isSmall = useMediaQuery(`only screen and (max-width: ${theme.breakpoints.xs})`);
+  const isMedium = useMediaQuery(`only screen and (max-width: ${theme.breakpoints.md})`);
 
   const shouldExpand = useMemo(() => {
     const checkExpand = (node, id, callback = (n) => n.id === id, root = node) => {
@@ -52,41 +102,6 @@ const MenuItem = ({ product, active, filter, isRoot }) => {
     return indexes
   }, [])
 
-  const isSmall = useMediaQuery('only screen and (max-width: 767px)');
-  const isMedium = useMediaQuery('only screen and (max-width: 991px)');
-
-  const style = {
-    padding: isSmall ? '8px 12px' : isMedium ? '10px 15px' : '12px 20px',
-    display: 'block',
-    color: active ? '#007bff' : 'inherit',
-    backgroundColor: active ? 'rgba(0, 123, 255, 0.1)' : 'transparent',
-    transition: 'all 0.2s ease-in-out',
-    item: {
-      padding: isSmall ? '8px 15px' : isMedium ? '10px 20px' : '12px 25px',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      textDecoration: 'none',
-      cursor: 'pointer'
-    },
-    subItems: {
-      paddingLeft: isSmall ? 15 : isMedium ? 20 : 25,
-      display: expanded ? 'block' : 'none'
-    },
-    subItem: {
-      padding: isSmall ? '6px 12px' : isMedium ? '8px 16px' : '10px 20px',
-      display: 'block',
-      color: '#666',
-      textDecoration: 'none',
-      transition: 'background-color 0.3s ease'
-    },
-    icon: {
-      width: 16,
-      marginLeft: 10,
-      transition: 'transform 0.3s ease'
-    }
-  }
-
   const { title, id, sub } = product
   const subItems = sub.map(p => (
     <MenuItem
@@ -112,9 +127,9 @@ const MenuItem = ({ product, active, filter, isRoot }) => {
         parts.push(<span key={`text-${lastIndex}`}>{title.slice(lastIndex, index)}</span>)
       }
       parts.push(
-        <span key={`filter-${index}`} style={style.filter}>
+        <FilterSpan key={`filter-${index}`}>
           {title.slice(index, index + filter.length)}
-        </span>
+        </FilterSpan>
       )
       lastIndex = index + filter.length
     })
@@ -124,34 +139,31 @@ const MenuItem = ({ product, active, filter, isRoot }) => {
     }
 
     return parts
-  }, [filter, title, substringIndex, style.filter])
+  }, [filter, title, substringIndex])
 
   return (
     <div>
-      <Link 
+      <MenuItemLink 
         to={`/produkter/${id}`} 
-        style={style.item}
         className="menu-item"
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
         onClick={onExpand}
+        isSmall={isSmall}
+        isMedium={isMedium}
+        active={active === id}
       >
         {titleElement}
         {sub.length > 0 && !isRoot && (
-          <FontAwesomeIcon
+          <MenuIcon
             icon={expanded ? faChevronDown : faChevronRight}
-            style={{
-              ...style.icon,
-              transform: expanded ? 'rotate(0deg)' : 'rotate(0deg)'
-            }}
+            expanded={expanded}
           />
         )}
-      </Link>
-      {expanded && (
-        <div style={style.subItems}>
-          {subItems}
-        </div>
-      )}
+      </MenuItemLink>
+      <SubItems expanded={expanded} isSmall={isSmall} isMedium={isMedium}>
+        {subItems}
+      </SubItems>
     </div>
   )
 }

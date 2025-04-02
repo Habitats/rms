@@ -10,13 +10,13 @@ const HeaderWrapper = styled.div`
 `
 
 const NavContainer = styled.div`
-  max-width: 1000px;
+  max-width: ${props => props.theme.layout.maxWidth};
   margin: 0 auto;
 `
 
 const NavVisibleXs = styled.div`
   margin-left: 15px;
-  @media only screen and (min-width: 768px) {
+  @media only screen and (min-width: ${props => props.theme.breakpoints.sm}) {
     display: none;
   }
 `
