@@ -62,9 +62,6 @@
     "webpack-dev-server": "^5.2.1",
     "webpack-hot-middleware": "^2.26.1"
   },
-  "optionalDependencies": {
-    "fsevents": "^2.3.3"
-  },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
