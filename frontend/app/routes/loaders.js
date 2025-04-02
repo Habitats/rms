@@ -116,10 +116,25 @@ export const projectsLoader = async () => {
       retrieve()
     ])
     
-    // Handle different response formats
-    const projects = Array.isArray(projectsData) 
-      ? projectsData 
-      : projectsData?.data || []
+    // Handle different response formats and ensure consistent structure
+    let projects = []
+    
+    if (Array.isArray(projectsData)) {
+      projects = projectsData
+    } else if (projectsData?.data) {
+      projects = projectsData.data
+    } else if (projectsData?.sub) {
+      projects = projectsData.sub
+    }
+    
+    // Ensure each project has required fields
+    projects = projects.map(project => ({
+      id: project.id || '',
+      title: project.title || '',
+      description: project.description || '',
+      modified: project.modified || new Date().toISOString(),
+      images: Array.isArray(project.images) ? project.images : []
+    }))
     
     return {
       projects,
@@ -127,6 +142,6 @@ export const projectsLoader = async () => {
     }
   } catch (error) {
     console.error('Error loading projects:', error)
-    return { projects: [], isAdmin: false }
+    throw new Error('Failed to load projects. Please try again later.')
   }
 } 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import Draggable from 'react-draggable'
 import Photo from './Photo.jsx'
@@ -11,6 +11,7 @@ const MiniGallery = ({ images, height = 350, orientation = 'horizontal' }) => {
   const [startX, setStartX] = useState(0)
   const [deltaX, setDeltaX] = useState(0)
   const [small, setSmall] = useState(false)
+  const nodeRef = useRef(null)
   const mql = window.matchMedia('only screen and (max-width: 991px)')
 
   useEffect(() => {
@@ -119,12 +120,13 @@ const MiniGallery = ({ images, height = 350, orientation = 'horizontal' }) => {
           <div className={classes.thumbWrapper}>
             <div style={style.thumbs}>
               <Draggable 
+                nodeRef={nodeRef}
                 axis="x" 
                 zIndex={100} 
                 onDrag={handleDrag} 
                 bounds={{top: 0, left: bound, right: 0, bottom: 0}}
               >
-                <div style={style.scroller}>
+                <div ref={nodeRef} style={style.scroller}>
                   {images.map(image => (
                     <div key={image.src} style={style.photo}>
                       <Photo 

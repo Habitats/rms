@@ -75,25 +75,66 @@ export const router = createBrowserRouter([
         loader: projectLoader
       },
       {
-        path: ROUTES.PRODUCTS,
+        path: "produkter",
         element: <ProductsContainer />,
         errorElement: <NotFound />,
-        loader: productsLoader
+        loader: productsLoader,
+        children: [
+          {
+            path: "ny",
+            element: <ProductAdd />,
+            errorElement: <NotFound />,
+            loader: checkAuth
+          },
+          {
+            path: "endre/:productId",
+            element: <ProductAdd />,
+            errorElement: <NotFound />,
+            loader: async (args) => {
+              await checkAuth()
+              return productLoader(args)
+            }
+          },
+          {
+            path: ":categoryId",
+            element: <CategoryContainer />,
+            errorElement: <NotFound />,
+            loader: categoryLoader,
+            children: [
+              {
+                path: ":productId",
+                element: <ProductContainer />,
+                errorElement: <NotFound />,
+                loader: productLoader,
+                children: [
+                  {
+                    path: ":subId",
+                    element: <ProductContainer />,
+                    errorElement: <NotFound />,
+                    loader: productLoader,
+                    children: [
+                      {
+                        path: ":subSubId",
+                        element: <ProductContainer />,
+                        errorElement: <NotFound />,
+                        loader: productLoader
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
       },
       {
-        path: "produkter/ny",
-        element: <ProductAdd />,
+        path: "admin",
+        element: <Admin />,
         errorElement: <NotFound />,
         loader: checkAuth
       },
       {
-        path: ROUTES.PRODUCT_DETAIL,
-        element: <ProductContainer />,
-        errorElement: <NotFound />,
-        loader: productLoader
-      },
-      {
-        path: "om-oss",
+        path: "om",
         element: <About />,
         errorElement: <NotFound />
       },
@@ -101,12 +142,6 @@ export const router = createBrowserRouter([
         path: "kontakt",
         element: <Contact />,
         errorElement: <NotFound />
-      },
-      {
-        path: "admin",
-        element: <Admin />,
-        errorElement: <NotFound />,
-        loader: checkAuth
       },
       {
         path: "login",
