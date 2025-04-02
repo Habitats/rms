@@ -70,7 +70,6 @@
     "react-router-dom": "^7.4.1",
     "react-select": "^5.10.1",
     "react-slick": "^0.30.3",
-    "slick-carousel": "^1.8.1",
-    "whatwg-fetch": "^3.6.20"
+    "slick-carousel": "^1.8.1"
   }
 }

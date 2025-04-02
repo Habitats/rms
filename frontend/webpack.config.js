@@ -21,15 +21,6 @@ const contextPath = ''  // Base path for application, used in URLs
 // ===== PLUGINS CONFIGURATION =====
 // Plugins modify the build process and add functionality to webpack
 const plugins = [
-  // Updated ProvidePlugin with webpack 4 syntax
-  new webpack.ProvidePlugin({
-    $: 'jquery',                                // Makes jQuery available globally without import
-    jQuery: 'jquery',                           // Same for jQuery (for plugins that expect global jQuery)
-    // Updated fetch polyfill to use proper imports-loader syntax
-    fetch: ['whatwg-fetch', 'fetch'],
-    'window.fetch': ['whatwg-fetch', 'fetch']
-  }),
-  
   // Extracts CSS into separate files
   new MiniCssExtractPlugin({
     filename: 'css/[name].css'
@@ -178,7 +169,6 @@ const config = {
     modules: [path.resolve(__dirname, 'node_modules'), 'node_modules'],
     alias: {
       'react': path.resolve(__dirname, 'node_modules/react'),
-      'whatwg-fetch': path.resolve(__dirname, 'node_modules/whatwg-fetch'),
       'bootstrap-sass': path.resolve(__dirname, 'node_modules/bootstrap-sass'),
       'react-select': path.resolve(__dirname, 'node_modules/react-select'),
       'react-select/dist/react-select.min.css': path.resolve(__dirname, 'node_modules/react-select/dist/react-select.min.css'),
