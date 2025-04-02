@@ -25,6 +25,7 @@
     "autoprefixer": "^10.4.21",
     "babel-cli": "^6.26.0",
     "babel-loader": "^10.0.0",
+    "babel-plugin-styled-components": "^2.1.4",
     "bootstrap-loader": "^4.0.5",
     "bootstrap-sass": "3.4.3",
     "core-js": "^3.36.0",
@@ -70,6 +71,7 @@
     "react-router-dom": "^7.4.1",
     "react-select": "^5.10.1",
     "react-slick": "^0.30.3",
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "styled-components": "^6.1.16"
   }
 }

@@ -12,11 +12,21 @@ const useMediaQuery = (query) => {
     // Create event listener
     const listener = (event) => setMatches(event.matches)
     
-    // Add listener
-    media.addEventListener('change', listener)
+    // Add listener using the deprecated method for better compatibility
+    if (media.addListener) {
+      media.addListener(listener)
+    } else {
+      media.addEventListener('change', listener)
+    }
     
     // Clean up
-    return () => media.removeEventListener('change', listener)
+    return () => {
+      if (media.removeListener) {
+        media.removeListener(listener)
+      } else {
+        media.removeEventListener('change', listener)
+      }
+    }
   }, [query])
 
   return matches

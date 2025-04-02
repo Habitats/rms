@@ -52,19 +52,8 @@ export const SESSION_ACTIONS = {
 // Router Constants
 export const ROUTES = {
   HOME: '/',
-  REFERENCES: '/referanser',
-  REFERENCE_NEW: '/referanser/ny',
-  REFERENCE_EDIT: '/referanser/endre/:id',
-  REFERENCE_DETAIL: '/referanser/:id',
   PRODUCTS: '/produkter',
-  PRODUCT_NEW: '/produkter/ny',
-  PRODUCT_EDIT: '/produkter/endre/:productId',
-  CATEGORY: '/produkter/:categoryId',
   PRODUCT_DETAIL: '/produkter/:categoryId/:productId',
   SUB_PRODUCT: '/produkter/:categoryId/:productId/:subId',
-  SUB_SUB_PRODUCT: '/produkter/:categoryId/:productId/:subId/:subSubId',
-  ADMIN: '/admin',
-  ABOUT: '/om',
-  CONTACT: '/kontakt',
-  LOGIN: '/login'
+  SUB_SUB_PRODUCT: '/produkter/:categoryId/:productId/:subId/:subSubId'
 } 

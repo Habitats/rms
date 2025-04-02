@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+import styled from 'styled-components'
 import Carousel from './../components/photo/Carousel.jsx'
 import BigHeadline from './../components/text/BigHeadline.jsx'
 import Features from './../components/feature/Features.jsx'
@@ -11,16 +12,25 @@ import useMediaQuery from '../hooks/useMediaQuery'
 import { useProducts } from '../hooks/useProducts'
 import { ProductProvider } from '../contexts/ProductContext'
 
+const LoadingContainer = styled.div`
+  text-align: center;
+`
+
+const ErrorContainer = styled.div`
+  text-align: center;
+  color: #dc3545;
+`
+
 const Welcome = () => {
   const { data: categories, isLoading: loading, error } = useProducts()
-  const isSmall = useMediaQuery('only screen and (max-width: 767px)');
+  const isSmall = useMediaQuery('only screen and (max-width: 767px)')
 
   if (loading) {
     return (
       <Box>
-        <div className="text-center">
+        <LoadingContainer>
           <FontAwesomeIcon icon={faSpinner} spin size="3x" />
-        </div>
+        </LoadingContainer>
       </Box>
     )
   }
@@ -28,10 +38,10 @@ const Welcome = () => {
   if (error) {
     return (
       <Box>
-        <div className="text-center text-danger">
+        <ErrorContainer>
           <h3>Error loading products</h3>
           <p>{error.message}</p>
-        </div>
+        </ErrorContainer>
       </Box>
     )
   }

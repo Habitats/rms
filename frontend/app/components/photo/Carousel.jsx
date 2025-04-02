@@ -1,40 +1,27 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Slider from 'react-slick'
 import Photo from './Photo.jsx'
-import useMediaQuery from '../../hooks/useMediaQuery'
+import Slider from 'react-slick'
+import styled from 'styled-components'
 import { SM, XS, COVER_HEIGHT } from '../../vars'
 
-const Carousel = ({ images }) => {
-  const isSmall = useMediaQuery('only screen and (max-width: 767px)')
-  const isMedium = useMediaQuery('only screen and (min-width: 768px)')
-  const isLarge = useMediaQuery('only screen and (min-width: 992px)')
+const CarouselContainer = styled.div`
+  height: ${COVER_HEIGHT}px;
 
-  // Calculate height based on screen size
-  const calculatedHeight = isSmall 
-    ? COVER_HEIGHT * XS 
-    : isMedium 
-      ? COVER_HEIGHT * SM 
-      : COVER_HEIGHT
-
-  const style = {
-    carousel: {
-      height: calculatedHeight,
-      width: '100%'
-    }
+  @media only screen and (max-width: 767px) {
+    height: ${COVER_HEIGHT * XS}px;
   }
 
-  const photos = images.map(i => (
-    <div key={i.src} style={style.carousel}>
-      <Photo 
-        src={i.src}
-        height={calculatedHeight}
-        size="med"
-        crop={true}
-      />
-    </div>
-  ))
+  @media only screen and (min-width: 768px) {
+    height: ${COVER_HEIGHT * SM}px;
+  }
 
+  @media only screen and (min-width: 992px) {
+    height: ${COVER_HEIGHT}px;
+  }
+`
+
+const Carousel = ({ images }) => {
   const settings = {
     dots: true,
     infinite: true,
@@ -50,7 +37,11 @@ const Carousel = ({ images }) => {
 
   return (
     <Slider {...settings}>
-      {photos}
+      {images.map(image => (
+        <CarouselContainer key={image.src}>
+          <Photo src={image.src} />
+        </CarouselContainer>
+      ))}
     </Slider>
   )
 }
