@@ -8,12 +8,17 @@ const StyledBox = styled.div`
   float: left;
   position: relative;
   width: 100%;
+  max-width: 100%;
+  overflow: hidden;
   box-shadow: 0 0 35px 3px rgba(0, 0, 0, 0.16);
+  box-sizing: border-box;
 
   @media only screen and (max-width: ${props => props.theme.breakpoints.xs}) {
     padding: ${V.MARGIN_XS};
     width: 100%;
+    max-width: 100vw;
     margin-bottom: 0;
+    overflow-x: hidden;
   }
 
   @media only screen and (min-width: ${props => props.theme.breakpoints.sm}) {

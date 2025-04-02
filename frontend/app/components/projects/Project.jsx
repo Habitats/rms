@@ -22,8 +22,21 @@ const Project = ({ project, selected = 0 }) => {
   return (
     <Box>
       <BigHeadline big={project.title} small="Prosjekt"/>
-      <div className="row">
-        <div className="col-xs-12">
+      <div className="row" style={{ 
+        width: '100%', 
+        maxWidth: '100%', 
+        overflow: 'hidden',
+        margin: 0,
+        padding: 0,
+        boxSizing: 'border-box'
+      }}>
+        <div className="col-xs-12" style={{ 
+          width: '100%', 
+          maxWidth: '100%', 
+          overflow: 'hidden',
+          padding: 0,
+          boxSizing: 'border-box'
+        }}>
           <MiniGallery images={project.images} orientation={'horizontal'} height={400} thumbHeight={100}/>
           {isAdmin && (
             <Button 

@@ -16,11 +16,17 @@ const Wrapper = styled.div`
 const Container = styled.div`
   max-width: ${props => props.theme.layout.maxWidth};
   margin: 0 auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  width: 100%;
   
   @media only screen and (max-width: ${props => props.theme.breakpoints.xs}) {
     margin-top: ${props => props.theme.layout.headerHeightXs};
     margin-bottom: ${props => props.theme.layout.footerHeightXs};
     padding: 0;
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
   }
   
   @media only screen and (min-width: ${props => props.theme.breakpoints.sm}) {

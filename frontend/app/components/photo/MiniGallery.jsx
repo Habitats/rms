@@ -13,6 +13,9 @@ const GalleryContainer = styled.div`
 const GalleryRow = styled.div`
   display: flex;
   flex-wrap: wrap;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
 `
 
 const CoverContainer = styled.div`
@@ -34,29 +37,85 @@ const CoverContainer = styled.div`
 
 const ThumbsWrapper = styled.div`
   width: 100%;
+  max-width: 100%;
+  margin-top: 15px;
+  overflow: hidden;
+  
+  @media only screen and (max-width: 767px) {
+    padding-left: 0;
+    padding-right: 0;
+    
+    /* Override any Bootstrap margins or padding that might cause overflow */
+    &.col-xs-12 {
+      padding: 0;
+      margin: 0;
+    }
+  }
 `
 
 const ThumbsContainer = styled.div`
-  max-height: 200px;
+  max-height: 100px;
   z-index: 200;
-  overflow: hidden;
   width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box;
+  
+  /* Mobile specific handling */
+  @media only screen and (max-width: 767px) {
+    max-width: 100vw;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+  
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 40px;
+    z-index: 3;
+    pointer-events: none;
+  }
+  
+  &::before {
+    left: 0;
+    background: linear-gradient(to right, rgba(255,255,255,1), rgba(255,255,255,0));
+    display: ${props => props.showLeftFade ? 'block' : 'none'};
+  }
+  
+  &::after {
+    right: 0;
+    background: linear-gradient(to left, rgba(255,255,255,1), rgba(255,255,255,0));
+    display: ${props => props.showRightFade ? 'block' : 'none'};
+  }
 `
 
 const ScrollerContainer = styled.div`
-  margin-top: 15px;
-  height: 80px;
+  height: 90px;
   position: relative;
+  min-width: min-content;
   width: ${props => props.imagesCount * 115 - 15}px;
+  max-width: ${props => props.imagesCount * 115 - 15}px;
   transform: translateX(${props => props.position}px);
   cursor: ${props => props.isDragging ? 'grabbing' : 'grab'};
   transition: ${props => props.isDragging ? 'none' : 'transform 0.3s ease-out'};
+  display: flex;
+  
+  /* Mobile specific handling */
+  @media only screen and (max-width: 767px) {
+    height: 60px;
+    width: ${props => props.imagesCount * 85 - 15}px;
+    max-width: ${props => props.imagesCount * 85 - 15}px;
+  }
 `
 
 const ThumbItem = styled.div`
   padding: 0 15px 0 0;
-  float: none;
-  display: inline-block;
+  flex: 0 0 auto;
   
   @media only screen and (max-width: 767px) {
     height: 60px;
@@ -78,6 +137,9 @@ const VerticalCoverContainer = styled.div`
 const VerticalThumbsContainer = styled.div`
   padding: 0;
   margin-left: -15px;
+  max-height: ${props => props.height}px;
+  overflow-y: auto;
+  overflow-x: hidden;
 `
 
 const VerticalScrollerContainer = styled.div`
@@ -99,6 +161,36 @@ const VerticalThumbItem = styled.div`
   }
 `
 
+// Navigation control buttons
+const NavButton = styled.button`
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  background: rgba(255, 255, 255, 0.7);
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-weight: bold;
+  outline: none;
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.9);
+  }
+  
+  &:disabled {
+    opacity: 0.3;
+    cursor: default;
+  }
+  
+  ${props => props.left ? 'left: 5px;' : 'right: 5px;'}
+`
+
 const MiniGallery = ({ images, height = 350, orientation = 'horizontal' }) => {
   const [selected, setSelected] = useState(null)
   const [position, setPosition] = useState(0)
@@ -106,13 +198,45 @@ const MiniGallery = ({ images, height = 350, orientation = 'horizontal' }) => {
   const [dragStartX, setDragStartX] = useState(0)
   const [dragStartPosition, setDragStartPosition] = useState(0)
   const [small, setSmall] = useState(false)
+  const [containerWidth, setContainerWidth] = useState(0)
+  const [showLeftFade, setShowLeftFade] = useState(false)
+  const [showRightFade, setShowRightFade] = useState(true)
+  
   const scrollerRef = useRef(null)
+  const containerRef = useRef(null)
   
   const isSmallScreen = useMediaQuery('only screen and (max-width: 991px)')
   
   useEffect(() => {
     setSmall(isSmallScreen)
   }, [isSmallScreen])
+  
+  // Update container width on mount and resize
+  useEffect(() => {
+    const updateContainerWidth = () => {
+      if (containerRef.current) {
+        setContainerWidth(containerRef.current.offsetWidth)
+      }
+    }
+    
+    updateContainerWidth()
+    window.addEventListener('resize', updateContainerWidth)
+    
+    return () => {
+      window.removeEventListener('resize', updateContainerWidth)
+    }
+  }, [])
+  
+  // Update fades based on scroll position
+  useEffect(() => {
+    if (scrollerRef.current && containerRef.current) {
+      const scrollerWidth = scrollerRef.current.offsetWidth
+      const maxScroll = scrollerWidth - containerWidth
+      
+      setShowLeftFade(position < 0)
+      setShowRightFade(position > -maxScroll && maxScroll > 0)
+    }
+  }, [position, containerWidth])
 
   const onSelect = (selected) => {
     setSelected(selected)
@@ -133,23 +257,50 @@ const MiniGallery = ({ images, height = 350, orientation = 'horizontal' }) => {
     setSelected(images[newSelectedIndex])
     setPosition(newPosition)
   }
+  
+  const scrollLeft = () => {
+    const itemWidth = 103
+    const newPosition = Math.min(0, position + (containerWidth / 2))
+    setPosition(newPosition)
+  }
+  
+  const scrollRight = () => {
+    if (!scrollerRef.current) return
+    
+    const itemWidth = 103
+    const scrollerWidth = scrollerRef.current.offsetWidth
+    const maxScroll = scrollerWidth - containerWidth
+    const newPosition = Math.max(-maxScroll, position - (containerWidth / 2))
+    setPosition(newPosition)
+  }
 
   const calculatePosition = (selectedIndex, totalImages) => {
-    const itemWidth = 103
-    const visibleItems = 7
+    if (!containerRef.current || totalImages <= 0) return 0
     
-    // If we don't need to scroll, stay at 0
-    if (totalImages <= visibleItems) return 0
+    // Adjust item width based on screen size
+    const isSmallScreen = window.innerWidth <= 767;
+    const itemWidth = isSmallScreen ? 85 : 103;
     
-    // Calculate center position
-    if (selectedIndex < 3) {
-      return 0
-    } else if (selectedIndex >= totalImages - 4) {
-      // Show last set of items
-      return -((totalImages - visibleItems) * itemWidth)
+    const containerWidth = containerRef.current.offsetWidth;
+    const visibleItems = Math.floor(containerWidth / itemWidth);
+    
+    // If all items fit, no scrolling needed
+    if (totalImages <= visibleItems) return 0;
+    
+    // Calculate position to center the selected item
+    const scrollerWidth = totalImages * itemWidth;
+    const maxScroll = scrollerWidth - containerWidth;
+    
+    if (selectedIndex < Math.floor(visibleItems / 2)) {
+      // Selected item is near the start
+      return 0;
+    } else if (selectedIndex >= totalImages - Math.ceil(visibleItems / 2)) {
+      // Selected item is near the end
+      return -maxScroll;
     } else {
       // Center the selected item
-      return -((selectedIndex - 3) * itemWidth)
+      const centerPosition = -((selectedIndex * itemWidth) - (containerWidth / 2) + (itemWidth / 2));
+      return Math.max(-maxScroll, Math.min(0, centerPosition));
     }
   }
 
@@ -163,6 +314,9 @@ const MiniGallery = ({ images, height = 350, orientation = 'horizontal' }) => {
       document.addEventListener('mousemove', handleDragMove)
       document.addEventListener('mouseup', handleDragEnd)
     }
+    
+    // Prevent default to avoid text selection during drag
+    e.preventDefault()
   }
 
   const handleDragMove = (e) => {
@@ -171,9 +325,15 @@ const MiniGallery = ({ images, height = 350, orientation = 'horizontal' }) => {
     const clientX = e.clientX || e.touches?.[0]?.clientX || 0
     const deltaX = clientX - dragStartX
     
-    const bound = images.length <= 7 ? 0 : -((images.length - 7) * 103)
-    const newPosition = Math.max(bound, Math.min(0, dragStartPosition + deltaX))
-    setPosition(newPosition)
+    if (scrollerRef.current && containerRef.current) {
+      const scrollerWidth = scrollerRef.current.offsetWidth
+      const containerWidth = containerRef.current.offsetWidth
+      const maxScroll = scrollerWidth - containerWidth
+      
+      // Apply boundary constraints
+      const newPosition = Math.max(-maxScroll, Math.min(0, dragStartPosition + deltaX))
+      setPosition(newPosition)
+    }
   }
 
   const handleDragEnd = () => {
@@ -207,29 +367,52 @@ const MiniGallery = ({ images, height = 350, orientation = 'horizontal' }) => {
         </CoverContainer>
         {images.length > 1 && (
           <ThumbsWrapper className={classes.thumbWrapper}>
-            <ThumbsContainer>
-              <ScrollerContainer 
-                ref={scrollerRef}
-                position={position}
-                isDragging={isDragging}
-                imagesCount={images.length}
-                onMouseDown={handleDragStart}
-                onTouchStart={handleDragStart}
-                onTouchMove={handleDragMove}
-                onTouchEnd={handleDragEnd}
-              >
-                {images.map(image => (
-                  <ThumbItem key={image.src}>
-                    <Photo 
-                      className={classes.thumbs} 
-                      src={image.src} 
-                      size={'low'}
-                      onClick={() => onSelect(image)} 
-                      selected={cover === image}
-                    />
-                  </ThumbItem>
-                ))}
-              </ScrollerContainer>
+            <ThumbsContainer 
+              ref={containerRef}
+              showLeftFade={showLeftFade}
+              showRightFade={showRightFade}
+            >
+              {showLeftFade && (
+                <NavButton 
+                  left 
+                  onClick={scrollLeft}
+                  disabled={position >= 0}
+                >
+                  &lt;
+                </NavButton>
+              )}
+              <div style={{ width: '100%', maxWidth: '100%', overflow: 'hidden' }}>
+                <ScrollerContainer 
+                  ref={scrollerRef}
+                  position={position}
+                  isDragging={isDragging}
+                  imagesCount={images.length}
+                  onMouseDown={handleDragStart}
+                  onTouchStart={handleDragStart}
+                  onTouchMove={handleDragMove}
+                  onTouchEnd={handleDragEnd}
+                >
+                  {images.map(image => (
+                    <ThumbItem key={image.src}>
+                      <Photo 
+                        className={classes.thumbs} 
+                        src={image.src} 
+                        size={'low'}
+                        onClick={() => onSelect(image)} 
+                        selected={cover === image}
+                      />
+                    </ThumbItem>
+                  ))}
+                </ScrollerContainer>
+              </div>
+              {showRightFade && (
+                <NavButton 
+                  onClick={scrollRight}
+                  disabled={!scrollerRef.current || scrollerRef.current.offsetWidth <= containerWidth || position <= -(scrollerRef.current.offsetWidth - containerWidth)}
+                >
+                  &gt;
+                </NavButton>
+              )}
             </ThumbsContainer>
           </ThumbsWrapper>
         )}
@@ -259,7 +442,7 @@ const MiniGallery = ({ images, height = 350, orientation = 'horizontal' }) => {
         </VerticalCoverContainer>
         {images.length > 1 && (
           <div className={classes.thumbWrapper}>
-            <VerticalThumbsContainer>
+            <VerticalThumbsContainer height={height}>
               <VerticalScrollerContainer height={height}>
                 {images.map(image => (
                   <VerticalThumbItem className={classes.thumbs} key={image.src}>
@@ -289,13 +472,25 @@ const MiniGallery = ({ images, height = 350, orientation = 'horizontal' }) => {
   const galleryHeight = images.length > 1 ? height : height * 0.75
 
   return (
-    <div>
+    <div style={{ 
+      width: '100%', 
+      maxWidth: '100%', 
+      overflow: 'hidden',
+      boxSizing: 'border-box',
+      padding: 0
+    }}>
       {images.length === 1 ? (
         <GalleryContainer height={galleryHeight}>
           <Photo src={cover.src}/>
         </GalleryContainer>
       ) : (
-        <div>
+        <div style={{ 
+          width: '100%', 
+          maxWidth: '100%', 
+          overflow: 'hidden',
+          boxSizing: 'border-box',
+          padding: 0
+        }}>
           {small ? 
             horizontal(images, cover, galleryHeight) :
             orientation === 'horizontal' ? 
