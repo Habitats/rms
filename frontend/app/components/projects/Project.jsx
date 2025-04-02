@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { useLoaderData, useNavigate } from 'react-router-dom'
+import { useNavigate, useOutletContext } from 'react-router-dom'
 import styled from 'styled-components'
 import BigHeadline from './../text/BigHeadline.jsx'
 import MiniGallery from './../photo/MiniGallery.jsx'
@@ -10,9 +10,14 @@ const Button = styled.button`
   margin-top: 5px;
 `
 
-const Project = ({ selected }) => {
+const Project = ({ project, selected = 0 }) => {
   const navigate = useNavigate()
-  const { project, isAdmin } = useLoaderData()
+  const { session } = useOutletContext() || {}
+  const isAdmin = session?.admin || false
+
+  if (!project) {
+    return null
+  }
 
   return (
     <Box>
@@ -24,7 +29,7 @@ const Project = ({ selected }) => {
             <Button 
               className="btn btn-default btn-block" 
               type="submit"
-              onClick={() => navigate(`referanser/endre/${project.id}`)}
+              onClick={() => navigate(`/referanser/endre/${project.id}`)}
             >
               Endre
             </Button>
@@ -43,7 +48,16 @@ const Project = ({ selected }) => {
 }
 
 Project.propTypes = {
-  selected: PropTypes.number.isRequired
+  project: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    images: PropTypes.array.isRequired
+  }),
+  selected: PropTypes.number
+}
+
+Project.defaultProps = {
+  selected: 0
 }
 
 export default Project

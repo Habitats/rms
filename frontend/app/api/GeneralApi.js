@@ -29,7 +29,34 @@ export async function getProjects() {
  * @returns {Promise<ApiResponse<Object>>}
  */
 export async function getProject(id) {
-  return retrieve(`api/project/${id}`)
+  console.log('API: Fetching project with ID:', id);
+  try {
+    // Try the new API endpoint format first
+    let response = await fetch(`${baseUrl}api/projects/${id}`, {
+      method: 'GET',
+      credentials: 'include'
+    });
+    
+    // If that fails, try the old format
+    if (!response.ok) {
+      console.log('API: First endpoint failed, trying alternative endpoint');
+      response = await fetch(`${baseUrl}api/project/${id}`, {
+        method: 'GET',
+        credentials: 'include'
+      });
+    }
+    
+    if (!response.ok) {
+      throw new Error(`API Error: ${response.status} ${response.statusText}`);
+    }
+    
+    const data = await response.json();
+    console.log('API: Project data:', data);
+    return data;
+  } catch (error) {
+    console.error('API: Error fetching project:', error);
+    throw error;
+  }
 }
 
 /**

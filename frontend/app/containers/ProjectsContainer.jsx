@@ -1,15 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { useLoaderData } from 'react-router-dom'
-import Link from './../components/Link.jsx'
+import { useLoaderData, Link } from 'react-router-dom'
 import Projects from './../components/projects/Projects.jsx'
 import BigHeadline from './../components/text/BigHeadline.jsx'
 import Box from './../components/Box.jsx'
 
 const ProjectsContainer = () => {
-  const data = useLoaderData()
-  const projects = data?.projects || []
-  const isAdmin = data?.isAdmin || false
+  const { projects = [], isAdmin = false } = useLoaderData() || {}
 
   if (!projects || projects.length === 0) {
     return (
@@ -38,7 +35,9 @@ const ProjectsContainer = () => {
   )
 }
 
-ProjectsContainer.propTypes = {}
+ProjectsContainer.propTypes = {
+  // Props now come from loader
+}
 
 export default ProjectsContainer
 

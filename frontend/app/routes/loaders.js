@@ -6,6 +6,7 @@ import {
   getProjects 
 } from '../api/GeneralApi'
 import { ROUTES } from '../constants'
+import { debugRouter } from './index'
 
 /**
  * Authentication check loader
@@ -35,11 +36,40 @@ export const rootLoader = async () => {
  * Project loader
  */
 export const projectLoader = async ({ params }) => {
+  console.log('Project loader called with params:', params);
   try {
-    const projectData = await getProject(params.id)
-    return projectData
+    const projectData = await getProject(params.id);
+    console.log('Project data received:', projectData);
+    
+    // Check if we got a valid project
+    if (!projectData || !projectData.id) {
+      console.log('Invalid project data, trying debug router');
+      // Try the debug router as a fallback
+      const debugProject = await debugRouter.fetchProject(params.id);
+      if (debugProject) {
+        console.log('Using debug project data');
+        return debugProject;
+      }
+    }
+    
+    return projectData;
   } catch (error) {
-    throw new Error('Project not found')
+    console.error('Error loading project:', error);
+    
+    // Try the debug router as a fallback on error
+    try {
+      console.log('Trying debug router fallback');
+      const debugProject = await debugRouter.fetchProject(params.id);
+      if (debugProject) {
+        console.log('Using debug project data after error');
+        return debugProject;
+      }
+    } catch (debugError) {
+      console.error('Debug router also failed:', debugError);
+    }
+    
+    // If all else fails, return null to show NotFound
+    return null;
   }
 }
 

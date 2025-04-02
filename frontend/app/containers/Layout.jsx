@@ -40,7 +40,7 @@ const Layout = () => {
     <Wrapper>
       <Container className="container" id="root">
         <Header />
-        <Outlet />
+        <Outlet context={{ session }} />
       </Container>
       <Footer />
     </Wrapper>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { useNavigate, useParams, useLoaderData, useActionData } from 'react-router-dom'
+import { useNavigate, useParams, useLoaderData } from 'react-router-dom'
 import styled from 'styled-components'
 import MediumHeadline from './../components/text/MediumHeadline.jsx'
 import Photo from './../components/photo/Photo.jsx'
@@ -126,8 +126,15 @@ const DeleteButton = styled(Button)`
 const ProjectAdd = () => {
   const navigate = useNavigate()
   const { id } = useParams()
-  const { images, projects, isAdmin } = useLoaderData()
-  const actionData = useActionData()
+  const loaderData = useLoaderData() || {}
+  
+  useEffect(() => {
+    if (loaderData.redirect) {
+      navigate(loaderData.redirect)
+    }
+  }, [loaderData.redirect, navigate])
+  
+  const { project, images = [], projects = [] } = loaderData
   
   const [state, setState] = useState({
     chosenImages: new Map(),
@@ -138,8 +145,7 @@ const ProjectAdd = () => {
   })
 
   useEffect(() => {
-    if (id && projects.find(p => p.id === id)) {
-      const project = projects.find(p => p.id === id)
+    if (project) {
       setState(prev => ({
         ...prev,
         description: project.description,
@@ -148,7 +154,7 @@ const ProjectAdd = () => {
         chosenImages: new Map(project.images.map(i => [i.src, i]))
       }))
     }
-  }, [id, projects])
+  }, [project])
 
   const handleTitleChange = (event) => {
     setState(prev => ({ ...prev, title: event.target.value }))
