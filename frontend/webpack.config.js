@@ -32,8 +32,7 @@ const plugins = [
   
   // Extracts CSS into separate files
   new MiniCssExtractPlugin({
-    filename: 'css/[name].css',
-    chunkFilename: 'css/[id].css'
+    filename: 'css/[name].css'
   }),
   
   // Add environment-specific plugins
@@ -64,16 +63,10 @@ const rules = [
   {
     test: /\.css$/,
     use: [
-      {
-        loader: MiniCssExtractPlugin.loader,
-        options: {
-          publicPath: '/'
-        }
-      },
+      MiniCssExtractPlugin.loader,
       {
         loader: 'css-loader',
         options: {
-          modules: false,
           importLoaders: 1
         }
       },
@@ -118,12 +111,7 @@ const rules = [
   {
     test: /\.scss$/,
     use: [
-      {
-        loader: MiniCssExtractPlugin.loader,
-        options: {
-          publicPath: '/'
-        }
-      },
+      MiniCssExtractPlugin.loader,
       {
         loader: 'css-loader',
         options: {
@@ -156,11 +144,7 @@ const rules = [
 
 // ===== ENTRY CONFIGURATION =====
 // Entry points tell webpack what files to start processing from
-const entry = DEBUG ? {
-  app: [
-    './index.js'
-  ]
-} : {
+const entry = {
   app: './index.js'
 }
 
