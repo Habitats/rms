@@ -109,7 +109,7 @@ const Footer = () => {
     ),
     map: (
       <MapContainer>
-        <MapWrapper height={143} zoom={7}/>
+        <MapWrapper height={143} zoom={7} context="footer"/>
         <Link to="login">Login</Link>
       </MapContainer>
     )

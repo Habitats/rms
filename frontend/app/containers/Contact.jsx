@@ -67,7 +67,7 @@ const Contact = () => {
       <Box>
         <div>
           <MapContainer isXs={isXs} isSm={isSm} height={height}>
-            <MapWrapper />
+            <MapWrapper context="footer" />
           </MapContainer>
           <BigHeadline big="Hvor er vi?"/>
           <ContactWrapper isXs={isXs} isSm={isSm} className="col-sm-10 col-sm-offset-1">

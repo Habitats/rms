@@ -197,7 +197,7 @@ const config = {
     },
     headers: {
       'Access-Control-Allow-Origin': '*',
-      'Content-Security-Policy': "default-src 'self' 'unsafe-inline' 'unsafe-eval' https: data: ws:; img-src 'self' https: data:; font-src 'self' https: data:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; connect-src 'self' https: ws:; worker-src 'self' blob:; child-src 'self' blob:;"
+      'Content-Security-Policy': "default-src 'self' 'unsafe-inline' 'unsafe-eval' https: data: ws:; img-src 'self' https: data:; font-src 'self' https: data:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; connect-src 'self' https: ws:; worker-src 'self' blob:; child-src 'self' blob: *.google.com; frame-src 'self' blob: *.google.com;"
     },
     proxy: [
       {

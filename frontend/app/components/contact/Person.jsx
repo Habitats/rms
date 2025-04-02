@@ -46,7 +46,10 @@ const PersonRow = styled.p`
   margin-bottom: 5px;
 `
 
-const StyledIcon = styled(FontAwesomeIcon)`
+const StyledIcon = styled(({ icon, ...props }) => {
+  // Only render the FontAwesomeIcon if an icon is provided
+  return icon ? <FontAwesomeIcon icon={icon} {...props} /> : null;
+})`
   margin-right: 10px;
   width: 20px;
   color: #007bff;

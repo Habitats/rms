@@ -1,48 +1,43 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
-import styled, { useTheme } from 'styled-components'
-import useMediaQuery from '../../hooks/useMediaQuery'
 
-const MapContainer = styled.div`
-  height: ${props => 
-    props.isSmall 
-      ? '300px' 
-      : props.isMedium 
-        ? '400px' 
-        : `${props.height || 500}px`
-  };
-  width: 100%;
-  color: #e9e9e9;
-  ${props => props.customStyle && Object.entries(props.customStyle).map(([key, value]) => `${key}: ${value};`).join('')}
-`
-
-const LoadingMessage = styled.div`
-  text-align: center;
-  padding-top: 20%;
-`
-
-const Map = ({ zoom, height, style: customStyle, isScriptLoaded, isScriptLoadSucceed }) => {
-  const [mapInitialized, setMapInitialized] = useState(false)
+const Map = ({ zoom, height, style, isScriptLoaded, isScriptLoadSucceed, context = 'default' }) => {
   const mapRef = useRef(null)
-  const theme = useTheme();
-  const isSmall = useMediaQuery(`only screen and (max-width: ${theme.breakpoints.xs})`);
-  const isMedium = useMediaQuery(`only screen and (max-width: ${theme.breakpoints.sm})`);
-
+  const mapInstanceRef = useRef(null)
+  
+  // Generate a unique map ID based on context
+  const mapId = `map-canvas-${context}`
+  
   useEffect(() => {
-    if (isScriptLoaded && isScriptLoadSucceed && window.google && !mapInitialized && mapRef.current) {
+    // Initialize or reinitialize the map when script is loaded
+    if (isScriptLoaded && isScriptLoadSucceed && window.google && window.google.maps) {
       initializeMap()
     }
-  }, [isScriptLoaded, isScriptLoadSucceed, zoom, mapInitialized])
-
+  }, [isScriptLoaded, isScriptLoadSucceed])
+  
+  // Handle zoom changes
+  useEffect(() => {
+    if (mapInstanceRef.current && window.google && window.google.maps) {
+      mapInstanceRef.current.setZoom(zoom)
+    }
+  }, [zoom])
+  
   const initializeMap = () => {
+    if (!mapRef.current || !window.google || !window.google.maps) return
+    
     const home = {lat: 60.255074, lng: 11.026707}
-
+    
     try {
+      // Create map instance
       const map = new window.google.maps.Map(mapRef.current, {
-        zoom, 
+        zoom: zoom, 
         center: home
       })
       
+      // Save map instance for later use
+      mapInstanceRef.current = map
+      
+      // Define styles
       const styles = [
         {stylers: [{saturation: -100}, {gamma: 1}]},
         {featureType: 'poi.business', elementType: 'labels.content', stylers: [{visibility: 'off'}]},
@@ -55,31 +50,26 @@ const Map = ({ zoom, height, style: customStyle, isScriptLoaded, isScriptLoadSuc
         {featureType: 'road.local', elementType: 'labels.content', stylers: [{weight: 0.5}, {color: '#333333'}]},
         {featureType: 'transit.station', elementType: 'labels.icon', stylers: [{gamma: 1}, {saturation: 50}]}
       ]
-
-      map.setOptions({styles})
-      new window.google.maps.Marker({position: home, map})
-      setMapInitialized(true)
+      
+      // Apply styles
+      map.setOptions({styles: styles})
+      
+      // Add marker
+      new window.google.maps.Marker({position: home, map: map})
     } catch (ex) {
       console.error('Error initializing map:', ex)
     }
   }
-
-  return (
-    <MapContainer 
-      ref={mapRef} 
-      customStyle={customStyle}
-      isSmall={isSmall}
-      isMedium={isMedium}
-      height={height}
-    >
-      {!isScriptLoaded && (
-        <LoadingMessage>Loading map...</LoadingMessage>
-      )}
-      {!isScriptLoadSucceed && (
-        <LoadingMessage>Error loading map</LoadingMessage>
-      )}
-    </MapContainer>
-  )
+  
+  // Use inline styles
+  const mapStyle = {
+    ...style,
+    height: height,
+    width: '100%',
+    color: '#e9e9e9'
+  }
+  
+  return <div id={mapId} ref={mapRef} style={mapStyle} />
 }
 
 Map.propTypes = {
@@ -87,13 +77,15 @@ Map.propTypes = {
   style: PropTypes.object,
   height: PropTypes.number,
   isScriptLoaded: PropTypes.bool,
-  isScriptLoadSucceed: PropTypes.bool
+  isScriptLoadSucceed: PropTypes.bool,
+  context: PropTypes.string
 }
 
 Map.defaultProps = {
   zoom: 10,
-  height: 500,
-  style: {}
+  height: 450,
+  style: {},
+  context: 'default'
 }
 
 export default Map
